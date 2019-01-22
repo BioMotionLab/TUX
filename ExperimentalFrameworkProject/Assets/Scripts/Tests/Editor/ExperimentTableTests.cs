@@ -83,7 +83,6 @@ namespace Tests.Editor
                 addedTable = ExperiementTable.AddVariable(addedTable, testIntDatum);
                 const int expected = 27;
                 Assert.AreEqual(expected, addedTable.Rows.Count, $"datum values: {testIntDatum.Values.Count}");
-
             }
 
         }

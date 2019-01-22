@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using UnityEngine;
 
 
@@ -151,6 +152,13 @@ public class DatumFactory {
                 throw new NotImplementedException("Support for this data type has not yet been defined. " +
                                                   "You can customize it yourself in the Datum.cs class");
         }
+
+        
+
+    }
+
+    public DataTable ToTable() {
+        return ExperiementTable.GetTable(AllData);
     }
 
     public void Add(Datum datum) {

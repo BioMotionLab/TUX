@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
+  m_Name: New Config File
+  m_EditorClassIdentifier: 
+  Factory:
+    intData:
+    - Name: firstint
+      TypeOfVariable: 0
+      RandomizeOrder: 1
+      Block: 0
+      Values: 010000000200000003000000
+    - Name: secondint
+      TypeOfVariable: 0
+      RandomizeOrder: 1
+      Block: 0
+      Values: 040000000500000006000000
+    floatData:
+    - Name: Unnamed Variable (type:System.Single)
+      TypeOfVariable: 0
+      RandomizeOrder: 0
+      Block: 0
+      Values: []
+    stringData: []
+    GameObjectData: []
+    Vector3Data: []
+    Vector2Data: []
+    CustomData: []
+    TypeToCreate: 3

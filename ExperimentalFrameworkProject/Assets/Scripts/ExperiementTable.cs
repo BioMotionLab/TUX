@@ -65,7 +65,7 @@ public class ExperiementTable : MonoBehaviour {
         
     }
 
-    public static DataTable AddVariable(DataTable  table, Datum datum) {
+    public static DataTable AddVariable(DataTable table, Datum datum) {
         DataTable newTable = table.Clone();
 
         DataColumn column = new DataColumn {
@@ -88,9 +88,7 @@ public class ExperiementTable : MonoBehaviour {
             }
             else {
                 foreach (DataRow tableRow in table.Rows) {
-                    UnityEngine.Debug.Log("looping through existing rows");
                     foreach (int value in intDatum.Values) {
-                        UnityEngine.Debug.Log("looping through values");
                         newTable.ImportRow(tableRow);
                         var newRow = newTable.Rows[newTable.Rows.Count - 1];
                         newRow[datum.Name] = value;
@@ -108,5 +106,14 @@ public class ExperiementTable : MonoBehaviour {
     void Update()
     {
         
+    }
+
+    public static DataTable GetTable(List<Datum> allData) {
+        DataTable table = new DataTable();
+        foreach (Datum datum in allData) {
+            table = AddVariable(table, datum);
+        }
+
+        return table;
     }
 }
