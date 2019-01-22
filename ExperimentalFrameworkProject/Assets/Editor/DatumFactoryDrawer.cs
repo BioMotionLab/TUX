@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEditor;
 
@@ -22,10 +23,10 @@ public class DatumFactoryDrawer : PropertyDrawer {
         EditorGUI.PropertyField(currentRect, typeProperty);
 
         currentRect.y += 20f;
-        if (GUI.Button(currentRect, "Add New")) {
+        if (GUI.Button(currentRect, "Add Add")) {
             DatumFactory factory =
                 fieldInfo.GetValue(property.serializedObject.targetObject) as DatumFactory;
-            factory?.New();
+            factory?.Add(factory?.New());
         }
 
         currentRect.y += 20f;

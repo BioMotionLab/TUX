@@ -39,7 +39,7 @@ public class DatumTester : MonoBehaviour {
         
 
 	    
-        //data.Add(Datum.New(intvariablename, () => somevariable));
+        //data.Add(Datum.Add(intvariablename, () => somevariable));
 
 	    
 

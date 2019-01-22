@@ -22,7 +22,7 @@ public class IVFactoryDrawer : PropertyDrawer {
         EditorGUI.PropertyField(currentRect, typeProperty);
 
         currentRect.y += 20f;
-        if (GUI.Button(currentRect, "Add New")) {
+        if (GUI.Button(currentRect, "Add Add")) {
             IndependentVariableFactory factory =
                 fieldInfo.GetValue(property.serializedObject.targetObject) as IndependentVariableFactory;
             factory?.CreateNew();

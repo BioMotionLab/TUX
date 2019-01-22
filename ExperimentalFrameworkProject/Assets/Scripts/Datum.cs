@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 
@@ -58,16 +59,22 @@ public class DatumFactory {
 
     [SerializeField]
     public List<DatumInt> intData = new List<DatumInt>();
+
     [SerializeField]
     public List<DatumFloat> floatData = new List<DatumFloat>();
+
     [SerializeField]
     public List<DatumString> stringData = new List<DatumString>();
+
     [SerializeField]
     public List<DatumGameObject> GameObjectData = new List<DatumGameObject>();
+
     [SerializeField]
     public List<DatumVector3> Vector3Data = new List<DatumVector3>();
+
     [SerializeField]
     public List<DatumVector2> Vector2Data = new List<DatumVector2>();
+
     [SerializeField]
     public List<DatumCustom> CustomData = new List<DatumCustom>();
 
@@ -77,6 +84,7 @@ public class DatumFactory {
             foreach (var intDatum in intData) {
                 data.Add(intDatum);
             }
+
             foreach (var floatDatum in floatData) {
                 data.Add(floatDatum);
             }
@@ -90,16 +98,19 @@ public class DatumFactory {
                     organizedDatums.Add(datum);
                 }
             }
+
             foreach (var datum in data) {
                 if (datum.Block && datum.TypeOfVariable == VariableType.Independent) {
                     organizedDatums.Add(datum);
                 }
             }
+
             foreach (var datum in data) {
                 if (datum.TypeOfVariable == VariableType.Dependent) {
                     organizedDatums.Add(datum);
                 }
             }
+
             return organizedDatums;
         }
     }
@@ -107,18 +118,21 @@ public class DatumFactory {
 
     public DataType TypeToCreate;
 
-    public void New() {
+    public Datum New() {
+        return New(TypeToCreate);
+    }
 
+    public Datum New(DataType type) {
         switch (TypeToCreate) {
             case DataType.Int:
-                intData.Add(new DatumInt());
-                break;
+                DatumInt newDatumInt = new DatumInt();
+                return newDatumInt;
             case DataType.Float:
-                floatData.Add(new DatumFloat());
-                break;
-            case DataType.String:
-                stringData.Add(new DatumString());
-                break;
+                DatumFloat newDatumFloat = new DatumFloat();
+                return newDatumFloat;
+            //case DataType.String:
+            //    stringData.Add(new DatumString());
+            //    break;
             //case DataType.GameObject:
             //    GameObjectData.Add(new DatumGameObject());
             //    break;
@@ -132,24 +146,38 @@ public class DatumFactory {
             //    CustomData.Add(new DatumCustom());
             //    break;
             case DataType.ChooseType:
-                Debug.LogWarning("Trying to add new datum, but not type chosen");
-                return;
+                throw new InvalidEnumArgumentException("Trying to create new datum, but not type not yet chosen");
             default:
-                throw new NotImplementedException("Support for this data type has not yet been defined. You can customize it yourself in the Datum.cs class");
+                throw new NotImplementedException("Support for this data type has not yet been defined. " +
+                                                  "You can customize it yourself in the Datum.cs class");
         }
-        
-       
-
-        Debug.Log($"added new datum of type {TypeToCreate}");
-
-        TypeToCreate = DataType.ChooseType;
-
-
     }
 
+    public void Add(Datum datum) {
+        if (datum.Type == typeof(int)) {
+            intData.Add((DatumInt)datum);
+        }
+        else if (datum.Type == typeof(float)) {
+            floatData.Add((DatumFloat) datum);
+        }
+        else {
+            throw new NotImplementedException("Support for this data type has not yet been defined. " +
+                                              "You can add support for it yourself in the Datum.cs class if needed");
+        }
 
-   
+        Debug.Log($"added new datum of type {TypeToCreate}");
+        TypeToCreate = DataType.ChooseType;
+    }
+
+    public DatumInt NewInt(List<int> intList) {
+        DatumInt newDatumInt = (DatumInt) New(DataType.Int);
+        newDatumInt.Values = intList;
+        return newDatumInt;
+    }
 }
+
+
+
 
 public class IVs {
     public List<Datum> Blocked = new List<Datum>();
