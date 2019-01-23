@@ -103,11 +103,11 @@ public class ExperiementTable : MonoBehaviour {
         foreach (Datum datum in allData) {
             table = AddVariable(table, datum);
         }
-        Debug.Log($"GetTable Method in ExperimentTable: table rows = {table.Rows.Count}");
-        string indexColumnName = "Trial Number";
+        
+        //Add trial number column
         DataColumn indexColumn = new DataColumn {
                                                     DataType = typeof(int),
-                                                    ColumnName = indexColumnName,
+                                                    ColumnName = Config.IndexColumnName,
                                                     Unique = false,
                                                     ReadOnly = false,
                                                 };
@@ -115,11 +115,21 @@ public class ExperiementTable : MonoBehaviour {
         indexColumn.SetOrdinal(0);// to put the column in position 0;
         int i = 0;
         foreach (DataRow row in table.Rows) {
-            row[indexColumnName] = i;
+            row[Config.IndexColumnName] = i;
             i++;
         }
 
-
+        //Add Successfully run column
+        DataColumn successColumn = new DataColumn {
+                                                    DataType = typeof(bool),
+                                                    ColumnName = Config.SuccessColumnName,
+                                                    Unique = false,
+                                                    ReadOnly = false,
+                                                };
+        table.Columns.Add(successColumn);
+        foreach (DataRow row in table.Rows) {
+            row[Config.SuccessColumnName] = false;
+        }
 
         return table;
     }

@@ -12,7 +12,18 @@ public abstract class Trial {
     readonly DataRow data;
     readonly Config configFile;
 
+    public DataRow Data => data;
+
     public int Index => (int)data[Config.IndexColumnName];
+
+    public bool Success {
+        get {
+            return (bool)data[Config.SuccessColumnName];
+        }
+        set {
+            data[Config.SuccessColumnName] = value;
+        }
+    }
 
     protected Trial(DataRow data, Config configFile) {
         this.data = data;
@@ -22,13 +33,13 @@ public abstract class Trial {
 
     public IEnumerator Run() {
         //Skip a frame to allow any previous things to end
+        Success = false;
         yield return null;
 
         ExperimentEventManager.StartingTrial(this);
 
         Debug.Log($"Trail {Index} Waiting for return key");
         bool waiting = true;
-        bool successful = false;
         while (waiting) {
 
 
@@ -51,7 +62,7 @@ public abstract class Trial {
             yield return null;
             if (Input.GetKeyDown(KeyCode.Return)) {
                 waiting = false;
-                successful = true;
+                Success = true;
                 ReturnPressed();
             }
 
@@ -59,11 +70,12 @@ public abstract class Trial {
             
         }
 
-        if (successful) {
+        if (Success) {
             Debug.Log($"Trial {Index} completed successfully");
+            ExperimentEventManager.EndTrial(this);
         }
         
-        ExperimentEventManager.EndTrial(this);
+        
         yield return null;
 
     }

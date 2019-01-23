@@ -8,6 +8,9 @@ using UnityEngine;
 
 public static class DataTableExtension
 {
+
+    const string separator = "\t";
+
     public static void PrintToConsole(this DataTable dt) {
         Debug.Log(dt.AsString());
     }
@@ -15,10 +18,14 @@ public static class DataTableExtension
     
 
     public static string AsString(this DataTable dt) {
-        string separator = "\t";
-        string res = string.Join(Environment.NewLine,
+        string tableString = string.Join(Environment.NewLine,
                                  dt.Rows.OfType<DataRow>().Select(x => string.Join(separator, x.ItemArray)));
-        return res;
+        return tableString;
+    }
+
+    public static string AsString(this DataRow row) {
+        string rowString  = string.Join(separator, row.ItemArray);
+        return rowString;
     }
 
 }

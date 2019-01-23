@@ -37,7 +37,7 @@ public class TrialSequence : MonoBehaviour {
         ExperimentEventManager.OnTrialInterrupt += InterruptedTrial;
         ExperimentEventManager.OnTrialStart += TrialStarted;
         ExperimentEventManager.OnTrialCompleted += TrialDone;
-        ExperimentEventManager.OnSkipToNextTrial += GoToNextTrial;
+        ExperimentEventManager.OnSkipToNextTrial += SkipTrial;
         ExperimentEventManager.OnGoBackOneTrial += BackOneTrial;
     }
 
@@ -45,7 +45,7 @@ public class TrialSequence : MonoBehaviour {
         ExperimentEventManager.OnTrialInterrupt -= InterruptedTrial;
         ExperimentEventManager.OnTrialStart -= TrialStarted;
         ExperimentEventManager.OnTrialCompleted -= TrialDone;
-        ExperimentEventManager.OnSkipToNextTrial -= GoToNextTrial;
+        ExperimentEventManager.OnSkipToNextTrial -= SkipTrial;
         ExperimentEventManager.OnGoBackOneTrial -= BackOneTrial;
     }
 
@@ -60,10 +60,17 @@ public class TrialSequence : MonoBehaviour {
         currentTrialRunning = StartCoroutine(trial.Run());
     }
 
+    
+
     void TrialDone(Trial currentTrial) {
-        int trialNum = TrialIndex(currentTrial);
-        Debug.Log($"Done Trial {trialNum+1}");
+        FinishTrial(currentTrial);
         GoToNextTrial(currentTrial);
+    }
+
+    void FinishTrial(Trial currentTrial) {
+        int trialNum = TrialIndex(currentTrial);
+        Debug.Log($"Done Trial {trialNum + 1}, success = {currentTrial.Success}");
+        Debug.Log(currentTrial.Data.AsString());
     }
 
     void GoToNextTrial(Trial currentTrial) {
@@ -78,6 +85,12 @@ public class TrialSequence : MonoBehaviour {
         
     }
 
+    void SkipTrial(Trial currentTrial) {
+        Debug.Log("Got Skip event");
+        ExperimentEventManager.InterruptTrial(currentTrial);
+        GoToNextTrial(currentTrial);
+    }
+
     void DoneTrials() {
         Debug.Log("---------------");
         Debug.Log("Done all trials");
@@ -85,9 +98,12 @@ public class TrialSequence : MonoBehaviour {
 
     void InterruptedTrial(Trial trial) {
         Debug.LogWarning("Got interrupt event from trial");
+        FinishTrial(trial);
     }
 
     void BackOneTrial(Trial currentTrial) {
+        Debug.Log("Got Back event");
+        ExperimentEventManager.InterruptTrial(currentTrial);
         int newIndex = TrialIndex(currentTrial) - 1;
         if (newIndex < 0) {
             Debug.LogWarning("Was already at first trial, restarting trial");
