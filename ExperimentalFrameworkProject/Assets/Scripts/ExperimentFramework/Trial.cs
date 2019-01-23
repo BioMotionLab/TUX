@@ -60,13 +60,10 @@ public abstract class Trial {
         }
 
         if (successful) {
-            Debug.Log($"Trail {Index} Trial completed successfully");
-            ExperimentEventManager.EndTrial(this);
-        }
-        else {
-            Debug.LogWarning($"Trail {Index} Trial completed unsuccessfully");
+            Debug.Log($"Trial {Index} completed successfully");
         }
         
+        ExperimentEventManager.EndTrial(this);
         yield return null;
 
     }
