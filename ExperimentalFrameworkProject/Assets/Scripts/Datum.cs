@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using UnityEngine;
-
+using UnityEngine.Experimental.AI;
 
 
 [Serializable]
@@ -124,7 +124,7 @@ public class DatumFactory {
     }
 
     public Datum New(DataType type) {
-        switch (TypeToCreate) {
+        switch (type) {
             case DataType.Int:
                 DatumInt newDatumInt = new DatumInt();
                 return newDatumInt;
@@ -177,8 +177,9 @@ public class DatumFactory {
         TypeToCreate = DataType.ChooseType;
     }
 
-    public DatumInt NewInt(List<int> intList) {
+    public DatumInt NewInt(string name, List<int> intList) {
         DatumInt newDatumInt = (DatumInt) New(DataType.Int);
+        newDatumInt.Name = name;
         newDatumInt.Values = intList;
         return newDatumInt;
     }

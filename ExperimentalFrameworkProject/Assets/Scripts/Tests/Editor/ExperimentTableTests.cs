@@ -29,7 +29,7 @@ namespace Tests.Editor
                 var intList = new List<int> {
                                                 1,2,3,
                                             };
-                testIntDatum = fact.NewInt(intList);
+                testIntDatum = fact.NewInt("inttest", intList);
             }
 
             // A Test behaves as an ordinary method
@@ -85,9 +85,27 @@ namespace Tests.Editor
                 Assert.AreEqual(expected, addedTable.Rows.Count, $"datum values: {testIntDatum.Values.Count}");
             }
 
-        }
-        
+            
 
+        }
+
+        public class GetTableMethod {
+            [Test]
+            public void OneDatumWith3ValuesReturnsTableWithCorrectNumberOfRows() {
+                DatumFactory fact = new DatumFactory();
+                List<int> intlist = new List<int> {1, 2, 3};
+                fact.Add(fact.NewInt("int1", intlist));
+
+                List<int> intlist2 = new List<int> { 4, 5, 6 };
+                fact.Add(fact.NewInt("int2", intlist));
+
+
+                DataTable addedTable = fact.ToTable();
+                
+                const int expected = 9;
+                Assert.AreEqual(expected, addedTable.Rows.Count, addedTable.PrintToString());
+            }
+        }
         
     }
 }
