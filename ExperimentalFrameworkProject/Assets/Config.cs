@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEditor;
 
@@ -7,6 +8,10 @@ public class Config : ScriptableObject
 {
     [SerializeField]
     public DatumFactory Factory = new DatumFactory();
+
+    public DataTable TrialTable => Factory.ToTable();
+
+    public const string IndexColumnName = "Trial Number";
 
     public void PrintTrials() {
         throw new System.NotImplementedException();

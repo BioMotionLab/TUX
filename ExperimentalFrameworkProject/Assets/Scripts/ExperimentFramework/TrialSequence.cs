@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class TrialSequence : MonoBehaviour {
-    //List<TrialDefinition> trialsInBlock = new List<TrialDefinition>();
-    //List<List<TrialDefinition>> blocks = new List<List<TrialDefinition>>();
-    List<Trial> trials;
+    public Config configFile;
+    DataTable trialTable;
+    List<Trial> trials = new List<Trial>();
 
     Trial currentTrial;
     Coroutine currentTrialRunning;
@@ -17,11 +18,19 @@ public class TrialSequence : MonoBehaviour {
 
 
     void Start() {
-        trials = new List<Trial>();
-        for (int i = 0; i < 5; i++) {
-            trials.Add(new TestTrial());
+        trialTable = configFile.TrialTable;
+        int i = 1;
+        Debug.Log($"number of rows in trial table = {trialTable.Rows.Count}");
+        foreach (DataRow row in trialTable.Rows) {
+            row[Config.IndexColumnName] = i;
+            Trial newTrial = new TestTrial(row, configFile);
+            Debug.Log("Adding Trial to list");
+            trials.Add(newTrial);
+            i++;
         }
+        Debug.Log("Starting to run experiment");
         StartRunningTrial(trials[0]);
+
     }
 
     void OnEnable() {
@@ -37,22 +46,23 @@ public class TrialSequence : MonoBehaviour {
         ExperimentEventManager.OnTrialStart -= TrialStarted;
         ExperimentEventManager.OnTrialCompleted -= TrialDone;
         ExperimentEventManager.OnSkipToNextTrial -= GoToNextTrial;
+        ExperimentEventManager.OnGoBackOneTrial -= BackOneTrial;
     }
 
     void TrialStarted(Trial trial) {
         int trialNum = TrialIndex(trial);
         Debug.Log($"*****\n\n");
-        Debug.Log($"Starting trial {trialNum}");
+        Debug.Log($"Starting trial {trialNum+1}/{trials.Count}");
     }
 
     void StartRunningTrial(Trial trial) {
         currentTrial = trial;
-        currentTrialRunning = StartCoroutine(trial.Run(TrialIndex(trial)));
+        currentTrialRunning = StartCoroutine(trial.Run());
     }
 
     void TrialDone(Trial currentTrial) {
         int trialNum = TrialIndex(currentTrial);
-        Debug.Log($"Done Trial {trialNum}");
+        Debug.Log($"Done Trial {trialNum+1}");
         GoToNextTrial(currentTrial);
     }
 
@@ -96,11 +106,7 @@ public class TrialSequence : MonoBehaviour {
 
 }
 
-public static class IntExtensions {
-    public static bool IsWithin(this int value, int minimum, int maximum) {
-        return value >= minimum && value <= maximum;
-    }
-}
+
 
 public interface Observer {
     void OnNotify(Subject subject, CustomEvent customEvent);
@@ -153,6 +159,12 @@ public class TrialDefinition {
 }
 
 public class TestTrial : Trial {
+    
+
+    public TestTrial(DataRow data, Config config) : base(data, config) {
+        
+    }
+
 
 }
 

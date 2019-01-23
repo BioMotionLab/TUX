@@ -8,22 +8,10 @@ public class ExperiementTable : MonoBehaviour {
 
     public DatumFactory fact;
 
-    //DataTable table = new DataTable("TrialData");
-    const string trialIdString = "TrialNumber";
-
 
     // Start is called before the first frame update
     void Start()
     {
-        ////add system columns
-        //DataColumn trialNumberColumn = new DataColumn();
-        //trialNumberColumn.DataType = typeof(int);
-        //trialNumberColumn.ColumnName = trialIdString;
-        //trialNumberColumn.ReadOnly = true;
-        //trialNumberColumn.Unique = false;
-        //table.Columns.Add(trialNumberColumn);
-        
-
         ////add block variable columns
         //foreach (Datum datum in fact.AllData) {
         //    DataColumn column = new DataColumn();
@@ -78,8 +66,10 @@ public class ExperiementTable : MonoBehaviour {
 
         
         if (datum.Type == typeof(int)) {
+            Debug.Log("detected datum type of int");
             DatumInt intDatum = (DatumInt) datum;
             if (table.Rows.Count == 0) {
+                Debug.Log("Adding rows to empty table in variable creation");
                 foreach (int value in intDatum.Values) {
                     var newRow = newTable.NewRow();
                     newRow[datum.Name] = value;
@@ -87,8 +77,10 @@ public class ExperiementTable : MonoBehaviour {
                 }
             }
             else {
+                Debug.Log("Adding rows to NON empty table in variable creation");
                 foreach (DataRow tableRow in table.Rows) {
                     foreach (int value in intDatum.Values) {
+
                         newTable.ImportRow(tableRow);
                         var newRow = newTable.Rows[newTable.Rows.Count - 1];
                         newRow[datum.Name] = value;
@@ -97,22 +89,37 @@ public class ExperiementTable : MonoBehaviour {
             }
             
         }
-
+        else {
+            newTable = table.Copy();
+        }
+        Debug.Log($"table now has {newTable.Rows.Count} rows");
         return newTable;
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public static DataTable GetTable(List<Datum> allData) {
         DataTable table = new DataTable();
         foreach (Datum datum in allData) {
             table = AddVariable(table, datum);
         }
+        Debug.Log($"GetTable Method in ExperimentTable: table rows = {table.Rows.Count}");
+        string indexColumnName = "Trial Number";
+        DataColumn indexColumn = new DataColumn {
+                                                    DataType = typeof(int),
+                                                    ColumnName = indexColumnName,
+                                                    Unique = false,
+                                                    ReadOnly = false,
+                                                };
+        table.Columns.Add(indexColumn);
+        indexColumn.SetOrdinal(0);// to put the column in position 0;
+        int i = 0;
+        foreach (DataRow row in table.Rows) {
+            row[indexColumnName] = i;
+            i++;
+        }
+
+
 
         return table;
     }

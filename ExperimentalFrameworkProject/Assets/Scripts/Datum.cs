@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
-
 
 [Serializable]
 public abstract class Datum<T> : Datum {
@@ -13,8 +10,6 @@ public abstract class Datum<T> : Datum {
     public override Type Type => typeof(T);
 
     public List<T> Values;
-
-    
 
     protected Datum() {
         Values = new List<T>();
@@ -42,7 +37,6 @@ public enum DataType {
     ChooseType,
 }
 
-
 public abstract class Datum {
     public    string         Name;
     public    VariableType   TypeOfVariable;
@@ -50,10 +44,7 @@ public abstract class Datum {
     public    bool           Block;
 
     public abstract Type Type { get; }
-
 }
-
-
 
 [Serializable]
 public class DatumFactory {
@@ -111,11 +102,9 @@ public class DatumFactory {
                     organizedDatums.Add(datum);
                 }
             }
-
             return organizedDatums;
         }
     }
-
 
     public DataType TypeToCreate;
 
@@ -149,15 +138,13 @@ public class DatumFactory {
             case DataType.ChooseType:
                 throw new InvalidEnumArgumentException("Trying to create new datum, but not type not yet chosen");
             default:
-                throw new NotImplementedException("Support for this data type has not yet been defined. " +
+                throw new NotImplementedException("Support for this data type has not yet been defined." +
                                                   "You can customize it yourself in the Datum.cs class");
         }
-
-        
-
     }
 
     public DataTable ToTable() {
+        Debug.Log($"ToTable method in Datum: Alldata.count {AllData.Count}");
         return ExperiementTable.GetTable(AllData);
     }
 

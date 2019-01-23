@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Data;
 using UnityEngine;
 
 
@@ -8,15 +9,24 @@ using UnityEngine;
 /// and it is in charge of setting and cleaning itself up
 /// </summary>
 public abstract class Trial {
+    readonly DataRow data;
+    readonly Config configFile;
+
+    public int Index => (int)data[Config.IndexColumnName];
+
+    protected Trial(DataRow data, Config configFile) {
+        this.data = data;
+        this.configFile = configFile;
+    }
 
 
-    public IEnumerator Run(int index) {
+    public IEnumerator Run() {
         //Skip a frame to allow any previous things to end
         yield return null;
 
         ExperimentEventManager.StartingTrial(this);
 
-        Debug.Log($"Trail {index} Waiting for return key");
+        Debug.Log($"Trail {Index} Waiting for return key");
         bool waiting = true;
         bool successful = false;
         while (waiting) {
@@ -24,7 +34,7 @@ public abstract class Trial {
 
             if (Input.GetKeyDown(KeyCode.Backspace)) {
                 ExperimentEventManager.InterruptTrial(this);
-                Debug.Log($"Trail {index} finished sending interrupt event");
+                Debug.Log($"Trail {Index} finished sending interrupt event");
                 break;
             }
 
@@ -42,7 +52,7 @@ public abstract class Trial {
             if (Input.GetKeyDown(KeyCode.Return)) {
                 waiting = false;
                 successful = true;
-                ReturnPressed(index);
+                ReturnPressed();
             }
 
             
@@ -50,19 +60,19 @@ public abstract class Trial {
         }
 
         if (successful) {
-            Debug.Log($"Trail {index} Trial completed successfully");
+            Debug.Log($"Trail {Index} Trial completed successfully");
             ExperimentEventManager.EndTrial(this);
         }
         else {
-            Debug.LogWarning($"Trail {index} Trial completed unsuccessfully");
+            Debug.LogWarning($"Trail {Index} Trial completed unsuccessfully");
         }
         
         yield return null;
 
     }
 
-    void ReturnPressed(int index) {
-        Debug.Log($"Trail {index} Return key pressed");
+    void ReturnPressed() {
+        Debug.Log($"Trail {Index} Return key pressed");
     }
 
 }
