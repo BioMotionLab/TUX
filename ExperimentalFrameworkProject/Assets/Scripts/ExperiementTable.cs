@@ -131,6 +131,18 @@ public class ExperiementTable : MonoBehaviour {
             row[Config.SuccessColumnName] = false;
         }
 
+        //Add Attempts column
+        DataColumn attemptsColumn = new DataColumn {
+                                                      DataType = typeof(int),
+                                                      ColumnName = Config.AttemptsColumnName,
+                                                      Unique = false,
+                                                      ReadOnly = false,
+                                                  };
+        table.Columns.Add(attemptsColumn);
+        foreach (DataRow row in table.Rows) {
+            row[Config.AttemptsColumnName] = 0;
+        }
+
         return table;
     }
 }

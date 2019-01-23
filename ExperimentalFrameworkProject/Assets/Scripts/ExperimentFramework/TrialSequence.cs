@@ -58,6 +58,7 @@ public class TrialSequence : MonoBehaviour {
     void StartRunningTrial(Trial trial) {
         currentTrial = trial;
         currentTrialRunning = StartCoroutine(trial.Run());
+        trial.Attempts++;
     }
 
     
@@ -76,7 +77,7 @@ public class TrialSequence : MonoBehaviour {
     void GoToNextTrial(Trial currentTrial) {
         int newIndex = TrialIndex(currentTrial) + 1;
         if (newIndex >= trials.Count) {
-            DoneTrials();
+            DoneAllTrials();
         }
         else {
             Trial nextTrial = trials[newIndex];
@@ -91,9 +92,14 @@ public class TrialSequence : MonoBehaviour {
         GoToNextTrial(currentTrial);
     }
 
-    void DoneTrials() {
+    void DoneAllTrials() {
         Debug.Log("---------------");
         Debug.Log("Done all trials");
+        DataTable endTable = trialTable.Clone();
+        foreach (Trial trial in trials) {
+            endTable.ImportRow(trial.Data);
+        }
+        Debug.Log(endTable.AsString());
     }
 
     void InterruptedTrial(Trial trial) {

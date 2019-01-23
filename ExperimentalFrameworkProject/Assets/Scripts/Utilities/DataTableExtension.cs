@@ -18,9 +18,12 @@ public static class DataTableExtension
     
 
     public static string AsString(this DataTable dt) {
+
+        string headerString =
+            String.Join(separator, dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName))) + "\n";
         string tableString = string.Join(Environment.NewLine,
                                  dt.Rows.OfType<DataRow>().Select(x => string.Join(separator, x.ItemArray)));
-        return tableString;
+        return headerString + tableString;
     }
 
     public static string AsString(this DataRow row) {

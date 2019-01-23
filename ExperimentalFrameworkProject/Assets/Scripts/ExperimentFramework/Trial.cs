@@ -25,6 +25,11 @@ public abstract class Trial {
         }
     }
 
+    public int Attempts {
+        get { return (int) data[Config.AttemptsColumnName]; }
+        set { data[Config.AttemptsColumnName] = value; }
+    }
+
     protected Trial(DataRow data, Config configFile) {
         this.data = data;
         this.configFile = configFile;
