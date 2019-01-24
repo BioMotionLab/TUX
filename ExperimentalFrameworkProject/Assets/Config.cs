@@ -10,7 +10,7 @@ public class Config : ScriptableObject
     public DatumFactory Factory = new DatumFactory();
 
     public DataTable TrialTable => Factory.ToTable();
-
+    public const string SkippedColumnName = "Skipped";
     public const string AttemptsColumnName = "Attempts";
     public const string IndexColumnName = "Trial Number";
     public const string SuccessColumnName = "Completed Successfully";

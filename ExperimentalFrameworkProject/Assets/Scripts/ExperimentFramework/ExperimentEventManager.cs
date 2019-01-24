@@ -17,7 +17,7 @@ public class ExperimentEventManager : MonoBehaviour {
     public static event GoBackOneTrialEvent OnGoBackOneTrial;
 
     public delegate void SkipToNextTrialEvent(Trial trial);
-    public static event SkipToNextTrialEvent OnSkipToNextTrial;
+    public static event SkipToNextTrialEvent OnToNextTrial;
 
     public static void StartingTrial(Trial trial) {
         OnTrialStart?.Invoke(trial);
@@ -36,6 +36,6 @@ public class ExperimentEventManager : MonoBehaviour {
     }
 
     public static void SkipToNextTrial(Trial trial) {
-        OnSkipToNextTrial?.Invoke(trial);
+        OnToNextTrial?.Invoke(trial);
     }
 }

@@ -30,6 +30,15 @@ public abstract class Trial {
         set { data[Config.AttemptsColumnName] = value; }
     }
 
+    public bool Skipped {
+        get {
+            return (bool)data[Config.SkippedColumnName];
+        }
+        set {
+            data[Config.SkippedColumnName] = value;
+        }
+    }
+
     protected Trial(DataRow data, Config configFile) {
         this.data = data;
         this.configFile = configFile;
@@ -50,7 +59,7 @@ public abstract class Trial {
 
             if (Input.GetKeyDown(KeyCode.Backspace)) {
                 ExperimentEventManager.InterruptTrial(this);
-                Debug.Log($"Trail {Index} finished sending interrupt event");
+                //Debug.Log($"Trail {Index} finished sending interrupt event");
                 break;
             }
 

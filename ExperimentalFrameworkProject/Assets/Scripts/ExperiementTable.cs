@@ -143,6 +143,19 @@ public class ExperiementTable : MonoBehaviour {
             row[Config.AttemptsColumnName] = 0;
         }
 
+        //Add skipped column
+        DataColumn skippedColumn = new DataColumn {
+                                                       DataType = typeof(bool),
+                                                       ColumnName = Config.SkippedColumnName,
+                                                       Unique = false,
+                                                       ReadOnly = false,
+                                                   };
+        table.Columns.Add(skippedColumn);
+        foreach (DataRow row in table.Rows) {
+            row[Config.SkippedColumnName] = false;
+        }
+
+
         return table;
     }
 }
