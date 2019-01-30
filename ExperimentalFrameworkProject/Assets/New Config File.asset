@@ -14,21 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Factory:
     intData:
-    - Name: balancer
+    - Name: balanced1
       TypeOfVariable: 0
       MixingTypeOfVariable: 0
       ShuffleOrder: 0
       Block: 0
       Values: 010000000200000003000000
-    - Name: looper
+    - Name: evenprob
       TypeOfVariable: 0
-      MixingTypeOfVariable: 1
+      MixingTypeOfVariable: 2
       ShuffleOrder: 0
       Block: 0
-      Values: 01000000020000000300000004000000
+      Values: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
+    - Name: balanced2
+      TypeOfVariable: 0
+      MixingTypeOfVariable: 0
+      ShuffleOrder: 0
+      Block: 0
+      Values: 0100000002000000
     floatData: []
     stringData: []
     GameObjectData: []
     Vector3Data: []
     CustomData: []
-    TypeToCreate: 0
+    TypeToCreate: 2

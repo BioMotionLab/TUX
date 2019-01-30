@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// A collection of extensions that extend the System List class to add new functionality
@@ -15,7 +17,7 @@ public static class ListExtension {
     /// <typeparam name="T"> The type stored in the list.</typeparam>
     /// <param name="list"> The list.</param>
     /// <param name="listMember">The list item to exclude.</param>
-    /// <exception cref="ArgumentOutOfRangeException">if list is too short to execute</exception>
+    /// <exception cref="System.ArgumentOutOfRangeException">if list is too short to execute</exception>
     /// <returns></returns>
     public static T RandomOtherItem<T> (this List<T> list, T listMember) {
 		if (list.Count < 2) {
@@ -39,8 +41,8 @@ public static class ListExtension {
 		if (list.Count < 1) {
 			throw new ArgumentOutOfRangeException(TooShortText);
 		}
-		T t = list [list.RandomIndex ()];
-		return t;
+		T item = list [list.RandomIndex ()];
+		return item;
 	}
 
     /// <summary>
@@ -62,7 +64,7 @@ public static class ListExtension {
 		int n = list.Count;
 		while (n > 1) {
 			n--;
-			int k = ThreadSafeRandom.ThisThreadsRandom.Next (n + 1);
+			int k = Random.Range(0, n + 1);
 			T value = list [k];
 			list [k] = list [n];
 			list [n] = value;
@@ -89,21 +91,13 @@ public static class ListExtension {
     /// <param name="list"></param>
     /// <returns></returns>
 	public static int RandomIndex<T> (this IList<T> list) {
-		var r = new Random ();
-		int randomIndex = r.Next (list.Count);
+		int randomIndex = Random.Range(0, list.Count);
+        Debug.Log(randomIndex);
 		return randomIndex;
 	}
 
 }
 
-
-static class ThreadSafeRandom {
-	[ThreadStatic] private static Random local;
-
-	public static Random ThisThreadsRandom {
-		get { return local ?? (local = new Random (unchecked(Environment.TickCount * 31 + Thread.CurrentThread.ManagedThreadId))); }
-	}
-}
 
 public class LoopingList<T> : List<T> {
     int currentIndex = 0;

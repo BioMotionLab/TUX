@@ -98,12 +98,12 @@ public class ExperiementTable : MonoBehaviour {
     }
 
     
-    public static DataTable GetTable(List<Datum> allData) {
+    public static DataTable GetTable(List<Datum> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
         DataTable table = new DataTable();
 
         List<Datum> balanced = new List<Datum>();
         List<Datum> looped = new List<Datum>();
-        List<Datum> probability = new List<Datum>();
+        List<Datum> evenProbability = new List<Datum>();
 
         foreach (Datum datum in allData) {
             switch (datum.MixingTypeOfVariable) {
@@ -113,8 +113,8 @@ public class ExperiementTable : MonoBehaviour {
                 case VariableMixingType.Looped:
                     looped.Add(datum);
                     break;
-                case VariableMixingType.Probability:
-                    probability.Add(datum);
+                case VariableMixingType.EvenProbability:
+                    evenProbability.Add(datum);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -130,10 +130,27 @@ public class ExperiementTable : MonoBehaviour {
             table = AddLoopedVariable(table, datum);
         }
 
-        foreach (Datum datum in probability) {
-            table = AddProbabilityVariable(table, datum);
+        foreach (Datum datum in evenProbability) {
+            table = AddEvenProbabilityVariable(table, datum);
         }
 
+
+        //if (numberOfRepetitions > 1) {
+        if (numberOfRepetitions > 1) { 
+            DataTable repeatedTable = table.Clone();
+            for (int i = 0; i < numberOfRepetitions; i++) {
+                foreach (DataRow row in table.Rows) {
+                    repeatedTable.ImportRow(row);
+                }
+            }
+
+            table = repeatedTable;
+        }
+
+
+        if (shuffleTrialOrder) {
+            table = table.Shuffle();
+        }
         //Add trial number column
         DataColumn indexColumn = new DataColumn {
                                                 DataType = typeof(int),
@@ -143,10 +160,10 @@ public class ExperiementTable : MonoBehaviour {
                                             };
         table.Columns.Add(indexColumn);
         indexColumn.SetOrdinal(0);// to put the column in position 0;
-        int i = 0;
+        int trialIndex = 0;
         foreach (DataRow row in table.Rows) {
-            row[Config.IndexColumnName] = i;
-            i++;
+            row[Config.IndexColumnName] = trialIndex;
+            trialIndex++;
         }
 
         //Add Successfully run column
@@ -185,12 +202,9 @@ public class ExperiementTable : MonoBehaviour {
             row[Config.SkippedColumnName] = false;
         }
 
+        
 
         return table;
-    }
-
-    static DataTable AddProbabilityVariable(DataTable table, Datum datum) {
-        throw new NotImplementedException();
     }
 
     static DataTable AddLoopedVariable(DataTable table, Datum datum) {
@@ -252,6 +266,51 @@ public class ExperiementTable : MonoBehaviour {
         Debug.Log($"table now has {newTable.Rows.Count} rows");
         return newTable;
     }
+
+    static DataTable AddEvenProbabilityVariable(DataTable table, Datum datum) {
+        Debug.Log("Adding EvenProbability variable");
+        DataTable newTable = table.Copy();
+
+        DataColumn column = new DataColumn {
+            DataType = datum.Type,
+            ColumnName = datum.Name,
+            ReadOnly = false,
+            Unique = false
+        };
+        newTable.Columns.Add(column);
+
+
+        if (datum.Type == typeof(int)) {
+
+            Debug.Log("detected datum type of int");
+            DatumInt intDatum = (DatumInt)datum;
+            
+
+            if (table.Rows.Count == 0) {
+                Debug.Log("Adding rows to empty table in variable creation");
+                foreach (int value in intDatum.Values) {
+                    var newRow = newTable.NewRow();
+                    newRow[datum.Name] = value;
+                    newTable.Rows.Add(newRow);
+                }
+            }
+            else {
+                Debug.Log($"Adding values to new table (rows: {newTable.Rows.Count}) in even probability variable creation");
+                foreach (DataRow newTableRow in newTable.Rows) {
+                    newTableRow[datum.Name] = intDatum.Values.RandomItem();
+                }
+            }
+
+        }
+        else {
+            throw new NotImplementedException("datatype not yet supported for adding variables");
+        }
+        Debug.Log($"table now has {newTable.Rows.Count} rows");
+        return newTable;
+    }
+
+
+
 }
 
 

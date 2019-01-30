@@ -6,10 +6,13 @@ using UnityEditor;
 
 public class Config : ScriptableObject
 {
+    public bool ShuffleTrialOrder;
+    public int NumberOfTimesToRepeatTrials = 1;
+
     [SerializeField]
     public DatumFactory Factory = new DatumFactory();
 
-    public DataTable TrialTable => Factory.ToTable();
+    public DataTable TrialTable => Factory.ToTable(ShuffleTrialOrder, NumberOfTimesToRepeatTrials);
     public const string SkippedColumnName = "Skipped";
     public const string AttemptsColumnName = "Attempts";
     public const string IndexColumnName = "Trial";

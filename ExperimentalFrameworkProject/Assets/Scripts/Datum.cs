@@ -141,9 +141,9 @@ public class DatumFactory {
         }
     }
 
-    public DataTable ToTable() {
+    public DataTable ToTable(bool shuffleTrialOrder, int numberRepetitions) {
         Debug.Log($"ToTable method in Datum: Alldata.count {AllData.Count}");
-        return ExperiementTable.GetTable(AllData);
+        return ExperiementTable.GetTable(AllData, shuffleTrialOrder, numberRepetitions);
     }
 
     public void Add(Datum datum) {
@@ -187,7 +187,8 @@ public class IVs {
 public enum VariableMixingType {
     Balanced,
     Looped,
-    Probability,
+    EvenProbability,
+    CustomProbability
 }
 
 [Serializable]
