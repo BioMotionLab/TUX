@@ -48,9 +48,10 @@ public abstract class Trial {
     bool interrupt = false;
 
     public IEnumerator Run() {
-        //Skip a frame to allow any previous things to end
         Success = false;
         interrupt = false;
+
+        //Skip a frame to allow any previous things to end
         yield return null;
 
         ExperimentEventManager.StartingTrial(this);
@@ -61,21 +62,7 @@ public abstract class Trial {
 
             if (interrupt) break;
 
-            if (Input.GetKeyDown(KeyCode.Backspace)) {
-                ExperimentEventManager.InterruptTrial(this);
-                //Debug.Log($"Trail {Index} finished sending interrupt event");
-                break;
-            }
-
-            if (Input.GetKeyDown(KeyCode.UpArrow)) {
-                ExperimentEventManager.GoBackOneTrial(this);
-                break;
-            }
-
-            if (Input.GetKeyDown(KeyCode.DownArrow)) {
-                ExperimentEventManager.SkipToNextTrial(this);
-                break;
-            }
+            if (CheckExperimenterControls()) break;
 
             yield return null;
             if (Input.GetKeyDown(KeyCode.Return)) {
@@ -96,6 +83,25 @@ public abstract class Trial {
         
         yield return null;
 
+    }
+
+    bool CheckExperimenterControls() {
+        if (Input.GetKeyDown(KeyCode.Backspace)) {
+            ExperimentEventManager.InterruptTrial(this);
+            return true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow)) {
+            ExperimentEventManager.GoBackOneTrial(this);
+            return true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            ExperimentEventManager.SkipToNextTrial(this);
+            return true;
+        }
+
+        return false;
     }
 
     void ReturnPressed() {
