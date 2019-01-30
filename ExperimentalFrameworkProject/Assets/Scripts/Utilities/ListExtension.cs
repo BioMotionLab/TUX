@@ -94,7 +94,6 @@ public static class ListExtension {
 		return randomIndex;
 	}
 
-
 }
 
 
@@ -104,4 +103,18 @@ static class ThreadSafeRandom {
 	public static Random ThisThreadsRandom {
 		get { return local ?? (local = new Random (unchecked(Environment.TickCount * 31 + Thread.CurrentThread.ManagedThreadId))); }
 	}
+}
+
+public class LoopingList<T> : List<T> {
+    int currentIndex = 0;
+
+    public T NextElement {
+        get {
+            currentIndex = (currentIndex + 1) % this.Count;
+            T nextItem = this[currentIndex];
+            return nextItem;
+        }
+    }
+
+    public T FirstElement => this[0];
 }

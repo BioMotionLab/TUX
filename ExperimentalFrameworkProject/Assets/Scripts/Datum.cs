@@ -29,7 +29,7 @@ public enum VariableType {
 public enum DataType {
     Int,
     Float,
-    String,
+    //String,
     //GameObject,
     //Vector3,
     //Vector2,
@@ -40,7 +40,8 @@ public enum DataType {
 public abstract class Datum {
     public    string         Name;
     public    VariableType   TypeOfVariable;
-    public    bool           RandomizeOrder;
+    public VariableMixingType MixingTypeOfVariable;
+    public    bool           ShuffleOrder;
     public    bool           Block;
 
     public abstract Type Type { get; }
@@ -63,9 +64,6 @@ public class DatumFactory {
 
     [SerializeField]
     public List<DatumVector3> Vector3Data = new List<DatumVector3>();
-
-    [SerializeField]
-    public List<DatumVector2> Vector2Data = new List<DatumVector2>();
 
     [SerializeField]
     public List<DatumCustom> CustomData = new List<DatumCustom>();
@@ -184,14 +182,12 @@ public class IVs {
     }
 }
 
-public enum SupportedTypes {
-    Int,
-    Float,
-    String,
-    GameObject,
-    Vector3,
-    Vector2,
-    Custom
+
+
+public enum VariableMixingType {
+    Balanced,
+    Looped,
+    Probability,
 }
 
 [Serializable]

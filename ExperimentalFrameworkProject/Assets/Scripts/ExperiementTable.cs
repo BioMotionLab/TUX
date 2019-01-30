@@ -33,7 +33,7 @@ public class ExperiementTable : MonoBehaviour {
         //    DataRow row = table.NewRow();
 
         //    var values = datum.Values;
-        //    if (datum.RandomizeOrder) {
+        //    if (datum.ShuffleOrder) {
         //        values = values.shuffle();
         //    }
         //    foreach (var value in values) {
@@ -53,7 +53,7 @@ public class ExperiementTable : MonoBehaviour {
         
     }
 
-    public static DataTable AddVariable(DataTable table, Datum datum) {
+    public static DataTable AddBalancedVariable(DataTable table, Datum datum) {
         DataTable newTable = table.Clone();
 
         DataColumn column = new DataColumn {
@@ -100,17 +100,47 @@ public class ExperiementTable : MonoBehaviour {
     
     public static DataTable GetTable(List<Datum> allData) {
         DataTable table = new DataTable();
+
+        List<Datum> balanced = new List<Datum>();
+        List<Datum> looped = new List<Datum>();
+        List<Datum> probability = new List<Datum>();
+
         foreach (Datum datum in allData) {
-            table = AddVariable(table, datum);
+            switch (datum.MixingTypeOfVariable) {
+                case VariableMixingType.Balanced:
+                    balanced.Add(datum);
+                    break;
+                case VariableMixingType.Looped:
+                    looped.Add(datum);
+                    break;
+                case VariableMixingType.Probability:
+                    probability.Add(datum);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
         }
-        
+
+        foreach (Datum datum in balanced) {
+            table = AddBalancedVariable(table, datum);
+        }
+
+        foreach (Datum datum in looped) {
+            table = AddLoopedVariable(table, datum);
+        }
+
+        foreach (Datum datum in probability) {
+            table = AddProbabilityVariable(table, datum);
+        }
+
         //Add trial number column
         DataColumn indexColumn = new DataColumn {
-                                                    DataType = typeof(int),
-                                                    ColumnName = Config.IndexColumnName,
-                                                    Unique = false,
-                                                    ReadOnly = false,
-                                                };
+                                                DataType = typeof(int),
+                                                ColumnName = Config.IndexColumnName,
+                                                Unique = false,
+                                                ReadOnly = false,
+                                            };
         table.Columns.Add(indexColumn);
         indexColumn.SetOrdinal(0);// to put the column in position 0;
         int i = 0;
@@ -158,4 +188,70 @@ public class ExperiementTable : MonoBehaviour {
 
         return table;
     }
+
+    static DataTable AddProbabilityVariable(DataTable table, Datum datum) {
+        throw new NotImplementedException();
+    }
+
+    static DataTable AddLoopedVariable(DataTable table, Datum datum) {
+        Debug.Log("Adding looped variable");
+        DataTable newTable = table.Clone();
+
+        DataColumn column = new DataColumn {
+                                               DataType = datum.Type,
+                                               ColumnName = datum.Name,
+                                               ReadOnly = false,
+                                               Unique = false
+                                           };
+        newTable.Columns.Add(column);
+
+        
+        if (datum.Type == typeof(int)) {
+           
+            Debug.Log("detected datum type of int");
+            DatumInt intDatum = (DatumInt)datum;
+
+            LoopingList < int > loopValues = new LoopingList<int>();
+            loopValues.AddRange(intDatum.Values);
+
+
+
+            if (table.Rows.Count == 0) {
+                Debug.Log("Adding rows to empty table in variable creation");
+                foreach (int value in intDatum.Values) {
+                    var newRow = newTable.NewRow();
+                    newRow[datum.Name] = value;
+                    newTable.Rows.Add(newRow);
+                }
+            }
+            else {
+                int lowestCommonMultiple =
+                    LowestCommonFunctions.LowestCommonMultiple(table.Rows.Count, intDatum.Values.Count);
+
+                //Make the required number of copies of the table.
+                int numberOfTableCopies = lowestCommonMultiple / table.Rows.Count;
+                Debug.Log($"Number of table copies: {numberOfTableCopies}");
+                for (int i = 0; i < numberOfTableCopies; i++) {
+                    Debug.Log($"Adding {i}th copy of table");
+                    foreach (DataRow tableRow in table.Rows) {
+                        newTable.ImportRow(tableRow);
+                    }
+                }
+                Debug.Log("Adding rows to NON empty table in looped variable creation");
+                int value = loopValues.FirstElement;
+                foreach (DataRow newTableRow in newTable.Rows) {
+                    newTableRow[datum.Name] = value;
+                    value = loopValues.NextElement;
+                }
+            }
+
+        }
+        else {
+            throw new NotImplementedException("datatype not yet supported for adding variables");
+        }
+        Debug.Log($"table now has {newTable.Rows.Count} rows");
+        return newTable;
+    }
 }
+
+
