@@ -45,9 +45,12 @@ public abstract class Trial {
     }
 
 
+    bool interrupt = false;
+
     public IEnumerator Run() {
         //Skip a frame to allow any previous things to end
         Success = false;
+        interrupt = false;
         yield return null;
 
         ExperimentEventManager.StartingTrial(this);
@@ -56,6 +59,7 @@ public abstract class Trial {
         bool waiting = true;
         while (waiting) {
 
+            if (interrupt) break;
 
             if (Input.GetKeyDown(KeyCode.Backspace)) {
                 ExperimentEventManager.InterruptTrial(this);
@@ -96,6 +100,10 @@ public abstract class Trial {
 
     void ReturnPressed() {
         Debug.Log($"Trail {Index} Return key pressed");
+    }
+
+    public void Interrupt() {
+        interrupt = true;
     }
 
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Factory:
     intData:
-    - Name: firstint
+    - Name: size
       TypeOfVariable: 0
       RandomizeOrder: 1
       Block: 0
@@ -35,4 +35,4 @@ MonoBehaviour:
     Vector3Data: []
     Vector2Data: []
     CustomData: []
-    TypeToCreate: 3
+    TypeToCreate: 0

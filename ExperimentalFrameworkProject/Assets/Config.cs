@@ -12,8 +12,8 @@ public class Config : ScriptableObject
     public DataTable TrialTable => Factory.ToTable();
     public const string SkippedColumnName = "Skipped";
     public const string AttemptsColumnName = "Attempts";
-    public const string IndexColumnName = "Trial Number";
-    public const string SuccessColumnName = "Completed Successfully";
+    public const string IndexColumnName = "Trial";
+    public const string SuccessColumnName = "Completed";
 
     public void PrintTrials() {
         throw new System.NotImplementedException();

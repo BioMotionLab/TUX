@@ -11,15 +11,7 @@ public class TrialSequence : MonoBehaviour {
     DataTable trialTable;
     readonly List<Trial> allTrials = new List<Trial>();
     List<Trial> currentTrialList = new List<Trial>();
-
-
     Trial currentTrial;
-    Coroutine currentTrialRunning;
-    //int totaltrialCounter = 0;    
-
-    //int currentBlock = 0;
-    //int currentTrialInBlock = 0;
-
 
     void Start() {
         trialTable = ConfigFile.TrialTable;
@@ -34,6 +26,7 @@ public class TrialSequence : MonoBehaviour {
         }
         Debug.Log("Starting to run experiment");
         currentTrialList = allTrials;
+        ExperimentEventManager.ExperimentStart(allTrials, trialTable.HeaderAsString());
         StartRunningTrial(currentTrialList[0]);
 
     }
@@ -44,6 +37,7 @@ public class TrialSequence : MonoBehaviour {
         ExperimentEventManager.OnTrialCompleted += TrialDone;
         ExperimentEventManager.OnToNextTrial += ToNextTrial;
         ExperimentEventManager.OnGoBackOneTrial += BackOneTrial;
+        ExperimentEventManager.OnJumpToTrial += JumpToTrial;
     }
 
     void OnDisable() {
@@ -52,6 +46,7 @@ public class TrialSequence : MonoBehaviour {
         ExperimentEventManager.OnTrialCompleted -= TrialDone;
         ExperimentEventManager.OnToNextTrial -= ToNextTrial;
         ExperimentEventManager.OnGoBackOneTrial -= BackOneTrial;
+        ExperimentEventManager.OnJumpToTrial -= JumpToTrial;
     }
 
     void TrialStarted(Trial trial) {
@@ -61,31 +56,44 @@ public class TrialSequence : MonoBehaviour {
     }
 
     void StartRunningTrial(Trial trial) {
+        ExperimentEventManager.TrialStarted(trial);
         currentTrial = trial;
-        currentTrialRunning = StartCoroutine(trial.Run());
-        trial.Attempts++;
+        StartCoroutine(trial.Run());
     }
 
     void TrialDone(Trial currentTrial) {
         FinishTrial(currentTrial);
+        currentTrial.Attempts++;
         GoToNextTrial(currentTrial);
     }
 
     void FinishTrial(Trial currentTrial) {
         int trialNum = TrialIndex(currentTrial);
+        
         Debug.Log($"Done Trial {trialNum + 1}, success = {currentTrial.Success}");
-        Debug.Log(currentTrial.Data.AsString());
+        Debug.Log(currentTrial.Data.AsStringWithHeader(trialTable));
+        ExperimentEventManager.UpdateTrialList(allTrials, TrialIndex(currentTrial));
     }
 
     void GoToNextTrial(Trial currentTrial) {
         int newIndex = TrialIndex(currentTrial) + 1;
-        if (newIndex >= currentTrialList.Count) {
-            DoneAllTrials();
+        
+        bool searchingForUncompletedTrial = true;
+        while (searchingForUncompletedTrial) {
+            if (newIndex > currentTrialList.Count - 1) {
+                searchingForUncompletedTrial = false;
+                DoneAllTrials();
+            }
+            else if (!currentTrialList[newIndex].Success) {
+                searchingForUncompletedTrial = false;
+                Trial nextTrial = currentTrialList[newIndex];
+                StartRunningTrial(nextTrial);
+            }
+            newIndex++;
+
         }
-        else {
-            Trial nextTrial = currentTrialList[newIndex];
-            StartRunningTrial(nextTrial);
-        }
+            
+        
     }
 
     void ToNextTrial(Trial currentTrial) {
@@ -111,15 +119,23 @@ public class TrialSequence : MonoBehaviour {
             currentTrialList = unsuccessfulTrials;
             StartRunningTrial(unsuccessfulTrials[0]);
         }
-        else { // finish up
+        else {
+            // finish up
             Debug.Log($"No more unsuccessful trials");
-            DataTable endTable = trialTable.Clone();
-            foreach (Trial trial in allTrials) {
-                endTable.ImportRow(trial.Data);
-            }
+            var endTable = CreateTableFromTrials(allTrials);
             Debug.Log(endTable.AsString());
+            ExperimentEventManager.ExperimentEnd();
         }
+
         
+    }
+
+    DataTable CreateTableFromTrials(List<Trial> trialList) {
+        DataTable newTable = trialTable.Clone();
+        foreach (Trial trial in trialList) {
+            newTable.ImportRow(trial.Data);
+        }
+        return newTable;
     }
 
     void SkipTrial(Trial currentTrial) {
@@ -144,51 +160,20 @@ public class TrialSequence : MonoBehaviour {
         }
     }
 
+    void JumpToTrial(int jumpToIndex) {
+        Debug.Log("Got jump event");
+        FinishTrial(currentTrial);
+        currentTrial.Interrupt();
+        currentTrialList = allTrials;
+        Trial newTrial = currentTrialList[jumpToIndex];
+        StartRunningTrial(newTrial);
+    }
+
+
     int TrialIndex(Trial trial) {
         return currentTrialList.IndexOf(trial);
     }
 
-}
-
-
-
-public interface Observer {
-    void OnNotify(Subject subject, CustomEvent customEvent);
-}
-
-public enum CustomEvent {
-    TrialComplete,
-    BackOneTrial
-}
-
-public class Subject {
-    List<Observer> observers = new List<Observer>();
-
-    List<Observer> toRemove = new List<Observer>();
-
-    public void AddObserver(Observer observer) {
-        observers.Add(observer);
-    }
-
-    public void RemoveObserver(Observer observer) {
-        toRemove.Remove(observer);
-    }
-
-    protected void Notify(CustomEvent customEvent) {
-        RemoveExpiredObservers();
-        foreach (var observer in observers) {
-            observer.OnNotify(this, customEvent);
-        }
-        RemoveExpiredObservers();
-        
-    }
-
-    void RemoveExpiredObservers() {
-        foreach (var observer in toRemove) {
-            observers.Remove(observer);
-        }
-        toRemove.Clear();
-    }
 }
 
 

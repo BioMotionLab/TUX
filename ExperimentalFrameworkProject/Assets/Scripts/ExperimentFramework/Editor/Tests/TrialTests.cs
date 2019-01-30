@@ -10,14 +10,14 @@ public class TrialTests {
         [SetUp]
         public void Setup() {
             simpleData = new SimpleDataRow();
-            simpleTrial = new Trial();
+            //simpleTrial = new Trial();
         }
 
         [Test]
         public void SimpleDataRowOfString_GetsOutput() {
             string output = "";
             string expected = "the data";
-            simpleTrial.Run(ref output, simpleData);
+            //simpleTrial.Run(ref output, simpleData);
             Assert.AreEqual(expected, output);
 
         }
@@ -34,8 +34,4 @@ public class SimpleDataRow {
     public string data = "the data";
 }
 
-public class Trial {
-    public void Run(ref string output, SimpleDataRow simpleData) {
-        output = simpleData.data;
-    }
-}
+
