@@ -13,7 +13,7 @@ public abstract class Datum<T> : Datum {
 
     protected Datum() {
         Values = new List<T>();
-        Name = $"Unnamed Variable (type:{typeof(T)})";
+        Name = $"Unnamed Variable (types:{typeof(T)})";
     }
 
 
@@ -26,10 +26,10 @@ public enum VariableType {
     Dependent
 }
 
-public enum DataType {
+public enum SupportedDataTypes {
     Int,
     Float,
-    //String,
+    String,
     //GameObject,
     //Vector3,
     //Vector2,
@@ -39,12 +39,14 @@ public enum DataType {
 
 public abstract class Datum {
     public    string         Name;
+    public abstract SupportedDataTypes DataType { get; }
     public    VariableType   TypeOfVariable;
     public VariableMixingType MixingTypeOfVariable;
     public    bool           ShuffleOrder;
     public    bool           Block;
 
     public abstract Type Type { get; }
+    
 }
 
 [Serializable]
@@ -59,14 +61,14 @@ public class DatumFactory {
     [SerializeField]
     public List<DatumString> stringData = new List<DatumString>();
 
-    [SerializeField]
-    public List<DatumGameObject> GameObjectData = new List<DatumGameObject>();
+    //[SerializeField]
+    //public List<DatumGameObject> GameObjectData = new List<DatumGameObject>();
 
-    [SerializeField]
-    public List<DatumVector3> Vector3Data = new List<DatumVector3>();
+    //[SerializeField]
+    //public List<DatumVector3> Vector3Data = new List<DatumVector3>();
 
-    [SerializeField]
-    public List<DatumCustom> CustomData = new List<DatumCustom>();
+    //[SerializeField]
+    //public List<DatumCustom> CustomData = new List<DatumCustom>();
 
     public List<Datum> AllData {
         get {
@@ -104,46 +106,46 @@ public class DatumFactory {
         }
     }
 
-    public DataType TypeToCreate;
+    public SupportedDataTypes TypesToCreate;
 
     public Datum New() {
-        return New(TypeToCreate);
+        return New(TypesToCreate);
     }
 
-    public Datum New(DataType type) {
-        switch (type) {
-            case DataType.Int:
+    public Datum New(SupportedDataTypes types) {
+        switch (types) {
+            case SupportedDataTypes.Int:
                 DatumInt newDatumInt = new DatumInt();
                 return newDatumInt;
-            case DataType.Float:
+            case SupportedDataTypes.Float:
                 DatumFloat newDatumFloat = new DatumFloat();
                 return newDatumFloat;
-            //case DataType.String:
+            //case SupportedDataTypes.String:
             //    stringData.Add(new DatumString());
             //    break;
-            //case DataType.GameObject:
+            //case SupportedDataTypes.GameObject:
             //    GameObjectData.Add(new DatumGameObject());
             //    break;
-            //case DataType.Vector3:
+            //case SupportedDataTypes.Vector3:
             //    Vector3Data.Add(new DatumVector3());
             //    break;
-            //case DataType.Vector2:
+            //case SupportedDataTypes.Vector2:
             //    Vector2Data.Add(new DatumVector2());
             //    break;
-            //case DataType.CustomDatum:
+            //case SupportedDataTypes.CustomDatum:
             //    CustomData.Add(new DatumCustom());
             //    break;
-            case DataType.ChooseType:
-                throw new InvalidEnumArgumentException("Trying to create new datum, but not type not yet chosen");
+            case SupportedDataTypes.ChooseType:
+                throw new InvalidEnumArgumentException("Trying to create new datum, but not types not yet chosen");
             default:
-                throw new NotImplementedException("Support for this data type has not yet been defined." +
+                throw new NotImplementedException("Support for this data types has not yet been defined." +
                                                   "You can customize it yourself in the Datum.cs class");
         }
     }
 
     public DataTable ToTable(bool shuffleTrialOrder, int numberRepetitions) {
         Debug.Log($"ToTable method in Datum: Alldata.count {AllData.Count}");
-        return ExperiementTable.GetTable(AllData, shuffleTrialOrder, numberRepetitions);
+        return ExperimentTable.GetTable(AllData, shuffleTrialOrder, numberRepetitions);
     }
 
     public void Add(Datum datum) {
@@ -154,16 +156,16 @@ public class DatumFactory {
             floatData.Add((DatumFloat) datum);
         }
         else {
-            throw new NotImplementedException("Support for this data type has not yet been defined. " +
+            throw new NotImplementedException("Support for this data types has not yet been defined. " +
                                               "You can add support for it yourself in the Datum.cs class if needed");
         }
 
-        Debug.Log($"added new datum of type {TypeToCreate}");
-        TypeToCreate = DataType.ChooseType;
+        Debug.Log($"added new datum of types {TypesToCreate}");
+        TypesToCreate = SupportedDataTypes.ChooseType;
     }
 
     public DatumInt NewInt(string name, List<int> intList) {
-        DatumInt newDatumInt = (DatumInt) New(DataType.Int);
+        DatumInt newDatumInt = (DatumInt) New(SupportedDataTypes.Int);
         newDatumInt.Name = name;
         newDatumInt.Values = intList;
         return newDatumInt;
@@ -193,37 +195,38 @@ public enum VariableMixingType {
 
 [Serializable]
 public class DatumInt : Datum<int> {
-
+    public override SupportedDataTypes DataType => SupportedDataTypes.Int;
 }
 
 [Serializable]
 public class DatumFloat : Datum<float> {
-
+    public override SupportedDataTypes DataType => SupportedDataTypes.Float;
 }
-[Serializable] public class DatumString : Datum<string> {//TODO
-                                                         }
-
-[Serializable]
-public class DatumGameObject : Datum<GameObject> {
-    //TODO
+[Serializable] public class DatumString : Datum<string> {
+    public override SupportedDataTypes DataType => SupportedDataTypes.String;
 }
 
-[Serializable]
-public class DatumVector3 : Datum<Vector3> {
-    //TODO
-}
+//[Serializable]
+//public class DatumGameObject : Datum<GameObject> {
+//    //TODO
+//}
 
-[Serializable]
-public class DatumVector2 : Datum<Vector2> {
-    //TODO
-}
+//[Serializable]
+//public class DatumVector3 : Datum<Vector3> {
+//    //TODO
+//}
 
-[Serializable]
-public class DatumCustom : Datum<CustomDatum> {
-    //TODO
-}
+//[Serializable]
+//public class DatumVector2 : Datum<Vector2> {
+//    //TODO
+//}
 
-public interface CustomDatum {
-    //TODO
-}
+//[Serializable]
+//public class DatumCustom : Datum<CustomDatum> {
+//    //TODO
+//}
+
+//public interface CustomDatum {
+//    //TODO
+//}
 

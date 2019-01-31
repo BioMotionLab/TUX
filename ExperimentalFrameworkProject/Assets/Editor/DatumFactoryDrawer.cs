@@ -19,7 +19,7 @@ public class DatumFactoryDrawer : PropertyDrawer {
         Rect contentPosition = EditorGUI.PrefixLabel(position, label);
 
         Rect currentRect = new Rect(position.x, position.y + 20f, position.width, 20f);
-        var typeProperty = property.FindPropertyRelative(nameof(DatumFactory.TypeToCreate));
+        var typeProperty = property.FindPropertyRelative(nameof(DatumFactory.TypesToCreate));
         EditorGUI.PropertyField(currentRect, typeProperty);
 
         currentRect.y += 20f;

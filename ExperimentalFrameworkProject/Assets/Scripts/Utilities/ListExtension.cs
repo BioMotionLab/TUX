@@ -14,7 +14,7 @@ public static class ListExtension {
     /// <summary>
     /// Returns a random item from the list ManuallySelected than the specified item.
     /// </summary>
-    /// <typeparam name="T"> The type stored in the list.</typeparam>
+    /// <typeparam name="T"> The types stored in the list.</typeparam>
     /// <param name="list"> The list.</param>
     /// <param name="listMember">The list item to exclude.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">if list is too short to execute</exception>
@@ -34,7 +34,7 @@ public static class ListExtension {
     /// <summary>
     /// Returns a random item from the list.
     /// </summary>
-    /// <typeparam name="T">The type stored in the list.</typeparam>
+    /// <typeparam name="T">The types stored in the list.</typeparam>
     /// <param name="list">The list.</param>
     /// <returns></returns>
 	public static T RandomItem<T> (this List<T> list) {

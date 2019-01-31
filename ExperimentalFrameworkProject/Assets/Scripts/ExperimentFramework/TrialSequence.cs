@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using UnityEngine;
 
 public class TrialSequence : MonoBehaviour {
@@ -15,6 +16,9 @@ public class TrialSequence : MonoBehaviour {
 
     void Start() {
         trialTable = ConfigFile.TrialTable;
+        if (trialTable.Rows.Count <= 0) {
+            throw new InvalidDataException("Trial Table Not created correctly");
+        }
         int i = 1;
         Debug.Log($"number of rows in currentTrial table = {trialTable.Rows.Count}");
         foreach (DataRow row in trialTable.Rows) {
