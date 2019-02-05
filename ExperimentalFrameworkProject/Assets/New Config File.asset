@@ -12,29 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
   m_Name: New Config File
   m_EditorClassIdentifier: 
+  ShuffleTrialOrder: 0
+  NumberOfTimesToRepeatTrials: 1
   Factory:
-    intData:
-    - Name: balanced1
+    DataTypesToCreate: 1
+    VariableTypeToCreate: 0
+    intIVs:
+    - Name: int1
       TypeOfVariable: 0
+      DataType: 0
       MixingTypeOfVariable: 0
-      ShuffleOrder: 0
       Block: 0
-      Values: 010000000200000003000000
-    - Name: evenprob
+      Values: 010000000200000003000000040000000500000006000000
+      Probabilities:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+    intDVs: []
+    floatIVs:
+    - Name: float 1
       TypeOfVariable: 0
-      MixingTypeOfVariable: 2
-      ShuffleOrder: 0
-      Block: 0
-      Values: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
-    - Name: balanced2
-      TypeOfVariable: 0
+      DataType: 1
       MixingTypeOfVariable: 0
-      ShuffleOrder: 0
       Block: 0
-      Values: 0100000002000000
-    floatData: []
-    stringData: []
-    GameObjectData: []
-    Vector3Data: []
-    CustomData: []
-    TypeToCreate: 2
+      Values:
+      - 1.1
+      - 2.2
+      Probabilities:
+      - 0
+      - 1
+    - Name: prob
+      TypeOfVariable: 0
+      DataType: 1
+      MixingTypeOfVariable: 3
+      Block: 0
+      Values:
+      - 1
+      - 2
+      Probabilities:
+      - 0.8
+      - 0.19999999
+    stringIVs: []

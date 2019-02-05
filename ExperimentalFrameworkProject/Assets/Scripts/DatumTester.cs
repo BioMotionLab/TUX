@@ -6,13 +6,13 @@ using UnityEditor;
 public class DatumTester : MonoBehaviour {
 
 
- // public Datum<int> intDatumGeneric = new Datum<int>();
+ // public IndependentVariable<int> intDatumGeneric = new IndependentVariable<int>();
 
     //[SerializeField]
-    //public DatumInt intDatum = new DatumInt();
+    //public IndependentVariableInt intDatum = new IndependentVariableInt();
 
     
-    //public DatumInt unserializedIntDatum = new DatumInt();
+    //public IndependentVariableInt unserializedIntDatum = new IndependentVariableInt();
 
     //[SerializeField]
     //public DatumGameObject gameObjectDatum= new DatumGameObject();
@@ -20,7 +20,7 @@ public class DatumTester : MonoBehaviour {
     //[SerializeField]
     //public DatumVector3 vector3Datum = new DatumVector3();
 
-    [SerializeField] public DatumFactory Factory = new DatumFactory();
+    [SerializeField] public VariableFactory Factory = new VariableFactory();
 
 
 
@@ -31,7 +31,7 @@ public class DatumTester : MonoBehaviour {
 
 
 
-        //IDatum dat = new Datum<int>(intvariablename, () => somevariable);
+        //IDatum dat = new IndependentVariable<int>(intvariablename, () => somevariable);
 
         
         //data.Add(dat);
@@ -39,7 +39,7 @@ public class DatumTester : MonoBehaviour {
         
 
 	    
-        //data.Add(Datum.Add(intvariablename, () => somevariable));
+        //data.Add(IndependentVariable.Add(intvariablename, () => somevariable));
 
 	    
 

@@ -10,7 +10,7 @@ public class Config : ScriptableObject
     public int NumberOfTimesToRepeatTrials = 1;
 
     [SerializeField]
-    public DatumFactory Factory = new DatumFactory();
+    public VariableFactory Factory = new VariableFactory();
 
     public DataTable TrialTable => Factory.ToTable(ShuffleTrialOrder, NumberOfTimesToRepeatTrials);
     public const string SkippedColumnName = "Skipped";

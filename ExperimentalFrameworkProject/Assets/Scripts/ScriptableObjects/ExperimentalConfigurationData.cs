@@ -13,7 +13,7 @@ using UnityEngine.Serialization;
 [Serializable]
 public class ExperimentalConfigurationData : ScriptableObject {
 
-    public IndependentVariableFactory fact = new IndependentVariableFactory();
+    //public IndependentVariableFactory fact = new IndependentVariableFactory();
 
     //public List<Variable> IndependentVariables = new List<Variable>();
     //public IndependentVariableFloat FloatLevels = new IndependentVariableFloat();

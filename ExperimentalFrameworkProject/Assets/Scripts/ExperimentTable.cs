@@ -7,45 +7,52 @@ using System.Data;
 public class ExperimentTable : MonoBehaviour {
 
 
-    public static DataTable GetTable(List<Datum> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
+    public static DataTable GetTable(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
         DataTable table = new DataTable();
 
-        List<Datum> balanced = new List<Datum>();
-        List<Datum> looped = new List<Datum>();
-        List<Datum> evenProbability = new List<Datum>();
+        List<IndependentVariable> balanced = new List<IndependentVariable>();
+        List<IndependentVariable> looped = new List<IndependentVariable>();
+        List<IndependentVariable> probability = new List<IndependentVariable>();
         
         //Sort datums into mixing categories so they go in order
-        foreach (Datum datum in allData) {
-            switch (datum.MixingTypeOfVariable) {
-                case VariableMixingType.Balanced:
-                    balanced.Add(datum);
-                    break;
-                case VariableMixingType.Looped:
-                    looped.Add(datum);
-                    break;
-                case VariableMixingType.EvenProbability:
-                    evenProbability.Add(datum);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+        foreach (Variable datum in allData) {
+            if (datum.TypeOfVariable == VariableType.Independent) {
+                IndependentVariable IvDatum = (IndependentVariable) datum;
+                switch (IvDatum.MixingTypeOfVariable) {
+                    case VariableMixingType.Balanced:
+                        balanced.Add(IvDatum);
+                        break;
+                    case VariableMixingType.Looped:
+                        looped.Add(IvDatum);
+                        break;
+                    case VariableMixingType.EvenProbability:
+                        probability.Add(IvDatum);
+                        break;
+                    case VariableMixingType.CustomProbability:
+                        probability.Add(IvDatum);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
+            
             
         }
 
         Debug.Log($"1: Current table rows in getTable() {table.Rows.Count}");
 
         //do balanced variables first
-        foreach (Datum datum in balanced) {
+        foreach (IndependentVariable datum in balanced) {
             table = AddVariableGeneric(datum, table);
         }
 
         //do looped variables second
-        foreach (Datum datum in looped) {
+        foreach (IndependentVariable datum in looped) {
             table = AddVariableGeneric(datum, table);
         }
 
         //do probability variables last
-        foreach (Datum datum in evenProbability) {
+        foreach (IndependentVariable datum in probability) {
             table = AddVariableGeneric(datum, table);
         }
         //TODO custom probability
@@ -144,17 +151,17 @@ public class ExperimentTable : MonoBehaviour {
         }
     }
 
-    static DataTable AddVariableGeneric(Datum datum, DataTable table) {
+    static DataTable AddVariableGeneric(IndependentVariable independentVariable, DataTable table) {
         DataTable newTable = new DataTable();
-        switch (datum.DataType) {
+        switch (independentVariable.DataType) {
             case SupportedDataTypes.Int:
-                newTable = AddVariable<int>(table, datum);
+                newTable = AddVariable<int>(table, independentVariable);
                 break;
             case SupportedDataTypes.Float:
-                newTable = AddVariable<float>(table, datum);
+                newTable = AddVariable<float>(table, independentVariable);
                 break;
             case SupportedDataTypes.String:
-                newTable = AddVariable<string>(table, datum);
+                newTable = AddVariable<string>(table, independentVariable);
                 break;
             case SupportedDataTypes.ChooseType:
                 throw new ArgumentException("type not chosen");
@@ -166,23 +173,24 @@ public class ExperimentTable : MonoBehaviour {
     }
 
 
-    static DataTable AddVariable<T>(DataTable table, Datum datum) {
+    static DataTable AddVariable<T>(DataTable table, IndependentVariable independentVariable) {
 
         DataTable newTable = table.Clone();
-        AddVariableColumn(datum, newTable);
+        AddVariableColumn(independentVariable, newTable);
 
-        switch (datum.MixingTypeOfVariable) {
+        switch (independentVariable.MixingTypeOfVariable) {
             case VariableMixingType.Balanced:
-                newTable = AddBalancedValues<T>(table, datum);
+                newTable = AddBalancedValues<T>(table, independentVariable);
                 break;
             case VariableMixingType.Looped:
-                newTable = AddLoopedValues<T>(table, datum);
+                newTable = AddLoopedValues<T>(table, independentVariable);
                 break;
             case VariableMixingType.EvenProbability:
-                newTable = AddEvenProbabilityValues<T>(table, datum);
+                newTable = AddEvenProbabilityValues<T>(table, independentVariable);
                 break;
             case VariableMixingType.CustomProbability:
-                throw new NotImplementedException();
+                newTable = AddCustomProbabilityValues<T>(table, independentVariable);
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -192,30 +200,36 @@ public class ExperimentTable : MonoBehaviour {
     }
 
 
-    static DataTable AddBalancedValues<T>(DataTable table, Datum datum) {
+
+
+    static DataTable AddBalancedValues<T>(DataTable table, IndependentVariable independentVariable) {
 
         DataTable newTable = table.Clone();
 
-        AddVariableColumn(datum, newTable);
+        AddVariableColumn(independentVariable, newTable);
 
-        
+        IndependentVariable<T> castIndependentVariable = (IndependentVariable<T>)independentVariable;
+        if (castIndependentVariable.Values.Count == 0) {
+            throw new ArgumentException($"No values defined for variable {independentVariable.Name}");
+        }
+
+
         if (table.Rows.Count == 0) {
             Debug.Log("Adding rows to empty table in variable creation");
-            Datum<T> castedDatum = (Datum<T>) datum;
-            foreach (T value in castedDatum.Values) {
+            
+            foreach (T value in castIndependentVariable.Values) {
                 var newRow = newTable.NewRow();
-                newRow[datum.Name] = value;
+                newRow[independentVariable.Name] = value;
                 newTable.Rows.Add(newRow);
             }
         }
         else {
             Debug.Log("Adding rows to NON empty table in variable creation");
             foreach (DataRow tableRow in table.Rows) {
-                Datum<T> castedDatum = (Datum<T>)datum;
-                foreach (T value in castedDatum.Values) {
+                foreach (T value in castIndependentVariable.Values) {
                     newTable.ImportRow(tableRow);
                     var newRow = newTable.Rows[newTable.Rows.Count - 1];
-                    newRow[datum.Name] = value;
+                    newRow[independentVariable.Name] = value;
                 }
             }
         }
@@ -224,28 +238,32 @@ public class ExperimentTable : MonoBehaviour {
 
     }
 
-    static DataTable AddLoopedValues<T>(DataTable table, Datum datum) {
+    static DataTable AddLoopedValues<T>(DataTable table, IndependentVariable independentVariable) {
         DataTable newTable = table.Clone();
 
-        AddVariableColumn(datum, newTable);
+        AddVariableColumn(independentVariable, newTable);
 
-        Datum<T> castedDatum = (Datum<T>)datum;
+        IndependentVariable<T> castIndependentVariable = (IndependentVariable<T>)independentVariable;
+        if (castIndependentVariable.Values.Count == 0) {
+            throw new ArgumentNullException($"No values defined for variable {independentVariable.Name}");
+        }
+
 
         LoopingList<T> loopValues = new LoopingList<T>();
-        loopValues.AddRange(castedDatum.Values);
+        loopValues.AddRange(castIndependentVariable.Values);
 
 
         if (table.Rows.Count == 0) {
             Debug.Log("Adding rows to empty table in variable creation");
-            foreach (T value in castedDatum.Values) {
+            foreach (T value in castIndependentVariable.Values) {
                 var newRow = newTable.NewRow();
-                newRow[datum.Name] = value;
+                newRow[independentVariable.Name] = value;
                 newTable.Rows.Add(newRow);
             }
         }
         else {
             int lowestCommonMultiple =
-                LowestCommonFunctions.LowestCommonMultiple(table.Rows.Count, castedDatum.Values.Count);
+                LowestCommonFunctions.LowestCommonMultiple(table.Rows.Count, castIndependentVariable.Values.Count);
 
             //Make the required number of copies of the table.
             int numberOfTableCopies = lowestCommonMultiple / table.Rows.Count;
@@ -260,7 +278,7 @@ public class ExperimentTable : MonoBehaviour {
             Debug.Log("Adding rows to NON empty table in looped variable creation");
             T value = loopValues.FirstElement;
             foreach (DataRow newTableRow in newTable.Rows) {
-                newTableRow[datum.Name] = value;
+                newTableRow[independentVariable.Name] = value;
                 value = loopValues.NextElement;
             }
         }
@@ -268,36 +286,79 @@ public class ExperimentTable : MonoBehaviour {
         return newTable;
     }
 
-    static DataTable AddEvenProbabilityValues<T>(DataTable table, Datum datum) {
+    static DataTable AddEvenProbabilityValues<T>(DataTable table, IndependentVariable independentVariable) {
 
         DataTable newTable = table.Copy();
 
-        AddVariableColumn(datum, newTable);
+        AddVariableColumn(independentVariable, newTable);
 
-        Datum<T> castedDatum = (Datum<T>) datum;
+        IndependentVariable<T> castIndependentVariable = (IndependentVariable<T>) independentVariable;
+        if (castIndependentVariable.Values.Count == 0) {
+            throw new ArgumentNullException($"No values defined for variable {independentVariable.Name}");
+        }
+
 
         if (table.Rows.Count == 0) {
             Debug.Log("Adding rows to empty table in variable creation");
-            foreach (T value in castedDatum.Values) {
+            foreach (T value in castIndependentVariable.Values) {
                 var newRow = newTable.NewRow();
-                newRow[datum.Name] = value;
+                newRow[independentVariable.Name] = value;
                 newTable.Rows.Add(newRow);
             }
         }
         else {
             Debug.Log($"Adding values to new table (rows: {table.Rows.Count}) in even probability variable creation");
             foreach (DataRow newTableRow in newTable.Rows) {
-                newTableRow[datum.Name] = castedDatum.Values.RandomItem();
+                newTableRow[independentVariable.Name] = castIndependentVariable.Values.RandomItem();
             }
         }
 
         return newTable;
     }
 
-    static void AddVariableColumn(Datum datum, DataTable newTable) {
+    static DataTable AddCustomProbabilityValues<T>(DataTable table, IndependentVariable independentVariable) {
+        DataTable newTable = table.Copy();
+
+
+        AddVariableColumn(independentVariable, newTable);
+
+
+        IndependentVariable<T> castedIndependentVariable = (IndependentVariable<T>)independentVariable;
+
+        List<T> distribution = new List<T>();
+        for (int i = 0; i < castedIndependentVariable.Probabilities.Count; i++) {
+            float prob = castedIndependentVariable.Probabilities[i];
+            T val = castedIndependentVariable.Values[i];
+            int number = (int)(prob * 1000);
+            for (int j = 0; j < number; j++) {
+                distribution.Add(val);
+            }
+        }
+
+        if (table.Rows.Count == 0) {
+            Debug.Log("Adding rows to empty table in variable creation");
+            foreach (T value in castedIndependentVariable.Values) {
+                var newRow = newTable.NewRow();
+                newRow[independentVariable.Name] = value;
+                newTable.Rows.Add(newRow);
+            }
+        }
+        else {
+            Debug.Log($"Adding values to new table (rows: {table.Rows.Count}) in even probability variable creation");
+            foreach (DataRow newTableRow in newTable.Rows) {
+                newTableRow[independentVariable.Name] = distribution.RandomItem();
+            }
+        }
+
+        return newTable;
+    }
+
+
+
+    static void AddVariableColumn(IndependentVariable independentVariable, DataTable newTable) {
         DataColumn column = new DataColumn {
-                                               DataType = datum.Type,
-                                               ColumnName = datum.Name,
+                                               DataType = independentVariable.Type,
+                                               ColumnName = independentVariable.Name,
                                                ReadOnly = false,
                                                Unique = false
                                            };
