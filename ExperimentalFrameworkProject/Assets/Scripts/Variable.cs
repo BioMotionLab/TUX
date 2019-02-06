@@ -286,7 +286,7 @@ public class VariableFactory {
     }
 
     public ExperimentTable ToTable(bool shuffleTrialOrder, int numberRepetitions) {
-        Debug.Log($"ToTable method in IndependentVariable: Alldata.count {AllVariables.Count}");
+        //Debug.Log($"ToTable method in IndependentVariable: Alldata.count {AllVariables.Count}");
         return ExperimentTable.GetTables(AllVariables, shuffleTrialOrder, numberRepetitions);
     }
 

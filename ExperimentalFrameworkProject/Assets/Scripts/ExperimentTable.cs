@@ -5,10 +5,11 @@ using UnityEngine;
 using System.Data;
 using System.Text;
 
+
 public class ExperimentTable {
 
-    public DataTable blocks;
-    public DataTable trials;
+    public DataTable blockTable;
+    public List<Block> blocks = new List<Block>();
 
     public static ExperimentTable GetTables(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
 
@@ -27,59 +28,89 @@ public class ExperimentTable {
 
         blockTable = SortAndAddIVs(blockVariables, blockTable, true);
 
-        DataTable baseTable = new DataTable();
-        baseTable = SortAndAddIVs(allData, baseTable);
+        DataTable baseTrialTable = new DataTable();
+        baseTrialTable = SortAndAddIVs(allData, baseTrialTable);
 
 
         //Repeat all trials if specified
         if (numberOfRepetitions > 1) {
-            DataTable repeatedTable = baseTable.Clone();
+            DataTable repeatedTable = baseTrialTable.Clone();
             for (int i = 0; i < numberOfRepetitions; i++) {
-                foreach (DataRow row in baseTable.Rows) {
+                foreach (DataRow row in baseTrialTable.Rows) {
                     repeatedTable.ImportRow(row);
                 }
             }
-            baseTable = repeatedTable;
+            baseTrialTable = repeatedTable;
         }
-        Debug.Log($"3: Current table rows in getTable() {baseTable.Rows.Count}");
+        Debug.Log($"3: Current table rows in getTable() {baseTrialTable.Rows.Count}");
 
         //Shuffle trial order if needed
         if (shuffleTrialOrder) {
-            baseTable = baseTable.Shuffle();
+            baseTrialTable = baseTrialTable.Shuffle();
         }
 
 
-        Debug.Log($"4: Current table rows in getTable() {baseTable.Rows.Count}");
+        Debug.Log($"4: Current table rows in getTable() {baseTrialTable.Rows.Count}");
 
         //Add trial number column
-        AddTrialNumberColumnTo(baseTable);
+        AddTrialIndexColumnTo(baseTrialTable);
+
+        //Add block number column
+        AddBlockNumberColumnTo(baseTrialTable);
 
         //Add Successfully run column
-        AddSuccessColumnTo(baseTable);
+        AddSuccessColumnTo(baseTrialTable);
 
         //Add Attempts column
-        AddAttemptsColumnTo(baseTable);
+        AddAttemptsColumnTo(baseTrialTable);
 
         //Add skipped column
-        AddSkippedColumnTo(baseTable);
+        AddSkippedColumnTo(baseTrialTable);
 
-        Debug.Log($"5: Current table rows in getTable() {baseTable.Rows.Count}");
+        Debug.Log($"5: Current table rows in getTable() {baseTrialTable.Rows.Count}");
 
-        for (int i = 0; i < blockVariables.Count; i++) {
-            Variable blockVariable = blockVariables[i];
-            AddVariableColumn(blockVariable, baseTable, i);
-        }
-
-        
-            
         
 
         ExperimentTable experimentTable = new ExperimentTable();
-        experimentTable.trials = baseTable;
-        Debug.Log($"***basetable\n {baseTable.AsString()}");
-        experimentTable.blocks = blockTable;
+
+        experimentTable.blockTable = blockTable;
         Debug.Log($"***blockTable\n {blockTable.AsString()}");
+
+        foreach (DataRow blockTableRow in blockTable.Rows) {
+            Block newBlock = new Block(baseTrialTable.Copy());
+            UpdateWithBlockValues(newBlock.table, blockTableRow);
+            newBlock.Identity = blockTableRow.AsString(separator:", ");
+            experimentTable.blocks.Add(newBlock);
+
+            Debug.Log($"{newBlock.AsString()}");
+
+        }
+
+
         return experimentTable;
+    }
+
+    static void UpdateWithBlockValues(DataTable trialTable, DataRow blockTableRow) {
+        foreach (DataColumn blockColumn in blockTableRow.Table.Columns) {
+            AddColumnFromOtherTable(blockColumn, trialTable, 0);
+            string columnName = blockColumn.ColumnName;
+            foreach (DataRow trialRow in trialTable.Rows) {
+                trialRow[columnName] = blockTableRow[columnName];
+            }
+        }
+    }
+
+    static void AddColumnFromOtherTable(DataColumn blockColumn, DataTable trialTable, int index = -1) {
+        DataColumn column = new DataColumn {
+            DataType = blockColumn.DataType,
+            ColumnName = blockColumn.ColumnName,
+            ReadOnly = false,
+            Unique = false
+        };
+        trialTable.Columns.Add(column);
+        if (index >= 0) {
+            column.SetOrdinal(index);
+        }
     }
 
     static DataTable SortAndAddIVs(List<Variable> allData, DataTable table, bool block=false) {
@@ -120,7 +151,7 @@ public class ExperimentTable {
             }
         }
 
-        Debug.Log($"1: Current table rows in getTable() {table.Rows.Count}");
+        //Debug.Log($"1: Current table rows in getTable() {table.Rows.Count}");
 
         //do balanced variables first
         foreach (IndependentVariable datum in balanced) {
@@ -186,21 +217,34 @@ public class ExperimentTable {
         }
     }
 
-    static void AddTrialNumberColumnTo(DataTable table) {
-        DataColumn indexColumn = new DataColumn {
+    static void AddTrialIndexColumnTo(DataTable table) {
+        DataColumn trialIndexColumn = new DataColumn {
                                                     DataType = typeof(int),
-                                                    ColumnName = Config.IndexColumnName,
+                                                    ColumnName = Config.TrialIndexColumnName,
                                                     Unique = false,
                                                     ReadOnly = false,
                                                 };
-        table.Columns.Add(indexColumn);
-        indexColumn.SetOrdinal(0); // to put the column in position 0;
-        int trialIndex = 0;
+        table.Columns.Add(trialIndexColumn);
+        trialIndexColumn.SetOrdinal(0); // to put the column in position 0;
         foreach (DataRow row in table.Rows) {
-            row[Config.IndexColumnName] = trialIndex;
-            trialIndex++;
+            row[Config.TrialIndexColumnName] = -1;
         }
     }
+
+    static void AddBlockNumberColumnTo(DataTable table) {
+        DataColumn blockIndexColumn = new DataColumn {
+            DataType = typeof(int),
+            ColumnName = Config.BlockIndexColumnName,
+            Unique = false,
+            ReadOnly = false,
+        };
+        table.Columns.Add(blockIndexColumn);
+        blockIndexColumn.SetOrdinal(0); // to put the column in position 0;
+        foreach (DataRow row in table.Rows) {
+            row[Config.BlockIndexColumnName] = -1;
+        }
+    }
+
 
     static DataTable AddVariableGeneric(Variable variable, DataTable table) {
         DataTable newTable = new DataTable();
@@ -288,7 +332,7 @@ public class ExperimentTable {
 
 
         if (table.Rows.Count == 0) {
-            Debug.Log("Adding rows to empty table in variable creation");
+            //Debug.Log("Adding rows to empty table in variable creation");
             
             foreach (T value in castIndependentVariable.Values) {
                 var newRow = newTable.NewRow();
@@ -297,7 +341,7 @@ public class ExperimentTable {
             }
         }
         else {
-            Debug.Log("Adding rows to NON empty table in variable creation");
+            //Debug.Log("Adding rows to NON empty table in variable creation");
             foreach (DataRow tableRow in table.Rows) {
                 foreach (T value in castIndependentVariable.Values) {
                     newTable.ImportRow(tableRow);

@@ -38,14 +38,25 @@ MonoBehaviour:
       - 0
     FloatIVs: []
     StringIVs:
-    - Name: block
+    - Name: block1
       TypeOfVariable: 0
       DataType: 2
       MixingTypeOfVariable: 0
       Block: 1
       Values:
-      - Block1
-      - Block2
+      - Block1val1
+      - Block1val2
+      Probabilities:
+      - 0
+      - 0
+    - Name: block2
+      TypeOfVariable: 0
+      DataType: 2
+      MixingTypeOfVariable: 0
+      Block: 1
+      Values:
+      - Block2val1
+      - Block2val2
       Probabilities:
       - 0
       - 0

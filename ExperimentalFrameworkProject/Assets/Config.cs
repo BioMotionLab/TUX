@@ -12,10 +12,12 @@ public class Config : ScriptableObject
     [SerializeField]
     public VariableFactory Factory = new VariableFactory();
 
-    public ExperimentTable TrialTable => Factory.ToTable(ShuffleTrialOrder, NumberOfTimesToRepeatTrials);
+    public ExperimentTable ExperimentTable => Factory.ToTable(ShuffleTrialOrder, NumberOfTimesToRepeatTrials);
+    public const string BlockIndexColumnName = "Block";
+
     public const string SkippedColumnName = "Skipped";
     public const string AttemptsColumnName = "Attempts";
-    public const string IndexColumnName = "Trial";
+    public const string TrialIndexColumnName = "Trial";
     public const string SuccessColumnName = "Completed";
 
     public void PrintTrials() {

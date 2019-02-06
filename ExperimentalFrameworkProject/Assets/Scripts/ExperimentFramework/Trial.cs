@@ -14,7 +14,7 @@ public abstract class Trial {
 
     public DataRow Data => data;
 
-    public int Index => (int)data[Config.IndexColumnName];
+    public int Index => (int)data[Config.TrialIndexColumnName];
 
     public bool Success {
         get {
@@ -48,13 +48,14 @@ public abstract class Trial {
     bool interrupt = false;
 
     public IEnumerator Run() {
+        
         Success = false;
         interrupt = false;
 
         //Skip a frame to allow any previous things to end
         yield return null;
 
-        ExperimentEventManager.StartingTrial(this);
+        ExperimentEvents.TrialHasStarted(this);
 
         Debug.Log($"Trail {Index} Waiting for return key");
         bool waiting = true;
@@ -77,7 +78,7 @@ public abstract class Trial {
 
         if (Success) {
             Debug.Log($"Trial {Index} completed successfully");
-            ExperimentEventManager.EndTrial(this);
+            ExperimentEvents.TrialHasCompleted();
         }
         
         
@@ -87,17 +88,17 @@ public abstract class Trial {
 
     bool CheckExperimenterControls() {
         if (Input.GetKeyDown(KeyCode.Backspace)) {
-            ExperimentEventManager.InterruptTrial(this);
+            ExperimentEvents.InterruptTrial();
             return true;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            ExperimentEventManager.GoBackOneTrial(this);
+            ExperimentEvents.GoBackOneTrial();
             return true;
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            ExperimentEventManager.SkipToNextTrial(this);
+            ExperimentEvents.SkipToNextTrial();
             return true;
         }
 
