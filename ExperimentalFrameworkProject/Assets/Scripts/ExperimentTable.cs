@@ -3,40 +3,121 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Data;
+using System.Text;
 
-public class ExperimentTable : MonoBehaviour {
+public class ExperimentTable {
+
+    public DataTable blocks;
+    public DataTable trials;
+
+    public static ExperimentTable GetTables(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
 
 
-    public static DataTable GetTable(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
-        DataTable table = new DataTable();
+        DataTable blockTable = new DataTable();
+        List<Variable> blockVariables = new List<Variable>();
 
+        foreach (Variable datum in allData) {
+            if (datum.TypeOfVariable == VariableType.Independent) {
+                IndependentVariable IvDatum = (IndependentVariable)datum;
+                if (IvDatum.Block) {
+                    blockVariables.Add(IvDatum);
+                }
+            }
+        }
+
+        blockTable = SortAndAddIVs(blockVariables, blockTable, true);
+
+        DataTable baseTable = new DataTable();
+        baseTable = SortAndAddIVs(allData, baseTable);
+
+
+        //Repeat all trials if specified
+        if (numberOfRepetitions > 1) {
+            DataTable repeatedTable = baseTable.Clone();
+            for (int i = 0; i < numberOfRepetitions; i++) {
+                foreach (DataRow row in baseTable.Rows) {
+                    repeatedTable.ImportRow(row);
+                }
+            }
+            baseTable = repeatedTable;
+        }
+        Debug.Log($"3: Current table rows in getTable() {baseTable.Rows.Count}");
+
+        //Shuffle trial order if needed
+        if (shuffleTrialOrder) {
+            baseTable = baseTable.Shuffle();
+        }
+
+
+        Debug.Log($"4: Current table rows in getTable() {baseTable.Rows.Count}");
+
+        //Add trial number column
+        AddTrialNumberColumnTo(baseTable);
+
+        //Add Successfully run column
+        AddSuccessColumnTo(baseTable);
+
+        //Add Attempts column
+        AddAttemptsColumnTo(baseTable);
+
+        //Add skipped column
+        AddSkippedColumnTo(baseTable);
+
+        Debug.Log($"5: Current table rows in getTable() {baseTable.Rows.Count}");
+
+        for (int i = 0; i < blockVariables.Count; i++) {
+            Variable blockVariable = blockVariables[i];
+            AddVariableColumn(blockVariable, baseTable, i);
+        }
+
+        
+            
+        
+
+        ExperimentTable experimentTable = new ExperimentTable();
+        experimentTable.trials = baseTable;
+        Debug.Log($"***basetable\n {baseTable.AsString()}");
+        experimentTable.blocks = blockTable;
+        Debug.Log($"***blockTable\n {blockTable.AsString()}");
+        return experimentTable;
+    }
+
+    static DataTable SortAndAddIVs(List<Variable> allData, DataTable table, bool block=false) {
         List<IndependentVariable> balanced = new List<IndependentVariable>();
         List<IndependentVariable> looped = new List<IndependentVariable>();
         List<IndependentVariable> probability = new List<IndependentVariable>();
-        
-        //Sort datums into mixing categories so they go in order
+
+        List<DependentVariable> dependentVariables = new List<DependentVariable>();
+
+        //Sort Independent variables into mixing categories so they go in order
         foreach (Variable datum in allData) {
             if (datum.TypeOfVariable == VariableType.Independent) {
                 IndependentVariable IvDatum = (IndependentVariable) datum;
-                switch (IvDatum.MixingTypeOfVariable) {
-                    case VariableMixingType.Balanced:
-                        balanced.Add(IvDatum);
-                        break;
-                    case VariableMixingType.Looped:
-                        looped.Add(IvDatum);
-                        break;
-                    case VariableMixingType.EvenProbability:
-                        probability.Add(IvDatum);
-                        break;
-                    case VariableMixingType.CustomProbability:
-                        probability.Add(IvDatum);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+
+                if (block && IvDatum.Block || !block && !IvDatum.Block) {
+
+                    switch (IvDatum.MixingTypeOfVariable) {
+                        case VariableMixingType.Balanced:
+                            balanced.Add(IvDatum);
+                            break;
+                        case VariableMixingType.Looped:
+                            looped.Add(IvDatum);
+                            break;
+                        case VariableMixingType.EvenProbability:
+                            probability.Add(IvDatum);
+                            break;
+                        case VariableMixingType.CustomProbability:
+                            probability.Add(IvDatum);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 }
             }
-            
-            
+            else if (datum.TypeOfVariable == VariableType.Dependent) {
+                DependentVariable dVDatum = (DependentVariable) datum;
+                dependentVariables.Add(dVDatum);
+            }
         }
 
         Debug.Log($"1: Current table rows in getTable() {table.Rows.Count}");
@@ -55,44 +136,14 @@ public class ExperimentTable : MonoBehaviour {
         foreach (IndependentVariable datum in probability) {
             table = AddVariableGeneric(datum, table);
         }
-        //TODO custom probability
+
+
+        foreach (DependentVariable dependentVariable in dependentVariables) {
+            table = AddVariableGeneric(dependentVariable, table);
+        }
+
 
         Debug.Log($"2: Current table rows in getTable() {table.Rows.Count}");
-
-
-        //Repeat all trials if specified
-        if (numberOfRepetitions > 1) { 
-            DataTable repeatedTable = table.Clone();
-            for (int i = 0; i < numberOfRepetitions; i++) {
-                foreach (DataRow row in table.Rows) {
-                    repeatedTable.ImportRow(row);
-                }
-            }
-            table = repeatedTable;
-        }
-        Debug.Log($"3: Current table rows in getTable() {table.Rows.Count}");
-
-        //Shuffle trial order if needed
-        if (shuffleTrialOrder) {
-            table = table.Shuffle();
-        }
-
-        Debug.Log($"4: Current table rows in getTable() {table.Rows.Count}");
-
-        //Add trial number column
-        AddTrialNumberColumnTo(table);
-
-        //Add Successfully run column
-        AddSuccessColumnTo(table);
-
-        //Add Attempts column
-        AddAttemptsColumnTo(table);
-
-        //Add skipped column
-        AddSkippedColumnTo(table);
-
-        Debug.Log($"5: Current table rows in getTable() {table.Rows.Count}");
-
         return table;
     }
 
@@ -151,51 +202,73 @@ public class ExperimentTable : MonoBehaviour {
         }
     }
 
-    static DataTable AddVariableGeneric(IndependentVariable independentVariable, DataTable table) {
+    static DataTable AddVariableGeneric(Variable variable, DataTable table) {
         DataTable newTable = new DataTable();
-        switch (independentVariable.DataType) {
+        switch (variable.DataType) {
             case SupportedDataTypes.Int:
-                newTable = AddVariable<int>(table, independentVariable);
+                newTable = AddVariable<int>(table, variable);
                 break;
             case SupportedDataTypes.Float:
-                newTable = AddVariable<float>(table, independentVariable);
+                newTable = AddVariable<float>(table, variable);
                 break;
             case SupportedDataTypes.String:
-                newTable = AddVariable<string>(table, independentVariable);
+                newTable = AddVariable<string>(table, variable);
+                break;
+            case SupportedDataTypes.GameObject:
+                newTable = AddVariable<GameObject>(table, variable);
+                break;
+            case SupportedDataTypes.Vector3:
+                newTable = AddVariable<Vector3>(table, variable);
+                break;
+            case SupportedDataTypes.CustomDataType:
+                newTable = AddVariable<CustomMonoBehaviour>(table, variable);
                 break;
             case SupportedDataTypes.ChooseType:
                 throw new ArgumentException("type not chosen");
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        Debug.Log($"table now has {newTable.Rows.Count} rows");
+        //Debug.Log($"table now has {newTable.Rows.Count} rows");
         return newTable;
     }
 
 
-    static DataTable AddVariable<T>(DataTable table, IndependentVariable independentVariable) {
+    static DataTable AddVariable<T>(DataTable table, Variable variable) {
 
-        DataTable newTable = table.Clone();
-        AddVariableColumn(independentVariable, newTable);
+        Debug.Log($"Processing variable {variable.Name} type: {variable.DataType}, varType: {variable.TypeOfVariable}");
 
-        switch (independentVariable.MixingTypeOfVariable) {
-            case VariableMixingType.Balanced:
-                newTable = AddBalancedValues<T>(table, independentVariable);
-                break;
-            case VariableMixingType.Looped:
-                newTable = AddLoopedValues<T>(table, independentVariable);
-                break;
-            case VariableMixingType.EvenProbability:
-                newTable = AddEvenProbabilityValues<T>(table, independentVariable);
-                break;
-            case VariableMixingType.CustomProbability:
-                newTable = AddCustomProbabilityValues<T>(table, independentVariable);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+        DataTable newTable; 
+
+        if (variable.TypeOfVariable == VariableType.Independent) {
+            newTable = table.Clone();
+            AddVariableColumn(variable, newTable);
+            IndependentVariable<T> independentVariable = (IndependentVariable<T>) variable;
+            switch (independentVariable.MixingTypeOfVariable) {
+                case VariableMixingType.Balanced:
+                    newTable = AddBalancedValues<T>(table, independentVariable);
+                    break;
+                case VariableMixingType.Looped:
+                    newTable = AddLoopedValues<T>(table, independentVariable);
+                    break;
+                case VariableMixingType.EvenProbability:
+                    newTable = AddEvenProbabilityValues<T>(table, independentVariable);
+                    break;
+                case VariableMixingType.CustomProbability:
+                    newTable = AddCustomProbabilityValues<T>(table, independentVariable);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+             
+        }
+        else {
+            newTable = table.Copy();
+            AddVariableColumn(variable, newTable);
         }
 
-        Debug.Log($"(AddVariable<T> table now has {newTable.Rows.Count} rows");
+        
+
+        //Debug.Log($"(AddVariable<T> table now has {newTable.Rows.Count} rows");
         return newTable;
     }
 
@@ -355,14 +428,17 @@ public class ExperimentTable : MonoBehaviour {
 
 
 
-    static void AddVariableColumn(IndependentVariable independentVariable, DataTable newTable) {
+    static void AddVariableColumn(Variable variable, DataTable newTable, int index = -1) {
         DataColumn column = new DataColumn {
-                                               DataType = independentVariable.Type,
-                                               ColumnName = independentVariable.Name,
+                                               DataType = variable.Type,
+                                               ColumnName = variable.Name,
                                                ReadOnly = false,
                                                Unique = false
                                            };
         newTable.Columns.Add(column);
+        if (index >= 0) {
+            column.SetOrdinal(index);
+        }
     }
 }
 

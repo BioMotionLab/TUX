@@ -9,29 +9,36 @@ public class TrialSequence : MonoBehaviour {
     public Config ConfigFile;
 
 
-    DataTable trialTable;
+    ExperimentTable trialTable;
     readonly List<Trial> allTrials = new List<Trial>();
     List<Trial> currentTrialList = new List<Trial>();
     Trial currentTrial;
+    DataRow currentBlockRow;
 
     void Start() {
         trialTable = ConfigFile.TrialTable;
-        if (trialTable.Rows.Count <= 0) {
+        if (trialTable.blocks.Rows.Count <= 0) {
             throw new InvalidDataException("Trial Table Not created correctly");
         }
-        int i = 1;
-        Debug.Log($"number of rows in currentTrial table = {trialTable.Rows.Count}");
-        foreach (DataRow row in trialTable.Rows) {
-            row[Config.IndexColumnName] = i;
-            Trial newTrial = new TestTrial(row, ConfigFile);
-            Debug.Log("Adding Trial to list");
-            allTrials.Add(newTrial);
-            i++;
+
+        foreach (DataRow blockRow in trialTable.blocks.Rows) {
+            currentBlockRow = blockRow;
+            int i = 1;
+            Debug.Log($"number of rows in currentTrial table = {trialTable.trials.Rows.Count}");
+            
+            foreach (DataRow row in trialTable.trials.Rows) {
+                row[Config.IndexColumnName] = i;
+                Trial newTrial = new TestTrial(row, ConfigFile);
+                Debug.Log("Adding Trial to list");
+                allTrials.Add(newTrial);
+                i++;
+            }
+            Debug.Log("Starting to run experiment");
+            currentTrialList = allTrials;
+            ExperimentEventManager.ExperimentStart(allTrials, trialTable.trials.HeaderAsString());
+            StartRunningTrial(currentTrialList[0]);
         }
-        Debug.Log("Starting to run experiment");
-        currentTrialList = allTrials;
-        ExperimentEventManager.ExperimentStart(allTrials, trialTable.HeaderAsString());
-        StartRunningTrial(currentTrialList[0]);
+        
 
     }
 
@@ -75,7 +82,7 @@ public class TrialSequence : MonoBehaviour {
         int trialNum = TrialIndex(currentTrial);
         
         Debug.Log($"Done Trial {trialNum + 1}, success = {currentTrial.Success}");
-        Debug.Log(currentTrial.Data.AsStringWithHeader(trialTable));
+        Debug.Log(currentTrial.Data.AsStringWithHeader(trialTable.trials));
         ExperimentEventManager.UpdateTrialList(allTrials, TrialIndex(currentTrial));
     }
 
@@ -135,7 +142,7 @@ public class TrialSequence : MonoBehaviour {
     }
 
     DataTable CreateTableFromTrials(List<Trial> trialList) {
-        DataTable newTable = trialTable.Clone();
+        DataTable newTable = trialTable.trials.Clone();
         foreach (Trial trial in trialList) {
             newTable.ImportRow(trial.Data);
         }

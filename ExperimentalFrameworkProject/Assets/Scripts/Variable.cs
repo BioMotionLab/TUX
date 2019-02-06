@@ -71,12 +71,13 @@ public enum SupportedDataTypes {
     Int,
     Float,
     String,
-    //GameObject,
-    //Vector3,
-    //Vector2,
-    //CustomDatum,
+    GameObject,
+    Vector3,
+    CustomDataType,
     ChooseType,
 }
+
+public abstract class CustomMonoBehaviour : MonoBehaviour { }
 
 [Serializable]
 public enum VariableMixingType {
@@ -95,20 +96,47 @@ public class VariableFactory {
     [SerializeField]
     public VariableType       VariableTypeToCreate;
 
+    //IVS
 
     [SerializeField]
-    public List<IndependentVariableInt> intIVs = new List<IndependentVariableInt>();
-    [SerializeField]
-    public List<DependentVariableInt> intDVs = new List<DependentVariableInt>();
-
-
-    [SerializeField]
-    public List<IndependentVariableFloat> floatIVs = new List<IndependentVariableFloat>();
-
-    [SerializeField] [HideInInspector]
-    public List<IndependentVariableString> stringIVs = new List<IndependentVariableString>();
-
+    public List<IndependentVariableInt> IntIVs = new List<IndependentVariableInt>();
     
+    [SerializeField]
+    public List<IndependentVariableFloat> FloatIVs = new List<IndependentVariableFloat>();
+
+    [SerializeField]
+    public List<IndependentVariableString> StringIVs = new List<IndependentVariableString>();
+
+    [SerializeField]
+    public List<IndependentVariableGameObject> GameObjectIVs = new List<IndependentVariableGameObject>();
+
+    [SerializeField]
+    public List<IndependentVariableVector3> Vector3IVs = new List<IndependentVariableVector3>();
+
+    [SerializeField]
+    public List<IndependentVariableCustomDataType> CustomDataTypeIVs = new List<IndependentVariableCustomDataType>();
+
+    //DVS
+
+    [SerializeField]
+    public List<DependentVariableInt> IntDVs = new List<DependentVariableInt>();
+
+    [SerializeField]
+    public List<DependentVariableFloat> FloatDVs = new List<DependentVariableFloat>();
+
+    [SerializeField]
+    public List<DependentVariableString> StringDVs = new List<DependentVariableString>();
+
+    [SerializeField]
+    public List<DependentVariableGameObject> GameObjectDVs = new List<DependentVariableGameObject>();
+
+    [SerializeField]
+    public List<DependentVariableVector3> Vector3DVs = new List<DependentVariableVector3>();
+
+    [SerializeField]
+    public List<DependentVariableCustomDataType> CustomDataTypeDVs = new List<DependentVariableCustomDataType>();
+
+
 
     //[SerializeField]
     //public List<DatumGameObject> GameObjectData = new List<DatumGameObject>();
@@ -122,15 +150,55 @@ public class VariableFactory {
     public List<Variable> AllVariables {
         get {
             List<Variable> variables = new List<Variable>();
-            foreach (var variable in intIVs) {
+            foreach (var variable in IntIVs) {
                 variables.Add(variable);
             }
 
-            foreach (var variable in floatIVs) {
+            foreach (var variable in FloatIVs) {
                 variables.Add(variable);
             }
 
-            //TODO add others
+            foreach (var variable in StringIVs) {
+                variables.Add(variable);
+            }
+
+            foreach (var variable in GameObjectIVs) {
+                variables.Add(variable);
+            }
+
+            foreach (var variable in Vector3IVs) {
+                variables.Add(variable);
+            }
+
+            foreach(var variable in CustomDataTypeIVs) {
+                variables.Add(variable);
+            }
+
+            //DVS
+            foreach (var variable in IntDVs) {
+                variables.Add(variable);
+            }
+
+            foreach (var variable in FloatDVs) {
+                variables.Add(variable);
+            }
+
+            foreach (var variable in StringDVs) {
+                variables.Add(variable);
+            }
+
+            foreach (var variable in GameObjectDVs) {
+                variables.Add(variable);
+            }
+
+            foreach (var variable in Vector3DVs) {
+                variables.Add(variable);
+            }
+
+            foreach (var variable in CustomDataTypeDVs) {
+                variables.Add(variable);
+            }
+
             return variables;
         }
     }
@@ -143,32 +211,30 @@ public class VariableFactory {
                     switch (DataTypesToCreate) {
                         case SupportedDataTypes.Int:
                             IndependentVariableInt ivInt = new IndependentVariableInt();
-                            intIVs.Add(ivInt);
+                            IntIVs.Add(ivInt);
                             break;
                         case SupportedDataTypes.Float:
                             IndependentVariableFloat ivFloat = new IndependentVariableFloat();
-                            floatIVs.Add(ivFloat);
+                            FloatIVs.Add(ivFloat);
                             break;
-                        //case SupportedDataTypes.String:
-                        //    stringData.Add(new IndependentVariableString());
-                        //    break;
-                        //case SupportedDataTypes.GameObject:
-                        //    GameObjectData.Add(new DatumGameObject());
-                        //    break;
-                        //case SupportedDataTypes.Vector3:
-                        //    Vector3Data.Add(new DatumVector3());
-                        //    break;
-                        //case SupportedDataTypes.Vector2:
-                        //    Vector2Data.Add(new DatumVector2());
-                        //    break;
-                        //case SupportedDataTypes.CustomDatum:
-                        //    CustomData.Add(new DatumCustom());
-                        //    break;
+                        case SupportedDataTypes.String:
+                            IndependentVariableString ivString = new IndependentVariableString();
+                            StringIVs.Add(ivString);
+                            break;
+                        case SupportedDataTypes.GameObject:
+                            IndependentVariableGameObject ivGameObject = new IndependentVariableGameObject();
+                            GameObjectIVs.Add(ivGameObject);
+                            break;
+                        case SupportedDataTypes.Vector3:
+                            IndependentVariableVector3 ivVector3 = new IndependentVariableVector3();
+                            Vector3IVs.Add(ivVector3);
+                            break;
+                        case SupportedDataTypes.CustomDataType:
+                            IndependentVariableCustomDataType ivCustomDataType = new IndependentVariableCustomDataType();
+                            CustomDataTypeIVs.Add(ivCustomDataType);
+                            break;
                         case SupportedDataTypes.ChooseType:
                             throw new InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
-                            
-                        case SupportedDataTypes.String:
-                            throw new NotImplementedException();
                         default:
                             throw new NotImplementedException("Support for this data types has not yet been defined." +
                                                               "You can customize it yourself in the IndependentVariable.cs class");
@@ -181,32 +247,30 @@ public class VariableFactory {
                 switch (DataTypesToCreate) {
                     case SupportedDataTypes.Int:
                         DependentVariableInt newDependentVariableInt = new DependentVariableInt();
-                        intDVs.Add(newDependentVariableInt);
+                        IntDVs.Add(newDependentVariableInt);
                         break;
-                    //case SupportedDataTypes.Float:
-                    //    IndependentVariableFloat newIndependentVariableFloat = new IndependentVariableFloat();
-                    //    return newIndependentVariableFloat;
-                    //case SupportedDataTypes.String:
-                    //    stringData.Add(new IndependentVariableString());
-                    //    break;
-                    //case SupportedDataTypes.GameObject:
-                    //    GameObjectData.Add(new DatumGameObject());
-                    //    break;
-                    //case SupportedDataTypes.Vector3:
-                    //    Vector3Data.Add(new DatumVector3());
-                    //    break;
-                    //case SupportedDataTypes.Vector2:
-                    //    Vector2Data.Add(new DatumVector2());
-                    //    break;
-                    //case SupportedDataTypes.CustomDatum:
-                    //    CustomData.Add(new DatumCustom());
-                    //    break;
-                    case SupportedDataTypes.ChooseType:
-                        throw new InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
                     case SupportedDataTypes.Float:
+                        DependentVariableFloat newDependentVariableFloat = new DependentVariableFloat();
+                        FloatDVs.Add(newDependentVariableFloat);
                         break;
                     case SupportedDataTypes.String:
+                        DependentVariableString newDependentVariableString = new DependentVariableString();
+                        StringDVs.Add(newDependentVariableString);
                         break;
+                    case SupportedDataTypes.GameObject:
+                        DependentVariableGameObject newDependentVariableGameObject = new DependentVariableGameObject();
+                        GameObjectDVs.Add(newDependentVariableGameObject);
+                        break;
+                    case SupportedDataTypes.Vector3:
+                        DependentVariableVector3 newDependentVariableVector3 = new DependentVariableVector3();
+                        Vector3DVs.Add(newDependentVariableVector3);
+                        break;
+                    case SupportedDataTypes.CustomDataType:
+                        DependentVariableCustomDataType newDependentVariableCustomDataType = new DependentVariableCustomDataType();
+                        CustomDataTypeDVs.Add(newDependentVariableCustomDataType);
+                        break;
+                    case SupportedDataTypes.ChooseType:
+                        throw new InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
                     default:
                         throw new NotImplementedException("Support for this data types has not yet been defined." +
                                                           "You can customize it yourself in the IndependentVariable.cs class");
@@ -221,9 +285,9 @@ public class VariableFactory {
 
     }
 
-    public DataTable ToTable(bool shuffleTrialOrder, int numberRepetitions) {
+    public ExperimentTable ToTable(bool shuffleTrialOrder, int numberRepetitions) {
         Debug.Log($"ToTable method in IndependentVariable: Alldata.count {AllVariables.Count}");
-        return ExperimentTable.GetTable(AllVariables, shuffleTrialOrder, numberRepetitions);
+        return ExperimentTable.GetTables(AllVariables, shuffleTrialOrder, numberRepetitions);
     }
 
    
@@ -246,6 +310,9 @@ public class DependentVariableInt : DependentVariable<int> {
         DataType = SupportedDataTypes.Int;
     }
 }
+[CustomPropertyDrawer(typeof(DependentVariableInt))]
+public class DependentVariableIntDrawer : DependentVariableDrawer {
+}
 
 
 //FLOAT
@@ -260,21 +327,128 @@ public class IndependentVariableFloat : IndependentVariable<float> {
 public class IndependentVariableFloatDrawer : IndependentVariableDrawer { }
 
 
-public class IndependentVariableDrawer : PropertyDrawer {
+[Serializable]
+public class DependentVariableFloat : DependentVariable<float> {
+    public DependentVariableFloat() {
+        DataType = SupportedDataTypes.Float;
+    }
+}
+[CustomPropertyDrawer(typeof(DependentVariableFloat))]
+public class DependentVariableFloatDrawer : DependentVariableDrawer {
+}
 
-    const float LineHeight = 20f;
-    public float customPropertyHeight;
+
+//STRING
+
+[Serializable]
+public class IndependentVariableString : IndependentVariable<string> {
+    public IndependentVariableString() {
+        DataType = SupportedDataTypes.String;
+    }
+}
+[CustomPropertyDrawer(typeof(IndependentVariableString))]
+public class IndependentVariableStringDrawer : IndependentVariableDrawer { }
+
+
+[Serializable]
+public class DependentVariableString : DependentVariable<string> {
+    public DependentVariableString() {
+        DataType = SupportedDataTypes.String;
+    }
+}
+[CustomPropertyDrawer(typeof(DependentVariableString))]
+public class DependentVariableStringDrawer : DependentVariableDrawer {
+}
+
+// GAMEOBJECT
+
+[Serializable]
+public class IndependentVariableGameObject : IndependentVariable<GameObject> {
+    public IndependentVariableGameObject() {
+        DataType = SupportedDataTypes.GameObject;
+    }
+}
+[CustomPropertyDrawer(typeof(IndependentVariableGameObject))]
+public class IndependentVariableGameObjectDrawer : IndependentVariableDrawer { }
+
+
+[Serializable]
+public class DependentVariableGameObject : DependentVariable<GameObject> {
+    public DependentVariableGameObject() {
+        DataType = SupportedDataTypes.GameObject;
+    }
+}
+[CustomPropertyDrawer(typeof(DependentVariableGameObject))]
+public class DependentVariableGameObjectDrawer : DependentVariableDrawer {
+}
+
+//VECTOR3
+
+[Serializable]
+public class IndependentVariableVector3 : IndependentVariable<Vector3> {
+    public IndependentVariableVector3() {
+        DataType = SupportedDataTypes.Vector3;
+    }
+}
+[CustomPropertyDrawer(typeof(IndependentVariableVector3))]
+public class IndependentVariableVector3Drawer : IndependentVariableDrawer { }
+
+
+[Serializable]
+public class DependentVariableVector3 : DependentVariable<Vector3> {
+    public DependentVariableVector3() {
+        DataType = SupportedDataTypes.Vector3;
+    }
+}
+[CustomPropertyDrawer(typeof(DependentVariableVector3))]
+public class DependentVariableVector3Drawer : DependentVariableDrawer {
+}
+
+// CUSTOMDATATYPE
+
+[Serializable]
+public class IndependentVariableCustomDataType : IndependentVariable<CustomMonoBehaviour> {
+    public IndependentVariableCustomDataType() {
+        DataType = SupportedDataTypes.CustomDataType;
+    }
+}
+[CustomPropertyDrawer(typeof(IndependentVariableCustomDataType))]
+public class IndependentVariableCustomDataTypeDrawer : IndependentVariableDrawer { }
+
+
+[Serializable]
+public class DependentVariableCustomDataType : DependentVariable<CustomMonoBehaviour> {
+    public DependentVariableCustomDataType() {
+        DataType = SupportedDataTypes.CustomDataType;
+    }
+}
+[CustomPropertyDrawer(typeof(DependentVariableCustomDataType))]
+public class DependentVariableCustomDataTypeDrawer : DependentVariableDrawer {
+}
+
+
+
+public class VariableDrawer : PropertyDrawer {
+    const  float LineHeight = 20f;
+    protected float customPropertyHeight;
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
         float propertyHeight = EditorGUI.GetPropertyHeight(property, GUIContent.none);
         propertyHeight += customPropertyHeight;
         return propertyHeight;
     }
+}
 
+public class DependentVariableDrawer : VariableDrawer {
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+        customPropertyHeight = VariableDrawerHelpers.AddAllDependentVariableProperties(position, property);
+    }
+}
+
+public class IndependentVariableDrawer : VariableDrawer {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
         customPropertyHeight = VariableDrawerHelpers.AddAllIndependentVariableProperties(position, property); 
     }
-
 }
 
 
@@ -288,18 +462,36 @@ public static class VariableDrawerHelpers {
         float oldY = currentRect.y;
 
         int oldIndentLevel = EditorGUI.indentLevel;
+
         currentRect = VariableDrawerHelpers.AddVariableProperties(property, currentRect);
         currentRect = VariableDrawerHelpers.AddIndependentVariableProperties(property, currentRect);
         currentRect = VariableDrawerHelpers.AddIndependentVariableValueProperties(property, currentRect);
+
         EditorGUI.indentLevel = oldIndentLevel;
         float propertyHeight = currentRect.y - oldY;
         property.serializedObject.ApplyModifiedProperties();
         return propertyHeight;
     }
 
+    public static float AddAllDependentVariableProperties(Rect position, SerializedProperty property) {
+        property.serializedObject.Update();
+        Rect currentRect = new Rect(position.x, position.y + LineHeight, position.width, LineHeight);
+        float oldY = currentRect.y;
+
+        int oldIndentLevel = EditorGUI.indentLevel;
+
+        currentRect = VariableDrawerHelpers.AddVariableProperties(property, currentRect);
+
+        EditorGUI.indentLevel = oldIndentLevel;
+        float propertyHeight = currentRect.y - oldY;
+        property.serializedObject.ApplyModifiedProperties();
+        return propertyHeight;
+    }
+
+
     public static Rect AddVariableProperties(SerializedProperty property, Rect currentRect) {
 
-        const float typeWidth = 100f;
+        const float typeWidth = 200f;
         const float nameWidth = 200f;
         const float namePad = 30f;
 
@@ -365,8 +557,7 @@ public static class VariableDrawerHelpers {
 
         for (int i = 0; i < valuesProperty.arraySize; i++) {
             Rect minusRect = new Rect(x, currentRect.y + ypad, minusWidth, minusHeight);
-            Rect valuesRect = new Rect(x + minusWidth, currentRect.y, currentRect.width - x - minusWidth - probValuesWidth,
-                                       currentRect.height);
+            Rect valuesRect = new Rect(x + minusWidth, currentRect.y, 0.5f*currentRect.width, currentRect.height);
             Rect customProbsValuesRect = new Rect(currentRect.width - probValuesWidth, currentRect.y, probValuesWidth,
                                                   currentRect.height);
 
@@ -382,7 +573,7 @@ public static class VariableDrawerHelpers {
             EditorGUI.PropertyField(valuesRect, value, GUIContent.none);
 
             SerializedProperty prob = probabilitiesProperty.GetArrayElementAtIndex(i);
-            if (prob != null && probabilitiesProperty.arraySize >= 2) {
+            if (customProb && probabilitiesProperty.arraySize >= 2) {
                 if (i == valuesProperty.arraySize - 1) {
                     float runningTotalWithoutLast = GetRunningTotal(probabilitiesProperty, true);
                     float remainder = 1 - runningTotalWithoutLast;
@@ -474,34 +665,4 @@ public static class VariableDrawerHelpers {
 }
 
 
-
-[Serializable] public class IndependentVariableString : IndependentVariable<string> {
-    public IndependentVariableString() {
-        DataType = SupportedDataTypes.String;
-    } 
-}
-
-//[Serializable]
-//public class DatumGameObject : IndependentVariable<GameObject> {
-//    //TODO
-//}
-
-//[Serializable]
-//public class DatumVector3 : IndependentVariable<Vector3> {
-//    //TODO
-//}
-
-//[Serializable]
-//public class DatumVector2 : IndependentVariable<Vector2> {
-//    //TODO
-//}
-
-//[Serializable]
-//public class DatumCustom : IndependentVariable<CustomDatum> {
-//    //TODO
-//}
-
-//public interface CustomDatum {
-//    //TODO
-//}
 

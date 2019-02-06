@@ -41,11 +41,44 @@ public class VariableFactoryDrawer : PropertyDrawer {
 
         property.serializedObject.ApplyModifiedProperties();
 
-        SerializedProperty intsProperty = property.FindPropertyRelative(nameof(VariableFactory.intIVs));
-        currentRect = AddPropertyFromList(property, currentRect, intsProperty);
+        //ADD IVs
+        SerializedProperty intIVProperty = property.FindPropertyRelative(nameof(VariableFactory.IntIVs));
+        currentRect = AddPropertyFromList(currentRect, intIVProperty);
 
-        SerializedProperty floatsProperty = property.FindPropertyRelative(nameof(VariableFactory.floatIVs));
-        currentRect = AddPropertyFromList(property, currentRect, floatsProperty);
+        SerializedProperty floatsIVProperty = property.FindPropertyRelative(nameof(VariableFactory.FloatIVs));
+        currentRect = AddPropertyFromList(currentRect, floatsIVProperty);
+
+        SerializedProperty stringsIVProperty = property.FindPropertyRelative(nameof(VariableFactory.StringIVs));
+        currentRect = AddPropertyFromList(currentRect, stringsIVProperty);
+
+        SerializedProperty gameObjectsIVProperty = property.FindPropertyRelative(nameof(VariableFactory.GameObjectIVs));
+        currentRect = AddPropertyFromList(currentRect, gameObjectsIVProperty);
+
+        SerializedProperty vector3IVProperty = property.FindPropertyRelative(nameof(VariableFactory.Vector3IVs));
+        currentRect = AddPropertyFromList(currentRect, vector3IVProperty);
+
+        SerializedProperty customDataTypesIVProperty = property.FindPropertyRelative(nameof(VariableFactory.CustomDataTypeIVs));
+        currentRect = AddPropertyFromList(currentRect, customDataTypesIVProperty);
+
+        //ADD DVs
+        SerializedProperty intDVProperty = property.FindPropertyRelative(nameof(VariableFactory.IntDVs));
+        currentRect = AddPropertyFromList(currentRect, intDVProperty);
+
+        SerializedProperty floatsDVProperty = property.FindPropertyRelative(nameof(VariableFactory.FloatDVs));
+        currentRect = AddPropertyFromList(currentRect, floatsDVProperty);
+
+        SerializedProperty stringsDVProperty = property.FindPropertyRelative(nameof(VariableFactory.StringDVs));
+        currentRect = AddPropertyFromList(currentRect, stringsDVProperty);
+
+        SerializedProperty gameObjectsDVProperty = property.FindPropertyRelative(nameof(VariableFactory.GameObjectDVs));
+        currentRect = AddPropertyFromList(currentRect, gameObjectsDVProperty);
+
+        SerializedProperty vector3DVProperty = property.FindPropertyRelative(nameof(VariableFactory.Vector3DVs));
+        currentRect = AddPropertyFromList(currentRect, vector3DVProperty);
+
+        SerializedProperty customDataTypesDVProperty = property.FindPropertyRelative(nameof(VariableFactory.CustomDataTypeDVs));
+        currentRect = AddPropertyFromList(currentRect, customDataTypesDVProperty);
+
 
 
         EditorGUI.LabelField(currentRect, "--------");
@@ -65,7 +98,7 @@ public class VariableFactoryDrawer : PropertyDrawer {
         property.serializedObject.ApplyModifiedProperties();
     }
 
-    static Rect AddPropertyFromList(SerializedProperty property, Rect currentRect, SerializedProperty valueProperty) {
+    static Rect AddPropertyFromList(Rect currentRect, SerializedProperty valueProperty) {
         const float deleteButtonHeight = 0.75f;
         for (int i = 0; i < valueProperty.arraySize; i++) {
             SerializedProperty item = valueProperty.GetArrayElementAtIndex(i);
@@ -87,7 +120,7 @@ public class VariableFactoryDrawer : PropertyDrawer {
 
             currentRect.y += lineHeight;
         }
-
+        valueProperty.serializedObject.ApplyModifiedProperties();
         return currentRect;
     }
     

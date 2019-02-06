@@ -35,14 +35,14 @@ public static class DataTableExtension
         return headerString;
     }
 
-    public static string AsString(this DataRow row, string separator = TabSeparator) {
-        string rowString  = string.Join(separator, row.ItemArray);
+    public static string AsString(this DataRow row, string separator = TabSeparator, int truncate = TruncateDefault) {
+        string rowString  = string.Join(separator, row.ItemArray.Select(c => c.ToString().Truncate(truncate)).ToArray());
         return rowString;
     }
 
     public static string AsStringWithHeader(this DataRow row, DataTable dt, string separator = TabSeparator, int truncate = TruncateDefault) {
         string headerString = dt.HeaderAsString();
-        string rowString = string.Join(separator, row.ItemArray);
+        string rowString = string.Join(separator, row.ItemArray.Select(c => c.ToString().Truncate(truncate)).ToArray());
         return headerString + "\n" + rowString;
     }
 
