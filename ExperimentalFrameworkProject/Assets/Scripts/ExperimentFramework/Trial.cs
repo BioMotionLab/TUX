@@ -10,7 +10,6 @@ using UnityEngine;
 /// </summary>
 public abstract class Trial {
     readonly DataRow data;
-    readonly Config configFile;
 
     public DataRow Data => data;
 
@@ -39,9 +38,9 @@ public abstract class Trial {
         }
     }
 
-    protected Trial(DataRow data, Config configFile) {
+    protected Trial(DataRow data) {
         this.data = data;
-        this.configFile = configFile;
+   
     }
 
 
@@ -55,7 +54,6 @@ public abstract class Trial {
         //Skip a frame to allow any previous things to end
         yield return null;
 
-        ExperimentEvents.TrialHasStarted(this);
 
         Debug.Log($"Trail {Index} Waiting for return key");
         bool waiting = true;

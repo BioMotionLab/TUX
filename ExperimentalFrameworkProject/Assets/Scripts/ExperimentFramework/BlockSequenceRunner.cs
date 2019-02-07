@@ -54,20 +54,7 @@ public class BlockSequenceRunner {
         Debug.Log($"Starting to run block {block.Identity}");
         ExperimentEvents.BlockHasStarted(block);
 
-        List<Trial> blockTrials = new List<Trial>();
-
-        int i = 1;
-
-        //configure block index
-        foreach (DataRow row in block.table.Rows) {
-            row[Config.TrialIndexColumnName] = i;
-            Trial newTrial = new TestTrial(row, ConfigFile);
-            //Debug.Log("Adding Trial to list");
-            blockTrials.Add(newTrial);
-            i++;
-        }
-
-        TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(experiment, blockTrials);
+        TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(experiment, block.Trials);
         trialSequenceRunner.Start();
 
     }
@@ -87,8 +74,8 @@ public class BlockSequenceRunner {
     void FinishBlock() {
         int blockNum = BlockIndex(currentlyRunningBlock);
         Debug.Log($"Done block {blockNum + 1}\n {currentlyRunningBlock.AsString()}");
-
-        ExperimentEvents.UpdateBlockList(blocks, BlockIndex(currentlyRunningBlock));
+        currentlyRunningBlock.Complete = true;
+        ExperimentEvents.UpdateBlock(blocks, BlockIndex(currentlyRunningBlock));
     }
 
     void BlockDoneRunning(List<Trial> trials) {
@@ -100,6 +87,7 @@ public class BlockSequenceRunner {
         Debug.Log("---------------\nDone all blocks");
 
         ExperimentEvents.BlockSequenceHasCompleted(blocks);
+        ExperimentEvents.EndExperiment();
 
         OnDisable();
     }

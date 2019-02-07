@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class ExperimentEvents : MonoBehaviour {
 
-    public delegate void TrialHasStartedEvent(Trial trial);
+    public delegate void TrialHasStartedEvent(Trial trial, int index);
     public static event TrialHasStartedEvent OnTrialHasStarted;
 
-    public static void TrialHasStarted(Trial trial) {
-        OnTrialHasStarted?.Invoke(trial);
+    public static void TrialHasStarted(Trial trial, int index) {
+        OnTrialHasStarted?.Invoke(trial, index);
     }
 
     public delegate void InterruptTrialEvent();
@@ -72,28 +72,29 @@ public class ExperimentEvents : MonoBehaviour {
     public static event BlockSequenceHasCompletedEvent OnBlockSequenceHasCompleted;
 
     public static void BlockSequenceHasCompleted(List<Block> blocks) {
+        Debug.Log("Blocksequence ended Event detected");
         OnBlockSequenceHasCompleted?.Invoke(blocks);
     }
 
 
-    public delegate void TrialListUpdatedEvent(List<Trial> trials);
-    public static event TrialListUpdatedEvent OnTrialListUpdated;
+    public delegate void TrialUpdatedEvent(List<Trial> trials, int index);
+    public static event TrialUpdatedEvent OnTrialUpdated;
 
-    public static void UpdateTrialList(List<Trial> trials, int index) {
-        OnTrialListUpdated?.Invoke(trials);
+    public static void UpdateTrial(List<Trial> trials, int index) {
+        OnTrialUpdated?.Invoke(trials, index);
     }
 
-    public delegate void OnBlockListUpdatedEvent(List<Block> blocks);
-    public static event OnBlockListUpdatedEvent OnBlockListUpdated;
-    public static void UpdateBlockList(List<Block> blocks, int index) {
-        OnBlockListUpdated?.Invoke(blocks);
+    public delegate void OnBlockUpdatedEvent(List<Block> blocks, int index);
+    public static event OnBlockUpdatedEvent OnBlockUpdated;
+    public static void UpdateBlock(List<Block> blocks, int index) {
+        OnBlockUpdated?.Invoke(blocks, index);
     }
 
-    public delegate void StartExperimentEvent(ExperimentTable table);
+    public delegate void StartExperimentEvent();
     public static event StartExperimentEvent OnStartExperiment;
 
-    public static void StartExperiment(ExperimentTable table) {
-        OnStartExperiment?.Invoke(table);
+    public static void StartExperiment() {
+        OnStartExperiment?.Invoke();
     }
 
     public delegate void InitExperimentEvent(Experiment experiment);
@@ -101,10 +102,16 @@ public class ExperimentEvents : MonoBehaviour {
     public static event InitExperimentEvent OnInitExperiment;
 
     public static void InitExperiment(Experiment experiment) {
+ 
         OnInitExperiment?.Invoke(experiment);
     }
 
+    public delegate void EndExperimentEvent();
+    public static event EndExperimentEvent OnEndExperiment;
 
+    public static void EndExperiment() {
+        OnEndExperiment?.Invoke();
+    }
 
 
 

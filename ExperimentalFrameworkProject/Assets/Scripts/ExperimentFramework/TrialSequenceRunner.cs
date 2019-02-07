@@ -44,6 +44,7 @@ public class TrialSequenceRunner {
 
     void StartRunningTrial(Trial trial) {
         currentlyRunningTrial = trial;
+        ExperimentEvents.TrialHasStarted(trial, TrialIndex(trial));
         experiment.StartCoroutine(trial.Run());
     }
 
@@ -54,16 +55,16 @@ public class TrialSequenceRunner {
     }
 
     void FinishTrial() {
-        int trialNum = TrialIndex(currentlyRunningTrial);
+        int trialNum = TrialCurrentIndex(currentlyRunningTrial);
         
         Debug.Log($"Done Trial {trialNum + 1}, success = {currentlyRunningTrial.Success}\n" +
                   $"Table:\n" +
                   $"{currentlyRunningTrial.Data.AsStringWithHeader()}");
-        ExperimentEvents.UpdateTrialList(trialsInSequence, TrialIndex(currentlyRunningTrial));
+        ExperimentEvents.UpdateTrial(trialsInSequence, TrialIndex(currentlyRunningTrial));
     }
 
     void GoToNextTrial() {
-        int newIndex = TrialIndex(currentlyRunningTrial) + 1;
+        int newIndex = TrialCurrentIndex(currentlyRunningTrial) + 1;
         
         bool searchingForUncompletedTrial = true;
         while (searchingForUncompletedTrial) {
@@ -123,7 +124,7 @@ public class TrialSequenceRunner {
     void BackOneTrial() {
         Debug.Log("Got Back event");
         FinishTrial();
-        int newIndex = TrialIndex(currentlyRunningTrial) - 1;
+        int newIndex = TrialCurrentIndex(currentlyRunningTrial) - 1;
         if (newIndex < 0) {
             Debug.LogWarning("Was already at first currentTrial, restarting currentTrial");
             StartRunningTrial(currentlyRunningTrial);
@@ -145,8 +146,12 @@ public class TrialSequenceRunner {
     }
 
 
-    int TrialIndex(Trial trial) {
+    int TrialCurrentIndex(Trial trial) {
         return currentTrialList.IndexOf(trial);
+    }
+
+    int TrialIndex(Trial trial) {
+        return trialsInSequence.IndexOf(trial);
     }
 
 }
@@ -155,7 +160,7 @@ public class TrialSequenceRunner {
 public class TestTrial : Trial {
     
 
-    public TestTrial(DataRow data, Config config) : base(data, config) {
+    public TestTrial(DataRow data) : base(data) {
         
     }
 
