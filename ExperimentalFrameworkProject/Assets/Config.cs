@@ -12,7 +12,7 @@ public class Config : ScriptableObject
     [SerializeField]
     public VariableFactory Factory = new VariableFactory();
 
-    public ExperimentTable ExperimentTable => Factory.ToTable(ShuffleTrialOrder, NumberOfTimesToRepeatTrials);
+    public ExperimentDesign ExperimentDesign => Factory.ToTable(ShuffleTrialOrder, NumberOfTimesToRepeatTrials);
     public const string TotalTrialIndexColumnName = "TrialNum";
 
     public const string BlockIndexColumnName = "Block";

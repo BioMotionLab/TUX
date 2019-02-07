@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Data;
 using System.Text;
-using NUnit.Framework;
 
 
-public class ExperimentTable {
+public class ExperimentDesign {
 
     DataTable baseBlockTable;
     DataTable baseTrialTable;
@@ -15,7 +14,7 @@ public class ExperimentTable {
     public DataTable OrderedBlockTable;
     public List<Block> Blocks;
 
-    public ExperimentTable(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
+    public ExperimentDesign(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
 
         baseBlockTable = CreateBlockTable(allData);
         baseTrialTable = CreateBaseTrialTable(allData, shuffleTrialOrder, numberOfRepetitions);
@@ -44,8 +43,6 @@ public class ExperimentTable {
             baseTrialTable = baseTrialTable.Shuffle();
         }
 
-
-        Debug.Log($"4: Current Table rows in getTable() {baseTrialTable.Rows.Count}");
 
         //Add total trial number column
         AddTotalTrialIndexColumnTo(baseTrialTable);
@@ -103,6 +100,9 @@ public class ExperimentTable {
             return blockPermutations;
         }
     }
+
+    public object TotalTrials => Blocks.Count * baseTrialTable.Rows.Count;
+    public int BlockCount => Blocks.Count;
 
     public DataTable GetBlockOrderTable(int index) {
         DataTable orderedTable = baseBlockTable.Clone();
@@ -192,7 +192,7 @@ public class ExperimentTable {
             }
         }
 
-        //Debug.Log($"1: Current Table rows in getTable() {Table.Rows.Count}");
+        //Debug.Log($"1: Current trialTable rows in getTable() {trialTable.Rows.Count}");
 
         //do balanced variables first
         foreach (IndependentVariable datum in balanced) {
@@ -215,7 +215,7 @@ public class ExperimentTable {
         }
 
 
-        //Debug.Log($"2: Current Table rows in getTable() {Table.Rows.Count}");
+        //Debug.Log($"2: Current trialTable rows in getTable() {trialTable.Rows.Count}");
         return table;
     }
 
@@ -327,7 +327,7 @@ public class ExperimentTable {
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        //Debug.Log($"Table now has {newTable.Rows.Count} rows");
+        //Debug.Log($"trialTable now has {newTable.Rows.Count} rows");
         return newTable;
     }
 
@@ -371,7 +371,7 @@ public class ExperimentTable {
 
         
 
-        //Debug.Log($"(AddVariable<T> Table now has {newTable.Rows.Count} rows");
+        //Debug.Log($"(AddVariable<T> trialTable now has {newTable.Rows.Count} rows");
         return newTable;
     }
 
@@ -391,7 +391,7 @@ public class ExperimentTable {
 
 
         if (table.Rows.Count == 0) {
-            //Debug.Log("Adding rows to empty Table in variable creation");
+            //Debug.Log("Adding rows to empty trialTable in variable creation");
             
             foreach (T value in castIndependentVariable.Values) {
                 var newRow = newTable.NewRow();
@@ -400,7 +400,7 @@ public class ExperimentTable {
             }
         }
         else {
-            //Debug.Log("Adding rows to NON empty Table in variable creation");
+            //Debug.Log("Adding rows to NON empty trialTable in variable creation");
             foreach (DataRow tableRow in table.Rows) {
                 foreach (T value in castIndependentVariable.Values) {
                     newTable.ImportRow(tableRow);
@@ -430,7 +430,7 @@ public class ExperimentTable {
 
 
         if (table.Rows.Count == 0) {
-            Debug.Log("Adding rows to empty Table in variable creation");
+            Debug.Log("Adding rows to empty trialTable in variable creation");
             foreach (T value in castIndependentVariable.Values) {
                 var newRow = newTable.NewRow();
                 newRow[independentVariable.Name] = value;
@@ -441,17 +441,17 @@ public class ExperimentTable {
             int lowestCommonMultiple =
                 LowestCommonFunctions.LowestCommonMultiple(table.Rows.Count, castIndependentVariable.Values.Count);
 
-            //Make the required number of copies of the Table.
+            //Make the required number of copies of the trialTable.
             int numberOfTableCopies = lowestCommonMultiple / table.Rows.Count;
-            Debug.Log($"Number of Table copies: {numberOfTableCopies}");
+            Debug.Log($"Number of trialTable copies: {numberOfTableCopies}");
             for (int i = 0; i < numberOfTableCopies; i++) {
-                Debug.Log($"Adding {i}th copy of Table");
+                Debug.Log($"Adding {i}th copy of trialTable");
                 foreach (DataRow tableRow in table.Rows) {
                     newTable.ImportRow(tableRow);
                 }
             }
 
-            Debug.Log("Adding rows to NON empty Table in looped variable creation");
+            Debug.Log("Adding rows to NON empty trialTable in looped variable creation");
             T value = loopValues.FirstElement;
             foreach (DataRow newTableRow in newTable.Rows) {
                 newTableRow[independentVariable.Name] = value;
@@ -475,7 +475,7 @@ public class ExperimentTable {
 
 
         if (table.Rows.Count == 0) {
-            Debug.Log("Adding rows to empty Table in variable creation");
+            Debug.Log("Adding rows to empty trialTable in variable creation");
             foreach (T value in castIndependentVariable.Values) {
                 var newRow = newTable.NewRow();
                 newRow[independentVariable.Name] = value;
@@ -483,7 +483,7 @@ public class ExperimentTable {
             }
         }
         else {
-            Debug.Log($"Adding values to new Table (rows: {table.Rows.Count}) in even probability variable creation");
+            Debug.Log($"Adding values to new trialTable (rows: {table.Rows.Count}) in even probability variable creation");
             foreach (DataRow newTableRow in newTable.Rows) {
                 newTableRow[independentVariable.Name] = castIndependentVariable.Values.RandomItem();
             }
@@ -512,7 +512,7 @@ public class ExperimentTable {
         }
 
         if (table.Rows.Count == 0) {
-            Debug.Log("Adding rows to empty Table in variable creation");
+            Debug.Log("Adding rows to empty trialTable in variable creation");
             foreach (T value in castedIndependentVariable.Values) {
                 var newRow = newTable.NewRow();
                 newRow[independentVariable.Name] = value;
@@ -520,7 +520,7 @@ public class ExperimentTable {
             }
         }
         else {
-            Debug.Log($"Adding values to new Table (rows: {table.Rows.Count}) in even probability variable creation");
+            Debug.Log($"Adding values to new trialTable (rows: {table.Rows.Count}) in even probability variable creation");
             foreach (DataRow newTableRow in newTable.Rows) {
                 newTableRow[independentVariable.Name] = distribution.RandomItem();
             }
@@ -537,7 +537,7 @@ public class ExperimentTable {
 
 
         if (table.Rows.Count == 0) {
-            throw new ArgumentException("Can't add dependent variable values to empty Table");
+            throw new ArgumentException("Can't add dependent variable values to empty trialTable");
         }
         
         foreach (DataRow newTableRow in newTable.Rows) {

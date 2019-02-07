@@ -5,7 +5,7 @@ public class Block {
     private const string TabSeparator = "\t";
     private const int TruncateDefault = 10;
 
-    public DataTable Table;
+    public DataTable trialTable;
     public string Identity;
 
     public bool Complete = false;
@@ -13,8 +13,8 @@ public class Block {
 
     public List<Trial> Trials;
 
-    public Block(DataTable table, string identity) {
-        this.Table = table;
+    public Block(DataTable trialTable, string identity) {
+        this.trialTable = trialTable;
         this.Identity = identity;
         MakeTrials();
     }
@@ -25,7 +25,7 @@ public class Block {
 
         int i = 1;
         //configure block index
-        foreach (DataRow row in Table.Rows) {
+        foreach (DataRow row in trialTable.Rows) {
             Trial newTrial = new TestTrial(row);
             Trials.Add(newTrial);
             i++;
@@ -35,7 +35,7 @@ public class Block {
     
 
     public string AsString(string separator = TabSeparator, int truncate = TruncateDefault) {
-        string tableString = Table.AsString();
+        string tableString = trialTable.AsString();
         return "Identity: " + Identity + "\n" + tableString;
     }
 

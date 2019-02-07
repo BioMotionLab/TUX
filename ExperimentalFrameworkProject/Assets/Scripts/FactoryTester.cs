@@ -8,7 +8,7 @@ public class FactoryTester : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        Debug.Log("Printing Table");
+        Debug.Log("Printing trialTable");
         //theConfig.Factory.ToTable(theConfig.ShuffleTrialOrder, theConfig.NumberOfTimesToRepeatTrials).PrintToConsole();
     }
 

@@ -15,10 +15,10 @@ MonoBehaviour:
   ShuffleTrialOrder: 0
   NumberOfTimesToRepeatTrials: 1
   Factory:
-    DataTypesToCreate: 2
-    VariableTypeToCreate: 1
+    DataTypesToCreate: 3
+    VariableTypeToCreate: 0
     IntIVs:
-    - Name: in1
+    - Name: int2
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0
@@ -27,13 +27,6 @@ MonoBehaviour:
       Probabilities:
       - 0
       - 0
-    - Name: int2
-      TypeOfVariable: 0
-      DataType: 0
-      MixingTypeOfVariable: 0
-      Block: 1
-      Values: 
-      Probabilities: []
     FloatIVs:
     - Name: float1
       TypeOfVariable: 0
@@ -47,7 +40,18 @@ MonoBehaviour:
       - 0
       - 0
     StringIVs: []
-    GameObjectIVs: []
+    GameObjectIVs:
+    - Name: GameObject
+      TypeOfVariable: 0
+      DataType: 3
+      MixingTypeOfVariable: 0
+      Block: 0
+      Values:
+      - {fileID: 100000, guid: 4cecc279033294096abeb5b24a3f5a75, type: 3}
+      - {fileID: 100000, guid: 4cecc279033294096abeb5b24a3f5a75, type: 3}
+      Probabilities:
+      - 0
+      - 0
     Vector3IVs: []
     CustomDataTypeIVs: []
     IntDVs: []
@@ -57,6 +61,7 @@ MonoBehaviour:
       TypeOfVariable: 1
       DataType: 2
       Value: 
+      DefaultValue: fdsjakl;
     GameObjectDVs: []
     Vector3DVs: []
     CustomDataTypeDVs: []

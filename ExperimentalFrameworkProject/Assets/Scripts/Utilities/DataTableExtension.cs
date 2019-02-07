@@ -12,7 +12,7 @@ public static class DataTableExtension
 
     const string TabSeparator = "\t";
     const string CommaSeparator = ", ";
-    const int TruncateDefault = 10;
+    const int TruncateDefault = 8;
 
     public static void PrintToConsole(this DataTable dt) {
         Debug.Log(dt.AsString());
@@ -29,9 +29,10 @@ public static class DataTableExtension
     }
 
     public static string HeaderAsString(this DataTable dt, string separator = TabSeparator, int truncate = TruncateDefault) {
-        string headerString = string.Join(separator, truncate < 0 ? 
-                                       dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName)) : 
-                                       dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName.Truncate(truncate))));
+        string headerString = string.Join(separator, truncate > 0 ? 
+                                       dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName.Truncate(truncate))) : 
+                                       dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName))
+                                              );
         return headerString;
     }
 

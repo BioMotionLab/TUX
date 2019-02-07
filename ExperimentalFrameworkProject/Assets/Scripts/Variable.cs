@@ -288,9 +288,9 @@ public class VariableFactory {
 
     }
 
-    public ExperimentTable ToTable(bool shuffleTrialOrder, int numberRepetitions) {
+    public ExperimentDesign ToTable(bool shuffleTrialOrder, int numberRepetitions) {
         //Debug.Log($"ToTable method in IndependentVariable: Alldata.count {AllVariables.Count}");
-        return new ExperimentTable(AllVariables, shuffleTrialOrder, numberRepetitions);
+        return new ExperimentDesign(AllVariables, shuffleTrialOrder, numberRepetitions);
     }
 
    
@@ -484,11 +484,24 @@ public static class VariableDrawerHelpers {
         int oldIndentLevel = EditorGUI.indentLevel;
 
         currentRect = VariableDrawerHelpers.AddVariableProperties(property, currentRect);
+        currentRect = VariableDrawerHelpers.AddDependentVariableValueProperties(property, currentRect);
 
         EditorGUI.indentLevel = oldIndentLevel;
         float propertyHeight = currentRect.y - oldY;
         property.serializedObject.ApplyModifiedProperties();
         return propertyHeight;
+    }
+
+    static Rect AddDependentVariableValueProperties(SerializedProperty property, Rect currentRect) {
+
+
+        var defaultValueProperty = property.FindPropertyRelative("DefaultValue");
+
+        EditorGUI.PropertyField(currentRect, defaultValueProperty);
+        
+
+        currentRect.y += LineHeight;
+        return currentRect;
     }
 
 
