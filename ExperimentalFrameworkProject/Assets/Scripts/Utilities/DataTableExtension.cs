@@ -87,7 +87,18 @@ public static class DataTableExtension
         }
     }
 
-
+    public static void AddColumnFromOtherTable(this DataTable table, DataColumn columnToAdd, int index = -1) {
+        DataColumn column = new DataColumn {
+                                               DataType = columnToAdd.DataType,
+                                               ColumnName = columnToAdd.ColumnName,
+                                               ReadOnly = false,
+                                               Unique = false
+                                           };
+        table.Columns.Add(column);
+        if (index >= 0) {
+            column.SetOrdinal(index);
+        }
+    }
 
 
     /// <summary>

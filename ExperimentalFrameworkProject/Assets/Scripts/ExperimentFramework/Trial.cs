@@ -15,7 +15,7 @@ public abstract class Trial {
 
     public int Index => (int)data[Config.TrialIndexColumnName];
 
-    public bool Success {
+    public bool CompletedSuccesssfully {
         get {
             return (bool)data[Config.SuccessColumnName];
         }
@@ -48,7 +48,7 @@ public abstract class Trial {
 
     public IEnumerator Run() {
         
-        Success = false;
+        CompletedSuccesssfully = false;
         interrupt = false;
 
         //Skip a frame to allow any previous things to end
@@ -66,7 +66,8 @@ public abstract class Trial {
             yield return null;
             if (Input.GetKeyDown(KeyCode.Return)) {
                 waiting = false;
-                Success = true;
+                CompletedSuccesssfully = true;
+                Attempts++;
                 ReturnPressed();
             }
 
@@ -74,7 +75,7 @@ public abstract class Trial {
             
         }
 
-        if (Success) {
+        if (CompletedSuccesssfully) {
             Debug.Log($"Trial {Index} completed successfully");
             ExperimentEvents.TrialHasCompleted();
         }

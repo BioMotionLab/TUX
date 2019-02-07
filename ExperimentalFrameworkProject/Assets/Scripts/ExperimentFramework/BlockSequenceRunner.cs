@@ -6,10 +6,8 @@ using UnityEngine;
 public class BlockSequenceRunner {
 
     Experiment experiment;
+    List<Block> blocks;
 
-    public Config ConfigFile;
-
-    List<Block> blocks = new List<Block>();
     Block currentlyRunningBlock;
 
     public BlockSequenceRunner(Experiment experiment, List<Block> blocks) {
@@ -34,14 +32,6 @@ public class BlockSequenceRunner {
 
         if (blocks.Count <= 0) {
             throw new InvalidDataException("Experiment blocks not created correctly");
-        }
-
-        int i = 1;
-        foreach (Block block in blocks) {
-            foreach (DataRow blockRow in block.table.Rows) {
-                blockRow[Config.BlockIndexColumnName] = i;
-            }
-            i++;
         }
 
         Debug.Log("Starting to run Blocks");

@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class Experiment : MonoBehaviour{
 
-    public ExperimentTable table;
+    public ExperimentTable Table;
+    public ExperimentTable OrderedTable;
     public Config Config;
     public bool Running = false;
     public bool Ended = false;
 
     void Start() {
-        table = Config.ExperimentTable;
-
+        Table = Config.ExperimentTable;
         ExperimentEvents.InitExperiment(this);
     }
 
@@ -28,7 +28,7 @@ public class Experiment : MonoBehaviour{
 
     void StartExperiment() {
         Running = true;
-        BlockSequenceRunner blockRunner = new BlockSequenceRunner(this, table.blocks);
+        BlockSequenceRunner blockRunner = new BlockSequenceRunner(this, Table.Blocks);
         blockRunner.Start();
     }
 

@@ -50,14 +50,13 @@ public class TrialSequenceRunner {
 
     void TrialHasCompleted() {
         FinishTrial();
-        currentlyRunningTrial.Attempts++;
         GoToNextTrial();
     }
 
     void FinishTrial() {
         int trialNum = TrialCurrentIndex(currentlyRunningTrial);
         
-        Debug.Log($"Done Trial {trialNum + 1}, success = {currentlyRunningTrial.Success}\n" +
+        Debug.Log($"Done Trial {trialNum + 1}, success = {currentlyRunningTrial.CompletedSuccesssfully}\n" +
                   $"Table:\n" +
                   $"{currentlyRunningTrial.Data.AsStringWithHeader()}");
         ExperimentEvents.UpdateTrial(trialsInSequence, TrialIndex(currentlyRunningTrial));
@@ -72,7 +71,7 @@ public class TrialSequenceRunner {
                 searchingForUncompletedTrial = false;
                 DoneTrialSequence();
             }
-            else if (!currentTrialList[newIndex].Success) {
+            else if (!currentTrialList[newIndex].CompletedSuccesssfully) {
                 searchingForUncompletedTrial = false;
                 Trial nextTrial = currentTrialList[newIndex];
                 StartRunningTrial(nextTrial);
@@ -94,7 +93,7 @@ public class TrialSequenceRunner {
 
         List<Trial> unsuccessfulTrials = new List<Trial>();
         foreach (Trial trial in currentTrialList) {
-            if (!trial.Success && !trial.Skipped) {
+            if (!trial.CompletedSuccesssfully && !trial.Skipped) {
                 unsuccessfulTrials.Add(trial);
             }
         }

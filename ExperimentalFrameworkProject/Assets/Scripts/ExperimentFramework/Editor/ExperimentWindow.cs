@@ -96,43 +96,31 @@ public class ExperimentWindow : EditorWindow {
         }
 
         
-        List<string> blockPermutations = new List<string>();
-        int blockOrderIndex = 0;
-        List<List<DataRow>> AllPermutations = experiment.table.blockTable.GetPermutations();
-        foreach (List<DataRow> dataRows in AllPermutations) {
-            StringBuilder sb = new StringBuilder();
-            sb.Append($"Order #{blockOrderIndex}:   ");
-            foreach (DataRow dataRow in dataRows) {
-                sb.Append($"{dataRow.AsString(separator:", ",truncate:-1)} >   ");
-                
-            }
-            blockPermutations.Add(sb.ToString());
-            blockOrderIndex++;
-        }
-
-        
+        var blockPermutations = experiment.Table.BlockPermutationsStrings;
         OrderChosenIndex = EditorGUILayout.Popup(OrderChosenIndex, blockPermutations.ToArray());
-        DataTable ordered = experiment.table.blockTable.Clone();
+        var selectedOrderTable = experiment.Table.GetBlockOrderTable(OrderChosenIndex);
 
-        foreach (DataRow dataRow in AllPermutations[OrderChosenIndex]) {
-            Debug.Log($"importing Row row = {dataRow.AsString()}");
-            ordered.ImportRow(dataRow);
-        }
-        Debug.Log($"***");
-        OrderedBlocks = ordered;
-
-        EditorGUILayout.LabelField("ordered block");
-        ShowBlockTable(OrderedBlocks);
         
 
+        if (!blockChosen) {
 
-        if (GUILayout.Button("Confirm Order")) {
-            Debug.Log($"Block order chosen: {OrderChosenIndex}");
-            blockChosen = true;
+            if (GUILayout.Button("Confirm Order")) {
+                Debug.Log($"Block order chosen: {OrderChosenIndex}");
+                experiment.Table.BlockOrderSelected(OrderChosenIndex);
+                blockChosen = true;
+            }
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Chosen block order:");
+            
+            ShowBlockTable(selectedOrderTable, orderSelected:false);
+            return;
         }
-
-        if (!blockChosen) return;    
         
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("Blocks:");
+        ShowBlockTable(experiment.Table.OrderedBlockTable);
 
         if (!experiment.Running) {
             if (GUILayout.Button("Start Experiment")) {
@@ -144,14 +132,9 @@ public class ExperimentWindow : EditorWindow {
             EditorGUILayout.TextArea($"Experiment is {runningText}.");
         }
 
-        string EndedText = !experiment.Ended ? "Not Finished" : "Ended";
-        EditorGUILayout.TextArea($"Experiment is {EndedText}.");
+        string endedText = !experiment.Ended ? "Not Finished" : "Ended";
+        EditorGUILayout.TextArea($"Experiment is {endedText}.");
 
-        
-        
-        EditorGUILayout.Space();
-
-        ShowBlockTable(experiment.table.blockTable);
 
         EditorGUILayout.Space();
 
@@ -160,15 +143,12 @@ public class ExperimentWindow : EditorWindow {
         EditorGUILayout.Space();
     }
 
-    public DataTable OrderedBlocks;
-
     void ShowTrialTables() {
 
         EditorGUILayout.LabelField("Trial Tables:", EditorStyles.boldLabel);
 
-        List<Block> blocks = experiment.table.blocks;
-        foreach (var block in blocks) {
-            int blockIndex = blocks.IndexOf(block);
+        foreach (var block in experiment.Table.Blocks) {
+            int blockIndex = experiment.Table.Blocks.IndexOf(block);
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("", IndentWidth);
@@ -180,16 +160,14 @@ public class ExperimentWindow : EditorWindow {
             EditorGUILayout.LabelField("", RunningTrialIndicatorWidth);
             EditorGUILayout.LabelField("", JumpToButtonWidth);
             EditorGUILayout.LabelField("", CompleteIndicatorWidth);
-            EditorGUILayout.TextArea(block.table.HeaderAsString());
+            EditorGUILayout.TextArea(block.Table.HeaderAsString());
             EditorGUILayout.EndHorizontal();
 
 
-            DataTable trialTable = block.table;
-            foreach (DataRow trialRow in trialTable.Rows) {
+            for (int indexOfRow = 0; indexOfRow < block.Table.Rows.Count; indexOfRow++) {
+                DataRow trialRow = block.Table.Rows[indexOfRow];
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("", IndentWidth);
-
-                int indexOfRow = trialTable.Rows.IndexOf(trialRow);
 
                 if (currentTrialIndex == indexOfRow && currentBlockIndex == blockIndex) {
                     EditorGUILayout.LabelField("Running", RunningTrialIndicatorWidth);
@@ -198,7 +176,7 @@ public class ExperimentWindow : EditorWindow {
                     EditorGUILayout.LabelField("", RunningTrialIndicatorWidth);
                 }
 
-                
+
                 if (blockIndex == currentBlockIndex) {
                     // can't jump between blocks
                     if (GUILayout.Button("Go", JumpToButtonWidth)) {
@@ -211,7 +189,7 @@ public class ExperimentWindow : EditorWindow {
 
                 Trial trial = block.Trials[indexOfRow];
 
-                Color color = trial.Success ? Color.green : Color.red;
+                Color color = trial.CompletedSuccesssfully ? Color.green : Color.red;
                 color = trial.Skipped ? Color.yellow : color;
                 EditorGUILayout.ColorField(GUIContent.none, color, false, false, false, CompleteIndicatorWidth);
 
@@ -224,7 +202,7 @@ public class ExperimentWindow : EditorWindow {
 
     }
 
-    void ShowBlockTable(DataTable blockTable) {
+    void ShowBlockTable(DataTable blockTable, bool orderSelected = true) {
 
 
         EditorGUILayout.LabelField("Block Table:", EditorStyles.boldLabel);
@@ -233,7 +211,6 @@ public class ExperimentWindow : EditorWindow {
         
         //BLOCK DISPLAY
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("", IndentWidth);
         EditorGUILayout.LabelField("", IndentWidth);
         EditorGUILayout.LabelField("", RunningTrialIndicatorWidth);
         EditorGUILayout.LabelField("", JumpToButtonWidth);
@@ -254,15 +231,21 @@ public class ExperimentWindow : EditorWindow {
             else {
                 EditorGUILayout.LabelField("", RunningTrialIndicatorWidth);
             }
-            
 
-            Block block = experiment.table.blocks[indexOfBlock];
-            Color color = block.Complete ? Color.green : Color.red;
-            EditorGUILayout.ColorField(GUIContent.none, color, false, false, false, CompleteIndicatorWidth);
+            if (orderSelected) {
+
+                Block block = experiment.Table.Blocks[indexOfBlock];
+                Color color = block.Complete ? Color.green : Color.red;
+                EditorGUILayout.ColorField(GUIContent.none, color, false, false, false, CompleteIndicatorWidth);
+            }
+            else {
+                EditorGUILayout.LabelField("", CompleteIndicatorWidth);
+            }
 
             EditorGUILayout.TextArea(blockRow.AsString());
 
             EditorGUILayout.EndHorizontal();
+            
         }
 
     }

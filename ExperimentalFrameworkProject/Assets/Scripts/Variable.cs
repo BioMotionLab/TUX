@@ -51,11 +51,14 @@ public abstract class IndependentVariable<T> : IndependentVariable {
 [Serializable]
 public abstract class DependentVariable<T> : DependentVariable {
     public          T            Value;
+    public T DefaultValue;
     public override Type         Type           => typeof(T);
 
     protected DependentVariable() {
         Name = $"Unnamed DependentVariable Variable (type:{typeof(T)})";
         TypeOfVariable = VariableType.Dependent;
+
+
     }
 }
 
@@ -287,7 +290,7 @@ public class VariableFactory {
 
     public ExperimentTable ToTable(bool shuffleTrialOrder, int numberRepetitions) {
         //Debug.Log($"ToTable method in IndependentVariable: Alldata.count {AllVariables.Count}");
-        return ExperimentTable.GetTables(AllVariables, shuffleTrialOrder, numberRepetitions);
+        return new ExperimentTable(AllVariables, shuffleTrialOrder, numberRepetitions);
     }
 
    

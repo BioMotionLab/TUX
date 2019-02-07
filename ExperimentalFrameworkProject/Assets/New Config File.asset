@@ -16,56 +16,47 @@ MonoBehaviour:
   NumberOfTimesToRepeatTrials: 1
   Factory:
     DataTypesToCreate: 2
-    VariableTypeToCreate: 0
+    VariableTypeToCreate: 1
     IntIVs:
-    - Name: iv1
+    - Name: in1
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0
-      Block: 0
+      Block: 1
       Values: 0100000002000000
       Probabilities:
       - 0
       - 0
-    - Name: 1v2
+    - Name: int2
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0
+      Block: 1
+      Values: 
+      Probabilities: []
+    FloatIVs:
+    - Name: float1
+      TypeOfVariable: 0
+      DataType: 1
+      MixingTypeOfVariable: 0
       Block: 0
-      Values: 0100000002000000
-      Probabilities:
-      - 0
-      - 0
-    FloatIVs: []
-    StringIVs:
-    - Name: block1
-      TypeOfVariable: 0
-      DataType: 2
-      MixingTypeOfVariable: 0
-      Block: 1
       Values:
-      - Block1val1
-      - Block1val2
+      - 1.1
+      - 2.2
       Probabilities:
       - 0
       - 0
-    - Name: block2
-      TypeOfVariable: 0
-      DataType: 2
-      MixingTypeOfVariable: 0
-      Block: 1
-      Values:
-      - Block2val1
-      - Block2val2
-      Probabilities:
-      - 0
-      - 0
+    StringIVs: []
     GameObjectIVs: []
     Vector3IVs: []
     CustomDataTypeIVs: []
     IntDVs: []
     FloatDVs: []
-    StringDVs: []
+    StringDVs:
+    - Name: output
+      TypeOfVariable: 1
+      DataType: 2
+      Value: 
     GameObjectDVs: []
     Vector3DVs: []
     CustomDataTypeDVs: []
