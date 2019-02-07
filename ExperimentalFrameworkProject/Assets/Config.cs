@@ -29,7 +29,7 @@ public class Config : ScriptableObject
 
 
 public class MakeScriptableObject {
-    [MenuItem("Assets/Create/Config File")]
+    [MenuItem("Experiment/Create Config File")]
     public static void CreateMyAsset() {
         Config asset = ScriptableObject.CreateInstance<Config>();
 

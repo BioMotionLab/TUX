@@ -24,8 +24,8 @@ public class ExperimentWindow : EditorWindow {
     string outputFileName;
     bool autoName;
 
-    // Add menu item named "My Window" to the Window menu
-    [MenuItem("Experiment/My Window")]
+    // Add menu item named "Experiment View Window" to the Window menu
+    [MenuItem("Experiment/Experiment View Window")]
     public static void ShowWindow() {
         //Show existing window instance. If one doesn't exist, make one.
         EditorWindow.GetWindow(typeof(ExperimentWindow));
