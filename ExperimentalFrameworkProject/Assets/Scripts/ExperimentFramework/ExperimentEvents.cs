@@ -72,7 +72,6 @@ public class ExperimentEvents : MonoBehaviour {
     public static event BlockSequenceHasCompletedEvent OnBlockSequenceHasCompleted;
 
     public static void BlockSequenceHasCompleted(List<Block> blocks) {
-        Debug.Log("Blocksequence ended Event detected");
         OnBlockSequenceHasCompleted?.Invoke(blocks);
     }
 

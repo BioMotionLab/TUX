@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
@@ -13,9 +15,10 @@ public class ExperimentWindow : EditorWindow {
 
     int currentBlockIndex = -1;
     int currentTrialIndex = -1;
-
+    int OrderChosenIndex = 0;
     bool initialized = false;
     Experiment experiment;
+    bool blockChosen;
 
     // Add menu item named "My Window" to the Window menu
     [MenuItem("Experiment/My Window")]
@@ -44,17 +47,17 @@ public class ExperimentWindow : EditorWindow {
 
     void TrialStarted(Trial trial, int index) {
         currentTrialIndex = index;
-        RepaintWindow();
+        Repaint();
     }
 
     void TrialCompleted(List<Trial> trials, int index) {
-        RepaintWindow();
+        Repaint();
     }
 
     void ExperimentStarted() {
         currentBlockIndex = 0;
         currentTrialIndex = 0;
-        RepaintWindow();
+        Repaint();
     }
 
     void InitWindow(Experiment experiment) {
@@ -62,20 +65,20 @@ public class ExperimentWindow : EditorWindow {
         currentTrialIndex = -1;
         this.experiment = experiment;
         initialized = true;
-        RepaintWindow();
-    }
-
-    void RepaintWindow() {
-        Debug.Log("repainting window");
+        blockChosen = false;
+        OrderChosenIndex = 0;
         Repaint();
     }
+
+    
     void BlockCompleted(List<Block> blocks, int index) {
         currentBlockIndex = index+1;
-        RepaintWindow();
+        Repaint();
     }
 
     void Update() {
         if (!Application.isPlaying) initialized = false;
+        Repaint();
     }
 
     void OnGUI() {
@@ -83,7 +86,7 @@ public class ExperimentWindow : EditorWindow {
 
         
         if (!Application.isPlaying) {
-            EditorGUILayout.HelpBox("Not in PlayMode", MessageType.Error);
+            EditorGUILayout.HelpBox("Cannot display experiment when Unity is not in PlayMode, Press play in Editor to start experiment Setup", MessageType.Error);
             return;
         }
 
@@ -91,6 +94,45 @@ public class ExperimentWindow : EditorWindow {
             EditorGUILayout.HelpBox($"Experiment and Config File not properly initialized.", MessageType.Error);
             return;
         }
+
+        
+        List<string> blockPermutations = new List<string>();
+        int blockOrderIndex = 0;
+        List<List<DataRow>> AllPermutations = experiment.table.blockTable.GetPermutations();
+        foreach (List<DataRow> dataRows in AllPermutations) {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"Order #{blockOrderIndex}:   ");
+            foreach (DataRow dataRow in dataRows) {
+                sb.Append($"{dataRow.AsString(separator:", ",truncate:-1)} >   ");
+                
+            }
+            blockPermutations.Add(sb.ToString());
+            blockOrderIndex++;
+        }
+
+        
+        OrderChosenIndex = EditorGUILayout.Popup(OrderChosenIndex, blockPermutations.ToArray());
+        DataTable ordered = experiment.table.blockTable.Clone();
+
+        foreach (DataRow dataRow in AllPermutations[OrderChosenIndex]) {
+            Debug.Log($"importing Row row = {dataRow.AsString()}");
+            ordered.ImportRow(dataRow);
+        }
+        Debug.Log($"***");
+        OrderedBlocks = ordered;
+
+        EditorGUILayout.LabelField("ordered block");
+        ShowBlockTable(OrderedBlocks);
+        
+
+
+        if (GUILayout.Button("Confirm Order")) {
+            Debug.Log($"Block order chosen: {OrderChosenIndex}");
+            blockChosen = true;
+        }
+
+        if (!blockChosen) return;    
+        
 
         if (!experiment.Running) {
             if (GUILayout.Button("Start Experiment")) {
@@ -109,7 +151,7 @@ public class ExperimentWindow : EditorWindow {
         
         EditorGUILayout.Space();
 
-        ShowBlockTable();
+        ShowBlockTable(experiment.table.blockTable);
 
         EditorGUILayout.Space();
 
@@ -117,6 +159,8 @@ public class ExperimentWindow : EditorWindow {
 
         EditorGUILayout.Space();
     }
+
+    public DataTable OrderedBlocks;
 
     void ShowTrialTables() {
 
@@ -180,7 +224,7 @@ public class ExperimentWindow : EditorWindow {
 
     }
 
-    void ShowBlockTable() {
+    void ShowBlockTable(DataTable blockTable) {
 
 
         EditorGUILayout.LabelField("Block Table:", EditorStyles.boldLabel);
@@ -194,10 +238,9 @@ public class ExperimentWindow : EditorWindow {
         EditorGUILayout.LabelField("", RunningTrialIndicatorWidth);
         EditorGUILayout.LabelField("", JumpToButtonWidth);
         EditorGUILayout.LabelField("", CompleteIndicatorWidth);
-        EditorGUILayout.TextArea(experiment.table.blockTable.HeaderAsString());
+        EditorGUILayout.TextArea(blockTable.HeaderAsString());
         EditorGUILayout.EndHorizontal();
 
-        DataTable blockTable = experiment.table.blockTable;
         foreach (DataRow blockRow in blockTable.Rows) {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("", IndentWidth);
@@ -211,11 +254,6 @@ public class ExperimentWindow : EditorWindow {
             else {
                 EditorGUILayout.LabelField("", RunningTrialIndicatorWidth);
             }
-            
-            
-            
-            
-
             
 
             Block block = experiment.table.blocks[indexOfBlock];

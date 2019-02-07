@@ -10,6 +10,7 @@ public class ExperimentTable {
 
     public DataTable blockTable;
     public List<Block> blocks = new List<Block>();
+    public DataTable OrderedBlocks;
 
     public static ExperimentTable GetTables(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
 
@@ -174,7 +175,7 @@ public class ExperimentTable {
         }
 
 
-        Debug.Log($"2: Current table rows in getTable() {table.Rows.Count}");
+        //Debug.Log($"2: Current table rows in getTable() {table.Rows.Count}");
         return table;
     }
 

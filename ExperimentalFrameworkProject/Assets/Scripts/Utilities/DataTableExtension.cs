@@ -36,7 +36,9 @@ public static class DataTableExtension
     }
 
     public static string AsString(this DataRow row, string separator = TabSeparator, int truncate = TruncateDefault) {
-        string rowString  = string.Join(separator, row.ItemArray.Select(c => c.ToString().Truncate(truncate)).ToArray());
+        string rowString = truncate <= 0
+            ? string.Join(separator, row.ItemArray.Select(c => c.ToString()).ToArray())
+            : string.Join(separator, row.ItemArray.Select(c => c.ToString().Truncate(truncate)).ToArray());
         return rowString;
     }
 
@@ -45,6 +47,48 @@ public static class DataTableExtension
         string rowString = string.Join(separator, row.ItemArray.Select(c => c.ToString().Truncate(truncate)).ToArray());
         return headerString + "\n" + rowString;
     }
+
+    public static List<List<DataRow>> GetPermutations(this DataTable dt) {
+        List<DataRow> dataRows = new List<DataRow>();
+        foreach (DataRow row in dt.Rows) {
+            dataRows.Add(row);
+        }
+
+        IEnumerable<IList> permutations = Permutate(dataRows, dataRows.Count);
+
+        List<List<DataRow>> AllPermutations = new List<List<DataRow>>();
+        foreach (IList perms in permutations) {
+            List<DataRow> permDataRows = new List<DataRow>();
+            foreach (DataRow permDataRow in perms) {
+                permDataRows.Add(permDataRow);
+
+            }
+
+            AllPermutations.Add(permDataRows);
+        }
+
+        return AllPermutations;
+    }
+
+    public static void RotateRight(IList sequence, int count) {
+        object tmp = sequence[count - 1];
+        sequence.RemoveAt(count - 1);
+        sequence.Insert(0, tmp);
+    }
+
+    public static IEnumerable<IList> Permutate(IList sequence, int count) {
+        if (count == 1) yield return sequence;
+        else {
+            for (int i = 0; i < count; i++) {
+                foreach (var perm in Permutate(sequence, count - 1))
+                    yield return perm;
+                RotateRight(sequence, count);
+            }
+        }
+    }
+
+
+
 
     /// <summary>
     /// Randomly shuffles the item order of this list

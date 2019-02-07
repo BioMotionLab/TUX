@@ -90,7 +90,7 @@ public class TrialSequenceRunner {
 
     void DoneTrialSequence() {
         Debug.Log("---------------");
-        Debug.Log("Done all currentTrialList");
+        Debug.Log("Done all trials in sequence");
 
         List<Trial> unsuccessfulTrials = new List<Trial>();
         foreach (Trial trial in currentTrialList) {
@@ -107,7 +107,7 @@ public class TrialSequenceRunner {
         }
         else {
             // finish up
-            Debug.Log($"No more unsuccessful trials");
+            Debug.Log($"No more trials");
             ExperimentEvents.TrialSequenceHasCompleted(trialsInSequence);
             OnDisable();
         }
