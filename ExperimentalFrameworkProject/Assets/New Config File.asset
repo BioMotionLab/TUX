@@ -18,7 +18,7 @@ MonoBehaviour:
     DataTypesToCreate: 3
     VariableTypeToCreate: 0
     IntIVs:
-    - Name: int2
+    - Name: blockint
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0

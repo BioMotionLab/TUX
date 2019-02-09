@@ -58,7 +58,7 @@ public class TrialSequenceRunner {
         
         Debug.Log($"Done Trial {trialNum + 1}, success = {currentlyRunningTrial.CompletedSuccesssfully}\n" +
                   $"trialTable:\n" +
-                  $"{currentlyRunningTrial.Data.AsStringWithHeader()}");
+                  $"{currentlyRunningTrial.Data.AsString(header:true)}");
         ExperimentEvents.UpdateTrial(trialsInSequence, TrialIndex(currentlyRunningTrial));
     }
 

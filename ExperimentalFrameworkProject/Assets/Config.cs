@@ -13,10 +13,9 @@ public class Config : ScriptableObject
     public VariableFactory Factory = new VariableFactory();
 
     public ExperimentDesign ExperimentDesign => Factory.ToTable(ShuffleTrialOrder, NumberOfTimesToRepeatTrials);
+
     public const string TotalTrialIndexColumnName = "TrialNum";
-
     public const string BlockIndexColumnName = "Block";
-
     public const string SkippedColumnName = "Skipped";
     public const string AttemptsColumnName = "Attempts";
     public const string TrialIndexColumnName = "TrialInBlock";

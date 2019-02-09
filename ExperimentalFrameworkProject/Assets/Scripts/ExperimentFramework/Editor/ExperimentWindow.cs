@@ -15,14 +15,14 @@ public class ExperimentWindow : EditorWindow {
 
     int currentBlockIndex = -1;
     int currentTrialIndex = -1;
-    int OrderChosenIndex = 0;
     bool initialized = false;
+    string OutputFolder;
     Experiment experiment;
     bool blockChosen;
-    string participantID;
-    string outputFilePath;
     string outputFileName;
     bool autoName;
+
+    Session session;
 
     // Add menu item named "Experiment View Window" to the Window menu
     [MenuItem("Experiment/Experiment View Window")]
@@ -35,7 +35,7 @@ public class ExperimentWindow : EditorWindow {
         ExperimentEvents.OnInitExperiment += InitWindow;
         ExperimentEvents.OnBlockUpdated += BlockCompleted;
         ExperimentEvents.OnTrialUpdated += TrialCompleted;
-        ExperimentEvents.OnStartExperiment += ExperimentStarted;
+        ExperimentEvents.OnExperimentStarted += ExperimentStarted;
         ExperimentEvents.OnTrialHasStarted += TrialStarted;
     }
 
@@ -45,7 +45,7 @@ public class ExperimentWindow : EditorWindow {
         ExperimentEvents.OnInitExperiment -= InitWindow;
         ExperimentEvents.OnBlockUpdated -= BlockCompleted;
         ExperimentEvents.OnTrialUpdated -= TrialCompleted;
-        ExperimentEvents.OnStartExperiment -= ExperimentStarted;
+        ExperimentEvents.OnExperimentStarted -= ExperimentStarted;
         ExperimentEvents.OnTrialHasStarted -= TrialStarted;
     }
 
@@ -65,12 +65,13 @@ public class ExperimentWindow : EditorWindow {
     }
 
     void InitWindow(Experiment experiment) {
+        session = new Session();
         currentBlockIndex = -1;
         currentTrialIndex = -1;
         this.experiment = experiment;
         initialized = true;
         blockChosen = false;
-        OrderChosenIndex = 0;
+        session.OrderChosenIndex = 0;
         Repaint();
     }
 
@@ -108,32 +109,7 @@ public class ExperimentWindow : EditorWindow {
         EditorGUILayout.Space();
 
 
-        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-        EditorGUILayout.LabelField("Experiment Controls:", EditorStyles.boldLabel);
-        EditorGUI.indentLevel++;
-        if (!experiment.Running) {
-            if (GUILayout.Button("Start Experiment")) {
-                ExperimentEvents.StartExperiment();
-            }
-        }
-        else {
-            EditorGUILayout.BeginHorizontal();
-            string runningText = experiment.Running ? "Running" : "Not Running";
-            EditorGUILayout.LabelField($"Experiment {runningText}.");
-            EditorGUILayout.LabelField($"Running Trial: " +
-                                       $"{experiment.Design.BlockCount*currentBlockIndex+currentTrialIndex + 1}" +
-                                       $"/" +
-                                       $"{experiment.Design.TotalTrials} ");
-            EditorGUILayout.EndHorizontal();
-        }
-
-        string endedText = !experiment.Ended ? "Not Finished" : "Ended";
-        EditorGUILayout.LabelField($"Experiment is {endedText}.");
-
-        EditorGUILayout.Space();
-        EditorGUI.indentLevel--;
-        EditorGUILayout.EndVertical();
-
+        ShowExperimentControls();
 
 
         EditorGUILayout.BeginVertical(EditorStyles.helpBox);
@@ -152,6 +128,34 @@ public class ExperimentWindow : EditorWindow {
         EditorGUILayout.Space();
     }
 
+    void ShowExperimentControls() {
+        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+        EditorGUILayout.LabelField("Experiment Controls:", EditorStyles.boldLabel);
+        EditorGUI.indentLevel++;
+        if (!experiment.Running) {
+            if (GUILayout.Button("Start Experiment")) {
+                ExperimentEvents.StartExperiment(session);
+            }
+        }
+        else {
+            EditorGUILayout.BeginHorizontal();
+            string runningText = experiment.Running ? "Running" : "Not Running";
+            EditorGUILayout.LabelField($"Experiment {runningText}.");
+            EditorGUILayout.LabelField($"Running Trial: " +
+                                       $"{experiment.Design.BlockCount * currentBlockIndex + currentTrialIndex + 1}" +
+                                       $"/" +
+                                       $"{experiment.Design.TotalTrials} ");
+            EditorGUILayout.EndHorizontal();
+        }
+
+        string endedText = !experiment.Ended ? "Not Finished" : "Ended";
+        EditorGUILayout.LabelField($"Experiment is {endedText}.");
+
+        EditorGUILayout.Space();
+        EditorGUI.indentLevel--;
+        EditorGUILayout.EndVertical();
+    }
+
     bool ShowBlockOrderSettings() {
         if (!blockChosen) {
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
@@ -159,8 +163,8 @@ public class ExperimentWindow : EditorWindow {
             EditorGUILayout.LabelField("Block Order Settings:", EditorStyles.boldLabel);
 
             var blockPermutations = experiment.Design.BlockPermutationsStrings;
-            OrderChosenIndex = EditorGUILayout.Popup(OrderChosenIndex, blockPermutations.ToArray());
-            var selectedOrderTable = experiment.Design.GetBlockOrderTable(OrderChosenIndex);
+            session.OrderChosenIndex = EditorGUILayout.Popup(session.OrderChosenIndex, blockPermutations.ToArray());
+            var selectedOrderTable = experiment.Design.GetBlockOrderTable(session.OrderChosenIndex);
 
 
             EditorGUILayout.Space();
@@ -169,8 +173,8 @@ public class ExperimentWindow : EditorWindow {
             ShowBlockTable(selectedOrderTable, orderSelected: false);
 
             if (GUILayout.Button("Confirm Order")) {
-                Debug.Log($"Block order chosen: {OrderChosenIndex}");
-                experiment.Design.BlockOrderSelected(OrderChosenIndex);
+                Debug.Log($"Block order chosen: {session.OrderChosenIndex}");
+                experiment.Design.BlockOrderSelected(session.OrderChosenIndex);
                 blockChosen = true;
             }
 
@@ -185,26 +189,33 @@ public class ExperimentWindow : EditorWindow {
         EditorGUILayout.BeginVertical(EditorStyles.helpBox);
         EditorGUILayout.LabelField("Session settings:", EditorStyles.boldLabel);
         EditorGUI.indentLevel++;
-        //Session Settings
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Debug Mode:", LabelWidth);
+        session.DebugMode = EditorGUILayout.Toggle(session.DebugMode);
+        EditorGUILayout.EndHorizontal();
+
+        //if (session.DebugMode) return true;
+
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Participant ID:", LabelWidth);
-        participantID = EditorGUILayout.TextField(participantID);
+        session.ParticipantID = EditorGUILayout.TextField(session.ParticipantID);
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Output File Path:", LabelWidth);
         if (GUILayout.Button("Choose Folder", LabelWidth)) {
-            outputFilePath = EditorUtility.OpenFolderPanel("Choose Output Folder", "", "");
+            OutputFolder = EditorUtility.OpenFolderPanel("Choose Output Folder", "", "");
         }
 
-        GUILayout.Box(outputFilePath);
+        GUILayout.Box(OutputFolder);
         EditorGUILayout.EndHorizontal();
 
 
         EditorGUILayout.BeginHorizontal();
         autoName = EditorGUILayout.Toggle("Output file: Auto Name?", autoName);
         if (autoName) {
-            outputFileName = participantID + " " + DateTime.Now.ToString("yyyy_MM_dd hh_mm");
+            outputFileName = DateTime.Now.ToString("yyyy-MM-dd_Thh-mm")  + "_Participant-" + session.ParticipantID;
             EditorGUILayout.LabelField($"Name: ", SmallLabelWidth);
             GUILayout.Box(outputFileName);
         }
@@ -214,14 +225,13 @@ public class ExperimentWindow : EditorWindow {
         }
 
         EditorGUILayout.EndHorizontal();
-        string extension = ".csv";
-        string fullPath = Path.Combine(outputFilePath, outputFileName, extension);
+        session.OutputPath = Path.Combine(OutputFolder, outputFileName);
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Full output path:", LabelWidth);
-        GUILayout.Box(fullPath);
+        GUILayout.Box(session.OutputPath);
         EditorGUILayout.EndHorizontal();
 
-        if (File.Exists(fullPath)) {
+        if (File.Exists(session.OutputPath)) {
             EditorGUILayout.HelpBox("File already exists!", MessageType.Error);
             return false;
         }

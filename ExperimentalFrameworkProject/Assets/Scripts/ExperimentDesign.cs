@@ -103,6 +103,7 @@ public class ExperimentDesign {
 
     public object TotalTrials => Blocks.Count * baseTrialTable.Rows.Count;
     public int BlockCount => Blocks.Count;
+    public string TrialTableHeader => Blocks[0].trialTable.HeaderAsString(separator: Delimiter.Comma, truncate: -1);
 
     public DataTable GetBlockOrderTable(int index) {
         DataTable orderedTable = baseBlockTable.Clone();
@@ -121,11 +122,16 @@ public class ExperimentDesign {
     public void CreateAndAddBlocks() {
         Blocks = new List<Block>();
 
+        baseTrialTable = AddBlockColumns(baseTrialTable, baseBlockTable);
+
+
         for (int i = 0; i < OrderedBlockTable.Rows.Count; i++) {
             DataRow orderedBlockRow = OrderedBlockTable.Rows[i];
 
+            
+
             DataTable trialTable = baseTrialTable.Copy();
-            UpdateWithBlockValues(trialTable, orderedBlockRow, i);
+            trialTable = UpdateWithBlockValues(trialTable, orderedBlockRow, i);
 
             string blockIdentity = orderedBlockRow.AsString(separator: ", ");
             Block newBlock = new Block(trialTable, blockIdentity);
@@ -136,13 +142,14 @@ public class ExperimentDesign {
         Debug.Log($"Blocks added {Blocks.Count}");
     }
 
-    static void UpdateWithBlockValues(DataTable blockTrialTable, DataRow blockTableRow, int blockIndex) {
+    static DataTable UpdateWithBlockValues(DataTable blockTrialTable, DataRow blockTableRow, int blockIndex) {
+        DataTable newTable = blockTrialTable.Copy();
+
         foreach (DataColumn blockTableColumn in blockTableRow.Table.Columns) {
-            blockTrialTable.AddColumnFromOtherTable(blockTableColumn, 0);
             string columnName = blockTableColumn.ColumnName;
-            int startingTotalTrialIndex = blockIndex* blockTrialTable.Rows.Count;
-            for (int trialIndexInBlock = 0; trialIndexInBlock < blockTrialTable.Rows.Count; trialIndexInBlock++) {
-                DataRow trialRow = blockTrialTable.Rows[trialIndexInBlock];
+            int startingTotalTrialIndex = blockIndex* newTable.Rows.Count;
+            for (int trialIndexInBlock = 0; trialIndexInBlock < newTable.Rows.Count; trialIndexInBlock++) {
+                DataRow trialRow = newTable.Rows[trialIndexInBlock];
                 trialRow[columnName] = blockTableRow[columnName];
                 trialRow[Config.BlockIndexColumnName] = blockIndex;
                 trialRow[Config.TrialIndexColumnName] = trialIndexInBlock;
@@ -150,9 +157,21 @@ public class ExperimentDesign {
                 startingTotalTrialIndex++;
             }
         }
+
+        return newTable;
     }
 
-    
+    static DataTable AddBlockColumns(DataTable trialTable, DataTable blockTable) {
+        DataTable newTrialTable = trialTable.Copy();
+
+        foreach (DataColumn blockTableColumn in blockTable.Columns) {
+            newTrialTable = newTrialTable.AddColumnFromOtherTable(blockTableColumn, 0);
+        }
+
+        return newTrialTable;
+    }
+
+
 
     static DataTable SortAndAddIVs(List<Variable> allData, DataTable table, bool block=false) {
         List<IndependentVariable> balanced = new List<IndependentVariable>();

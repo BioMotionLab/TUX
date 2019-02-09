@@ -10,8 +10,6 @@ using Random = UnityEngine.Random;
 public static class DataTableExtension
 {
 
-    const string TabSeparator = "\t";
-    const string CommaSeparator = ", ";
     const int TruncateDefault = 8;
 
     public static void PrintToConsole(this DataTable dt) {
@@ -20,15 +18,15 @@ public static class DataTableExtension
 
     
 
-    public static string AsString(this DataTable dt, string separator = TabSeparator, int truncate = TruncateDefault) {
-        string headerString = HeaderAsString(dt, separator, truncate);
+    public static string AsString(this DataTable dt, bool header = true, string separator = Delimiter.Tab, int truncate = TruncateDefault) {
+        string headerString = header ? HeaderAsString(dt, separator, truncate) + "\n" : "";
 
         string tableString = string.Join(Environment.NewLine,
                                  dt.Rows.OfType<DataRow>().Select(x => string.Join(separator, x.ItemArray)));
-        return headerString + "\n" + tableString;
+        return headerString + tableString;
     }
 
-    public static string HeaderAsString(this DataTable dt, string separator = TabSeparator, int truncate = TruncateDefault) {
+    public static string HeaderAsString(this DataTable dt, string separator = Delimiter.Tab, int truncate = TruncateDefault) {
         string headerString = string.Join(separator, truncate > 0 ? 
                                        dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName.Truncate(truncate))) : 
                                        dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName))
@@ -36,17 +34,12 @@ public static class DataTableExtension
         return headerString;
     }
 
-    public static string AsString(this DataRow row, string separator = TabSeparator, int truncate = TruncateDefault) {
+    public static string AsString(this DataRow row, bool header = false, string separator = Delimiter.Tab, int truncate = TruncateDefault) {
+        string headerString = header? row.Table.HeaderAsString(separator:separator, truncate: truncate) + "\n" : "" ;
         string rowString = truncate <= 0
             ? string.Join(separator, row.ItemArray.Select(c => c.ToString()).ToArray())
             : string.Join(separator, row.ItemArray.Select(c => c.ToString().Truncate(truncate)).ToArray());
-        return rowString;
-    }
-
-    public static string AsStringWithHeader(this DataRow row, string separator = TabSeparator, int truncate = TruncateDefault) {
-        string headerString = row.Table.HeaderAsString();
-        string rowString = string.Join(separator, row.ItemArray.Select(c => c.ToString().Truncate(truncate)).ToArray());
-        return headerString + "\n" + rowString;
+        return headerString + rowString;
     }
 
     public static List<List<DataRow>> GetPermutations(this DataTable dt) {
@@ -88,17 +81,20 @@ public static class DataTableExtension
         }
     }
 
-    public static void AddColumnFromOtherTable(this DataTable table, DataColumn columnToAdd, int index = -1) {
+    public static DataTable AddColumnFromOtherTable(this DataTable table, DataColumn columnToAdd, int index = -1) {
+        DataTable newTable = table.Copy();
         DataColumn column = new DataColumn {
                                                DataType = columnToAdd.DataType,
                                                ColumnName = columnToAdd.ColumnName,
                                                ReadOnly = false,
                                                Unique = false
                                            };
-        table.Columns.Add(column);
+        newTable.Columns.Add(column);
         if (index >= 0) {
             column.SetOrdinal(index);
         }
+
+        return newTable;
     }
 
 
@@ -130,8 +126,5 @@ public static class DataTableExtension
         return shuffledTable;
     }
 
-    public static string FormattedForCSV(this DataTable dt) {
-        return dt.AsString(CommaSeparator, truncate:-1);
-    }
-
+    
 }

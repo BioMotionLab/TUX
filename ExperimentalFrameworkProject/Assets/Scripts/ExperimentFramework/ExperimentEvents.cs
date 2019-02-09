@@ -7,6 +7,8 @@ public class ExperimentEvents : MonoBehaviour {
 
     public delegate void TrialHasStartedEvent(Trial trial, int index);
     public static event TrialHasStartedEvent OnTrialHasStarted;
+    
+    
 
     public static void TrialHasStarted(Trial trial, int index) {
         OnTrialHasStarted?.Invoke(trial, index);
@@ -89,11 +91,19 @@ public class ExperimentEvents : MonoBehaviour {
         OnBlockUpdated?.Invoke(blocks, index);
     }
 
-    public delegate void StartExperimentEvent();
+    public delegate void StartExperimentEvent(Session session);
     public static event StartExperimentEvent OnStartExperiment;
 
-    public static void StartExperiment() {
-        OnStartExperiment?.Invoke();
+    public static void StartExperiment(Session session) {
+        OnStartExperiment?.Invoke(session);
+    }
+
+    public delegate void ExperimentStartedEvent();
+
+    public static event ExperimentStartedEvent OnExperimentStarted;
+
+    public static void ExperimentStarted() {
+        OnExperimentStarted?.Invoke();
     }
 
     public delegate void InitExperimentEvent(Experiment experiment);
@@ -104,6 +114,14 @@ public class ExperimentEvents : MonoBehaviour {
  
         OnInitExperiment?.Invoke(experiment);
     }
+
+    public delegate void OutputUpdatedEvent(Outputtable output);
+    public static event OutputUpdatedEvent OnOutputUpdated;
+
+    public static void OutputUpdated(Outputtable output) {
+        OnOutputUpdated?.Invoke(output);
+    }
+
 
     public delegate void EndExperimentEvent();
     public static event EndExperimentEvent OnEndExperiment;
