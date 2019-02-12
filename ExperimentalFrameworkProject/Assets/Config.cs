@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
 public class Config : ScriptableObject
@@ -26,13 +23,15 @@ public class Config : ScriptableObject
     }
 }
 
-
+/// <summary>
+/// Adds a menu item to create a new config file
+/// </summary>
 public class MakeScriptableObject {
     [MenuItem("Experiment/Create Config File")]
     public static void CreateMyAsset() {
         Config asset = ScriptableObject.CreateInstance<Config>();
 
-        AssetDatabase.CreateAsset(asset, "Assets/New Config File.asset");
+        AssetDatabase.CreateAsset(asset, "Assets/New Experiment Config File.asset");
         AssetDatabase.SaveAssets();
 
         EditorUtility.FocusProjectWindow();

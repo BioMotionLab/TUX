@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
-public class ExperimentEvents : MonoBehaviour {
+
+public class ExperimentEvents {
 
     public delegate void TrialHasStartedEvent(Trial trial, int index);
     public static event TrialHasStartedEvent OnTrialHasStarted;

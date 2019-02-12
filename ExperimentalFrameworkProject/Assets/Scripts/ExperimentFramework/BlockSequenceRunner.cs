@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using UnityEngine;
@@ -38,16 +39,41 @@ public class BlockSequenceRunner {
         StartRunningBlock(blocks[0]);
     }
 
+
     void StartRunningBlock(Block block) {
 
         currentlyRunningBlock = block;
         Debug.Log($"Starting to run block {block.Identity}");
         ExperimentEvents.BlockHasStarted(block);
 
+        experiment.StartCoroutine(RunPreBlock(block));
+        
+    }
+
+    IEnumerator RunPreBlock(Block block) {
+        yield return PreBlockCode();
+
         TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(experiment, block.Trials);
         trialSequenceRunner.Start();
-
+        yield return null;
     }
+
+    IEnumerator RunPostBlock() {
+        yield return PostBlockCode();
+        FinishBlock();
+        GoToNextBlock();
+    }
+
+    protected virtual IEnumerator PreBlockCode() {
+        Debug.Log("Skipped pre-block code");
+        yield return null;
+    }
+    protected virtual IEnumerator PostBlockCode() {
+        Debug.Log("Skipped post-block code");
+        yield return null;
+    }
+    
+
 
     void GoToNextBlock() {
         int newIndex = BlockIndex(currentlyRunningBlock) + 1;
@@ -69,10 +95,12 @@ public class BlockSequenceRunner {
     }
 
     void BlockDoneRunning(List<Trial> trials) {
-        FinishBlock();
-        GoToNextBlock();
-    }
+        
 
+        experiment.StartCoroutine(RunPostBlock());
+
+    }
+    
     void DoneBlockSequence() {
         Debug.Log("---------------\nDone all blocks");
 

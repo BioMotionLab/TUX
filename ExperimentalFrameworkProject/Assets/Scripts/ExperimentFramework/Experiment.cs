@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -26,8 +27,6 @@ public class Experiment : MonoBehaviour, Outputtable{
         ExperimentEvents.OnStartExperiment -= StartExperiment;
         ExperimentEvents.OnTrialUpdated -= TrialUpdated;
         ExperimentEvents.OnEndExperiment -= EndExperiment;
-
-
     }
 
     void TrialUpdated(List<Trial> trials, int index) {
@@ -42,15 +41,37 @@ public class Experiment : MonoBehaviour, Outputtable{
         this.session = currentSession;
         Running = true;
         outputManager = new OutputManager(currentSession.OutputPath, session.DebugMode);
+        StartCoroutine(RunPreExperiment());
+    }
+
+    IEnumerator RunPreExperiment() {
+        yield return PreExperimentCode();
+
         ExperimentEvents.ExperimentStarted();
         BlockSequenceRunner blockRunner = new BlockSequenceRunner(this, Design.Blocks);
         blockRunner.Start();
     }
 
-    void EndExperiment() {
+    IEnumerator RunPostExperiment() {
+        yield return PostExperimentCode();
+
         Running = false;
         Ended = true;
         outputManager.Disable();
+    }
+
+    protected virtual IEnumerator PreExperimentCode() {
+        Debug.Log("Skipping pre experiment code");
+        yield return null;
+    }
+
+    protected virtual IEnumerator PostExperimentCode() {
+        Debug.Log("Skipping post experiment code");
+        yield return null;
+    }
+
+    void EndExperiment() {
+        StartCoroutine(RunPostExperiment());
     }
 
     public string AsString {
