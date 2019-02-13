@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 [Serializable]
 public class VariableFactory {
-
+    
     [SerializeField]
     public SupportedDataTypes DataTypesToCreate;
 
@@ -201,9 +202,9 @@ public class VariableFactory {
 
     }
 
-    public ExperimentDesign ToTable(bool shuffleTrialOrder, int numberRepetitions) {
+    public ExperimentDesign ToTable(Experiment experiment, bool shuffleTrialOrder, int numberRepetitions) {
         //Debug.Log($"ToTable method in IndependentVariable: Alldata.count {AllVariables.Count}");
-        return new ExperimentDesign(AllVariables, shuffleTrialOrder, numberRepetitions);
+        return new ExperimentDesign(experiment, AllVariables, shuffleTrialOrder, numberRepetitions);
     }
 
    

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEditor;
 
 public class Config : ScriptableObject
@@ -6,11 +7,11 @@ public class Config : ScriptableObject
     public bool ShuffleTrialOrder;
     public int NumberOfTimesToRepeatTrials = 1;
 
+    
+
     [SerializeField]
     public VariableFactory Factory = new VariableFactory();
-
-    public ExperimentDesign ExperimentDesign => Factory.ToTable(ShuffleTrialOrder, NumberOfTimesToRepeatTrials);
-
+    
     public const string TotalTrialIndexColumnName = "TrialNum";
     public const string BlockIndexColumnName = "Block";
     public const string SkippedColumnName = "Skipped";

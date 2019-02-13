@@ -128,6 +128,11 @@ public class ExperimentEvents {
         OnEndExperiment?.Invoke();
     }
 
+    public delegate void BlockOrderChosenEvent(int blockOrderIndex);
 
+    public static event BlockOrderChosenEvent OnBlockOrderChosen;
 
+    public static void BlockOrderSelected(int blockOrderIndex) {
+        OnBlockOrderChosen?.Invoke(blockOrderIndex);
+    }
 }

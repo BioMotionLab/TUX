@@ -1,9 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-public class Experiment : MonoBehaviour, Outputtable {
+public abstract class Experiment : MonoBehaviour, Outputtable {
+
+    public abstract Type TrialType { get; }
+    public abstract Type BlockType { get; }
+
 
     public ExperimentDesign Design;
     Session session;
@@ -13,8 +20,10 @@ public class Experiment : MonoBehaviour, Outputtable {
     public bool Ended = false;
     
     void Start() {
-        Design = Config.ExperimentDesign;
+        
+        Design = Config.Factory.ToTable(this, Config.ShuffleTrialOrder, Config.NumberOfTimesToRepeatTrials);
         ExperimentEvents.InitExperiment(this);
+        
     }
 
     void OnEnable() {
@@ -40,37 +49,41 @@ public class Experiment : MonoBehaviour, Outputtable {
     void StartExperiment(Session currentSession) {
         this.session = currentSession;
         Running = true;
-        outputManager = new OutputManager(currentSession.OutputPath, session.DebugMode);
+        outputManager = new OutputManager(currentSession.OutputFullPath);
         StartCoroutine(RunPreExperiment());
     }
 
     IEnumerator RunPreExperiment() {
-        yield return PreExperimentCode();
+        yield return Pre();
         ExperimentEvents.ExperimentStarted();
         BlockSequenceRunner blockRunner = new BlockSequenceRunner(this, Design.Blocks);
         blockRunner.Start();
     }
 
     IEnumerator RunPostExperiment() {
-        yield return PostExperimentCode();
+        yield return Post();
+
 
         Running = false;
         Ended = true;
+        Design.Disable();
         outputManager.Disable();
     }
 
-    protected virtual IEnumerator PreExperimentCode() {
+    protected virtual IEnumerator Pre() {
         Debug.Log("Skipping pre experiment code");
         yield return null;
     }
 
-    protected virtual IEnumerator PostExperimentCode() {
+    protected virtual IEnumerator Post() {
         Debug.Log("Skipping post experiment code");
         yield return null;
     }
 
     void EndExperiment() {
         StartCoroutine(RunPostExperiment());
+
+        
     }
 
     public string AsString {
@@ -90,4 +103,3 @@ public class Experiment : MonoBehaviour, Outputtable {
         }
     }
 }
-

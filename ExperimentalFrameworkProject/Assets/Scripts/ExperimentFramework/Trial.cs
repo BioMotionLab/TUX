@@ -181,24 +181,3 @@ public abstract class Trial {
     }
 
 }
-
-
-public class TestTrial : Trial {
-
-
-    public TestTrial(DataRow data) : base(data) {
-
-    }
-    
-    protected override IEnumerator RunMainTrial() {
-        bool running = true;
-        while (running) {
-            if (Input.GetKeyDown(KeyCode.Return)) {
-                Debug.Log($"{TrialText} Return key pressed");
-                running = false;
-            }
-
-            yield return null;
-        }
-    }
-}

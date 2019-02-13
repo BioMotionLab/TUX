@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 
-public class Block {
+public abstract class Block {
     private const string TabSeparator = "\t";
     private const int TruncateDefault = 10;
 
@@ -13,34 +14,28 @@ public class Block {
 
     public List<Trial> Trials;
 
-    public Block(DataTable trialTable, string identity) {
+    public Block(DataTable trialTable, string identity, Type trialType) {
         this.trialTable = trialTable;
         this.Identity = identity;
-        MakeTrials();
+        MakeTrials(trialType);
     }
 
-    void MakeTrials() {
+    void MakeTrials(Type trialType) {
 
         Trials = new List<Trial>();
 
         int i = 1;
         //configure block index
         foreach (DataRow row in trialTable.Rows) {
-            Trial newTrial = new TestTrial(row);
+            Trial newTrial = (Trial)Activator.CreateInstance(trialType, row);
             Trials.Add(newTrial);
             i++;
         }
     }
 
-    
-
     public string AsString(string separator = TabSeparator, int truncate = TruncateDefault) {
         string tableString = trialTable.AsString();
         return "Identity: " + Identity + "\n" + tableString;
     }
-
-    
-
-
 
 }

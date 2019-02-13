@@ -1,20 +1,75 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 
 public class Session {
 
-    readonly string debugPath = Application.dataPath + "/Debug/debugFile";
+    readonly string debugFolder = Application.dataPath + "/Debug";
+    const string debugFileName = "debugFile";
 
+    string outputFullPath;
     /// <summary>
     /// stores the output path
     /// </summary>
-    public string OutputPath;
+    public string OutputFullPath {
+        get {
+            outputFullPath = Path.Combine(OutputFolder, OutputFileName);
+            return outputFullPath;
+        }
+    }
 
-    /// <summary>
-    /// retrieves the output path or debug path
-    /// </summary>
-    public string GetFinalizedOutputPath => DebugMode ? debugPath : OutputPath;
+    string outputFileName = "";
+    public string OutputFileName {
+        get {
+            if (DebugMode) {
+                return debugFileName;
+            }
+            else {
+                return outputFileName;
+            }
+        }
+        set { outputFileName = value; }
+    }
 
-    public bool DebugMode;
-    public int OrderChosenIndex;
-    public string ParticipantId;
+    string outputFolder = "";
+    public string OutputFolder {
+        get {
+            if (DebugMode) {
+                return debugFolder;
+            }
+            else {
+                return outputFolder;
+            }
+        }
+        set { outputFolder = value; }
+    }
+
+    bool debugMode;
+    public bool DebugMode {
+        get { return debugMode; }
+        set {
+            debugMode = value;
+            if (debugMode) {
+                BlockChosen = true;
+            }
+        }
+    } 
+
+    bool blockChosen = false;
+
+    public bool BlockChosen {
+        get { return blockChosen; }
+        set {
+
+            if (value == blockChosen) return;
+
+            blockChosen = value;
+            if (blockChosen) {
+                Debug.Log($"Block order chosen: {OrderChosenIndex}");
+                ExperimentEvents.BlockOrderSelected(OrderChosenIndex);
+            }
+        }
+    }
+
+    public int OrderChosenIndex = 0;
+    public string ParticipantId = "Unamed";
 }

@@ -8,17 +8,28 @@ using System.Text;
 
 public class ExperimentDesign {
 
+    Experiment experiment;
+    
     DataTable baseBlockTable;
     DataTable baseTrialTable;
 
     public DataTable OrderedBlockTable;
     public List<Block> Blocks;
 
-    public ExperimentDesign(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
-
+    public ExperimentDesign(Experiment experiment, List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
+        this.experiment = experiment;
         baseBlockTable = CreateBlockTable(allData);
         baseTrialTable = CreateBaseTrialTable(allData, shuffleTrialOrder, numberOfRepetitions);
-        
+        OnEnable();
+    }
+
+    void OnEnable() {
+        ExperimentEvents.OnBlockOrderChosen += BlockOrderSelected;
+    }
+
+    public void Disable() {
+        ExperimentEvents.OnBlockOrderChosen -= BlockOrderSelected;
+
     }
 
     static DataTable CreateBaseTrialTable(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions) {
@@ -134,7 +145,7 @@ public class ExperimentDesign {
             trialTable = UpdateWithBlockValues(trialTable, orderedBlockRow, i);
 
             string blockIdentity = orderedBlockRow.AsString(separator: ", ");
-            Block newBlock = new Block(trialTable, blockIdentity);
+            Block newBlock = (Block)Activator.CreateInstance(experiment.BlockType, trialTable, blockIdentity, experiment.TrialType);
             Blocks.Add(newBlock);
 
             //Debug.Log($"{newBlock.AsString()}");

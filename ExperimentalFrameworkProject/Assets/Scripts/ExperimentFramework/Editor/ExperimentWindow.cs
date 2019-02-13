@@ -16,10 +16,7 @@ public class ExperimentWindow : EditorWindow {
     int currentBlockIndex = -1;
     int currentTrialIndex = -1;
     bool initialized = false;
-    string OutputFolder;
     Experiment experiment;
-    bool blockChosen;
-    string outputFileName;
     bool autoName;
 
     Session session;
@@ -70,8 +67,6 @@ public class ExperimentWindow : EditorWindow {
         currentTrialIndex = -1;
         this.experiment = experiment;
         initialized = true;
-        blockChosen = false;
-        session.OrderChosenIndex = 0;
         Repaint();
     }
 
@@ -157,7 +152,7 @@ public class ExperimentWindow : EditorWindow {
     }
 
     bool ShowBlockOrderSettings() {
-        if (!blockChosen) {
+        if (!session.BlockChosen) {
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Block Order Settings:", EditorStyles.boldLabel);
@@ -173,9 +168,7 @@ public class ExperimentWindow : EditorWindow {
             ShowBlockTable(selectedOrderTable, orderSelected: false);
 
             if (GUILayout.Button("Confirm Order")) {
-                Debug.Log($"Block order chosen: {session.OrderChosenIndex}");
-                experiment.Design.BlockOrderSelected(session.OrderChosenIndex);
-                blockChosen = true;
+                session.BlockChosen = true;
             }
 
             EditorGUILayout.EndVertical();
@@ -205,33 +198,32 @@ public class ExperimentWindow : EditorWindow {
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Output File Path:", LabelWidth);
         if (GUILayout.Button("Choose Folder", LabelWidth)) {
-            OutputFolder = EditorUtility.OpenFolderPanel("Choose Output Folder", "", "");
+            session.OutputFolder = EditorUtility.OpenFolderPanel("Choose Output Folder", "", "");
         }
 
-        GUILayout.Box(OutputFolder);
+        GUILayout.Box(session.OutputFolder);
         EditorGUILayout.EndHorizontal();
 
 
         EditorGUILayout.BeginHorizontal();
         autoName = EditorGUILayout.Toggle("Output file: Auto Name?", autoName);
         if (autoName) {
-            outputFileName = DateTime.Now.ToString("yyyy-MM-dd_Thh-mm")  + "_Participant-" + session.ParticipantId;
+            session.OutputFileName = DateTime.Now.ToString("yyyy-MM-dd_Thh-mm")  + "_Participant-" + session.ParticipantId;
             EditorGUILayout.LabelField($"Name: ", SmallLabelWidth);
-            GUILayout.Box(outputFileName);
+            GUILayout.Box(session.OutputFileName);
         }
         else {
             EditorGUILayout.LabelField("Name: ", SmallLabelWidth);
-            outputFileName = EditorGUILayout.TextField(outputFileName);
+            session.OutputFileName = EditorGUILayout.TextField(session.OutputFileName);
         }
 
         EditorGUILayout.EndHorizontal();
-        session.OutputPath = Path.Combine(OutputFolder, outputFileName);
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Full output path:", LabelWidth);
-        GUILayout.Box(session.OutputPath);
+        GUILayout.Box(session.OutputFullPath);
         EditorGUILayout.EndHorizontal();
 
-        if (File.Exists(session.OutputPath)) {
+        if (File.Exists(session.OutputFullPath)) {
             EditorGUILayout.HelpBox("File already exists!", MessageType.Error);
             return false;
         }
