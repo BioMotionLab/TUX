@@ -18,7 +18,7 @@ MonoBehaviour:
     DataTypesToCreate: 3
     VariableTypeToCreate: 0
     IntIVs:
-    - Name: blockint
+    - Name: BlockVariable
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     - Name: float1
       TypeOfVariable: 0
       DataType: 1
-      MixingTypeOfVariable: 0
+      MixingTypeOfVariable: 1
       Block: 0
       Values:
       - 1.1
@@ -44,14 +44,14 @@ MonoBehaviour:
     - Name: GameObject
       TypeOfVariable: 0
       DataType: 3
-      MixingTypeOfVariable: 0
+      MixingTypeOfVariable: 3
       Block: 0
       Values:
       - {fileID: 100000, guid: 4cecc279033294096abeb5b24a3f5a75, type: 3}
-      - {fileID: 100000, guid: 4cecc279033294096abeb5b24a3f5a75, type: 3}
+      - {fileID: 100000, guid: 3fd15aae6d89c4665a268411949e0952, type: 3}
       Probabilities:
-      - 0
-      - 0
+      - 0.5
+      - 0.5
     Vector3IVs: []
     CustomDataTypeIVs: []
     IntDVs: []

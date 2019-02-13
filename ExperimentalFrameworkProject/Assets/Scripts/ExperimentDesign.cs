@@ -339,7 +339,7 @@ public class ExperimentDesign {
                 newTable = AddVariable<Vector3>(table, variable);
                 break;
             case SupportedDataTypes.CustomDataType:
-                newTable = AddVariable<CustomMonoBehaviour>(table, variable);
+                newTable = AddVariable<CustomSupportedDataType>(table, variable);
                 break;
             case SupportedDataTypes.ChooseType:
                 throw new ArgumentException("type not chosen");
