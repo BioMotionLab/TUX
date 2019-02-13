@@ -199,7 +199,7 @@ public class ExperimentWindow : EditorWindow {
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Participant ID:", LabelWidth);
-        session.ParticipantID = EditorGUILayout.TextField(session.ParticipantID);
+        session.ParticipantId = EditorGUILayout.TextField(session.ParticipantId);
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
@@ -215,7 +215,7 @@ public class ExperimentWindow : EditorWindow {
         EditorGUILayout.BeginHorizontal();
         autoName = EditorGUILayout.Toggle("Output file: Auto Name?", autoName);
         if (autoName) {
-            outputFileName = DateTime.Now.ToString("yyyy-MM-dd_Thh-mm")  + "_Participant-" + session.ParticipantID;
+            outputFileName = DateTime.Now.ToString("yyyy-MM-dd_Thh-mm")  + "_Participant-" + session.ParticipantId;
             EditorGUILayout.LabelField($"Name: ", SmallLabelWidth);
             GUILayout.Box(outputFileName);
         }
@@ -288,7 +288,7 @@ public class ExperimentWindow : EditorWindow {
 
                 Trial trial = block.Trials[indexOfRow];
 
-                Color color = trial.CompletedSuccesssfully ? Color.green : Color.red;
+                Color color = trial.CompletedSuccessfully ? Color.green : Color.red;
                 color = trial.Skipped ? Color.yellow : color;
                 EditorGUILayout.ColorField(GUIContent.none, color, false, false, false, CompleteIndicatorWidth);
 

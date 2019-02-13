@@ -2,7 +2,7 @@
 using System.Text;
 using UnityEngine;
 
-public class Experiment : MonoBehaviour, Outputtable{
+public class Experiment : MonoBehaviour, Outputtable {
 
     public ExperimentDesign Design;
     Session session;
@@ -41,7 +41,7 @@ public class Experiment : MonoBehaviour, Outputtable{
     void StartExperiment(Session currentSession) {
         this.session = currentSession;
         Running = true;
-        outputManager = new OutputManager(currentSession.OutputPath, session.DebugMode);
+        outputManager = new OutputManager(currentSession.GetFinalizedOutputPath, session.DebugMode);
         ExperimentEvents.ExperimentStarted();
         BlockSequenceRunner blockRunner = new BlockSequenceRunner(this, Design.Blocks);
         blockRunner.Start();
@@ -66,6 +66,8 @@ public class Experiment : MonoBehaviour, Outputtable{
             }
 
             return sb.ToString();
+            
         }
     }
 }
+

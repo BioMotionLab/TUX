@@ -13,6 +13,7 @@ public class TrialSequenceRunner {
     List<Trial> trialsInSequence;
     List<Trial> currentTrialList;
 
+
     public TrialSequenceRunner(Experiment experiment, List<Trial> trialList) {
         OnEnable();
         this.experiment = experiment;
@@ -45,20 +46,21 @@ public class TrialSequenceRunner {
     void StartRunningTrial(Trial trial) {
         currentlyRunningTrial = trial;
         ExperimentEvents.TrialHasStarted(trial, TrialIndex(trial));
-        experiment.StartCoroutine(trial.Run());
+        experiment.StartCoroutine(trial.Run(experiment));
     }
 
     void TrialHasCompleted() {
+        Debug.Log("Trial has completed event received)");
         FinishTrial();
         GoToNextTrial();
     }
 
     void FinishTrial() {
-        int trialNum = TrialCurrentIndex(currentlyRunningTrial);
         
-        Debug.Log($"Done Trial {trialNum + 1}, success = {currentlyRunningTrial.CompletedSuccesssfully}\n" +
+        Debug.Log($"Finished {currentlyRunningTrial.TrialText} in Sequence, success = {currentlyRunningTrial.CompletedSuccessfully}\n" +
                   $"trialTable:\n" +
                   $"{currentlyRunningTrial.Data.AsString(header:true)}");
+
         ExperimentEvents.UpdateTrial(trialsInSequence, TrialIndex(currentlyRunningTrial));
     }
 
@@ -71,7 +73,7 @@ public class TrialSequenceRunner {
                 searchingForUncompletedTrial = false;
                 DoneTrialSequence();
             }
-            else if (!currentTrialList[newIndex].CompletedSuccesssfully) {
+            else if (!currentTrialList[newIndex].CompletedSuccessfully) {
                 searchingForUncompletedTrial = false;
                 Trial nextTrial = currentTrialList[newIndex];
                 StartRunningTrial(nextTrial);
@@ -82,9 +84,20 @@ public class TrialSequenceRunner {
     }
 
     void SkipToNextTrial() {
-        Debug.Log("Got Next Trial event");
+        Debug.LogWarning("Got Next Trial event");
         FinishTrial();
-        GoToNextTrial();
+
+        int newIndex = TrialCurrentIndex(currentlyRunningTrial) +1;
+        if (newIndex > currentTrialList.Count -1) {
+            Debug.LogWarning("Already at final trial, restarting current Trial");
+            StartRunningTrial(currentlyRunningTrial);
+        }
+        else {
+            Debug.Log("Going to next trial");
+            Trial next = currentTrialList[newIndex];
+            StartRunningTrial(next);
+        }
+        
     }
 
     void DoneTrialSequence() {
@@ -93,7 +106,7 @@ public class TrialSequenceRunner {
 
         List<Trial> unsuccessfulTrials = new List<Trial>();
         foreach (Trial trial in currentTrialList) {
-            if (!trial.CompletedSuccesssfully && !trial.Skipped) {
+            if (!trial.CompletedSuccessfully && !trial.Skipped) {
                 unsuccessfulTrials.Add(trial);
             }
         }
@@ -115,13 +128,12 @@ public class TrialSequenceRunner {
 
     void InterruptTrial() {
         Debug.LogWarning("Got Skip event from currentTrial");
-        currentlyRunningTrial.Skipped = true;
         FinishTrial();
         GoToNextTrial();
     }
 
     void BackOneTrial() {
-        Debug.Log("Got Back event");
+        Debug.LogWarning("Got Back event");
         FinishTrial();
         int newIndex = TrialCurrentIndex(currentlyRunningTrial) - 1;
         if (newIndex < 0) {
@@ -155,16 +167,6 @@ public class TrialSequenceRunner {
 
 }
 
-
-public class TestTrial : Trial {
-    
-
-    public TestTrial(DataRow data) : base(data) {
-        
-    }
-
-
-}
 
 
 
