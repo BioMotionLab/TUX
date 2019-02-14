@@ -145,7 +145,7 @@ public class ExperimentDesign {
             trialTable = UpdateWithBlockValues(trialTable, orderedBlockRow, i);
 
             string blockIdentity = orderedBlockRow.AsString(separator: ", ");
-            Block newBlock = (Block)Activator.CreateInstance(experiment.BlockType, trialTable, blockIdentity, experiment.TrialType);
+            Block newBlock = (Block)Activator.CreateInstance(experiment.BlockType, orderedBlockRow, trialTable, blockIdentity, experiment.TrialType);
             Blocks.Add(newBlock);
 
             //Debug.Log($"{newBlock.AsString()}");

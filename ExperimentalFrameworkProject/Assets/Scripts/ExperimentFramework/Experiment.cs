@@ -2,15 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 public abstract class Experiment : MonoBehaviour, Outputtable {
 
-    public abstract Type TrialType { get; }
-    public abstract Type BlockType { get; }
-
+    public virtual Type TrialType => typeof(SimpleTrial);
+    public virtual Type BlockType => typeof(SimpleBlock);
 
     public ExperimentDesign Design;
     Session session;
@@ -49,7 +46,7 @@ public abstract class Experiment : MonoBehaviour, Outputtable {
     void StartExperiment(Session currentSession) {
         this.session = currentSession;
         Running = true;
-        outputManager = new OutputManager(currentSession.OutputFullPath);
+        outputManager = new OutputManager(currentSession.OutputFullPath, session.DebugMode);
         StartCoroutine(RunPreExperiment());
     }
 
@@ -71,12 +68,12 @@ public abstract class Experiment : MonoBehaviour, Outputtable {
     }
 
     protected virtual IEnumerator Pre() {
-        Debug.Log("Skipping pre experiment code");
+        Debug.Log("No pre experiment code defined");
         yield return null;
     }
 
     protected virtual IEnumerator Post() {
-        Debug.Log("Skipping post experiment code");
+        Debug.Log("No post experiment code defined");
         yield return null;
     }
 

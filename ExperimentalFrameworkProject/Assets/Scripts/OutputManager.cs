@@ -7,7 +7,7 @@ using UnityEngine;
 public class OutputManager {
 
     readonly string outputPath;
-
+    bool overwrite;
 
     /// <summary>
     /// Creates an OutputFile manager instance to output strings as a file
@@ -17,7 +17,7 @@ public class OutputManager {
     /// <param name="extension"></param>
     public OutputManager(string path, bool overwrite = false, string extension = FileExtensions.CSV) {
         outputPath = path;
-
+        this.overwrite = overwrite;
         Debug.Log($"path before extension {outputPath}");
         if (!Path.HasExtension(outputPath)) {
             Debug.Log($"path no extension: {outputPath}");
@@ -25,9 +25,7 @@ public class OutputManager {
             Debug.Log($"path after extension add: {outputPath}");
         }
 
-        if (File.Exists(outputPath) && !overwrite) {
-            Debug.LogError("OutputFile file already exists, please choose new name");
-        }
+        
         Enable();
     }
 
@@ -59,8 +57,13 @@ public class OutputManager {
             if (folder != null)
                 Directory.CreateDirectory(folder);
 
-        using (StreamWriter streamWriter = new StreamWriter(outputPath)) {
-            streamWriter.Write(output.AsString);
+        if (File.Exists(outputPath) && !overwrite) {
+            Debug.LogError("OutputFile file already exists, please choose new name");
+        }
+        else {
+            using (StreamWriter streamWriter = new StreamWriter(outputPath)) {
+                streamWriter.Write(output.AsString);
+            }
         }
 
     }

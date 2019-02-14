@@ -51,7 +51,7 @@ public class BlockSequenceRunner {
     }
 
     IEnumerator RunPreBlock(Block block) {
-        yield return PreBlockCode();
+        yield return currentlyRunningBlock.Pre();
 
         TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(experiment, block.Trials);
         trialSequenceRunner.Start();
@@ -59,18 +59,9 @@ public class BlockSequenceRunner {
     }
 
     IEnumerator RunPostBlock() {
-        yield return PostBlockCode();
+        yield return currentlyRunningBlock.Post();
         FinishBlock();
         GoToNextBlock();
-    }
-
-    protected virtual IEnumerator PreBlockCode() {
-        Debug.Log("Skipped pre-block code");
-        yield return null;
-    }
-    protected virtual IEnumerator PostBlockCode() {
-        Debug.Log("Skipped post-block code");
-        yield return null;
     }
     
 

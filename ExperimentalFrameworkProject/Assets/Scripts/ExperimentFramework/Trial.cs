@@ -9,7 +9,7 @@ using UnityEngine;
 /// and it is in charge of setting and cleaning itself up
 /// </summary>
 public abstract class Trial {
-    readonly DataRow data;
+    protected readonly DataRow data;
 
     public DataRow Data => data;
     MonoBehaviour runner;
@@ -59,32 +59,37 @@ public abstract class Trial {
 
         Debug.Log($"{TrialText} Running...");
 
-        if (!interrupt) {
-            Debug.Log($"{TrialText} Running pretrial");
-            yield return RunPreTrial();
+        
+
+        Debug.Log($"{TrialText} Running pre trial");
+        IEnumerator pre = Pre();
+        while (!interrupt && pre.MoveNext()) {
+            yield return pre.Current;
+
         }
-        else {
-            Debug.Log($"{TrialText} pretrial interrupted");
-        }
+        Debug.Log("Done running pre trial");
+
 
         Debug.Log($"{TrialText} Running main trial");
-        IEnumerator main = RunMainTrial();
+        IEnumerator main = Main();
         while (!interrupt && main.MoveNext()) {
             yield return main.Current;
             
         }
         Debug.Log("Done running main");
-    
-        if (!interrupt) {
-            Debug.Log($"{TrialText} Running posttrial");
-            yield return RunPostTrial();
-        }
-        else {
-            Debug.Log($"{TrialText} posttrial interrupted");
-        }
 
-        Debug.Log($"finalizing from within run");
+
+        Debug.Log($"{TrialText} Running post trial");
+        IEnumerator post = Post();
+        while (!interrupt && post.MoveNext()) {
+            yield return post.Current;
+
+        }
+        Debug.Log("Done running post trial");
+
+
         FinalizeTrial();
+
         if (!interrupt) {
             ExperimentEvents.TrialHasCompleted();
         }
@@ -168,15 +173,15 @@ public abstract class Trial {
         interrupt = true;
     }
 
-    protected virtual IEnumerator RunPreTrial() {
-        Debug.Log($"{TrialText} Skipped Pretrial");
+    protected virtual IEnumerator Pre() {
+        Debug.Log($"No Pre-Trial code defined");
         yield return null;
     }
 
-    protected abstract IEnumerator RunMainTrial(); 
+    protected abstract IEnumerator Main(); 
 
-    protected virtual IEnumerator RunPostTrial() {
-        Debug.Log($"{TrialText} Skipped Post-trial code");
+    protected virtual IEnumerator Post() {
+        Debug.Log($"No post trial code defined");
         yield return null;
     }
 
