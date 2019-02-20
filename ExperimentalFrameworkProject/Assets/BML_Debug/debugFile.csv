@@ -1,0 +1,5 @@
+BlockVariable, Block, TrialInBlock, TrialNum, float1, GameObject, output, Completed, Attempts, Skipped
+1, 0, 0, 0, 1.1, null, fdsjakl;, True, 1, False
+1, 0, 1, 1, 2.2, null, fdsjakl;, True, 1, False
+2, 1, 0, 2, 1.1, null, fdsjakl;, True, 1, False
+2, 1, 1, 3, 2.2, null, fdsjakl;, True, 1, False

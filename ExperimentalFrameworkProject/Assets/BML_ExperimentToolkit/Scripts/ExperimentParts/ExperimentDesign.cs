@@ -116,7 +116,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
         }
 
-        public object TotalTrials      => Blocks.Count * baseTrialTable.Rows.Count;
+        public int TotalTrials      => Blocks.Count * baseTrialTable.Rows.Count;
         public int    BlockCount       => Blocks.Count;
         public string TrialTableHeader => Blocks[0].trialTable.HeaderAsString(separator: Delimiter.Comma, truncate: -1);
 
