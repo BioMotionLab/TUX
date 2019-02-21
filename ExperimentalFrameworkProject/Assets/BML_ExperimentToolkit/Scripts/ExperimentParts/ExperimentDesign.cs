@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
@@ -10,10 +11,9 @@ using UnityEngine;
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
     public class ExperimentDesign {
+        readonly Experiment experiment;
 
-        Experiment experiment;
-
-        DataTable baseBlockTable;
+        readonly DataTable baseBlockTable;
         DataTable baseTrialTable;
 
         public DataTable   OrderedBlockTable;
@@ -101,6 +101,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             get {
                 List<string> blockPermutations = new List<string>();
                 int blockOrderIndex = 0;
+                if (baseBlockTable.Rows.Count == 0) return null;
                 foreach (List<DataRow> dataRows in baseBlockTable.GetPermutations()) {
                     StringBuilder sb = new StringBuilder();
                     sb.Append($"Order #{blockOrderIndex}:   ");
@@ -120,8 +121,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public int    BlockCount       => Blocks.Count;
         public string TrialTableHeader => Blocks[0].trialTable.HeaderAsString(separator: Delimiter.Comma, truncate: -1);
 
+        public bool HasBlocks => baseBlockTable.Rows.Count > 0;
+
         public DataTable GetBlockOrderTable(int index) {
+
             DataTable orderedTable = baseBlockTable.Clone();
+
+            if (!HasBlocks) return null;
+            
             foreach (DataRow dataRow in baseBlockTable.GetPermutations()[index]) {
                 orderedTable.ImportRow(dataRow);
             }
@@ -130,6 +137,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         public void BlockOrderSelected(int selectedOrderIndex) {
+
             OrderedBlockTable = GetBlockOrderTable(selectedOrderIndex);
             CreateAndAddBlocks();
         }
@@ -139,21 +147,28 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             baseTrialTable = AddBlockColumns(baseTrialTable, baseBlockTable);
 
-
-            for (int i = 0; i < OrderedBlockTable.Rows.Count; i++) {
-                DataRow orderedBlockRow = OrderedBlockTable.Rows[i];
-
-
-
+            if (OrderedBlockTable == null) {
+                Debug.Log("No Block Variables");
                 DataTable trialTable = baseTrialTable.Copy();
-                trialTable = UpdateWithBlockValues(trialTable, orderedBlockRow, i);
-
-                string blockIdentity = orderedBlockRow.AsString(separator: ", ");
-                Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, orderedBlockRow, trialTable,
-                                                                  blockIdentity, experiment.TrialType);
+                Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, trialTable,
+                                                                      "Main Block", experiment.TrialType);
                 Blocks.Add(newBlock);
 
-                //Debug.Log($"{newBlock.AsString()}");
+            }
+            else {
+                for (int i = 0; i < OrderedBlockTable.Rows.Count; i++) {
+                    DataRow orderedBlockRow = OrderedBlockTable.Rows[i];
+
+                    DataTable trialTable = baseTrialTable.Copy();
+                    trialTable = UpdateWithBlockValues(trialTable, orderedBlockRow, i);
+
+                    string blockIdentity = orderedBlockRow.AsString(separator: ", ");
+                    Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, trialTable,
+                                                                      blockIdentity, experiment.TrialType);
+                    Blocks.Add(newBlock);
+
+                    //Debug.Log($"{newBlock.AsString()}");
+                }
             }
 
             Debug.Log($"Blocks added {Blocks.Count}");
@@ -349,6 +364,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 case SupportedDataTypes.String:
                     newTable = AddVariable<string>(table, variable);
                     break;
+                case SupportedDataTypes.Bool:
+                    newTable = AddVariable<bool>(table, variable);
+                    break;
                 case SupportedDataTypes.GameObject:
                     newTable = AddVariable<GameObject>(table, variable);
                     break;
@@ -379,6 +397,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 newTable = table.Clone();
                 AddVariableColumn(variable, newTable);
                 IndependentVariable<T> independentVariable = (IndependentVariable<T>) variable;
+                Debug.Log($"Variable values: {String.Join(", ", independentVariable.Values.ToArray())}");
                 switch (independentVariable.MixingTypeOfVariable) {
                     case VariableMixingType.Balanced:
                         newTable = AddBalancedValues<T>(table, independentVariable);

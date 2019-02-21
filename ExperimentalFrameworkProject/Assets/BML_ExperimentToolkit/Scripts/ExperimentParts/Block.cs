@@ -6,11 +6,14 @@ using BML_Utilities;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+
+    /// <summary>
+    /// This class stores a block a trials in an experiment.
+    /// </summary>
     public abstract class Block {
         private const string TabSeparator    = "\t";
         private const int    TruncateDefault = 10;
 
-        public DataRow data;
 
         public DataTable trialTable;
         public string    Identity;
@@ -20,8 +23,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public List<Trial> Trials;
 
-        public Block(DataRow row, DataTable trialTable, string identity, Type trialType) {
-            this.data = row;
+        public Block(DataTable trialTable, string identity, Type trialType) {
             this.trialTable = trialTable;
             this.Identity = identity;
             MakeTrials(trialType);

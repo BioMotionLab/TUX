@@ -40,7 +40,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         }
     }
 
-
     /// <summary>
     /// A collection of functions to help draw variable drawers
     /// </summary>
@@ -308,6 +307,21 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         }
 
 
+        public static float AddAllBoolVariableProperties(Rect position, SerializedProperty property) {
+            property.serializedObject.Update();
+            Rect currentRect = new Rect(position.x, position.y + LineHeight, position.width, LineHeight);
+            float oldY = currentRect.y;
+
+            int oldIndentLevel = EditorGUI.indentLevel;
+
+            currentRect = AddVariableProperties(property, currentRect);
+            currentRect = AddIndependentVariableProperties(property, currentRect);
+            
+            EditorGUI.indentLevel = oldIndentLevel;
+            float propertyHeight = currentRect.y - oldY;
+            property.serializedObject.ApplyModifiedProperties();
+            return propertyHeight;
+        }
     }
 
 

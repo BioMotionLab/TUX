@@ -40,28 +40,21 @@ MonoBehaviour:
       - 0
       - 0
     StringIVs: []
-    GameObjectIVs:
-    - Name: GameObject
+    BoolIVs:
+    - Name: Bool1
       TypeOfVariable: 0
       DataType: 3
-      MixingTypeOfVariable: 3
+      MixingTypeOfVariable: 0
       Block: 0
-      Values:
-      - {fileID: 100000, guid: 4cecc279033294096abeb5b24a3f5a75, type: 3}
-      - {fileID: 100000, guid: 3fd15aae6d89c4665a268411949e0952, type: 3}
-      Probabilities:
-      - 0.5
-      - 0.5
+      Values: 0101
+      Probabilities: []
+    GameObjectIVs: []
     Vector3IVs: []
     CustomDataTypeIVs: []
     IntDVs: []
     FloatDVs: []
-    StringDVs:
-    - Name: output
-      TypeOfVariable: 1
-      DataType: 2
-      Value: 
-      DefaultValue: fdsjakl;
+    StringDVs: []
+    BoolDVs: []
     GameObjectDVs: []
     Vector3DVs: []
     CustomDataTypeDVs: []

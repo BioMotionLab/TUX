@@ -54,6 +54,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             SerializedProperty stringsIVProperty = property.FindPropertyRelative(nameof(VariableFactory.StringIVs));
             currentRect = AddPropertyFromList(currentRect, stringsIVProperty);
 
+            SerializedProperty boolsIVProperty = property.FindPropertyRelative(nameof(VariableFactory.BoolIVs));
+            currentRect = AddPropertyFromList(currentRect, boolsIVProperty);
+
             SerializedProperty gameObjectsIVProperty =
                 property.FindPropertyRelative(nameof(VariableFactory.GameObjectIVs));
             currentRect = AddPropertyFromList(currentRect, gameObjectsIVProperty);
@@ -74,6 +77,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
             SerializedProperty stringsDvProperty = property.FindPropertyRelative(nameof(VariableFactory.StringDVs));
             currentRect = AddPropertyFromList(currentRect, stringsDvProperty);
+
+            SerializedProperty boolsDvProperty = property.FindPropertyRelative(nameof(VariableFactory.BoolDVs));
+            currentRect = AddPropertyFromList(currentRect, boolsDvProperty);
 
             SerializedProperty gameObjectsDvProperty =
                 property.FindPropertyRelative(nameof(VariableFactory.GameObjectDVs));

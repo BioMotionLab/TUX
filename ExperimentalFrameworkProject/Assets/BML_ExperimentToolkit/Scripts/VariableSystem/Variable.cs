@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Windows.Markup;
 using UnityEditor;
 using UnityEngine;
 
@@ -77,6 +79,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         Int,
         Float,
         String,
+        Bool,
         GameObject,
         Vector3,
         CustomDataType,
@@ -170,7 +173,39 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
     public class DependentVariableStringDrawer : DependentVariableDrawer {
     }
 
-// GAME OBJECT
+    //BOOL
+
+    [Serializable]
+    public class IndependentVariableBool : IndependentVariable<bool> {
+        public IndependentVariableBool() {
+            DataType = SupportedDataTypes.Bool;
+            Values.Add(true);
+            Values.Add(false);
+        }
+
+        
+    }
+
+    [CustomPropertyDrawer(typeof(IndependentVariableBool))]
+    public class IndependentVariableBoolDrawer : IndependentVariableDrawer {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+            CustomPropertyHeight = VariableDrawerHelpers.AddAllBoolVariableProperties(position, property);
+        }
+    }
+
+
+    [Serializable]
+    public class DependentVariableBool : DependentVariable<bool> {
+        public DependentVariableBool() {
+            DataType = SupportedDataTypes.Bool;
+        }
+    }
+
+    [CustomPropertyDrawer(typeof(DependentVariableBool))]
+    public class DependentVariableBoolDrawer : DependentVariableDrawer {
+    }
+
+    // GAME OBJECT
 
     [Serializable]
     public class IndependentVariableGameObject : IndependentVariable<GameObject> {

@@ -89,7 +89,6 @@ namespace BML_ExperimentToolkit.Scripts.Managers.UI.Editor {
         void OnGUI() {
             EditorGUILayout.BeginVertical();
 
-
             //Check if in play mode
             if (!Application.isPlaying) {
                 EditorGUILayout
@@ -108,27 +107,19 @@ namespace BML_ExperimentToolkit.Scripts.Managers.UI.Editor {
             if (!ShowSessionSettings()) return;
 
             //Block Order
-            EditorGUILayout.Space();
             if (!ShowBlockOrderSettings()) return;
-
+            
+            
             //Experiment controls
-            EditorGUILayout.Space();
             ShowExperimentControls();
-            EditorGUILayout.Space();
+            
 
             //Blocks
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Blocks:", EditorStyles.boldLabel);
             ShowBlockTable(experiment.Design.OrderedBlockTable);
-            EditorGUILayout.EndVertical();
 
             //Trials
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Trials:", EditorStyles.boldLabel);
             ShowTrialTables();
-            EditorGUILayout.EndVertical();
+            
 
 
             EditorGUILayout.Space();
@@ -139,9 +130,12 @@ namespace BML_ExperimentToolkit.Scripts.Managers.UI.Editor {
         /// Display the experiment controls
         /// </summary>
         void ShowExperimentControls() {
+
+            EditorGUILayout.Space();
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Experiment Controls:", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
+
             if (!experiment.Running && !experiment.Ended) {
                 if (GUILayout.Button("Start Experiment")) {
                     ExperimentEvents.StartExperiment(session);
@@ -175,15 +169,23 @@ namespace BML_ExperimentToolkit.Scripts.Managers.UI.Editor {
         /// <returns></returns>
         bool ShowBlockOrderSettings() {
             if (!session.BlockChosen) {
+
+                if (!experiment.Design.HasBlocks) {
+                    Debug.Log($"Experiment has no blocks");
+                    session.OrderChosenIndex = 0;
+                    session.BlockChosen = true;
+                    return true;
+                }
+
                 EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Block Order Settings:", EditorStyles.boldLabel);
 
-                var blockPermutations = experiment.Design.BlockPermutationsStrings;
+                List<string> blockPermutations = experiment.Design.BlockPermutationsStrings;
+                
                 session.OrderChosenIndex = EditorGUILayout.Popup(session.OrderChosenIndex, blockPermutations.ToArray());
-                var selectedOrderTable = experiment.Design.GetBlockOrderTable(session.OrderChosenIndex);
-
-
+                DataTable selectedOrderTable = experiment.Design.GetBlockOrderTable(session.OrderChosenIndex);
+                
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Chosen block order:");
 
@@ -265,6 +267,10 @@ namespace BML_ExperimentToolkit.Scripts.Managers.UI.Editor {
         /// </summary>
         void ShowTrialTables() {
 
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Trials:", EditorStyles.boldLabel);
+
             foreach (var block in experiment.Design.Blocks) {
                 int blockIndex = experiment.Design.Blocks.IndexOf(block);
 
@@ -323,7 +329,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers.UI.Editor {
                 EditorGUILayout.EndVertical();
 
             }
-
+            EditorGUILayout.EndVertical();
         }
 
         /// <summary>
@@ -332,6 +338,13 @@ namespace BML_ExperimentToolkit.Scripts.Managers.UI.Editor {
         /// <param name="blockTable"></param>
         /// <param name="orderSelected"></param>
         void ShowBlockTable(DataTable blockTable, bool orderSelected = true) {
+
+
+            if (!experiment.Design.HasBlocks) return;
+
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Blocks:", EditorStyles.boldLabel);
 
             //BLOCK DISPLAY
             EditorGUILayout.BeginHorizontal();
@@ -367,6 +380,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers.UI.Editor {
                 EditorGUILayout.EndHorizontal();
 
             }
+            EditorGUILayout.EndVertical();
         }
 
     }

@@ -20,7 +20,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         Session                 session;
         OutputManager           outputManager;
         public ExperimentConfig           ExperimentConfig;
+
+        [HideInInspector]
         public bool             Running = false;
+        [HideInInspector]
         public bool             Ended   = false;
 
         void Start() {

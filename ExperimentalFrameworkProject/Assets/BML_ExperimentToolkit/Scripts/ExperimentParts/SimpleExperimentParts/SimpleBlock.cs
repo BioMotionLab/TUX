@@ -3,9 +3,13 @@ using System.Data;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
     
+    /// <summary>
+    /// This class is the simplest block possible.
+    /// It is used as a default when no custom block is specified.
+    /// </summary>
     public class SimpleBlock : Block {
-        public SimpleBlock(DataRow row, DataTable trialTable, string identity, Type CustomTrialType) :
-            base(row, trialTable, identity, CustomTrialType) {
+        public SimpleBlock(DataTable trialTable, string identity, Type customTrialType) :
+            base(trialTable, identity, customTrialType) {
         }
     }
 }

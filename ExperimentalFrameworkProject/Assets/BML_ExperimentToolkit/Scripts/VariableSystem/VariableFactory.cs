@@ -28,6 +28,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public List<IndependentVariableString> StringIVs = new List<IndependentVariableString>();
 
         [SerializeField]
+        public List<IndependentVariableBool> BoolIVs = new List<IndependentVariableBool>();
+
+        [SerializeField]
         public List<IndependentVariableGameObject> GameObjectIVs = new List<IndependentVariableGameObject>();
 
         [SerializeField]
@@ -47,6 +50,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
         [SerializeField]
         public List<DependentVariableString> StringDVs = new List<DependentVariableString>();
+
+        [SerializeField]
+        public List<DependentVariableBool> BoolDVs = new List<DependentVariableBool>();
 
         [SerializeField]
         public List<DependentVariableGameObject> GameObjectDVs = new List<DependentVariableGameObject>();
@@ -83,6 +89,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                     variables.Add(variable);
                 }
 
+                foreach (var variable in BoolIVs) {
+                    variables.Add(variable);
+                }
+
                 foreach (var variable in GameObjectIVs) {
                     variables.Add(variable);
                 }
@@ -105,6 +115,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                 }
 
                 foreach (var variable in StringDVs) {
+                    variables.Add(variable);
+                }
+
+                foreach (var variable in BoolDVs) {
                     variables.Add(variable);
                 }
 
@@ -142,7 +156,11 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                             IndependentVariableString ivString = new IndependentVariableString();
                             StringIVs.Add(ivString);
                             break;
-                        case SupportedDataTypes.GameObject:
+                        case SupportedDataTypes.Bool:
+                            IndependentVariableBool ivBool = new IndependentVariableBool();
+                            BoolIVs.Add(ivBool);
+                            break;
+                            case SupportedDataTypes.GameObject:
                             IndependentVariableGameObject ivGameObject = new IndependentVariableGameObject();
                             GameObjectIVs.Add(ivGameObject);
                             break;
@@ -159,7 +177,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                             throw new
                                 InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
                         default:
-                            throw new NotImplementedException("Support for this data types has not yet been defined." +
+                            throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
                                                               "You can customize it yourself in the IndependentVariable.cs class");
                     }
                 }
@@ -180,6 +198,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                             DependentVariableString newDependentVariableString = new DependentVariableString();
                             StringDVs.Add(newDependentVariableString);
                             break;
+                        case SupportedDataTypes.Bool:
+                            DependentVariableBool newDependentVariableBool = new DependentVariableBool();
+                            BoolDVs.Add(newDependentVariableBool);
+                            break;
                         case SupportedDataTypes.GameObject:
                             DependentVariableGameObject newDependentVariableGameObject =
                                 new DependentVariableGameObject();
@@ -198,7 +220,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                             throw new
                                 InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
                         default:
-                            throw new NotImplementedException("Support for this data types has not yet been defined." +
+                            throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
                                                               "You can customize it yourself in the IndependentVariable.cs class");
                     }
 
