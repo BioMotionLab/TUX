@@ -99,7 +99,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers.UI.Editor {
 
             //Ensure config file initialized properly.
             if (!initialized) {
-                EditorGUILayout.HelpBox("Experiment and ExperimentConfig File not properly initialized.", MessageType.Error);
+                EditorGUILayout.HelpBox("Experiment and ConfigDesignFile File not properly initialized.", MessageType.Error);
                 return;
             }
 

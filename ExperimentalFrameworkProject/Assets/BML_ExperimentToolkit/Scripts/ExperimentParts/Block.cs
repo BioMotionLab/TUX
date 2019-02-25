@@ -22,8 +22,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public int  Index    = -1;
 
         public List<Trial> Trials;
+        Experiment experiment;
 
-        public Block(DataTable trialTable, string identity, Type trialType) {
+        public Block(Experiment experiment, DataTable trialTable, string identity, Type trialType) {
+            this.experiment = experiment;
             this.trialTable = trialTable;
             this.Identity = identity;
             MakeTrials(trialType);
@@ -36,7 +38,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             int i = 1;
             //configure block index
             foreach (DataRow row in trialTable.Rows) {
-                Trial newTrial = (Trial)Activator.CreateInstance(trialType, row);
+                Trial newTrial = (Trial)Activator.CreateInstance(trialType, experiment, row);
                 Trials.Add(newTrial);
                 i++;
             }

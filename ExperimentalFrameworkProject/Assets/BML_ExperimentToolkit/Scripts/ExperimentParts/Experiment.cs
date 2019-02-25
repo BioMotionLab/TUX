@@ -9,8 +9,7 @@ using MyNamespace;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
-
-
+    
     public abstract class Experiment : MonoBehaviour, Outputtable {
 
         public virtual Type TrialType => typeof(SimpleTrial);
@@ -19,7 +18,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public ExperimentDesign Design;
         Session                 session;
         OutputManager           outputManager;
-        public ExperimentConfig           ExperimentConfig;
+        public ConfigDesignFile           ConfigDesignFile;
+        public ConfigTrialScript ConfigTrialScript;
 
         [HideInInspector]
         public bool             Running = false;
@@ -27,14 +27,18 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public bool             Ended   = false;
 
         void Start() {
-            if (ExperimentConfig == null) {
-                Debug.LogError("Config not set up properly, make sure you dragged a config file into your experiment GameObject");
+            if (ConfigDesignFile == null) {
+                Debug.LogError("Design Configuration not set up properly, make sure you dragged a configDesign file into your experiment GameObject");
                 UnityEditor.EditorApplication.isPlaying = false;
                 Application.Quit();
                 return;
             }
 
-            Design = ExperimentConfig.Factory.ToTable(this, ExperimentConfig.ShuffleTrialOrder, ExperimentConfig.NumberOfTimesToRepeatTrials);
+            if (ConfigTrialScript == null) {
+                Debug.Log("No Trial Config Script Selected.");
+            }
+
+            Design = ConfigDesignFile.Factory.ToTable(this, ConfigDesignFile.ShuffleTrialOrder, ConfigDesignFile.NumberOfTimesToRepeatTrials);
             ExperimentEvents.InitExperiment(this);
 
         }

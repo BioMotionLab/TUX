@@ -150,8 +150,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             if (OrderedBlockTable == null) {
                 Debug.Log("No Block Variables");
                 DataTable trialTable = baseTrialTable.Copy();
-                Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, trialTable,
-                                                                      "Main Block", experiment.TrialType);
+                Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, experiment, trialTable,
+                                                                      "Main Block");
                 Blocks.Add(newBlock);
 
             }
@@ -163,7 +163,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     trialTable = UpdateWithBlockValues(trialTable, orderedBlockRow, i);
 
                     string blockIdentity = orderedBlockRow.AsString(separator: ", ");
-                    Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, trialTable,
+                    Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, experiment, trialTable,
                                                                       blockIdentity, experiment.TrialType);
                     Blocks.Add(newBlock);
 
@@ -183,9 +183,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 for (int trialIndexInBlock = 0; trialIndexInBlock < newTable.Rows.Count; trialIndexInBlock++) {
                     DataRow trialRow = newTable.Rows[trialIndexInBlock];
                     trialRow[columnName] = blockTableRow[columnName];
-                    trialRow[ExperimentConfig.BlockIndexColumnName] = blockIndex;
-                    trialRow[ExperimentConfig.TrialIndexColumnName] = trialIndexInBlock;
-                    trialRow[ExperimentConfig.TotalTrialIndexColumnName] = startingTotalTrialIndex;
+                    trialRow[ConfigDesignFile.BlockIndexColumnName] = blockIndex;
+                    trialRow[ConfigDesignFile.TrialIndexColumnName] = trialIndexInBlock;
+                    trialRow[ConfigDesignFile.TotalTrialIndexColumnName] = startingTotalTrialIndex;
                     startingTotalTrialIndex++;
                 }
             }
@@ -273,81 +273,81 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         static void AddSkippedColumnTo(DataTable table) {
             DataColumn skippedColumn = new DataColumn {
                                                           DataType = typeof(bool),
-                                                          ColumnName = ExperimentConfig.SkippedColumnName,
+                                                          ColumnName = ConfigDesignFile.SkippedColumnName,
                                                           Unique = false,
                                                           ReadOnly = false,
                                                       };
             table.Columns.Add(skippedColumn);
             foreach (DataRow row in table.Rows) {
-                row[ExperimentConfig.SkippedColumnName] = false;
+                row[ConfigDesignFile.SkippedColumnName] = false;
             }
         }
 
         static void AddAttemptsColumnTo(DataTable table) {
             DataColumn attemptsColumn = new DataColumn {
                                                            DataType = typeof(int),
-                                                           ColumnName = ExperimentConfig.AttemptsColumnName,
+                                                           ColumnName = ConfigDesignFile.AttemptsColumnName,
                                                            Unique = false,
                                                            ReadOnly = false,
                                                        };
             table.Columns.Add(attemptsColumn);
             foreach (DataRow row in table.Rows) {
-                row[ExperimentConfig.AttemptsColumnName] = 0;
+                row[ConfigDesignFile.AttemptsColumnName] = 0;
             }
         }
 
         static void AddSuccessColumnTo(DataTable table) {
             DataColumn successColumn = new DataColumn {
                                                           DataType = typeof(bool),
-                                                          ColumnName = ExperimentConfig.SuccessColumnName,
+                                                          ColumnName = ConfigDesignFile.SuccessColumnName,
                                                           Unique = false,
                                                           ReadOnly = false,
                                                       };
             table.Columns.Add(successColumn);
             foreach (DataRow row in table.Rows) {
-                row[ExperimentConfig.SuccessColumnName] = false;
+                row[ConfigDesignFile.SuccessColumnName] = false;
             }
         }
 
         static void AddTrialIndexColumnTo(DataTable table) {
             DataColumn trialIndexColumn = new DataColumn {
                                                              DataType = typeof(int),
-                                                             ColumnName = ExperimentConfig.TrialIndexColumnName,
+                                                             ColumnName = ConfigDesignFile.TrialIndexColumnName,
                                                              Unique = false,
                                                              ReadOnly = false,
                                                          };
             table.Columns.Add(trialIndexColumn);
             trialIndexColumn.SetOrdinal(0); // to put the column in position 0;
             foreach (DataRow row in table.Rows) {
-                row[ExperimentConfig.TrialIndexColumnName] = -1;
+                row[ConfigDesignFile.TrialIndexColumnName] = -1;
             }
         }
 
         static void AddTotalTrialIndexColumnTo(DataTable table) {
             DataColumn trialIndexColumn = new DataColumn {
                                                              DataType = typeof(int),
-                                                             ColumnName = ExperimentConfig.TotalTrialIndexColumnName,
+                                                             ColumnName = ConfigDesignFile.TotalTrialIndexColumnName,
                                                              Unique = false,
                                                              ReadOnly = false,
                                                          };
             table.Columns.Add(trialIndexColumn);
             trialIndexColumn.SetOrdinal(0); // to put the column in position 0;
             foreach (DataRow row in table.Rows) {
-                row[ExperimentConfig.TotalTrialIndexColumnName] = -1;
+                row[ConfigDesignFile.TotalTrialIndexColumnName] = -1;
             }
         }
 
         static void AddBlockNumberColumnTo(DataTable table) {
             DataColumn blockIndexColumn = new DataColumn {
                                                              DataType = typeof(int),
-                                                             ColumnName = ExperimentConfig.BlockIndexColumnName,
+                                                             ColumnName = ConfigDesignFile.BlockIndexColumnName,
                                                              Unique = false,
                                                              ReadOnly = false,
                                                          };
             table.Columns.Add(blockIndexColumn);
             blockIndexColumn.SetOrdinal(0); // to put the column in position 0;
             foreach (DataRow row in table.Rows) {
-                row[ExperimentConfig.BlockIndexColumnName] = -1;
+                row[ConfigDesignFile.BlockIndexColumnName] = -1;
             }
         }
 

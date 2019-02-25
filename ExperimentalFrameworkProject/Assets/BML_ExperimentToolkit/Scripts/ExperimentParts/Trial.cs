@@ -14,32 +14,34 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public DataRow Data => data;
         MonoBehaviour  runner;
-        public int     Index      => (int) data[ExperimentConfig.TrialIndexColumnName];
-        public int     BlockIndex => (int) (data[ExperimentConfig.BlockIndexColumnName]);
+        public int     Index      => (int) data[ConfigDesignFile.TrialIndexColumnName];
+        public int     BlockIndex => (int) (data[ConfigDesignFile.BlockIndexColumnName]);
         public string  TrialText  => $"Trial {Index} of Block {BlockIndex}";
 
         public bool CompletedSuccessfully {
-            get { return (bool) data[ExperimentConfig.SuccessColumnName]; }
-            set { data[ExperimentConfig.SuccessColumnName] = value; }
+            get { return (bool) data[ConfigDesignFile.SuccessColumnName]; }
+            set { data[ConfigDesignFile.SuccessColumnName] = value; }
         }
 
         public int Attempts {
-            get { return (int) data[ExperimentConfig.AttemptsColumnName]; }
-            set { data[ExperimentConfig.AttemptsColumnName] = value; }
+            get { return (int) data[ConfigDesignFile.AttemptsColumnName]; }
+            set { data[ConfigDesignFile.AttemptsColumnName] = value; }
         }
 
         public bool Skipped {
-            get { return (bool) data[ExperimentConfig.SkippedColumnName]; }
-            set { data[ExperimentConfig.SkippedColumnName] = value; }
+            get { return (bool) data[ConfigDesignFile.SkippedColumnName]; }
+            set { data[ConfigDesignFile.SkippedColumnName] = value; }
         }
 
-        protected Trial(DataRow data) {
+        protected Trial(Experiment experiment, DataRow data) {
             this.data = data;
+            this.experiment = experiment;
 
         }
 
         protected bool trialRunning = true;
         bool           interrupt    = false;
+        Experiment experiment;
 
         public IEnumerator Run(MonoBehaviour theRunner) {
             this.runner = theRunner;

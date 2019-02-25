@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
-    public class ExperimentConfig : ScriptableObject {
+    public class ConfigDesignFile : ScriptableObject {
         public bool ShuffleTrialOrder;
         public int  NumberOfTimesToRepeatTrials = 1;
 
