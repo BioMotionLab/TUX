@@ -151,7 +151,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 Debug.Log("No Block Variables");
                 DataTable trialTable = baseTrialTable.Copy();
                 Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, experiment, trialTable,
-                                                                      "Main Block");
+                                                                      "Main Block", experiment.TrialType);
                 Blocks.Add(newBlock);
 
             }
