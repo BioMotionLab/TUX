@@ -41,6 +41,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             Design = ConfigDesignFile.Factory.ToTable(this, ConfigDesignFile.ShuffleTrialOrder, ConfigDesignFile.NumberOfTimesToRepeatTrials);
             ExperimentEvents.InitExperiment(this);
 
+            
+
         }
 
         void OnEnable() {
