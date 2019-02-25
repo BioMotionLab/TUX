@@ -19,7 +19,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         Session                 session;
         OutputManager           outputManager;
         public ConfigDesignFile           ConfigDesignFile;
-        public ConfigTrialScript ConfigTrialScript;
+        public ConfigOptions ConfigOptions;
 
         [HideInInspector]
         public bool             Running = false;
@@ -34,7 +34,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 return;
             }
 
-            if (ConfigTrialScript == null) {
+            if (ConfigOptions == null) {
                 Debug.Log("No Trial Config Script Selected.");
             }
 

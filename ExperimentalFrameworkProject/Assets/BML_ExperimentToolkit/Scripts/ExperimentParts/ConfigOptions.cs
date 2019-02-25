@@ -2,7 +2,7 @@
 
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
-    public class ConfigTrialScript : MonoBehaviour
+    public class ConfigOptions : MonoBehaviour
     {
     
     }
