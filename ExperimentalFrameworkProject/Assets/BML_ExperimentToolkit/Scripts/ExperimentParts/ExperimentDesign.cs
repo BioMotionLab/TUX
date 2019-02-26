@@ -397,7 +397,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 newTable = table.Clone();
                 AddVariableColumn(variable, newTable);
                 IndependentVariable<T> independentVariable = (IndependentVariable<T>) variable;
-                Debug.Log($"Variable values: {String.Join(", ", independentVariable.Values.ToArray())}");
+                //Debug.Log($"Variable values: {String.Join(", ", independentVariable.Values.ToArray())}");
                 switch (independentVariable.MixingTypeOfVariable) {
                     case VariableMixingType.Balanced:
                         newTable = AddBalancedValues<T>(table, independentVariable);
@@ -499,9 +499,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
                 //Make the required number of copies of the trialTable.
                 int numberOfTableCopies = lowestCommonMultiple / table.Rows.Count;
-                Debug.Log($"Number of trialTable copies: {numberOfTableCopies}");
+                //Debug.Log($"Number of trialTable copies: {numberOfTableCopies}");
                 for (int i = 0; i < numberOfTableCopies; i++) {
-                    Debug.Log($"Adding {i}th copy of trialTable");
+                    //Debug.Log($"Adding {i}th copy of trialTable");
                     foreach (DataRow tableRow in table.Rows) {
                         newTable.ImportRow(tableRow);
                     }

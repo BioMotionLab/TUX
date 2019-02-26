@@ -6,6 +6,7 @@ using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_Utilities;
 using MyNamespace;
+using UnityEditor;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
@@ -35,13 +36,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
 
             if (ConfigOptions == null) {
-                Debug.Log("No Trial Config Script Selected.");
+                Debug.LogWarning("No Custom Trial Config Script Used.");
             }
-
-            Design = ConfigDesignFile.Factory.ToTable(this, ConfigDesignFile.ShuffleTrialOrder, ConfigDesignFile.NumberOfTimesToRepeatTrials);
-            ExperimentEvents.InitExperiment(this);
-
             
+            Design = ConfigDesignFile.Factory.ToTable(this, ConfigDesignFile.ShuffleTrialOrder, ConfigDesignFile.NumberOfTimesToRepeatTrials);
+
+            ExperimentEvents.InitExperiment(this);
 
         }
 
