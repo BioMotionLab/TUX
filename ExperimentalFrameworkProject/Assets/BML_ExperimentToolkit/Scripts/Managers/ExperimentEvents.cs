@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using BML_ExperimentToolkit.Scripts.Managers;
 
-namespace MyNamespace {
-
-
+namespace BML_ExperimentToolkit.Scripts.Managers {
+    
     public class ExperimentEvents {
 
         public delegate void TrialHasStartedEvent(Trial trial, int index);

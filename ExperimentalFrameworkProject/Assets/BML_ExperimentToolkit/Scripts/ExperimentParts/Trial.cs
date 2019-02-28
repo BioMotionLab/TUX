@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Data;
+using BML_ExperimentToolkit.Scripts.Managers;
 using MyNamespace;
 using UnityEngine;
 
@@ -10,38 +11,40 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     /// and it is in charge of setting and cleaning itself up
     /// </summary>
     public abstract class Trial {
-        protected readonly DataRow data;
+        protected readonly DataRow Data;
 
-        public DataRow Data => data;
         MonoBehaviour  runner;
-        public int     Index      => (int) data[ConfigDesignFile.TrialIndexColumnName];
-        public int     BlockIndex => (int) (data[ConfigDesignFile.BlockIndexColumnName]);
+        public int     Index      => (int) Data[ConfigDesignFile.TrialIndexColumnName];
+        public int     BlockIndex => (int) (Data[ConfigDesignFile.BlockIndexColumnName]);
         public string  TrialText  => $"Trial {Index} of Block {BlockIndex}";
 
         public bool CompletedSuccessfully {
-            get { return (bool) data[ConfigDesignFile.SuccessColumnName]; }
-            set { data[ConfigDesignFile.SuccessColumnName] = value; }
+            get { return (bool) Data[ConfigDesignFile.SuccessColumnName]; }
+            set { Data[ConfigDesignFile.SuccessColumnName] = value; }
         }
 
         public int Attempts {
-            get { return (int) data[ConfigDesignFile.AttemptsColumnName]; }
-            set { data[ConfigDesignFile.AttemptsColumnName] = value; }
+            get { return (int) Data[ConfigDesignFile.AttemptsColumnName]; }
+            set { Data[ConfigDesignFile.AttemptsColumnName] = value; }
         }
 
         public bool Skipped {
-            get { return (bool) data[ConfigDesignFile.SkippedColumnName]; }
-            set { data[ConfigDesignFile.SkippedColumnName] = value; }
+            get { return (bool) Data[ConfigDesignFile.SkippedColumnName]; }
+            set { Data[ConfigDesignFile.SkippedColumnName] = value; }
         }
 
-        protected Trial(Experiment experiment, DataRow data) {
-            this.data = data;
-            this.experiment = experiment;
+        protected Trial(ConfigOptions options, DataRow data) {
+            Data = data;
+            Options = options;
 
         }
 
-        protected bool trialRunning = true;
-        bool           interrupt    = false;
-        Experiment experiment;
+        protected bool TrialRunning = true;
+        bool           interrupt = false ;
+
+
+        // ReSharper disable once NotAccessedField.Local
+        protected readonly ConfigOptions Options;
 
         public IEnumerator Run(MonoBehaviour theRunner) {
             this.runner = theRunner;
@@ -53,38 +56,25 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
 
             Debug.Log($"{TrialText} Running...");
+            
 
-
-
-            Debug.Log($"{TrialText} Running pre trial");
             IEnumerator pre = Pre();
             while (!interrupt && pre.MoveNext()) {
                 yield return pre.Current;
 
             }
-
-            Debug.Log("Done running pre trial");
-
-
-            Debug.Log($"{TrialText} Running main trial");
+            
             IEnumerator main = Main();
             while (!interrupt && main.MoveNext()) {
                 yield return main.Current;
 
             }
 
-            Debug.Log("Done running main");
-
-
-            Debug.Log($"{TrialText} Running post trial");
             IEnumerator post = Post();
             while (!interrupt && post.MoveNext()) {
                 yield return post.Current;
 
             }
-
-            Debug.Log("Done running post trial");
-
 
             FinalizeTrial();
 
@@ -97,11 +87,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         void InitializeTrial() {
             CompletedSuccessfully = false;
             interrupt = false;
-            trialRunning = true;
+            TrialRunning = true;
         }
 
         public void FinalizeTrial() {
-            trialRunning = false;
+            TrialRunning = false;
             if (!interrupt) {
                 Debug.Log($"Finalizing {TrialText}");
                 CompletedSuccessfully = true;
@@ -110,17 +100,21 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         }
 
+        /// <summary>
+        /// Allows experimenter to control the experiments and jump between trials.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator RunExperimentControls() {
 
-            while (trialRunning) {
+            while (TrialRunning) {
 
-                //let things from last frame finish up
+                //let things from last frame finish up before running
                 yield return null;
 
                 if (Input.GetKeyDown(KeyCode.Backspace)) {
                     Debug.Log($"detected skip key");
                     interrupt = true;
-                    trialRunning = false;
+                    TrialRunning = false;
                     Skipped = true;
                     Debug.Log("Finalizing from within controls");
                     FinalizeTrial();
@@ -133,7 +127,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) {
                     Debug.Log($"detected last key");
                     interrupt = true;
-                    trialRunning = false;
+                    TrialRunning = false;
                     Debug.Log("Finalizing from within controls");
                     FinalizeTrial();
                     //Let notifications disperse through program for a frame
@@ -146,7 +140,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow)) {
                     Debug.Log($"detected next key");
                     interrupt = true;
-                    trialRunning = false;
+                    TrialRunning = false;
                     Debug.Log("Finalizing from within controls");
                     FinalizeTrial();
                     //Let notifications disperse through program for a frame
@@ -157,7 +151,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
                 }
 
-                if (!trialRunning) {
+                if (!TrialRunning) {
                     runner.StopCoroutine(this.Run(runner));
                 }
 
@@ -167,18 +161,34 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             yield return null;
         }
 
-
+        //Interrupts the trial while allowing the frame to complete
         public void Interrupt() {
             interrupt = true;
         }
 
+        /// <summary>
+        /// Code that runs before each trial. Overwrite this for custom behaviour.
+        /// Suggest doing trial setup here.
+        /// </summary>
+        /// <returns></returns>
         protected virtual IEnumerator Pre() {
             Debug.Log($"No Pre-Trial code defined");
             yield return null;
         }
 
+        /// <summary>
+        /// Code that runs during trial. You must overwrite this.
+        /// Setup should go in Pre() method
+        /// Cleanup and writing to dependent variables should go in Post() method
+        /// </summary>
+        /// <returns></returns>
         protected abstract IEnumerator Main();
 
+        /// <summary>
+        /// Code that runs after each trial. Overwrite this for custom behaviour.
+        /// suggest doing trial cleanup and writing output to data here
+        /// </summary>
+        /// <returns></returns>
         protected virtual IEnumerator Post() {
             Debug.Log($"No post trial code defined");
             yield return null;
