@@ -14,9 +14,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
         /// <summary>
         /// Constructor just calls the base class Trail's constructor.
         /// </summary>
-        /// <param name="experiment">The experiment being run</param>
+        /// <param name="options">The experiment being run</param>
         /// <param name="data">The row of BlockData for this trial from a table</param>
-        public SimpleTrial(Experiment experiment, DataRow data) : base(experiment, data) {}
+        public SimpleTrial(Experiment options, DataRow data) : base(options, data) {}
 
         /// <summary>
         /// Overwrites the Main method to provide the trial's functionality

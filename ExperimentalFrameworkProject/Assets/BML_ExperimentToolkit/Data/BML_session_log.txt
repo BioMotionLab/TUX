@@ -1,0 +1,26 @@
+
+
+---------------------
+Session Logged: 2019/02/27 06:12
+{"outputFileName":"2019-02-27_T06-12_Participant-Unnamed","outputFolder":"","debugMode":true,"OrderChosenIndex":0,"participantId":"Unnamed"}
+Confirmed Complete at: 06:12
+
+---------------------
+Session Logged: 2019/02/27 06:14
+{"outputFileName":"2019-02-27_T06-12_Participant-Unnamed","outputFolder":"","debugMode":true,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019/02/27 06:14
+{"outputFileName":"","outputFolder":"","debugMode":false,"OrderChosenIndex":0,"participantId":""}
+
+
+---------------------
+Session Logged: 2019/02/27 06:14
+{"outputFileName":"2019-02-27_T06-12_Participant-Unnamed","outputFolder":"","debugMode":true,"OrderChosenIndex":0,"participantId":"Unnamed"}
+Confirmed Complete at: 06:14Confirmed Complete at: 06:14Confirmed Complete at: 06:14
+
+---------------------
+Session Logged: 2019/02/27 06:18
+{"outputFileName":"2019-02-27_T06-12_Participant-Unnamed","outputFolder":"","debugMode":true,"OrderChosenIndex":0,"participantId":"Unnamed"}
+Confirmed Complete at: 06:18

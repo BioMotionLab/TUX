@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using BML_ExperimentToolkit.Scripts.Managers;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
 using MyNamespace;
@@ -171,7 +172,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 }
             }
 
-            Debug.Log($"Blocks added {Blocks.Count}");
+            //Debug.Log($"Blocks added {Blocks.Count}");
         }
 
         static DataTable UpdateWithBlockValues(DataTable blockTrialTable, DataRow blockTableRow, int blockIndex) {

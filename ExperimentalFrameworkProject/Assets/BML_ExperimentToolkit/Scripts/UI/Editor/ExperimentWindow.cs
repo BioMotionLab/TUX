@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_ExperimentToolkit.Scripts.Managers;
 using BML_Utilities;
 using MyNamespace;
 using UnityEditor;
@@ -74,7 +75,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         }
 
         void InitWindow(Experiment experimentToInit) {
-            session = new Session();
+            session = Session.LoadSessionData();
             currentBlockIndex = -1;
             currentTrialIndex = -1;
             experiment = experimentToInit;
@@ -154,7 +155,11 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             session.DebugMode = EditorGUILayout.Toggle(session.DebugMode);
             EditorGUILayout.EndHorizontal();
 
-            //if (session.DebugMode) return true;
+            //break out if debug mode
+            if (session.DebugMode) {
+                EditorGUILayout.EndVertical();
+                return true;
+            }
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Participant ID:", LabelWidth);
