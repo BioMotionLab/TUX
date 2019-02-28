@@ -24,3 +24,27 @@ Confirmed Complete at: 06:14Confirmed Complete at: 06:14Confirmed Complete at: 0
 Session Logged: 2019/02/27 06:18
 {"outputFileName":"2019-02-27_T06-12_Participant-Unnamed","outputFolder":"","debugMode":true,"OrderChosenIndex":0,"participantId":"Unnamed"}
 Confirmed Complete at: 06:18
+
+---------------------
+Session Logged: 2019-02-28 10:42
+{"outputFileName":"2019-02-27_T06-12_Participant-Unnamed","outputFolder":"","debugMode":true,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-02-28 10:43
+{"outputFileName":"2019-02-28_T10-43_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":false,"OrderChosenIndex":1,"participantId":"1"}
+
+
+---------------------
+Session Logged: 2019-02-28 11:14
+{"outputFileName":"2019-02-28_T11-14_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":true,"OrderChosenIndex":1,"participantId":"1"}
+
+
+---------------------
+Session Logged: 2019-02-28 11:18
+{"outputFileName":"2019-02-28_T11-14_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":true,"OrderChosenIndex":1,"participantId":"1"}
+
+
+---------------------
+Session Logged: 2019-02-28 11:21
+{"outputFileName":"2019-02-28_T11-14_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":true,"OrderChosenIndex":1,"participantId":"1"}

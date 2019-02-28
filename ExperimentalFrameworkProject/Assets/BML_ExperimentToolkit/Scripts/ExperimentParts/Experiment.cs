@@ -105,9 +105,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <param name="currentSession"></param>
         void StartExperiment(Session currentSession) {
+            Debug.Log("Starting experiment");
             session = currentSession;
             Running = true;
-            outputManager = new OutputManager(currentSession.OutputFullPath, session.DebugMode);
+            outputManager = new OutputManager(currentSession.OutputFullPath);
             StartCoroutine(RunPreExperiment());
         }
 
@@ -116,6 +117,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <returns></returns>
         IEnumerator RunPreExperiment() {
+            yield return null; // let last frame finish before starting
+
             yield return Pre();
             ExperimentEvents.ExperimentStarted();
             BlockSequenceRunner blockRunner = new BlockSequenceRunner(this, Design.Blocks);
@@ -127,9 +130,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <returns></returns>
         IEnumerator RunPostExperiment() {
+            yield return null; // let last frame finish before starting
+            
             yield return Post();
-
-
+            
             Running = false;
             Ended = true;
             Design.Disable();
@@ -141,7 +145,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <returns></returns>
         protected virtual IEnumerator Pre() {
-            Debug.Log("No pre experiment code defined");
+            //Debug.Log("No pre experiment code defined");
             yield return null;
         }
 
@@ -150,7 +154,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <returns></returns>
         protected virtual IEnumerator Post() {
-            Debug.Log("No post experiment code defined");
+            //Debug.Log("No post experiment code defined");
             yield return null;
         }
 

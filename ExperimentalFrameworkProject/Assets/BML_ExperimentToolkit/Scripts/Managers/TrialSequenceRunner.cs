@@ -25,7 +25,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         }
 
         public void Start() {
-            Debug.Log("Starting to run trial sequence");
+            //Debug.Log("Starting to run trial sequence");
             StartRunningTrial(currentTrialList[0]);
         }
 

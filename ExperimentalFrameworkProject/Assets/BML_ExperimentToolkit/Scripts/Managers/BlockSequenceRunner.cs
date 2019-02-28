@@ -40,7 +40,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
                 throw new InvalidDataException("Experiment blocks not created correctly");
             }
 
-            Debug.Log("Starting to run Blocks");
+            //Debug.Log("Starting to run Blocks");
             StartRunningBlock(blocks[0]);
         }
 
@@ -56,14 +56,19 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         }
 
         IEnumerator RunPreBlock(Block block) {
+
+            yield return null; //let previous frame finish before starting
+
             yield return currentlyRunningBlock.Pre();
 
             TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(experiment, block.Trials);
             trialSequenceRunner.Start();
-            yield return null;
+            
         }
 
         IEnumerator RunPostBlock() {
+            yield return null; //let previous frame finish before starting
+
             yield return currentlyRunningBlock.Post();
             FinishBlock();
             GoToNextBlock();

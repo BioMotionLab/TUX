@@ -138,10 +138,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             if (File.Exists(filePath)) {
                 string dataAsJason = File.ReadAllText(filePath);
                 session = JsonUtility.FromJson<Session>(dataAsJason);
-                Debug.Log($"Session loaded: {filePath}");
+                //Debug.Log($"Session loaded: {filePath}");
                 }
             else {
-                Debug.Log("Session file not found, not loaded, creating new");
+                Debug.Log("Previous session file not found, creating new");
                 session = new Session();
             }
             session.Enable();
@@ -149,7 +149,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         public void SaveSessionData() {
-            Debug.Log("Saving session data");
+            //Debug.Log("Saving session data");
             string fileFolder = Path.Combine(Application.dataPath, SessionLocation);
 
             Directory.CreateDirectory(fileFolder);
@@ -158,7 +158,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             string dataAsJson = JsonUtility.ToJson(this);
             File.WriteAllText(filePath, dataAsJson);
             
-            Debug.Log(File.Exists(filePath) ? $"session saved: {filePath}" : $"session not saved: {filePath}");
+            Debug.Log(File.Exists(filePath) ? $"Saving session data" : $"Session not saved properly: {filePath}");
         }
 
         /// <summary>

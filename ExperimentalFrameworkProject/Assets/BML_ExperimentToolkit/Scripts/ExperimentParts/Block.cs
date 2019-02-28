@@ -63,7 +63,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <returns></returns>
         public virtual IEnumerator Pre() {
-            Debug.Log("No pre-block code defined");
+            //Debug.Log("No pre-block code defined");
             yield return null;
         }
 
@@ -72,7 +72,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <returns></returns>
         public virtual IEnumerator Post() {
-            Debug.Log("no post-block code defined");
+            //Debug.Log("no post-block code defined");
             yield return null;
         }
 

@@ -25,7 +25,7 @@ namespace BML_Utilities.Tests.Editor {
             [Test]
             public void CopiedLocalPosition() {
                 GameObject newGameObject = new GameObject();
-                newGameObject.transform.CopyFromLocal(mockObject.transform);
+                newGameObject.transform.CopyLocalFrom(mockObject.transform);
                 var expected = new Vector3(1, 2, 3);
                 Assert.AreEqual(expected, newGameObject.transform.localPosition);
             }
@@ -33,7 +33,7 @@ namespace BML_Utilities.Tests.Editor {
             [Test]
             public void CopiedLocalEulers() {
                 GameObject newGameObject = new GameObject();
-                newGameObject.transform.CopyFromLocal(mockObject.transform);
+                newGameObject.transform.CopyLocalFrom(mockObject.transform);
                 var expected = new Vector3(4f, 5f, 6f);
                 Assert.IsTrue(expected == newGameObject.transform.localEulerAngles);
             }
@@ -41,7 +41,7 @@ namespace BML_Utilities.Tests.Editor {
             [Test]
             public void CopiedLocalScale() {
                 GameObject newGameObject = new GameObject();
-                newGameObject.transform.CopyFromLocal(mockObject.transform);
+                newGameObject.transform.CopyLocalFrom(mockObject.transform);
                 var expected = new Vector3(7, 8, 9);
                 Assert.AreEqual(expected, newGameObject.transform.localScale);
             }

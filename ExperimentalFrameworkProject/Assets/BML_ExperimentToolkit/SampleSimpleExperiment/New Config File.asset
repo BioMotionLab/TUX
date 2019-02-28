@@ -18,7 +18,7 @@ MonoBehaviour:
     DataTypesToCreate: 3
     VariableTypeToCreate: 0
     IntIVs:
-    - Name: BlockVariable
+    - Name: Distance
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0
@@ -28,25 +28,27 @@ MonoBehaviour:
       - 0
       - 0
     FloatIVs:
-    - Name: float1
+    - Name: Angle
       TypeOfVariable: 0
       DataType: 1
       MixingTypeOfVariable: 1
       Block: 0
       Values:
-      - 1.1
-      - 2.2
+      - 45.6
+      - 34.5
+      - 25.1
       Probabilities:
+      - 0
       - 0
       - 0
     StringIVs: []
     BoolIVs:
-    - Name: Bool1
+    - Name: Window
       TypeOfVariable: 0
       DataType: 3
       MixingTypeOfVariable: 0
       Block: 0
-      Values: 0101
+      Values: 0100
       Probabilities: []
     GameObjectIVs: []
     Vector3IVs: []

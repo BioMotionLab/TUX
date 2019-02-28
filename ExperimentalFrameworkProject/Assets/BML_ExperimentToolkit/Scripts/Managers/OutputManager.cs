@@ -1,10 +1,7 @@
 ﻿using System.IO;
-using MyNamespace;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.Managers {
-
-
 
     /// <summary>
     /// Outputs files based on events that it listens to.
@@ -12,22 +9,19 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
     public class OutputManager {
 
         readonly string outputPath;
-        bool            overwrite;
 
         /// <summary>
         /// Creates an OutputFile manager instance to output strings as a file
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="overwrite"></param>
         /// <param name="extension"></param>
-        public OutputManager(string path, bool overwrite = false, string extension = FileExtensions.CSV) {
+        public OutputManager(string path, string extension = FileExtensions.CSV) {
             outputPath = path;
-            this.overwrite = overwrite;
-            Debug.Log($"path before extension {outputPath}");
+            //Debug.Log($"path before extension {outputPath}");
             if (!Path.HasExtension(outputPath)) {
-                Debug.Log($"path no extension: {outputPath}");
+                //Debug.Log($"path no extension: {outputPath}");
                 outputPath += extension;
-                Debug.Log($"path after extension add: {outputPath}");
+                //Debug.Log($"path after extension add: {outputPath}");
             }
 
 
@@ -58,18 +52,12 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
             Debug.Log("***********");
             Debug.Log("");
             string folder = Path.GetDirectoryName(outputPath);
-            if (!Directory.Exists(folder))
-                if (folder != null)
-                    Directory.CreateDirectory(folder);
+            if (folder != null) Directory.CreateDirectory(folder);
 
-            if (File.Exists(outputPath) && !overwrite) {
-                Debug.LogError("OutputFile file already exists, please choose new name");
-            }
-            else {
-                using (StreamWriter streamWriter = new StreamWriter(outputPath)) {
+            using (StreamWriter streamWriter = new StreamWriter(outputPath)) {
                     streamWriter.Write(output.AsString);
-                }
             }
+            
 
         }
 

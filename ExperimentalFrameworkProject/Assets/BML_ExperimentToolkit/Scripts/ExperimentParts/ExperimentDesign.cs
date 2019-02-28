@@ -151,6 +151,13 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             if (OrderedBlockTable == null) {
                 Debug.Log("No Block Variables");
                 DataTable trialTable = baseTrialTable.Copy();
+                for (int i = 0; i < trialTable.Rows.Count; i++) {
+                    DataRow trialRow = trialTable.Rows[i];
+                    trialRow[ConfigDesignFile.BlockIndexColumnName] = 0;
+                    trialRow[ConfigDesignFile.TrialIndexColumnName] = i;
+                    trialRow[ConfigDesignFile.TotalTrialIndexColumnName] = i;
+                }
+
                 Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, experiment, trialTable,
                                                                       "Main Block", experiment.TrialType);
                 Blocks.Add(newBlock);
@@ -398,7 +405,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 newTable = table.Clone();
                 AddVariableColumn(variable, newTable);
                 IndependentVariable<T> independentVariable = (IndependentVariable<T>) variable;
-                //Debug.Log($"Variable values: {String.Join(", ", independentVariable.Values.ToArray())}");
+                Debug.Log($"Variable values: {String.Join(", ", independentVariable.Values.ToArray())}");
                 switch (independentVariable.MixingTypeOfVariable) {
                     case VariableMixingType.Balanced:
                         newTable = AddBalancedValues<T>(table, independentVariable);
@@ -508,7 +515,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     }
                 }
 
-                Debug.Log("Adding rows to NON empty trialTable in looped variable creation");
                 T value = loopValues.FirstElement;
                 foreach (DataRow newTableRow in newTable.Rows) {
                     newTableRow[independentVariable.Name] = value;
