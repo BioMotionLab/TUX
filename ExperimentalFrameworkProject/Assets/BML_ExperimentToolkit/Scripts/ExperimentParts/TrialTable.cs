@@ -12,7 +12,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public TrialTable(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions, ColumnNames columnNames) {
             ColumnNames = columnNames;
-            baseTrialTable = ExperimentDesign.SortAndAddIVs(allData, baseTrialTable);
+            baseTrialTable = ExperimentDesign.SortAndAddIVs(allData);
 
             //Repeat all trials if specified
             if (numberOfRepetitions > 1) {

@@ -23,7 +23,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 }
             }
 
-            baseBlockTable = ExperimentDesign.SortAndAddIVs(blockVariables, baseBlockTable, true);
+            baseBlockTable = ExperimentDesign.SortAndAddIVs(blockVariables, true);
    
         }
 

@@ -109,7 +109,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         
-        public static DataTable SortAndAddIVs(List<Variable> allData, DataTable table, bool block = false) {
+        public static DataTable SortAndAddIVs(List<Variable> allData, bool block = false) {
+            DataTable table = new DataTable();
+
             List<IndependentVariable> balanced = new List<IndependentVariable>();
             List<IndependentVariable> looped = new List<IndependentVariable>();
             List<IndependentVariable> probability = new List<IndependentVariable>();
@@ -147,7 +149,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 }
             }
 
-
+            
             //Order they're added matters.
             foreach (IndependentVariable datum in balanced) table = AddVariableGeneric(datum, table);
             foreach (IndependentVariable datum in looped) table = AddVariableGeneric(datum, table);
