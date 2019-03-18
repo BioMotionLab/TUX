@@ -13,35 +13,36 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     /// <summary>
     /// The Experiment class is the main backbone of the toolkit. This sets up the experiment design, the blocks and trial structure, and manages output
     /// </summary>
-    /// <seealso cref="UnityEngine.MonoBehaviour" />
-    /// <seealso cref="BML_ExperimentToolkit.Scripts.Managers.Outputtable" />
+    /// <seealso cref="T:UnityEngine.MonoBehaviour" />
+    /// <seealso cref="T:BML_ExperimentToolkit.Scripts.Managers.Outputtable" />
     public abstract class Experiment : MonoBehaviour, Outputtable {
 
-        //stores the script of the Trial used in this experiment. This is used to customize trial behaviour
+        /// <summary>
+        /// stores the script of the Trial used in this experiment. This is used to customize trial behaviour
+        /// </summary>
         public virtual Type TrialType => typeof(SimpleTrial);
-        //stores the script of the Block used in this experiment. This is used to customize trial behaviour
+        
+        /// <summary>
+        /// stores the script of the Block used in this experiment. This is used to customize trial behaviour
+        /// </summary>
         public virtual Type BlockType => typeof(SimpleBlock);
 
         public ExperimentDesign Design;
-        Session session;
+        protected Session Session;
         OutputManager outputManager;
 
         [Header("Required:")]
-        [Tooltip("Drag the configuration file here")]
+        public ColumnNames ColumnNames;
         public ConfigDesignFile ConfigDesignFile;
         [Header("Optional:")]
-        [Tooltip("Drag the GameObject with attached ConfigOptions script here")]
         public ConfigOptions ConfigOptions;
-
+        
         [HideInInspector]
         public bool Running;
         [HideInInspector]
         public bool Ended;
 
-        /// <summary>
-        /// Called first frame of the experiment
-        /// </summary>
-        void Start() {
+       void Start() {
 
             //check if config file is loaded
             if (ConfigDesignFile == null) {
@@ -106,7 +107,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <param name="currentSession"></param>
         void StartExperiment(Session currentSession) {
             Debug.Log("Starting experiment");
-            session = currentSession;
+            Session = currentSession;
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);
             StartCoroutine(RunPreExperiment());

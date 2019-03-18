@@ -10,26 +10,32 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     /// and it is in charge of setting and cleaning itself up
     /// </summary>
     public abstract class Trial {
+        protected bool TrialRunning = true;
+        bool           interrupt;
+
+
+        // ReSharper disable once NotAccessedField.Local
+        protected readonly Experiment Experiment;
         public readonly DataRow Data;
 
         MonoBehaviour  runner;
-        public int     Index      => (int) Data[ConfigDesignFile.TrialIndexColumnName];
-        public int     BlockIndex => (int) (Data[ConfigDesignFile.BlockIndexColumnName]);
+        public int     Index      => (int) Data[Experiment.ColumnNames.TrialIndex];
+        public int     BlockIndex => (int) (Data[Experiment.ColumnNames.BlockIndex]);
         public string  TrialText  => $"Trial {Index} of Block {BlockIndex}";
 
         public bool CompletedSuccessfully {
-            get { return (bool) Data[ConfigDesignFile.SuccessColumnName]; }
-            set { Data[ConfigDesignFile.SuccessColumnName] = value; }
+            get => (bool) Data[Experiment.ColumnNames.Completed];
+            set => Data[Experiment.ColumnNames.Completed] = value;
         }
 
         public int Attempts {
-            get { return (int) Data[ConfigDesignFile.AttemptsColumnName]; }
-            set { Data[ConfigDesignFile.AttemptsColumnName] = value; }
+            get => (int) Data[Experiment.ColumnNames.Attempts];
+            set => Data[Experiment.ColumnNames.Attempts] = value;
         }
 
         public bool Skipped {
-            get { return (bool) Data[ConfigDesignFile.SkippedColumnName]; }
-            set { Data[ConfigDesignFile.SkippedColumnName] = value; }
+            get => (bool) Data[Experiment.ColumnNames.Skipped];
+            set => Data[Experiment.ColumnNames.Skipped] = value;
         }
 
         protected Trial(Experiment experiment, DataRow data) {
@@ -38,15 +44,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         }
 
-        protected bool TrialRunning = true;
-        bool           interrupt;
-
-
-        // ReSharper disable once NotAccessedField.Local
-        protected readonly Experiment Experiment;
-
         /// <summary>
-        /// Run the whole trial
+        /// Run the main section of trial
         /// </summary>
         /// <param name="theRunner"></param>
         /// <returns></returns>
@@ -60,18 +59,17 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             Debug.Log($"{TrialText} Running...");
             
-            IEnumerator pre = Pre();
-            while (!interrupt && pre.MoveNext()) yield return pre.Current;
-            
-            IEnumerator main = Main();
-            while (!interrupt && main.MoveNext()) yield return main.Current;
-            
-            IEnumerator post = Post();
-            while (!interrupt && post.MoveNext()) yield return post.Current;
+            yield return RunCoroutineWhileListeningForInterrupt(Pre() );
+            yield return RunCoroutineWhileListeningForInterrupt(Main());
+            yield return RunCoroutineWhileListeningForInterrupt(Post());
             
             FinalizeTrial();
 
             if (!interrupt) ExperimentEvents.TrialHasCompleted();
+        }
+
+        IEnumerator RunCoroutineWhileListeningForInterrupt(IEnumerator coroutineMethod) {
+            while (!interrupt && coroutineMethod.MoveNext()) yield return coroutineMethod.Current;
         }
 
         /// <summary>
