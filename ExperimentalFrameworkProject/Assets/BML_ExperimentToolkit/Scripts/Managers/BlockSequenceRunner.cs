@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using MyNamespace;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.Managers {

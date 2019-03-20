@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace MyNamespace {
-
-
+namespace BML_Utilities {
 
     /// <summary>
     /// Component used to snap position to another GameObject

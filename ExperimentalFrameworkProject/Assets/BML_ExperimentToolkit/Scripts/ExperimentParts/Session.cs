@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using BML_ExperimentToolkit.Scripts.Managers;
-using MyNamespace;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {

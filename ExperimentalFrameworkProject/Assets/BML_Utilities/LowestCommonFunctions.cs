@@ -1,11 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace MyNamespace {
-
-
-
+﻿namespace BML_Utilities {
+    
     public static class LowestCommonFunctions {
         public static int GreatestCommonFactor(int a, int b) {
             while (b != 0) {
