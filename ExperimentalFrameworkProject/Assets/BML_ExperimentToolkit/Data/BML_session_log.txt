@@ -48,3 +48,9 @@ Session Logged: 2019-02-28 11:18
 ---------------------
 Session Logged: 2019-02-28 11:21
 {"outputFileName":"2019-02-28_T11-14_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":true,"OrderChosenIndex":1,"participantId":"1"}
+
+
+---------------------
+Session Logged: 2019-03-20 10:41
+{"outputFileName":"2019-02-28_T11-14_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":true,"OrderChosenIndex":1,"participantId":"Unnamed"}
+Confirmed Complete at: 10:41
