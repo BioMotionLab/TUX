@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
@@ -10,8 +8,8 @@ using MyNamespace;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
-   
-    public class ExperimentDesign {
+
+    public partial class ExperimentDesign {
 
         readonly Experiment experiment;
 
@@ -28,11 +26,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public bool HasBlocks => baseBlockTable.HasBlocks;
 
+        readonly bool shuffleTrialsBetweenBlocks;
+
         public ExperimentDesign(Experiment experiment, List<Variable> allData, bool shuffleTrialOrder,
-                                int        numberOfRepetitions) {
+                                int        numberOfRepetitions, bool shuffleTrialsBetweenBlocks) {
             this.experiment = experiment;
+            this.shuffleTrialsBetweenBlocks = shuffleTrialsBetweenBlocks;
             baseBlockTable = new BlockTable(allData);
-            baseTrialTable = new TrialTable(allData, shuffleTrialOrder, numberOfRepetitions, experiment.ColumnNames);
+            baseTrialTable = new TrialTable(allData, baseBlockTable, shuffleTrialOrder, numberOfRepetitions, experiment.ColumnNames);
             OnEnable();
         }
 
@@ -44,6 +45,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             ExperimentEvents.OnBlockOrderChosen -= BlockOrderSelected;
         }
 
+        public DataTable GetBlockOrderTable(int sessionOrderChosenIndex) {
+            BlockTable orderedBlockTable = baseBlockTable.GetBlockOrderTable(sessionOrderChosenIndex);
+            return orderedBlockTable;
+        }
+
         public void BlockOrderSelected(int selectedOrderIndex) {
             OrderedBlockTable = baseBlockTable.GetBlockOrderTable(selectedOrderIndex);
             CreateAndAddBlocks();
@@ -52,8 +58,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public void CreateAndAddBlocks() {
             Blocks = new List<Block>();
-            baseTrialTable.AddBlockColumns(baseBlockTable);
-
+            
             if (OrderedBlockTable == null) {
                 Debug.Log("No Block Variables");
                 DataTable trialTable = baseTrialTable.Copy();
@@ -65,19 +70,26 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 }
 
                 string blockIdentity = "Main Block";
-                Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, experiment, trialTable,
-                                                                      blockIdentity, experiment.TrialType);
+                Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, 
+                                                                  experiment, 
+                                                                  trialTable,
+                                                                  blockIdentity, 
+                                                                  experiment.TrialType 
+                                                                  );
                 Blocks.Add(newBlock);
 
             }
             else {
                 for (int i = 0; i < OrderedBlockTable.Rows.Count; i++) {
                     DataRow orderedBlockRow = OrderedBlockTable.Rows[i];
-                    DataTable baseTrialDataTable = baseTrialTable;
-                    DataTable trialTable = baseTrialDataTable.Copy();
+                    
+                    DataTable trialTable = baseTrialTable.Copy();
+                    if (shuffleTrialsBetweenBlocks) {
+                        trialTable = trialTable.Shuffle();
+                    }
                     trialTable = UpdateWithBlockValues(trialTable, orderedBlockRow, i);
 
-                    string blockIdentity = orderedBlockRow.AsString(separator: ", ");
+                    string blockIdentity = orderedBlockRow.AsStringWithColumnNames(separator: ", ");
                     Block newBlock = (Block) Activator.CreateInstance(experiment.BlockType, experiment, trialTable,
                                                                       blockIdentity, experiment.TrialType);
                     Blocks.Add(newBlock);
@@ -119,37 +131,57 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             List<DependentVariable> dependentVariables = new List<DependentVariable>();
 
             //Sort Independent variables into mixing categories so they go in order
-            foreach (Variable datum in allData) {
-                if (datum.TypeOfVariable == VariableType.Independent) {
-                    IndependentVariable ivDatum = (IndependentVariable) datum;
+            int numberOfBlockIvs = 0;
+            int numberOfNonBlockIvs = 0;
+            foreach (Variable variable in allData) {
+                if (variable.TypeOfVariable == VariableType.Independent) {
+                    IndependentVariable ivVariable = (IndependentVariable) variable;
 
-                    if (block && ivDatum.Block || !block && !ivDatum.Block) {
+                    if (ivVariable.Block) {
+                        numberOfBlockIvs++;
+                    }
+                    else {
+                        numberOfNonBlockIvs++;
+                    }
+                    
 
-                        switch (ivDatum.MixingTypeOfVariable) {
+                    if (block && ivVariable.Block || !block && !ivVariable.Block) {
+
+                        switch (ivVariable.MixingTypeOfVariable) {
                             case VariableMixingType.Balanced:
-                                balanced.Add(ivDatum);
+                                balanced.Add(ivVariable);
                                 break;
                             case VariableMixingType.Looped:
-                                looped.Add(ivDatum);
+                                looped.Add(ivVariable);
                                 break;
 
                             case VariableMixingType.EvenProbability:
                             case VariableMixingType.CustomProbability:
-                                probability.Add(ivDatum);
+                                probability.Add(ivVariable);
                                 break;
 
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
                     }
+                    
                 }
-                else if (datum.TypeOfVariable == VariableType.Dependent) {
-                    DependentVariable dVDatum = (DependentVariable) datum;
+                else if (variable.TypeOfVariable == VariableType.Dependent) {
+                    DependentVariable dVDatum = (DependentVariable) variable;
                     dependentVariables.Add(dVDatum);
                 }
             }
 
-            
+            bool thereAreBlockIvsButNoNormalIvs = numberOfBlockIvs > 0 && numberOfNonBlockIvs == 0;
+            if (!block && thereAreBlockIvsButNoNormalIvs) {
+
+                throw new InvalidExperimentDesignException($"You defined {numberOfBlockIvs} block variable(s), " +
+                                                           $"when there are {numberOfNonBlockIvs} unblocked independent variables." +
+                                                           $"You can safely unblock the variable " +
+                                                           $"to make it a normal variable");
+            }
+
+
             //Order they're added matters.
             foreach (IndependentVariable datum in balanced) table = AddVariableGeneric(datum, table);
             foreach (IndependentVariable datum in looped) table = AddVariableGeneric(datum, table);
@@ -160,7 +192,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return table;
         }
 
-        
         static DataTable AddVariableGeneric(Variable variable, DataTable table) {
             DataTable newTable = new DataTable();
             switch (variable.DataType) {
@@ -206,7 +237,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 newTable = table.Clone();
                 AddVariableColumn(variable, newTable);
                 IndependentVariable<T> independentVariable = (IndependentVariable<T>) variable;
-                Debug.Log($"Variable values: {String.Join(", ", independentVariable.Values.ToArray())}");
+                Debug.Log($"Variable values: {string.Join(", ", independentVariable.Values.ToArray())}");
                 switch (independentVariable.MixingTypeOfVariable) {
                     case VariableMixingType.Balanced:
                         newTable = AddBalancedValues<T>(table, independentVariable);
@@ -233,8 +264,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             else {
                 throw new ArgumentException("Variable is of undefined type of variable");
             }
-
-
 
             //Debug.Log($"(AddVariable<T> trialTable now has {newTable.Rows.Count} rows");
             return newTable;
@@ -420,11 +449,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             if (index >= 0) {
                 column.SetOrdinal(index);
             }
-        }
-
-
-        public DataTable GetBlockOrderTable(int sessionOrderChosenIndex) {
-            return OrderedBlockTable;
         }
     }
 

@@ -58,7 +58,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
 
             //set up experiment design
-            Design = ConfigDesignFile.Factory.ToTable(this, ConfigDesignFile.ShuffleTrialOrder, ConfigDesignFile.NumberOfTimesToRepeatTrials);
+            Design = ConfigDesignFile.Factory.ToTable(this, ConfigDesignFile.ShuffleTrialOrder, ConfigDesignFile.RepeatTrialBlock, ConfigDesignFile.ShuffleDifferentlyForEachBlock);
 
             //initialize the experiment
             ExperimentEvents.InitExperiment(this);

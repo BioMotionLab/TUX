@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
-  m_Name: New Config File
+  m_Name: SimpleExperiment Config
   m_EditorClassIdentifier: 
-  ShuffleTrialOrder: 0
-  NumberOfTimesToRepeatTrials: 1
+  ShuffleTrialOrder: 1
+  ShuffleDifferentlyForEachBlock: 1
+  RepeatTrialBlock: 1
   Factory:
     DataTypesToCreate: 3
     VariableTypeToCreate: 0
@@ -31,14 +32,12 @@ MonoBehaviour:
     - Name: Angle
       TypeOfVariable: 0
       DataType: 1
-      MixingTypeOfVariable: 1
+      MixingTypeOfVariable: 0
       Block: 0
       Values:
-      - 45.6
-      - 34.5
-      - 25.1
+      - 10
+      - 20
       Probabilities:
-      - 0
       - 0
       - 0
     StringIVs: []
@@ -60,3 +59,4 @@ MonoBehaviour:
     GameObjectDVs: []
     Vector3DVs: []
     CustomDataTypeDVs: []
+  ColumnNames: {fileID: 11400000, guid: b004757e12fd66b43828570a0f83b1db, type: 2}

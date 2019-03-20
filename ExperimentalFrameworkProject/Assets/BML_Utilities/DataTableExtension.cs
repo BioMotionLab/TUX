@@ -51,6 +51,24 @@ namespace BML_Utilities {
             return headerString + rowString;
         }
 
+        public static string AsStringWithColumnNames(this DataRow row, string separator = Delimiter.Tab,
+                                      int          truncate = TruncateDefault) {
+            string headerString =
+                row.Table.HeaderAsString(separator: separator, truncate: truncate);
+            string rowString = truncate <= 0
+                ? string.Join(separator, row.ItemArray.Select(c => c.ToString()).ToArray())
+                : string.Join(separator, row.ItemArray.Select(c => c.ToString().Truncate(truncate)).ToArray());
+            string[] headerStrings = headerString.Split(new[] { separator}, StringSplitOptions.None);
+            string[] rowStrings = rowString.Split(new [] {separator}, StringSplitOptions.None);
+            string stringWithColumnNames = "";
+            for (int i = 0; i < headerStrings.Length; i++) {
+                string separatorString = i < headerStrings.Length - 1 ? separator : "";
+                stringWithColumnNames += $"{headerStrings[i]}: {rowStrings[i]}{separatorString}";
+            }
+
+            return stringWithColumnNames;
+        }
+
         public static List<List<DataRow>> GetPermutations(this DataTable dt) {
             List<DataRow> dataRows = new List<DataRow>();
             foreach (DataRow row in dt.Rows) {

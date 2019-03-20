@@ -17,11 +17,13 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-            property.serializedObject.Update();
+            //property.serializedObject.Update();
             int oldIndentLevel = EditorGUI.indentLevel;
 
             Rect currentRect = new Rect(position.x, position.y + 20f, position.width, 20f);
             float oldy = currentRect.y;
+
+            EditorGUI.LabelField(currentRect, "--------");
 
             SerializedProperty dataTypeProperty =
                 property.FindPropertyRelative(nameof(VariableFactory.DataTypesToCreate));

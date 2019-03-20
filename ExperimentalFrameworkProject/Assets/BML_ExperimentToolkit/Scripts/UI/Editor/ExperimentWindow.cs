@@ -5,7 +5,6 @@ using System.IO;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_Utilities;
-using MyNamespace;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,10 +16,11 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
         static readonly GUILayoutOption CompleteIndicatorWidth = GUILayout.Width(20);
         static readonly GUILayoutOption JumpToButtonWidth = GUILayout.Width(40);
-        static readonly GUILayoutOption RunningTrialIndicatorWidth = GUILayout.Width(60);
+        static readonly GUILayoutOption RunningTrialIndicatorWidth = GUILayout.Width(70);
         static readonly GUILayoutOption IndentWidth = GUILayout.Width(40);
         static readonly GUILayoutOption SmallLabelWidth = GUILayout.Width(60);
         static readonly GUILayoutOption LabelWidth = GUILayout.Width(120);
+        static readonly GUILayoutOption BlockIdentityWidth = GUILayout.Width(300);
 
         int currentBlockIndex = -1;
         int currentTrialIndex = -1;
@@ -158,6 +158,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             //break out if debug mode
             if (session.DebugMode) {
                 EditorGUILayout.EndVertical();
+                EditorGUI.indentLevel--;
                 return true;
             }
 
@@ -349,7 +350,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("", IndentWidth);
-                EditorGUILayout.LabelField($"Block Values: {block.Identity}");
+                EditorGUILayout.TextArea($"Block Values: {block.Identity}", BlockIdentityWidth);
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.BeginHorizontal();

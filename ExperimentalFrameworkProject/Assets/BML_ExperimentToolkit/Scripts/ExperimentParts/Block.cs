@@ -23,7 +23,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public List<Trial> Trials;
         Experiment experiment;
 
-        public Block(Experiment experiment, DataTable trialTable, string identity, Type trialType) {
+        public Block(Experiment experiment, 
+                     DataTable trialTable, 
+                     string identity, 
+                     Type trialType) {
             this.experiment = experiment;
             this.trialTable = trialTable;
             this.Identity = identity;

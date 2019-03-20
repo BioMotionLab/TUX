@@ -3,6 +3,7 @@ using System.Data;
 using System.Text;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
+using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
@@ -69,7 +70,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 orderedTable.ImportRow(dataRow);
             }
 
-            return new BlockTable(orderedTable);
+            BlockTable blockOrderTable = new BlockTable(orderedTable);
+            return blockOrderTable;
         }
 
     }

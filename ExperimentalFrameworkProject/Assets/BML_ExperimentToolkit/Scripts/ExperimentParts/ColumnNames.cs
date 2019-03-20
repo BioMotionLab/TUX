@@ -9,6 +9,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public string Skipped         = "Skipped";
         public string Attempts        = "Attempts";
         public string TrialIndex      = "TrialInBlock";
-        public string Completed         = "Completed";
+        public string Completed       = "Completed";
     }
 }

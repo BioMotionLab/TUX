@@ -2,6 +2,7 @@
 using System.Data;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
+using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public class TrialTable {
@@ -10,7 +11,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         ColumnNames ColumnNames;
         public int Trials => baseTrialTable.Rows.Count;
 
-        public TrialTable(List<Variable> allData, bool shuffleTrialOrder, int numberOfRepetitions, ColumnNames columnNames) {
+        public TrialTable(List<Variable> allData,             BlockTable  baseBlockTable, bool shuffleBaseTrialOrder,
+                          int            numberOfRepetitions, ColumnNames columnNames) {
             ColumnNames = columnNames;
             baseTrialTable = ExperimentDesign.SortAndAddIVs(allData);
 
@@ -27,16 +29,20 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
 
             //Shuffle trial order if needed
-            if (shuffleTrialOrder) {
+            if (shuffleBaseTrialOrder) {
                 baseTrialTable = baseTrialTable.Shuffle();
             }
 
-            AddTotalTrialIndexColumnTo(baseTrialTable);
-            AddTrialIndexColumnTo(baseTrialTable);
-            AddBlockNumberColumnTo(baseTrialTable);
-            AddSuccessColumnTo(baseTrialTable);
-            AddAttemptsColumnTo(baseTrialTable);
-            AddSkippedColumnTo(baseTrialTable);
+            AddBlockColumnsFrom(baseBlockTable);
+
+            AddTotalTrialIndexColumnTo();
+            AddTrialIndexColumnTo();
+            AddBlockNumberColumnTo();
+            AddSuccessColumnTo();
+            AddAttemptsColumnTo();
+            AddSkippedColumnTo();
+            
+            
 
         }
 
@@ -46,83 +52,83 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public DataRowCollection Rows => baseTrialTable.Rows;
 
-        void AddSkippedColumnTo(DataTable table) {
+        void AddSkippedColumnTo() {
             DataColumn skippedColumn = new DataColumn {
                 DataType = typeof(bool),
                 ColumnName = ColumnNames.Skipped,
                 Unique = false,
                 ReadOnly = false,
             };
-            table.Columns.Add(skippedColumn);
-            foreach (DataRow row in table.Rows) {
+            baseTrialTable.Columns.Add(skippedColumn);
+            foreach (DataRow row in baseTrialTable.Rows) {
                 row[ColumnNames.Skipped] = false;
             }
         }
 
-        void AddAttemptsColumnTo(DataTable table) {
+        void AddAttemptsColumnTo() {
             DataColumn attemptsColumn = new DataColumn {
                 DataType = typeof(int),
                 ColumnName = ColumnNames.Attempts,
                 Unique = false,
                 ReadOnly = false,
             };
-            table.Columns.Add(attemptsColumn);
-            foreach (DataRow row in table.Rows) {
+            baseTrialTable.Columns.Add(attemptsColumn);
+            foreach (DataRow row in baseTrialTable.Rows) {
                 row[ColumnNames.Attempts] = 0;
             }
         }
 
-        void AddSuccessColumnTo(DataTable table) {
+        void AddSuccessColumnTo() {
             DataColumn successColumn = new DataColumn {
                 DataType = typeof(bool),
                 ColumnName = ColumnNames.Completed,
                 Unique = false,
                 ReadOnly = false,
             };
-            table.Columns.Add(successColumn);
-            foreach (DataRow row in table.Rows) {
+            baseTrialTable.Columns.Add(successColumn);
+            foreach (DataRow row in baseTrialTable.Rows) {
                 row[ColumnNames.Completed] = false;
             }
         }
 
-        void AddTrialIndexColumnTo(DataTable table) {
+        void AddTrialIndexColumnTo() {
             DataColumn trialIndexColumn = new DataColumn {
                 DataType = typeof(int),
                 ColumnName = ColumnNames.TrialIndex,
                 Unique = false,
                 ReadOnly = false,
             };
-            table.Columns.Add(trialIndexColumn);
+            baseTrialTable.Columns.Add(trialIndexColumn);
             trialIndexColumn.SetOrdinal(0); // to put the column in position 0;
-            foreach (DataRow row in table.Rows) {
+            foreach (DataRow row in baseTrialTable.Rows) {
                 row[ColumnNames.TrialIndex] = -1;
             }
         }
 
-        void AddTotalTrialIndexColumnTo(DataTable table) {
+        void AddTotalTrialIndexColumnTo() {
             DataColumn trialIndexColumn = new DataColumn {
                 DataType = typeof(int),
                 ColumnName = ColumnNames.TotalTrialIndex,
                 Unique = false,
                 ReadOnly = false,
             };
-            table.Columns.Add(trialIndexColumn);
+            baseTrialTable.Columns.Add(trialIndexColumn);
             trialIndexColumn.SetOrdinal(0); // to put the column in position 0;
-            foreach (DataRow row in table.Rows) {
+            foreach (DataRow row in baseTrialTable.Rows) {
                 row[ColumnNames.TotalTrialIndex] = -1;
             }
         }
 
-        void AddBlockNumberColumnTo(DataTable table) {
+        void AddBlockNumberColumnTo() {
             DataColumn blockIndexColumn = new DataColumn {
                 DataType = typeof(int),
                 ColumnName = ColumnNames.BlockIndex,
                 Unique = false,
                 ReadOnly = false,
             };
-            table.Columns.Add(blockIndexColumn);
+            baseTrialTable.Columns.Add(blockIndexColumn);
             blockIndexColumn.SetOrdinal(0); // to put the column in position 0;
-            foreach (DataRow row in table.Rows) {
+            foreach (DataRow row in baseTrialTable.Rows) {
                 row[ColumnNames.BlockIndex] = -1;
             }
         }
@@ -131,9 +137,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return baseTrialTable.Copy();
         }
 
-        public void AddBlockColumns(DataTable blockTable) {
+        public void AddBlockColumnsFrom(DataTable blockTable) {
+            //Debug.Log("Adding Block Columns to Trial Table");
             foreach (DataColumn blockTableColumn in blockTable.Columns) {
-                baseTrialTable.AddColumnFromOtherTable(blockTableColumn, 0);
+                //Debug.Log($"Adding Column: {blockTableColumn.ColumnName}");
+                baseTrialTable = baseTrialTable.AddColumnFromOtherTable(blockTableColumn, 0);
             }
         }
     }
