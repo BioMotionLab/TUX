@@ -12,7 +12,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         readonly Experiment experiment;
 
-        public BlockTable   OrderedBlockTable;
+        public BlockTable OrderedBlockTable;
+
         public List<Block> Blocks;
         readonly BlockTable baseBlockTable;
         readonly TrialTable baseTrialTable;

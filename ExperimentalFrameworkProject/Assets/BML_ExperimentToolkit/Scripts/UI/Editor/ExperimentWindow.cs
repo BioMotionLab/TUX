@@ -113,7 +113,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             if (!initialized) {
                 EditorGUILayout.HelpBox("ConfigDesignFile not properly initialized. " +
                                         "\nMake sure you have created a config file from the menu and populated it with variables" +
-                                        "\nAlso make sure the config file is dragged into the Experiment GameObject'd inspector in your scene.",
+                                        "\nAlso make sure the config file is dragged into the Experiment GameObject inspector in your scene.",
                                         MessageType.Error);
                 return;
             }
@@ -127,10 +127,13 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             
             //Experiment controls
             ShowExperimentControls();
-            
+
 
             //Blocks
-            ShowBlockTable(experiment.Design.OrderedBlockTable);
+            if (experiment.Design.HasBlocks) {
+                ShowBlockTable(experiment.Design.OrderedBlockTable);
+            }
+            
 
             //Trials
             ShowTrialTables();
@@ -288,8 +291,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         /// <param name="blockTable"></param>
         /// <param name="orderSelected"></param>
         void ShowBlockTable(DataTable blockTable, bool orderSelected = true) {
-
-
+            
             if (!experiment.Design.HasBlocks) return;
 
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
