@@ -45,11 +45,16 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             TypeOfVariable = VariableType.Independent;
         }
 
+        public void EnsureHasValues() {
+            if (Values.Count == 0) {
+                throw new ArgumentException($"No values defined for variable {Name}");
+            }
+        }
+        
 
+    //public virtual string ValueAsString()
 
-        //public virtual string ValueAsString()
-
-    }
+}
 
     [Serializable]
     public abstract class DependentVariable<T> : DependentVariable {

@@ -37,24 +37,25 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             OnEnable();
         }
 
-        void OnEnable() {
-            ExperimentEvents.OnBlockOrderChosen += BlockOrderSelected;
-        }
+        #region BlockOrderSelection
+            void OnEnable() {
+                ExperimentEvents.OnBlockOrderChosen += BlockOrderSelected;
+            }
+            public void Disable() {
+                ExperimentEvents.OnBlockOrderChosen -= BlockOrderSelected;
+            }
+            public void BlockOrderSelected(int selectedOrderIndex) {
+                OrderedBlockTable = baseBlockTable.GetBlockOrderTable(selectedOrderIndex);
+                CreateAndAddBlocks();
+            }
+        #endregion
 
-        public void Disable() {
-            ExperimentEvents.OnBlockOrderChosen -= BlockOrderSelected;
-        }
+
 
         public DataTable GetBlockOrderTable(int sessionOrderChosenIndex) {
             BlockTable orderedBlockTable = baseBlockTable.GetBlockOrderTable(sessionOrderChosenIndex);
             return orderedBlockTable;
         }
-
-        public void BlockOrderSelected(int selectedOrderIndex) {
-            OrderedBlockTable = baseBlockTable.GetBlockOrderTable(selectedOrderIndex);
-            CreateAndAddBlocks();
-        }
-
 
         public void CreateAndAddBlocks() {
             Blocks = new List<Block>();
@@ -124,76 +125,19 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public static DataTable SortAndAddIVs(List<Variable> allData, bool block = false) {
             DataTable table = new DataTable();
 
-            List<IndependentVariable> balanced = new List<IndependentVariable>();
-            List<IndependentVariable> looped = new List<IndependentVariable>();
-            List<IndependentVariable> probability = new List<IndependentVariable>();
+            SortedVariableContainer sorted = new SortedVariableContainer(allData, block);
 
-            List<DependentVariable> dependentVariables = new List<DependentVariable>();
-
-            //Sort Independent variables into mixing categories so they go in order
-            int numberOfBlockIvs = 0;
-            int numberOfNonBlockIvs = 0;
-            foreach (Variable variable in allData) {
-                if (variable.TypeOfVariable == VariableType.Independent) {
-                    IndependentVariable ivVariable = (IndependentVariable) variable;
-
-                    if (ivVariable.Block) {
-                        numberOfBlockIvs++;
-                    }
-                    else {
-                        numberOfNonBlockIvs++;
-                    }
-                    
-
-                    if (block && ivVariable.Block || !block && !ivVariable.Block) {
-
-                        switch (ivVariable.MixingTypeOfVariable) {
-                            case VariableMixingType.Balanced:
-                                balanced.Add(ivVariable);
-                                break;
-                            case VariableMixingType.Looped:
-                                looped.Add(ivVariable);
-                                break;
-
-                            case VariableMixingType.EvenProbability:
-                            case VariableMixingType.CustomProbability:
-                                probability.Add(ivVariable);
-                                break;
-
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-                    }
-                    
-                }
-                else if (variable.TypeOfVariable == VariableType.Dependent) {
-                    DependentVariable dVDatum = (DependentVariable) variable;
-                    dependentVariables.Add(dVDatum);
-                }
-            }
-
-            bool thereAreBlockIvsButNoNormalIvs = numberOfBlockIvs > 0 && numberOfNonBlockIvs == 0;
-            if (!block && thereAreBlockIvsButNoNormalIvs) {
-
-                throw new InvalidExperimentDesignException($"You defined {numberOfBlockIvs} block variable(s), " +
-                                                           $"when there are {numberOfNonBlockIvs} unblocked independent variables." +
-                                                           $"You can safely unblock the variable " +
-                                                           $"to make it a normal variable");
-            }
-
-
-            //Order they're added matters.
-            foreach (IndependentVariable datum in balanced) table = AddVariableGeneric(datum, table);
-            foreach (IndependentVariable datum in looped) table = AddVariableGeneric(datum, table);
-            foreach (IndependentVariable datum in probability) table = AddVariableGeneric(datum, table);
-            foreach (DependentVariable dependentVariable in dependentVariables) table = AddVariableGeneric(dependentVariable, table);
+            //Order matters.
+            foreach (IndependentVariable datum in sorted.BalancedIndependentVariables) table = AddVariableGeneric(datum, table);
+            foreach (IndependentVariable datum in sorted.LoopedIndependentVariables) table = AddVariableGeneric(datum, table);
+            foreach (IndependentVariable datum in sorted.ProbabilityIndependentVariables) table = AddVariableGeneric(datum, table);
+            foreach (DependentVariable dependentVariable in sorted.DependentVariables) table = AddVariableGeneric(dependentVariable, table);
             
-            //Debug.Log($"2: Current trialTable rows in getTable() {trialTable.Rows.Count}");
             return table;
         }
 
         static DataTable AddVariableGeneric(Variable variable, DataTable table) {
-            DataTable newTable = new DataTable();
+            DataTable newTable;
             switch (variable.DataType) {
                 case SupportedDataTypes.Int:
                     newTable = AddVariable<int>(table, variable);
@@ -262,7 +206,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 newTable = AddDefaultValues<T>(newTable, dependentVariable);
             }
             else {
-                throw new ArgumentException("Variable is of undefined type of variable");
+                throw new ArgumentException("Variable is of undefined type");
             }
 
             //Debug.Log($"(AddVariable<T> trialTable now has {newTable.Rows.Count} rows");
@@ -272,26 +216,17 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
 
 
-        static DataTable AddBalancedValues<T>(DataTable table, IndependentVariable independentVariable) {
+        static DataTable AddBalancedValues<T>(DataTable table, IndependentVariable<T> castIndependentVariable) {
 
             DataTable newTable = table.Clone();
 
-            AddVariableColumn(independentVariable, newTable);
-
-            IndependentVariable<T> castIndependentVariable = (IndependentVariable<T>) independentVariable;
-            if (castIndependentVariable.Values.Count == 0) {
-                throw new ArgumentException($"No values defined for variable {independentVariable.Name}");
-            }
-
-
+            AddVariableColumn(castIndependentVariable, newTable);
+            
+            castIndependentVariable.EnsureHasValues();
+               
+            
             if (table.Rows.Count == 0) {
-                //Debug.Log("Adding rows to empty trialTable in variable creation");
-
-                foreach (T value in castIndependentVariable.Values) {
-                    var newRow = newTable.NewRow();
-                    newRow[independentVariable.Name] = value;
-                    newTable.Rows.Add(newRow);
-                }
+                AddRowsToEmptyTable(castIndependentVariable, newTable);
             }
             else {
                 //Debug.Log("Adding rows to NON empty trialTable in variable creation");
@@ -299,7 +234,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     foreach (T value in castIndependentVariable.Values) {
                         newTable.ImportRow(tableRow);
                         var newRow = newTable.Rows[newTable.Rows.Count - 1];
-                        newRow[independentVariable.Name] = value;
+                        newRow[castIndependentVariable.Name] = value;
                     }
                 }
             }
@@ -308,14 +243,24 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         }
 
-        static DataTable AddLoopedValues<T>(DataTable table, IndependentVariable independentVariable) {
+        static void AddRowsToEmptyTable<T>(IndependentVariable<T> castIndependentVariable,
+                                           DataTable  newTable) {
+            //Debug.Log("Adding rows to empty trialTable in variable creation");
+            foreach (T value in castIndependentVariable.Values) {
+                var newRow = newTable.NewRow();
+                newRow[castIndependentVariable.Name] = value;
+                newTable.Rows.Add(newRow);
+            }
+
+        }
+
+        static DataTable AddLoopedValues<T>(DataTable table, IndependentVariable<T> castIndependentVariable) {
             DataTable newTable = table.Clone();
 
-            AddVariableColumn(independentVariable, newTable);
+            AddVariableColumn(castIndependentVariable, newTable);
 
-            IndependentVariable<T> castIndependentVariable = (IndependentVariable<T>) independentVariable;
             if (castIndependentVariable.Values.Count == 0) {
-                throw new ArgumentNullException($"No values defined for variable {independentVariable.Name}");
+                throw new ArgumentNullException($"No values defined for variable {castIndependentVariable.Name}");
             }
 
 
@@ -324,12 +269,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
 
             if (table.Rows.Count == 0) {
-                Debug.Log("Adding rows to empty trialTable in variable creation");
-                foreach (T value in castIndependentVariable.Values) {
-                    var newRow = newTable.NewRow();
-                    newRow[independentVariable.Name] = value;
-                    newTable.Rows.Add(newRow);
-                }
+                AddRowsToEmptyTable(castIndependentVariable, newTable);
             }
             else {
                 int lowestCommonMultiple =
@@ -347,7 +287,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
                 T value = loopValues.FirstElement;
                 foreach (DataRow newTableRow in newTable.Rows) {
-                    newTableRow[independentVariable.Name] = value;
+                    newTableRow[castIndependentVariable.Name] = value;
                     value = loopValues.NextElement;
                 }
             }
@@ -355,49 +295,38 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return newTable;
         }
 
-        static DataTable AddEvenProbabilityValues<T>(DataTable table, IndependentVariable independentVariable) {
+        static DataTable AddEvenProbabilityValues<T>(DataTable table, IndependentVariable<T> castIndependentVariable) {
 
             DataTable newTable = table.Copy();
 
-            AddVariableColumn(independentVariable, newTable);
+            AddVariableColumn(castIndependentVariable, newTable);
 
-            IndependentVariable<T> castIndependentVariable = (IndependentVariable<T>) independentVariable;
             if (castIndependentVariable.Values.Count == 0) {
-                throw new ArgumentNullException($"No values defined for variable {independentVariable.Name}");
+                throw new ArgumentNullException($"No values defined for variable {castIndependentVariable.Name}");
             }
-
-
+            
             if (table.Rows.Count == 0) {
-                Debug.Log("Adding rows to empty trialTable in variable creation");
-                foreach (T value in castIndependentVariable.Values) {
-                    var newRow = newTable.NewRow();
-                    newRow[independentVariable.Name] = value;
-                    newTable.Rows.Add(newRow);
-                }
+                AddRowsToEmptyTable(castIndependentVariable, newTable);
             }
             else {
-                Debug.Log($"Adding values to new trialTable (rows: {table.Rows.Count}) in even probability variable creation");
+                Debug.Log($"Adding values to new trialTable (rows: {table.Rows.Count}) in even ProbabilityIndependentVariables variable creation");
                 foreach (DataRow newTableRow in newTable.Rows) {
-                    newTableRow[independentVariable.Name] = castIndependentVariable.Values.RandomItem();
+                    newTableRow[castIndependentVariable.Name] = castIndependentVariable.Values.RandomItem();
                 }
             }
 
             return newTable;
         }
 
-        static DataTable AddCustomProbabilityValues<T>(DataTable table, IndependentVariable independentVariable) {
+        static DataTable AddCustomProbabilityValues<T>(DataTable table, IndependentVariable<T> castIndependentVariable) {
             DataTable newTable = table.Copy();
-
-
-            AddVariableColumn(independentVariable, newTable);
-
-
-            IndependentVariable<T> castedIndependentVariable = (IndependentVariable<T>) independentVariable;
-
+            
+            AddVariableColumn(castIndependentVariable, newTable);
+           
             List<T> distribution = new List<T>();
-            for (int i = 0; i < castedIndependentVariable.Probabilities.Count; i++) {
-                float prob = castedIndependentVariable.Probabilities[i];
-                T val = castedIndependentVariable.Values[i];
+            for (int i = 0; i < castIndependentVariable.Probabilities.Count; i++) {
+                float prob = castIndependentVariable.Probabilities[i];
+                T val = castIndependentVariable.Values[i];
                 int number = (int) (prob * 1000);
                 for (int j = 0; j < number; j++) {
                     distribution.Add(val);
@@ -405,17 +334,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
 
             if (table.Rows.Count == 0) {
-                Debug.Log("Adding rows to empty trialTable in variable creation");
-                foreach (T value in castedIndependentVariable.Values) {
-                    var newRow = newTable.NewRow();
-                    newRow[independentVariable.Name] = value;
-                    newTable.Rows.Add(newRow);
-                }
+                AddRowsToEmptyTable(castIndependentVariable, newTable);
             }
             else {
-                Debug.Log($"Adding values to new trialTable (rows: {table.Rows.Count}) in even probability variable creation");
+                Debug.Log($"Adding values to new trialTable (rows: {table.Rows.Count}) in even ProbabilityIndependentVariables variable creation");
                 foreach (DataRow newTableRow in newTable.Rows) {
-                    newTableRow[independentVariable.Name] = distribution.RandomItem();
+                    newTableRow[castIndependentVariable.Name] = distribution.RandomItem();
                 }
             }
 

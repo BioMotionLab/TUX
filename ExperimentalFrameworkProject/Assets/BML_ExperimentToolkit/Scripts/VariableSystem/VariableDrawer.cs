@@ -297,7 +297,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                 SerializedProperty prob = probabilitiesProperty.GetArrayElementAtIndex(i);
                 if (prob.floatValue < 0 || prob.floatValue > 1) {
                     throw new
-                        ArgumentOutOfRangeException($"Can't have a probability outside of range 0-1, prob: {prob.floatValue} ");
+                        ArgumentOutOfRangeException($"Can't have a ProbabilityIndependentVariables outside of range 0-1, prob: {prob.floatValue} ");
                 }
 
                 runningTotal += prob.floatValue;
