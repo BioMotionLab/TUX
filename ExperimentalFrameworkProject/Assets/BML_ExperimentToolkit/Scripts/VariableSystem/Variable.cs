@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_ExperimentToolkit.Scripts.VariableSystem.ValueAddingStrategies;
 using UnityEditor;
 using UnityEngine;
 
@@ -33,11 +34,14 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
         public override Type Type => typeof(T);
         public override DataTable AddValuesTo(DataTable table) {
-            return AddValuesStrategy.AddValuesToCopyOf(table, this);
-        }
 
-        AddIndependentValuesStrategy<T> AddValuesStrategy =>
-            IndependentValuesStrategyFactory.Create<T>(MixingTypeOfVariable);
+            if (Values.Count == 0) {
+                throw new ArgumentNullException($"Can't add values, none defined for variable: {Name}");
+            }
+
+            IndependentValuesStrategy<T> independentValuesStrategy = IndependentValuesStrategyFactory.Create<T>(MixingTypeOfVariable);
+            return independentValuesStrategy.AddValuesToTable(table, this);
+        }
 
 
         [SerializeField]
@@ -52,13 +56,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             Name = $"Unnamed Variable (types:{typeof(T)})";
             TypeOfVariable = VariableType.Independent;
         }
-
-        public void EnsureHasValues() {
-            if (Values.Count == 0) {
-                throw new ArgumentException($"No values defined for variable {Name}");
-            }
-        }
-    //public virtual string ValueAsString()
 
 }
 
@@ -75,10 +72,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         }
 
         public override DataTable AddValuesTo(DataTable table) {
-            return addValuesStrategy.AddValuesToCopyOf(table, this);
+            return valuesStrategy.AddValuesToCopyOf(table, this);
         }
 
-        readonly AddDependentValuesStrategy<T> addValuesStrategy = new AddDependentValuesStrategy<T>();
+        readonly DependentValuesStrategy<T> valuesStrategy = new DependentValuesStrategy<T>();
 
     }
 

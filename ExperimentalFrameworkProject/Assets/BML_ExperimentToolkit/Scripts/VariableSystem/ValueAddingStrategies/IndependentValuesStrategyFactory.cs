@@ -1,20 +1,20 @@
 ﻿using System;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_ExperimentToolkit.Scripts.VariableSystem.ValueAddingStrategies {
     internal class IndependentValuesStrategyFactory {
 
-        public static AddIndependentValuesStrategy<T> Create<T>(VariableMixingType mixingTypeOfVariable) {
+        public static IndependentValuesStrategy<T> Create<T>(VariableMixingType mixingTypeOfVariable) {
 
             switch (mixingTypeOfVariable) {
                 case VariableMixingType.Balanced:
-                    return new AddBalancedValuesStrategy<T>();
+                    return new BalancedStrategy<T>();
                 case VariableMixingType.Looped:
-                    return new AddLoopedValuesStrategy<T>();
+                    return new LoopedStrategy<T>();
                 case VariableMixingType.EvenProbability:
-                    return new AddEvenProbabilityValuesStrategy<T>();
+                    return new EvenProbabilityStrategy<T>();
                 case VariableMixingType.CustomProbability:
-                    return new AddCustomProbabilityValuesStrategy<T>();
+                    return new CustomProbabilityStrategy<T>();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mixingTypeOfVariable), mixingTypeOfVariable, null);
             }

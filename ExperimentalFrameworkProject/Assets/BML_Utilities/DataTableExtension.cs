@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using BML_ExperimentToolkit.Scripts.VariableSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -126,10 +127,10 @@ namespace BML_Utilities {
 
 
         /// <summary>
-        /// Randomly shuffles the item order of this list
+        /// Randomly shuffles the row order of this table
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
+        /// <param name="table"></param>
         public static DataTable Shuffle(this DataTable table) {
             int n = table.Rows.Count;
             List<DataRow> shuffledRows = new List<DataRow>();
