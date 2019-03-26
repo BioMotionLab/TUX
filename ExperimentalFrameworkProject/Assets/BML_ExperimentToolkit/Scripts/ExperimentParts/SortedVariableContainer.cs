@@ -18,27 +18,28 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             int numberOfNonBlockIvs = 0;
             foreach (Variable variable in allData) {
                 if (variable.TypeOfVariable == VariableType.Independent) {
-                    IndependentVariable ivVariable = (IndependentVariable) variable;
-                    if (ivVariable.Block) {
+                    IndependentVariable independentVariable = (IndependentVariable) variable;
+
+                    if (independentVariable.Block) {
                         numberOfBlockIvs++;
                     }
                     else {
                         numberOfNonBlockIvs++;
                     }
 
-                    if (block && ivVariable.Block || !block && !ivVariable.Block) {
+                    if (block && independentVariable.Block || !block && !independentVariable.Block) {
 
-                        switch (ivVariable.MixingTypeOfVariable) {
+                        switch (independentVariable.MixingTypeOfVariable) {
                             case VariableMixingType.Balanced:
-                                BalancedIndependentVariables.Add(ivVariable);
+                                BalancedIndependentVariables.Add(independentVariable);
                                 break;
                             case VariableMixingType.Looped:
-                                LoopedIndependentVariables.Add(ivVariable);
+                                LoopedIndependentVariables.Add(independentVariable);
                                 break;
 
                             case VariableMixingType.EvenProbability:
                             case VariableMixingType.CustomProbability:
-                                ProbabilityIndependentVariables.Add(ivVariable);
+                                ProbabilityIndependentVariables.Add(independentVariable);
                                 break;
 
                             default:
@@ -47,8 +48,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     }
                 }
                 else if (variable.TypeOfVariable == VariableType.Dependent) {
-                    DependentVariable dVDatum = (DependentVariable) variable;
-                    DependentVariables.Add(dVDatum);
+                    DependentVariable dependentVariable = (DependentVariable) variable;
+                    DependentVariables.Add(dependentVariable);
                 }
             }
 

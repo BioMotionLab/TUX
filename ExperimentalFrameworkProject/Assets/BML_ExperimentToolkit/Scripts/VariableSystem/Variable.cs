@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using UnityEditor;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
-
-
 
 
     [Serializable]
@@ -15,6 +15,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public          VariableType       TypeOfVariable;
         public          SupportedDataTypes DataType;
         public abstract Type               Type { get; }
+        public abstract DataTable AddValuesTo(DataTable table);
     }
 
     [Serializable]
@@ -31,6 +32,13 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
     public abstract class IndependentVariable<T> : IndependentVariable {
 
         public override Type Type => typeof(T);
+        public override DataTable AddValuesTo(DataTable table) {
+            return AddValuesStrategy.AddValuesToCopyOf(table, this);
+        }
+
+        AddIndependentValuesStrategy<T> AddValuesStrategy =>
+            IndependentValuesStrategyFactory.Create<T>(MixingTypeOfVariable);
+
 
         [SerializeField]
         public List<T> Values;
@@ -50,8 +58,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                 throw new ArgumentException($"No values defined for variable {Name}");
             }
         }
-        
-
     //public virtual string ValueAsString()
 
 }
@@ -66,8 +72,14 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             Name = $"Unnamed DependentVariable Variable (type:{typeof(T)})";
             TypeOfVariable = VariableType.Dependent;
 
-
         }
+
+        public override DataTable AddValuesTo(DataTable table) {
+            return addValuesStrategy.AddValuesToCopyOf(table, this);
+        }
+
+        readonly AddDependentValuesStrategy<T> addValuesStrategy = new AddDependentValuesStrategy<T>();
+
     }
 
     [Serializable]
