@@ -2,7 +2,7 @@
 
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
-    [CreateAssetMenu(menuName = "BML/Create ColumnNames")]
+    [CreateAssetMenu(menuName = "BML/Create ColumnNames Config File")]
     public class ColumnNames : ScriptableObject{
         public string TotalTrialIndex = "Trial";
         public string BlockIndex      = "Block";

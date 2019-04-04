@@ -22,7 +22,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public int TotalTrials => Blocks.Count * baseTrialTable.Trials;
         public int BlockCount => Blocks.Count;
-        public string TrialTableHeader => Blocks[0].trialTable.HeaderAsString(separator: Delimiter.Comma, truncate: -1);
+        public string TrialTableHeader => Blocks[0].TrialTable.HeaderAsString(separator: Delimiter.Comma, truncate: -1);
 
         public bool HasBlocks => baseBlockTable.HasBlocks;
 
@@ -34,12 +34,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             this.shuffleTrialsBetweenBlocks = shuffleTrialsBetweenBlocks;
             baseBlockTable = new BlockTable(allData);
             baseTrialTable = new TrialTable(allData, baseBlockTable, shuffleTrialOrder, numberOfRepetitions,
-                                            experiment.ColumnNames);
+                                            experiment.ConfigDesignFile.ColumnNames);
             OnEnable();
         }
-
-        #region BlockOrderSelection
-
+        
         void OnEnable() {
             ExperimentEvents.OnBlockOrderChosen += BlockOrderSelected;
         }
@@ -48,21 +46,17 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             ExperimentEvents.OnBlockOrderChosen -= BlockOrderSelected;
         }
 
-        public void BlockOrderSelected(int selectedOrderIndex) {
+        void BlockOrderSelected(int selectedOrderIndex) {
             OrderedBlockTable = baseBlockTable.GetBlockOrderTable(selectedOrderIndex);
             CreateAndAddBlocks();
         }
-
-        #endregion
-
-
-
+        
         public DataTable GetBlockOrderTable(int sessionOrderChosenIndex) {
             BlockTable orderedBlockTable = baseBlockTable.GetBlockOrderTable(sessionOrderChosenIndex);
             return orderedBlockTable;
         }
 
-        public void CreateAndAddBlocks() {
+        void CreateAndAddBlocks() {
             Blocks = new List<Block>();
 
             if (OrderedBlockTable == null) {
@@ -70,9 +64,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 DataTable trialTable = baseTrialTable.Copy();
                 for (int i = 0; i < trialTable.Rows.Count; i++) {
                     DataRow trialRow = trialTable.Rows[i];
-                    trialRow[experiment.ColumnNames.BlockIndex] = 0;
-                    trialRow[experiment.ColumnNames.TrialIndex] = i;
-                    trialRow[experiment.ColumnNames.TotalTrialIndex] = i;
+                    trialRow[experiment.ConfigDesignFile.ColumnNames.BlockIndex] = 0;
+                    trialRow[experiment.ConfigDesignFile.ColumnNames.TrialIndex] = i;
+                    trialRow[experiment.ConfigDesignFile.ColumnNames.TotalTrialIndex] = i;
                 }
 
                 string blockIdentity = "Main Block";
@@ -121,9 +115,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 for (int trialIndexInBlock = 0; trialIndexInBlock < newTable.Rows.Count; trialIndexInBlock++) {
                     DataRow trialRow = newTable.Rows[trialIndexInBlock];
                     trialRow[columnName] = blockTableRow[columnName];
-                    trialRow[experiment.ColumnNames.BlockIndex] = blockIndex;
-                    trialRow[experiment.ColumnNames.TrialIndex] = trialIndexInBlock;
-                    trialRow[experiment.ColumnNames.TotalTrialIndex] = startingTotalTrialIndex;
+                    trialRow[experiment.ConfigDesignFile.ColumnNames.BlockIndex] = blockIndex;
+                    trialRow[experiment.ConfigDesignFile.ColumnNames.TrialIndex] = trialIndexInBlock;
+                    trialRow[experiment.ConfigDesignFile.ColumnNames.TotalTrialIndex] = startingTotalTrialIndex;
                     startingTotalTrialIndex++;
                 }
             }

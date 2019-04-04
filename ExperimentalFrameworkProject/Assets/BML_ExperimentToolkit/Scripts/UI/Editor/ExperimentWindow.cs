@@ -104,7 +104,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             //Check if in play mode
             if (!Application.isPlaying) {
                 EditorGUILayout
-                    .HelpBox("Cannot display experiment design when Unity is not in PlayMode, Press play in Editor to start experimentToInit Setup",
+                    .HelpBox("Cannot display experiment design when Unity is not in PlayMode, " +
+                             "\n\nPress play in Editor to start experimentToInit Setup",
                              MessageType.Error);
                 return;
             }
@@ -112,8 +113,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             //Ensure config file initialized properly.
             if (!initialized) {
                 EditorGUILayout.HelpBox("ConfigDesignFile not properly initialized. " +
-                                        "\nMake sure you have created a config file from the menu and populated it with variables" +
-                                        "\nAlso make sure the config file is dragged into the Experiment GameObject inspector in your scene.",
+                                        "\n\nMake sure you have created a config file from the menu and populated it with variables" +
+                                        "\n\nAlso make sure the config file is dragged into the Experiment GameObject inspector in your scene.",
                                         MessageType.Error);
                 return;
             }
@@ -360,12 +361,12 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 EditorGUILayout.LabelField("", RunningTrialIndicatorWidth);
                 EditorGUILayout.LabelField("", JumpToButtonWidth);
                 EditorGUILayout.LabelField("", CompleteIndicatorWidth);
-                EditorGUILayout.TextArea(block.trialTable.HeaderAsString());
+                EditorGUILayout.TextArea(block.TrialTable.HeaderAsString());
                 EditorGUILayout.EndHorizontal();
 
 
-                for (int indexOfRow = 0; indexOfRow < block.trialTable.Rows.Count; indexOfRow++) {
-                    DataRow trialRow = block.trialTable.Rows[indexOfRow];
+                for (int indexOfRow = 0; indexOfRow < block.TrialTable.Rows.Count; indexOfRow++) {
+                    DataRow trialRow = block.TrialTable.Rows[indexOfRow];
 
                     EditorGUILayout.BeginHorizontal();
 

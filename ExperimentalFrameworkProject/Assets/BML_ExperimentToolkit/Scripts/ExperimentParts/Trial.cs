@@ -2,6 +2,7 @@
 using System.Data;
 using BML_ExperimentToolkit.Scripts.Managers;
 using UnityEngine;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
@@ -19,23 +20,38 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public readonly DataRow Data;
 
         MonoBehaviour  runner;
-        public int     Index      => (int) Data[Experiment.ColumnNames.TrialIndex];
-        public int     BlockIndex => (int) (Data[Experiment.ColumnNames.BlockIndex]);
+        public int     Index      => (int) Data[Experiment.ConfigDesignFile.ColumnNames.TrialIndex];
+        public int     BlockIndex => (int) (Data[Experiment.ConfigDesignFile.ColumnNames.BlockIndex]);
         public string  TrialText  => $"Trial {Index} of Block {BlockIndex}";
 
         public bool CompletedSuccessfully {
-            get => (bool) Data[Experiment.ColumnNames.Completed];
-            set => Data[Experiment.ColumnNames.Completed] = value;
+            get {
+                return (bool)Data[Experiment.ConfigDesignFile.ColumnNames.Completed];
+            }
+
+            set {
+                Data[Experiment.ConfigDesignFile.ColumnNames.Completed] = value;
+            }
         }
 
         public int Attempts {
-            get => (int) Data[Experiment.ColumnNames.Attempts];
-            set => Data[Experiment.ColumnNames.Attempts] = value;
+            get {
+                return (int)Data[Experiment.ConfigDesignFile.ColumnNames.Attempts];
+            }
+
+            set {
+                Data[Experiment.ConfigDesignFile.ColumnNames.Attempts] = value;
+            }
         }
 
         public bool Skipped {
-            get => (bool) Data[Experiment.ColumnNames.Skipped];
-            set => Data[Experiment.ColumnNames.Skipped] = value;
+            get {
+                return (bool)Data[Experiment.ConfigDesignFile.ColumnNames.Skipped];
+            }
+
+            set {
+                Data[Experiment.ConfigDesignFile.ColumnNames.Skipped] = value;
+            }
         }
 
         protected Trial(Experiment experiment, DataRow data) {
@@ -50,14 +66,16 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <param name="theRunner"></param>
         /// <returns></returns>
         public IEnumerator Run(MonoBehaviour theRunner) {
-            this.runner = theRunner;
+            runner = theRunner;
+
             InitializeTrial();
+
             //Skip a frame to allow any previous things to end
             yield return null;
 
             runner.StartCoroutine(RunExperimentControls());
 
-            Debug.Log($"{TrialText} Running...");
+            Debug.Log($"***\n{TrialText} Running...");
             
             yield return RunCoroutineWhileListeningForInterrupt(Pre() );
             yield return RunCoroutineWhileListeningForInterrupt(Main());
@@ -108,38 +126,23 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 if (Input.GetKeyDown(KeyCode.Backspace)) {
                     //Debug.Log("detected skip key");
                     interrupt = true;
-                    TrialRunning = false;
                     Skipped = true;
                     FinalizeTrial();
-                    //Let notifications disperse through program for a frame
-                    yield return null;
-
                     ExperimentEvents.InterruptTrial();
                 }
 
                 if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) {
                     //Debug.Log($"detected last key");
                     interrupt = true;
-                    TrialRunning = false;
                     FinalizeTrial();
-                    //Let notifications disperse through program for a frame
-                    yield return null;
-
                     ExperimentEvents.GoBackOneTrial();
-
                 }
 
                 if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow)) {
                     //Debug.Log($"detected next key");
                     interrupt = true;
-                    TrialRunning = false;
                     FinalizeTrial();
-                    //Let notifications disperse through program for a frame
-                    yield return null;
-
-
                     ExperimentEvents.SkipToNextTrial();
-
                 }
 
                 if (!TrialRunning) {

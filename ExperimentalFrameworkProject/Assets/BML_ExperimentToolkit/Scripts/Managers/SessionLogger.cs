@@ -15,7 +15,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         /// </summary>
         /// <param name="session"></param>
         public static void Log(Session session) {
-            Debug.Log("Logging session");
+            //Debug.Log("Logging session");
 
             //Set up file location/reference
             string fileFolder = Path.Combine(Application.dataPath, OutputLocation);

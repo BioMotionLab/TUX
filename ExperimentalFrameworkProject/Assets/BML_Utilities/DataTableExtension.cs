@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -78,7 +77,7 @@ namespace BML_Utilities {
 
             IEnumerable<IList> permutations = Permutate(dataRows, dataRows.Count);
 
-            List<List<DataRow>> AllPermutations = new List<List<DataRow>>();
+            List<List<DataRow>> allPermutations = new List<List<DataRow>>();
             foreach (IList perms in permutations) {
                 List<DataRow> permDataRows = new List<DataRow>();
                 foreach (DataRow permDataRow in perms) {
@@ -86,10 +85,10 @@ namespace BML_Utilities {
 
                 }
 
-                AllPermutations.Add(permDataRows);
+                allPermutations.Add(permDataRows);
             }
 
-            return AllPermutations;
+            return allPermutations;
         }
 
         public static void RotateRight(IList sequence, int count) {
@@ -129,7 +128,6 @@ namespace BML_Utilities {
         /// <summary>
         /// Randomly shuffles the row order of this table
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="table"></param>
         public static DataTable Shuffle(this DataTable table) {
             int n = table.Rows.Count;

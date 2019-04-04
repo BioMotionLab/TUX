@@ -2,18 +2,17 @@
 using System.Data;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
-using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public class TrialTable {
 
         DataTable baseTrialTable;
-        ColumnNames ColumnNames;
+        readonly ColumnNames columnNames;
         public int Trials => baseTrialTable.Rows.Count;
 
         public TrialTable(List<Variable> allData,             BlockTable  baseBlockTable, bool shuffleBaseTrialOrder,
                           int            numberOfRepetitions, ColumnNames columnNames) {
-            ColumnNames = columnNames;
+            this.columnNames = columnNames;
             baseTrialTable = ExperimentDesign.SortAndAddIVs(allData);
 
             //Repeat all trials if specified
@@ -55,81 +54,81 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         void AddSkippedColumnTo() {
             DataColumn skippedColumn = new DataColumn {
                 DataType = typeof(bool),
-                ColumnName = ColumnNames.Skipped,
+                ColumnName = columnNames.Skipped,
                 Unique = false,
                 ReadOnly = false,
             };
             baseTrialTable.Columns.Add(skippedColumn);
             foreach (DataRow row in baseTrialTable.Rows) {
-                row[ColumnNames.Skipped] = false;
+                row[columnNames.Skipped] = false;
             }
         }
 
         void AddAttemptsColumnTo() {
             DataColumn attemptsColumn = new DataColumn {
                 DataType = typeof(int),
-                ColumnName = ColumnNames.Attempts,
+                ColumnName = columnNames.Attempts,
                 Unique = false,
                 ReadOnly = false,
             };
             baseTrialTable.Columns.Add(attemptsColumn);
             foreach (DataRow row in baseTrialTable.Rows) {
-                row[ColumnNames.Attempts] = 0;
+                row[columnNames.Attempts] = 0;
             }
         }
 
         void AddSuccessColumnTo() {
             DataColumn successColumn = new DataColumn {
                 DataType = typeof(bool),
-                ColumnName = ColumnNames.Completed,
+                ColumnName = columnNames.Completed,
                 Unique = false,
                 ReadOnly = false,
             };
             baseTrialTable.Columns.Add(successColumn);
             foreach (DataRow row in baseTrialTable.Rows) {
-                row[ColumnNames.Completed] = false;
+                row[columnNames.Completed] = false;
             }
         }
 
         void AddTrialIndexColumnTo() {
             DataColumn trialIndexColumn = new DataColumn {
                 DataType = typeof(int),
-                ColumnName = ColumnNames.TrialIndex,
+                ColumnName = columnNames.TrialIndex,
                 Unique = false,
                 ReadOnly = false,
             };
             baseTrialTable.Columns.Add(trialIndexColumn);
             trialIndexColumn.SetOrdinal(0); // to put the column in position 0;
             foreach (DataRow row in baseTrialTable.Rows) {
-                row[ColumnNames.TrialIndex] = -1;
+                row[columnNames.TrialIndex] = -1;
             }
         }
 
         void AddTotalTrialIndexColumnTo() {
             DataColumn trialIndexColumn = new DataColumn {
                 DataType = typeof(int),
-                ColumnName = ColumnNames.TotalTrialIndex,
+                ColumnName = columnNames.TotalTrialIndex,
                 Unique = false,
                 ReadOnly = false,
             };
             baseTrialTable.Columns.Add(trialIndexColumn);
             trialIndexColumn.SetOrdinal(0); // to put the column in position 0;
             foreach (DataRow row in baseTrialTable.Rows) {
-                row[ColumnNames.TotalTrialIndex] = -1;
+                row[columnNames.TotalTrialIndex] = -1;
             }
         }
 
         void AddBlockNumberColumnTo() {
             DataColumn blockIndexColumn = new DataColumn {
                 DataType = typeof(int),
-                ColumnName = ColumnNames.BlockIndex,
+                ColumnName = columnNames.BlockIndex,
                 Unique = false,
                 ReadOnly = false,
             };
             baseTrialTable.Columns.Add(blockIndexColumn);
             blockIndexColumn.SetOrdinal(0); // to put the column in position 0;
             foreach (DataRow row in baseTrialTable.Rows) {
-                row[ColumnNames.BlockIndex] = -1;
+                row[columnNames.BlockIndex] = -1;
             }
         }
 

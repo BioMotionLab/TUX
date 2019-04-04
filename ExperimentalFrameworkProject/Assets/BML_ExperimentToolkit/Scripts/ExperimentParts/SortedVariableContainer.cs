@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 

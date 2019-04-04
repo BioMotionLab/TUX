@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using BML_Utilities;
-using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
@@ -11,24 +10,23 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     /// This class stores a block a trials in an experiment.
     /// </summary>
     public abstract class Block {
-        private const string TabSeparator    = "\t";
-        private const int    TruncateDefault = 10;
 
-        public DataTable trialTable;
-        public string    Identity;
+        public readonly DataTable TrialTable;
+        public readonly string    Identity;
 
         public bool Complete = false;
         public int  Index    = -1;
 
         public List<Trial> Trials;
-        Experiment experiment;
+        readonly Experiment experiment;
 
+        // ReSharper disable once PublicConstructorInAbstractClass
         public Block(Experiment experiment, 
                      DataTable trialTable, 
                      string identity, 
                      Type trialType) {
             this.experiment = experiment;
-            this.trialTable = trialTable;
+            this.TrialTable = trialTable;
             this.Identity = identity;
             MakeTrials(trialType);
         }
@@ -40,13 +38,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         void MakeTrials(Type trialType) {
 
             Trials = new List<Trial>();
-
-            int i = 1;
-            //configure block index
-            foreach (DataRow row in trialTable.Rows) {
+            
+            foreach (DataRow row in TrialTable.Rows) {
                 Trial newTrial = (Trial)Activator.CreateInstance(trialType, experiment, row);
                 Trials.Add(newTrial);
-                i++;
+                
             }
         }
 
@@ -54,10 +50,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// String output for the block
         /// </summary>
         /// <param name="separator">The separator.</param>
-        /// <param name="TruncateToNum">The number of characters to leave.</param>
         /// <returns></returns>
-        public string AsString(string separator = TabSeparator, int TruncateToNum = TruncateDefault) {
-            string tableString = trialTable.AsString();
+        public string AsString(string separator = Delimiter.Tab) {
+            string tableString = TrialTable.AsString();
             return "Identity: " + Identity + "\n" + tableString;
         }
 

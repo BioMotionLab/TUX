@@ -6,6 +6,8 @@ using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_Utilities;
 using UnityEngine;
+// ReSharper disable VirtualMemberNeverOverridden.Global
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
@@ -15,6 +17,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     /// </summary>
     /// <seealso cref="T:UnityEngine.MonoBehaviour" />
     /// <seealso cref="T:BML_ExperimentToolkit.Scripts.Managers.Outputtable" />
+    // ReSharper disable once InheritdocConsiderUsage
     public abstract class Experiment : MonoBehaviour, Outputtable {
 
         /// <summary>
@@ -28,11 +31,13 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public virtual Type BlockType => typeof(SimpleBlock);
 
         public ExperimentDesign Design;
+
+        // ReSharper disable once NotAccessedField.Global
         protected Session Session;
+
         OutputManager outputManager;
 
         [Header("Required:")]
-        public ColumnNames ColumnNames;
         public ConfigDesignFile ConfigDesignFile;
         [Header("Optional:")]
         public ConfigOptions ConfigOptions;

@@ -47,7 +47,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         void StartRunningBlock(Block block) {
 
             currentlyRunningBlock = block;
-            Debug.Log($"Starting to run block {block.Identity}");
+            Debug.Log($"*****\nStarting to run block: {block.Identity}");
             ExperimentEvents.BlockHasStarted(block);
 
             experiment.StartCoroutine(RunPreBlock(block));
@@ -116,8 +116,8 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
             StartRunningBlock(blocks[jumpToIndex]);
         }
 
-        int BlockIndex(Block Block) {
-            return blocks.IndexOf(Block);
+        int BlockIndex(Block block) {
+            return blocks.IndexOf(block);
         }
 
     }

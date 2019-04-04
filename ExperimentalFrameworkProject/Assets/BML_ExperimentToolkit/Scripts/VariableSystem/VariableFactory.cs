@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
