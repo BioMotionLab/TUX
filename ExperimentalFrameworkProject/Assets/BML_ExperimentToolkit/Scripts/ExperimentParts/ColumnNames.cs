@@ -10,5 +10,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public string Attempts        = "Attempts";
         public string TrialIndex      = "TrialInBlock";
         public string Completed       = "Completed";
+        public string TrialTime = "TrialTime";
+
+        [Space]
+        public int DefaultMissingValue = -999;
     }
 }

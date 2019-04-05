@@ -40,8 +40,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             AddSuccessColumnTo();
             AddAttemptsColumnTo();
             AddSkippedColumnTo();
-            
-            
+            AddTrialTimeColumnTo();
+
+
 
         }
 
@@ -100,7 +101,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             baseTrialTable.Columns.Add(trialIndexColumn);
             trialIndexColumn.SetOrdinal(0); // to put the column in position 0;
             foreach (DataRow row in baseTrialTable.Rows) {
-                row[columnNames.TrialIndex] = -1;
+                row[columnNames.TrialIndex] = columnNames.DefaultMissingValue;
             }
         }
 
@@ -114,7 +115,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             baseTrialTable.Columns.Add(trialIndexColumn);
             trialIndexColumn.SetOrdinal(0); // to put the column in position 0;
             foreach (DataRow row in baseTrialTable.Rows) {
-                row[columnNames.TotalTrialIndex] = -1;
+                row[columnNames.TotalTrialIndex] = columnNames.DefaultMissingValue;
             }
         }
 
@@ -128,7 +129,19 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             baseTrialTable.Columns.Add(blockIndexColumn);
             blockIndexColumn.SetOrdinal(0); // to put the column in position 0;
             foreach (DataRow row in baseTrialTable.Rows) {
-                row[columnNames.BlockIndex] = -1;
+                row[columnNames.BlockIndex] = columnNames.DefaultMissingValue;
+            }
+        }
+        void AddTrialTimeColumnTo() {
+            DataColumn trailTimeColumn = new DataColumn {
+                                                             DataType = typeof(float),
+                                                             ColumnName = columnNames.TrialTime,
+                                                             Unique = false,
+                                                             ReadOnly = false,
+                                                         };
+            baseTrialTable.Columns.Add(trailTimeColumn);
+            foreach (DataRow row in baseTrialTable.Rows) {
+                row[columnNames.TrialTime] = 0;
             }
         }
 
@@ -136,7 +149,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return baseTrialTable.Copy();
         }
 
-        public void AddBlockColumnsFrom(DataTable blockTable) {
+        void AddBlockColumnsFrom(DataTable blockTable) {
             //Debug.Log("Adding Block Columns to Trial Table");
             foreach (DataColumn blockTableColumn in blockTable.Columns) {
                 //Debug.Log($"Adding Column: {blockTableColumn.ColumnName}");

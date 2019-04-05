@@ -24,6 +24,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public int     BlockIndex => (int) (Data[Experiment.ConfigDesignFile.ColumnNames.BlockIndex]);
         public string  TrialText  => $"Trial {Index} of Block {BlockIndex}";
 
+        float trialTime;
+
         public bool CompletedSuccessfully {
             get {
                 return (bool)Data[Experiment.ConfigDesignFile.ColumnNames.Completed];
@@ -31,6 +33,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             set {
                 Data[Experiment.ConfigDesignFile.ColumnNames.Completed] = value;
+            }
+        }
+
+        public float TrialTime {
+            set {
+                Data[Experiment.ConfigDesignFile.ColumnNames.TrialTime] = value;
             }
         }
 
@@ -78,7 +86,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             Debug.Log($"***\n{TrialText} Running...");
             
             yield return RunCoroutineWhileListeningForInterrupt(Pre() );
+            float startTime = Time.time;
             yield return RunCoroutineWhileListeningForInterrupt(Main());
+            float endTime = Time.time;
+            TrialTime = endTime - startTime;
             yield return RunCoroutineWhileListeningForInterrupt(Post());
             
             FinalizeTrial();
