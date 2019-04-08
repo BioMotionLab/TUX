@@ -27,29 +27,19 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         float trialTime;
 
         public bool CompletedSuccessfully {
-            get {
-                return (bool)Data[Experiment.ConfigDesignFile.ColumnNames.Completed];
-            }
+            get => (bool)Data[Experiment.ConfigDesignFile.ColumnNames.Completed];
 
-            set {
-                Data[Experiment.ConfigDesignFile.ColumnNames.Completed] = value;
-            }
+            set => Data[Experiment.ConfigDesignFile.ColumnNames.Completed] = value;
         }
 
         public float TrialTime {
-            set {
-                Data[Experiment.ConfigDesignFile.ColumnNames.TrialTime] = value;
-            }
+            set => Data[Experiment.ConfigDesignFile.ColumnNames.TrialTime] = value;
         }
 
         public int Attempts {
-            get {
-                return (int)Data[Experiment.ConfigDesignFile.ColumnNames.Attempts];
-            }
+            get => (int)Data[Experiment.ConfigDesignFile.ColumnNames.Attempts];
 
-            set {
-                Data[Experiment.ConfigDesignFile.ColumnNames.Attempts] = value;
-            }
+            set => Data[Experiment.ConfigDesignFile.ColumnNames.Attempts] = value;
         }
 
         public bool Skipped {
