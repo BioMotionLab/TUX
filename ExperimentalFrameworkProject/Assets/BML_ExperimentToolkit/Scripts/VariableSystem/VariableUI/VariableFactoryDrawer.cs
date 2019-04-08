@@ -9,7 +9,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
     public class VariableFactoryDrawer : PropertyDrawer {
 
         const float LineHeight = 20f;
-        const float backgroundPadding = 5f;
         float       height;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {

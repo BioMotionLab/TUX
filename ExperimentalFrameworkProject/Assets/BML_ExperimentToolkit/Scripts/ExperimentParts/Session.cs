@@ -23,36 +23,25 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         [SerializeField]
-        string outputFileName = "";
+        // ReSharper disable once InconsistentNaming
+        private string outputFileName = "";
 
         public string OutputFileName {
-            get {
-                if (DebugMode) {
-                    return DebugFileName;
-                }
-                else {
-                    return outputFileName;
-                }
-            }
-            set { outputFileName = value; }
+            get => DebugMode ? DebugFileName : outputFileName;
+            set => outputFileName = value;
         }
 
         [SerializeField]
-        string outputFolder = "";
+        // ReSharper disable once InconsistentNaming
+        private string outputFolder = "";
 
         public string OutputFolder {
-            get {
-                if (DebugMode) {
-                    return Path.Combine(Application.dataPath + DebugFolder);
-                }
-                else {
-                    return outputFolder;
-                }
-            }
-            set { outputFolder = value; }
+            get => DebugMode ? Path.Combine(Application.dataPath + DebugFolder) : outputFolder;
+            set => outputFolder = value;
         }
 
         [SerializeField]
+        // ReSharper disable once InconsistentNaming
         bool debugMode;
 
         public bool DebugMode {
@@ -72,16 +61,15 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         bool blockChosen;
 
         public bool BlockChosen {
-            get { return blockChosen; }
+            get => blockChosen;
             set {
 
                 if (value == blockChosen) return;
 
                 blockChosen = value;
-                if (blockChosen) {
-                    Debug.Log($"Block order chosen: {OrderChosenIndex}");
-                    ExperimentEvents.BlockOrderSelected(OrderChosenIndex);
-                }
+                if (!blockChosen) return;
+                Debug.Log($"Block order chosen: {OrderChosenIndex}");
+                ExperimentEvents.BlockOrderSelected(OrderChosenIndex);
             }
         }
 
@@ -89,6 +77,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public int    OrderChosenIndex;
 
         [SerializeField]
+        // ReSharper disable once InconsistentNaming
         string participantId;
 
 

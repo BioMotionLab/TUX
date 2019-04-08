@@ -11,7 +11,7 @@ namespace BML_Utilities {
         }
 
         void OnDisable() {
-            Event.UnRegisterListener(this); ;
+            Event.UnRegisterListener(this);
         }
 
         public void OnEventRaised() {

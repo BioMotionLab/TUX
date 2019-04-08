@@ -19,8 +19,8 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         public TrialSequenceRunner(Experiment experiment, List<Trial> trialList) {
             OnEnable();
             this.experiment = experiment;
-            this.trialsInSequence = trialList;
-            this.currentTrialList = trialList;
+            trialsInSequence = trialList;
+            currentTrialList = trialList;
         }
 
         public void Start() {
