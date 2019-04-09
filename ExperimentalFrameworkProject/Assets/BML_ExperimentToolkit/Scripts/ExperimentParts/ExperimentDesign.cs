@@ -35,10 +35,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             baseBlockTable = new BlockTable(allData);
             baseTrialTable = new TrialTable(allData, baseBlockTable, shuffleTrialOrder, numberOfRepetitions,
                                             experiment.ConfigDesignFile.ColumnNames);
-            OnEnable();
+            Enable();
         }
         
-        void OnEnable() {
+        void Enable() {
             ExperimentEvents.OnBlockOrderChosen += BlockOrderSelected;
         }
 
@@ -69,7 +69,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     trialRow[experiment.ConfigDesignFile.ColumnNames.TotalTrialIndex] = i;
                 }
 
-                string blockIdentity = "Main Block";
+                const string blockIdentity = "MainTrailCoroutine Block";
                 Block newBlock = CreateNewBlock(trialTable, blockIdentity);
                 Blocks.Add(newBlock);
 

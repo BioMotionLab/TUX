@@ -16,13 +16,7 @@ namespace BML_Utilities {
 
         // Update is called once per frame
         void Update() {
-            if (Text == null) {
-                text.text = MissingWarning;
-            }
-            else {
-                text.text = Text;
-            }
-        
+            text.text = Text == null ? MissingWarning : Text;
         }
     }
 }

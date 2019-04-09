@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace BML_Utilities {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu+"Create BML Event")]
     public class BmlEvent : ScriptableObject {
         private List<BmlEventListener> listeners = new List<BmlEventListener>();
 

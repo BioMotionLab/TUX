@@ -26,8 +26,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                      string identity, 
                      Type trialType) {
             this.experiment = experiment;
-            this.TrialTable = trialTable;
-            this.Identity = identity;
+            TrialTable = trialTable;
+            Identity = identity;
             MakeTrials(trialType);
         }
 

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace BML_Utilities {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create BML String Event")]
     public class BmlStringEvent : ScriptableObject {
 
         readonly List<BmlStringEventListener> listeners = new List<BmlStringEventListener>();

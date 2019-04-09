@@ -2,7 +2,7 @@
 
 namespace BML_Utilities {
 
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create Float Value")]
     public class FloatValue : ScriptableObject {
         public float Value;
 

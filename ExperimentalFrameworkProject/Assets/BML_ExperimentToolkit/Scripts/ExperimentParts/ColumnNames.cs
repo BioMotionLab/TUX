@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using MenuNames = BML_Utilities.MenuNames;
 
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
-    [CreateAssetMenu(menuName = "BML/Create ColumnNames Config File")]
+    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + 
+                                "Create Column Names Config")]
     public class ColumnNames : ScriptableObject{
         public string TotalTrialIndex = "Trial";
         public string BlockIndex      = "Block";

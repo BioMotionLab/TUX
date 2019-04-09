@@ -2,8 +2,8 @@
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Extras.StandHerePrompt {
-    [CreateAssetMenu]
-    public class StandHereSettings : ScriptableObject{
+    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create StandHerePrompt PromptSettings")]
+    public class StandHerePromptSettings : ScriptableObject{
         public Material    GoodColor;
         public Material    BadColor;
         public float       StandDistanceTolerance;

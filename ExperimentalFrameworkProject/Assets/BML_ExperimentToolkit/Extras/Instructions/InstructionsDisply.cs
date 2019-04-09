@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 namespace BML_ExperimentToolkit.Extras.Instructions {
-    public class InstructionsDisplayer : MonoBehaviour {
+    public class InstructionsDisplay : MonoBehaviour {
 
         public Text       TextBox;
         public GameObject Container;

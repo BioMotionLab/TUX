@@ -4,7 +4,7 @@ namespace BML_ExperimentToolkit.Extras.StandHerePrompt {
     public abstract class MoveMarker : MonoBehaviour {
 
 
-        public StandHereSettings Settings;
+        public StandHerePromptSettings PromptSettings;
         public MeshRenderer      Renderer;
         public Transform         MainText;
         public Transform         Hmd;

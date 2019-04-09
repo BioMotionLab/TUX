@@ -13,7 +13,7 @@ namespace BML_ExperimentToolkit.Extras.StandHerePrompt {
         public BmlStringEvent ShowInstructionEvent;
         public BmlEvent       HideInstructionEvent;
 
-        public StandHereSettings Settings;
+        public StandHerePromptSettings PromptSettings;
 
         bool alreadyHidden = false;
 
@@ -21,10 +21,10 @@ namespace BML_ExperimentToolkit.Extras.StandHerePrompt {
   
             CheckStandingSpot();
 
-            SetColor(StandingInCorrectSpot ? Settings.GoodColor : Settings.BadColor);
+            SetColor(StandingInCorrectSpot ? PromptSettings.GoodColor : PromptSettings.BadColor);
             if (!StandingInCorrectSpot) {
                 DestinationMarker.ShowMoveToText();
-                ShowInstructionEvent.Raise(Settings.InstructionsForMoving);
+                ShowInstructionEvent.Raise(PromptSettings.InstructionsForMoving);
                 alreadyHidden = false;
             }
             else {
@@ -50,7 +50,7 @@ namespace BML_ExperimentToolkit.Extras.StandHerePrompt {
     
         bool IsPositionCorrect() {
             Vector3 positionDeviation = PositionMarker.transform.position - DestinationMarker.transform.position;
-            return positionDeviation.magnitude < Settings.StandDistanceTolerance;
+            return positionDeviation.magnitude < PromptSettings.StandDistanceTolerance;
         }
     }
 }

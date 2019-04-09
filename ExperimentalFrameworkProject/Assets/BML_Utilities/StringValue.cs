@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace BML_Utilities {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create String Value")]
     public class StringValue : ScriptableObject {
 
         [TextArea]

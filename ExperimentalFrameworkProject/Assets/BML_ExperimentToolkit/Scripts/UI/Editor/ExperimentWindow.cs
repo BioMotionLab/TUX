@@ -12,8 +12,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
     public class ExperimentWindow : EditorWindow {
 
-        public static ExperimentWindow Instance { get; private set; }
-
         static readonly GUILayoutOption CompleteIndicatorWidth = GUILayout.Width(20);
         static readonly GUILayoutOption JumpToButtonWidth = GUILayout.Width(40);
         static readonly GUILayoutOption RunningTrialIndicatorWidth = GUILayout.Width(70);
@@ -45,7 +43,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             ExperimentEvents.OnExperimentStarted += ExperimentStarted;
             ExperimentEvents.OnTrialHasStarted += TrialStarted;
 
-            Instance = this;
         }
         
         void OnDisable() {
@@ -55,8 +52,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             ExperimentEvents.OnTrialUpdated -= TrialCompleted;
             ExperimentEvents.OnExperimentStarted -= ExperimentStarted;
             ExperimentEvents.OnTrialHasStarted -= TrialStarted;
-
-            Instance = null;
+            
         }
 
         void TrialStarted(Trial trial, int index) {
@@ -119,7 +115,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 return;
             }
 
-            //Session Settings
+            //Session PromptSettings
             if (!ShowSessionSettings()) return;
 
             //Block Order
@@ -226,7 +222,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
                 EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                 EditorGUILayout.Space();
-                EditorGUILayout.LabelField("Block Order Settings:", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Block Order PromptSettings:", EditorStyles.boldLabel);
 
                 List<string> blockPermutations = experiment.Design.BlockPermutationsStrings;
                 

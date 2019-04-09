@@ -11,7 +11,7 @@ namespace BML_ExperimentToolkit.Extras.StandHerePrompt {
 
             float distanceFromDestination = (transform.position - PositionMarker.transform.position).magnitude;
 
-            if (distanceFromDestination < Settings.CloseDistance) {
+            if (distanceFromDestination < PromptSettings.CloseDistance) {
                 MainText.eulerAngles = new Vector3(0, Hmd.eulerAngles.y, 0);
             }
             else {
@@ -22,12 +22,12 @@ namespace BML_ExperimentToolkit.Extras.StandHerePrompt {
         }
 
         public void ShowMoveToText() {
-            StandHereText.Text = Settings.MoveHereText;
+            StandHereText.Text = PromptSettings.MoveHereText;
         
         }
 
         public void ShowOkText() {
-            StandHereText.Text = Settings.LookUpText;
+            StandHereText.Text = PromptSettings.LookUpText;
         }
 
     }
