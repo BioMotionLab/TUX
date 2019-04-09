@@ -69,7 +69,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     trialRow[experiment.ConfigDesignFile.ColumnNames.TotalTrialIndex] = i;
                 }
 
-                const string blockIdentity = "MainTrailCoroutine Block";
+                const string blockIdentity = "MainCoroutine Block";
                 Block newBlock = CreateNewBlock(trialTable, blockIdentity);
                 Blocks.Add(newBlock);
 

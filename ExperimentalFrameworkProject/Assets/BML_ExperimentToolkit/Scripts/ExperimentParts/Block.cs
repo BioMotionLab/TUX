@@ -56,23 +56,52 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return "Identity: " + Identity + "\n" + tableString;
         }
 
+
+
         /// <summary>
-        /// This code is run before each block. Overwrite this for custom behaviour
+        /// Code that runs before each block. Overwrite this for custom behaviour.
+        /// Suggest doing block setup here.
+        /// Useful for more complex cleanup tasks/instructions that need to
+        /// run for more than one frame.
+        /// Must contain at least one "yield return" statement.
+        /// [Note: Called after PreMethod()]
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerator Pre() {
-            //Debug.Log("No pre-block code defined");
+        public virtual IEnumerator PreCoroutine() {
             yield return null;
         }
 
         /// <summary>
-        /// This code is run after each block. Overwrite this for custom behaviour
+        /// Code that runs before each block. Overwrite this for custom behaviour.
+        /// Suggest doing trial setup here.
+        /// Useful for simple setup tasks that can be completed in a single frame.
+        /// [Note: Called before PreCoroutine()]
+        /// </summary>
+        public virtual void PreMethod() { }
+
+        
+
+        /// <summary>
+        /// Code that runs after each blcok. Overwrite this for custom behaviour.
+        /// suggest doing trial cleanup and writing output to data here.
+        /// Useful for more complex cleanup tasks/instructions that need to
+        /// run for more than one frame.
+        /// Must contain at least one "yield return" statement.
+        /// [Note: Called before PostMethod()]
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerator Post() {
-            //Debug.Log("no post-block code defined");
+        public virtual IEnumerator PostCoroutine() {
+            //Debug.Log($"No post trial code defined");
             yield return null;
         }
+
+        /// <summary>
+        /// Code that runs after each block. Overwrite this for custom behaviour.
+        /// suggest doing trial cleanup and writing output to data here.
+        /// Useful for simple setup tasks that can occur in a single frame.
+        /// [Note: Called after PostCoroutine()]
+        /// </summary>
+        public virtual void PostMethod() { }
 
     }
 

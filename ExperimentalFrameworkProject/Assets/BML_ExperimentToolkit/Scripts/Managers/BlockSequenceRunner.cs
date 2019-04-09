@@ -58,7 +58,8 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
             yield return null; //let previous frame finish before starting
 
-            yield return currentlyRunningBlock.Pre();
+            currentlyRunningBlock.PreMethod();
+            yield return currentlyRunningBlock.PreCoroutine();
 
             TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(experiment, block.Trials);
             trialSequenceRunner.Start();
@@ -68,7 +69,8 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         IEnumerator RunPostBlock() {
             yield return null; //let previous frame finish before starting
 
-            yield return currentlyRunningBlock.Post();
+            yield return currentlyRunningBlock.PostCoroutine();
+            currentlyRunningBlock.PostMethod();
             FinishBlock();
             GoToNextBlock();
         }

@@ -76,19 +76,20 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             Debug.Log($"***\n{TrialText} Running...");
             
             //RUN OPTIONAL USER-DEFINED PRE-TRIAL CODE
-            PreTrialMethod();
-            yield return RunCoroutineWhileListeningForInterrupt(PreTrialCoroutine() );
+            PreMethod();
+            yield return RunCoroutineWhileListeningForInterrupt(PreCoroutine() );
 
             //RUN MANDATORY USER-DEFINED MAIN TRAIL CODE
             float startTime = Time.time;
-            yield return RunCoroutineWhileListeningForInterrupt(MainTrailCoroutine());
+            yield return RunCoroutineWhileListeningForInterrupt(MainCoroutine());
             float endTime = Time.time;
             TrialTime = endTime - startTime;
 
             //RUN OPTIONAL USER-DEFINED POST-TRIAL CODE
-            PostTrialMethod();
-            yield return RunCoroutineWhileListeningForInterrupt(PostTrialCoroutine());
             
+            yield return RunCoroutineWhileListeningForInterrupt(PostCoroutine());
+            PostMethod();
+
             FinalizeTrial();
 
             if (!interrupt) ExperimentEvents.TrialHasCompleted();
@@ -173,11 +174,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Useful for more complex cleanup tasks/instructions that need to
         /// run for more than one frame.
         /// Must contain at least one "yield return" statement.
-        /// [Note: Called after PreTrialMethod()]
+        /// [Note: Called after PreMethod()]
         /// </summary>
         /// <returns></returns>
-        protected virtual IEnumerator PreTrialCoroutine() {
-            //Debug.Log($"No PreTrialCoroutine-Trial code defined");
+        protected virtual IEnumerator PreCoroutine() {
+            //Debug.Log($"No PreCoroutine-Trial code defined");
             yield return null;
         }
 
@@ -185,26 +186,18 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Code that runs before each trial. Overwrite this for custom behaviour.
         /// Suggest doing trial setup here.
         /// Useful for simple setup tasks that can be completed in a single frame.
-        /// [Note: Called before PreTrialCoroutine()]
+        /// [Note: Called before PreCoroutine()]
         /// </summary>
-        protected virtual void PreTrialMethod() {}
+        protected virtual void PreMethod() {}
 
         /// <summary>
         /// Code that runs during trial. You must overwrite this.
-        /// Setup should go in either PreTrialMethod() or PreTrialCoroutine().
+        /// Setup should go in either PreMethod() or PreCoroutine().
         /// Cleanup and writing to dependent variables should go in
-        /// either PostTrialMethod() or PostTrialCoroutine().
+        /// either PostMethod() or PostCoroutine().
         /// </summary>
         /// <returns></returns>
-        protected abstract IEnumerator MainTrailCoroutine();
-
-        /// <summary>
-        /// Code that runs after each trial. Overwrite this for custom behaviour.
-        /// suggest doing trial cleanup and writing output to data here.
-        /// Useful for simple setup tasks that can occur in a single frame.
-        /// [Note: Called before PostTrialCoroutine()]
-        /// </summary>
-        protected virtual void PostTrialMethod() {}
+        protected abstract IEnumerator MainCoroutine();
 
         /// <summary>
         /// Code that runs after each trial. Overwrite this for custom behaviour.
@@ -212,13 +205,20 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Useful for more complex cleanup tasks/instructions that need to
         /// run for more than one frame.
         /// Must contain at least one "yield return" statement.
-        /// [Note: Called after PostTrialMethod()]
+        /// [Note: Called before PostMethod()]
         /// </summary>
         /// <returns></returns>
-        protected virtual IEnumerator PostTrialCoroutine() {
+        protected virtual IEnumerator PostCoroutine() {
             //Debug.Log($"No post trial code defined");
             yield return null;
         }
 
+        /// <summary>
+        /// Code that runs after each trial. Overwrite this for custom behaviour.
+        /// suggest doing trial cleanup and writing output to data here.
+        /// Useful for simple setup tasks that can occur in a single frame.
+        /// [Note: Called after PostCoroutine()]
+        /// </summary>
+        protected virtual void PostMethod() { }
     }
 }

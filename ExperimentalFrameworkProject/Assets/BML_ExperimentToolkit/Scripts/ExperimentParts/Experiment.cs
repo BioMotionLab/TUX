@@ -39,8 +39,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         [Header("Required:")]
         public ConfigDesignFile ConfigDesignFile;
-        [Header("Optional:")]
-        public ConfigOptions ConfigOptions;
         
         [HideInInspector]
         public bool Running;
@@ -56,11 +54,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 Application.Quit();
                 return;
             }
-
-            //check if trial config GameObject is loaded
-            if (ConfigOptions == null) {
-                Debug.LogWarning("No Custom Trial Config Script Used.");
-            }
+            
 
             //set up experiment design
             Design = ConfigDesignFile.Factory.ToTable(this, ConfigDesignFile.ShuffleTrialOrder, ConfigDesignFile.RepeatTrialBlock, ConfigDesignFile.ShuffleDifferentlyForEachBlock);
