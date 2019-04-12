@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace BML_Utilities {
+namespace BML_Utilities.EventSystem {
     public class BmlEventListener : MonoBehaviour {
         public BmlEvent   Event;
         public UnityEvent Response;

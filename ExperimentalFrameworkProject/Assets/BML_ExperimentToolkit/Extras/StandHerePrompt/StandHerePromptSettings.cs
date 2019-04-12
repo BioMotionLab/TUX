@@ -1,4 +1,5 @@
 ﻿using BML_Utilities;
+using BML_Utilities.ScriptableObject_Assets;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Extras.StandHerePrompt {

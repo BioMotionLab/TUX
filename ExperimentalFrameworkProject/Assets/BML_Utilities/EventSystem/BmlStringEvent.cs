@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace BML_Utilities {
+namespace BML_Utilities.EventSystem {
     [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create BML String Event")]
     public class BmlStringEvent : ScriptableObject {
 

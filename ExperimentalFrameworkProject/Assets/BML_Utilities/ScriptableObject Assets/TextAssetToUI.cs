@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace BML_Utilities {
+namespace BML_Utilities.ScriptableObject_Assets {
     [ExecuteInEditMode]
     [RequireComponent(typeof(Text))]
     public class TextAssetToUi : MonoBehaviour {

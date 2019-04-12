@@ -8,14 +8,15 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
     /// It is used as a default when no custom block is specified.
     /// </summary>
     public class SimpleBlock : Block {
-        public SimpleBlock(Experiment experiment, 
+        public SimpleBlock(ExperimentRunner runner,
                            DataTable trialTable, 
                            string identity, 
                            Type customTrialType) :
-            base(experiment, 
+            base(runner, 
                  trialTable, 
                  identity, 
                  customTrialType) {
         }
+        
     }
 }

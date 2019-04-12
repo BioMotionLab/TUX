@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using BML_Utilities;
+using BML_Utilities.Extensions;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies {
 

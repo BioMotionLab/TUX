@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using BML_Utilities;
+using BML_Utilities.Extensions;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.Managers {
@@ -8,17 +8,14 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
     public class TrialSequenceRunner {
 
-        Experiment experiment;
-
         Trial currentlyRunningTrial;
 
         List<Trial> trialsInSequence;
         List<Trial> currentTrialList;
 
 
-        public TrialSequenceRunner(Experiment experiment, List<Trial> trialList) {
+        public TrialSequenceRunner(ExperimentRunner runner, List<Trial> trialList) {
             OnEnable();
-            this.experiment = experiment;
             trialsInSequence = trialList;
             currentTrialList = trialList;
         }
@@ -47,8 +44,9 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
         void StartRunningTrial(Trial trial) {
             currentlyRunningTrial = trial;
+
+            ExperimentEvents.StartPart(trial);
             ExperimentEvents.TrialHasStarted(trial, TrialIndex(trial));
-            experiment.StartCoroutine(trial.Run(experiment));
         }
 
         void TrialHasCompleted() {
@@ -131,7 +129,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
 
         void InterruptTrial() {
-            Debug.LogWarning("Got Skip event from currentTrial");
+            Debug.LogWarning("Got SkipTrial event from currentTrial");
             FinishTrial();
             GoToNextTrial();
         }
@@ -154,7 +152,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         void JumpToTrial(int jumpToIndex) {
             Debug.Log("Got jump event");
             FinishTrial();
-            currentlyRunningTrial.Interrupt();
+            currentlyRunningTrial.InterruptTrial();
             currentTrialList = trialsInSequence;
             Trial newTrial = currentTrialList[jumpToIndex];
             StartRunningTrial(newTrial);

@@ -234,9 +234,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
         }
 
-        public ExperimentDesign ToTable(Experiment experiment, bool shuffleTrialOrder, int numberRepetitions, bool shuffleTrialsBetweenBlocks) {
+        public ExperimentDesign ToTable(ExperimentRunner experimentRunner, bool shuffleTrialOrder, int numberRepetitions, bool shuffleTrialsBetweenBlocks) {
             //Debug.Log($"ToTable method in IndependentVariable: Alldata.count {AllVariables.Count}");
-            return new ExperimentDesign(experiment, AllVariables, shuffleTrialOrder, numberRepetitions, shuffleTrialsBetweenBlocks );
+            return new ExperimentDesign(experimentRunner, AllVariables, shuffleTrialOrder, numberRepetitions, shuffleTrialsBetweenBlocks );
         }
 
 

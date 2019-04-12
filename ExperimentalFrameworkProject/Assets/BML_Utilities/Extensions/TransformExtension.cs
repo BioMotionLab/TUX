@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BML_Utilities {
+namespace BML_Utilities.Extensions {
 
 
     /// <summary>

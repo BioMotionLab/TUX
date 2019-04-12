@@ -13,17 +13,18 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
     /// </summary>
     public class SimpleTrial : Trial {
 
-        SimpleExperiment simpleExperiment;
+        // ReSharper disable once NotAccessedField.Local
+        SimpleExperimentRunner simpleExperimentRunner;
 
         /// <summary>
         /// Constructor just calls the base class Trail's constructor.
         /// </summary>
-        /// <param name="experiment">The experiment being run</param>
+        /// <param name="runner">The Runner being run</param>
         /// <param name="data">The row of BlockData for this trial from a table</param>
-        public SimpleTrial(Experiment experiment, DataRow data) : base(experiment, data) {}
+        public SimpleTrial(ExperimentRunner runner, DataRow data) : base(runner, data) {}
 
-        protected override void PreMethod() {
-           simpleExperiment  = (SimpleExperiment) Experiment;
+        public override void PreMethod() {
+            simpleExperimentRunner = (SimpleExperimentRunner) Runner;
         }
 
         /// <inheritdoc />
@@ -31,7 +32,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
         /// Overwrites the MainCoroutine method to provide the trial's functionality
         /// </summary>
         /// <returns></returns>
-        protected override IEnumerator MainCoroutine() {
+        protected override IEnumerator RunMainCoroutine() {
             bool running = true;
             Debug.Log("...Waiting for you to press return key! (in SimpleTrial MainCoroutine() method)");
             while (running) {

@@ -124,13 +124,13 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
             OnExperimentStarted?.Invoke();
         }
 
-        public delegate void InitExperimentEvent(Experiment experiment);
+        public delegate void InitExperimentEvent(ExperimentRunner experimentRunner);
 
         public static event InitExperimentEvent OnInitExperiment;
 
-        public static void InitExperiment(Experiment experiment) {
+        public static void InitExperiment(ExperimentRunner experimentRunner) {
 
-            OnInitExperiment?.Invoke(experiment);
+            OnInitExperiment?.Invoke(experimentRunner);
         }
 
         public delegate void OutputUpdatedEvent(Outputtable output);
@@ -156,6 +156,13 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
         public static void BlockOrderSelected(int blockOrderIndex) {
             OnBlockOrderChosen?.Invoke(blockOrderIndex);
+        }
+
+        public delegate void StartRunningExperimentPartEvent(ExperimentPart experimentPart);
+        public static event StartRunningExperimentPartEvent OnStartPart;
+
+        public static void StartPart(ExperimentPart experimentPart) {
+            OnStartPart?.Invoke(experimentPart);
         }
     }
 }

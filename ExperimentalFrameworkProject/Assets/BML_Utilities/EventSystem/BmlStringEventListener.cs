@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace BML_Utilities {
+namespace BML_Utilities.EventSystem {
     public class BmlStringEventListener : MonoBehaviour {
 
         public BmlStringEvent Event;

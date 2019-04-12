@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace BML_Utilities {
+namespace BML_Utilities.Extensions {
 
 
     public static class DataTableExtension {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BML_Utilities {
+namespace BML_Utilities.ScriptableObject_Assets {
     [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create Bool Value")]
     public class BoolValue : ScriptableObject {
         public bool Value;

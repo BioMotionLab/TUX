@@ -10,14 +10,14 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
     public class BlockSequenceRunner {
 
-        Experiment  experiment;
+        ExperimentRunner runner;
         List<Block> blocks;
 
         Block currentlyRunningBlock;
 
-        public BlockSequenceRunner(Experiment experiment, List<Block> blocks) {
+        public BlockSequenceRunner(ExperimentRunner runner, List<Block> blocks) {
             OnEnable();
-            this.experiment = experiment;
+            this.runner = runner;
             this.blocks = blocks;
         }
 
@@ -36,7 +36,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         public void Start() {
 
             if (blocks.Count <= 0) {
-                throw new InvalidDataException("Experiment blocks not created correctly");
+                throw new InvalidDataException("Runner blocks not created correctly");
             }
 
             //Debug.Log("Starting to run Blocks");
@@ -49,30 +49,15 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
             currentlyRunningBlock = block;
             Debug.Log($"*****\nStarting to run block: {block.Identity}");
             ExperimentEvents.BlockHasStarted(block);
+            ExperimentEvents.StartPart(block);
 
-            experiment.StartCoroutine(RunPreBlock(block));
-
-        }
-
-        IEnumerator RunPreBlock(Block block) {
-
-            yield return null; //let previous frame finish before starting
-
-            currentlyRunningBlock.PreMethod();
-            yield return currentlyRunningBlock.PreCoroutine();
-
-            TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(experiment, block.Trials);
-            trialSequenceRunner.Start();
-            
         }
 
         IEnumerator RunPostBlock() {
-            yield return null; //let previous frame finish before starting
-
-            yield return currentlyRunningBlock.PostCoroutine();
-            currentlyRunningBlock.PostMethod();
+            
             FinishBlock();
             GoToNextBlock();
+            yield return null;
         }
 
 
@@ -99,7 +84,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         void BlockDoneRunning(List<Trial> trials) {
 
 
-            experiment.StartCoroutine(RunPostBlock());
+            runner.StartCoroutine(RunPostBlock());
 
         }
 

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using UnityEngine;
 
-namespace BML_Utilities.Tests.Editor {
+namespace BML_Utilities.Extensions.Tests.Editor {
 
     public class TransformExtensionTests {
 

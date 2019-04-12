@@ -3,7 +3,7 @@ using System.Data;
 using System.Text;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
-using BML_Utilities;
+using BML_Utilities.Extensions;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 

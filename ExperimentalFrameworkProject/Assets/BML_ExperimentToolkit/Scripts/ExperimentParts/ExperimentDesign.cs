@@ -4,13 +4,14 @@ using BML_Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using BML_Utilities.Extensions;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
     public partial class ExperimentDesign {
 
-        readonly Experiment experiment;
+        readonly ExperimentRunner runner;
 
         public BlockTable OrderedBlockTable;
 
@@ -28,13 +29,13 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         readonly bool shuffleTrialsBetweenBlocks;
 
-        public ExperimentDesign(Experiment experiment, List<Variable> allData, bool shuffleTrialOrder,
+        public ExperimentDesign(ExperimentRunner runner, List<Variable> allData, bool shuffleTrialOrder,
                                 int numberOfRepetitions, bool shuffleTrialsBetweenBlocks) {
-            this.experiment = experiment;
+            this.runner = runner;
             this.shuffleTrialsBetweenBlocks = shuffleTrialsBetweenBlocks;
             baseBlockTable = new BlockTable(allData);
             baseTrialTable = new TrialTable(allData, baseBlockTable, shuffleTrialOrder, numberOfRepetitions,
-                                            experiment.ConfigDesignFile.ColumnNames);
+                                            runner.ConfigDesignFile.ColumnNames);
             Enable();
         }
         
@@ -64,9 +65,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 DataTable trialTable = baseTrialTable.Copy();
                 for (int i = 0; i < trialTable.Rows.Count; i++) {
                     DataRow trialRow = trialTable.Rows[i];
-                    trialRow[experiment.ConfigDesignFile.ColumnNames.BlockIndex] = 0;
-                    trialRow[experiment.ConfigDesignFile.ColumnNames.TrialIndex] = i;
-                    trialRow[experiment.ConfigDesignFile.ColumnNames.TotalTrialIndex] = i;
+                    trialRow[runner.ConfigDesignFile.ColumnNames.BlockIndex] = 0;
+                    trialRow[runner.ConfigDesignFile.ColumnNames.TrialIndex] = i;
+                    trialRow[runner.ConfigDesignFile.ColumnNames.TotalTrialIndex] = i;
                 }
 
                 const string blockIdentity = "MainCoroutine Block";
@@ -97,11 +98,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         Block CreateNewBlock(DataTable trialTable, string blockIdentity) {
-            Block newBlock = (Block)Activator.CreateInstance(experiment.BlockType,
-                                                              experiment,
+            Block newBlock = (Block)Activator.CreateInstance(runner.BlockType,
+                                                              runner,
                                                               trialTable,
                                                               blockIdentity,
-                                                              experiment.TrialType
+                                                              runner.TrialType
                                                              );
             return newBlock;
         }
@@ -115,9 +116,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 for (int trialIndexInBlock = 0; trialIndexInBlock < newTable.Rows.Count; trialIndexInBlock++) {
                     DataRow trialRow = newTable.Rows[trialIndexInBlock];
                     trialRow[columnName] = blockTableRow[columnName];
-                    trialRow[experiment.ConfigDesignFile.ColumnNames.BlockIndex] = blockIndex;
-                    trialRow[experiment.ConfigDesignFile.ColumnNames.TrialIndex] = trialIndexInBlock;
-                    trialRow[experiment.ConfigDesignFile.ColumnNames.TotalTrialIndex] = startingTotalTrialIndex;
+                    trialRow[runner.ConfigDesignFile.ColumnNames.BlockIndex] = blockIndex;
+                    trialRow[runner.ConfigDesignFile.ColumnNames.TrialIndex] = trialIndexInBlock;
+                    trialRow[runner.ConfigDesignFile.ColumnNames.TotalTrialIndex] = startingTotalTrialIndex;
                     startingTotalTrialIndex++;
                 }
             }

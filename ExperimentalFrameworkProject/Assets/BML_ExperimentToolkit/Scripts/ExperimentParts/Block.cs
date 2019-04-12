@@ -2,30 +2,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using BML_Utilities;
+using BML_ExperimentToolkit.Scripts.Managers;
+using BML_Utilities.Extensions;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
     /// <summary>
-    /// This class stores a block a trials in an experiment.
+    /// This class stores a block a trials in an Runner.
     /// </summary>
-    public abstract class Block {
+    public abstract class Block : ExperimentPart {
 
         public readonly DataTable TrialTable;
         public readonly string    Identity;
 
         public bool Complete = false;
-        public int  Index    = -1;
-
+        ExperimentRunner runner;
         public List<Trial> Trials;
-        readonly Experiment experiment;
 
-        // ReSharper disable once PublicConstructorInAbstractClass
-        public Block(Experiment experiment, 
+        protected Block(ExperimentRunner runner,
                      DataTable trialTable, 
                      string identity, 
-                     Type trialType) {
-            this.experiment = experiment;
+                     Type trialType) 
+                        : base(runner) {
+            this.runner = runner;
             TrialTable = trialTable;
             Identity = identity;
             MakeTrials(trialType);
@@ -40,68 +39,27 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             Trials = new List<Trial>();
             
             foreach (DataRow row in TrialTable.Rows) {
-                Trial newTrial = (Trial)Activator.CreateInstance(trialType, experiment, row);
+                Trial newTrial = (Trial)Activator.CreateInstance(trialType, runner, row);
                 Trials.Add(newTrial);
                 
             }
         }
 
+        protected override IEnumerator RunMainCoroutine() {
+
+            TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(runner, Trials);
+            trialSequenceRunner.Start();
+            yield return null;
+        }
+
         /// <summary>
         /// String output for the block
         /// </summary>
-        /// <param name="separator">The separator.</param>
         /// <returns></returns>
-        public string AsString(string separator = Delimiter.Tab) {
+        public string AsString() {
             string tableString = TrialTable.AsString();
             return "Identity: " + Identity + "\n" + tableString;
         }
-
-
-
-        /// <summary>
-        /// Code that runs before each block. Overwrite this for custom behaviour.
-        /// Suggest doing block setup here.
-        /// Useful for more complex cleanup tasks/instructions that need to
-        /// run for more than one frame.
-        /// Must contain at least one "yield return" statement.
-        /// [Note: Called after PreMethod()]
-        /// </summary>
-        /// <returns></returns>
-        public virtual IEnumerator PreCoroutine() {
-            yield return null;
-        }
-
-        /// <summary>
-        /// Code that runs before each block. Overwrite this for custom behaviour.
-        /// Suggest doing trial setup here.
-        /// Useful for simple setup tasks that can be completed in a single frame.
-        /// [Note: Called before PreCoroutine()]
-        /// </summary>
-        public virtual void PreMethod() { }
-
-        
-
-        /// <summary>
-        /// Code that runs after each blcok. Overwrite this for custom behaviour.
-        /// suggest doing trial cleanup and writing output to data here.
-        /// Useful for more complex cleanup tasks/instructions that need to
-        /// run for more than one frame.
-        /// Must contain at least one "yield return" statement.
-        /// [Note: Called before PostMethod()]
-        /// </summary>
-        /// <returns></returns>
-        public virtual IEnumerator PostCoroutine() {
-            //Debug.Log($"No post trial code defined");
-            yield return null;
-        }
-
-        /// <summary>
-        /// Code that runs after each block. Overwrite this for custom behaviour.
-        /// suggest doing trial cleanup and writing output to data here.
-        /// Useful for simple setup tasks that can occur in a single frame.
-        /// [Note: Called after PostCoroutine()]
-        /// </summary>
-        public virtual void PostMethod() { }
 
     }
 
