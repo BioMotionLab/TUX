@@ -15,7 +15,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public VariableFactory Factory = new VariableFactory();
 
         public ColumnNames ColumnNames;
+        public ControlSettings ControlSettings;
 
-       
+
     }
 }

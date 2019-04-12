@@ -62,13 +62,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         protected override IEnumerator RunMainCoroutine() {
-            
-
             BlockSequenceRunner blockRunner = new BlockSequenceRunner(runner, design.Blocks);
             blockRunner.Start();
             yield return null;
         }
-
 
         /// <summary>Gets the Runner as string.</summary>
         /// <value>The Runner as a string.</value>

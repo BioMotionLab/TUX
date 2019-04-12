@@ -36,13 +36,18 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             GetWindow(typeof(ExperimentWindow), false, "Runner Runner Window");
         }
 
+        static ExperimentWindow instance;
+        public static bool IsOpen => instance != null;
+
         void OnEnable() {
+            instance = this;
             //add listeners for events
             ExperimentEvents.OnInitExperiment += InitWindow;
             ExperimentEvents.OnBlockUpdated += BlockCompleted;
             ExperimentEvents.OnTrialUpdated += TrialCompleted;
             ExperimentEvents.OnExperimentStarted += ExperimentStarted;
             ExperimentEvents.OnTrialHasStarted += TrialStarted;
+            ExperimentEvents.OnCheckMainWindowIsOpen += CheckWindowOpen;
 
         }
         
@@ -53,7 +58,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             ExperimentEvents.OnTrialUpdated -= TrialCompleted;
             ExperimentEvents.OnExperimentStarted -= ExperimentStarted;
             ExperimentEvents.OnTrialHasStarted -= TrialStarted;
-            
+            ExperimentEvents.OnCheckMainWindowIsOpen -= CheckWindowOpen;
+
+
         }
 
         void TrialStarted(Trial trial, int index) {
@@ -78,6 +85,14 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             runner = runnerToInit;
             initialized = true;
             Repaint();
+
+            runnerToInit.FinishedInitialization = true;
+        }
+
+        static void CheckWindowOpen(ExperimentRunner runnerToInit) {
+            if (IsOpen) {
+                runnerToInit.WindowOpen = true;
+            }
         }
 
 

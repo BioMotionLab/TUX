@@ -164,5 +164,13 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         public static void StartPart(ExperimentPart experimentPart) {
             OnStartPart?.Invoke(experimentPart);
         }
+
+        public delegate void CheckMainWindowIsOpenEvent(ExperimentRunner experimentRunner);
+
+        public static event CheckMainWindowIsOpenEvent OnCheckMainWindowIsOpen;
+
+        public static void CheckMainWindowIsOpen(ExperimentRunner experimentRunner) {
+            OnCheckMainWindowIsOpen?.Invoke(experimentRunner);
+        }
     }
 }

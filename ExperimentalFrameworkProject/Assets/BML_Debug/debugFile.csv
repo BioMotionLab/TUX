@@ -1,9 +1,9 @@
 Block, TrialInBlock, Trial, Distance, Angle, Window, Completed, Attempts, Skipped, TrialTime
-0, 0, 0, 2, 20, False, True, 1, False, 1.945848
-0, 1, 1, 2, 10, True, True, 1, False, 10.65627
-0, 2, 2, 2, 10, False, True, 1, False, 5.055687
-0, 3, 3, 2, 20, True, True, 1, False, 0.9914093
-1, 0, 4, 1, 10, False, True, 1, False, 0.9892349
-1, 1, 5, 1, 10, True, True, 1, False, 0.3323288
-1, 2, 6, 1, 20, True, True, 1, False, 0.3980446
-1, 3, 7, 1, 20, False, False, 0, False, 0
+0, 0, 0, 2, 10, False, True, 1, False, 1.334228
+0, 1, 1, 2, 20, False, True, 1, False, 0.232255
+0, 2, 2, 2, 10, True, True, 1, False, 0.09940052
+0, 3, 3, 2, 20, True, True, 1, False, 0.1319518
+1, 0, 4, 1, 10, False, True, 1, False, 0.4482265
+1, 1, 5, 1, 20, True, True, 1, False, 0.198822
+1, 2, 6, 1, 20, False, True, 1, False, 0.1490679
+1, 3, 7, 1, 10, True, True, 1, False, 0.2153664
