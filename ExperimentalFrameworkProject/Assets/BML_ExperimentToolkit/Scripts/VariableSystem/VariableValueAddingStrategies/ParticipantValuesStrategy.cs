@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies {
 

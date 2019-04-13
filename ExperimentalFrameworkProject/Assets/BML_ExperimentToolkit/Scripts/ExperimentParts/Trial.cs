@@ -16,27 +16,27 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         protected readonly ExperimentRunner Runner;
         public readonly DataRow Data;
 
-        public int     Index      => (int) Data[Runner.ConfigDesignFile.ColumnNames.TrialIndex];
-        public int     BlockIndex => (int) (Data[Runner.ConfigDesignFile.ColumnNames.BlockIndex]);
+        public int     Index      => (int) Data[Runner.ConfigFile.ColumnNames.TrialIndex];
+        public int     BlockIndex => (int) (Data[Runner.ConfigFile.ColumnNames.BlockIndex]);
         public string  TrialText  => $"Trial {Index} of Block {BlockIndex}";
 
         public bool CompletedSuccessfully {
-            get => (bool)Data[Runner.ConfigDesignFile.ColumnNames.Completed];
-            set => Data[Runner.ConfigDesignFile.ColumnNames.Completed] = value;
+            get => (bool)Data[Runner.ConfigFile.ColumnNames.Completed];
+            set => Data[Runner.ConfigFile.ColumnNames.Completed] = value;
         }
 
         public float TrialTime {
-            set => Data[Runner.ConfigDesignFile.ColumnNames.TrialTime] = value;
+            set => Data[Runner.ConfigFile.ColumnNames.TrialTime] = value;
         }
 
         public int Attempts {
-            get => (int) Data[Runner.ConfigDesignFile.ColumnNames.Attempts];
-            set => Data[Runner.ConfigDesignFile.ColumnNames.Attempts] = value;
+            get => (int) Data[Runner.ConfigFile.ColumnNames.Attempts];
+            set => Data[Runner.ConfigFile.ColumnNames.Attempts] = value;
         }
 
         public bool Skipped {
-            get => (bool) Data[Runner.ConfigDesignFile.ColumnNames.Skipped];
-            set => Data[Runner.ConfigDesignFile.ColumnNames.Skipped] = value;
+            get => (bool) Data[Runner.ConfigFile.ColumnNames.Skipped];
+            set => Data[Runner.ConfigFile.ColumnNames.Skipped] = value;
         }
 
         protected Trial(ExperimentRunner runner, DataRow data) : base(runner) {

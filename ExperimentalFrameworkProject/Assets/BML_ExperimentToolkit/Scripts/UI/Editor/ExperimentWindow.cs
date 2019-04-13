@@ -131,7 +131,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             //Ensure config file initialized properly.
             if (!initialized) {
-                EditorGUILayout.HelpBox("ConfigDesignFile not properly initialized. " +
+                EditorGUILayout.HelpBox("ConfigFile not properly initialized. " +
                                         "\n\nMake sure you have created a config file from the menu and populated it with variables" +
                                         "\n\nAlso make sure the config file is dragged into the Runner GameObject inspector in your scene.",
                                         MessageType.Error);
@@ -249,7 +249,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
 
             EditorGUILayout.LabelField("Fill In Participant Variables:", EditorStyles.boldLabel);
-            List<Variable> variables = runner.ConfigDesignFile.Factory.AllVariables;
+            List<Variable> variables = runner.ConfigFile.Factory.AllVariables;
 
 
             foreach (Variable variable in variables) {

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public abstract class ExperimentRunner : MonoBehaviour {
         [Header("Required:")]
-        public ConfigDesignFile ConfigDesignFile;
+        public ConfigDesignFile ConfigFile;
 
         public ExperimentDesign Design;
 
@@ -34,13 +34,16 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         protected virtual Type ExperimentType => typeof(SimpleExperiment);
 
-
+        [HideInInspector]
         public bool Ended;
 
+        [HideInInspector]
         public bool Running;
 
+        [HideInInspector]
         public bool FinishedInitialization;
 
+        [HideInInspector]
         public bool WindowOpen = false;
 
         void Start() {
@@ -55,14 +58,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
 
             //check if config file is loaded
-            if (ConfigDesignFile == null) {
+            if (ConfigFile == null) {
                 Debug.LogError("Design Configuration not set up properly, make sure you dragged a configDesign file into your Runner GameObject");
                 ExitProgram();
                 return;
             }
 
 
-            Design = ConfigDesignFile.Factory.ToTable(this, ConfigDesignFile.ShuffleTrialOrder, ConfigDesignFile.RepeatTrialBlock, ConfigDesignFile.ShuffleDifferentlyForEachBlock);
+            Design = ConfigFile.Factory.ToTable(this, ConfigFile.ShuffleTrialOrder, ConfigFile.RepeatTrialBlock, ConfigFile.ShuffleDifferentlyForEachBlock);
             if (Design == null) {
                 Debug.Log("Design not created properly");
                 throw new NullReferenceException("Design null");
@@ -111,9 +114,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             Debug.Log("Starting Runner");
             ExperimentEvents.ExperimentStarted();
-
-            ExperimentControls controls = new ExperimentControls();
-            StartCoroutine(controls.Run());
+            
+            StartCoroutine(ConfigFile.ControlSettings.Run());
             ExperimentEvents.StartPart(experiment);
 
 

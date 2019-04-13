@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlTypes;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies;
 

@@ -16,8 +16,8 @@ MonoBehaviour:
   ShuffleDifferentlyForEachBlock: 1
   RepeatTrialBlock: 1
   Factory:
-    DataTypesToCreate: 1
-    VariableTypeToCreate: 1
+    DataTypesToCreate: 0
+    VariableTypeToCreate: 2
     IntIVs:
     - Name: IVint
       TypeOfVariable: 0
@@ -64,13 +64,19 @@ MonoBehaviour:
     GameObjectDVs: []
     Vector3DVs: []
     CustomDataTypeDVs: []
-    IntParticipantVariables: []
+    IntParticipantVariables:
+    - Name: ParticipantID
+      TypeOfVariable: 2
+      DataType: 0
+      Value: 1
+      ConstrainValues: 0
+      PossibleValues: 
     FloatParticipantVariables: []
     StringParticipantVariables:
     - Name: Gender
       TypeOfVariable: 2
       DataType: 2
-      Value: 
+      Value: Male
       ConstrainValues: 1
       PossibleValues:
       - Male
