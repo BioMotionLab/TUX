@@ -17,7 +17,7 @@ namespace BML_Utilities.Extensions.Tests.Editor {
 
             [Test]
             public void ReturnsOtherItemIfOnly2Long() {
-                var result = testListTwo.RandomOtherItem(1);
+                int result = testListTwo.RandomOtherItem(1);
                 Assert.AreEqual(2,result);
             }
 

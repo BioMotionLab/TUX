@@ -17,7 +17,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         [SerializeField]
         public VariableType VariableTypeToCreate;
 
-        //IVS
+        #region IndependentVariables
+
+        
 
         [SerializeField]
         public List<IndependentVariableInt> IntIVs = new List<IndependentVariableInt>();
@@ -41,7 +43,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public List<IndependentVariableCustomDataType>
             CustomDataTypeIVs = new List<IndependentVariableCustomDataType>();
 
-        //DVS
+        #endregion
+
+        #region DependentVariables
 
         [SerializeField]
         public List<DependentVariableInt> IntDVs = new List<DependentVariableInt>();
@@ -64,77 +68,54 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         [SerializeField]
         public List<DependentVariableCustomDataType> CustomDataTypeDVs = new List<DependentVariableCustomDataType>();
 
+        #endregion
+
+        #region ParticipantVariables
+
+        public List<ParticipantVariableInt> IntParticipantVariables = new List<ParticipantVariableInt>();
+        public List<ParticipantVariableFloat> FloatParticipantVariables = new List<ParticipantVariableFloat>();
+        public List<ParticipantVariableString> StringParticipantVariables = new List<ParticipantVariableString>();
+        public List<ParticipantVariableBool> BoolParticipantVariables = new List<ParticipantVariableBool>();
+        public List<ParticipantVariableGameObject> GameObjectParticipantVariables = new List<ParticipantVariableGameObject>();
+        public List<ParticipantVariableVector3> Vector3ParticipantVariables = new List<ParticipantVariableVector3>();
+        public List<ParticipantVariableCustomData> CustomDataParticipantVariables = new List<ParticipantVariableCustomData>();
+
+        #endregion
 
 
-        //[SerializeField]
-        //public List<DatumGameObject> GameObjectData = new List<DatumGameObject>();
-
-        //[SerializeField]
-        //public List<DatumVector3> Vector3Data = new List<DatumVector3>();
-
-        //[SerializeField]
-        //public List<DatumCustom> CustomData = new List<DatumCustom>();
-
-        public List<Variable> AllVariables {
+        List<Variable> AllVariables {
             get {
+
                 List<Variable> variables = new List<Variable>();
-                foreach (var variable in IntIVs) {
-                    variables.Add(variable);
-                }
 
-                foreach (var variable in FloatIVs) {
-                    variables.Add(variable);
-                }
+                //IVs
+                variables.AddRange(IntIVs);
+                variables.AddRange(FloatIVs);
+                variables.AddRange(StringIVs);
+                variables.AddRange(BoolIVs);
+                variables.AddRange(GameObjectIVs);
+                variables.AddRange(Vector3IVs);
+                variables.AddRange(CustomDataTypeIVs);
 
-                foreach (var variable in StringIVs) {
-                    variables.Add(variable);
-                }
+                //DVs
+                variables.AddRange(IntDVs);
+                variables.AddRange(FloatDVs);
+                variables.AddRange(StringDVs);
+                variables.AddRange(BoolIVs);
+                variables.AddRange(GameObjectDVs);
+                variables.AddRange(Vector3DVs);
+                variables.AddRange(CustomDataTypeDVs);
+                
 
-                foreach (var variable in BoolIVs) {
-                    variables.Add(variable);
-                }
-
-                foreach (var variable in GameObjectIVs) {
-                    variables.Add(variable);
-                }
-
-                foreach (var variable in Vector3IVs) {
-                    variables.Add(variable);
-                }
-
-                foreach (var variable in CustomDataTypeIVs) {
-                    variables.Add(variable);
-                }
-
-                //DVS
-                foreach (var variable in IntDVs) {
-                    variables.Add(variable);
-                }
-
-                foreach (var variable in FloatDVs) {
-                    variables.Add(variable);
-                }
-
-                foreach (var variable in StringDVs) {
-                    variables.Add(variable);
-                }
-
-                foreach (var variable in BoolDVs) {
-                    variables.Add(variable);
-                }
-
-                foreach (var variable in GameObjectDVs) {
-                    variables.Add(variable);
-                }
-
-                foreach (var variable in Vector3DVs) {
-                    variables.Add(variable);
-                }
-
-                foreach (var variable in CustomDataTypeDVs) {
-                    variables.Add(variable);
-                }
-
+                //PARTICIPANT VARIABLES
+                variables.AddRange(IntParticipantVariables);    
+                variables.AddRange(FloatParticipantVariables);
+                variables.AddRange(StringParticipantVariables);
+                variables.AddRange(BoolParticipantVariables);
+                variables.AddRange(GameObjectParticipantVariables);
+                variables.AddRange(Vector3ParticipantVariables);
+                variables.AddRange(CustomDataParticipantVariables);
+                
                 return variables;
             }
         }
@@ -227,6 +208,47 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
                     break;
                 case VariableType.ChooseType:
+                    break;
+                case VariableType.Participant:
+
+                    switch (DataTypesToCreate) {
+                        case SupportedDataTypes.Int:
+                            ParticipantVariableInt newVariableInt = new ParticipantVariableInt();
+                            IntParticipantVariables.Add(newVariableInt);
+                            break;
+                        case SupportedDataTypes.Float:
+                            ParticipantVariableFloat newVariableFloat = new ParticipantVariableFloat();
+                            FloatParticipantVariables.Add(newVariableFloat);
+                            break;
+                        case SupportedDataTypes.String:
+                            ParticipantVariableString newVariableString = new ParticipantVariableString();
+                            StringParticipantVariables.Add(newVariableString);
+                            break;
+                        case SupportedDataTypes.Bool:
+                            ParticipantVariableBool newVariableBool = new ParticipantVariableBool();
+                            BoolParticipantVariables.Add(newVariableBool);
+                            break;
+                        case SupportedDataTypes.GameObject:
+                            ParticipantVariableGameObject newVariableGameObject = new ParticipantVariableGameObject();
+                            GameObjectParticipantVariables.Add(newVariableGameObject);
+                            break;
+                        case SupportedDataTypes.Vector3:
+                            ParticipantVariableVector3 newVariableVector3 = new ParticipantVariableVector3();
+                            Vector3ParticipantVariables.Add(newVariableVector3);
+                            break;
+                        case SupportedDataTypes.CustomDataType:
+                            ParticipantVariableCustomData newVariableCustomData = new ParticipantVariableCustomData();
+                            CustomDataParticipantVariables.Add(newVariableCustomData);
+                            break;
+                        case SupportedDataTypes.ChooseType:
+                            throw new
+                                InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
+                        default:
+                            throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
+                                                              "You can customize it yourself in the IndependentVariable.cs class");
+                    }
+
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(VariableTypeToCreate), DataTypesToCreate, null);

@@ -46,7 +46,14 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
             property.serializedObject.ApplyModifiedProperties();
 
+
+
             //ADD IVs
+            EditorGUI.LabelField(currentRect, "--------");
+            currentRect.y += LineHeight;
+            EditorGUI.LabelField(currentRect, "Independent Variables:", EditorStyles.boldLabel);
+            currentRect.y += LineHeight;
+
             SerializedProperty intIvProperty = property.FindPropertyRelative(nameof(VariableFactory.IntIVs));
             currentRect = AddPropertyFromList(currentRect, intIvProperty);
 
@@ -71,6 +78,11 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             currentRect = AddPropertyFromList(currentRect, customDataTypesIvProperty);
 
             //ADD DVs
+            EditorGUI.LabelField(currentRect, "--------");
+            currentRect.y += LineHeight;
+            EditorGUI.LabelField(currentRect, "Dependent Variables:", EditorStyles.boldLabel);
+            currentRect.y += LineHeight;
+
             SerializedProperty intDvProperty = property.FindPropertyRelative(nameof(VariableFactory.IntDVs));
             currentRect = AddPropertyFromList(currentRect, intDvProperty);
 
@@ -94,14 +106,48 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                 property.FindPropertyRelative(nameof(VariableFactory.CustomDataTypeDVs));
             currentRect = AddPropertyFromList(currentRect, customDataTypesDvProperty);
 
+            //Add Participant variables
+            EditorGUI.LabelField(currentRect, "--------");
+            currentRect.y += LineHeight;
+            EditorGUI.LabelField(currentRect, "Participant Variables:", EditorStyles.boldLabel);
+            currentRect.y += LineHeight;
 
+            SerializedProperty intParticipantProperty = 
+                property.FindPropertyRelative(nameof(VariableFactory.IntParticipantVariables));
+            currentRect = AddPropertyFromList(currentRect, intParticipantProperty);
+
+            SerializedProperty floatParticipantProperty =
+                property.FindPropertyRelative(nameof(VariableFactory.FloatParticipantVariables));
+            currentRect = AddPropertyFromList(currentRect, floatParticipantProperty);
+
+            SerializedProperty stringParticipantProperty =
+                property.FindPropertyRelative(nameof(VariableFactory.StringParticipantVariables));
+            currentRect = AddPropertyFromList(currentRect, stringParticipantProperty);
+
+            SerializedProperty boolParticipantProperty =
+                property.FindPropertyRelative(nameof(VariableFactory.BoolParticipantVariables));
+            currentRect = AddPropertyFromList(currentRect, boolParticipantProperty);
+
+            SerializedProperty gameObjectParticipantProperty =
+                property.FindPropertyRelative(nameof(VariableFactory.GameObjectParticipantVariables));
+            currentRect = AddPropertyFromList(currentRect, gameObjectParticipantProperty);
+
+            SerializedProperty vector3ParticipantProperty =
+                property.FindPropertyRelative(nameof(VariableFactory.Vector3ParticipantVariables));
+            currentRect = AddPropertyFromList(currentRect, vector3ParticipantProperty);
+
+            SerializedProperty customDataParticipantProperty =
+                property.FindPropertyRelative(nameof(VariableFactory.CustomDataParticipantVariables));
+            currentRect = AddPropertyFromList(currentRect, customDataParticipantProperty);
+            
+            
 
             EditorGUI.LabelField(currentRect, "--------");
-            currentRect.y += 20f;
-            //var floatsProperty = property.FindPropertyRelative(nameof(VariableFactory.floatData));
-            //EditorGUI.PropertyField(currentRect, floatsProperty, GUIContent.none, includeChildren: true);
-
-            //currentRect.y += 20f;
+            currentRect.y += LineHeight;
+            
+            EditorGUI.LabelField(currentRect, "Settings:", EditorStyles.boldLabel);
+            currentRect.y += LineHeight;
+            
 
             EditorGUI.indentLevel = oldIndentLevel;
             if (Math.Abs(height - currentRect.y) > 0.001f) {

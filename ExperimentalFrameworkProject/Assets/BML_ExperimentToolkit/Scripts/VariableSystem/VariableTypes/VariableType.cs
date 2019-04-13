@@ -5,6 +5,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
     public enum VariableType {
         Independent,
         Dependent,
+        Participant,
         ChooseType
     }
 }

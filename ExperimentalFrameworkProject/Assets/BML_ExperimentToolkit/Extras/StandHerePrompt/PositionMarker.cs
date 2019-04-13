@@ -17,7 +17,7 @@ namespace BML_ExperimentToolkit.Extras.StandHerePrompt {
         }
 
         void CopyPositionFromHmd() {
-            var hmdPosition = Hmd.position;
+            Vector3 hmdPosition = Hmd.position;
             Vector3 newPosition = new Vector3(hmdPosition.x, PromptSettings.PositionMarkerVerticalOffset, hmdPosition.z);
             transform.position = newPosition;
         }

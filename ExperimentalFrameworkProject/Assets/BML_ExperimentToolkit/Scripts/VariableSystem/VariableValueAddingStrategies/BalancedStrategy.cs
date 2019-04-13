@@ -20,7 +20,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrate
             foreach (DataRow tableRow in table.Rows) {
                 foreach (T value in independentVariable.Values) {
                     newTable.ImportRow(tableRow);
-                    var newRow = newTable.Rows[newTable.Rows.Count - 1];
+                    DataRow newRow = newTable.Rows[newTable.Rows.Count - 1];
                     newRow[independentVariable.Name] = value;
                 }
             }

@@ -16,8 +16,8 @@ MonoBehaviour:
   ShuffleDifferentlyForEachBlock: 1
   RepeatTrialBlock: 1
   Factory:
-    DataTypesToCreate: 3
-    VariableTypeToCreate: 0
+    DataTypesToCreate: 1
+    VariableTypeToCreate: 1
     IntIVs:
     - Name: Distance
       TypeOfVariable: 0
@@ -53,10 +53,31 @@ MonoBehaviour:
     Vector3IVs: []
     CustomDataTypeIVs: []
     IntDVs: []
-    FloatDVs: []
+    FloatDVs:
+    - Name: FloatDependent
+      TypeOfVariable: 1
+      DataType: 1
+      Value: 0
+      DefaultValue: -999
     StringDVs: []
     BoolDVs: []
     GameObjectDVs: []
     Vector3DVs: []
     CustomDataTypeDVs: []
+    IntParticipantVariables: []
+    FloatParticipantVariables: []
+    StringParticipantVariables:
+    - Name: Gender
+      TypeOfVariable: 2
+      DataType: 2
+      Value: 
+      ConstrainValues: 1
+      PossibleValues:
+      - Male
+      - Female
+    BoolParticipantVariables: []
+    GameObjectParticipantVariables: []
+    Vector3ParticipantVariables: []
+    CustomDataParticipantVariables: []
   ColumnNames: {fileID: 11400000, guid: b004757e12fd66b43828570a0f83b1db, type: 2}
+  ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}

@@ -24,7 +24,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         void StartPart(ExperimentPart experimentPart) {
             if (experimentPart == this) {
-                UnityEngine.Debug.Log("Starting Coroutine");
                 runner.StartCoroutine(Run());
             }
         }

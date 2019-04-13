@@ -101,7 +101,7 @@ namespace BML_Utilities.Extensions {
             if (count == 1) yield return sequence;
             else {
                 for (int i = 0; i < count; i++) {
-                    foreach (var perm in Permutate(sequence, count - 1))
+                    foreach (IList perm in Permutate(sequence, count - 1))
                         yield return perm;
                     RotateRight(sequence, count);
                 }

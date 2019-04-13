@@ -28,7 +28,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrate
             
             //Debug.Log("Adding rows to empty trialTable in variable creation");
             foreach (T value in independentVariable.Values) {
-                var newRow = newTable.NewRow();
+                DataRow newRow = newTable.NewRow();
                 newRow[independentVariable.Name] = value;
                 newTable.Rows.Add(newRow);
             }

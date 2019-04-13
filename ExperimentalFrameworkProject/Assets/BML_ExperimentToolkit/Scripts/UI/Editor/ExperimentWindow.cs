@@ -373,7 +373,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Trials:", EditorStyles.boldLabel);
 
-            foreach (var block in runner.Design.Blocks) {
+            foreach (Block block in runner.Design.Blocks) {
                 int blockIndex = runner.Design.Blocks.IndexOf(block);
 
                 EditorGUILayout.BeginVertical(EditorStyles.helpBox);
