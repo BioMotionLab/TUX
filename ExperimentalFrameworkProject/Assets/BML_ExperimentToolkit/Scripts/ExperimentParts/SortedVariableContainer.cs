@@ -12,6 +12,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public List<IndependentVariable> LoopedIndependentVariables      = new List<IndependentVariable>();
         public List<IndependentVariable> ProbabilityIndependentVariables = new List<IndependentVariable>();
         public List<DependentVariable>   DependentVariables              = new List<DependentVariable>();
+        public List<ParticipantVariable> ParticipantVariables = new List<ParticipantVariable>();
 
         //Sort Independent variables into mixing categories so they go in order
         public SortedVariableContainer(List<Variable> allData, bool block) {
@@ -52,6 +53,13 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     DependentVariable dependentVariable = (DependentVariable) variable;
                     DependentVariables.Add(dependentVariable);
                 }
+                else if (variable.TypeOfVariable == VariableType.Participant) {
+                    ParticipantVariable participantVariable = (ParticipantVariable) variable;
+                    ParticipantVariables.Add(participantVariable);
+
+                }
+                    
+                
             }
 
             bool thereAreBlockIvsButNoNormalIvs = numberOfBlockIvs > 0 && numberOfNonBlockIvs == 0;
@@ -63,5 +71,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                                                                             $"to make it a normal variable");
             }
         }
+
+       
     }
 }

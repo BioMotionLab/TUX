@@ -4,6 +4,8 @@ using System.Data;
 using System.IO;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
+using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using BML_Utilities;
 using BML_Utilities.Extensions;
 using UnityEditor;
@@ -163,7 +165,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             }
             
 
-            //Trials
+            //NumberOfTrials
             ShowTrialTables();
             
 
@@ -199,6 +201,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.LabelField("Participant ID:", LabelWidth);
             session.ParticipantId = EditorGUILayout.TextField(session.ParticipantId);
             EditorGUILayout.EndHorizontal();
+
+            ShowParticipantVariables();
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Output File Path:", LabelWidth);
@@ -237,6 +241,72 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.EndVertical();
             return true;
         }
+
+        void ShowParticipantVariables() {
+
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            
+
+
+            EditorGUILayout.LabelField("Fill In Participant Variables:", EditorStyles.boldLabel);
+            List<Variable> variables = runner.ConfigDesignFile.Factory.AllVariables;
+
+
+            foreach (Variable variable in variables) {
+                
+                
+
+                if (variable.TypeOfVariable != VariableType.Participant) continue;
+
+                ParticipantVariable participantVariable = (ParticipantVariable) variable;
+
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField(participantVariable.Name + ":", LabelWidth);
+                if (participantVariable.ValuesAreConstrained) {
+                    
+                    string[] possibleValues = participantVariable.PossibleValuesStringArray;
+
+                    
+                    participantVariable.SelectedValue =
+                            EditorGUILayout.Popup(participantVariable.SelectedValue, possibleValues);
+
+                }
+                else {
+                    
+                    switch (participantVariable.DataType) {
+                        case SupportedDataTypes.Int:
+                            ParticipantVariableInt intVariable = (ParticipantVariableInt) participantVariable;
+                            intVariable.Value = EditorGUILayout.IntField(intVariable.Value);
+                            break;
+                        case SupportedDataTypes.Float:
+                            ParticipantVariableFloat floatVariable = (ParticipantVariableFloat)participantVariable;
+                            floatVariable.Value = EditorGUILayout.FloatField(floatVariable.Value);
+                            break;
+                        case SupportedDataTypes.String:
+                            ParticipantVariableString stringVariable = (ParticipantVariableString)participantVariable;
+                            stringVariable.Value = EditorGUILayout.TextField(stringVariable.Value);
+                            break;
+                        case SupportedDataTypes.Bool:
+                            ParticipantVariableBool boolVariable = (ParticipantVariableBool)participantVariable;
+                            boolVariable.Value = EditorGUILayout.Toggle(boolVariable.Value);
+                            break;
+                        case SupportedDataTypes.GameObject:
+                        case SupportedDataTypes.Vector3:
+                        case SupportedDataTypes.CustomDataType:
+                        case SupportedDataTypes.ChooseType:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+
+                EditorGUILayout.EndHorizontal();
+            }
+
+            
+            EditorGUILayout.EndVertical();
+        }
+
 
         /// <summary>
         /// Choose block order
@@ -371,7 +441,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Trials:", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("NumberOfTrials:", EditorStyles.boldLabel);
 
             foreach (Block block in runner.Design.Blocks) {
                 int blockIndex = runner.Design.Blocks.IndexOf(block);
@@ -431,6 +501,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 EditorGUILayout.EndVertical();
 
             }
+
+            EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
         }
     }

@@ -1,9 +1,9 @@
-Block, TrialInBlock, Trial, Distance, Angle, Window, Completed, Attempts, Skipped, TrialTime
-0, 0, 0, 2, 10, False, True, 1, False, 1.334228
-0, 1, 1, 2, 20, False, True, 1, False, 0.232255
-0, 2, 2, 2, 10, True, True, 1, False, 0.09940052
-0, 3, 3, 2, 20, True, True, 1, False, 0.1319518
-1, 0, 4, 1, 10, False, True, 1, False, 0.4482265
-1, 1, 5, 1, 20, True, True, 1, False, 0.198822
-1, 2, 6, 1, 20, False, True, 1, False, 0.1490679
-1, 3, 7, 1, 10, True, True, 1, False, 0.2153664
+Block, TrialInBlock, Trial, IVint, IVfloat, IVbool, output, Completed, Attempts, Skipped, RespTime, ParticipantID, Gender
+0,0,0,2,2.2, True,-999, True,1, False,1.160496,1, Male
+0,1,1,1,2.2, True,-999, True,1, False,0.09915829,1, Male
+0,2,2,2,2.2, False,-999, True,1, False,0.0830884,1, Male
+0,3,3,1,2.2, False,-999, True,1, False,0.06603003,1, Male
+0,4,4,2,1.1, False,-999, True,1, False,0.08283186,1, Male
+0,5,5,1,1.1, True,-999, True,1, False,0.09937668,1, Male
+0,6,6,2,1.1, True,-999, True,1, False,0.1205177,1, Male
+0,7,7,1,1.1, False,-999, True,1, False,0.2153497,1, Male

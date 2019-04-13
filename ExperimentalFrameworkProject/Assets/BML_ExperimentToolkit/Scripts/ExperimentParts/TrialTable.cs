@@ -6,14 +6,14 @@ using BML_Utilities.Extensions;
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public class TrialTable {
 
-        DataTable baseTrialTable;
+        public DataTable baseTrialTable;
         readonly ColumnNames columnNames;
-        public int Trials => baseTrialTable.Rows.Count;
+        public int NumberOfTrials => baseTrialTable.Rows.Count;
 
-        public TrialTable(List<Variable> allData,             BlockTable  baseBlockTable, bool shuffleBaseTrialOrder,
+        public TrialTable(List<Variable> allData,  ExperimentDesign design,           BlockTable  baseBlockTable, bool shuffleBaseTrialOrder,
                           int            numberOfRepetitions, ColumnNames columnNames) {
             this.columnNames = columnNames;
-            baseTrialTable = ExperimentDesign.SortAndAddIVs(allData);
+            baseTrialTable = design.SortAndAddIVs(allData);
 
             //Repeat all trials if specified
             if (numberOfRepetitions > 1) {
@@ -41,6 +41,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             AddAttemptsColumnTo();
             AddSkippedColumnTo();
             AddTrialTimeColumnTo();
+            
 
 
 

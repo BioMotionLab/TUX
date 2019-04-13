@@ -19,30 +19,30 @@ MonoBehaviour:
     DataTypesToCreate: 1
     VariableTypeToCreate: 1
     IntIVs:
-    - Name: Distance
+    - Name: IVint
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0
-      Block: 1
+      Block: 0
       Values: 0100000002000000
       Probabilities:
       - 0
       - 0
     FloatIVs:
-    - Name: Angle
+    - Name: IVfloat
       TypeOfVariable: 0
       DataType: 1
       MixingTypeOfVariable: 0
       Block: 0
       Values:
-      - 10
-      - 20
+      - 1.1
+      - 2.2
       Probabilities:
       - 0
       - 0
     StringIVs: []
     BoolIVs:
-    - Name: Window
+    - Name: IVbool
       TypeOfVariable: 0
       DataType: 3
       MixingTypeOfVariable: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
     CustomDataTypeIVs: []
     IntDVs: []
     FloatDVs:
-    - Name: FloatDependent
+    - Name: output
       TypeOfVariable: 1
       DataType: 1
       Value: 0

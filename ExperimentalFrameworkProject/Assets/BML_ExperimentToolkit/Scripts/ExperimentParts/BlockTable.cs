@@ -11,7 +11,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         readonly DataTable baseBlockTable;
 
-        public BlockTable(List<Variable> allData) {
+        public BlockTable(List<Variable> allData, ExperimentDesign design) {
 
             //Get block Variables
             List<Variable> blockVariables = new List<Variable>();
@@ -24,7 +24,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 }
             }
 
-            baseBlockTable = ExperimentDesign.SortAndAddIVs(blockVariables, true);
+            baseBlockTable = design.SortAndAddIVs(blockVariables, true);
    
         }
 

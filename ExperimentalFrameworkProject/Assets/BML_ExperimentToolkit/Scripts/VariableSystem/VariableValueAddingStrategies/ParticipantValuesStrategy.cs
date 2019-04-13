@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies {
 
@@ -10,20 +12,19 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrate
     public class ParticipantVariableValuesAdderStrategy<T> {
 
         public DataTable AddValuesToCopyOf(DataTable table, ParticipantVariable<T> participantVariable) {
-
+            
             AddVariableColumn(participantVariable, table);
-
-            DataTable newTable = table.Copy();
+            
 
             if (table.Rows.Count == 0) {
                 throw new ArgumentException("Can't add participant variable values to empty trialTable");
             }
 
-            foreach (DataRow newTableRow in newTable.Rows) {
+            foreach (DataRow newTableRow in table.Rows) {
                 newTableRow[participantVariable.Name] = participantVariable.Value;
             }
 
-            return newTable;
+            return table;
         }
 
 
@@ -40,5 +41,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrate
                 column.SetOrdinal(index);
             }
         }
+        
     }
 }

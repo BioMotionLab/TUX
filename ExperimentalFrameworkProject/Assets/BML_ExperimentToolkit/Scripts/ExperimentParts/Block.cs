@@ -12,7 +12,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     /// </summary>
     public abstract class Block : ExperimentPart {
 
-        public readonly DataTable TrialTable;
+        public DataTable TrialTable;
         public readonly string    Identity;
 
         public bool Complete = false;

@@ -46,7 +46,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         IEnumerator Run() {
             yield return RunPreMethods();
             float startTime = Time.time;
-            Debug.Log("starting main coroutine");
+
+
             yield return RunMainCoroutine();
             float endTime = Time.time;
             RunTime = endTime - startTime;

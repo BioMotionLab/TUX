@@ -83,7 +83,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         #endregion
 
 
-        List<Variable> AllVariables {
+        public List<Variable> AllVariables {
             get {
 
                 List<Variable> variables = new List<Variable>();
@@ -101,7 +101,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                 variables.AddRange(IntDVs);
                 variables.AddRange(FloatDVs);
                 variables.AddRange(StringDVs);
-                variables.AddRange(BoolIVs);
+                variables.AddRange(BoolDVs);
                 variables.AddRange(GameObjectDVs);
                 variables.AddRange(Vector3DVs);
                 variables.AddRange(CustomDataTypeDVs);
