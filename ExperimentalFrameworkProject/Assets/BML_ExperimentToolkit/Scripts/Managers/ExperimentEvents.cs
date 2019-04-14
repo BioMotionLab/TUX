@@ -3,7 +3,7 @@ using BML_ExperimentToolkit.Scripts.ExperimentParts;
 
 namespace BML_ExperimentToolkit.Scripts.Managers {
     
-    public class ExperimentEvents {
+    public static class ExperimentEvents {
 
         public delegate void TrialHasStartedEvent(Trial trial, int index);
 

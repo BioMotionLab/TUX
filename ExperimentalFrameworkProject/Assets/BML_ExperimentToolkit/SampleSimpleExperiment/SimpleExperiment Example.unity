@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d94fdbbf4931f8429360b47cbe5d070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConfigDesignFile: {fileID: 11400000, guid: 717ef8589e8e3164f9eb9ca72c0e10f3, type: 2}
+  ConfigFile: {fileID: 11400000, guid: 717ef8589e8e3164f9eb9ca72c0e10f3, type: 2}
   Ended: 0
   Running: 0
   FinishedInitialization: 0

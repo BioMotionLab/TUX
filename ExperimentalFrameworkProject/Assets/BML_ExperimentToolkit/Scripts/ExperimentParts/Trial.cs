@@ -10,14 +10,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     /// and it is in charge of setting and cleaning itself up
     /// </summary>
     public abstract class Trial : ExperimentPart {
-        bool           interrupt;
+        
 
         // ReSharper disable once NotAccessedField.Local
         protected readonly ExperimentRunner Runner;
         public readonly DataRow Data;
 
         public int     Index      => (int) Data[Runner.ConfigFile.ColumnNames.TrialIndex];
-        public int     BlockIndex => (int) (Data[Runner.ConfigFile.ColumnNames.BlockIndex]);
+        public int     BlockIndex => (int) Data[Runner.ConfigFile.ColumnNames.BlockIndex];
         public string  TrialText  => $"Trial {Index} of Block {BlockIndex}";
 
         public bool CompletedSuccessfully {
@@ -43,23 +43,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             Data = data;
             Runner = runner;
             CompletedSuccessfully = false;
-            interrupt = false;
-            Enable();
+            
         }
 
-        void Enable() {
-            ExperimentEvents.OnTrialInterrupt += SkipTrial;
-            ExperimentEvents.OnGoBackOneTrial += InterruptTrial;
-            ExperimentEvents.OnSkipToNextTrial += InterruptTrial;
-
-        }
-
-        void Disable() {
-            ExperimentEvents.OnTrialInterrupt -= SkipTrial;
-            ExperimentEvents.OnGoBackOneTrial -= InterruptTrial;
-            ExperimentEvents.OnSkipToNextTrial -= InterruptTrial;
-
-        }
+        
 
         /// <summary>
         /// Run the main section of trial
@@ -67,29 +54,33 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <returns></returns>
         protected override void InternalPostMethod() {
             FinalizeTrial();
-            if (!interrupt) ExperimentEvents.TrialHasCompleted();
+            if (!Interrupt) ExperimentEvents.TrialHasCompleted();
         }
 
         /// <summary>
         /// Finalizes the trial
         /// </summary>
         public void FinalizeTrial() {
-            if (!interrupt) {
+            if (!Interrupt) {
                 CompletedSuccessfully = true;
                 Attempts++;
             }
             
             TrialTime = RunTime;
-            Disable();
+            
+
         }
         
-        public void SkipTrial() {
+        public void SkipCompletely() {
+           
             Skipped = true;
             InterruptTrial();
+
         }
 
         public void InterruptTrial() {
-            interrupt = true;
+
+            InterruptThis();
             FinalizeTrial();
         }
 

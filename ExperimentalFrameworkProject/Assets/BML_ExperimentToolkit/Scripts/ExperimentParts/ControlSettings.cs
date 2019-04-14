@@ -16,7 +16,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <returns></returns>
         public IEnumerator Run() {
-            //TODO let user select keycodes in inspector using scriptable object settings
             const bool running = true;
 
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse

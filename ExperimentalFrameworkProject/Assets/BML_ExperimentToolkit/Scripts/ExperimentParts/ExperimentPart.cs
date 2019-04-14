@@ -8,9 +8,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         readonly ExperimentRunner runner;
         protected float RunTime;
+        protected bool Interrupt { get; private set; }
 
         protected ExperimentPart(ExperimentRunner runner) {
             this.runner = runner;
+            Interrupt = false;
             Enable();
         }
 
@@ -23,9 +25,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         void StartPart(ExperimentPart experimentPart) {
-            if (experimentPart == this) {
-                runner.StartCoroutine(Run());
-            }
+
+            if (experimentPart != this) return;
+
+            runner.StartCoroutine(Run());
+            Interrupt = false;
         }
         
         /// <summary>
@@ -44,28 +48,43 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
 
         IEnumerator Run() {
-            yield return RunPreMethods();
+            yield return ConditionalCoroutine(RunPreMethods());
+
             float startTime = Time.time;
 
+            yield return ConditionalCoroutine(RunMainCoroutine());
 
-            yield return RunMainCoroutine();
+            //yield return RunMainCoroutine();
+
             float endTime = Time.time;
             RunTime = endTime - startTime;
-            yield return RunPostMethods();
 
-            Disable();
+            yield return ConditionalCoroutine(RunPostMethods());
+
+            
+        }
+
+        IEnumerator ConditionalCoroutine(IEnumerator coroutine) {
+            while (coroutine.MoveNext()) {
+                if (Interrupt) {
+                    Debug.LogWarning($"Interrupted {nameof(coroutine)}");
+                    break;
+                }
+                yield return coroutine.Current;
+            }
         }
 
         /// <summary>
         /// Start running the code that occurs after the main part of the Runner
         /// </summary>
         /// <returns></returns>
-        protected IEnumerator RunPostMethods() {
+        IEnumerator RunPostMethods() {
             yield return null; // let last frame finish before starting
 
             yield return PostCoroutine();
             PostMethod();
             InternalPostMethod();
+            
         }
 
 
@@ -117,5 +136,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// [Note: Called after PostCoroutine()]
         /// </summary>
         protected virtual void PostMethod() {}
+
+        protected void InterruptThis() {
+            Interrupt = true;
+        }
     }
 }

@@ -86,6 +86,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
         void SkipToNextTrial() {
             Debug.LogWarning("Got Next Trial event");
+            currentlyRunningTrial.InterruptTrial();
             FinishTrial();
 
             int newIndex = TrialCurrentIndex(currentlyRunningTrial) + 1;
@@ -129,13 +130,15 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
 
         void InterruptTrial() {
-            Debug.LogWarning("Got SkipTrial event from currentTrial");
+            Debug.LogWarning("Got SkipCompletely event from currentTrial");
+            currentlyRunningTrial.SkipCompletely();
             FinishTrial();
             GoToNextTrial();
         }
 
         void BackOneTrial() {
             Debug.LogWarning("Got Back event");
+            currentlyRunningTrial.InterruptTrial();
             FinishTrial();
             int newIndex = TrialCurrentIndex(currentlyRunningTrial) - 1;
             if (newIndex < 0) {
