@@ -12,7 +12,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
     /// The trial ends when the key is pressed.
     /// </summary>
     public class SimpleTrial : Trial {
-
         
 
         /// <summary>
@@ -22,6 +21,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
         /// <param name="data">The row of BlockData for this trial from a table</param>
         public SimpleTrial(ExperimentRunner runner, DataRow data) : base(runner, data) {}
 
+        
 
         /// <inheritdoc />
         /// <summary>
