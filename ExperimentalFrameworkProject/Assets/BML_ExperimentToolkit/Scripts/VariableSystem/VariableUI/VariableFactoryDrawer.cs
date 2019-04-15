@@ -15,7 +15,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             return EditorGUI.GetPropertyHeight(property) + height;
         }
 
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             //property.serializedObject.Update();
             int oldIndentLevel = EditorGUI.indentLevel;
@@ -141,7 +140,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             currentRect = AddPropertyFromList(currentRect, customDataParticipantProperty);
             
             
-
             EditorGUI.LabelField(currentRect, "--------");
             currentRect.y += LineHeight;
             
@@ -172,7 +170,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                 Color oldColor = GUI.backgroundColor;
                 //GUI.color = Color.red;
                 //GUI.DrawTexture(currentRect, EditorGUIUtility.whiteTexture);
-                GUI.backgroundColor = Color.red;
+                //GUI.backgroundColor = Color.red;
                 if (GUI.Button(deleteButtonRect, "Delete Variable")) {
                     valueProperty.DeleteArrayElementAtIndex(i);
                     break;

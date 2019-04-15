@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
 using UnityEngine;
@@ -153,18 +155,26 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         /// <param name="currentRect"></param>
         /// <returns></returns>
         static Rect AddVariableProperties(SerializedProperty property, Rect currentRect) {
-            const float typeWidth = 200f;
             const float nameWidth = 200f;
-            const float namePad = 30f;
 
             Rect nameRect = new Rect(currentRect.x, currentRect.y, nameWidth, currentRect.height);
             SerializedProperty name = property.FindPropertyRelative(nameof(Variable.Name));
             EditorGUI.PropertyField(nameRect, name, GUIContent.none);
+            currentRect.y += LineHeight;
 
-            Rect dataTypeRect = new Rect(nameWidth + namePad, currentRect.y, typeWidth, currentRect.height);
+            VariableNameValidator validator = new VariableNameValidator(name.stringValue);
+            Rect warningBoxRect = new Rect(currentRect.x, currentRect.y, currentRect.width, LineHeight*3);
+            if (!validator.Valid) {
+                EditorGUI.HelpBox(warningBoxRect, validator.InvalidReasons, MessageType.Error);
+                currentRect.y += LineHeight * 3;
+            }
+
+            currentRect.y += LineHeight;
+
+            
             SerializedProperty variableDataType = property.FindPropertyRelative(nameof(Variable.DataType));
             SupportedDataTypes dataType = (SupportedDataTypes) variableDataType.enumValueIndex;
-            EditorGUI.LabelField(dataTypeRect, $"Data Type: {dataType.ToString()}");
+            EditorGUI.LabelField(currentRect, $"Data Type: {dataType.ToString()}");
 
             currentRect.y += LineHeight;
 
@@ -356,6 +366,33 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             float propertyHeight = currentRect.y - oldY;
             property.serializedObject.ApplyModifiedProperties();
             return propertyHeight;
+        }
+    }
+
+    internal class VariableNameValidator {
+
+        public bool Valid => reasonsInvalid.Count == 0;
+
+        public string InvalidReasons {
+            get {
+                string reasons = "";
+                foreach (string reason in reasonsInvalid) {
+                    reasons += reason + ", ";
+                }
+
+                return reasons;
+            }
+        }
+
+        readonly List<string> reasonsInvalid = new List<string>();
+
+        const string invalidName =
+            "Name Contains Illegal Characters. Name must be one word of letters or numbers only";
+
+        public VariableNameValidator(string nameStringValue) {
+            if (!nameStringValue.All(c => Char.IsLetterOrDigit(c) || c == '_')) {
+                reasonsInvalid.Add(invalidName);
+            }
         }
     }
 }
