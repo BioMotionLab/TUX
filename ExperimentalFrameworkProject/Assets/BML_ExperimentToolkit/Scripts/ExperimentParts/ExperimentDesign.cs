@@ -76,7 +76,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 }
 
                 const string blockIdentity = "MainCoroutine Block";
-                Block newBlock = CreateNewBlock(trialTable, blockIdentity);
+                Block newBlock = CreateNewBlock(trialTable, blockIdentity, null);
                 Blocks.Add(newBlock);
 
             }
@@ -92,7 +92,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     trialTable = UpdateWithBlockValues(trialTable, orderedBlockRow, i);
 
                     string blockIdentity = orderedBlockRow.AsStringWithColumnNames(separator: ", ");
-                    Block newBlock = CreateNewBlock(trialTable, blockIdentity);
+                    Block newBlock = CreateNewBlock(trialTable, blockIdentity, orderedBlockRow);
                     Blocks.Add(newBlock);
 
                     //Debug.Log($"{newBlock.AsString()}");
@@ -120,12 +120,13 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         }
 
-        Block CreateNewBlock(DataTable trialTable, string blockIdentity) {
+        Block CreateNewBlock(DataTable trialTable, string blockIdentity, DataRow dataRow) {
             Block newBlock = (Block)Activator.CreateInstance(runner.BlockType,
                                                               runner,
                                                               trialTable,
                                                               blockIdentity,
-                                                              runner.TrialType
+                                                              runner.TrialType,
+                                                              dataRow
                                                              );
             return newBlock;
         }

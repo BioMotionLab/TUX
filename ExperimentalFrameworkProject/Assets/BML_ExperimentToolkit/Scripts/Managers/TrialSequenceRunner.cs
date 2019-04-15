@@ -10,11 +10,11 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
         Trial currentlyRunningTrial;
 
-        List<Trial> trialsInSequence;
+        readonly List<Trial> trialsInSequence;
         List<Trial> currentTrialList;
 
 
-        public TrialSequenceRunner(ExperimentRunner runner, List<Trial> trialList) {
+        public TrialSequenceRunner(List<Trial> trialList) {
             OnEnable();
             trialsInSequence = trialList;
             currentTrialList = trialList;

@@ -386,12 +386,12 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
         readonly List<string> reasonsInvalid = new List<string>();
 
-        const string invalidName =
+        const string InvalidName =
             "Name Contains Illegal Characters. Name must be one word of letters or numbers only";
 
         public VariableNameValidator(string nameStringValue) {
             if (!nameStringValue.All(c => Char.IsLetterOrDigit(c) || c == '_')) {
-                reasonsInvalid.Add(invalidName);
+                reasonsInvalid.Add(InvalidName);
             }
         }
     }

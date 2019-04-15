@@ -11,11 +11,13 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
         public SimpleBlock(ExperimentRunner runner,
                            DataTable trialTable, 
                            string identity, 
-                           Type customTrialType) :
+                           Type customTrialType,
+                           DataRow dataRow) :
             base(runner, 
                  trialTable, 
                  identity, 
-                 customTrialType) {
+                 customTrialType,
+                 dataRow) {
         }
         
     }

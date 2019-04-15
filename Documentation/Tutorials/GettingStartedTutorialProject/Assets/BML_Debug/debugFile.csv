@@ -1,0 +1,10 @@
+Block, TrialInBlock, Trial, Distance, Color, Size, SelectedSize, Completed, Attempts, Skipped, RespTime, Age, Gender
+0, 0, 0, 1, Red, 1.5, 1, True, 1, False, 9.759346, 0, 
+0, 1, 1, 1, Blue, 2, 1, True, 1, False, 1.801176, 0, 
+0, 2, 2, 1, Green, 1, 1, True, 1, False, 0.3490582, 0, 
+1, 0, 3, 2, Red, 1.5, 2.58856, True, 1, False, 11.72355, 0, 
+1, 1, 4, 2, Blue, 2, -999, False, 0, False, 0, 0, 
+1, 2, 5, 2, Green, 1, -999, False, 0, False, 0, 0, 
+2, 0, 6, 3, Red, 1.5, -999, False, 0, False, 0, 0, 
+2, 1, 7, 3, Blue, 2, -999, False, 0, False, 0, 0, 
+2, 2, 8, 3, Green, 1, -999, False, 0, False, 0, 0, 

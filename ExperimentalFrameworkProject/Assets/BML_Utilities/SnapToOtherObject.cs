@@ -25,8 +25,8 @@ namespace BML_Utilities {
         /// Can snap each axis separately.
         /// </summary>
         /// <param name="otherObject">The object to snap to</param>
-        public void SnapTo(GameObject otherObject) {
-            Vector3 newPosition = this.transform.position;
+        void SnapTo(GameObject otherObject) {
+            Vector3 newPosition = transform.position;
 
             if (SnapToX) {
                 newPosition.x = otherObject.transform.position.x;
@@ -40,7 +40,7 @@ namespace BML_Utilities {
                 newPosition.z = otherObject.transform.position.z;
             }
 
-            this.transform.position = newPosition;
+            transform.position = newPosition;
         }
 
         void Update() {
