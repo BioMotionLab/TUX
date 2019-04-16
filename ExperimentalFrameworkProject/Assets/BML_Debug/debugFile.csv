@@ -1,9 +1,9 @@
 Block, TrialInBlock, Trial, IVint, IVfloat, IVbool, output, Completed, Attempts, Skipped, RespTime, ParticipantID, Gender
-0, 0, 0, 1, 2.2, False, -999, True, 1, False, 0.7235565, 1, Male
-0, 1, 1, 1, 1.1, True, -999, False, 0, True, 0, 1, Male
-0, 2, 2, 2, 2.2, True, -999, True, 1, False, 2.679148, 1, Male
-0, 3, 3, 2, 1.1, False, -999, True, 1, False, 0.7645597, 1, Male
-0, 4, 4, 2, 2.2, False, -999, True, 1, False, 0.6259651, 1, Male
-0, 5, 5, 1, 2.2, True, -999, True, 2, False, 0.5359592, 1, Male
-0, 6, 6, 2, 1.1, True, -999, True, 1, False, 2.152612, 1, Male
-0, 7, 7, 1, 1.1, False, -999, True, 1, False, 1.147373, 1, Male
+0, 0, 0, 1, 1.1, False, -999, True, 1, False, 54.31631, 1, Male
+0, 1, 1, 2, 2.2, True, -999, False, 0, False, 0.2134628, 1, Male
+0, 2, 2, 1, 2.2, False, -999, False, 0, False, 0.1806641, 1, Male
+0, 3, 3, 1, 1.1, True, -999, False, 0, False, 0.2320099, 1, Male
+0, 4, 4, 2, 1.1, True, -999, False, 0, False, 0.2138443, 1, Male
+0, 5, 5, 2, 2.2, False, -999, False, 0, False, 0.19701, 1, Male
+0, 6, 6, 2, 1.1, False, -999, False, 0, False, 0, 1, Male
+0, 7, 7, 1, 2.2, True, -999, False, 0, False, 0, 1, Male

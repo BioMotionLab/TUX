@@ -20,9 +20,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             ExperimentEvents.OnStartPart += StartPart;
         }
 
-        void Disable() {
-            ExperimentEvents.OnStartPart -= StartPart;
-        }
+        //TODO disable somehow. Disabling after trial completed does not allow it to restart. Perhaps do it using end of experiment event?
 
         void StartPart(ExperimentPart experimentPart) {
 

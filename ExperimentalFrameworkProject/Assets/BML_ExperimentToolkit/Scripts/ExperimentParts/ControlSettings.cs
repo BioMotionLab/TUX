@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_Utilities;
 using UnityEngine;
@@ -7,9 +8,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
     [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create Control Settings Asset")]
     public class ControlSettings : ScriptableObject {
-        public KeyCode InterruptKey;
-        public KeyCode BackKey;
-        public KeyCode NextKey;
+        public List<KeyCode> InterruptKeys;
+        public List<KeyCode> BackKeys;
+        public List<KeyCode> NextKeys;
 
         /// <summary>
         /// Allows experimenter to control the experiments and jump between trials.
@@ -21,16 +22,22 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             while (running) {
 
-                if (Input.GetKeyDown(InterruptKey)) {
-                    ExperimentEvents.InterruptTrial();
+                foreach (KeyCode interruptKey in InterruptKeys) {
+                    if (Input.GetKeyDown(interruptKey)) {
+                        ExperimentEvents.InterruptTrial();
+                    }
                 }
 
-                if (Input.GetKeyDown(BackKey)) {
-                    ExperimentEvents.GoBackOneTrial();
+                foreach (KeyCode backKey in BackKeys) {
+                    if (Input.GetKeyDown(backKey)) {
+                        ExperimentEvents.GoBackOneTrial();
+                    }
                 }
 
-                if (Input.GetKeyDown(NextKey)) {
-                    ExperimentEvents.SkipToNextTrial();
+                foreach (KeyCode nextKey in NextKeys) {
+                    if (Input.GetKeyDown(nextKey)) {
+                        ExperimentEvents.SkipToNextTrial();
+                    }
                 }
 
                 yield return null;

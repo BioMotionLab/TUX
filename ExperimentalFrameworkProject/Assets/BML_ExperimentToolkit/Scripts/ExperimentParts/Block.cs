@@ -19,15 +19,30 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         ExperimentRunner runner;
         public List<Trial> Trials;
 
+        readonly DataRow data;
+
+        protected DataRow Data {
+            get {
+                if (data == null) {
+                    throw
+                        new NullReferenceException("Trying to access Block data in experiment with no blocks defined");
+                }
+
+                return data;
+            }
+        }
+
         protected Block(ExperimentRunner runner,
                      DataTable trialTable, 
                      string identity, 
-                     Type trialType) 
+                     Type trialType,
+                     DataRow dataRow) 
                         : base(runner) {
             this.runner = runner;
             TrialTable = trialTable;
             Identity = identity;
             MakeTrials(trialType);
+            data = dataRow;
         }
 
         /// <summary>
@@ -47,7 +62,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         protected override IEnumerator RunMainCoroutine() {
 
-            TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(runner, Trials);
+            TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(Trials);
             trialSequenceRunner.Start();
             yield return null;
         }

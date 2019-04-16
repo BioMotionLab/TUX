@@ -4,6 +4,7 @@ namespace BML_Utilities {
 
 
 
+    /// <inheritdoc />
     /// <summary>
     /// Component to set a camera's aspect ratio
     /// </summary>
@@ -13,10 +14,10 @@ namespace BML_Utilities {
         [Tooltip("square = 1")]
         public float AspectRatio;
 
-        private Camera thisCamera;
+        Camera thisCamera;
 
         void Start() {
-            thisCamera = this.GetComponent<Camera>();
+            thisCamera = GetComponent<Camera>();
             thisCamera.aspect = AspectRatio;
         }
 

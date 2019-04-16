@@ -107,7 +107,7 @@ namespace BML_Utilities.Extensions {
 
         public T NextElement {
             get {
-                currentIndex = (currentIndex + 1) % this.Count;
+                currentIndex = (currentIndex + 1) % Count;
                 T nextItem = this[currentIndex];
                 return nextItem;
             }
