@@ -60,7 +60,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             ExperimentEvents.OutputUpdated(this);
         }
 
-        protected override IEnumerator RunMainCoroutine() {
+        protected override IEnumerator MainCoroutine() {
             BlockSequenceRunner blockRunner = new BlockSequenceRunner(runner, design.Blocks);
             blockRunner.Start();
             yield return null;

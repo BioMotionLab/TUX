@@ -45,7 +45,7 @@ public class TutorialTrial : Trial
 
     }
 
-    protected override IEnumerator RunMainCoroutine() {
+    protected override IEnumerator MainCoroutine() {
         bool trialComplete = false;
         while (!trialComplete) {
             if (Input.GetKeyDown(KeyCode.Space)) {

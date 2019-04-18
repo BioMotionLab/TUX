@@ -43,7 +43,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             
         }
 
-        protected abstract IEnumerator RunMainCoroutine();
+        protected abstract IEnumerator MainCoroutine();
 
 
         IEnumerator Run() {
@@ -51,9 +51,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             float startTime = Time.time;
 
-            yield return ConditionalCoroutine(RunMainCoroutine());
+            yield return ConditionalCoroutine(MainCoroutine());
 
-            //yield return RunMainCoroutine();
+            //yield return MainCoroutine();
 
             float endTime = Time.time;
             RunTime = endTime - startTime;
