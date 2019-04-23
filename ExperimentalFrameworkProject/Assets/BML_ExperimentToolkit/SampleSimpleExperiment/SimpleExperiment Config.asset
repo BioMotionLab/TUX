@@ -85,5 +85,6 @@ MonoBehaviour:
     GameObjectParticipantVariables: []
     Vector3ParticipantVariables: []
     CustomDataParticipantVariables: []
-  ColumnNames: {fileID: 11400000, guid: b004757e12fd66b43828570a0f83b1db, type: 2}
+  ColumnNamesSettings: {fileID: 11400000, guid: b004757e12fd66b43828570a0f83b1db,
+    type: 2}
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}

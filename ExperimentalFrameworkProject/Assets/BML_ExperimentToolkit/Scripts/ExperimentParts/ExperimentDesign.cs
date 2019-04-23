@@ -36,7 +36,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             this.shuffleTrialsBetweenBlocks = shuffleTrialsBetweenBlocks;
             baseBlockTable = new BlockTable(allData, this);
             baseTrialTable = new TrialTable(allData, this, baseBlockTable, shuffleTrialOrder, numberOfRepetitions,
-                                            runner.ConfigFile.ColumnNames);
+                                            runner.VariableConfigFile.ColumnNamesSettings);
             Enable();
         }
         
@@ -70,12 +70,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 DataTable trialTable = baseTrialTable.Copy();
                 for (int i = 0; i < trialTable.Rows.Count; i++) {
                     DataRow trialRow = trialTable.Rows[i];
-                    trialRow[runner.ConfigFile.ColumnNames.BlockIndex] = 0;
-                    trialRow[runner.ConfigFile.ColumnNames.TrialIndex] = i;
-                    trialRow[runner.ConfigFile.ColumnNames.TotalTrialIndex] = i;
+                    trialRow[runner.VariableConfigFile.ColumnNamesSettings.BlockIndex] = 0;
+                    trialRow[runner.VariableConfigFile.ColumnNamesSettings.TrialIndex] = i;
+                    trialRow[runner.VariableConfigFile.ColumnNamesSettings.TotalTrialIndex] = i;
                 }
 
-                const string blockIdentity = "MainCoroutine Block";
+                const string blockIdentity = "Main Block (No Block Variables)";
                 Block newBlock = CreateNewBlock(trialTable, blockIdentity, null);
                 Blocks.Add(newBlock);
 
@@ -140,9 +140,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 for (int trialIndexInBlock = 0; trialIndexInBlock < newTable.Rows.Count; trialIndexInBlock++) {
                     DataRow trialRow = newTable.Rows[trialIndexInBlock];
                     trialRow[columnName] = blockTableRow[columnName];
-                    trialRow[runner.ConfigFile.ColumnNames.BlockIndex] = blockIndex;
-                    trialRow[runner.ConfigFile.ColumnNames.TrialIndex] = trialIndexInBlock;
-                    trialRow[runner.ConfigFile.ColumnNames.TotalTrialIndex] = startingTotalTrialIndex;
+                    trialRow[runner.VariableConfigFile.ColumnNamesSettings.BlockIndex] = blockIndex;
+                    trialRow[runner.VariableConfigFile.ColumnNamesSettings.TrialIndex] = trialIndexInBlock;
+                    trialRow[runner.VariableConfigFile.ColumnNamesSettings.TotalTrialIndex] = startingTotalTrialIndex;
                     startingTotalTrialIndex++;
                 }
             }

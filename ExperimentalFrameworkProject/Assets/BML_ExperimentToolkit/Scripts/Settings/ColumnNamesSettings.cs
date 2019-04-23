@@ -2,10 +2,10 @@
 using MenuNames = BML_Utilities.MenuNames;
 
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_ExperimentToolkit.Scripts.Settings {
     [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + 
                                 "Create Column Names Config")]
-    public class ColumnNames : ScriptableObject{
+    public class ColumnNamesSettings : ScriptableObject{
         public string TotalTrialIndex = "Trial";
         public string BlockIndex      = "Block";
         public string Skipped         = "Skipped";
