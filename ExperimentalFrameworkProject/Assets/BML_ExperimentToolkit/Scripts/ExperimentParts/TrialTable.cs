@@ -174,7 +174,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
 
             SortedVariableContainer sortedVariables = new SortedVariableContainer(allData, block);
-            design.sortedVariables = sortedVariables;
+            design.SortedVariables = sortedVariables;
             //Order matters.
             foreach (IndependentVariable independentVariable in sortedVariables.BalancedIndependentVariables) {
                 table = independentVariable.AddValuesTo(table);
