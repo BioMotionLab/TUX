@@ -131,7 +131,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             //Ensure config file initialized properly.
             if (!initialized) {
-                EditorGUILayout.HelpBox("ConfigFile not properly initialized. " +
+                EditorGUILayout.HelpBox("VariableConfigFile not properly initialized. " +
                                         "\n\nMake sure you have created a config file from the menu and populated it with variables" +
                                         "\n\nAlso make sure the config file is dragged into the Runner GameObject inspector in your scene.",
                                         MessageType.Error);
@@ -249,7 +249,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
 
             EditorGUILayout.LabelField("Fill In Participant Variables:", EditorStyles.boldLabel);
-            List<Variable> variables = runner.ConfigFile.Factory.AllVariables;
+            List<Variable> variables = runner.VariableConfigFile.Factory.AllVariables;
 
 
             foreach (Variable variable in variables) {
@@ -316,7 +316,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             if (!session.BlockChosen) {
 
                 if (!runner.Design.HasBlocks) {
-                    Debug.Log($"Runner has no blocks");
+                    //Debug.Log($"Runner has no blocks");
                     session.OrderChosenIndex = 0;
                     session.BlockChosen = true;
                     return true;
@@ -441,7 +441,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("NumberOfTrials:", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Trial Tables:", EditorStyles.boldLabel);
 
             foreach (Block block in runner.Design.Blocks) {
                 int blockIndex = runner.Design.Blocks.IndexOf(block);

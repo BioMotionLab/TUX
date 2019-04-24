@@ -58,7 +58,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
         }
 
-        protected override IEnumerator RunMainCoroutine() {
+        protected override IEnumerator MainCoroutine() {
 
             TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(runner, Trials);
             trialSequenceRunner.Start();

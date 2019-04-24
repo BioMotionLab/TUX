@@ -4,7 +4,7 @@ using BML_ExperimentToolkit.Scripts.Managers;
 using BML_Utilities;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_ExperimentToolkit.Scripts.Settings {
 
     [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create Control Settings Asset")]
     public class ControlSettings : ScriptableObject {
