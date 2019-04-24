@@ -123,7 +123,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         void UpdateParticipantValues() {
-            
             foreach (ParticipantVariable participantVariable in SortedVariables.ParticipantVariables) {
                 participantVariable.AddValuesTo(baseTrialTable);
                 foreach (Block block in Blocks) {
@@ -131,7 +130,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
                 }
             }
-
         }
 
         Block CreateNewBlock(DataTable trialTable, string blockIdentity, DataRow dataRow) {
