@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
+using BML_Utilities;
 using UnityEditor;
 using UnityEngine;
 
@@ -20,17 +21,18 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         /// <returns></returns>
         public static float AddAllIndependentVariableProperties(Rect position, SerializedProperty property) {
             property.serializedObject.Update();
-            Rect currentRect = new Rect(position.x, position.y + LineHeight, position.width, LineHeight);
-            float oldY = currentRect.y;
-
+            
+            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight);
+            layoutRect.NewSetup(position);
+            
             int oldIndentLevel = EditorGUI.indentLevel;
 
-            currentRect = AddVariableProperties(property, currentRect);
-            currentRect = AddIndependentVariableProperties(property, currentRect);
-            currentRect = AddIndependentVariableValueProperties(property, currentRect);
+            AddVariableProperties(layoutRect, property);
+            AddIndependentVariableProperties(layoutRect, property);
+            AddIndependentVariableValueProperties(layoutRect, property);
 
             EditorGUI.indentLevel = oldIndentLevel;
-            float propertyHeight = currentRect.y - oldY;
+            float propertyHeight = layoutRect.FinalHeight;
             property.serializedObject.ApplyModifiedProperties();
             return propertyHeight;
         }
@@ -43,18 +45,19 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         /// <returns></returns>
         public static float AddAllDependentVariableProperties(Rect position, SerializedProperty property) {
             property.serializedObject.Update();
-            Rect currentRect = new Rect(position.x, position.y + LineHeight, position.width, LineHeight);
-            float oldY = currentRect.y;
+            
+            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight);
+            layoutRect.NewSetup(position);
 
             int oldIndentLevel = EditorGUI.indentLevel;
 
-            currentRect = AddVariableProperties(property, currentRect);
-            currentRect = AddDependentVariableValueProperties(property, currentRect);
+            AddVariableProperties(layoutRect, property);
+            AddDependentVariableValueProperties(layoutRect, property);
 
             EditorGUI.indentLevel = oldIndentLevel;
-            float propertyHeight = currentRect.y - oldY;
+            
             property.serializedObject.ApplyModifiedProperties();
-            return propertyHeight;
+            return layoutRect.FinalHeight;
         }
 
         /// <summary>
@@ -65,59 +68,57 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         /// <returns></returns>
         public static float AddAllParticipantVariableProperties(Rect position, SerializedProperty property) {
             property.serializedObject.Update();
-            Rect currentRect = new Rect(position.x, position.y + LineHeight, position.width, LineHeight);
-            float oldY = currentRect.y;
-
+            
+            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight);
+            layoutRect.NewSetup(position);
+            
             int oldIndentLevel = EditorGUI.indentLevel;
 
-            currentRect = AddVariableProperties(property, currentRect);
-            currentRect = AddParticipantVariableValueProperties(property, currentRect);
+            AddVariableProperties(layoutRect, property);
+            AddParticipantVariableValueProperties(layoutRect, property);
 
             EditorGUI.indentLevel = oldIndentLevel;
-            float propertyHeight = currentRect.y - oldY;
+            
             property.serializedObject.ApplyModifiedProperties();
-            return propertyHeight;
+            return layoutRect.FinalHeight;
         }
 
         /// <summary>
         /// Adds Value display to dependent variable properties
         /// </summary>
+        /// <param name="layoutRect"></param>
         /// <param name="property"></param>
-        /// <param name="currentRect"></param>
         /// <returns></returns>
-        static Rect AddDependentVariableValueProperties(SerializedProperty property, Rect currentRect) {
+        static void AddDependentVariableValueProperties(GuiLayoutRect layoutRect, SerializedProperty property) {
             SerializedProperty defaultValueProperty = property.FindPropertyRelative("DefaultValue");
-
-            EditorGUI.PropertyField(currentRect, defaultValueProperty);
-
-
-            currentRect.y += LineHeight;
-            return currentRect;
+            EditorGUI.PropertyField(layoutRect.NextLine, defaultValueProperty);
         }
 
-        static Rect AddParticipantVariableValueProperties(SerializedProperty property, Rect currentRect) {
+        
+        static void AddParticipantVariableValueProperties(GuiLayoutRect layoutRect, SerializedProperty property) {
             SerializedProperty valuesProperty = property.FindPropertyRelative("PossibleValues");
             SerializedProperty constrainProperty = property.FindPropertyRelative("ConstrainValues");
 
-            EditorGUI.PropertyField(currentRect, constrainProperty);
-            currentRect.y += LineHeight;
+            EditorGUI.PropertyField(layoutRect.NextLine, constrainProperty);
 
 
             if (constrainProperty.boolValue) {
-                EditorGUI.LabelField(currentRect, "Possible Values");
+                EditorGUI.LabelField(layoutRect.NextLine, "Possible Values");
 
                 const float indentAmt = 40f;
                 const float minusWidth = 20f;
                 const float minusHeight = 14f;
-                float x = indentAmt + currentRect.x;
+                float x = indentAmt + layoutRect.CurrentLine.x;
                 const float yPadding = (LineHeight - minusHeight) / 2;
 
-                currentRect.y += LineHeight;
 
                 for (int i = 0; i < valuesProperty.arraySize; i++) {
-                    Rect minusRect = new Rect(x, currentRect.y + yPadding, minusWidth, minusHeight);
-                    Rect valuesRect = new Rect(x + minusWidth, currentRect.y, 0.5f * currentRect.width,
-                        currentRect.height);
+
+                    Rect valuesBaseRect = layoutRect.NextLine;
+                    
+                    Rect minusRect = new Rect(x, valuesBaseRect.y + yPadding, minusWidth, minusHeight);
+                    Rect valuesRect = new Rect(x + minusWidth, valuesBaseRect.y, 0.5f * valuesBaseRect.width,
+                                               valuesBaseRect.height);
 
                     //Minus button
                     if (GUI.Button(minusRect, "-")) {
@@ -128,11 +129,12 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                     SerializedProperty value = valuesProperty.GetArrayElementAtIndex(i);
                     EditorGUI.PropertyField(valuesRect, value, GUIContent.none);
 
-                    currentRect.y += LineHeight;
                 }
 
+
+                Rect valuesFooterBaseRect = layoutRect.NextLine;
                 //plus button
-                Rect plusRect = new Rect(x, currentRect.y + yPadding, minusWidth, minusHeight);
+                Rect plusRect = new Rect(x, valuesFooterBaseRect.y + yPadding, minusWidth, minusHeight);
                 if (GUI.Button(plusRect, "+")) {
                     int lastIndex = valuesProperty.arraySize;
                     if (lastIndex < 0) lastIndex = 0;
@@ -143,86 +145,76 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
             property.serializedObject.ApplyModifiedProperties();
 
-            currentRect.y += LineHeight;
-            return currentRect;
         }
 
 
         /// <summary>
         /// Adds the properties for all variables
         /// </summary>
+        /// <param name="layoutRect"></param>
         /// <param name="property"></param>
-        /// <param name="currentRect"></param>
         /// <returns></returns>
-        static Rect AddVariableProperties(SerializedProperty property, Rect currentRect) {
-            const float nameWidth = 200f;
-
-            Rect nameRect = new Rect(currentRect.x, currentRect.y, nameWidth, currentRect.height);
+        static void AddVariableProperties(GuiLayoutRect layoutRect, SerializedProperty property) {
+            
             SerializedProperty name = property.FindPropertyRelative(nameof(Variable.Name));
-            EditorGUI.PropertyField(nameRect, name, GUIContent.none);
-            currentRect.y += LineHeight;
+            EditorGUI.PropertyField(layoutRect.NextLine, name, GUIContent.none);
 
             VariableNameValidator validator = new VariableNameValidator(name.stringValue);
-            Rect warningBoxRect = new Rect(currentRect.x, currentRect.y, currentRect.width, LineHeight*3);
             if (!validator.Valid) {
+                Rect warningBoxRect = layoutRect.NextLines(3);
                 EditorGUI.HelpBox(warningBoxRect, validator.InvalidReasons, MessageType.Error);
-                currentRect.y += LineHeight * 3;
+                
             }
-
-            currentRect.y += LineHeight;
-
             
             SerializedProperty variableDataType = property.FindPropertyRelative(nameof(Variable.DataType));
             SupportedDataTypes dataType = (SupportedDataTypes) variableDataType.enumValueIndex;
-            EditorGUI.LabelField(currentRect, $"Data Type: {dataType.ToString()}");
-
-            currentRect.y += LineHeight;
+            EditorGUI.LabelField(layoutRect.NextLine, $"Data Type: {dataType.ToString()}");
 
             EditorGUI.indentLevel++;
 
             SerializedProperty variableType = property.FindPropertyRelative(nameof(Variable.TypeOfVariable));
             VariableType varType = (VariableType) variableType.enumValueIndex;
-            EditorGUI.LabelField(currentRect, $"Variable Type: {varType.ToString()}");
-            currentRect.y += LineHeight;
-            return currentRect;
+            EditorGUI.LabelField(layoutRect.NextLine, $"Variable Type: {varType.ToString()}");
+            
         }
 
         /// <summary>
         /// Adds the properties for independent variables
         /// </summary>
+        /// <param name="layoutRect"></param>
         /// <param name="property"></param>
-        /// <param name="currentRect"></param>
         /// <returns></returns>
-        public static Rect AddIndependentVariableProperties(SerializedProperty property, Rect currentRect) {
+        static void AddIndependentVariableProperties(GuiLayoutRect layoutRect, SerializedProperty property) {
+            
             SerializedProperty block = property.FindPropertyRelative(nameof(IndependentVariable.Block));
-            EditorGUI.PropertyField(currentRect, block);
-            currentRect.y += LineHeight;
+            EditorGUI.PropertyField(layoutRect.NextLine, block);
+            
 
             SerializedProperty mixType =
                 property.FindPropertyRelative(nameof(IndependentVariable.MixingTypeOfVariable));
-            EditorGUI.PropertyField(currentRect, mixType);
-            currentRect.y += LineHeight;
-            return currentRect;
+            EditorGUI.PropertyField(layoutRect.NextLine, mixType);
         }
 
         /// <summary>
         /// Adds display of values for independent variables
         /// </summary>
+        /// <param name="layoutRect"></param>
         /// <param name="property"></param>
-        /// <param name="currentRect"></param>
         /// <returns></returns>
-        public static Rect AddIndependentVariableValueProperties(SerializedProperty property, Rect currentRect) {
+        static void AddIndependentVariableValueProperties(GuiLayoutRect layoutRect, SerializedProperty property) {
             SerializedProperty valuesProperty = property.FindPropertyRelative("Values");
             SerializedProperty probabilitiesProperty = property.FindPropertyRelative("Probabilities");
 
 
-            EditorGUI.LabelField(currentRect, "Values");
+            EditorGUI.LabelField(layoutRect.NextLine, "Values");
 
+            
+            
             const float indentAmt = 40f;
             const float minusWidth = 20f;
             const float minusHeight = 14f;
             const float customProbabilityWidth = 180f;
-            float x = indentAmt + currentRect.x;
+            float x = indentAmt + layoutRect.CurrentLine.x;
             const float yPadding = (LineHeight - minusHeight) / 2;
 
             //Debug.Log($"enum value : {mixType.enumValueIndex} {(VariableMixingType)mixType.enumValueIndex}");
@@ -234,19 +226,26 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             if (customProb) {
                 //Debug.Log("custom probabilities");
                 probValuesWidth = customProbabilityWidth;
-                Rect probLabel = new Rect(currentRect.width - probValuesWidth, currentRect.y, probValuesWidth,
-                    currentRect.height);
+
+                Rect probLabelBaseRect = layoutRect.NextLine;
+                
+                Rect probLabel = new Rect(probLabelBaseRect.width - probValuesWidth, 
+                                          probLabelBaseRect.y, 
+                                          probValuesWidth,
+                                          probLabelBaseRect.height);
                 EditorGUI.LabelField(probLabel, "Probability");
             }
 
-            currentRect.y += LineHeight;
 
             for (int i = 0; i < valuesProperty.arraySize; i++) {
-                Rect minusRect = new Rect(x, currentRect.y + yPadding, minusWidth, minusHeight);
-                Rect valuesRect = new Rect(x + minusWidth, currentRect.y, 0.5f * currentRect.width, currentRect.height);
-                Rect customProbabilityValuesRect = new Rect(currentRect.width - probValuesWidth, currentRect.y,
+
+                Rect valueBaseRect = layoutRect.NextLine;
+                
+                Rect minusRect = new Rect(x, valueBaseRect.y + yPadding, minusWidth, minusHeight);
+                Rect valuesRect = new Rect(x + minusWidth, valueBaseRect.y, 0.5f * valueBaseRect.width, valueBaseRect.height);
+                Rect customProbabilityValuesRect = new Rect(valueBaseRect.width - probValuesWidth, valueBaseRect.y,
                     probValuesWidth,
-                    currentRect.height);
+                    valueBaseRect.height);
 
                 //Minus button
                 if (GUI.Button(minusRect, "-")) {
@@ -278,11 +277,14 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                     }
                 }
 
-                currentRect.y += LineHeight;
+                
             }
 
+
+            Rect valuesFooterBaseRect = layoutRect.NextLine;
+            
             //plus button
-            Rect plusRect = new Rect(x, currentRect.y + yPadding, minusWidth, minusHeight);
+            Rect plusRect = new Rect(x, valuesFooterBaseRect.y + yPadding, minusWidth, minusHeight);
             if (GUI.Button(plusRect, "+")) {
                 int lastIndex = valuesProperty.arraySize;
                 if (lastIndex < 0) lastIndex = 0;
@@ -296,8 +298,8 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             }
 
             if (customProb) {
-                Rect totalProbRect = new Rect(currentRect.width - probValuesWidth, currentRect.y, probValuesWidth,
-                    currentRect.height);
+                Rect totalProbRect = new Rect(valuesFooterBaseRect.width - probValuesWidth, valuesFooterBaseRect.y, probValuesWidth,
+                                              valuesFooterBaseRect.height);
                 if (probabilitiesProperty.arraySize != 0) {
                     float runningTotal = GetRunningTotal(probabilitiesProperty);
                     string direction = "";
@@ -315,14 +317,12 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             }
 
             if (probabilitiesProperty.arraySize == 0) {
-                Rect noValueWarningRect = new Rect(x + 15f + minusWidth, currentRect.y,
-                    currentRect.width - x - 15 - minusWidth - probValuesWidth,
-                    currentRect.height);
+                Rect noValueWarningRect = new Rect(x + 15f + minusWidth, valuesFooterBaseRect.y,
+                                                   valuesFooterBaseRect.width - x - 15 - minusWidth - probValuesWidth,
+                                                   valuesFooterBaseRect.height);
                 EditorGUI.HelpBox(noValueWarningRect, "No values", MessageType.Error);
             }
-
-            currentRect.y += LineHeight;
-            return currentRect;
+           
         }
 
         /// <summary>
@@ -354,18 +354,19 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
         public static float AddAllBoolVariableProperties(Rect position, SerializedProperty property) {
             property.serializedObject.Update();
-            Rect currentRect = new Rect(position.x, position.y + LineHeight, position.width, LineHeight);
-            float oldY = currentRect.y;
-
+            
+            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight);
+            layoutRect.NewSetup(position);
+            
             int oldIndentLevel = EditorGUI.indentLevel;
 
-            currentRect = AddVariableProperties(property, currentRect);
-            currentRect = AddIndependentVariableProperties(property, currentRect);
+            AddVariableProperties(layoutRect, property);
+            AddIndependentVariableProperties(layoutRect, property);
 
             EditorGUI.indentLevel = oldIndentLevel;
-            float propertyHeight = currentRect.y - oldY;
+            
             property.serializedObject.ApplyModifiedProperties();
-            return propertyHeight;
+            return layoutRect.FinalHeight;
         }
     }
 

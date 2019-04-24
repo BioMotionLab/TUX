@@ -23,6 +23,14 @@ namespace BML_Utilities {
             }
         }
 
+        public Rect NextLines(int numberOfLines) {
+            Rect longRect = new Rect(mainRect.x, mainRect.y + lineHeight, mainRect.width, lineHeight*numberOfLines);
+            for (int i = 0; i < numberOfLines; i++) {
+                AddLine();
+            }
+            return longRect;
+        }
+
         public float FinalHeight => mainRect.y - startingY;
         public Rect  CurrentLine => mainRect;
 
@@ -34,5 +42,6 @@ namespace BML_Utilities {
         void AddLine() {
             mainRect.y += lineHeight;
         }
+
     }
 }
