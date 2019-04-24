@@ -1,13 +1,14 @@
 ﻿using System;
 using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
+using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public abstract class ExperimentRunner : MonoBehaviour {
         [Header("Required:")]
-        public ConfigDesignFile ConfigFile;
+        public VariableConfig VariableConfigFile;
 
         public ExperimentDesign Design;
 
@@ -58,14 +59,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
 
             //check if config file is loaded
-            if (ConfigFile == null) {
+            if (VariableConfigFile == null) {
                 Debug.LogError("Design Configuration not set up properly, make sure you dragged a configDesign file into your Runner GameObject");
                 ExitProgram();
                 return;
             }
 
 
-            Design = ConfigFile.Factory.ToTable(this, ConfigFile.ShuffleTrialOrder, ConfigFile.RepeatTrialBlock, ConfigFile.ShuffleDifferentlyForEachBlock);
+            Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, VariableConfigFile.RepeatTrialBlock, VariableConfigFile.ShuffleDifferentlyForEachBlock);
             if (Design == null) {
                 Debug.Log("Design not created properly");
                 throw new NullReferenceException("Design null");
@@ -115,7 +116,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             Debug.Log("Starting Runner");
             ExperimentEvents.ExperimentStarted();
             
-            StartCoroutine(ConfigFile.ControlSettings.Run());
+            StartCoroutine(VariableConfigFile.ControlSettings.Run());
             ExperimentEvents.StartPart(experiment);
 
 

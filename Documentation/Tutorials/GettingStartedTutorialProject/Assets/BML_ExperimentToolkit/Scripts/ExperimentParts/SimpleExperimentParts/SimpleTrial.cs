@@ -28,7 +28,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
         /// Overwrites the MainCoroutine method to provide the trial's functionality
         /// </summary>
         /// <returns></returns>
-        protected override IEnumerator RunMainCoroutine() {
+        protected override IEnumerator MainCoroutine() {
             bool running = true;
             Debug.Log("...Waiting for you to press return key! (in SimpleTrial MainCoroutine() method)");
             while (running) {

@@ -1,11 +1,11 @@
-﻿using BML_ExperimentToolkit.Scripts.VariableSystem;
+﻿using BML_ExperimentToolkit.Scripts.Settings;
 using UnityEngine;
 using MenuNames = BML_Utilities.MenuNames;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
-    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Variable Config")]
-    public class ConfigDesignFile : ScriptableObject {
+    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create new Variable Config Asset")]
+    public class VariableConfig : ScriptableObject {
 
         public bool ShuffleTrialOrder;
         public bool ShuffleDifferentlyForEachBlock;
@@ -14,9 +14,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         [SerializeField]
         public VariableFactory Factory = new VariableFactory();
 
-        public ColumnNames ColumnNames;
+        public ColumnNamesSettings ColumnNamesSettings;
         public ControlSettings ControlSettings;
-
-
     }
 }
