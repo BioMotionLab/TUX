@@ -10,7 +10,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public DataTable BaseTrialTable;
         readonly ColumnNamesSettings columnNamesSettings;
         public int NumberOfTrials => BaseTrialTable.Rows.Count;
-        ExperimentDesign design;
 
         public TrialTable(List<Variable> allData,  
                           ExperimentDesign design,           
@@ -20,8 +19,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                           ColumnNamesSettings columnNamesSettings) 
         {
             this.columnNamesSettings = columnNamesSettings;
-            this.design = design;
-            BaseTrialTable = SortAndAddIVs(allData);
+            BaseTrialTable = design.SortAndAddIVs(allData);
 
             //Repeat all trials if specified
             if (numberOfRepetitions > 1) {
@@ -164,36 +162,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 //Debug.Log($"Adding Column: {blockTableColumn.ColumnName}");
                 BaseTrialTable = BaseTrialTable.AddColumnFromOtherTable(blockTableColumn, 0);
             }
-        }
-
-
-
-
-        public DataTable SortAndAddIVs(List<Variable> allData, bool block = false) {
-            DataTable table = new DataTable();
-
-
-            SortedVariableContainer sortedVariables = new SortedVariableContainer(allData, block);
-            design.SortedVariables = sortedVariables;
-            //Order matters.
-            foreach (IndependentVariable independentVariable in sortedVariables.BalancedIndependentVariables) {
-                table = independentVariable.AddValuesTo(table);
-            }
-
-            foreach (IndependentVariable independentVariable in sortedVariables.LoopedIndependentVariables) {
-                table = independentVariable.AddValuesTo(table);
-            }
-
-            foreach (IndependentVariable independentVariable in sortedVariables.ProbabilityIndependentVariables) {
-                table = independentVariable.AddValuesTo(table);
-            }
-
-            foreach (DependentVariable dependentVariable in sortedVariables.DependentVariables) {
-                table = dependentVariable.AddValuesTo(table);
-            }
-
-
-            return table;
         }
     }
 }

@@ -28,7 +28,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
    
         }
 
-        private BlockTable(DataTable blockTable) {
+        BlockTable(DataTable blockTable) {
             baseBlockTable = blockTable;
         }
 

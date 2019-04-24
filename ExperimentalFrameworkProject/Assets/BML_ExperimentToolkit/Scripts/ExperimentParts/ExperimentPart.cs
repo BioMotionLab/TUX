@@ -52,8 +52,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             yield return ConditionalCoroutine(RunMainCoroutine());
 
-            //yield return RunMainCoroutine();
-
             float endTime = Time.time;
             RunTime = endTime - startTime;
 

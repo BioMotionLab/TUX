@@ -181,10 +181,12 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         /// </summary>
         /// <returns></returns>
         bool ShowSessionSettings() {
+            
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Session settings:", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-
+            
+            
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Debug Mode:", LabelWidth);
             session.DebugMode = EditorGUILayout.Toggle(session.DebugMode);
@@ -197,13 +199,16 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 return true;
             }
 
+            
+            ShowParticipantVariables();
+
+            
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Participant ID:", LabelWidth);
             session.ParticipantId = EditorGUILayout.TextField(session.ParticipantId);
             EditorGUILayout.EndHorizontal();
-
-            ShowParticipantVariables();
-
+            
+            
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Output File Path:", LabelWidth);
             if (GUILayout.Button("Choose Folder", LabelWidth)) {
