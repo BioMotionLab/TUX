@@ -8,4 +8,6 @@ For documentation see our [Wiki](https://github.com/BioMotionLab/ExperimentalFra
 
 To get started using the toolkit see our [Getting Started Guide](https://github.com/BioMotionLab/ExperimentalFramework/wiki/Getting-Started).
 
+Download the latest [Release](https://github.com/BioMotionLab/ExperimentalFramework/releases).
+
 
