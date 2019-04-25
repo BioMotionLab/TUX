@@ -7,10 +7,11 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
     /// A custom drawer to edit variables
     /// </summary>
     public class VariableDrawer : PropertyDrawer {
+        
         protected float CustomPropertyHeight;
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-            float propertyBaseHeight = EditorGUI.GetPropertyHeight(property, GUIContent.none);
+        public override float GetPropertyHeight(SerializedProperty mainProperty, GUIContent label) {
+            float propertyBaseHeight = EditorGUI.GetPropertyHeight(mainProperty, GUIContent.none);
             float totalPropertyHeight = propertyBaseHeight + CustomPropertyHeight;
             return totalPropertyHeight;
         }
