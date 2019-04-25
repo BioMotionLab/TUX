@@ -5,17 +5,14 @@ namespace BML_Utilities {
         
         readonly float lineHeight;
         Rect           mainRect;
-        float          startingY;
+        readonly float startingY;
 
-        public GuiLayoutRect(float lineHeight) {
+        public GuiLayoutRect(float lineHeight, Rect position) {
             this.lineHeight = lineHeight;
+            startingY = position.y;
+            mainRect = new Rect(position.x, position.y, position.width, lineHeight);
         }
 
-        public Rect NewSetup(Rect position) {
-            startingY = mainRect.y;
-            mainRect = new Rect(position.x, position.y + lineHeight, position.width, lineHeight);
-            return mainRect;
-        }
         public Rect NextLine {
             get {
                 AddLine();

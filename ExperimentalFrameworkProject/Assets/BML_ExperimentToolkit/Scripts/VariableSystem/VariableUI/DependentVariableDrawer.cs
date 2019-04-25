@@ -7,8 +7,8 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
     /// A custom drawer to edit dependent variables
     /// </summary>
     public class DependentVariableDrawer : VariableDrawer {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-            CustomPropertyHeight = VariableDrawerHelpers.AddAllDependentVariableProperties(position, property);
+        public override void OnGUI(Rect position, SerializedProperty mainProperty, GUIContent label) {
+            CustomPropertyHeight = VariableDrawerHelpers.AddAllDependentVariableProperties(position, mainProperty);
         }
     }
 }

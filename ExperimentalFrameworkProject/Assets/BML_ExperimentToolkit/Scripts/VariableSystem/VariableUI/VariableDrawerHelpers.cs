@@ -16,70 +16,69 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         /// <summary>
         /// Adds all properties to independent variables
         /// </summary>
-        /// <param name="position"></param>
-        /// <param name="property"></param>
+        /// <param name="mainPosition"></param>
+        /// <param name="mainProperty"></param>
         /// <returns></returns>
-        public static float AddAllIndependentVariableProperties(Rect position, SerializedProperty property) {
-            property.serializedObject.Update();
+        public static float AddAllIndependentVariableProperties(Rect mainPosition, SerializedProperty mainProperty) {
+            mainProperty.serializedObject.Update();
             
-            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight);
-            layoutRect.NewSetup(position);
+            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight, mainPosition);
             
             int oldIndentLevel = EditorGUI.indentLevel;
 
-            AddVariableProperties(layoutRect, property);
-            AddIndependentVariableProperties(layoutRect, property);
-            AddIndependentVariableValueProperties(layoutRect, property);
+            AddVariableProperties(layoutRect, mainProperty);
+            AddIndependentVariableProperties(layoutRect, mainProperty);
+            AddIndependentVariableValueProperties(layoutRect, mainProperty);
 
             EditorGUI.indentLevel = oldIndentLevel;
-            float propertyHeight = layoutRect.FinalHeight;
-            property.serializedObject.ApplyModifiedProperties();
-            return propertyHeight;
-        }
-
-        /// <summary>
-        /// Adds all properties to Dependent variables
-        /// </summary>
-        /// <param name="position"></param>
-        /// <param name="property"></param>
-        /// <returns></returns>
-        public static float AddAllDependentVariableProperties(Rect position, SerializedProperty property) {
-            property.serializedObject.Update();
+ 
+            mainProperty.serializedObject.ApplyModifiedProperties();
             
-            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight);
-            layoutRect.NewSetup(position);
-
-            int oldIndentLevel = EditorGUI.indentLevel;
-
-            AddVariableProperties(layoutRect, property);
-            AddDependentVariableValueProperties(layoutRect, property);
-
-            EditorGUI.indentLevel = oldIndentLevel;
-            
-            property.serializedObject.ApplyModifiedProperties();
             return layoutRect.FinalHeight;
         }
 
         /// <summary>
         /// Adds all properties to Dependent variables
         /// </summary>
-        /// <param name="position"></param>
-        /// <param name="property"></param>
+        /// <param name="mainPosition"></param>
+        /// <param name="mainProperty"></param>
         /// <returns></returns>
-        public static float AddAllParticipantVariableProperties(Rect position, SerializedProperty property) {
-            property.serializedObject.Update();
+        public static float AddAllDependentVariableProperties(Rect mainPosition, SerializedProperty mainProperty) {
+            mainProperty.serializedObject.Update();
             
-            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight);
-            layoutRect.NewSetup(position);
-            
+            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight, mainPosition);
+
             int oldIndentLevel = EditorGUI.indentLevel;
 
-            AddVariableProperties(layoutRect, property);
-            AddParticipantVariableValueProperties(layoutRect, property);
+            AddVariableProperties(layoutRect, mainProperty);
+            AddDependentVariableValueProperties(layoutRect, mainProperty);
 
             EditorGUI.indentLevel = oldIndentLevel;
             
-            property.serializedObject.ApplyModifiedProperties();
+            mainProperty.serializedObject.ApplyModifiedProperties();
+            
+            return layoutRect.FinalHeight;
+        }
+
+        /// <summary>
+        /// Adds all properties to Dependent variables
+        /// </summary>
+        /// <param name="mainPosition"></param>
+        /// <param name="mainProperty"></param>
+        /// <returns></returns>
+        public static float AddAllParticipantVariableProperties(Rect mainPosition, SerializedProperty mainProperty) {
+            mainProperty.serializedObject.Update();
+            
+            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight, mainPosition);
+            
+            int oldIndentLevel = EditorGUI.indentLevel;
+
+            AddVariableProperties(layoutRect, mainProperty);
+            AddParticipantVariableValueProperties(layoutRect, mainProperty);
+
+            EditorGUI.indentLevel = oldIndentLevel;
+            
+            mainProperty.serializedObject.ApplyModifiedProperties();
             return layoutRect.FinalHeight;
         }
 
@@ -206,7 +205,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             SerializedProperty probabilitiesProperty = property.FindPropertyRelative("Probabilities");
 
 
-            EditorGUI.LabelField(layoutRect.NextLine, "Values");
+            Rect valueLabelBaseRect = layoutRect.NextLine;
+            
+            EditorGUI.LabelField(valueLabelBaseRect, "Values");
 
             
             
@@ -223,16 +224,20 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             SerializedProperty mixType =
                 property.FindPropertyRelative(nameof(IndependentVariable.MixingTypeOfVariable));
             bool customProb = (VariableMixingType) mixType.enumValueIndex == VariableMixingType.CustomProbability;
+            
+            
+            
+            
             if (customProb) {
                 //Debug.Log("custom probabilities");
                 probValuesWidth = customProbabilityWidth;
 
-                Rect probLabelBaseRect = layoutRect.NextLine;
                 
-                Rect probLabel = new Rect(probLabelBaseRect.width - probValuesWidth, 
-                                          probLabelBaseRect.y, 
+                
+                Rect probLabel = new Rect(valueLabelBaseRect.width - probValuesWidth, 
+                                          valueLabelBaseRect.y, 
                                           probValuesWidth,
-                                          probLabelBaseRect.height);
+                                          valueLabelBaseRect.height);
                 EditorGUI.LabelField(probLabel, "Probability");
             }
 
@@ -352,20 +357,19 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         }
 
 
-        public static float AddAllBoolVariableProperties(Rect position, SerializedProperty property) {
-            property.serializedObject.Update();
+        public static float AddAllBoolVariableProperties(Rect mainPosition, SerializedProperty mainProperty) {
+            mainProperty.serializedObject.Update();
             
-            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight);
-            layoutRect.NewSetup(position);
+            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight, mainPosition);
             
             int oldIndentLevel = EditorGUI.indentLevel;
 
-            AddVariableProperties(layoutRect, property);
-            AddIndependentVariableProperties(layoutRect, property);
+            AddVariableProperties(layoutRect, mainProperty);
+            AddIndependentVariableProperties(layoutRect, mainProperty);
 
             EditorGUI.indentLevel = oldIndentLevel;
             
-            property.serializedObject.ApplyModifiedProperties();
+            mainProperty.serializedObject.ApplyModifiedProperties();
             return layoutRect.FinalHeight;
         }
     }

@@ -7,19 +7,19 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
     public class VariableFactoryDrawer : PropertyDrawer {
 
         const float LineHeight = 20f;
+        float height;
         
-        readonly GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight);
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-            return EditorGUI.GetPropertyHeight(property) + layoutRect.FinalHeight;
+            return EditorGUI.GetPropertyHeight(property) + height;
         }
 
-        public override void OnGUI(Rect position, SerializedProperty mainProperty, GUIContent label) {
+        public override void OnGUI(Rect mainPosition, SerializedProperty mainProperty, GUIContent label) {
             
             //property.serializedObject.Update();
             int oldIndentLevel = EditorGUI.indentLevel;
-
-            layoutRect.NewSetup(position);
+            
+            GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight, mainPosition);
             
             Color oldColor = GUI.backgroundColor;
             
@@ -44,50 +44,55 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             EditorGUI.LabelField(layoutRect.NextLine, "--------");
             EditorGUI.LabelField(layoutRect.NextLine, "Independent Variables:", EditorStyles.boldLabel);
 
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.IntIVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.FloatIVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.StringIVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.BoolIVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.GameObjectIVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3IVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataTypeIVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.IntIVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.FloatIVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.StringIVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.BoolIVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.GameObjectIVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3IVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataTypeIVs));
 
             //ADD DVs
             EditorGUI.LabelField(layoutRect.NextLine, "--------");
             EditorGUI.LabelField(layoutRect.NextLine, "Dependent Variables:", EditorStyles.boldLabel);
 
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.IntDVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.FloatDVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.StringDVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.BoolDVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.GameObjectDVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3DVs));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataTypeDVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.IntDVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.FloatDVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.StringDVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.BoolDVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.GameObjectDVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3DVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataTypeDVs));
             
             //Add Participant variables
             EditorGUI.LabelField(layoutRect.NextLine, "--------");
             EditorGUI.LabelField(layoutRect.NextLine, "Participant Variables:", EditorStyles.boldLabel);
 
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.IntParticipantVariables));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.FloatParticipantVariables));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.StringParticipantVariables));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.BoolParticipantVariables));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.GameObjectParticipantVariables));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3ParticipantVariables));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataParticipantVariables));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.IntParticipantVariables));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.FloatParticipantVariables));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.StringParticipantVariables));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.BoolParticipantVariables));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.GameObjectParticipantVariables));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3ParticipantVariables));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataParticipantVariables));
 
             EditorGUI.LabelField(layoutRect.NextLine, "--------");
             EditorGUI.LabelField(layoutRect.NextLine, "Settings:", EditorStyles.boldLabel);
         
             EditorGUI.indentLevel = oldIndentLevel;
-            
+            height = layoutRect.FinalHeight;
             mainProperty.serializedObject.ApplyModifiedProperties();
         }
 
 
-        static void AddPropertyFromName(GuiLayoutRect layoutRect, SerializedProperty property, string name) {
+        static void AddListPropertyFromName(GuiLayoutRect layoutRect, SerializedProperty property, string name) {
             SerializedProperty propertyFromName = property.FindPropertyRelative(name);
             AddPropertyFromList(layoutRect, propertyFromName);
+        }
+        
+        static void AddPropertyFromName(GuiLayoutRect layoutRect, SerializedProperty property, string name) {
+            SerializedProperty propertyFromName = property.FindPropertyRelative(name);
+            EditorGUI.PropertyField(layoutRect.NextLine, propertyFromName, GUIContent.none);
         }
         
         static void AddPropertyFromList(GuiLayoutRect layoutRect, SerializedProperty valueProperty) {
@@ -99,8 +104,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                 EditorGUI.PropertyField(layoutRect.NextLine, item, GUIContent.none);
                 layoutRect.AddHeight(EditorGUI.GetPropertyHeight(item, GUIContent.none));
 
-                Rect deleteButtonRect = layoutRect.NextLine;
-                if (DeleteButton(layoutRect, valueProperty, deleteButtonRect, i)) break;
+                if (DeleteButton(layoutRect, valueProperty, i)) break;
             }
 
             valueProperty.serializedObject.ApplyModifiedProperties();
@@ -109,16 +113,16 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
         static bool DeleteButton(GuiLayoutRect layoutRect, 
                                  SerializedProperty valueProperty, 
-                                 Rect rect,
                                  int i) {
-            
+
+            Rect deleteBaseRect = layoutRect.NextLine;
             const float deleteButtonHeight = 0.75f;
-            float yPadding = (rect.height - (layoutRect.CurrentLine.height * deleteButtonHeight)) / 2f;
+            float yPadding = (deleteBaseRect.height - (layoutRect.CurrentLine.height * deleteButtonHeight)) / 2f;
             
-            Rect smallerDeleteButtonRect = new Rect(rect.x + 40, 
-                                                    rect.y + yPadding, 
+            Rect smallerDeleteButtonRect = new Rect(deleteBaseRect.x + 40, 
+                                                    deleteBaseRect.y + yPadding, 
                                                     125,
-                                                    deleteButtonHeight * rect.height);
+                                                    deleteButtonHeight * deleteBaseRect.height);
 
             // ReSharper disable once InvertIf
             if (GUI.Button(smallerDeleteButtonRect, "Delete Variable")) {

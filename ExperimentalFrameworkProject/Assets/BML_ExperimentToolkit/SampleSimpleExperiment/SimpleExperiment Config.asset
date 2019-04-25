@@ -17,70 +17,40 @@ MonoBehaviour:
   RepeatTrialBlock: 1
   Factory:
     DataTypesToCreate: 0
-    VariableTypeToCreate: 2
+    VariableTypeToCreate: 0
     IntIVs:
-    - Name: IVint
+    - Name: int
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0
       Block: 0
-      Values: 0100000002000000
+      Values: 0000000000000000
       Probabilities:
       - 0
       - 0
-    FloatIVs:
-    - Name: IVfloat
+    - Name: Unnamed Variable (types:System.Int32)
       TypeOfVariable: 0
-      DataType: 1
+      DataType: 0
       MixingTypeOfVariable: 0
       Block: 0
-      Values:
-      - 1.1
-      - 2.2
-      Probabilities:
-      - 0
-      - 0
-    StringIVs: []
-    BoolIVs:
-    - Name: IVbool
-      TypeOfVariable: 0
-      DataType: 3
-      MixingTypeOfVariable: 0
-      Block: 0
-      Values: 0100
+      Values: 
       Probabilities: []
+    FloatIVs: []
+    StringIVs: []
+    BoolIVs: []
     GameObjectIVs: []
     Vector3IVs: []
     CustomDataTypeIVs: []
     IntDVs: []
-    FloatDVs:
-    - Name: output
-      TypeOfVariable: 1
-      DataType: 1
-      Value: 0
-      DefaultValue: -999
+    FloatDVs: []
     StringDVs: []
     BoolDVs: []
     GameObjectDVs: []
     Vector3DVs: []
     CustomDataTypeDVs: []
-    IntParticipantVariables:
-    - Name: ParticipantID
-      TypeOfVariable: 2
-      DataType: 0
-      Value: 1
-      ConstrainValues: 0
-      PossibleValues: 
+    IntParticipantVariables: []
     FloatParticipantVariables: []
-    StringParticipantVariables:
-    - Name: Gender
-      TypeOfVariable: 2
-      DataType: 2
-      Value: Male
-      ConstrainValues: 1
-      PossibleValues:
-      - Male
-      - Female
+    StringParticipantVariables: []
     BoolParticipantVariables: []
     GameObjectParticipantVariables: []
     Vector3ParticipantVariables: []
