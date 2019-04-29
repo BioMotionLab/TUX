@@ -404,3 +404,8 @@ Session Logged: 2019-04-23 05:58
 Session Logged: 2019-04-24 03:01
 {"outputFileName":"2019-02-28_T11-14_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}
 Confirmed Complete at: 03:02
+
+---------------------
+Session Logged: 2019-04-25 11:20
+{"outputFileName":"2019-02-28_T11-14_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}
+Confirmed Complete at: 11:20

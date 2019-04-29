@@ -19,22 +19,24 @@ MonoBehaviour:
     DataTypesToCreate: 0
     VariableTypeToCreate: 0
     IntIVs:
-    - Name: int
+    - Name: Variable1
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0
       Block: 0
-      Values: 0000000000000000
+      Values: 0100000002000000
       Probabilities:
       - 0
       - 0
-    - Name: Unnamed Variable (types:System.Int32)
+    - Name: Variable2
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0
       Block: 0
-      Values: 
-      Probabilities: []
+      Values: 0100000002000000
+      Probabilities:
+      - 0
+      - 0
     FloatIVs: []
     StringIVs: []
     BoolIVs: []
