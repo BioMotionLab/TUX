@@ -45,7 +45,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     StringBuilder sb = new StringBuilder();
                     sb.Append($"Order #{blockOrderIndex}:   ");
                     foreach (DataRow dataRow in dataRows) {
-                        sb.Append($"{dataRow.AsString(separator: ", ", truncate: -1)} >   ");
+                        sb.Append($"{dataRow.AsString(separator: ", ", truncateLength: -1)} >   ");
                     }
 
                     blockPermutations.Add(sb.ToString());

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\BioMotion\.Rider2018.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\BioMotion\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_ExperimentalFrameworkProject.-326162388.00" t="ExcludeRecursive" />
+    <e p="C:\Users\BioMotion\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\BioMotion\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_ExperimentalFrameworkProject.-326162388.00" t="ExcludeRecursive" />
     <e p="C:\Users\BioMotion\Documents\GitHub\ExperimentalFramework\ExperimentalFrameworkProject" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
@@ -142,6 +142,12 @@
         <e p="BML_Utilities" t="Include">
           <e p="CameraAspect.cs" t="Include" />
           <e p="Delimiter.cs" t="Include" />
+          <e p="Editor" t="Include">
+            <e p="LayerAttributeEditor.cs" t="Include" />
+            <e p="Tests" t="Include">
+              <e p="test.cs" t="Include" />
+            </e>
+          </e>
           <e p="EventSystem" t="Include">
             <e p="BmlEvent.cs" t="Include" />
             <e p="BmlEventListener.cs" t="Include" />
@@ -149,6 +155,7 @@
             <e p="BmlStringEventListener.cs" t="Include" />
           </e>
           <e p="Extensions" t="Include">
+            <e p="DataFormatter.cs" t="Include" />
             <e p="DataTableExtension.cs" t="Include" />
             <e p="IntExtension.cs" t="Include" />
             <e p="ListExtension.cs" t="Include" />
@@ -164,8 +171,11 @@
             <e p="TransformExtension.cs" t="Include" />
           </e>
           <e p="GuiLayoutRect.cs" t="Include" />
+          <e p="LayerAttribute.cs" t="Include" />
           <e p="LowestCommonFunctions.cs" t="Include" />
           <e p="MenuNames.cs" t="Include" />
+          <e p="PlaneShaper.cs" t="Include" />
+          <e p="Rotator.cs" t="Include" />
           <e p="ScriptableObject Assets" t="Include">
             <e p="BoolValue.cs" t="Include" />
             <e p="FloatValue.cs" t="Include" />
@@ -173,15 +183,13 @@
             <e p="TextAssetToUI.cs" t="Include" />
           </e>
           <e p="SnapToOtherObject.cs" t="Include" />
+          <e p="test.cs" t="Include" />
         </e>
       </e>
       <e p="ExperimentalFrameworkProject.sln" t="IncludeFlat" />
-      <e p="Library" t="ExcludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
-      <e p="Temp" t="ExcludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
-      </e>
+      <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
   </component>
 </project>

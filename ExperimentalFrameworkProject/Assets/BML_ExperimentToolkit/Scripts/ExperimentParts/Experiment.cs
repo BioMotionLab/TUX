@@ -76,7 +76,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 sb.AppendLine(header);
                 foreach (Block block in design.Blocks) {
                     foreach (Trial trial in block.Trials) {
-                        sb.AppendLine(trial.Data.AsString(separator: Delimiter.Comma, truncate: -1));
+                        sb.AppendLine(trial.Data.AsString(separator: Delimiter.Comma, truncateLength: -1));
                     }
                 }
 
