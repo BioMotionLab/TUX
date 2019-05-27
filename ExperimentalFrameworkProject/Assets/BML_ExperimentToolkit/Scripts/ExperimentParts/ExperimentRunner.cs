@@ -33,7 +33,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Stores the script of the custom Runner used in this Runner.
         /// Override this to customize Runner behaviour
         /// </summary>
-        protected virtual Type ExperimentType => typeof(SimpleExperiment);
+        // ReSharper disable once MemberCanBeProtected.Global
+        public virtual Type ExperimentType => typeof(SimpleExperiment);
 
         [HideInInspector]
         public bool Ended;
@@ -58,13 +59,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 
             }
 
+
             //check if config file is loaded
             if (VariableConfigFile == null) {
-                Debug.LogError("Design Configuration not set up properly, make sure you dragged a configDesign file into your Runner GameObject");
+                Debug.LogError("Config file not set up properly, make sure you dragged a configuration file into your Runner GameObject in the inspector");
                 ExitProgram();
                 return;
             }
-
+            VariableConfigFile.Validate();
 
             Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, VariableConfigFile.RepeatTrialBlock, VariableConfigFile.ShuffleDifferentlyForEachBlock);
             if (Design == null) {

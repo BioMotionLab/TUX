@@ -16,14 +16,14 @@ MonoBehaviour:
   ShuffleDifferentlyForEachBlock: 1
   RepeatTrialBlock: 1
   Factory:
-    DataTypesToCreate: 0
+    DataTypesToCreate: 5
     VariableTypeToCreate: 0
     IntIVs:
     - Name: Variable1
       TypeOfVariable: 0
       DataType: 0
       MixingTypeOfVariable: 0
-      Block: 0
+      Block: 1
       Values: 0100000002000000
       Probabilities:
       - 0
@@ -41,7 +41,18 @@ MonoBehaviour:
     StringIVs: []
     BoolIVs: []
     GameObjectIVs: []
-    Vector3IVs: []
+    Vector3IVs:
+    - Name: vect
+      TypeOfVariable: 0
+      DataType: 5
+      MixingTypeOfVariable: 0
+      Block: 0
+      Values:
+      - {x: 1, y: 2, z: 3}
+      - {x: 4, y: 5, z: 6}
+      Probabilities:
+      - 0
+      - 0
     CustomDataTypeIVs: []
     IntDVs: []
     FloatDVs: []

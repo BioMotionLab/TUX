@@ -144,9 +144,6 @@
           <e p="Delimiter.cs" t="Include" />
           <e p="Editor" t="Include">
             <e p="LayerAttributeEditor.cs" t="Include" />
-            <e p="Tests" t="Include">
-              <e p="test.cs" t="Include" />
-            </e>
           </e>
           <e p="EventSystem" t="Include">
             <e p="BmlEvent.cs" t="Include" />
