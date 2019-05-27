@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using UnityEngine;
@@ -17,8 +19,38 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         [SerializeField]
         public VariableType VariableTypeToCreate;
 
-        #region IndependentVariables
 
+        readonly Dictionary<SupportedDataTypes, Type> supportedIndependentTypes;
+        readonly Dictionary<SupportedDataTypes, Type> supportedDependentTypes;
+        readonly Dictionary<SupportedDataTypes, Type> supportedParticipantTypes;
+
+        public VariableFactory() {
+
+            supportedIndependentTypes = GetSupportedTypes(typeof(IndependentVariable));
+            supportedDependentTypes = GetSupportedTypes(typeof(DependentVariable));
+            supportedParticipantTypes = GetSupportedTypes(typeof(ParticipantVariable));
+
+        }
+
+        static Dictionary<SupportedDataTypes, Type> GetSupportedTypes(Type baseType) {
+            
+            IEnumerable<Type> concreteTypes = Assembly.GetAssembly(baseType).GetTypes()
+                .Where(myType => myType.IsClass && !myType.IsAbstract &&
+                                 myType.IsSubclassOf(baseType));
+            
+            
+            Dictionary<SupportedDataTypes, Type> createdDic = new Dictionary<SupportedDataTypes, Type>();
+            
+            foreach (Type concreteType in concreteTypes) {
+                dynamic tempVariable = Activator.CreateInstance(concreteType);
+                if (!createdDic.ContainsKey(tempVariable.DataType)) createdDic.Add(tempVariable.DataType, concreteType);
+            }
+
+            return createdDic;
+        }
+
+        #region IndependentVariables
+        
         public List<IndependentVariableInt> IntIVs = new List<IndependentVariableInt>();
         public List<IndependentVariableFloat> FloatIVs = new List<IndependentVariableFloat>();
         public List<IndependentVariableString> StringIVs = new List<IndependentVariableString>();
@@ -99,97 +131,21 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
         public void AddNew() {
             switch (VariableTypeToCreate) {
-                case VariableType.Independent: {
-
-
-                    switch (DataTypesToCreate) {
-                        case SupportedDataTypes.Int:
-                            IndependentVariableInt ivInt = new IndependentVariableInt();
-                            IntIVs.Add(ivInt);
-                            break;
-                        case SupportedDataTypes.Float:
-                            IndependentVariableFloat ivFloat = new IndependentVariableFloat();
-                            FloatIVs.Add(ivFloat);
-                            break;
-                        case SupportedDataTypes.String:
-                            IndependentVariableString ivString = new IndependentVariableString();
-                            StringIVs.Add(ivString);
-                            break;
-                        case SupportedDataTypes.Bool:
-                            IndependentVariableBool ivBool = new IndependentVariableBool();
-                            BoolIVs.Add(ivBool);
-                            break;
-                            case SupportedDataTypes.GameObject:
-                            IndependentVariableGameObject ivGameObject = new IndependentVariableGameObject();
-                            GameObjectIVs.Add(ivGameObject);
-                            break;
-                        case SupportedDataTypes.Vector2:
-                            IndependentVariableVector2 ivVector2 = new IndependentVariableVector2();
-                            Vector2IVs.Add(ivVector2);
-                            break;
-                        case SupportedDataTypes.Vector3:
-                            IndependentVariableVector3 ivVector3 = new IndependentVariableVector3();
-                            Vector3IVs.Add(ivVector3);
-                            break;
-                        case SupportedDataTypes.CustomDataType:
-                            IndependentVariableCustomDataType
-                                ivCustomDataType = new IndependentVariableCustomDataType();
-                            CustomDataTypeIVs.Add(ivCustomDataType);
-                            break;
-                        case SupportedDataTypes.ChooseType:
-                            throw new
-                                InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
-                        default:
-                            throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
-                                                              "You can customize it yourself in the IndependentVariable.cs class");
+                
+                case VariableType.Independent: 
+                    
+                    if (supportedIndependentTypes.TryGetValue(DataTypesToCreate, out Type ivType)) {
+                        IndependentVariable newIv = Activator.CreateInstance(ivType) as IndependentVariable;
+                        UpdateSerializedIvsWith(newIv);
                     }
-                }
+                    
                     break;
-
+                
                 case VariableType.Dependent:
 
-                    switch (DataTypesToCreate) {
-                        case SupportedDataTypes.Int:
-                            DependentVariableInt newDependentVariableInt = new DependentVariableInt();
-                            IntDVs.Add(newDependentVariableInt);
-                            break;
-                        case SupportedDataTypes.Float:
-                            DependentVariableFloat newDependentVariableFloat = new DependentVariableFloat();
-                            FloatDVs.Add(newDependentVariableFloat);
-                            break;
-                        case SupportedDataTypes.String:
-                            DependentVariableString newDependentVariableString = new DependentVariableString();
-                            StringDVs.Add(newDependentVariableString);
-                            break;
-                        case SupportedDataTypes.Bool:
-                            DependentVariableBool newDependentVariableBool = new DependentVariableBool();
-                            BoolDVs.Add(newDependentVariableBool);
-                            break;
-                        case SupportedDataTypes.GameObject:
-                            DependentVariableGameObject newDependentVariableGameObject =
-                                new DependentVariableGameObject();
-                            GameObjectDVs.Add(newDependentVariableGameObject);
-                            break;
-                        case SupportedDataTypes.Vector2:
-                            DependentVariableVector2 newDependentVariableVector2 = new DependentVariableVector2();
-                            Vector2DVs.Add(newDependentVariableVector2);
-                            Debug.Log(Vector2DVs.Count);
-                            break;
-                        case SupportedDataTypes.Vector3:
-                            DependentVariableVector3 newDependentVariableVector3 = new DependentVariableVector3();
-                            Vector3DVs.Add(newDependentVariableVector3);
-                            break;
-                        case SupportedDataTypes.CustomDataType:
-                            DependentVariableCustomDataType newDependentVariableCustomDataType =
-                                new DependentVariableCustomDataType();
-                            CustomDataTypeDVs.Add(newDependentVariableCustomDataType);
-                            break;
-                        case SupportedDataTypes.ChooseType:
-                            throw new
-                                InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
-                        default:
-                            throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
-                                                              "You can customize it yourself in the IndependentVariable.cs class");
+                    if (supportedDependentTypes.TryGetValue(DataTypesToCreate, out Type dvType)) {
+                        DependentVariable newDv = Activator.CreateInstance(dvType) as DependentVariable;
+                        UpdateSerializedDvsWith(newDv);
                     }
 
                     break;
@@ -197,48 +153,11 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                     break;
                 case VariableType.Participant:
 
-                    switch (DataTypesToCreate) {
-                        case SupportedDataTypes.Int:
-                            ParticipantVariableInt newVariableInt = new ParticipantVariableInt();
-                            IntParticipantVariables.Add(newVariableInt);
-                            break;
-                        case SupportedDataTypes.Float:
-                            ParticipantVariableFloat newVariableFloat = new ParticipantVariableFloat();
-                            FloatParticipantVariables.Add(newVariableFloat);
-                            break;
-                        case SupportedDataTypes.String:
-                            ParticipantVariableString newVariableString = new ParticipantVariableString();
-                            StringParticipantVariables.Add(newVariableString);
-                            break;
-                        case SupportedDataTypes.Bool:
-                            ParticipantVariableBool newVariableBool = new ParticipantVariableBool();
-                            BoolParticipantVariables.Add(newVariableBool);
-                            break;
-                        case SupportedDataTypes.GameObject:
-                            ParticipantVariableGameObject newVariableGameObject = new ParticipantVariableGameObject();
-                            GameObjectParticipantVariables.Add(newVariableGameObject);
-                            break;
-                        case SupportedDataTypes.Vector2:
-                            ParticipantVariableVector2 newVariableVector2 = new ParticipantVariableVector2();
-                            Vector2ParticipantVariables.Add(newVariableVector2);
-                            break;
-                        case SupportedDataTypes.Vector3:
-                            ParticipantVariableVector3 newVariableVector3 = new ParticipantVariableVector3();
-                            Vector3ParticipantVariables.Add(newVariableVector3);
-                            break;
-                        case SupportedDataTypes.CustomDataType:
-                            ParticipantVariableCustomData newVariableCustomData = new ParticipantVariableCustomData();
-                            CustomDataParticipantVariables.Add(newVariableCustomData);
-                            break;
-                        case SupportedDataTypes.ChooseType:
-                            throw new
-                                InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
-                        default:
-                            throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
-                                                              "You can customize it yourself in the IndependentVariable.cs class");
+                    if (supportedParticipantTypes.TryGetValue(DataTypesToCreate, out Type pvType)) {
+                        ParticipantVariable newPv = Activator.CreateInstance(pvType) as ParticipantVariable;
+                        UpdateSerializedPvsWith(newPv);
                     }
-
-
+                    
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(VariableTypeToCreate), DataTypesToCreate, null);
@@ -251,6 +170,115 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             return new ExperimentDesign(experimentRunner, AllVariables, shuffleTrialOrder, numberRepetitions, shuffleTrialsBetweenBlocks );
         }
 
+
+        void UpdateSerializedIvsWith(IndependentVariable iv) {
+
+            switch (iv.DataType) {
+                case SupportedDataTypes.Int:
+                    IntIVs.Add(iv as IndependentVariableInt);
+                    break;
+                case SupportedDataTypes.Float:
+                    FloatIVs.Add(iv as IndependentVariableFloat);
+                    break;
+                case SupportedDataTypes.String:
+                    StringIVs.Add(iv as IndependentVariableString);
+                    break;
+                case SupportedDataTypes.Bool:
+                    BoolIVs.Add(iv as IndependentVariableBool);
+                    break;
+                case SupportedDataTypes.GameObject:
+                    GameObjectIVs.Add(iv as IndependentVariableGameObject);
+                    break;
+                case SupportedDataTypes.Vector2:
+                    Vector2IVs.Add(iv as IndependentVariableVector2);
+                    break;
+                case SupportedDataTypes.Vector3:
+                    Vector3IVs.Add(iv as IndependentVariableVector3);
+                    break;
+                case SupportedDataTypes.CustomDataType:
+                    CustomDataTypeIVs.Add(iv as IndependentVariableCustomDataType);
+                    break;
+                case SupportedDataTypes.ChooseType:
+                    throw new InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
+                default:
+                    throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
+                                                                  "You can customize it yourself in the IndependentVariable.cs class");
+            }
+            
+                       
+              
+        }
+
+        void UpdateSerializedDvsWith(DependentVariable dv) {
+            switch (dv.DataType) {
+                        case SupportedDataTypes.Int:
+                            IntDVs.Add(dv as DependentVariableInt);
+                            break;
+                        case SupportedDataTypes.Float:
+                            FloatDVs.Add(dv as DependentVariableFloat);
+                            break;
+                        case SupportedDataTypes.String:
+                            StringDVs.Add(dv as DependentVariableString);
+                            break;
+                        case SupportedDataTypes.Bool:
+                            BoolDVs.Add(dv as DependentVariableBool);
+                            break;
+                        case SupportedDataTypes.GameObject:
+                            GameObjectDVs.Add(dv as DependentVariableGameObject);
+                            break;
+                        case SupportedDataTypes.Vector2:
+                            Vector2DVs.Add(dv as DependentVariableVector2);
+                            Debug.Log(Vector2DVs.Count);
+                            break;
+                        case SupportedDataTypes.Vector3:
+                            Vector3DVs.Add(dv as DependentVariableVector3);
+                            break;
+                        case SupportedDataTypes.CustomDataType:
+                            CustomDataTypeDVs.Add(dv as DependentVariableCustomDataType);
+                            break;
+                        case SupportedDataTypes.ChooseType:
+                            throw new
+                                InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
+                        default:
+                            throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
+                                                              "You can customize it yourself in the IndependentVariable.cs class");
+                    }
+        }
+
+        void UpdateSerializedPvsWith(ParticipantVariable pv) {
+            switch (pv.DataType) {
+                        case SupportedDataTypes.Int:
+                            IntParticipantVariables.Add(pv as ParticipantVariableInt);
+                            break;
+                        case SupportedDataTypes.Float:
+                            FloatParticipantVariables.Add(pv as ParticipantVariableFloat);
+                            break;
+                        case SupportedDataTypes.String:
+                            StringParticipantVariables.Add(pv as ParticipantVariableString);
+                            break;
+                        case SupportedDataTypes.Bool:
+                            BoolParticipantVariables.Add(pv as ParticipantVariableBool);
+                            break;
+                        case SupportedDataTypes.GameObject:
+                            GameObjectParticipantVariables.Add(pv as ParticipantVariableGameObject);
+                            break;
+                        case SupportedDataTypes.Vector2:
+                            Vector2ParticipantVariables.Add(pv as ParticipantVariableVector2);
+                            break;
+                        case SupportedDataTypes.Vector3:
+                            Vector3ParticipantVariables.Add(pv as ParticipantVariableVector3);
+                            break;
+                        case SupportedDataTypes.CustomDataType:
+                            CustomDataParticipantVariables.Add(pv as ParticipantVariableCustomData);
+                            break;
+                        case SupportedDataTypes.ChooseType:
+                            throw new
+                                InvalidEnumArgumentException("Trying to create new variable, but type not yet chosen");
+                        default:
+                            throw new NotImplementedException("Support for this data type has not yet been defined." +
+                                                              "You can customize it yourself or submit a request to include it");
+                    }
+        }
 
     }
 }

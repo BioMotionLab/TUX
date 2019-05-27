@@ -95,9 +95,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         void OnDisable() {
             ExperimentEvents.OnStartExperiment -= StartExperiment;
             ExperimentEvents.OnEndExperiment -= EndExperiment;
-            Design.Disable();
-            outputManager.Disable();
-            experiment.Disable();
+            Design?.Disable();
+            outputManager?.Disable();
+            experiment?.Disable();
         
         }
 
