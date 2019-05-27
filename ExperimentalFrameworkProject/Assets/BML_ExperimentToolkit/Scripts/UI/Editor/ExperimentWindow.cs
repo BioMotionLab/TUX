@@ -372,7 +372,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 EditorGUILayout.BeginHorizontal();
                 string runningText = runner.Running ? "Running" : "Not Running";
                 EditorGUILayout.LabelField($"Runner {runningText}.");
-                int currentTrial = runner.Design.BlockCount * currentBlockIndex + currentTrialIndex + 1;
+                int currentTrial = (runner.Design.TotalTrials/runner.Design.BlockCount) * (currentBlockIndex) + currentTrialIndex + 1;
                 if (currentTrial > runner.Design.TotalTrials) currentTrial = runner.Design.TotalTrials;
                 EditorGUILayout.LabelField("Running Trial: " +
                                            $"{currentTrial}" +

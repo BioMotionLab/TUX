@@ -68,7 +68,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
             VariableConfigFile.Validate();
 
-            Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, VariableConfigFile.RepeatTrialBlock, VariableConfigFile.ShuffleDifferentlyForEachBlock);
+            Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, VariableConfigFile.RepeatTrialsInBlock, VariableConfigFile.ShuffleDifferentlyForEachBlock, VariableConfigFile.RepeatAllBlocks);
             if (Design == null) {
                 Debug.Log("Design not created properly");
                 throw new NullReferenceException("Design null");

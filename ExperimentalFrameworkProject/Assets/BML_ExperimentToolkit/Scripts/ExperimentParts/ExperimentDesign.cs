@@ -27,15 +27,17 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public bool HasBlocks => baseBlockTable.HasBlocks;
 
-        readonly bool                    shuffleTrialsBetweenBlocks;
+        readonly bool shuffleTrialsBetweenBlocks;
+        readonly int repeatBlocks;
         SortedVariableContainer sortedVariables;
 
         public ExperimentDesign(ExperimentRunner runner,              List<Variable> allData, bool shuffleTrialOrder,
-                                int              numberOfRepetitions, bool           shuffleTrialsBetweenBlocks) {
+                                int              RepeatTrials, bool           shuffleTrialsBetweenBlocks, int repeatBlocks) {
             this.runner = runner;
             this.shuffleTrialsBetweenBlocks = shuffleTrialsBetweenBlocks;
+            this.repeatBlocks = repeatBlocks;
             baseBlockTable = new BlockTable(allData, this);
-            baseTrialTable = new TrialTable(allData, this, baseBlockTable, shuffleTrialOrder, numberOfRepetitions,
+            baseTrialTable = new TrialTable(allData, this, baseBlockTable, shuffleTrialOrder, RepeatTrials,
                                             runner.VariableConfigFile.ColumnNamesSettings);
             Enable();
         }
@@ -74,18 +76,23 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 Blocks.Add(newBlock);
             }
             else {
-                for (int i = 0; i < OrderedBlockTable.Rows.Count; i++) {
-                    DataRow orderedBlockRow = OrderedBlockTable.Rows[i];
-                    if (shuffleTrialsBetweenBlocks) {
-                        trialTable = trialTable.Shuffle();
-                    }
+                for (int j = 0; j < repeatBlocks; j++) {
+                    for (int i = 0; i < OrderedBlockTable.Rows.Count; i++) {
+                        DataRow orderedBlockRow = OrderedBlockTable.Rows[i];
+                        if (shuffleTrialsBetweenBlocks) {
+                            trialTable = trialTable.Shuffle();
+                        }
 
-                    trialTable = UpdateTrialTableWithBlockValues(trialTable, orderedBlockRow, i);
-                    string blockIdentity = orderedBlockRow.AsStringWithColumnNames(separator: ", ");
-                    Block newBlock = CreateNewBlock(trialTable, blockIdentity, orderedBlockRow);
-                    Blocks.Add(newBlock);
+                        trialTable = UpdateTrialTableWithBlockValues(trialTable, orderedBlockRow, (j*OrderedBlockTable.Rows.Count)+(i));
+                        string blockIdentity = orderedBlockRow.AsStringWithColumnNames(separator: ", ");
+                        Block newBlock = CreateNewBlock(trialTable, blockIdentity, orderedBlockRow);
+                        Blocks.Add(newBlock);
+                    }
                 }
             }
+
+         
+         
 
             //Debug.Log($"Blocks added {Blocks.Count}");
         }

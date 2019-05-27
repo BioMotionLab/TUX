@@ -8,9 +8,14 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
     [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create new Variable Config Asset")]
     public class VariableConfig : ScriptableObject {
 
-        public bool ShuffleTrialOrder;
-        public bool ShuffleDifferentlyForEachBlock;
-        public int  RepeatTrialBlock;
+        public bool ShuffleTrialOrder = false;
+        public bool ShuffleDifferentlyForEachBlock = false;
+        
+        [Range(1,100)]
+        public int  RepeatTrialsInBlock = 1;
+        
+        [Range(1,100)]
+        public int RepeatAllBlocks = 1;
         
         [SerializeField]
         public VariableFactory Factory = new VariableFactory();

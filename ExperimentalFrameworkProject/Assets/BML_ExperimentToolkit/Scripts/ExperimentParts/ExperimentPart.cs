@@ -40,7 +40,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             PreMethod();
             yield return PreCoroutine();
             
-            Debug.Log($"Done premethods of {this.GetType()}");
+            //Debug.Log($"Done premethods of {this.GetType()}");
         }
 
         protected abstract IEnumerator RunMainCoroutine();
@@ -55,7 +55,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             float endTime = Time.time;
             RunTime = endTime - startTime;
-            Debug.Log($"Done mainCoroutine of {this.GetType()}");
+            //Debug.Log($"Done mainCoroutine of {this.GetType()}");
 
             yield return ConditionalCoroutine(RunPostMethods());
 
@@ -82,7 +82,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             yield return PostCoroutine();
             PostMethod();
             
-            Debug.Log($"Done postmethods of {this.GetType()}");
+            //Debug.Log($"Done postmethods of {this.GetType()}");
             
             InternalPostMethod();
             

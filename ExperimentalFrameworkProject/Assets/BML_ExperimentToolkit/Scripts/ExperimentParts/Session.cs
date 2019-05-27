@@ -17,7 +17,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         public string OutputFullPath {
             get {
-                outputFullPath = Path.Combine(OutputFolder, OutputFileName);
+                outputFullPath = Path.Combine(OutputFolder, OutputFileName).Replace(@"\", @"/");
                 return outputFullPath;
             }
         }
