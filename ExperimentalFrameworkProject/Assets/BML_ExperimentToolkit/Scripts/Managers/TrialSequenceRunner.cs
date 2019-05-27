@@ -9,6 +9,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
     public class TrialSequenceRunner {
 
         Trial currentlyRunningTrial;
+        public bool Running = false;
 
         readonly List<Trial> trialsInSequence;
         List<Trial> currentTrialList;
@@ -20,8 +21,10 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
             currentTrialList = trialList;
         }
 
+        
         public void Start() {
             //Debug.Log("Starting to run trial sequence");
+            Running = true;
             StartRunningTrial(currentTrialList[0]);
         }
 
@@ -50,7 +53,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         }
 
         void TrialHasCompleted() {
-            Debug.Log("Trial has completed event received)");
+            //Debug.Log("Trial has completed event received)");
             FinishTrial();
             GoToNextTrial();
         }
@@ -124,6 +127,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
                 // finish up
                 Debug.Log($"No more trials");
                 ExperimentEvents.TrialSequenceHasCompleted(trialsInSequence);
+                Running = false;
                 OnDisable();
             }
         }

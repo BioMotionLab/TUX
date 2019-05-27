@@ -64,7 +64,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             TrialSequenceRunner trialSequenceRunner = new TrialSequenceRunner(Trials);
             trialSequenceRunner.Start();
-            yield return null;
+            while (trialSequenceRunner.Running) {
+                yield return null;
+            }
+            
         }
 
         /// <summary>
