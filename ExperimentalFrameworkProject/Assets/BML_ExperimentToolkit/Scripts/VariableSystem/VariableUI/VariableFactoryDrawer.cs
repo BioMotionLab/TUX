@@ -33,6 +33,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                 VariableFactory factory =
                     fieldInfo.GetValue(mainProperty.serializedObject.targetObject) as VariableFactory;
                 factory?.AddNew();
+                
             }
             
             GUI.backgroundColor = oldColor;
@@ -49,6 +50,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.StringIVs));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.BoolIVs));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.GameObjectIVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector2IVs));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3IVs));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataTypeIVs));
 
@@ -61,6 +63,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.StringDVs));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.BoolDVs));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.GameObjectDVs));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector2DVs));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3DVs));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataTypeDVs));
             
@@ -73,6 +76,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.StringParticipantVariables));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.BoolParticipantVariables));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.GameObjectParticipantVariables));
+            AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector2ParticipantVariables));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3ParticipantVariables));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataParticipantVariables));
 

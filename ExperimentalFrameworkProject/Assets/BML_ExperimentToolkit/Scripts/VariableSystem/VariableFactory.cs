@@ -19,53 +19,26 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
         #region IndependentVariables
 
-        
-
-        [SerializeField]
         public List<IndependentVariableInt> IntIVs = new List<IndependentVariableInt>();
-
-        [SerializeField]
         public List<IndependentVariableFloat> FloatIVs = new List<IndependentVariableFloat>();
-
-        [SerializeField]
         public List<IndependentVariableString> StringIVs = new List<IndependentVariableString>();
-
-        [SerializeField]
         public List<IndependentVariableBool> BoolIVs = new List<IndependentVariableBool>();
-
-        [SerializeField]
         public List<IndependentVariableGameObject> GameObjectIVs = new List<IndependentVariableGameObject>();
-
-        [SerializeField]
+        public List<IndependentVariableVector2> Vector2IVs = new List<IndependentVariableVector2>();
         public List<IndependentVariableVector3> Vector3IVs = new List<IndependentVariableVector3>();
-
-        [SerializeField]
-        public List<IndependentVariableCustomDataType>
-            CustomDataTypeIVs = new List<IndependentVariableCustomDataType>();
+        public List<IndependentVariableCustomDataType> CustomDataTypeIVs = new List<IndependentVariableCustomDataType>();
 
         #endregion
 
         #region DependentVariables
 
-        [SerializeField]
         public List<DependentVariableInt> IntDVs = new List<DependentVariableInt>();
-
-        [SerializeField]
         public List<DependentVariableFloat> FloatDVs = new List<DependentVariableFloat>();
-
-        [SerializeField]
         public List<DependentVariableString> StringDVs = new List<DependentVariableString>();
-
-        [SerializeField]
         public List<DependentVariableBool> BoolDVs = new List<DependentVariableBool>();
-
-        [SerializeField]
         public List<DependentVariableGameObject> GameObjectDVs = new List<DependentVariableGameObject>();
-
-        [SerializeField]
+        public List<DependentVariableVector2> Vector2DVs = new List<DependentVariableVector2>();
         public List<DependentVariableVector3> Vector3DVs = new List<DependentVariableVector3>();
-
-        [SerializeField]
         public List<DependentVariableCustomDataType> CustomDataTypeDVs = new List<DependentVariableCustomDataType>();
 
         #endregion
@@ -77,6 +50,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public List<ParticipantVariableString> StringParticipantVariables = new List<ParticipantVariableString>();
         public List<ParticipantVariableBool> BoolParticipantVariables = new List<ParticipantVariableBool>();
         public List<ParticipantVariableGameObject> GameObjectParticipantVariables = new List<ParticipantVariableGameObject>();
+        public List<ParticipantVariableVector2> Vector2ParticipantVariables = new List<ParticipantVariableVector2>();
         public List<ParticipantVariableVector3> Vector3ParticipantVariables = new List<ParticipantVariableVector3>();
         public List<ParticipantVariableCustomData> CustomDataParticipantVariables = new List<ParticipantVariableCustomData>();
 
@@ -94,6 +68,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                 variables.AddRange(StringIVs);
                 variables.AddRange(BoolIVs);
                 variables.AddRange(GameObjectIVs);
+                variables.AddRange(Vector2IVs);
                 variables.AddRange(Vector3IVs);
                 variables.AddRange(CustomDataTypeIVs);
 
@@ -103,6 +78,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                 variables.AddRange(StringDVs);
                 variables.AddRange(BoolDVs);
                 variables.AddRange(GameObjectDVs);
+                variables.AddRange(Vector2DVs);
                 variables.AddRange(Vector3DVs);
                 variables.AddRange(CustomDataTypeDVs);
                 
@@ -113,6 +89,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                 variables.AddRange(StringParticipantVariables);
                 variables.AddRange(BoolParticipantVariables);
                 variables.AddRange(GameObjectParticipantVariables);
+                variables.AddRange(Vector2ParticipantVariables);
                 variables.AddRange(Vector3ParticipantVariables);
                 variables.AddRange(CustomDataParticipantVariables);
                 
@@ -145,6 +122,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                             case SupportedDataTypes.GameObject:
                             IndependentVariableGameObject ivGameObject = new IndependentVariableGameObject();
                             GameObjectIVs.Add(ivGameObject);
+                            break;
+                        case SupportedDataTypes.Vector2:
+                            IndependentVariableVector2 ivVector2 = new IndependentVariableVector2();
+                            Vector2IVs.Add(ivVector2);
                             break;
                         case SupportedDataTypes.Vector3:
                             IndependentVariableVector3 ivVector3 = new IndependentVariableVector3();
@@ -189,6 +170,11 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                                 new DependentVariableGameObject();
                             GameObjectDVs.Add(newDependentVariableGameObject);
                             break;
+                        case SupportedDataTypes.Vector2:
+                            DependentVariableVector2 newDependentVariableVector2 = new DependentVariableVector2();
+                            Vector2DVs.Add(newDependentVariableVector2);
+                            Debug.Log(Vector2DVs.Count);
+                            break;
                         case SupportedDataTypes.Vector3:
                             DependentVariableVector3 newDependentVariableVector3 = new DependentVariableVector3();
                             Vector3DVs.Add(newDependentVariableVector3);
@@ -231,6 +217,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                         case SupportedDataTypes.GameObject:
                             ParticipantVariableGameObject newVariableGameObject = new ParticipantVariableGameObject();
                             GameObjectParticipantVariables.Add(newVariableGameObject);
+                            break;
+                        case SupportedDataTypes.Vector2:
+                            ParticipantVariableVector2 newVariableVector2 = new ParticipantVariableVector2();
+                            Vector2ParticipantVariables.Add(newVariableVector2);
                             break;
                         case SupportedDataTypes.Vector3:
                             ParticipantVariableVector3 newVariableVector3 = new ParticipantVariableVector3();

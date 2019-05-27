@@ -79,6 +79,7 @@
                 <e p="DependentVariableGameObject.cs" t="Include" />
                 <e p="DependentVariableInt.cs" t="Include" />
                 <e p="DependentVariableString.cs" t="Include" />
+                <e p="DependentVariableVector2.cs" t="Include" />
                 <e p="DependentVariableVector3.cs" t="Include" />
                 <e p="IndependentVariableBool.cs" t="Include" />
                 <e p="IndependentVariableCustomDataType.cs" t="Include" />
@@ -86,6 +87,7 @@
                 <e p="IndependentVariableGameObject.cs" t="Include" />
                 <e p="IndependentVariableInt.cs" t="Include" />
                 <e p="IndependentVariableString.cs" t="Include" />
+                <e p="IndependentVariableVector2.cs" t="Include" />
                 <e p="IndependentVariableVector3.cs" t="Include" />
                 <e p="ParticipantVariableBool.cs" t="Include" />
                 <e p="ParticipantVariableCustomData.cs" t="Include" />
@@ -93,6 +95,7 @@
                 <e p="ParticipantVariableGameObject.cs" t="Include" />
                 <e p="ParticipantVariableInt.cs" t="Include" />
                 <e p="ParticipantVariableString.cs" t="Include" />
+                <e p="ParticipantVariableVector2.cs" t="Include" />
                 <e p="ParticipantVariableVector3.cs" t="Include" />
                 <e p="VariableType.cs" t="Include" />
               </e>
@@ -104,6 +107,7 @@
                 <e p="DependentVariableGameObjectDrawer.cs" t="Include" />
                 <e p="DependentVariableIntDrawer.cs" t="Include" />
                 <e p="DependentVariableStringDrawer.cs" t="Include" />
+                <e p="DependentVariableVector2Drawer.cs" t="Include" />
                 <e p="DependentVariableVector3Drawer.cs" t="Include" />
                 <e p="IndependentVariableBoolDrawer.cs" t="Include" />
                 <e p="IndependentVariableCustomDataTypeDrawer.cs" t="Include" />
@@ -112,6 +116,7 @@
                 <e p="IndependentVariableGameObjectDrawer.cs" t="Include" />
                 <e p="IndependentVariableIntDrawer.cs" t="Include" />
                 <e p="IndependentVariableStringDrawer.cs" t="Include" />
+                <e p="IndependentVariableVector2Drawer.cs" t="Include" />
                 <e p="IndependentVariableVector3Drawer.cs" t="Include" />
                 <e p="ParticipantVariableBoolDrawer.cs" t="Include" />
                 <e p="ParticipantVariableCustomDataDrawer.cs" t="Include" />
@@ -120,6 +125,7 @@
                 <e p="ParticipantVariableGameObjectDrawer.cs" t="Include" />
                 <e p="ParticipantVariableIntDrawer.cs" t="Include" />
                 <e p="ParticipantVariableStringDrawer.cs" t="Include" />
+                <e p="ParticipantVariableVector2Drawer.cs" t="Include" />
                 <e p="ParticipantVariableVector3Drawer.cs" t="Include" />
                 <e p="VariableDrawer.cs" t="Include" />
                 <e p="VariableDrawerHelpers.cs" t="Include" />

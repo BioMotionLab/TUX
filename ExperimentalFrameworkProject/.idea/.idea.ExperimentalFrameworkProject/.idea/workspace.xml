@@ -4,10 +4,9 @@
     <list default="true" id="22ea5ef4-e322-4ce5-98ba-7ef8faef5429" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleSimpleExperiment/SimpleExperiment Config.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleSimpleExperiment/SimpleExperiment Config.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SupportedDataTypes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SupportedDataTypes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Editor/Tests/test.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Editor/Tests/test.cs.meta" beforeDir="false" />
@@ -21,175 +20,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/OutputManager.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1045">
-              <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
-              <folding>
-                <marker date="1556130268022" expanded="true" signature="6:35" ph="..." />
-                <marker date="1556130268022" expanded="true" signature="86:2344" ph="{...}" />
-                <marker date="1556130268022" expanded="true" signature="93:183" ph="/// Outputs files based on events that it listens to. ... " />
-                <marker date="1556130268022" expanded="true" signature="215:1908" ph="{...}" />
-                <marker date="1556130268022" expanded="true" signature="263:463" ph="/// Creates an OutputFile manager instance to output strings as a file ... " />
-                <marker date="1556130268022" expanded="true" signature="545:917" ph="{...}" />
-                <marker date="1556130268022" expanded="true" signature="690:883" ph="{...}" />
-                <marker date="1556130268022" expanded="true" signature="927:1012" ph="/// Must be called when instance created ... " />
-                <marker date="1556130268022" expanded="true" signature="1035:1106" ph="{...}" />
-                <marker date="1556130268022" expanded="true" signature="1116:1258" ph="/// *Important!* ... " />
-                <marker date="1556130268022" expanded="true" signature="1289:1360" ph="{...}" />
-                <marker date="1556130268022" expanded="true" signature="1370:1494" ph="/// Outputs the Outputtable as a file ... " />
-                <marker date="1556130268022" expanded="true" signature="1539:1901" ph="{...}" />
-                <marker date="1556130268022" expanded="true" signature="1805:1877" ph="{...}" />
-                <marker date="1556130268022" expanded="true" signature="1955:2043" ph="/// Defines a class that can be output as a string. ... " />
-                <marker date="1556130268022" expanded="true" signature="2077:2117" ph="{...}" />
-                <marker date="1556130268022" expanded="true" signature="2123:2198" ph="/// Defines supported file extensions. ... " />
-                <marker date="1556130268022" expanded="true" signature="2238:2340" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Experiment.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1216">
-              <caret line="78" column="53" selection-start-line="78" selection-start-column="53" selection-end-line="78" selection-end-column="53" />
-              <folding>
-                <marker date="1558638669548" expanded="false" signature="6:191" ph="..." />
-                <marker date="1558638669548" expanded="true" signature="193:296" ph="/* ReSharper disable VirtualMemberNeverOverridden.Global ... */" />
-                <marker date="1558638669548" expanded="true" signature="354:2914" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="360:672" ph="/// The Runner class is the main backbone of the toolkit. This sets up the Runner design, the blocks and trial st ... " />
-                <marker date="1558638669548" expanded="true" signature="794:2911" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="976:1214" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="1044:1148" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="1224:1301" ph="/// Called when Runner is loaded ... " />
-                <marker date="1558638669548" expanded="true" signature="1324:1396" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="1406:1481" ph="/// Called when Runner is over ... " />
-                <marker date="1558638669548" expanded="true" signature="1512:1584" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="1594:1758" ph="/// Called when a trial gets updated ... " />
-                <marker date="1558638669548" expanded="true" signature="1816:1856" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="1866:1942" ph="/// Updates the Runner's output ... " />
-                <marker date="1558638669548" expanded="true" signature="1972:2033" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="2093:2262" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="2272:2372" ph="///Gets the Runner as string. ... " />
-                <marker date="1558638669548" expanded="true" signature="2404:2905" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="2422:2895" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="2632:2841" ph="{...}" />
-                <marker date="1558638669548" expanded="true" signature="2692:2823" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/BML_Utilities/Extensions/DataTableExtension.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="63" column="12" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
-              <folding>
-                <marker date="1558639116461" expanded="false" signature="6:165" ph="..." />
-                <marker date="1558639116461" expanded="true" signature="202:6925" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="249:6923" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="353:402" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="604:1037" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="806:967" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="1125:1691" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="1250:1626" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="1464:1563" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="1877:2325" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="2523:2814" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="3000:3927" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="3673:3874" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="4006:4681" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="4111:4161" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="4374:4634" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="4497:4568" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="4749:4885" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="4965:5296" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="5017:5286" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="5085:5272" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="5416:6038" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="5512:5869" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="5941:5998" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="6049:6184" ph="/// Randomly shuffles the row order of this table ... " />
-                <marker date="1558639116461" expanded="true" signature="6247:6915" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="6397:6451" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="6479:6704" ph="{...}" />
-                <marker date="1558639116461" expanded="true" signature="6809:6870" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/BML_Utilities/Extensions/StringExtension.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
-              <folding>
-                <marker date="1556566148084" expanded="true" signature="50:651" ph="{...}" />
-                <marker date="1556566148084" expanded="true" signature="93:649" ph="{...}" />
-                <marker date="1556566148084" expanded="true" signature="227:643" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/BML_Utilities/Extensions/DataFormatter.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-              <folding>
-                <marker date="1558639176580" expanded="true" signature="55:511" ph="{...}" />
-                <marker date="1558639176580" expanded="true" signature="88:509" ph="{...}" />
-                <marker date="1558639176580" expanded="true" signature="180:247" ph="{...}" />
-                <marker date="1558639176580" expanded="true" signature="281:503" ph="{...}" />
-                <marker date="1558639176580" expanded="true" signature="299:493" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentPart.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="52" column="66" selection-start-line="52" selection-start-column="66" selection-end-line="52" selection-end-column="66" />
-              <folding>
-                <marker date="1556130267996" expanded="true" signature="6:90" ph="..." />
-                <marker date="1556130267996" expanded="true" signature="149:4396" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="192:4394" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="384:482" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="506:572" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="768:902" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="920:1070" ph="/// Start running the code that occurs before the main part of the Runner ... " />
-                <marker date="1556130267996" expanded="true" signature="1107:1302" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="1391:1739" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="1805:2073" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="1848:2063" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="1881:2001" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="2083:2232" ph="/// Start running the code that occurs after the main part of the Runner ... " />
-                <marker date="1556130267996" expanded="true" signature="2270:2469" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="2523:2534" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="2588:2599" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="2609:2881" ph="/// Code that runs before this ExperimentPart. ... " />
-                <marker date="1556130267996" expanded="true" signature="2934:3330" ph="/// Code that runs before this ExperimentPart. ... " />
-                <marker date="1556130267996" expanded="true" signature="3384:3426" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="3437:3836" ph="/// Code that runs after this ExperimentPart. ... " />
-                <marker date="1556130267996" expanded="true" signature="3891:3933" ph="{...}" />
-                <marker date="1556130267996" expanded="true" signature="3943:4259" ph="/// Code that runs after each block. Overwrite this for custom behaviour. ... " />
-                <marker date="1556130267996" expanded="true" signature="4347:4388" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1157">
-              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+              <caret line="43" selection-start-line="43" selection-end-line="43" />
               <folding>
                 <marker date="1558964428500" expanded="true" signature="6:226" ph="..." />
                 <marker date="1558964428500" expanded="true" signature="284:4377" ph="{...}" />
@@ -213,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="665">
-              <caret line="35" column="1" lean-forward="true" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+              <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
               <folding>
                 <marker date="1558964735287" expanded="true" signature="6:121" ph="..." />
                 <marker date="1558964735287" expanded="true" signature="178:1425" ph="{...}" />
@@ -231,25 +65,134 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperimentRunner.cs">
+        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableVector2.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="190">
+              <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
               <folding>
-                <marker date="1556130268010" expanded="true" signature="78:163" ph="{...}" />
-                <marker date="1556130268010" expanded="true" signature="140:161" ph="{...}" />
+                <marker date="1558966293031" expanded="true" signature="6:32" ph="..." />
+                <marker date="1558966293031" expanded="true" signature="103:315" ph="{...}" />
+                <marker date="1558966293031" expanded="true" signature="199:313" ph="{...}" />
+                <marker date="1558966293031" expanded="true" signature="245:307" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/BML_Utilities/Delimiter.cs">
+        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableVector2.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="152">
+              <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
               <folding>
-                <marker date="1558632756083" expanded="true" signature="24:206" ph="{...}" />
-                <marker date="1558632756083" expanded="true" signature="63:204" ph="{...}" />
+                <marker date="1558966327194" expanded="false" signature="6:32" ph="..." />
+                <marker date="1558966327194" expanded="true" signature="103:309" ph="{...}" />
+                <marker date="1558966327194" expanded="true" signature="195:307" ph="{...}" />
+                <marker date="1558966327194" expanded="true" signature="239:301" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableVector2.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+              <folding>
+                <marker date="1558966351568" expanded="false" signature="6:32" ph="..." />
+                <marker date="1558966351568" expanded="true" signature="103:315" ph="{...}" />
+                <marker date="1558966351568" expanded="true" signature="199:313" ph="{...}" />
+                <marker date="1558966351568" expanded="true" signature="245:307" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableFactory.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="175" column="56" lean-forward="true" selection-start-line="175" selection-start-column="56" selection-end-line="175" selection-end-column="56" />
+              <folding>
+                <marker date="1558967000627" expanded="false" signature="6:214" ph="..." />
+                <marker date="1558967000627" expanded="true" signature="271:14131" ph="{...}" />
+                <marker date="1558967000627" expanded="true" signature="327:14129" ph="{...}" />
+                <marker date="1558967000627" expanded="true" signature="493:1350" ph="IndependentVariables" />
+                <marker date="1558967000627" expanded="true" signature="1360:2183" ph="DependentVariables" />
+                <marker date="1558967000627" expanded="true" signature="2193:3174" ph="ParticipantVariables" />
+                <marker date="1558967000627" expanded="true" signature="3220:4772" ph="{...}" />
+                <marker date="1558967000627" expanded="true" signature="3238:4762" ph="{...}" />
+                <marker date="1558967000627" expanded="true" signature="4803:13710" ph="{...}" />
+                <marker date="1558967000627" expanded="true" signature="4847:13699" ph="{...}" />
+                <marker date="1558967000627" expanded="true" signature="4947:7503" ph="{...}" />
+                <marker date="1558967000627" expanded="true" signature="7643:10540" ph="{...}" />
+                <marker date="1558967000627" expanded="true" signature="10737:13517" ph="{...}" />
+                <marker date="1558967000627" expanded="true" signature="13867:14121" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="722">
+              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+              <folding>
+                <marker date="1558967059168" expanded="false" signature="6:58" ph="..." />
+                <marker date="1558967059168" expanded="true" signature="126:7345" ph="{...}" />
+                <marker date="1558967059168" expanded="true" signature="236:7343" ph="{...}" />
+                <marker date="1558967059168" expanded="true" signature="404:482" ph="{...}" />
+                <marker date="1558967059168" expanded="true" signature="589:5112" ph="{...}" />
+                <marker date="1558967059168" expanded="true" signature="1320:1515" ph="{...}" />
+                <marker date="1558967059168" expanded="true" signature="5227:5388" ph="{...}" />
+                <marker date="1558967059168" expanded="true" signature="5506:5697" ph="{...}" />
+                <marker date="1558967059168" expanded="true" signature="5807:6357" ph="{...}" />
+                <marker date="1558967059168" expanded="true" signature="5884:6263" ph="{...}" />
+                <marker date="1558967059168" expanded="true" signature="6527:7337" ph="{...}" />
+                <marker date="1558967059168" expanded="true" signature="7196:7300" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/DependentVariableVector2Drawer.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+              <folding>
+                <marker date="1558966728733" expanded="false" signature="6:84" ph="..." />
+                <marker date="1558966728733" expanded="true" signature="152:298" ph="{...}" />
+                <marker date="1558966728733" expanded="true" signature="289:296" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableVector2Drawer.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+              <folding>
+                <marker date="1558966755144" expanded="false" signature="6:84" ph="..." />
+                <marker date="1558966755144" expanded="true" signature="152:304" ph="{...}" />
+                <marker date="1558966755144" expanded="true" signature="295:302" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SupportedDataTypes.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+              <folding>
+                <marker date="1558966282790" expanded="true" signature="70:300" ph="{...}" />
+                <marker date="1558966282790" expanded="true" signature="126:298" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -264,25 +207,33 @@
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawerHelpers.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperimentRunner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/OutputManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_Utilities/Extensions/DataFormatter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableVector2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_Utilities/SnapToOtherObject.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableBoolDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_Utilities/Delimiter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_Utilities/Extensions/StringExtension.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BML_Utilities/GuiLayoutRect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Experiment.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/DependentVariableDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/ParticipantVariableDrawer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SortedVariableContainer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/ParticipantVariableVector2Drawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_Utilities/Extensions/DataTableExtension.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentPart.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleTrial.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableVector2Drawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/DependentVariableVector2Drawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SupportedDataTypes.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableBoolDrawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableFactory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_Utilities/GuiLayoutRect.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/DependentVariableDrawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SortedVariableContainer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableVector2.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleTrial.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableVector2.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -290,7 +241,6 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SortedVariableContainer.cs" />
         <option value="$PROJECT_DIR$/../../PictoralSpaceFrame/PictoralFrameProject/Assets/BML_Utilities/Editor/Tests/RotatorTests.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableDrawer.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawerHelpers.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawer.cs" />
@@ -301,10 +251,19 @@
         <option value="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/DataFormatter.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableVector4.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SupportedDataTypes.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableVector2.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableVector2.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/DependentVariableVector2Drawer.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableVector2Drawer.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/ParticipantVariableVector2Drawer.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableFactory.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="77" />
     <option name="y" value="134" />
     <option name="width" value="1739" />
@@ -382,12 +341,12 @@
       <workItem from="1558630296555" duration="20000" />
       <workItem from="1558630465812" duration="6214000" />
       <workItem from="1558641830589" duration="1198000" />
-      <workItem from="1558963366457" duration="1753000" />
+      <workItem from="1558963366457" duration="3787000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19717000" />
+    <option name="totallyTimeSpent" value="21751000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -399,10 +358,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.65884864" visible="true" weight="0.19083156" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.65884864" visible="true" weight="0.19083156" />
       <window_info id="Structure" order="1" sideWeight="0.3411514" side_tool="true" visible="true" weight="0.19083156" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -426,7 +385,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="right" id="Errors In Solution" order="4" visible="true" weight="0.09701493" />
+      <window_info active="true" anchor="right" id="Errors In Solution" order="4" visible="true" weight="0.09701493" />
       <window_info anchor="right" id="Unit Tests Coverage" order="5" />
     </layout>
   </component>
@@ -530,27 +489,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../PictoralSpaceFrame/PictoralFrameProject/Assets/BML_Utilities/Editor/Tests/RotatorTests.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1824">
-          <caret line="104" column="67" selection-start-line="104" selection-start-column="67" selection-end-line="104" selection-end-column="67" />
-          <folding>
-            <marker date="1556205318055" expanded="false" signature="6:58" ph="..." />
-            <marker date="1556205318055" expanded="true" signature="126:7031" ph="{...}" />
-            <marker date="1556205318055" expanded="true" signature="236:7029" ph="{...}" />
-            <marker date="1556205318055" expanded="true" signature="404:482" ph="{...}" />
-            <marker date="1556205318055" expanded="true" signature="589:4798" ph="{...}" />
-            <marker date="1556205318055" expanded="true" signature="1320:1515" ph="{...}" />
-            <marker date="1556205318055" expanded="true" signature="4913:5074" ph="{...}" />
-            <marker date="1556205318055" expanded="true" signature="5192:5383" ph="{...}" />
-            <marker date="1556205318055" expanded="true" signature="5493:6043" ph="{...}" />
-            <marker date="1556205318055" expanded="true" signature="5570:5949" ph="{...}" />
-            <marker date="1556205318055" expanded="true" signature="6213:7023" ph="{...}" />
-            <marker date="1556205318055" expanded="true" signature="6882:6986" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawer.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -906,7 +844,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1157">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
           <folding>
             <marker date="1558964428500" expanded="true" signature="6:226" ph="..." />
             <marker date="1558964428500" expanded="true" signature="284:4377" ph="{...}" />
@@ -932,7 +870,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="665">
-          <caret line="35" column="1" lean-forward="true" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+          <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
           <folding>
             <marker date="1558964735287" expanded="true" signature="6:121" ph="..." />
             <marker date="1558964735287" expanded="true" signature="178:1425" ph="{...}" />
@@ -940,6 +878,136 @@
             <marker date="1558964735287" expanded="true" signature="693:1417" ph="{...}" />
             <marker date="1558964735287" expanded="true" signature="753:1063" ph="{...}" />
             <marker date="1558964735287" expanded="true" signature="1106:1407" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SupportedDataTypes.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding>
+            <marker date="1558966282790" expanded="true" signature="70:300" ph="{...}" />
+            <marker date="1558966282790" expanded="true" signature="126:298" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableVector2.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding>
+            <marker date="1558966293031" expanded="true" signature="6:32" ph="..." />
+            <marker date="1558966293031" expanded="true" signature="103:315" ph="{...}" />
+            <marker date="1558966293031" expanded="true" signature="199:313" ph="{...}" />
+            <marker date="1558966293031" expanded="true" signature="245:307" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableVector2.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding>
+            <marker date="1558966327194" expanded="false" signature="6:32" ph="..." />
+            <marker date="1558966327194" expanded="true" signature="103:309" ph="{...}" />
+            <marker date="1558966327194" expanded="true" signature="195:307" ph="{...}" />
+            <marker date="1558966327194" expanded="true" signature="239:301" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableVector2.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding>
+            <marker date="1558966351568" expanded="false" signature="6:32" ph="..." />
+            <marker date="1558966351568" expanded="true" signature="103:315" ph="{...}" />
+            <marker date="1558966351568" expanded="true" signature="199:313" ph="{...}" />
+            <marker date="1558966351568" expanded="true" signature="245:307" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/DependentVariableVector2Drawer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding>
+            <marker date="1558966728733" expanded="false" signature="6:84" ph="..." />
+            <marker date="1558966728733" expanded="true" signature="152:298" ph="{...}" />
+            <marker date="1558966728733" expanded="true" signature="289:296" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/ParticipantVariableVector2Drawer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding>
+            <marker date="1558966779331" expanded="false" signature="6:84" ph="..." />
+            <marker date="1558966779331" expanded="true" signature="152:304" ph="{...}" />
+            <marker date="1558966779331" expanded="true" signature="295:302" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableVector2Drawer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding>
+            <marker date="1558966755144" expanded="false" signature="6:84" ph="..." />
+            <marker date="1558966755144" expanded="true" signature="152:304" ph="{...}" />
+            <marker date="1558966755144" expanded="true" signature="295:302" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableFactory.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="175" column="56" lean-forward="true" selection-start-line="175" selection-start-column="56" selection-end-line="175" selection-end-column="56" />
+          <folding>
+            <marker date="1558967000627" expanded="false" signature="6:214" ph="..." />
+            <marker date="1558967000627" expanded="true" signature="271:14131" ph="{...}" />
+            <marker date="1558967000627" expanded="true" signature="327:14129" ph="{...}" />
+            <marker date="1558967000627" expanded="true" signature="493:1350" ph="IndependentVariables" />
+            <marker date="1558967000627" expanded="true" signature="1360:2183" ph="DependentVariables" />
+            <marker date="1558967000627" expanded="true" signature="2193:3174" ph="ParticipantVariables" />
+            <marker date="1558967000627" expanded="true" signature="3220:4772" ph="{...}" />
+            <marker date="1558967000627" expanded="true" signature="3238:4762" ph="{...}" />
+            <marker date="1558967000627" expanded="true" signature="4803:13710" ph="{...}" />
+            <marker date="1558967000627" expanded="true" signature="4847:13699" ph="{...}" />
+            <marker date="1558967000627" expanded="true" signature="4947:7503" ph="{...}" />
+            <marker date="1558967000627" expanded="true" signature="7643:10540" ph="{...}" />
+            <marker date="1558967000627" expanded="true" signature="10737:13517" ph="{...}" />
+            <marker date="1558967000627" expanded="true" signature="13867:14121" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <marker date="1558967059168" expanded="false" signature="6:58" ph="..." />
+            <marker date="1558967059168" expanded="true" signature="126:7345" ph="{...}" />
+            <marker date="1558967059168" expanded="true" signature="236:7343" ph="{...}" />
+            <marker date="1558967059168" expanded="true" signature="404:482" ph="{...}" />
+            <marker date="1558967059168" expanded="true" signature="589:5112" ph="{...}" />
+            <marker date="1558967059168" expanded="true" signature="1320:1515" ph="{...}" />
+            <marker date="1558967059168" expanded="true" signature="5227:5388" ph="{...}" />
+            <marker date="1558967059168" expanded="true" signature="5506:5697" ph="{...}" />
+            <marker date="1558967059168" expanded="true" signature="5807:6357" ph="{...}" />
+            <marker date="1558967059168" expanded="true" signature="5884:6263" ph="{...}" />
+            <marker date="1558967059168" expanded="true" signature="6527:7337" ph="{...}" />
+            <marker date="1558967059168" expanded="true" signature="7196:7300" ph="{...}" />
           </folding>
         </state>
       </provider>
