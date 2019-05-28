@@ -33,7 +33,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Stores the script of the custom Runner used in this Runner.
         /// Override this to customize Runner behaviour
         /// </summary>
-        protected virtual Type ExperimentType => typeof(SimpleExperiment);
+        // ReSharper disable once MemberCanBeProtected.Global
+        public virtual Type ExperimentType => typeof(SimpleExperiment);
 
         [HideInInspector]
         public bool Ended;
@@ -58,23 +59,26 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 
             }
 
+
             //check if config file is loaded
             if (VariableConfigFile == null) {
-                Debug.LogError("Design Configuration not set up properly, make sure you dragged a configDesign file into your Runner GameObject");
+                Debug.LogError("Config file not set up properly, make sure you dragged a configuration file into your Runner GameObject in the inspector");
                 ExitProgram();
                 return;
             }
+            VariableConfigFile.Validate();
 
-
-            Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, VariableConfigFile.RepeatTrialBlock, VariableConfigFile.ShuffleDifferentlyForEachBlock);
+            Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, VariableConfigFile.RepeatTrialsInBlock, VariableConfigFile.ShuffleDifferentlyForEachBlock, VariableConfigFile.RepeatAllBlocks);
             if (Design == null) {
-                Debug.Log("Design not created properly");
                 throw new NullReferenceException("Design null");
             }
 
-
             experiment = (Experiment)Activator.CreateInstance(ExperimentType, this, Design);
 
+            if (experiment == null) {
+                throw new NullReferenceException("Experiment object instance could not be created");
+            }
+            
             ExperimentEvents.InitExperiment(this);
             
         }
@@ -93,9 +97,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         void OnDisable() {
             ExperimentEvents.OnStartExperiment -= StartExperiment;
             ExperimentEvents.OnEndExperiment -= EndExperiment;
-            Design.Disable();
-            outputManager.Disable();
-            experiment.Disable();
+            Design?.Disable();
+            outputManager?.Disable();
+            experiment?.Disable();
         
         }
 
@@ -105,15 +109,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <param name="currentSession"></param>
         void StartExperiment(Session currentSession) {
             if (!FinishedInitialization) {
-                throw new NullReferenceException("Experiment started before FinishedInitialization");
+                throw new NullReferenceException("Experiment started before initialization finished");
             }
 
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);
 
-
-
-            Debug.Log("Starting Runner");
             ExperimentEvents.ExperimentStarted();
             
             StartCoroutine(VariableConfigFile.ControlSettings.Run());

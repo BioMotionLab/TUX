@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\BioMotion\.Rider2019.1\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\BioMotion\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_ExperimentalFrameworkProject.-326162388.00" t="ExcludeRecursive" />
-    <e p="C:\Users\BioMotion\Documents\GitHub\ExperimentalFramework\ExperimentalFrameworkProject" t="IncludeRecursive">
+    <e p="C:\Users\BioMotion\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_GettingStartedTutorialProject.779795943.00" t="ExcludeRecursive" />
+    <e p="C:\Users\BioMotion\Documents\GitHub\ExperimentalFramework\Documentation\Tutorials\GettingStartedTutorialProject" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -30,6 +30,9 @@
             <e p="ExperimentParts" t="Include">
               <e p="Block.cs" t="Include" />
               <e p="BlockTable.cs" t="Include" />
+              <e p="ColumnNames.cs" t="Include" />
+              <e p="ConfigDesignFile.cs" t="Include" />
+              <e p="ControlSettings.cs" t="Include" />
               <e p="Experiment.cs" t="Include" />
               <e p="ExperimentDesign.cs" t="Include" />
               <e p="ExperimentPart.cs" t="Include" />
@@ -42,6 +45,7 @@
                 <e p="SimpleExperimentRunner.cs" t="Include" />
                 <e p="SimpleTrial.cs" t="Include" />
               </e>
+              <e p="SortedVariableContainer.cs" t="Include" />
               <e p="Trial.cs" t="Include" />
               <e p="TrialTable.cs" t="Include" />
             </e>
@@ -52,10 +56,6 @@
               <e p="SessionLogger.cs" t="Include" />
               <e p="TrialSequenceRunner.cs" t="Include" />
             </e>
-            <e p="Settings" t="Include">
-              <e p="ColumnNamesSettings.cs" t="Include" />
-              <e p="ControlSettings.cs" t="Include" />
-            </e>
             <e p="UI" t="Include">
               <e p="Editor" t="Include">
                 <e p="ExperimentWindow.cs" t="Include" />
@@ -65,10 +65,8 @@
               <e p="DependentVariable.cs" t="Include" />
               <e p="IndependentVariable.cs" t="Include" />
               <e p="ParticipantVariable.cs" t="Include" />
-              <e p="SortedVariableContainer.cs" t="Include" />
               <e p="SupportedDataTypes.cs" t="Include" />
               <e p="Variable.cs" t="Include" />
-              <e p="VariableConfig.cs" t="Include" />
               <e p="VariableFactory.cs" t="Include" />
               <e p="VariableMixingType.cs" t="Include" />
               <e p="VariableTypes" t="Include">
@@ -79,7 +77,6 @@
                 <e p="DependentVariableGameObject.cs" t="Include" />
                 <e p="DependentVariableInt.cs" t="Include" />
                 <e p="DependentVariableString.cs" t="Include" />
-                <e p="DependentVariableVector2.cs" t="Include" />
                 <e p="DependentVariableVector3.cs" t="Include" />
                 <e p="IndependentVariableBool.cs" t="Include" />
                 <e p="IndependentVariableCustomDataType.cs" t="Include" />
@@ -87,7 +84,6 @@
                 <e p="IndependentVariableGameObject.cs" t="Include" />
                 <e p="IndependentVariableInt.cs" t="Include" />
                 <e p="IndependentVariableString.cs" t="Include" />
-                <e p="IndependentVariableVector2.cs" t="Include" />
                 <e p="IndependentVariableVector3.cs" t="Include" />
                 <e p="ParticipantVariableBool.cs" t="Include" />
                 <e p="ParticipantVariableCustomData.cs" t="Include" />
@@ -95,7 +91,6 @@
                 <e p="ParticipantVariableGameObject.cs" t="Include" />
                 <e p="ParticipantVariableInt.cs" t="Include" />
                 <e p="ParticipantVariableString.cs" t="Include" />
-                <e p="ParticipantVariableVector2.cs" t="Include" />
                 <e p="ParticipantVariableVector3.cs" t="Include" />
                 <e p="VariableType.cs" t="Include" />
               </e>
@@ -107,7 +102,6 @@
                 <e p="DependentVariableGameObjectDrawer.cs" t="Include" />
                 <e p="DependentVariableIntDrawer.cs" t="Include" />
                 <e p="DependentVariableStringDrawer.cs" t="Include" />
-                <e p="DependentVariableVector2Drawer.cs" t="Include" />
                 <e p="DependentVariableVector3Drawer.cs" t="Include" />
                 <e p="IndependentVariableBoolDrawer.cs" t="Include" />
                 <e p="IndependentVariableCustomDataTypeDrawer.cs" t="Include" />
@@ -116,7 +110,6 @@
                 <e p="IndependentVariableGameObjectDrawer.cs" t="Include" />
                 <e p="IndependentVariableIntDrawer.cs" t="Include" />
                 <e p="IndependentVariableStringDrawer.cs" t="Include" />
-                <e p="IndependentVariableVector2Drawer.cs" t="Include" />
                 <e p="IndependentVariableVector3Drawer.cs" t="Include" />
                 <e p="ParticipantVariableBoolDrawer.cs" t="Include" />
                 <e p="ParticipantVariableCustomDataDrawer.cs" t="Include" />
@@ -125,7 +118,6 @@
                 <e p="ParticipantVariableGameObjectDrawer.cs" t="Include" />
                 <e p="ParticipantVariableIntDrawer.cs" t="Include" />
                 <e p="ParticipantVariableStringDrawer.cs" t="Include" />
-                <e p="ParticipantVariableVector2Drawer.cs" t="Include" />
                 <e p="ParticipantVariableVector3Drawer.cs" t="Include" />
                 <e p="VariableDrawer.cs" t="Include" />
                 <e p="VariableDrawerHelpers.cs" t="Include" />
@@ -148,9 +140,6 @@
         <e p="BML_Utilities" t="Include">
           <e p="CameraAspect.cs" t="Include" />
           <e p="Delimiter.cs" t="Include" />
-          <e p="Editor" t="Include">
-            <e p="LayerAttributeEditor.cs" t="Include" />
-          </e>
           <e p="EventSystem" t="Include">
             <e p="BmlEvent.cs" t="Include" />
             <e p="BmlEventListener.cs" t="Include" />
@@ -158,7 +147,6 @@
             <e p="BmlStringEventListener.cs" t="Include" />
           </e>
           <e p="Extensions" t="Include">
-            <e p="DataFormatter.cs" t="Include" />
             <e p="DataTableExtension.cs" t="Include" />
             <e p="IntExtension.cs" t="Include" />
             <e p="ListExtension.cs" t="Include" />
@@ -173,12 +161,8 @@
             </e>
             <e p="TransformExtension.cs" t="Include" />
           </e>
-          <e p="GuiLayoutRect.cs" t="Include" />
-          <e p="LayerAttribute.cs" t="Include" />
           <e p="LowestCommonFunctions.cs" t="Include" />
           <e p="MenuNames.cs" t="Include" />
-          <e p="PlaneShaper.cs" t="Include" />
-          <e p="Rotator.cs" t="Include" />
           <e p="ScriptableObject Assets" t="Include">
             <e p="BoolValue.cs" t="Include" />
             <e p="FloatValue.cs" t="Include" />
@@ -186,12 +170,16 @@
             <e p="TextAssetToUI.cs" t="Include" />
           </e>
           <e p="SnapToOtherObject.cs" t="Include" />
-          <e p="test.cs" t="Include" />
+        </e>
+        <e p="TutorialExperiment" t="Include">
+          <e p="TutorialBlock.cs" t="Include" />
+          <e p="TutorialExperimentRunner.cs" t="Include" />
+          <e p="TutorialTrial.cs" t="Include" />
         </e>
       </e>
-      <e p="ExperimentalFrameworkProject.sln" t="IncludeFlat" />
+      <e p="GettingStartedTutorialProject.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
-      <e p="packages" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
   </component>

@@ -8,8 +8,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         String,
         Bool,
         GameObject,
+        Vector2,
         Vector3,
-        CustomDataType,
+        CustomDataType_NotYetImplemented,
         ChooseType,
+        
     }
 }

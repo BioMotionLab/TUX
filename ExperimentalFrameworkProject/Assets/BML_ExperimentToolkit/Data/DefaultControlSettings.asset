@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21b6f6d7c324dc2bf2c64bcde951264, type: 3}
   m_Name: DefaultControlSettings
   m_EditorClassIdentifier: 
-  InterruptKeys: 78000000
-  BackKeys: 7700000061000000
-  NextKeys: 7300000064000000
+  InterruptKeys: 7f000000
+  BackKeys: 1401000011010000
+  NextKeys: 1201000013010000

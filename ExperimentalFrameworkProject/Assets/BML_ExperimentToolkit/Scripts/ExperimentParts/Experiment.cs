@@ -63,7 +63,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         protected override IEnumerator RunMainCoroutine() {
             BlockSequenceRunner blockRunner = new BlockSequenceRunner(runner, design.Blocks);
             blockRunner.Start();
-            yield return null;
+            while (blockRunner.Running) {
+                yield return null;
+            }
+            
         }
 
         /// <summary>Gets the Runner as string.</summary>
@@ -76,7 +79,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 sb.AppendLine(header);
                 foreach (Block block in design.Blocks) {
                     foreach (Trial trial in block.Trials) {
-                        sb.AppendLine(trial.Data.AsString(separator: Delimiter.Comma, truncate: -1));
+                        sb.AppendLine(trial.Data.AsString(separator: Delimiter.Comma, truncateLength: -1));
                     }
                 }
 

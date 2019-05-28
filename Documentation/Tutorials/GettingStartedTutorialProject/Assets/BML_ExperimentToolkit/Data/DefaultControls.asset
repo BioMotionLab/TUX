@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a21b6f6d7c324dc2bf2c64bcde951264, type: 3}
-  m_Name: DefaultControlSettings
+  m_Name: DefaultControls
   m_EditorClassIdentifier: 
   InterruptKey: 8
   BackKey: 276
