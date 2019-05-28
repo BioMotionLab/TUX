@@ -70,13 +70,15 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, VariableConfigFile.RepeatTrialsInBlock, VariableConfigFile.ShuffleDifferentlyForEachBlock, VariableConfigFile.RepeatAllBlocks);
             if (Design == null) {
-                Debug.Log("Design not created properly");
                 throw new NullReferenceException("Design null");
             }
 
-
             experiment = (Experiment)Activator.CreateInstance(ExperimentType, this, Design);
 
+            if (experiment == null) {
+                throw new NullReferenceException("Experiment object instance could not be created");
+            }
+            
             ExperimentEvents.InitExperiment(this);
             
         }
@@ -107,15 +109,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <param name="currentSession"></param>
         void StartExperiment(Session currentSession) {
             if (!FinishedInitialization) {
-                throw new NullReferenceException("Experiment started before FinishedInitialization");
+                throw new NullReferenceException("Experiment started before initialization finished");
             }
 
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);
 
-
-
-            Debug.Log("Starting Runner");
             ExperimentEvents.ExperimentStarted();
             
             StartCoroutine(VariableConfigFile.ControlSettings.Run());

@@ -195,7 +195,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                 case SupportedDataTypes.Vector3:
                     Vector3IVs.Add(iv as IndependentVariableVector3);
                     break;
-                case SupportedDataTypes.CustomDataType:
+                case SupportedDataTypes.CustomDataType_NotYetImplemented:
                     CustomDataTypeIVs.Add(iv as IndependentVariableCustomDataType);
                     break;
                 case SupportedDataTypes.ChooseType:
@@ -233,7 +233,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                         case SupportedDataTypes.Vector3:
                             Vector3DVs.Add(dv as DependentVariableVector3);
                             break;
-                        case SupportedDataTypes.CustomDataType:
+                        case SupportedDataTypes.CustomDataType_NotYetImplemented:
                             CustomDataTypeDVs.Add(dv as DependentVariableCustomDataType);
                             break;
                         case SupportedDataTypes.ChooseType:
@@ -268,7 +268,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                         case SupportedDataTypes.Vector3:
                             Vector3ParticipantVariables.Add(pv as ParticipantVariableVector3);
                             break;
-                        case SupportedDataTypes.CustomDataType:
+                        case SupportedDataTypes.CustomDataType_NotYetImplemented:
                             CustomDataParticipantVariables.Add(pv as ParticipantVariableCustomData);
                             break;
                         case SupportedDataTypes.ChooseType:

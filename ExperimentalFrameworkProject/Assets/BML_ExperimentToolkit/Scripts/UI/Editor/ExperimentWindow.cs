@@ -297,7 +297,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                             break;
                         case SupportedDataTypes.GameObject:
                         case SupportedDataTypes.Vector3:
-                        case SupportedDataTypes.CustomDataType:
+                        case SupportedDataTypes.CustomDataType_NotYetImplemented:
                         case SupportedDataTypes.ChooseType:
                             break;
                         default:
