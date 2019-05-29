@@ -24,7 +24,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public List<string> BlockPermutationsStrings {
             get {
                 
-                if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && orderConfigs.Count > 0) {
+                if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && orderConfigs.Count == 0) {
                     return baseBlockTable.BlockPermutationsStrings;
                 }
 

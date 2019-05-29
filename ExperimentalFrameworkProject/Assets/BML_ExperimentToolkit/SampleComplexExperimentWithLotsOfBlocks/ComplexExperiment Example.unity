@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 581316273}
   - component: {fileID: 581316274}
   m_Layer: 0
-  m_Name: SimpleExperiment
+  m_Name: ComplexExperiment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d94fdbbf4931f8429360b47cbe5d070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VariableConfigFile: {fileID: 11400000, guid: 717ef8589e8e3164f9eb9ca72c0e10f3, type: 2}
+  VariableConfigFile: {fileID: 11400000, guid: d0ec2fbf8cbfb864db94093d19d8940f, type: 2}
   Ended: 0
   Running: 0
   FinishedInitialization: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   ShuffleTrialOrder: 0
   ShuffleDifferentlyForEachBlock: 0
   RepeatTrialsInBlock: 1
-  RepeatAllBlocks: 2
+  RepeatAllBlocks: 1
   Factory:
     DataTypesToCreate: 1
     VariableTypeToCreate: 0
@@ -85,3 +85,4 @@ MonoBehaviour:
   ColumnNamesSettings: {fileID: 11400000, guid: b004757e12fd66b43828570a0f83b1db,
     type: 2}
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
+  OrderConfigs: []

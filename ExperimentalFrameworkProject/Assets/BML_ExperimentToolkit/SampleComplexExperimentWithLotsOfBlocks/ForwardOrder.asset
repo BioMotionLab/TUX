@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c778f369fcf2481a977aaae21caa0804, type: 3}
-  m_Name: TestOrderConfig
+  m_Name: ForwardOrder
   m_EditorClassIdentifier: 
-  Order: 00000000000000000000000000000000
+  Order: 00000000010000000200000003000000

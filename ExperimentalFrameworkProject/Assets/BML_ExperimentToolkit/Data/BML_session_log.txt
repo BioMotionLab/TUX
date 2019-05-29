@@ -563,3 +563,8 @@ Session Logged: 2019-05-29 11:08
 ---------------------
 Session Logged: 2019-05-29 02:07
 {"outputFileName":"2019-02-28_T11-14_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":true,"OrderChosenIndex":1,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-05-29 03:09
+{"outputFileName":"2019-02-28_T11-14_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":true,"OrderChosenIndex":1,"participantId":"Unnamed"}
