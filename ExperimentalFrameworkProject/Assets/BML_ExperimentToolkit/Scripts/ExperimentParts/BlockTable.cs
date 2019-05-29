@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
@@ -32,6 +33,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             baseBlockTable = blockTable;
         }
 
+        public string AsString() {
+            return baseBlockTable.AsString();
+        }
+        
         public static implicit operator DataTable(BlockTable table) {
             return table.baseBlockTable;
         }
@@ -41,6 +46,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 List<string> blockPermutations = new List<string>();
                 int blockOrderIndex = 0;
                 if (baseBlockTable.Rows.Count == 0) return null;
+                if (baseBlockTable.Rows.Count >= 4) throw new TooManyPermutationsException();
                 foreach (List<DataRow> dataRows in baseBlockTable.GetPermutations()) {
                     StringBuilder sb = new StringBuilder();
                     sb.Append($"Order #{blockOrderIndex}:   ");
@@ -60,7 +66,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public DataRowCollection Rows => baseBlockTable.Rows;
 
 
-        public BlockTable GetBlockOrderTable(int index) {
+        public BlockTable GetBlockOrderTableFromPermutations(int index) {
 
             DataTable orderedTable = baseBlockTable.Clone();
 
@@ -74,7 +80,35 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return blockOrderTable;
         }
 
+        public BlockTable GetBlockOrderTableFromOrderConfigs(int orderChosenIndex, List<OrderConfig> orderConfigs) {
+            
+            OrderConfig chosenOrder = orderConfigs[orderChosenIndex];
+            
+            DataTable orderedTable = baseBlockTable.Clone();
+            
+            foreach (int index in chosenOrder.OrderedIndices) {
+                orderedTable.ImportRow(baseBlockTable.Rows[index]);
+            }
+            BlockTable blockOrderTable = new BlockTable(orderedTable);
+            return blockOrderTable;
+        }
     }
 
+    
+    public class TooManyPermutationsException : Exception {
+        public TooManyPermutationsException()
+        {
+        }
 
+        public TooManyPermutationsException(string message)
+            : base(message)
+        {
+        }
+
+        public TooManyPermutationsException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+    }
+    
 }

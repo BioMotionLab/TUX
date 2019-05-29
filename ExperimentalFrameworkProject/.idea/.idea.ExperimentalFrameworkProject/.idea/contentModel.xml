@@ -35,6 +35,7 @@
               <e p="ExperimentPart.cs" t="Include" />
               <e p="ExperimentRunner.cs" t="Include" />
               <e p="InvalidExperimentDesignException.cs" t="Include" />
+              <e p="OrderConfig.cs" t="Include" />
               <e p="Session.cs" t="Include" />
               <e p="SimpleExperimentParts" t="Include">
                 <e p="SimpleBlock.cs" t="Include" />

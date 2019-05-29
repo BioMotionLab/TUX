@@ -99,7 +99,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Useful for simple setup tasks that can be completed in a single frame.
         /// [Note: Called before PreCoroutine()]
         /// </summary>
-        public virtual void PreMethod() {}
+        protected virtual void PreMethod() {}
 
         /// <summary>
         /// Code that runs before this ExperimentPart.

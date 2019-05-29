@@ -12,8 +12,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public abstract class Trial : ExperimentPart {
         
 
-        // ReSharper disable once NotAccessedField.Local
-        protected readonly ExperimentRunner Runner;
         public readonly DataRow Data;
 
         public int     Index      => (int) Data[Runner.VariableConfigFile.ColumnNamesSettings.TrialIndex];
@@ -41,7 +39,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         protected Trial(ExperimentRunner runner, DataRow data) : base(runner) {
             Data = data;
-            Runner = runner;
             CompletedSuccessfully = false;
             
         }

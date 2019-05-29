@@ -19,23 +19,74 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         readonly BlockTable  baseBlockTable;
         readonly TrialTable  baseTrialTable;
 
-        public List<string> BlockPermutationsStrings => baseBlockTable.BlockPermutationsStrings;
+        public const int MaxBlockPermutationsAllowed = 3;
+
+        public List<string> BlockPermutationsStrings {
+            get {
+                
+                if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && orderConfigs.Count == 0) {
+                    return baseBlockTable.BlockPermutationsStrings;
+                }
+
+                if (orderConfigs.Count > 0) return GetBlockOrderConfigStrings();
+                
+                
+                UnityEditor.EditorApplication.isPlaying = false;
+                Application.Quit();
+                throw new NullReferenceException("There are too many block values to create a permutation table. " +
+                                                 "Possible block orders must be defined manually using OrderConfig files. " +
+                                                 "See documentation for more information");
+
+
+
+            }
+        }
+
+        List<string> GetBlockOrderConfigStrings() {
+            List<string> orderStrings = new List<string>();
+            foreach (OrderConfig orderConfig in orderConfigs) {
+                
+                if (orderConfig.Length != baseBlockTable.Rows.Count) {
+                    UnityEditor.EditorApplication.isPlaying = false;
+                    Application.Quit();
+                    throw new ArgumentException($"OrderConfig does not match length. See Below:\n" +
+                                                $"Need to adjust length of orders.\n" +
+                                                $"{orderConfig.name} should be {baseBlockTable.Rows.Count} long. Is {orderConfig.Length}\n\n" +
+                                                $"Base Table:" +
+                                                $"{baseBlockTable.AsString()}");
+                }
+                
+                string orderString = "";
+                foreach (int orderIndex in orderConfig.OrderedIndices) {
+                    string rowString = baseBlockTable.Rows[orderIndex].AsString(separator: ", ", truncateLength: -1);
+                    orderString += rowString + " > ";
+                }
+                orderStrings.Add(orderString);
+                
+                
+            }
+
+            return orderStrings;
+        }
+
+        readonly List<OrderConfig> orderConfigs;
 
         public int    TotalTrials      => Blocks.Count * baseTrialTable.NumberOfTrials;
         public int    BlockCount       => Blocks.Count;
         public string TrialTableHeader => Blocks[0].TrialTable.HeaderAsString(separator: Delimiter.Comma, truncate: -1);
 
         public bool HasBlocks => baseBlockTable.HasBlocks;
-
+        
         readonly bool shuffleTrialsBetweenBlocks;
         readonly int repeatBlocks;
         SortedVariableContainer sortedVariables;
 
         public ExperimentDesign(ExperimentRunner runner,              List<Variable> allData, bool shuffleTrialOrder,
-                                int              RepeatTrials, bool           shuffleTrialsBetweenBlocks, int repeatBlocks) {
+                                int              RepeatTrials, bool           shuffleTrialsBetweenBlocks, int repeatBlocks, List<OrderConfig> orderConfigs) {
             this.runner = runner;
             this.shuffleTrialsBetweenBlocks = shuffleTrialsBetweenBlocks;
             this.repeatBlocks = repeatBlocks;
+            this.orderConfigs = orderConfigs;
             baseBlockTable = new BlockTable(allData, this);
             baseTrialTable = new TrialTable(allData, this, baseBlockTable, shuffleTrialOrder, RepeatTrials,
                                             runner.VariableConfigFile.ColumnNamesSettings);
@@ -55,14 +106,28 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         void BlockOrderSelected(int selectedOrderIndex) {
-            OrderedBlockTable = baseBlockTable.GetBlockOrderTable(selectedOrderIndex);
+            OrderedBlockTable = GetOrderedBlockTable(selectedOrderIndex);
             CreateAndAddBlocks();
         }
 
         public DataTable GetBlockOrderTable(int sessionOrderChosenIndex) {
-            BlockTable orderedBlockTable = baseBlockTable.GetBlockOrderTable(sessionOrderChosenIndex);
+            BlockTable orderedBlockTable = GetOrderedBlockTable(sessionOrderChosenIndex);
             return orderedBlockTable;
         }
+
+        private BlockTable GetOrderedBlockTable(int OrderChosenIndex) {
+            BlockTable orderedBlockTable;
+            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed) {
+                orderedBlockTable = baseBlockTable.GetBlockOrderTableFromPermutations(OrderChosenIndex);
+            }
+            else {
+                orderedBlockTable = baseBlockTable.GetBlockOrderTableFromOrderConfigs(OrderChosenIndex, orderConfigs);
+            }
+            
+            return orderedBlockTable;
+        }
+
+        
 
         void CreateAndAddBlocks() {
             Blocks = new List<Block>();

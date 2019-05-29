@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Settings;
 using UnityEngine;
 using MenuNames = BML_Utilities.MenuNames;
@@ -22,6 +24,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
         public ColumnNamesSettings ColumnNamesSettings;
         public ControlSettings ControlSettings;
+        
+        [Header("Manual Block Order Config:")]
+        [SerializeField]
+        public List<OrderConfig> OrderConfigs = new List<OrderConfig>();
 
         public void Validate() {
             

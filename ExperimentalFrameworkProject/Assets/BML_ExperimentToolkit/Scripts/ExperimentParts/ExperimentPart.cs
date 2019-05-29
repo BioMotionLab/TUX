@@ -6,12 +6,12 @@ using UnityEngine;
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public abstract class ExperimentPart {
 
-        readonly ExperimentRunner runner;
+        protected readonly ExperimentRunner Runner;
         protected float RunTime;
         protected bool Interrupt { get; private set; }
 
         protected ExperimentPart(ExperimentRunner runner) {
-            this.runner = runner;
+            Runner = runner;
             Interrupt = false;
             Enable();
         }
@@ -26,7 +26,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             if (experimentPart != this) return;
 
-            runner.StartCoroutine(Run());
+            Runner.StartCoroutine(Run());
             Interrupt = false;
         }
         
@@ -101,7 +101,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Useful for simple setup tasks that can be completed in a single frame.
         /// [Note: Called before PreCoroutine()]
         /// </summary>
-        public virtual void PreMethod() {}
+        protected virtual void PreMethod() {}
 
         /// <summary>
         /// Code that runs before this ExperimentPart.

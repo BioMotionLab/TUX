@@ -16,7 +16,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public readonly string    Identity;
 
         public bool Complete = false;
-        ExperimentRunner runner;
+        
         public List<Trial> Trials;
 
         readonly DataRow data;
@@ -38,7 +38,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                      Type trialType,
                      DataRow dataRow) 
                         : base(runner) {
-            this.runner = runner;
             TrialTable = trialTable;
             Identity = identity;
             MakeTrials(trialType);
@@ -54,7 +53,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             Trials = new List<Trial>();
             
             foreach (DataRow row in TrialTable.Rows) {
-                Trial newTrial = (Trial)Activator.CreateInstance(trialType, runner, row);
+                Trial newTrial = (Trial)Activator.CreateInstance(trialType, Runner, row);
                 Trials.Add(newTrial);
                 
             }

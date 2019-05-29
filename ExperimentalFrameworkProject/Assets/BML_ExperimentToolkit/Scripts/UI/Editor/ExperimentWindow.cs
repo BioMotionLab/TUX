@@ -331,9 +331,16 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Block Order PromptSettings:", EditorStyles.boldLabel);
 
-                List<string> blockPermutations = runner.Design.BlockPermutationsStrings;
+                try {
+                    List<string> blockPermutations = runner.Design.BlockPermutationsStrings;
+                    session.OrderChosenIndex = EditorGUILayout.Popup(session.OrderChosenIndex, blockPermutations.ToArray());
+                }
+                catch (TooManyPermutationsException e) {
+                    Console.WriteLine(e);
+                    throw;
+                }
                 
-                session.OrderChosenIndex = EditorGUILayout.Popup(session.OrderChosenIndex, blockPermutations.ToArray());
+                
                 DataTable selectedOrderTable = runner.Design.GetBlockOrderTable(session.OrderChosenIndex);
                 
                 EditorGUILayout.Space();
