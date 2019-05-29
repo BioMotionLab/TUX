@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using BML_Utilities;
 using UnityEditor;
@@ -188,6 +189,8 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             SerializedProperty block = property.FindPropertyRelative(nameof(IndependentVariable.Block));
             EditorGUI.PropertyField(layoutRect.NextLine, block);
             
+            
+            
 
             SerializedProperty mixType =
                 property.FindPropertyRelative(nameof(IndependentVariable.MixingTypeOfVariable));
@@ -326,6 +329,16 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                                                    valuesFooterBaseRect.width - x - 15 - minusWidth - probValuesWidth,
                                                    valuesFooterBaseRect.height);
                 EditorGUI.HelpBox(noValueWarningRect, "No values", MessageType.Error);
+            }
+            
+            
+            SerializedProperty block = property.FindPropertyRelative(nameof(IndependentVariable.Block));
+            if (block.boolValue && valuesProperty.arraySize > ExperimentDesign.MaxBlockPermutationsAllowed) {
+                Rect tooManyBlockValuesWarningRect = layoutRect.NextLines(3);
+                EditorGUI.HelpBox(tooManyBlockValuesWarningRect, "Too many Block Values for automatic permutation.\n" +
+                                                                 "Must define possible Block orders manually using OrderConfig ScriptableObjects.\n" +
+                                                                 "See Docs.", 
+                                  MessageType.Warning);
             }
            
         }

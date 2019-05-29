@@ -11,7 +11,7 @@ public class TutorialBlock : Block
         : base(runner, trialTable, identity, trialType, dataRow) {
     }
 
-    public override void PreMethod() {
+    protected override void PreMethod() {
         //Get reference to custom ExperimentRunner
         TutorialExperimentRunner tutorialRunner = (TutorialExperimentRunner) runner;
 

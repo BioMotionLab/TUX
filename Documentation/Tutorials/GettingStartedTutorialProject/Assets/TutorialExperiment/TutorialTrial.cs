@@ -11,7 +11,7 @@ public class TutorialTrial : Trial
 
     TutorialExperimentRunner tutorialRunner;
 
-    public override void PreMethod() {
+    protected override void PreMethod() {
         tutorialRunner = (TutorialExperimentRunner)runner;
 
         //Get this trial's value for the Color variable

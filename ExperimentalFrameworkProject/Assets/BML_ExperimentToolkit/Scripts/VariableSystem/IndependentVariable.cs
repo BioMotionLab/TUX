@@ -26,7 +26,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             return independentVariableValuesAdderStrategy.AddVariableValuesToTable(table, this);
         }
 
-
         [SerializeField]
         public List<T> Values;
 

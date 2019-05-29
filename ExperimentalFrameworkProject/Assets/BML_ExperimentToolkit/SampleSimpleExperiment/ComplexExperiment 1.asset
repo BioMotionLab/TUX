@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
+  m_Name: ComplexExperiment 1
+  m_EditorClassIdentifier: 
+  ShuffleTrialOrder: 0
+  ShuffleDifferentlyForEachBlock: 0
+  RepeatTrialsInBlock: 1
+  RepeatAllBlocks: 1
+  Factory:
+    DataTypesToCreate: 0
+    VariableTypeToCreate: 0
+    IntIVs:
+    - Name: block2
+      TypeOfVariable: 0
+      DataType: 0
+      MixingTypeOfVariable: 0
+      Block: 1
+      Values: 0100000002000000
+      Probabilities:
+      - 0
+      - 0
+    FloatIVs:
+    - Name: float1
+      TypeOfVariable: 0
+      DataType: 1
+      MixingTypeOfVariable: 0
+      Block: 0
+      Values:
+      - 1
+      - 2
+      - 3
+      Probabilities:
+      - 0
+      - 0
+      - 0
+    - Name: float2
+      TypeOfVariable: 0
+      DataType: 1
+      MixingTypeOfVariable: 0
+      Block: 0
+      Values:
+      - 1
+      - 2
+      - 4
+      - 5
+      Probabilities:
+      - 0
+      - 0
+      - 0
+      - 0
+    - Name: blockvar
+      TypeOfVariable: 0
+      DataType: 1
+      MixingTypeOfVariable: 0
+      Block: 1
+      Values:
+      - 1
+      - 2
+      - 3
+      - 4
+      Probabilities:
+      - 0
+      - 0
+      - 0
+      - 0
+    StringIVs: []
+    BoolIVs: []
+    GameObjectIVs: []
+    Vector2IVs: []
+    Vector3IVs: []
+    CustomDataTypeIVs: []
+    IntDVs: []
+    FloatDVs: []
+    StringDVs: []
+    BoolDVs: []
+    GameObjectDVs: []
+    Vector2DVs: []
+    Vector3DVs: []
+    CustomDataTypeDVs: []
+    IntParticipantVariables: []
+    FloatParticipantVariables: []
+    StringParticipantVariables: []
+    BoolParticipantVariables: []
+    GameObjectParticipantVariables: []
+    Vector2ParticipantVariables: []
+    Vector3ParticipantVariables: []
+    CustomDataParticipantVariables: []
+  ColumnNamesSettings: {fileID: 11400000, guid: b004757e12fd66b43828570a0f83b1db,
+    type: 2}
+  ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
+  OrderConfigs:
+  - {fileID: 11400000, guid: 91f00e055df1ce54db844e2a8acd98d2, type: 2}
+  - {fileID: 11400000, guid: f6c826e5364bc684987d8df5e9e539d5, type: 2}
