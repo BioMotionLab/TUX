@@ -34,7 +34,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 UnityEditor.EditorApplication.isPlaying = false;
                 Application.Quit();
                 throw new NullReferenceException("There are too many block values to create a permutation table. " +
-                                                 "Possible block orders must be defined manually using OrderConfig files. " +
+                                                 "Block orders must be defined manually using OrderConfig files. " +
                                                  "See documentation for more information");
 
 
@@ -49,9 +49,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 if (orderConfig.Length != baseBlockTable.Rows.Count) {
                     UnityEditor.EditorApplication.isPlaying = false;
                     Application.Quit();
-                    throw new ArgumentException($"OrderConfig does not match length. See Below:\n" +
+                    throw new ArgumentException($"OrderConfig file does not match length. See Below:\n" +
                                                 $"Need to adjust length of orders.\n" +
-                                                $"{orderConfig.name} should be {baseBlockTable.Rows.Count} long. Is {orderConfig.Length}\n\n" +
+                                                $"{orderConfig.name} should be {baseBlockTable.Rows.Count} long. But is {orderConfig.Length}\n\n" +
                                                 $"Base Table:" +
                                                 $"{baseBlockTable.AsString()}");
                 }

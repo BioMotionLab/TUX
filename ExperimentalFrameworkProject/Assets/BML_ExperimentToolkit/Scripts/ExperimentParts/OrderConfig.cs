@@ -15,7 +15,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     if (Order.Contains(i)) continue;
                     UnityEditor.EditorApplication.isPlaying = false;
                     Application.Quit();
-                    throw new MissingIndexException($"OrderConfig named: |{this.name}| is missing index {i}");
+                    throw new MissingIndexException($"OrderConfig named: |{this.name}| is missing index {i}\n" +
+                                                    $"The Order Config should be the order of indexes, not values. So it should start at zero\n" +
+                                                    $"and end at n, where n is the number of values");
                 }
 
                 return Order;
