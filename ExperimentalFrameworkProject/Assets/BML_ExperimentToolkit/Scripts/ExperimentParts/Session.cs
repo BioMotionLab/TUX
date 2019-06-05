@@ -74,7 +74,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
 
-        public int    OrderChosenIndex;
+        public int    OrderChosenIndex = 0;
 
         [SerializeField]
         // ReSharper disable once InconsistentNaming
