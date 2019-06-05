@@ -82,6 +82,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
         void InitWindow(ExperimentRunner runnerToInit) {
             session = Session.LoadSessionData();
+            session.OrderChosenIndex = 0;
             currentBlockIndex = -1;
             currentTrialIndex = -1;
             runner = runnerToInit;
@@ -333,7 +334,13 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
                 try {
                     List<string> blockPermutations = runner.Design.BlockPermutationsStrings;
-                    session.OrderChosenIndex = EditorGUILayout.Popup(session.OrderChosenIndex, blockPermutations.ToArray());
+                    if (blockPermutations.Count == 1) {
+                        session.BlockChosen = true;
+                        session.OrderChosenIndex = 0;
+                    }
+                    else {
+                        session.OrderChosenIndex = EditorGUILayout.Popup(session.OrderChosenIndex, blockPermutations.ToArray());
+                    }
                 }
                 catch (TooManyPermutationsException e) {
                     Console.WriteLine(e);

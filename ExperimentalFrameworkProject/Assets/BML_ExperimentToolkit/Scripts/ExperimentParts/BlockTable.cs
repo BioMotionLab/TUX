@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Text;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using BML_Utilities.Extensions;
+using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
     public class BlockTable {
 
         readonly DataTable baseBlockTable;
-
+        ExperimentDesign design;
+        BlockTable currentOrderedTable;
+        int currentOrderedTableIndex = -1;
+        
         public BlockTable(List<Variable> allData, ExperimentDesign design) {
 
+            this.design = design;
             //Get block Variables
             List<Variable> blockVariables = new List<Variable>();
             foreach (Variable datum in allData) {
@@ -81,15 +87,23 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         public BlockTable GetBlockOrderTableFromOrderConfigs(int orderChosenIndex, List<OrderConfig> orderConfigs) {
+ 
+            if (orderChosenIndex > orderConfigs.Count- 1) throw new IndexOutOfRangeException($"Index chosen is {orderChosenIndex}, but count is {orderConfigs.Count}");
             
             OrderConfig chosenOrder = orderConfigs[orderChosenIndex];
+
+            if (chosenOrder.Randomize && currentOrderedTableIndex == orderChosenIndex) {
+                return currentOrderedTable;
+            } 
             
             DataTable orderedTable = baseBlockTable.Clone();
-            
+
             foreach (int index in chosenOrder.OrderedIndices) {
                 orderedTable.ImportRow(baseBlockTable.Rows[index]);
             }
             BlockTable blockOrderTable = new BlockTable(orderedTable);
+            currentOrderedTable = blockOrderTable;
+            currentOrderedTableIndex = orderChosenIndex;
             return blockOrderTable;
         }
     }

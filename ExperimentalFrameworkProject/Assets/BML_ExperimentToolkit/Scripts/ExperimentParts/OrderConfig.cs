@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BML_Utilities.Extensions;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
@@ -9,6 +10,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         [Header("Add indexes of block table in desired order")]
         private List<int> Order = new List<int>();
 
+        [Tooltip("Check this to randomize block order. Still type in required indexes.")]
+        public bool Randomize;
+        
         public List<int> OrderedIndices {
             get {
                 for (int i = 0; i < Order.Count; i++) {
@@ -20,7 +24,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                                                     $"and end at n, where n is the number of values");
                 }
 
-                return Order;
+                List<int> orderedIndices = Randomize ? Order.ShuffledCopy() : Order;
+                return orderedIndices;
             }
             
         }

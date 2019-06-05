@@ -55,14 +55,18 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                                                 $"Base Table:" +
                                                 $"{baseBlockTable.AsString()}");
                 }
-                
-                string orderString = "";
-                foreach (int orderIndex in orderConfig.OrderedIndices) {
-                    string rowString = baseBlockTable.Rows[orderIndex].AsString(separator: ", ", truncateLength: -1);
-                    orderString += rowString + " > ";
+
+                if (orderConfig.Randomize) {
+                    orderStrings.Add("Randomize");
                 }
-                orderStrings.Add(orderString);
-                
+                else {
+                    string orderString = "";
+                    foreach (int orderIndex in orderConfig.OrderedIndices) {
+                        string rowString = baseBlockTable.Rows[orderIndex].AsString(separator: ", ", truncateLength: -1);
+                        orderString += rowString + " > ";
+                    }
+                    orderStrings.Add(orderString); 
+                }
                 
             }
 
