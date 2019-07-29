@@ -20,5 +20,8 @@ namespace BML_ExperimentToolkit.Extras.Instructions {
             TextBox.text = string.Empty;
             Container.SetActive(false);
         }
+
+        public void Test() {
+        }
     }
 }

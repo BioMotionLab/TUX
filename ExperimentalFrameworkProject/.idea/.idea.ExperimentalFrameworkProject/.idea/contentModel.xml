@@ -16,7 +16,7 @@
               <e p="BlackCamera.cs" t="Include" />
             </e>
             <e p="Instructions" t="Include">
-              <e p="InstructionsDisply.cs" t="Include" />
+              <e p="InstructionsDisplay.cs" t="Include" />
             </e>
             <e p="StandHerePrompt" t="Include">
               <e p="DestinationMarker.cs" t="Include" />
