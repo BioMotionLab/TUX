@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22ea5ef4-e322-4ce5-98ba-7ef8faef5429" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/SetRecursiveLayer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/SetRecursiveLayer.cs.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,43 +16,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentPart.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
-              <folding>
-                <marker date="1559157079517" expanded="true" signature="6:90" ph="..." />
-                <marker date="1559157079517" expanded="true" signature="149:4629" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="192:4627" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="394:487" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="511:577" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="773:907" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="925:1075" ph="/// Start running the code that occurs before the main part of the Runner ... " />
-                <marker date="1559157079517" expanded="true" signature="1112:1372" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="1461:1877" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="1943:2211" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="1986:2201" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="2019:2139" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="2221:2370" ph="/// Start running the code that occurs after the main part of the Runner ... " />
-                <marker date="1559157079517" expanded="true" signature="2408:2699" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="2753:2764" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="2818:2829" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="2839:3111" ph="/// Code that runs before this ExperimentPart. ... " />
-                <marker date="1559157079517" expanded="true" signature="3167:3563" ph="/// Code that runs before this ExperimentPart. ... " />
-                <marker date="1559157079517" expanded="true" signature="3617:3659" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="3670:4069" ph="/// Code that runs after this ExperimentPart. ... " />
-                <marker date="1559157079517" expanded="true" signature="4124:4166" ph="{...}" />
-                <marker date="1559157079517" expanded="true" signature="4176:4492" ph="/// Code that runs after each block. Overwrite this for custom behaviour. ... " />
-                <marker date="1559157079517" expanded="true" signature="4580:4621" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
+            <state relative-caret-position="-19">
               <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
               <folding>
                 <marker date="1559157079521" expanded="true" signature="6:208" ph="..." />
@@ -151,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="224">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
               <folding>
                 <marker date="1564421843475" expanded="true" signature="6:95" ph="..." />
                 <marker date="1564421843475" expanded="true" signature="149:1094" ph="{...}" />
@@ -165,6 +134,32 @@
                 <marker date="1564421843475" expanded="true" signature="638:750" ph="{...}" />
                 <marker date="1564421843475" expanded="true" signature="811:911" ph="{...}" />
                 <marker date="1564421843475" expanded="true" signature="974:1072" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/BML_Utilities/PackageBuilder/PackageBuilder.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <marker date="1564421994166" expanded="false" signature="6:137" ph="..." />
+                <marker date="1564421994166" expanded="true" signature="178:3772" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="194:310" ph="/// Tool for automatically building unitypackages from folders in your project. ... " />
+                <marker date="1564421994166" expanded="true" signature="384:3038" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="844:1150" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="862:1140" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="1160:1256" ph="/// Exports the specified folders as a unitypackage ... " />
+                <marker date="1564421994166" expanded="true" signature="1293:1735" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="1788:1995" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="2047:2581" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="2644:3032" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="2865:2995" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="2929:2981" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="3092:3561" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="3398:3555" ph="{...}" />
+                <marker date="1564421994166" expanded="true" signature="3618:3770" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -202,7 +197,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BlockTable.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1311">
+            <state relative-caret-position="1140">
               <caret line="95" column="43" selection-start-line="95" selection-start-column="43" selection-end-line="95" selection-end-column="43" />
               <folding>
                 <marker date="1559757658332" expanded="false" signature="6:283" ph="..." />
@@ -236,7 +231,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1064">
+            <state relative-caret-position="912">
               <caret line="84" column="41" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
               <folding>
                 <marker date="1559757658335" expanded="false" signature="6:391" ph="..." />
@@ -307,7 +302,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2052">
+            <state relative-caret-position="1843">
               <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
               <folding>
                 <marker date="1559757658334" expanded="false" signature="6:95" ph="..." />
@@ -352,7 +347,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Assets/BML_Utilities" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawerHelpers.cs" root0="FORCE_HIGHLIGHTING" />
@@ -394,6 +389,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/DependentVariableDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SortedVariableContainer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableVector2.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_Utilities/PackageBuilder/PackageBuilder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleTrial.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableVector2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/BlockSequenceRunner.cs" root0="FORCE_HIGHLIGHTING" />
@@ -435,6 +431,7 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/OrderConfig.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_Utilities/SetRecursiveLayer.cs" />
       </list>
     </option>
   </component>
@@ -522,12 +519,12 @@
       <workItem from="1559569003219" duration="280000" />
       <workItem from="1559754528797" duration="2987000" />
       <workItem from="1564421424384" duration="63000" />
-      <workItem from="1564421521965" duration="325000" />
+      <workItem from="1564421521965" duration="701000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53085000" />
+    <option name="totallyTimeSpent" value="53461000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1239,7 +1236,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
+        <state relative-caret-position="-19">
           <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
           <folding>
             <marker date="1559157079521" expanded="true" signature="6:208" ph="..." />
@@ -1363,7 +1360,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BlockTable.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
+        <state relative-caret-position="1140">
           <caret line="95" column="43" selection-start-line="95" selection-start-column="43" selection-end-line="95" selection-end-column="43" />
           <folding>
             <marker date="1559757658332" expanded="false" signature="6:283" ph="..." />
@@ -1395,7 +1392,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1064">
+        <state relative-caret-position="912">
           <caret line="84" column="41" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
           <folding>
             <marker date="1559757658335" expanded="false" signature="6:391" ph="..." />
@@ -1464,7 +1461,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2052">
+        <state relative-caret-position="1843">
           <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
           <folding>
             <marker date="1559757658334" expanded="false" signature="6:95" ph="..." />
@@ -1499,10 +1496,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_Utilities/SetRecursiveLayer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
           <folding>
             <marker date="1564421843475" expanded="true" signature="6:95" ph="..." />
             <marker date="1564421843475" expanded="true" signature="149:1094" ph="{...}" />
@@ -1512,6 +1516,30 @@
             <marker date="1564421843475" expanded="true" signature="638:750" ph="{...}" />
             <marker date="1564421843475" expanded="true" signature="811:911" ph="{...}" />
             <marker date="1564421843475" expanded="true" signature="974:1072" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_Utilities/PackageBuilder/PackageBuilder.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <marker date="1564421994166" expanded="false" signature="6:137" ph="..." />
+            <marker date="1564421994166" expanded="true" signature="178:3772" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="194:310" ph="/// Tool for automatically building unitypackages from folders in your project. ... " />
+            <marker date="1564421994166" expanded="true" signature="384:3038" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="844:1150" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="862:1140" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="1160:1256" ph="/// Exports the specified folders as a unitypackage ... " />
+            <marker date="1564421994166" expanded="true" signature="1293:1735" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="1788:1995" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="2047:2581" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="2644:3032" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="2865:2995" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="2929:2981" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="3092:3561" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="3398:3555" ph="{...}" />
+            <marker date="1564421994166" expanded="true" signature="3618:3770" ph="{...}" />
           </folding>
         </state>
       </provider>
