@@ -1,27 +1,42 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace BML_ExperimentToolkit.Extras.Instructions {
     public class InstructionsDisplay : MonoBehaviour {
 
         public Text       TextBox;
-        public GameObject Container;
+        public GameObject DisplayGameObject;
 
         void Start() {
             HideInstructions();
         }
 
+        [PublicAPI]
         public void ShowInstructions(string instructions) {
             TextBox.text = instructions;
-            Container.SetActive(true);
+            DisplayGameObject.SetActive(true);
         }
 
+        [PublicAPI]
+        public void ShowInstructionsForDuration(string instructions, float duration) {
+            ShowInstructions(instructions);
+            StartCoroutine(HideAfterSeconds(duration));
+
+        }
+
+        [PublicAPI]
         public void HideInstructions() {
             TextBox.text = string.Empty;
-            Container.SetActive(false);
+            DisplayGameObject.SetActive(false);
         }
-
-        public void Test() {
+        
+        IEnumerator HideAfterSeconds(float duration) {
+            yield return new WaitForSeconds(duration);
+            HideInstructions();
         }
+        
     }
+    
 }

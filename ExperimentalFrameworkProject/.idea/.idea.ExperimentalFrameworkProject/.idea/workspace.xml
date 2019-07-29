@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22ea5ef4-e322-4ce5-98ba-7ef8faef5429" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisply.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisply.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/Packages-Update.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/Packages-Update.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +15,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentPart.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
+            <state relative-caret-position="114">
               <caret line="7" selection-start-line="7" selection-end-line="7" />
               <folding>
                 <marker date="1559157079517" expanded="true" signature="6:90" ph="..." />
@@ -57,7 +49,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
+            <state relative-caret-position="494">
               <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
               <folding>
                 <marker date="1559157079521" expanded="true" signature="6:208" ph="..." />
@@ -162,15 +154,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="13" column="59" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
+            <state relative-caret-position="224">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
               <folding>
-                <marker date="1556130267947" expanded="false" signature="6:40" ph="..." />
-                <marker date="1556130267947" expanded="true" signature="94:581" ph="{...}" />
-                <marker date="1556130267947" expanded="true" signature="149:579" ph="{...}" />
-                <marker date="1556130267947" expanded="true" signature="246:289" ph="{...}" />
-                <marker date="1556130267947" expanded="true" signature="349:440" ph="{...}" />
-                <marker date="1556130267947" expanded="true" signature="481:573" ph="{...}" />
+                <marker date="1564421843475" expanded="true" signature="6:95" ph="..." />
+                <marker date="1564421843475" expanded="true" signature="149:1094" ph="{...}" />
+                <marker date="1564421843475" expanded="true" signature="204:1087" ph="{...}" />
+                <marker date="1564421843475" expanded="true" signature="309:352" ph="{...}" />
+                <marker date="1564421843475" expanded="true" signature="432:531" ph="{...}" />
+                <marker date="1564421843475" expanded="true" signature="638:750" ph="{...}" />
+                <marker date="1564421843475" expanded="true" signature="811:911" ph="{...}" />
+                <marker date="1564421843475" expanded="true" signature="974:1072" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -208,7 +202,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BlockTable.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1482">
+            <state relative-caret-position="1311">
               <caret line="95" column="43" selection-start-line="95" selection-start-column="43" selection-end-line="95" selection-end-column="43" />
               <folding>
                 <marker date="1559757658332" expanded="false" signature="6:283" ph="..." />
@@ -242,7 +236,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1216">
+            <state relative-caret-position="1064">
               <caret line="84" column="41" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
               <folding>
                 <marker date="1559757658335" expanded="false" signature="6:391" ph="..." />
@@ -313,7 +307,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2261">
+            <state relative-caret-position="2052">
               <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
               <folding>
                 <marker date="1559757658334" expanded="false" signature="6:95" ph="..." />
@@ -440,6 +434,7 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/OrderConfig.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs" />
       </list>
     </option>
   </component>
@@ -457,10 +452,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <option name="show-all-files" value="false" />
       </pane>
+      <pane id="FileSystemExplorer" />
       <pane id="AssemblyExplorer" />
       <pane id="UnityExplorer">
         <option name="show-hidden-items" value="false" />
@@ -527,11 +522,12 @@
       <workItem from="1559569003219" duration="280000" />
       <workItem from="1559754528797" duration="2987000" />
       <workItem from="1564421424384" duration="63000" />
+      <workItem from="1564421521965" duration="325000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52760000" />
+    <option name="totallyTimeSpent" value="53085000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -544,9 +540,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.37033084" visible="true" weight="0.0990943" />
-      <window_info active="true" id="Structure" order="1" sideWeight="0.62966913" side_tool="true" visible="true" weight="0.0990943" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.36926362" visible="true" weight="0.10015983" />
+      <window_info active="true" id="Structure" order="1" sideWeight="0.6307364" side_tool="true" visible="true" weight="0.10015983" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
@@ -1210,7 +1207,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentPart.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
+        <state relative-caret-position="114">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <marker date="1559157079517" expanded="true" signature="6:90" ph="..." />
@@ -1242,10 +1239,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
+        <state relative-caret-position="494">
           <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
           <folding>
             <marker date="1559157079521" expanded="true" signature="6:208" ph="..." />
+            <marker date="1559157079521" expanded="true" signature="265:1793" ph="{...}" />
             <marker date="1559157079521" expanded="true" signature="413:1791" ph="{...}" />
             <marker date="1559157079521" expanded="true" signature="1061:1785" ph="{...}" />
             <marker date="1559157079521" expanded="true" signature="1121:1431" ph="{...}" />
@@ -1310,9 +1308,28 @@
         <state>
           <folding>
             <marker date="1556205318052" expanded="false" signature="6:37" ph="..." />
+            <marker date="1556205318052" expanded="true" signature="105:656" ph="{...}" />
             <marker date="1556205318052" expanded="true" signature="111:208" ph="/// A custom drawer to edit variables ... " />
             <marker date="1556205318052" expanded="true" signature="258:654" ph="{...}" />
             <marker date="1556205318052" expanded="true" signature="415:648" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/OrderConfig.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <marker date="1559757658334" expanded="false" signature="6:98" ph="..." />
+            <marker date="1559757658334" expanded="true" signature="156:1662" ph="{...}" />
+            <marker date="1559757658334" expanded="true" signature="228:1660" ph="{...}" />
+            <marker date="1559757658334" expanded="true" signature="541:1321" ph="{...}" />
+            <marker date="1559757658334" expanded="true" signature="559:1298" ph="{...}" />
+            <marker date="1559757658334" expanded="true" signature="615:1159" ph="{...}" />
+            <marker date="1559757658334" expanded="true" signature="1417:1477" ph="{...}" />
+            <marker date="1559757658334" expanded="true" signature="1527:1645" ph="{...}" />
+            <marker date="1559757658334" expanded="true" signature="1619:1634" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1346,7 +1363,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BlockTable.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1482">
+        <state relative-caret-position="1311">
           <caret line="95" column="43" selection-start-line="95" selection-start-column="43" selection-end-line="95" selection-end-column="43" />
           <folding>
             <marker date="1559757658332" expanded="false" signature="6:283" ph="..." />
@@ -1378,7 +1395,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1216">
+        <state relative-caret-position="1064">
           <caret line="84" column="41" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
           <folding>
             <marker date="1559757658335" expanded="false" signature="6:391" ph="..." />
@@ -1447,7 +1464,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2261">
+        <state relative-caret-position="2052">
           <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
           <folding>
             <marker date="1559757658334" expanded="false" signature="6:95" ph="..." />
@@ -1482,35 +1499,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/OrderConfig.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-          <folding>
-            <marker date="1559757658334" expanded="false" signature="6:98" ph="..." />
-            <marker date="1559757658334" expanded="true" signature="156:1662" ph="{...}" />
-            <marker date="1559757658334" expanded="true" signature="228:1660" ph="{...}" />
-            <marker date="1559757658334" expanded="true" signature="541:1321" ph="{...}" />
-            <marker date="1559757658334" expanded="true" signature="559:1298" ph="{...}" />
-            <marker date="1559757658334" expanded="true" signature="615:1159" ph="{...}" />
-            <marker date="1559757658334" expanded="true" signature="1417:1477" ph="{...}" />
-            <marker date="1559757658334" expanded="true" signature="1527:1645" ph="{...}" />
-            <marker date="1559757658334" expanded="true" signature="1619:1634" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="13" column="59" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
+        <state relative-caret-position="224">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
           <folding>
-            <marker date="1556130267947" expanded="false" signature="6:40" ph="..." />
-            <marker date="1556130267947" expanded="true" signature="94:581" ph="{...}" />
-            <marker date="1556130267947" expanded="true" signature="149:579" ph="{...}" />
-            <marker date="1556130267947" expanded="true" signature="246:289" ph="{...}" />
-            <marker date="1556130267947" expanded="true" signature="349:440" ph="{...}" />
-            <marker date="1556130267947" expanded="true" signature="481:573" ph="{...}" />
+            <marker date="1564421843475" expanded="true" signature="6:95" ph="..." />
+            <marker date="1564421843475" expanded="true" signature="149:1094" ph="{...}" />
+            <marker date="1564421843475" expanded="true" signature="204:1087" ph="{...}" />
+            <marker date="1564421843475" expanded="true" signature="309:352" ph="{...}" />
+            <marker date="1564421843475" expanded="true" signature="432:531" ph="{...}" />
+            <marker date="1564421843475" expanded="true" signature="638:750" ph="{...}" />
+            <marker date="1564421843475" expanded="true" signature="811:911" ph="{...}" />
+            <marker date="1564421843475" expanded="true" signature="974:1072" ph="{...}" />
           </folding>
         </state>
       </provider>
