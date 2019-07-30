@@ -202,6 +202,7 @@
             <e p="StringValue.cs" t="Include" />
             <e p="TextAssetToUI.cs" t="Include" />
           </e>
+          <e p="SetRecursiveLayer.cs" t="Include" />
           <e p="SnapToOtherObject.cs" t="Include" />
           <e p="TestingUtilities" t="Include">
             <e p="AssertUtilities.cs" t="Include" />
