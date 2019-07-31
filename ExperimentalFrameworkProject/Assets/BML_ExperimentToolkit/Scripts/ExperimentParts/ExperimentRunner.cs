@@ -43,10 +43,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public bool Running;
 
         [HideInInspector]
-        public bool FinishedInitialization;
-
-        [HideInInspector]
         public bool WindowOpen = false;
+
+        public Session Session { get; private set; }
 
         void Start() {
 
@@ -83,6 +82,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 throw new NullReferenceException("Experiment object instance could not be created");
             }
             
+            Session = Session.LoadSessionData();
             ExperimentEvents.InitExperiment(this);
             
         }
@@ -112,9 +112,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <param name="currentSession"></param>
         void StartExperiment(Session currentSession) {
-            if (!FinishedInitialization) {
-                throw new NullReferenceException("Experiment started before initialization finished");
-            }
 
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);
