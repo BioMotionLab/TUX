@@ -6,5 +6,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
         public ParticipantVariableBool() {
             DataType = SupportedDataTypes.Bool;
         }
+
+        public override void SelectValue(string value) {
+            Value = Convert.ToBoolean(value);
+        }
     }
 }

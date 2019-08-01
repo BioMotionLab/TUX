@@ -17,8 +17,8 @@ MonoBehaviour:
   RepeatTrialsInBlock: 1
   RepeatAllBlocks: 1
   Factory:
-    DataTypesToCreate: 1
-    VariableTypeToCreate: 0
+    DataTypesToCreate: 0
+    VariableTypeToCreate: 2
     IntIVs: []
     FloatIVs:
     - Name: float1
@@ -78,9 +78,23 @@ MonoBehaviour:
     Vector2DVs: []
     Vector3DVs: []
     CustomDataTypeDVs: []
-    IntParticipantVariables: []
+    IntParticipantVariables:
+    - Name: ParticipantID
+      TypeOfVariable: 2
+      DataType: 0
+      Value: 0
+      ConstrainValues: 0
+      PossibleValues: 
     FloatParticipantVariables: []
-    StringParticipantVariables: []
+    StringParticipantVariables:
+    - Name: Sex
+      TypeOfVariable: 2
+      DataType: 2
+      Value: 
+      ConstrainValues: 1
+      PossibleValues:
+      - Male
+      - Female
     BoolParticipantVariables: []
     GameObjectParticipantVariables: []
     Vector2ParticipantVariables: []

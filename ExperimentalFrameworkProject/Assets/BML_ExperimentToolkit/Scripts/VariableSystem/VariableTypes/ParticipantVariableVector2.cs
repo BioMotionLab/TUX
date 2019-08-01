@@ -7,5 +7,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
         public ParticipantVariableVector2() {
             DataType = SupportedDataTypes.Vector2;
         }
+
+        public override void SelectValue(string value) {
+            throw new NotImplementedException();
+        }
     }
 }

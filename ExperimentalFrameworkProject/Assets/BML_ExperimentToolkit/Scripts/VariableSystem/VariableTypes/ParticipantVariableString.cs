@@ -6,5 +6,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
         public ParticipantVariableString() {
             DataType = SupportedDataTypes.String;
         }
+
+        public override void SelectValue(string value) {
+            Value = value;
+        }
     }
 }

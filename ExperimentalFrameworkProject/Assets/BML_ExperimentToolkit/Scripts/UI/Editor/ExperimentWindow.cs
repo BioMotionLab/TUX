@@ -248,8 +248,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             
-
-
+            
             EditorGUILayout.LabelField("Fill In Participant Variables:", EditorStyles.boldLabel);
             List<Variable> variables = runner.VariableConfigFile.Factory.AllVariables;
 

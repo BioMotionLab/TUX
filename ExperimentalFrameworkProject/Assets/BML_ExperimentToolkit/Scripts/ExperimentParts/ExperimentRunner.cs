@@ -1,6 +1,7 @@
 ﻿using System;
 using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
+using BML_ExperimentToolkit.Scripts.UI;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
 using UnityEngine;
@@ -11,7 +12,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public VariableConfig VariableConfigFile;
 
         public ExperimentDesign Design;
-
+        
+        [SerializeField]
+        ExperimentGui gui = default;
+        
         OutputManager outputManager;
 
 
@@ -49,15 +53,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         void Start() {
 
-            ExperimentEvents.CheckMainWindowIsOpen(this);
-            if (!WindowOpen) {
-                    throw new InvalidOperationException(
-                         $"Can't run experiment unless Experiment window is open" +
-                                $"\nPlease open {MenuNames.BmlMainMenu} Menu and open " +
-                                $"the main runner window");
-                
-            }
-
+            
 
             //check if config file is loaded
             if (VariableConfigFile == null) {
@@ -66,6 +62,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 return;
             }
             VariableConfigFile.Validate();
+            
+            
 
             Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, 
                                                         VariableConfigFile.RepeatTrialsInBlock, 
@@ -83,7 +81,16 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
             
             Session = Session.LoadSessionData();
+            if (Session == null) {
+                throw new NullReferenceException("Session nul and not created properly");
+            }
+            
+            if (gui != null) {
+                gui.RegisterExperiment(this);
+            }
+            
             ExperimentEvents.InitExperiment(this);
+            
             
         }
 

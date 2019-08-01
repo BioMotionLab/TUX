@@ -6,5 +6,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
         public ParticipantVariableFloat() {
             DataType = SupportedDataTypes.Float;
         }
+
+        public override void SelectValue(string value) {
+            Value = Convert.ToSingle(value);
+        }
     }
 }

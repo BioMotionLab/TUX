@@ -61,6 +61,8 @@
               <e p="Editor" t="Include">
                 <e p="ExperimentWindow.cs" t="Include" />
               </e>
+              <e p="ExperimentGUI.cs" t="Include" />
+              <e p="ParticipantVariableEntry.cs" t="Include" />
             </e>
             <e p="VariableSystem" t="Include">
               <e p="DependentVariable.cs" t="Include" />
