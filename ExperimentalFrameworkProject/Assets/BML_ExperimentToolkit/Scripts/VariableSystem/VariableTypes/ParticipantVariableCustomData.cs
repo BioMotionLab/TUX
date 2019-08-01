@@ -6,5 +6,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
         public ParticipantVariableCustomData() {
             DataType = SupportedDataTypes.CustomDataType_NotYetImplemented;
         }
+
+        public override void SelectValue(string value) {
+            throw new NotImplementedException();
+        }
     }
 }

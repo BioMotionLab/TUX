@@ -110,10 +110,10 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
         public delegate void StartExperimentEvent(Session session);
 
-        public static event StartExperimentEvent OnStartExperiment;
+        public static event StartExperimentEvent OnStartRunningExperiment;
 
-        public static void StartExperiment(Session session) {
-            OnStartExperiment?.Invoke(session);
+        public static void StartRunningExperiment(Session session) {
+            OnStartRunningExperiment?.Invoke(session);
         }
 
         public delegate void ExperimentStartedEvent();

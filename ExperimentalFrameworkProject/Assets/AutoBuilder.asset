@@ -15,9 +15,11 @@ MonoBehaviour:
   Folders:
   - {fileID: 102900000, guid: 8a38113dee9962f4ba4c34c9bb0b1f5b, type: 3}
   - {fileID: 102900000, guid: 15bc3b7fd893fe1499631ead55f3ea6f, type: 3}
+  - {fileID: 102900000, guid: f54d1bd14bd3ca042bd867b519fee8cc, type: 3}
   FolderPaths:
   - Assets/BML_ExperimentToolkit
   - Assets/BML_Utilities
+  - Assets/TextMesh Pro
   ExportPath: C:/Users/BioMotion/Documents/GitHub/ExperimentalFramework/Releases
   PackageName: BML_ExperimentToolkit
-  Version: 0.7.6b
+  Version: 0.8.0b

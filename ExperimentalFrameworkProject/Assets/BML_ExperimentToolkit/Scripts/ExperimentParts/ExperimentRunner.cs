@@ -1,6 +1,7 @@
 ﻿using System;
 using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
+using BML_ExperimentToolkit.Scripts.UI;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
 using UnityEngine;
@@ -13,7 +14,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public ExperimentDesign Design;
 
         OutputManager outputManager;
-
 
         Experiment experiment;
 
@@ -43,22 +43,20 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public bool Running;
 
         [HideInInspector]
-        public bool FinishedInitialization;
-
-        [HideInInspector]
         public bool WindowOpen = false;
+
+        ExperimentGui gui;
+
+        public Session Session { get; private set; }
 
         void Start() {
 
+            #if UNITY_EDITOR
+            
             ExperimentEvents.CheckMainWindowIsOpen(this);
-            if (!WindowOpen) {
-                    throw new InvalidOperationException(
-                         $"Can't run experiment unless Experiment window is open" +
-                                $"\nPlease open {MenuNames.BmlMainMenu} Menu and open " +
-                                $"the main runner window");
-                
-            }
 
+            #endif
+            
 
             //check if config file is loaded
             if (VariableConfigFile == null) {
@@ -67,6 +65,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 return;
             }
             VariableConfigFile.Validate();
+            
+            
 
             Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, 
                                                         VariableConfigFile.RepeatTrialsInBlock, 
@@ -83,23 +83,38 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 throw new NullReferenceException("Experiment object instance could not be created");
             }
             
+            Session = Session.LoadSessionData();
+            if (Session == null) {
+                throw new NullReferenceException("Session nul and not created properly");
+            }
+            
+            if (!WindowOpen) {
+                gui = Instantiate(VariableConfigFile.GuiSettings.GuiPrefab);
+                gui.gameObject.SetActive(true);
+                gui.RegisterExperiment(this);
+            }
+            
+            
             ExperimentEvents.InitExperiment(this);
+            
             
         }
 
         static void ExitProgram() {
+            #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
+            #endif
             Application.Quit();
         }
 
         void OnEnable() {
-            ExperimentEvents.OnStartExperiment += StartExperiment;
+            ExperimentEvents.OnStartRunningExperiment += StartRunningRunningExperiment;
             ExperimentEvents.OnEndExperiment += EndExperiment;
 
         }
 
         void OnDisable() {
-            ExperimentEvents.OnStartExperiment -= StartExperiment;
+            ExperimentEvents.OnStartRunningExperiment -= StartRunningRunningExperiment;
             ExperimentEvents.OnEndExperiment -= EndExperiment;
             Design?.Disable();
             outputManager?.Disable();
@@ -111,10 +126,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Starts the Runner. The Runner does not start automatically, because it waits for an event to start it.
         /// </summary>
         /// <param name="currentSession"></param>
-        void StartExperiment(Session currentSession) {
-            if (!FinishedInitialization) {
-                throw new NullReferenceException("Experiment started before initialization finished");
-            }
+        void StartRunningRunningExperiment(Session currentSession) {
 
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);

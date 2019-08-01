@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using BML_ExperimentToolkit.Scripts.Managers;
-using BML_Utilities;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.Settings {
 
-    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create Control Settings Asset")]
+    [CreateAssetMenu]
     public class ControlSettings : ScriptableObject {
         public List<KeyCode> InterruptKeys;
         public List<KeyCode> BackKeys;

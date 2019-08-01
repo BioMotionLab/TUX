@@ -568,3 +568,33 @@ Session Logged: 2019-05-29 02:07
 ---------------------
 Session Logged: 2019-05-29 03:09
 {"outputFileName":"2019-02-28_T11-14_Participant-1","outputFolder":"C:/Users/BioMotion/Desktop","debugMode":true,"OrderChosenIndex":1,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-01 11:40
+{"outputFileName":"asdfa","outputFolder":"C:\\Users\\BioMotion\\Documents\\asdf","debugMode":true,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-01 11:41
+{"outputFileName":"asdf","outputFolder":"C:\\Users\\BioMotion\\Documents\\asdf","debugMode":true,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-01 11:46
+{"outputFileName":"Test","outputFolder":"C:\\Users\\BioMotion\\Documents\\ExperimentTest","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}
+Confirmed Complete at: 11:46
+
+---------------------
+Session Logged: 2019-08-01 11:51
+{"outputFileName":"Test","outputFolder":"C:\\Users\\BioMotion\\Documents\\ExperimentTest","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-01 11:52
+{"outputFileName":"Test","outputFolder":"C:\\Users\\BioMotion\\Documents\\ExperimentTest","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-01 11:53
+{"outputFileName":"Test","outputFolder":"C:\\Users\\BioMotion\\Documents\\ExperimentTest","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}

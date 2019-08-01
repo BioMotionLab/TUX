@@ -30,8 +30,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
                 if (orderConfigs.Count > 0) return GetBlockOrderConfigStrings();
                 
-                
+                #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
+                #endif
                 Application.Quit();
                 throw new NullReferenceException("There are too many block values to create a permutation table. " +
                                                  "Block orders must be defined manually using OrderConfig files. " +
@@ -47,7 +48,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             foreach (OrderConfig orderConfig in orderConfigs) {
                 
                 if (orderConfig.Length != baseBlockTable.Rows.Count) {
+#if UNITY_EDITOR
                     UnityEditor.EditorApplication.isPlaying = false;
+                    #endif
                     Application.Quit();
                     throw new ArgumentException($"OrderConfig file does not match length. See Below:\n" +
                                                 $"Need to adjust length of orders.\n" +
@@ -99,14 +102,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         void Enable() {
             ExperimentEvents.OnBlockOrderChosen += BlockOrderSelected;
-            ExperimentEvents.OnStartExperiment += ExperimentStarted;
+            ExperimentEvents.OnStartRunningExperiment += RunningExperimentStarted;
         }
 
 
 
         public void Disable() {
             ExperimentEvents.OnBlockOrderChosen -= BlockOrderSelected;
-            ExperimentEvents.OnStartExperiment -= ExperimentStarted;
+            ExperimentEvents.OnStartRunningExperiment -= RunningExperimentStarted;
         }
 
         void BlockOrderSelected(int selectedOrderIndex) {
@@ -201,7 +204,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
 
-        void ExperimentStarted(Session session) {
+        void RunningExperimentStarted(Session session) {
             WriteParticipantValuesToTables();
         }
 

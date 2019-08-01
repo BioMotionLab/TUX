@@ -50,7 +50,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             ExperimentEvents.OnExperimentStarted += ExperimentStarted;
             ExperimentEvents.OnTrialHasStarted += TrialStarted;
             ExperimentEvents.OnCheckMainWindowIsOpen += CheckWindowOpen;
-
         }
         
         void OnDisable() {
@@ -61,8 +60,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             ExperimentEvents.OnExperimentStarted -= ExperimentStarted;
             ExperimentEvents.OnTrialHasStarted -= TrialStarted;
             ExperimentEvents.OnCheckMainWindowIsOpen -= CheckWindowOpen;
-
-
         }
 
         void TrialStarted(Trial trial, int index) {
@@ -80,16 +77,15 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             Repaint();
         }
 
-        void InitWindow(ExperimentRunner runnerToInit) {
-            session = Session.LoadSessionData();
+        void InitWindow(ExperimentRunner runner) {
+            session = runner.Session;
             session.OrderChosenIndex = 0;
             currentBlockIndex = -1;
             currentTrialIndex = -1;
-            runner = runnerToInit;
+            this.runner = runner;
             initialized = true;
             Repaint();
 
-            runnerToInit.FinishedInitialization = true;
         }
 
         static void CheckWindowOpen(ExperimentRunner runnerToInit) {
@@ -178,7 +174,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
 
         /// <summary>
-        /// Displays session settings
+        /// Displays Session settings
         /// </summary>
         /// <returns></returns>
         bool ShowSessionSettings() {
@@ -252,8 +248,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             
-
-
+            
             EditorGUILayout.LabelField("Fill In Participant Variables:", EditorStyles.boldLabel);
             List<Variable> variables = runner.VariableConfigFile.Factory.AllVariables;
 
@@ -378,7 +373,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             if (!runner.Running && !runner.Ended) {
                 if (GUILayout.Button("Start Runner")) {
-                    ExperimentEvents.StartExperiment(session);
+                    ExperimentEvents.StartRunningExperiment(session);
                 }
 
             }

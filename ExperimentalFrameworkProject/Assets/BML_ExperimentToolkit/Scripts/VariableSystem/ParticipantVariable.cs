@@ -8,6 +8,8 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
     [Serializable]
     public abstract class ParticipantVariable : Variable {
         public abstract int SelectedValue { get; set; }
+
+        public abstract void SelectValue(string value);
         public abstract string[] PossibleValuesStringArray { get; }
         public abstract bool ValuesAreConstrained { get; }
     }
@@ -38,6 +40,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                 Value = PossibleValues[value];
             }
         }
+        
 
         public override Type Type => typeof(T);
         readonly ParticipantVariableValuesAdderStrategy<T> variableValuesAdderStrategy 

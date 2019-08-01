@@ -7,5 +7,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
         public ParticipantVariableGameObject() {
             DataType = SupportedDataTypes.GameObject;
         }
+
+        public override void SelectValue(string value) {
+            throw new NotImplementedException();
+        }
     }
 }

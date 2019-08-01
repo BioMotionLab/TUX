@@ -6,5 +6,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
         public ParticipantVariableInt() {
             DataType = SupportedDataTypes.Int;
         }
+
+        public override void SelectValue(string value) {
+            Value = Convert.ToInt32(value);
+        }
     }
 }
