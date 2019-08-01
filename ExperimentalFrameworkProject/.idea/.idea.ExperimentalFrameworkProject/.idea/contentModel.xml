@@ -49,6 +49,7 @@
             <e p="Settings" t="Include">
               <e p="ColumnNamesSettings.cs" t="Include" />
               <e p="ControlSettings.cs" t="Include" />
+              <e p="GuiSettings.cs" t="Include" />
             </e>
             <e p="UI" t="Include">
               <e p="Editor" t="Include">

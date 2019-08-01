@@ -23,6 +23,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
         public ColumnNamesSettings ColumnNamesSettings;
         public ControlSettings ControlSettings;
+        public GuiSettings GuiSettings;
         
         [Header("Manual Block Order Config:")]
         [SerializeField]

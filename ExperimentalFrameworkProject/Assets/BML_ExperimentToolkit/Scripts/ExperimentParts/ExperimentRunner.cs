@@ -12,12 +12,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public VariableConfig VariableConfigFile;
 
         public ExperimentDesign Design;
-        
-        [SerializeField]
-        ExperimentGui gui = default;
-        
-        OutputManager outputManager;
 
+        OutputManager outputManager;
 
         Experiment experiment;
 
@@ -49,10 +45,17 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         [HideInInspector]
         public bool WindowOpen = false;
 
+        ExperimentGui gui;
+
         public Session Session { get; private set; }
 
         void Start() {
 
+            #if UNITY_EDITOR
+            
+            ExperimentEvents.CheckMainWindowIsOpen(this);
+
+            #endif
             
 
             //check if config file is loaded
@@ -85,9 +88,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 throw new NullReferenceException("Session nul and not created properly");
             }
             
-            if (gui != null) {
+            if (!WindowOpen) {
+                gui = Instantiate(VariableConfigFile.GuiSettings.GuiPrefab);
+                gui.gameObject.SetActive(true);
                 gui.RegisterExperiment(this);
             }
+            
             
             ExperimentEvents.InitExperiment(this);
             

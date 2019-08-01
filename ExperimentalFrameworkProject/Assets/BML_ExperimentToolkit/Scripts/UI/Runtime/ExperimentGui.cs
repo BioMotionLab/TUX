@@ -44,8 +44,8 @@ namespace BML_ExperimentToolkit.Scripts.UI {
         TextMeshProUGUI BlockOrderTitle = default;
         
         const string SelectText = "Choose...";
-        
-        List<ParticipantVariableEntry> participantVariableEntries = new List<ParticipantVariableEntry>();
+
+        readonly List<ParticipantVariableEntry> participantVariableEntries = new List<ParticipantVariableEntry>();
         public void RegisterExperiment(ExperimentRunner experimentRunner) {
             ExperimentEvents.OnInitExperiment += Init;
             runner = experimentRunner;
@@ -223,7 +223,7 @@ namespace BML_ExperimentToolkit.Scripts.UI {
             return errorLog;
         }
 
-        bool IsAllNumbersAndLetters(string text) {
+        static bool IsAllNumbersAndLetters(string text) {
             return Regex.IsMatch(text, @"^[a-zA-Z0-9_]+$");
         }
         
