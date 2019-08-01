@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
+using BML_ExperimentToolkit.Scripts.UI.Runtime;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
-using UnityEngine.WSA;
 
 namespace BML_ExperimentToolkit.Scripts.UI {
     public class ExperimentGui : MonoBehaviour {
@@ -28,22 +26,24 @@ namespace BML_ExperimentToolkit.Scripts.UI {
         TMP_InputField OutputFolder = default;
 
         [SerializeField]
-        ParticipantVariableEntry ParticipantVariableEntryPrefab;
+        ParticipantVariableEntry ParticipantVariableEntryPrefab = default;
 
         [SerializeField]
-        RectTransform ParticipantVariablesPanel;
+        RectTransform ParticipantVariablesPanel = default;
 
         [SerializeField]
-        TextMeshProUGUI ErrorText;
+        TextMeshProUGUI ErrorText = default;
 
         [SerializeField]
-        RectTransform ErrorPanel;
+        RectTransform ErrorPanel = default;
 
         [SerializeField]
-        TMP_Dropdown BlockOrderSelector;
+        TMP_Dropdown BlockOrderSelector = default;
 
         [SerializeField]
-        TextMeshProUGUI BlockOrderTitle;
+        TextMeshProUGUI BlockOrderTitle = default;
+        
+        const string SelectText = "Choose...";
         
         List<ParticipantVariableEntry> participantVariableEntries = new List<ParticipantVariableEntry>();
         public void RegisterExperiment(ExperimentRunner experimentRunner) {
@@ -57,6 +57,7 @@ namespace BML_ExperimentToolkit.Scripts.UI {
 
         void Init(ExperimentRunner experimentRunner) {
             session = experimentRunner.Session;
+            session.DebugMode = false;
             if (session == null) throw new NullReferenceException("session null in gui");
             SessionStatusText.text = session != null ? "New session successfully created and linked to experiment" : "no session detected";
 
@@ -88,7 +89,7 @@ namespace BML_ExperimentToolkit.Scripts.UI {
                 session.OrderChosenIndex = 0;
                 session.BlockChosen = true;
                 BlockOrderSelector.gameObject.SetActive(false);
-                BlockOrderTitle.text = "No block bariables configured";
+                BlockOrderTitle.text = "No block variables configured";
                 return;
                 
             }
@@ -101,6 +102,7 @@ namespace BML_ExperimentToolkit.Scripts.UI {
                 }
                 else {
                     BlockOrderSelector.options.Clear();
+                    blockPermutations.Insert(0, SelectText);
                     foreach (string order in blockPermutations) {
                         BlockOrderSelector.options.Add(new TMP_Dropdown.OptionData() {text = order});
                     }
@@ -117,17 +119,22 @@ namespace BML_ExperimentToolkit.Scripts.UI {
 
             if (!InputsValid()) return;
 
-            string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            folder = Path.Combine(folder, OutputFolder.text);
-            
+            string folder = GetOutputFolderPath();
+
             session.OutputFileName = OutputFileName.text;
             session.OutputFolder = folder;
 
-            session.OrderChosenIndex = BlockOrderSelector.value;
+            session.OrderChosenIndex = BlockOrderSelector.value-1; // subtract 1 because added first one in.
             session.BlockChosen = true;
             
-            Debug.LogWarning($"block order chosen: {session.OrderChosenIndex}");
-            Debug.LogWarning("Experiment Starting successfully");
+            gameObject.SetActive(false);
+            ExperimentEvents.StartRunningExperiment(session);
+        }
+
+        string GetOutputFolderPath() {
+            string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            folder = Path.Combine(folder, OutputFolder.text);
+            return folder;
         }
 
         [PublicAPI]
@@ -142,9 +149,12 @@ namespace BML_ExperimentToolkit.Scripts.UI {
             
             ValidateDirectoryName(OutputFolder.text, ref errorLog, ref isValid);
             ValidateDirectoryName(OutputFileName.text, ref errorLog, ref isValid);
+            ValidateFileDoesNotExist(ref errorLog, ref isValid);
             
             ValidateParticipantVariableValues(ref errorLog, ref isValid);
 
+            ValidateBlockOrderChosen(ref errorLog, ref isValid);
+            
             if (!isValid) {
                 ErrorText.text = errorLog;
                 ErrorPanel.gameObject.SetActive(true);
@@ -153,18 +163,37 @@ namespace BML_ExperimentToolkit.Scripts.UI {
             return isValid;
         }
 
+        void ValidateFileDoesNotExist(ref string errorLog, ref bool isValid) {
+            string fullFilePath = Path.Combine(GetOutputFolderPath(), OutputFileName.text + ".csv");
+            Debug.Log(fullFilePath);
+            if (!File.Exists(fullFilePath)) return;
+            
+            string errorString = $"Output File Already Exists @ {fullFilePath}";
+            errorLog = LogErrorIntoString(errorLog, errorString);
+            isValid = false;
+        }
+
+        void ValidateBlockOrderChosen(ref string errorLog, ref bool isValid) {
+            string selectedText = BlockOrderSelector.options[BlockOrderSelector.value].text;
+
+            if (selectedText != SelectText) return;
+            string errorString = $"Need to select block order value";
+            errorLog = LogErrorIntoString(errorLog, errorString);
+            isValid = false;
+        }
+
         void ValidateParticipantVariableValues(ref string errorLog, ref bool isValid) {
             foreach (ParticipantVariableEntry participantVariableEntry in participantVariableEntries) {
                 try {
                     participantVariableEntry.ConfirmValue();
                 }
-                catch (FormatException e) {
+                catch (FormatException) {
                     string errorString =
                         $"Input for Variable {participantVariableEntry.Variable.Name} is incorrect format or type";
                     errorLog = LogErrorIntoString(errorLog, errorString);
                     isValid = false;
                 }
-                catch (ParticipantVariableEntry.NoValueSelectedException e) {
+                catch (NoValueSelectedException) {
                     string errorString =
                         $"No value selected for {participantVariableEntry.Variable.Name}";
                     errorLog = LogErrorIntoString(errorLog, errorString);

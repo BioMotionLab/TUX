@@ -68,7 +68,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
                 blockChosen = value;
                 if (!blockChosen) return;
-                Debug.Log($"Block order chosen: {OrderChosenIndex}");
                 ExperimentEvents.BlockOrderSelected(OrderChosenIndex);
             }
         }

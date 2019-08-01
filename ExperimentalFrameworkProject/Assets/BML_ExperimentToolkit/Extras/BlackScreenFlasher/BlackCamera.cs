@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using BML_Utilities.ScriptableObject_Assets;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Extras.BlackScreenFlasher {
@@ -8,14 +7,13 @@ namespace BML_ExperimentToolkit.Extras.BlackScreenFlasher {
         Camera              thisCamera;
         public List<Camera> OtherCameras = new List<Camera>();
 
-        public FloatValue BlackScreenShowTime;
 
         void Start() {
             thisCamera = GetComponent<Camera>();
             thisCamera.enabled = false;
         }
 
-        public void ShowBlankScreen() {
+        public void ShowBlankScreen(float BlackScreenShowTime) {
             StartCoroutine(ShowThisCamera(BlackScreenShowTime));
         }
 

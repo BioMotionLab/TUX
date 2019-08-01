@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Settings;
 using UnityEngine;
-using MenuNames = BML_Utilities.MenuNames;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
-    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Create new Variable Config Asset")]
+    [CreateAssetMenu]
     public class VariableConfig : ScriptableObject {
 
         public bool ShuffleTrialOrder = false;

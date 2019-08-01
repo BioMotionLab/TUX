@@ -95,18 +95,20 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         static void ExitProgram() {
+            #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
+            #endif
             Application.Quit();
         }
 
         void OnEnable() {
-            ExperimentEvents.OnStartExperiment += StartExperiment;
+            ExperimentEvents.OnStartRunningExperiment += StartRunningRunningExperiment;
             ExperimentEvents.OnEndExperiment += EndExperiment;
 
         }
 
         void OnDisable() {
-            ExperimentEvents.OnStartExperiment -= StartExperiment;
+            ExperimentEvents.OnStartRunningExperiment -= StartRunningRunningExperiment;
             ExperimentEvents.OnEndExperiment -= EndExperiment;
             Design?.Disable();
             outputManager?.Disable();
@@ -118,7 +120,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Starts the Runner. The Runner does not start automatically, because it waits for an event to start it.
         /// </summary>
         /// <param name="currentSession"></param>
-        void StartExperiment(Session currentSession) {
+        void StartRunningRunningExperiment(Session currentSession) {
 
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);

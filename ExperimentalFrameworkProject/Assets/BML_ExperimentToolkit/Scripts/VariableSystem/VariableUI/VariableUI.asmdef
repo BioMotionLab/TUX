@@ -1,0 +1,17 @@
+{
+    "name": "VariableUI",
+    "references": [
+        "GUID:e2e42d675e1f3084a981f233d35a3fb5",
+        "GUID:33137bc24d23a6d47b061e686c29d7f3"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

@@ -373,7 +373,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             if (!runner.Running && !runner.Ended) {
                 if (GUILayout.Button("Start Runner")) {
-                    ExperimentEvents.StartExperiment(session);
+                    ExperimentEvents.StartRunningExperiment(session);
                 }
 
             }
