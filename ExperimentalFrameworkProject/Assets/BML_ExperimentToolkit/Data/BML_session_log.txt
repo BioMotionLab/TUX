@@ -598,3 +598,13 @@ Session Logged: 2019-08-01 11:52
 ---------------------
 Session Logged: 2019-08-01 11:53
 {"outputFileName":"Test","outputFolder":"C:\\Users\\BioMotion\\Documents\\ExperimentTest","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-06 11:24
+{"outputFileName":"sdaf","outputFolder":"C:\\Users\\BioMotion\\Documents\\asdf","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-06 01:56
+{"outputFileName":"fdas","outputFolder":"C:\\Users\\BioMotion\\Documents\\asdf","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}

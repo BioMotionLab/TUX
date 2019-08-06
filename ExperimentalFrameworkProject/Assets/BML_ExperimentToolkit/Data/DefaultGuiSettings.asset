@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de2d29b33db59e4186a89a5ef9549c5, type: 3}
   m_Name: DefaultGuiSettings
   m_EditorClassIdentifier: 
-  GuiPrefab: {fileID: 4705326578187371850, guid: 54133c8be039f904d859d2f63523b15b,
+  GuiPrefab: {fileID: 5503625799166534412, guid: 54133c8be039f904d859d2f63523b15b,
     type: 3}
