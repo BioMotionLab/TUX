@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using BML_ExperimentToolkit.Scripts.Managers;
 using UnityEngine;
 
@@ -158,9 +159,52 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
 
+        public void ValidateFilePath(ref string errorLog, ref bool isValid) {
+            ValidateFolder(ref errorLog, ref isValid);
+            ValidateFileName (ref errorLog, ref isValid);
+            ValidateFileDoesNotExist(ref errorLog, ref isValid);
+        }
         
+        void ValidateFolder(ref string errorLog, ref bool isValid ) {
+            if (string.IsNullOrEmpty(OutputFolder)) {
+                string errorString = $"Output Folder name not set or too short. {OutputFolder}";
+                errorLog = LogErrorIntoString(errorLog, errorString);
+                isValid = false;
+            }
+        }
+        
+        void ValidateFileName(ref string errorLog, ref bool isValid ) {
+            if (string.IsNullOrEmpty(outputFileName)) {
+                string errorString = $"Output File name not set or too short. {outputFileName}";
+                errorLog = LogErrorIntoString(errorLog, errorString);
+                isValid = false;
+                return;
+            }
+            
+            if (!IsAllNumbersAndLetters(outputFileName)) {
+                string errorString = $"Output File name contains invalid characters. {outputFileName}";
+                errorLog = LogErrorIntoString(errorLog, errorString);
+                isValid = false;
+            }
+        }
 
-
+        static bool IsAllNumbersAndLetters(string text) {
+            return Regex.IsMatch(text, @"^[a-zA-Z0-9_]+$");
+        }
+        
+        static string LogErrorIntoString(string errorLog, string errorString) {
+            Debug.LogWarning(errorString);
+            errorLog += errorString + "\n";
+            return errorLog;
+        }
+        
+        void ValidateFileDoesNotExist(ref string errorLog, ref bool isValid) {
+            if (!File.Exists(outputFullPath)) return;
+            string errorString = $"Output File Already Exists @ {outputFullPath}";
+            errorLog = LogErrorIntoString(errorLog, errorString);
+            isValid = false;
+        }
+        
 
     }
 }

@@ -4,13 +4,12 @@ using System.IO;
 using System.Text.RegularExpressions;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
-using BML_ExperimentToolkit.Scripts.UI.Runtime;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.UI {
+namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
     public class ExperimentGui : MonoBehaviour {
 
         Session session;
@@ -55,8 +54,8 @@ namespace BML_ExperimentToolkit.Scripts.UI {
             ExperimentEvents.OnInitExperiment -= Init;
         }
 
-        void Init(ExperimentRunner experimentRunner) {
-            session = experimentRunner.Session;
+        void Init(ExperimentRunner runner) {
+            session = runner.Session;
             session.DebugMode = false;
             if (session == null) throw new NullReferenceException("session null in gui");
             SessionStatusText.text = session != null ? "New session successfully created and linked to experiment" : "no session detected";
@@ -117,12 +116,11 @@ namespace BML_ExperimentToolkit.Scripts.UI {
         [PublicAPI]
         public void StartExperiment() {
 
-            if (!InputsValid()) return;
-
-            string folder = GetOutputFolderPath();
-
             session.OutputFileName = OutputFileName.text;
+            string folder = GetOutputFolderPath();
             session.OutputFolder = folder;
+            
+            if (!InputsValid()) return;
 
             session.OrderChosenIndex = BlockOrderSelector.value-1; // subtract 1 because added first one in.
             session.BlockChosen = true;
@@ -147,13 +145,10 @@ namespace BML_ExperimentToolkit.Scripts.UI {
             bool isValid = true;
             string errorLog = string.Empty;
             
-            ValidateDirectoryName(OutputFolder.text, ref errorLog, ref isValid);
-            ValidateDirectoryName(OutputFileName.text, ref errorLog, ref isValid);
-            ValidateFileDoesNotExist(ref errorLog, ref isValid);
             
-            ValidateParticipantVariableValues(ref errorLog, ref isValid);
-
+            session.ValidateFilePath(ref errorLog, ref isValid);
             ValidateBlockOrderChosen(ref errorLog, ref isValid);
+            ValidateParticipantVariableValues(ref errorLog, ref isValid);
             
             if (!isValid) {
                 ErrorText.text = errorLog;
@@ -163,24 +158,9 @@ namespace BML_ExperimentToolkit.Scripts.UI {
             return isValid;
         }
 
-        void ValidateFileDoesNotExist(ref string errorLog, ref bool isValid) {
-            string fullFilePath = Path.Combine(GetOutputFolderPath(), OutputFileName.text + ".csv");
-            Debug.Log(fullFilePath);
-            if (!File.Exists(fullFilePath)) return;
-            
-            string errorString = $"Output File Already Exists @ {fullFilePath}";
-            errorLog = LogErrorIntoString(errorLog, errorString);
-            isValid = false;
-        }
+        
 
-        void ValidateBlockOrderChosen(ref string errorLog, ref bool isValid) {
-            string selectedText = BlockOrderSelector.options[BlockOrderSelector.value].text;
-
-            if (selectedText != SelectText) return;
-            string errorString = $"Need to select block order value";
-            errorLog = LogErrorIntoString(errorLog, errorString);
-            isValid = false;
-        }
+       
 
         void ValidateParticipantVariableValues(ref string errorLog, ref bool isValid) {
             foreach (ParticipantVariableEntry participantVariableEntry in participantVariableEntries) {
@@ -202,19 +182,13 @@ namespace BML_ExperimentToolkit.Scripts.UI {
             }
         }
 
-        void ValidateDirectoryName(string fileOrDirectoryName, ref string errorLog, ref bool isValid ) {
-            if (string.IsNullOrEmpty(fileOrDirectoryName)) {
-                string errorString = $"Output Folder name not set or too short. {fileOrDirectoryName}";
-                errorLog = LogErrorIntoString(errorLog, errorString);
-                isValid = false;
-                return;
-            }
+        void ValidateBlockOrderChosen(ref string errorLog, ref bool isValid) {
+            string selectedText = BlockOrderSelector.options[BlockOrderSelector.value].text;
 
-            if (!IsAllNumbersAndLetters(fileOrDirectoryName)) {
-                string errorString = $"Output Folder name contains invalid characters. {fileOrDirectoryName}";
-                errorLog = LogErrorIntoString(errorLog, errorString);
-                isValid = false;
-            }
+            if (selectedText != SelectText) return;
+            string errorString = $"Need to select block order value";
+            errorLog = LogErrorIntoString(errorLog, errorString);
+            isValid = false;
         }
 
         static string LogErrorIntoString(string errorLog, string errorString) {
@@ -223,9 +197,7 @@ namespace BML_ExperimentToolkit.Scripts.UI {
             return errorLog;
         }
 
-        static bool IsAllNumbersAndLetters(string text) {
-            return Regex.IsMatch(text, @"^[a-zA-Z0-9_]+$");
-        }
+        
         
     }
 }
