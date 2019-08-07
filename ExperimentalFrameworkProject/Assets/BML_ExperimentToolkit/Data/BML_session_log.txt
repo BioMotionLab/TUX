@@ -608,3 +608,43 @@ Session Logged: 2019-08-06 11:24
 ---------------------
 Session Logged: 2019-08-06 01:56
 {"outputFileName":"fdas","outputFolder":"C:\\Users\\BioMotion\\Documents\\asdf","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-07 11:25
+{"outputFileName":"fdas","outputFolder":"C:\\Users\\BioMotion\\Documents\\asdf","debugMode":true,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-07 11:35
+{"outputFileName":"fdas","outputFolder":"C:\\Users\\BioMotion\\Documents\\asdf","debugMode":true,"OrderChosenIndex":0,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-07 11:37
+{"outputFileName":"debugFile","outputFolder":"C:/Users/BioMotion/Documents/TestBuild","debugMode":true,"OrderChosenIndex":1,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-07 11:59
+{"outputFileName":"debugFile","outputFolder":"C:/Users/BioMotion/Documents/TestBuild","debugMode":true,"OrderChosenIndex":1,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-07 12:01
+{"outputFileName":"debugFile","outputFolder":"C:/Users/BioMotion/Documents/TestBuild","debugMode":true,"OrderChosenIndex":1,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-07 12:03
+{"outputFileName":"debugFile5432","outputFolder":"C:/Users/BioMotion/Documents/TestBuild","debugMode":true,"OrderChosenIndex":1,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-07 12:03
+{"outputFileName":"debugFile#$@$##$","outputFolder":"C:/Users/BioMotion/Documents/TestBuild","debugMode":true,"OrderChosenIndex":1,"participantId":"Unnamed"}
+
+
+---------------------
+Session Logged: 2019-08-07 12:06
+{"outputFileName":"debug","outputFolder":"C:/Users/BioMotion/Documents/TestBuild","debugMode":true,"OrderChosenIndex":1,"participantId":"Unnamed"}

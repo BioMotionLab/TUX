@@ -7,7 +7,6 @@ using BML_ExperimentToolkit.Scripts.Managers;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using BML_Utilities;
-using BML_Utilities.BML_EditorUtilities.Editor;
 using BML_Utilities.Extensions;
 using UnityEditor;
 using UnityEngine;
@@ -40,7 +39,14 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         }
 
         static ExperimentWindow instance;
-        public static bool IsOpen => instance != null;
+        bool debugMode = false;
+        string outputFolder;
+        string fileName;
+        bool started = false;
+        int orderChosenIndex = 0;
+        string fileErrorLog;
+        bool isValidFilePath = true;
+        static bool IsOpen => instance != null;
 
         void OnEnable() {
             instance = this;
@@ -79,14 +85,19 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         }
 
         void InitWindow(ExperimentRunner runner) {
+            this.runner = runner;
             session = runner.Session;
-            session.OrderChosenIndex = 0;
+            
             currentBlockIndex = -1;
             currentTrialIndex = -1;
-            this.runner = runner;
+
+            isValidFilePath = true;
+            fileErrorLog = string.Empty;
+            started = false;
+            debugMode = false;
+            
             initialized = true;
             Repaint();
-
         }
 
         static void CheckWindowOpen(ExperimentRunner runnerToInit) {
@@ -119,9 +130,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             //Check if in play mode
             if (!Application.isPlaying) {
                 EditorGUILayout
-                    .HelpBox("Cannot display Runner design when Unity is not in PlayMode, " +
-                             "\n\nPress play in Editor to Set up the Runner",
-                             MessageType.Error);
+                    .HelpBox("Runner display needs to be in PlayMode, " +
+                             "\n\nPress play in Editor",
+                             MessageType.Warning);
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndScrollView();
                 return;
@@ -138,36 +149,24 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 return;
             }
 
-            //Session PromptSettings
-            if (!ShowSessionSettings()) {
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndScrollView();
-                return;
+            if (!started) {
+                ShowSessionSettings();
+            }
+            else {
+                ShowExperimentControls();
+                
+                //Blocks
+                if (runner.Design.HasBlocks) {
+                    ShowBlockTable(runner.Design.OrderedBlockTable);
+                }
+
+                //NumberOfTrials
+                ShowTrialTables();
             }
 
-            //Block Order
-            if (!ShowBlockOrderSettings()) {
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndScrollView();
-                return;
-            }
-
-
-            //Runner controls
-            ShowExperimentControls();
-
-
-            //Blocks
-            if (runner.Design.HasBlocks) {
-                ShowBlockTable(runner.Design.OrderedBlockTable);
-            }
             
-
-            //NumberOfTrials
-            ShowTrialTables();
             
-
-
+            
             EditorGUILayout.Space();
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndScrollView();
@@ -178,71 +177,91 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         /// Displays Session settings
         /// </summary>
         /// <returns></returns>
-        bool ShowSessionSettings() {
+        void ShowSessionSettings() {
+            
+            EditorGUILayout.LabelField("session properly linked to experiment");
+
+            if (started || debugMode) {
+                Debug.Log("didn't pass check");
+                return;
+            }
             
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Session settings:", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
             
-            
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Debug Mode:", LabelWidth);
-            session.DebugMode = EditorGUILayout.Toggle(session.DebugMode);
-            EditorGUILayout.EndHorizontal();
-
-            //break out if debug mode
-            if (session.DebugMode) {
-                EditorGUILayout.EndVertical();
-                EditorGUI.indentLevel--;
-                return true;
+            if (GUILayout.Button("Start in debug mode")) {
+                StartInDebugMode();
             }
-
+            
+            ShowOuputFolderInput();
+            ShowOutputFileNameInput();
+            
+            if (!isValidFilePath) {
+                EditorGUILayout.HelpBox(fileErrorLog, MessageType.Error);
+            }
             
             ShowParticipantVariables();
-
             
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Participant ID:", LabelWidth);
-            session.ParticipantId = EditorGUILayout.TextField(session.ParticipantId);
-            EditorGUILayout.EndHorizontal();
+            ShowBlockOrderSettings();
             
+            ShowStartButton();
             
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Output File Path:", LabelWidth);
-            if (GUILayout.Button("Choose Folder", LabelWidth)) {
-                session.OutputFolder = EditorUtility.OpenFolderPanel("Choose Output Folder", "", "");
-            }
-            GUILayout.Box(session.OutputFolder);
-            EditorGUILayout.EndHorizontal();
-
-
-            EditorGUILayout.BeginHorizontal();
-            autoName = EditorGUILayout.Toggle("Output file: Auto Name?", autoName);
-            if (autoName) {
-                session.OutputFileName =
-                    DateTime.Now.ToString("yyyy-MM-dd_Thh-mm") + "_Participant-" + session.ParticipantId;
-                EditorGUILayout.LabelField("Name: ", SmallLabelWidth);
-                GUILayout.Box(session.OutputFileName);
-            }
-            else {
-                EditorGUILayout.LabelField("Name: ", SmallLabelWidth);
-                session.OutputFileName = EditorGUILayout.TextField(session.OutputFileName);
-            }
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Full output path:", LabelWidth);
-            GUILayout.Box(session.OutputFullPath);
-            EditorGUILayout.EndHorizontal();
-
-            if (File.Exists(session.OutputFullPath)) {
-                EditorGUILayout.HelpBox("File already exists!", MessageType.Error);
-                return false;
-            }
-
             EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
-            return true;
+
+        }
+
+        void ShowStartButton() {
+            if (GUILayout.Button("Start Runner")) {
+                StartExperiment();
+            }
+        }
+
+        void StartExperiment() {
+            
+            session.OutputFolder = outputFolder;
+            session.OutputFileName = fileName;
+
+            fileErrorLog = string.Empty;
+            session.ValidateFilePath(ref fileErrorLog, ref isValidFilePath);
+            
+            if (!isValidFilePath) {
+                return;
+            }
+            
+            
+            session.BlockChosen = true;
+            
+            started = true;
+            ExperimentEvents.StartRunningExperiment(session);
+        }
+
+        void StartInDebugMode() {
+            debugMode = true;
+            session.DebugMode = true;
+            session.OrderChosenIndex = 0;
+            session.BlockChosen = true;
+            started = true;
+            ExperimentEvents.StartRunningExperiment(session);
+        }
+        
+        
+
+        void ShowOutputFileNameInput() {
+            EditorGUILayout.LabelField("File Name: ", SmallLabelWidth);
+            fileName = EditorGUILayout.TextField(fileName);
+        }
+
+        void ShowOuputFolderInput() {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Output Folder:", LabelWidth);
+            if (GUILayout.Button("Choose", LabelWidth)) {
+                outputFolder = EditorUtility.OpenFolderPanel("Choose Output Folder", "", "");
+            }
+
+            GUILayout.Box(outputFolder);
+            EditorGUILayout.EndHorizontal();
         }
 
         void ShowParticipantVariables() {
@@ -314,52 +333,43 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         /// Choose block order
         /// </summary>
         /// <returns></returns>
-        bool ShowBlockOrderSettings() {
-            if (!session.BlockChosen) {
-
-                if (!runner.Design.HasBlocks) {
-                    //Debug.Log($"Runner has no blocks");
-                    session.OrderChosenIndex = 0;
+        void ShowBlockOrderSettings() {
+            if (!runner.Design.HasBlocks) {
+                    orderChosenIndex = 0;
                     session.BlockChosen = true;
-                    return true;
-                }
-
-                EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                EditorGUILayout.Space();
-                EditorGUILayout.LabelField("Block Order PromptSettings:", EditorStyles.boldLabel);
-
-                try {
-                    List<string> blockPermutations = runner.Design.BlockPermutationsStrings;
-                    if (blockPermutations.Count == 1) {
-                        session.BlockChosen = true;
-                        session.OrderChosenIndex = 0;
-                    }
-                    else {
-                        session.OrderChosenIndex = EditorGUILayout.Popup(session.OrderChosenIndex, blockPermutations.ToArray());
-                    }
-                }
-                catch (TooManyPermutationsException e) {
-                    Console.WriteLine(e);
-                    throw;
-                }
-                
-                
-                DataTable selectedOrderTable = runner.Design.GetBlockOrderTable(session.OrderChosenIndex);
-                
-                EditorGUILayout.Space();
-                EditorGUILayout.LabelField("Chosen block order:");
-
-                ShowBlockTable(selectedOrderTable, orderSelected: false);
-
-                if (GUILayout.Button("Confirm Order")) {
-                    session.BlockChosen = true;
-                }
-
-                EditorGUILayout.EndVertical();
-                return false;
+                    return;
             }
 
-            return true;
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.Space();
+            
+            EditorGUILayout.LabelField("Choose Block Order:", EditorStyles.boldLabel);
+
+            try {
+                List<string> blockPermutations = runner.Design.BlockPermutationsStrings;
+                if (blockPermutations.Count == 1) {
+                    session.BlockChosen = true;
+                    session.OrderChosenIndex = 0;
+                }
+                else {
+                    session.OrderChosenIndex = EditorGUILayout.Popup(session.OrderChosenIndex, blockPermutations.ToArray());
+                }
+            }
+            catch (TooManyPermutationsException e) {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+            
+            DataTable selectedOrderTable = runner.Design.GetBlockOrderTable(session.OrderChosenIndex);
+            
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Chosen block order:");
+
+            ShowBlockTable(selectedOrderTable, orderSelected: false);
+            
+            EditorGUILayout.EndVertical();
+            
         }
 
         /// <summary>
@@ -372,13 +382,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.LabelField("Runner Controls:", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
 
-            if (!runner.Running && !runner.Ended) {
-                if (GUILayout.Button("Start Runner")) {
-                    ExperimentEvents.StartRunningExperiment(session);
-                }
-
-            }
-            else {
+            if (runner.Running || runner.Ended) {
                 EditorGUILayout.BeginHorizontal();
                 string runningText = runner.Running ? "Running" : "Not Running";
                 EditorGUILayout.LabelField($"Runner {runningText}.");
