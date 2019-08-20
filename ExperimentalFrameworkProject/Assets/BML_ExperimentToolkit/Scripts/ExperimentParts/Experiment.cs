@@ -23,10 +23,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         protected Experiment(ExperimentRunner runner, ExperimentDesign design) : base(runner) {
             this.runner = runner;
-            if (design == null) {
-                throw new NullReferenceException("Experiment created with null design");
-            }
-            this.design = design;
+            this.design = design ?? throw new NullReferenceException("Experiment created with null design");
             Enable();
         }
 

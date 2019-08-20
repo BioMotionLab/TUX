@@ -165,12 +165,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
         }
 
-        public ExperimentDesign ToTable(ExperimentRunner experimentRunner, bool shuffleTrialOrder, int numberRepetitions, bool shuffleTrialsBetweenBlocks, int repeatBlocks, List<OrderConfig> orderConfigs) {
-            //Debug.Log($"ToTable method in IndependentVariable: Alldata.count {AllVariables.Count}");
-            return new ExperimentDesign(experimentRunner, AllVariables, shuffleTrialOrder, numberRepetitions, shuffleTrialsBetweenBlocks, repeatBlocks, orderConfigs );
-        }
-
-
         void UpdateSerializedIvsWith(IndependentVariable iv) {
 
             switch (iv.DataType) {

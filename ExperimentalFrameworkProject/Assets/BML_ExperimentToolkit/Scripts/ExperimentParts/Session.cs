@@ -5,7 +5,6 @@ using BML_ExperimentToolkit.Scripts.Managers;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
-
     [Serializable]
     public class Session {
         const string DebugFolder = "/BML_Debug/";
@@ -13,6 +12,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         string outputFullPath;
 
+        public TrialTableGenerationMode TrialTableGenerationMode = TrialTableGenerationMode.OnTheFly;
+        
         /// <summary>
         /// stores the output path
         /// </summary>
@@ -42,63 +43,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         [SerializeField]
-        // ReSharper disable once InconsistentNaming
-        bool debugMode;
-
-        public bool DebugMode {
-            get { return debugMode; }
-            set {
-                if (value == debugMode) return;
-                debugMode = value;
-
-                
-                if (!debugMode) {
-                    ParticipantId = "Unnamed";
-                }
-            }
-        }
-
-
-        bool blockChosen;
-
-        public bool BlockChosen {
-            get => blockChosen;
-            set {
-
-                if (value == blockChosen) return;
-
-                blockChosen = value;
-                if (!blockChosen) return;
-                ExperimentEvents.BlockOrderSelected(OrderChosenIndex);
-            }
-        }
-
-
+        public bool DebugMode;
+        
         public int    OrderChosenIndex = 0;
-
-        [SerializeField]
-        // ReSharper disable once InconsistentNaming
-        string participantId;
-
-
-        public string ParticipantId {
-            get {
-                if (debugMode) {
-                    return "debug";
-                }
-                else {
-                    if (string.IsNullOrEmpty(participantId))
-                    {
-                        participantId = "Unnamed";
-                    }
-                    return participantId;
-                }
-            }
-            set {
-                participantId = debugMode ? "debug" : value;
-            }
-        }
-
 
         const string SessionDataFileName = "BML_last_experiment_session.json";
         const string SessionLocation = "BML_ExperimentToolkit/Data";
@@ -127,7 +74,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 string dataAsJason = File.ReadAllText(filePath);
                 session = JsonUtility.FromJson<Session>(dataAsJason);
                 //Debug.Log($"Session loaded: {filePath}");
-                }
+            }
             else {
                 Debug.Log("Previous Session file not found, creating new");
                 session = new Session();
@@ -136,7 +83,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return session;
         }
 
-        public void SaveSessionData() {
+        void SaveSessionData() {
             //Debug.Log("Saving Session data");
             string fileFolder = Path.Combine(Application.dataPath, SessionLocation);
 
@@ -152,7 +99,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <summary>
         /// Mark Session as completed
         /// </summary>
-        public void Completed() {
+        void Completed() {
 
             SessionLogger.LogComplete(this);
             Disable();

@@ -18,122 +18,44 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public   List<Block> Blocks;
         readonly BlockTable  baseBlockTable;
         readonly TrialTable  baseTrialTable;
-
-        public const int MaxBlockPermutationsAllowed = 3;
-
-        public List<string> BlockPermutationsStrings {
-            get {
-                
-                if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && orderConfigs.Count == 0) {
-                    return baseBlockTable.BlockPermutationsStrings;
-                }
-
-                if (orderConfigs.Count > 0) return GetBlockOrderConfigStrings();
-                
-                #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-                #endif
-                Application.Quit();
-                throw new NullReferenceException("There are too many block values to create a permutation table. " +
-                                                 "Block orders must be defined manually using OrderConfig files. " +
-                                                 "See documentation for more information");
-
-
-
-            }
-        }
-
-        List<string> GetBlockOrderConfigStrings() {
-            List<string> orderStrings = new List<string>();
-            foreach (OrderConfig orderConfig in orderConfigs) {
-                
-                if (orderConfig.Length != baseBlockTable.Rows.Count) {
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-                    #endif
-                    Application.Quit();
-                    throw new ArgumentException($"OrderConfig file does not match length. See Below:\n" +
-                                                $"Need to adjust length of orders.\n" +
-                                                $"{orderConfig.name} should be {baseBlockTable.Rows.Count} long. But is {orderConfig.Length}\n\n" +
-                                                $"Base Table:" +
-                                                $"{baseBlockTable.AsString()}");
-                }
-
-                if (orderConfig.Randomize) {
-                    orderStrings.Add("Randomize");
-                }
-                else {
-                    string orderString = "";
-                    foreach (int orderIndex in orderConfig.OrderedIndices) {
-                        string rowString = baseBlockTable.Rows[orderIndex].AsString(separator: ", ", truncateLength: -1);
-                        orderString += rowString + " > ";
-                    }
-                    orderStrings.Add(orderString); 
-                }
-                
-            }
-
-            return orderStrings;
-        }
-
-        readonly List<OrderConfig> orderConfigs;
-
+        
         public int    TotalTrials      => Blocks.Count * baseTrialTable.NumberOfTrials;
         public int    BlockCount       => Blocks.Count;
-        public string TrialTableHeader => Blocks[0].TrialTable.HeaderAsString(separator: Delimiter.Comma, truncate: -1);
+        public string TrialTableHeader => Blocks[0].TrialTable.HeaderAsString(Delimiter.Comma, -1);
 
         public bool HasBlocks => baseBlockTable.HasBlocks;
         
-        readonly bool shuffleTrialsBetweenBlocks;
-        readonly int repeatBlocks;
         SortedVariableContainer sortedVariables;
+        readonly VariableConfig variableConfig;
 
-        public ExperimentDesign(ExperimentRunner runner,              List<Variable> allData, bool shuffleTrialOrder,
-                                int              RepeatTrials, bool           shuffleTrialsBetweenBlocks, int repeatBlocks, List<OrderConfig> orderConfigs) {
+        public List<string> BlockPermutationsStrings => baseBlockTable.BlockPermutationsStrings;
+        public static int MaxBlockPermutationsAllowed => BlockTable.MaxBlockPermutationsAllowed;
+        
+        
+        public static ExperimentDesign CreateFrom(VariableConfig variableConfigFile, ExperimentRunner experimentRunner) {
+            return new ExperimentDesign(variableConfigFile, experimentRunner);
+        }
+        
+        public ExperimentDesign(VariableConfig variableConfig,             
+                                ExperimentRunner runner) {
+            this.variableConfig = variableConfig;
             this.runner = runner;
-            this.shuffleTrialsBetweenBlocks = shuffleTrialsBetweenBlocks;
-            this.repeatBlocks = repeatBlocks;
-            this.orderConfigs = orderConfigs;
-            baseBlockTable = new BlockTable(allData, this);
-            baseTrialTable = new TrialTable(allData, this, baseBlockTable, shuffleTrialOrder, RepeatTrials,
-                                            runner.VariableConfigFile.ColumnNamesSettings);
-            Enable();
+            baseBlockTable = new BlockTable(this, variableConfig);
+            baseTrialTable = new TrialTable(this, baseBlockTable, variableConfig);
         }
 
-        void Enable() {
-            ExperimentEvents.OnBlockOrderChosen += BlockOrderSelected;
-            ExperimentEvents.OnStartRunningExperiment += RunningExperimentStarted;
-        }
-
-
-
-        public void Disable() {
-            ExperimentEvents.OnBlockOrderChosen -= BlockOrderSelected;
-            ExperimentEvents.OnStartRunningExperiment -= RunningExperimentStarted;
-        }
-
-        void BlockOrderSelected(int selectedOrderIndex) {
-            OrderedBlockTable = GetOrderedBlockTable(selectedOrderIndex);
+        public void FinalizeDesign(int selectedOrderIndex) {
+            //TODO make sure this is called
+            OrderedBlockTable = baseBlockTable.GetOrderedBlockTable(selectedOrderIndex);
             CreateAndAddBlocks();
+            WriteParticipantValuesToTables();
         }
+
 
         public DataTable GetBlockOrderTable(int sessionOrderChosenIndex) {
-            BlockTable orderedBlockTable = GetOrderedBlockTable(sessionOrderChosenIndex);
+            BlockTable orderedBlockTable = baseBlockTable.GetOrderedBlockTable(sessionOrderChosenIndex);
             return orderedBlockTable;
         }
-
-        private BlockTable GetOrderedBlockTable(int OrderChosenIndex) {
-            BlockTable orderedBlockTable;
-            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed) {
-                orderedBlockTable = baseBlockTable.GetBlockOrderTableFromPermutations(OrderChosenIndex);
-            }
-            else {
-                orderedBlockTable = baseBlockTable.GetBlockOrderTableFromOrderConfigs(OrderChosenIndex, orderConfigs);
-            }
-            
-            return orderedBlockTable;
-        }
-
         
 
         void CreateAndAddBlocks() {
@@ -148,14 +70,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 Blocks.Add(newBlock);
             }
             else {
-                for (int j = 0; j < repeatBlocks; j++) {
-                    for (int i = 0; i < OrderedBlockTable.Rows.Count; i++) {
-                        DataRow orderedBlockRow = OrderedBlockTable.Rows[i];
-                        if (shuffleTrialsBetweenBlocks) {
+                for (int blockRepetitionCount = 0; blockRepetitionCount < variableConfig.RepeatAllBlocks; blockRepetitionCount++) {
+                    for (int rowIndex = 0; rowIndex < OrderedBlockTable.Rows.Count; rowIndex++) {
+                        DataRow orderedBlockRow = OrderedBlockTable.Rows[rowIndex];
+                        if (variableConfig.ShuffleDifferentlyForEachBlock) {
                             trialTable = trialTable.Shuffle();
                         }
 
-                        trialTable = UpdateTrialTableWithBlockValues(trialTable, orderedBlockRow, (j*OrderedBlockTable.Rows.Count)+(i));
+                        trialTable = AddBlockValuesToTrialTables(trialTable, orderedBlockRow, (blockRepetitionCount*OrderedBlockTable.Rows.Count)+(rowIndex));
                         string blockIdentity = orderedBlockRow.AsStringWithColumnNames(separator: ", ");
                         Block newBlock = CreateNewBlock(trialTable, blockIdentity, orderedBlockRow);
                         Blocks.Add(newBlock);
@@ -163,13 +85,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 }
             }
 
-         
-         
-
             //Debug.Log($"Blocks added {Blocks.Count}");
         }
 
-        DataTable UpdateTrialTableWithBlockValues(DataTable blockTrialTable, DataRow blockTableRow, int blockIndex) {
+        DataTable AddBlockValuesToTrialTables(DataTable blockTrialTable, DataRow blockTableRow, int blockIndex) {
             DataTable newTable = blockTrialTable.Copy();
 
             foreach (DataColumn blockTableColumn in blockTableRow.Table.Columns) {
@@ -183,31 +102,26 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         void AddTrialAndBlockIndicesWhenNoBlocks(DataTable trialTable) {
-            for (int i = 0; i < trialTable.Rows.Count; i++) {
-                DataRow trialRow = trialTable.Rows[i];
-                trialRow[runner.VariableConfigFile.ColumnNamesSettings.BlockIndex] = 0;
-                trialRow[runner.VariableConfigFile.ColumnNamesSettings.TrialIndex] = i;
-                trialRow[runner.VariableConfigFile.ColumnNamesSettings.TotalTrialIndex] = i;
+            for (int rowIndex = 0; rowIndex < trialTable.Rows.Count; rowIndex++) {
+                DataRow trialRow = trialTable.Rows[rowIndex];
+                trialRow[variableConfig.ColumnNamesSettings.BlockIndex] = 0;
+                trialRow[variableConfig.ColumnNamesSettings.TrialIndex] = rowIndex;
+                trialRow[variableConfig.ColumnNamesSettings.TotalTrialIndex] = rowIndex;
             }
         }
 
         void AddTrialAndBlockIndicesWhenThereAreBlocks(DataRow blockTableRow, int blockIndex, DataTable newTable,
                                                        string  columnName,    int startingTotalTrialIndex) {
-            for (int i = 0; i < newTable.Rows.Count; i++) {
-                DataRow trialRow = newTable.Rows[i];
+            for (int rowIndex = 0; rowIndex < newTable.Rows.Count; rowIndex++) {
+                DataRow trialRow = newTable.Rows[rowIndex];
                 trialRow[columnName] = blockTableRow[columnName];
-                trialRow[runner.VariableConfigFile.ColumnNamesSettings.BlockIndex] = blockIndex;
-                trialRow[runner.VariableConfigFile.ColumnNamesSettings.TrialIndex] = i;
-                trialRow[runner.VariableConfigFile.ColumnNamesSettings.TotalTrialIndex] = startingTotalTrialIndex;
+                trialRow[variableConfig.ColumnNamesSettings.BlockIndex] = blockIndex;
+                trialRow[variableConfig.ColumnNamesSettings.TrialIndex] = rowIndex;
+                trialRow[variableConfig.ColumnNamesSettings.TotalTrialIndex] = startingTotalTrialIndex;
                 startingTotalTrialIndex++;
             }
         }
-
-
-        void RunningExperimentStarted(Session session) {
-            WriteParticipantValuesToTables();
-        }
-
+        
         void WriteParticipantValuesToTables() {
             foreach (ParticipantVariable participantVariable in sortedVariables.ParticipantVariables) {
                 participantVariable.AddValuesTo(baseTrialTable);
@@ -250,5 +164,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             return table;
         }
+
+        
     }
 }

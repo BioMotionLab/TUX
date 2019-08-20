@@ -66,27 +66,16 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 return;
             }
             VariableConfigFile.Validate();
-            
-            
 
-            Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, 
-                                                        VariableConfigFile.RepeatTrialsInBlock, 
-                                                        VariableConfigFile.ShuffleDifferentlyForEachBlock, 
-                                                        VariableConfigFile.RepeatAllBlocks, 
-                                                        VariableConfigFile.OrderConfigs);
-            if (Design == null) {
-                throw new NullReferenceException("Design null");
-            }
-
-            experiment = (Experiment)Activator.CreateInstance(ExperimentType, this, Design);
-
-            if (experiment == null) {
-                throw new NullReferenceException("Experiment object instance could not be created");
-            }
-            
             Session = Session.LoadSessionData();
             if (Session == null) {
                 throw new NullReferenceException("Session nul and not created properly");
+            }
+            
+            
+            Design = ExperimentDesign.CreateFrom(VariableConfigFile, this);
+            if (Design == null) {
+                throw new NullReferenceException("Design null");
             }
             
             if (!WindowOpen) {
@@ -129,11 +118,19 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
 
+            
+            
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);
 
-            ExperimentEvents.ExperimentStarted();
+            experiment = (Experiment)Activator.CreateInstance(ExperimentType, this, Design);
+
+            if (experiment == null) {
+                throw new NullReferenceException("Experiment object instance could not be created");
+            }
             
+            ExperimentEvents.ExperimentStarted();
+
             StartCoroutine(VariableConfigFile.ControlSettings.Run());
             ExperimentEvents.StartPart(experiment);
 

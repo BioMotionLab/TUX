@@ -43,7 +43,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         string outputFolder;
         string fileName;
         bool started = false;
-        int orderChosenIndex = 0;
         string fileErrorLog;
         bool isValidFilePath = true;
         static bool IsOpen => instance != null;
@@ -87,7 +86,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         void InitWindow(ExperimentRunner runner) {
             this.runner = runner;
             session = runner.Session;
-            
+
+            OrderChosenIndex = 0;
             currentBlockIndex = -1;
             currentTrialIndex = -1;
 
@@ -229,10 +229,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             if (!isValidFilePath) {
                 return;
             }
-            
-            
-            session.BlockChosen = true;
-            
+           
             started = true;
             ExperimentEvents.StartRunningExperiment(session);
         }
@@ -240,8 +237,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         void StartInDebugMode() {
             debugMode = true;
             session.DebugMode = true;
-            session.OrderChosenIndex = 0;
-            session.BlockChosen = true;
+     
             started = true;
             ExperimentEvents.StartRunningExperiment(session);
         }
@@ -335,9 +331,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         /// <returns></returns>
         void ShowBlockOrderSettings() {
             if (!runner.Design.HasBlocks) {
-                    orderChosenIndex = 0;
-                    session.BlockChosen = true;
-                    return;
+                return;
             }
 
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
@@ -348,11 +342,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             try {
                 List<string> blockPermutations = runner.Design.BlockPermutationsStrings;
                 if (blockPermutations.Count == 1) {
-                    session.BlockChosen = true;
-                    session.OrderChosenIndex = 0;
                 }
                 else {
-                    session.OrderChosenIndex = EditorGUILayout.Popup(session.OrderChosenIndex, blockPermutations.ToArray());
+                    OrderChosenIndex = EditorGUILayout.Popup(OrderChosenIndex, blockPermutations.ToArray());
                 }
             }
             catch (TooManyPermutationsException e) {
@@ -361,16 +353,18 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             }
             
             
-            DataTable selectedOrderTable = runner.Design.GetBlockOrderTable(session.OrderChosenIndex);
+            DataTable selectedOrderTable = runner.Design.GetBlockOrderTable(OrderChosenIndex);
             
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Chosen block order:");
 
-            ShowBlockTable(selectedOrderTable, orderSelected: false);
+            ShowBlockTable(selectedOrderTable, false);
             
             EditorGUILayout.EndVertical();
             
         }
+
+        public int OrderChosenIndex;
 
         /// <summary>
         /// Display the Runner controls

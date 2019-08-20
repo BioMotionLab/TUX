@@ -24,8 +24,13 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public ColumnNamesSettings ColumnNamesSettings;
         public ControlSettings ControlSettings;
         public GuiSettings GuiSettings;
+
+        [Space]
+        [Header("Advanced:")]
+        [Space]
+        [SerializeField]
+        public TrialTableGenerationMode TrialTableGenerationMode = TrialTableGenerationMode.OnTheFly;
         
-        [Header("Manual Block Order Config:")]
         [SerializeField]
         public List<OrderConfig> OrderConfigs = new List<OrderConfig>();
 
@@ -43,5 +48,8 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                                                  "Please drag control settings into the proper place in the config file");
             }
         }
+
+        public List<Variable> AllVariables => Factory.AllVariables;
     }
+    
 }

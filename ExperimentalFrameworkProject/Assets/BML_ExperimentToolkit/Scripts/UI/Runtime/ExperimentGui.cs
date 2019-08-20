@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
@@ -54,14 +53,25 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             ExperimentEvents.OnInitExperiment -= Init;
         }
 
-        void Init(ExperimentRunner runner) {
+        void Init(ExperimentRunner unused) {
             session = runner.Session;
             session.DebugMode = false;
             if (session == null) throw new NullReferenceException("session null in gui");
-            SessionStatusText.text = session != null ? "New session successfully created and linked to experiment" : "no session detected";
+            SessionStatusText.text = session != null ? 
+                "New session successfully created and linked to experiment" : 
+                "no session detected";
 
-            ShowParticipantVariables();
-            ShowBlockOrderSettings();
+
+            switch (session.TrialTableGenerationMode) {
+                case TrialTableGenerationMode.OnTheFly:
+                    ShowBlockOrderSettings();
+                    ShowParticipantVariables();
+                    break;
+                case TrialTableGenerationMode.PreGenerated:
+                    throw new NotImplementedException();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         void ShowParticipantVariables() {
@@ -69,34 +79,27 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             List<Variable> variables = runner.VariableConfigFile.Factory.AllVariables;
 
             foreach (Variable variable in variables) {
+                if (!(variable is ParticipantVariable participantVariable)) continue;
                 
-                if (variable is ParticipantVariable participantVariable) {
-                    
-                    ParticipantVariableEntry newParticipantVariableEntry = Instantiate(ParticipantVariableEntryPrefab, ParticipantVariablesPanel);
-                    
-                    participantVariableEntries.Add(newParticipantVariableEntry);
-                    
-                    newParticipantVariableEntry.Display(participantVariable);
-                }
+                ParticipantVariableEntry newParticipantVariableEntry = 
+                    Instantiate(ParticipantVariableEntryPrefab, ParticipantVariablesPanel);
+                participantVariableEntries.Add(newParticipantVariableEntry);
+                newParticipantVariableEntry.Display(participantVariable);
             }
         }
-        
         
         void ShowBlockOrderSettings() {
             
             if (!runner.Design.HasBlocks) {
                 session.OrderChosenIndex = 0;
-                session.BlockChosen = true;
                 BlockOrderSelector.gameObject.SetActive(false);
                 BlockOrderTitle.text = "No block variables configured";
                 return;
-                
             }
-            
+
             try {
                 List<string> blockPermutations = runner.Design.BlockPermutationsStrings;
                 if (blockPermutations.Count == 1) {
-                    session.BlockChosen = true;
                     session.OrderChosenIndex = 0;
                 }
                 else {
@@ -111,6 +114,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
                 Console.WriteLine(e);
                 throw;
             }
+            
         }
 
         [PublicAPI]
@@ -123,7 +127,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             if (!InputsValid()) return;
 
             session.OrderChosenIndex = BlockOrderSelector.value-1; // subtract 1 because added first one in.
-            session.BlockChosen = true;
             
             gameObject.SetActive(false);
             ExperimentEvents.StartRunningExperiment(session);
@@ -159,9 +162,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         }
 
         
-
-       
-
         void ValidateParticipantVariableValues(ref string errorLog, ref bool isValid) {
             foreach (ParticipantVariableEntry participantVariableEntry in participantVariableEntries) {
                 try {
@@ -184,7 +184,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
 
         void ValidateBlockOrderChosen(ref string errorLog, ref bool isValid) {
             string selectedText = BlockOrderSelector.options[BlockOrderSelector.value].text;
-
             if (selectedText != SelectText) return;
             string errorString = $"Need to select block order value";
             errorLog = LogErrorIntoString(errorLog, errorString);
