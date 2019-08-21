@@ -13,28 +13,17 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public class BlockTable {
 
         readonly DataTable baseBlockTable;
-        ExperimentDesign design;
         BlockTable currentOrderedTable;
         int currentOrderedTableIndex = -1;
           
         public const int MaxBlockPermutationsAllowed = 3;
         readonly List<OrderConfig> orderConfigs;
-        
-        public BlockTable(ExperimentDesign design, VariableConfig variableConfig) {
-            orderConfigs = variableConfig.OrderConfigs;
-            this.design = design;
-            //Get block Variables
-            List<Variable> blockVariables = new List<Variable>();
-            foreach (Variable datum in variableConfig.AllVariables) {
-                if (datum.TypeOfVariable == VariableType.Independent) {
-                    IndependentVariable independentVariable = (IndependentVariable)datum;
-                    if (independentVariable.Block) {
-                        blockVariables.Add(independentVariable);
-                    }
-                }
-            }
+        readonly IndependentVariables blockVariables;
 
-            baseBlockTable = design.SortAndAddIVs(blockVariables, true);
+        public BlockTable(VariableConfig variableConfig) {
+            orderConfigs = variableConfig.OrderConfigs;
+            blockVariables = variableConfig.Variables.BlockVariables;
+            baseBlockTable = AddVariablesToTable();
    
         }
 
@@ -44,6 +33,23 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public string AsString() {
             return baseBlockTable.AsString();
+        }
+        
+        DataTable AddVariablesToTable() {
+            DataTable table = new DataTable();
+
+            //Order matters.
+            foreach (IndependentVariable independentVariable in blockVariables.Looped) {
+                table = independentVariable.AddValuesTo(table);
+            }
+            foreach (IndependentVariable independentVariable in blockVariables.Balanced) {
+                table = independentVariable.AddValuesTo(table);
+            }
+            foreach (IndependentVariable independentVariable in blockVariables.Probability) {
+                table = independentVariable.AddValuesTo(table);
+            }
+
+            return table;
         }
         
         public static implicit operator DataTable(BlockTable table) {

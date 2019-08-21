@@ -4,12 +4,13 @@ using BML_Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using BML_ExperimentToolkit.Scripts.Settings;
 using BML_Utilities.Extensions;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
-    public partial class ExperimentDesign {
+    public class ExperimentDesign {
 
         readonly ExperimentRunner runner;
 
@@ -25,39 +26,36 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public bool HasBlocks => baseBlockTable.HasBlocks;
         
-        SortedVariableContainer sortedVariables;
-        readonly VariableConfig variableConfig;
+        readonly VariableConfig config;
+        ColumnNamesSettings columnNames;
 
         public List<string> BlockPermutationsStrings => baseBlockTable.BlockPermutationsStrings;
         public static int MaxBlockPermutationsAllowed => BlockTable.MaxBlockPermutationsAllowed;
         
-        
-        public static ExperimentDesign CreateFrom(VariableConfig variableConfigFile, ExperimentRunner experimentRunner) {
-            return new ExperimentDesign(variableConfigFile, experimentRunner);
+        public static ExperimentDesign CreateFrom(VariableConfig configFile, ExperimentRunner experimentRunner) {
+            return new ExperimentDesign(configFile, experimentRunner);
         }
         
-        public ExperimentDesign(VariableConfig variableConfig,             
+        ExperimentDesign(VariableConfig config,             
                                 ExperimentRunner runner) {
-            this.variableConfig = variableConfig;
+            this.config = config;
             this.runner = runner;
-            baseBlockTable = new BlockTable(this, variableConfig);
-            baseTrialTable = new TrialTable(this, baseBlockTable, variableConfig);
+            columnNames = config.ColumnNamesSettings;
+            baseBlockTable = new BlockTable(config);
+            baseTrialTable = new TrialTable(baseBlockTable, config);
         }
 
         public void FinalizeDesign(int selectedOrderIndex) {
-            //TODO make sure this is called
             OrderedBlockTable = baseBlockTable.GetOrderedBlockTable(selectedOrderIndex);
             CreateAndAddBlocks();
             WriteParticipantValuesToTables();
         }
-
-
+        
         public DataTable GetBlockOrderTable(int sessionOrderChosenIndex) {
             BlockTable orderedBlockTable = baseBlockTable.GetOrderedBlockTable(sessionOrderChosenIndex);
             return orderedBlockTable;
         }
         
-
         void CreateAndAddBlocks() {
             Blocks = new List<Block>();
 
@@ -70,15 +68,15 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 Blocks.Add(newBlock);
             }
             else {
-                for (int blockRepetitionCount = 0; blockRepetitionCount < variableConfig.RepeatAllBlocks; blockRepetitionCount++) {
+                for (int blockRepetitionCount = 0; blockRepetitionCount < config.RepeatAllBlocks; blockRepetitionCount++) {
                     for (int rowIndex = 0; rowIndex < OrderedBlockTable.Rows.Count; rowIndex++) {
                         DataRow orderedBlockRow = OrderedBlockTable.Rows[rowIndex];
-                        if (variableConfig.ShuffleDifferentlyForEachBlock) {
-                            trialTable = trialTable.Shuffle();
+                        if (config.ShuffleDifferentlyForEachBlock) {
+                            trialTable = trialTable.ShuffleRows();
                         }
 
                         trialTable = AddBlockValuesToTrialTables(trialTable, orderedBlockRow, (blockRepetitionCount*OrderedBlockTable.Rows.Count)+(rowIndex));
-                        string blockIdentity = orderedBlockRow.AsStringWithColumnNames(separator: ", ");
+                        string blockIdentity = orderedBlockRow.AsStringWithColumnNames(", ");
                         Block newBlock = CreateNewBlock(trialTable, blockIdentity, orderedBlockRow);
                         Blocks.Add(newBlock);
                     }
@@ -104,9 +102,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         void AddTrialAndBlockIndicesWhenNoBlocks(DataTable trialTable) {
             for (int rowIndex = 0; rowIndex < trialTable.Rows.Count; rowIndex++) {
                 DataRow trialRow = trialTable.Rows[rowIndex];
-                trialRow[variableConfig.ColumnNamesSettings.BlockIndex] = 0;
-                trialRow[variableConfig.ColumnNamesSettings.TrialIndex] = rowIndex;
-                trialRow[variableConfig.ColumnNamesSettings.TotalTrialIndex] = rowIndex;
+                trialRow[columnNames.BlockIndex] = 0;
+                trialRow[columnNames.TrialIndex] = rowIndex;
+                trialRow[columnNames.TotalTrialIndex] = rowIndex;
             }
         }
 
@@ -115,15 +113,15 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             for (int rowIndex = 0; rowIndex < newTable.Rows.Count; rowIndex++) {
                 DataRow trialRow = newTable.Rows[rowIndex];
                 trialRow[columnName] = blockTableRow[columnName];
-                trialRow[variableConfig.ColumnNamesSettings.BlockIndex] = blockIndex;
-                trialRow[variableConfig.ColumnNamesSettings.TrialIndex] = rowIndex;
-                trialRow[variableConfig.ColumnNamesSettings.TotalTrialIndex] = startingTotalTrialIndex;
+                trialRow[columnNames.BlockIndex] = blockIndex;
+                trialRow[columnNames.TrialIndex] = rowIndex;
+                trialRow[columnNames.TotalTrialIndex] = startingTotalTrialIndex;
                 startingTotalTrialIndex++;
             }
         }
         
         void WriteParticipantValuesToTables() {
-            foreach (ParticipantVariable participantVariable in sortedVariables.ParticipantVariables) {
+            foreach (ParticipantVariable participantVariable in config.Variables.ParticipantVariables) {
                 participantVariable.AddValuesTo(baseTrialTable);
                 foreach (Block block in Blocks) {
                     participantVariable.AddValuesTo(block.TrialTable);
@@ -137,34 +135,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                                                               runner,
                                                               trialTable,
                                                               blockIdentity,
-                                                              runner.TrialType,
                                                               dataRow
                                                              );
             return newBlock;
         }
 
-        public DataTable SortAndAddIVs(List<Variable> allData, bool block = false) {
-            DataTable table = new DataTable();
-            
-            sortedVariables = new SortedVariableContainer(allData, block);
 
-            //Order matters.
-            foreach (IndependentVariable independentVariable in sortedVariables.BalancedIndependentVariables) {
-                table = independentVariable.AddValuesTo(table);
-            }
-            foreach (IndependentVariable independentVariable in sortedVariables.LoopedIndependentVariables) {
-                table = independentVariable.AddValuesTo(table);
-            }
-            foreach (IndependentVariable independentVariable in sortedVariables.ProbabilityIndependentVariables) {
-                table = independentVariable.AddValuesTo(table);
-            }
-            foreach (DependentVariable dependentVariable in sortedVariables.DependentVariables) {
-                table = dependentVariable.AddValuesTo(table);
-            }
-
-            return table;
-        }
-
-        
     }
 }

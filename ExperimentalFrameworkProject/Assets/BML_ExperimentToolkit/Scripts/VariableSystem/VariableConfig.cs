@@ -49,7 +49,8 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             }
         }
 
-        public List<Variable> AllVariables => Factory.AllVariables;
+        public Variables Variables => Factory.Variables;
+        
     }
     
 }

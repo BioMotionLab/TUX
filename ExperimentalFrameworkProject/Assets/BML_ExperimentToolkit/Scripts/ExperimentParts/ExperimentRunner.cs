@@ -5,6 +5,7 @@ using BML_ExperimentToolkit.Scripts.UI;
 using BML_ExperimentToolkit.Scripts.UI.Runtime;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
@@ -22,12 +23,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Stores the script of the custom Trial used in this Runner.
         /// Override this to customize trial behaviour
         /// </summary>
+        [PublicAPI]
         public virtual Type TrialType => typeof(SimpleTrial);
 
         /// <summary>
         /// Stores the script of the custom Block used in this Runner.
         /// Override this to customize block behaviour
         /// </summary>
+        [PublicAPI]
         public virtual Type BlockType => typeof(SimpleBlock);
 
         /// <summary>
@@ -35,6 +38,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Override this to customize Runner behaviour
         /// </summary>
         // ReSharper disable once MemberCanBeProtected.Global
+        [PublicAPI]
         public virtual Type ExperimentType => typeof(SimpleExperiment);
 
         [HideInInspector]
@@ -57,7 +61,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             ExperimentEvents.CheckMainWindowIsOpen(this);
 
             #endif
-            
 
             //check if config file is loaded
             if (VariableConfigFile == null) {
@@ -71,8 +74,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             if (Session == null) {
                 throw new NullReferenceException("Session nul and not created properly");
             }
-            
-            
+
             Design = ExperimentDesign.CreateFrom(VariableConfigFile, this);
             if (Design == null) {
                 throw new NullReferenceException("Design null");
@@ -83,7 +85,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 gui.gameObject.SetActive(true);
                 gui.RegisterExperiment(this);
             }
-            
             
             ExperimentEvents.InitExperiment(this);
             
@@ -106,7 +107,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         void OnDisable() {
             ExperimentEvents.OnStartRunningExperiment -= StartRunningRunningExperiment;
             ExperimentEvents.OnEndExperiment -= EndExperiment;
-            Design?.Disable();
             outputManager?.Disable();
             experiment?.Disable();
         
@@ -118,7 +118,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
 
-            
+            Design.FinalizeDesign(currentSession.BlockOrderChosenIndex);
             
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);

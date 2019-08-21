@@ -45,7 +45,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         [SerializeField]
         public bool DebugMode;
         
-        public int    OrderChosenIndex = 0;
+        public int    BlockOrderChosenIndex = 0;
 
         const string SessionDataFileName = "BML_last_experiment_session.json";
         const string SessionLocation = "BML_ExperimentToolkit/Data";

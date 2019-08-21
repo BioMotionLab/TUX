@@ -9,18 +9,45 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         DataTable baseTrialTable;
 
-        readonly VariableConfig variableConfig;
+        readonly Variables variables;
         readonly ColumnNamesSettings columnNames;
         public int NumberOfTrials => baseTrialTable.Rows.Count;
 
-        public TrialTable(ExperimentDesign design,
-                          BlockTable baseBlockTable,
+        public TrialTable(BlockTable baseBlockTable,
                           VariableConfig variableConfig) {
-                          
-            this.variableConfig = variableConfig;
-            baseTrialTable = design.SortAndAddIVs(variableConfig.AllVariables);
+            
+            variables = variableConfig.Variables;
             columnNames = variableConfig.ColumnNamesSettings;
-            //Repeat all trials if specified
+            
+            
+            baseTrialTable = AddVariablesToTable();
+            
+            RepeatTrialsIfNeeded(variableConfig);
+
+            //ShuffleRows trial order if needed
+            ShuffleTrialsIfNeeded(variableConfig);
+            
+            AddMetaColumns(baseBlockTable);
+        }
+
+        void AddMetaColumns(BlockTable baseBlockTable) {
+            AddBlockColumnsFrom(baseBlockTable);
+            AddTotalTrialIndexColumn();
+            AddTrialIndexColumn();
+            AddBlockNumberColumn();
+            AddSuccessColumn();
+            AddAttemptsColumn();
+            AddSkippedColumn();
+            AddTrialTimeColumn();
+        }
+
+        void ShuffleTrialsIfNeeded(VariableConfig variableConfig) {
+            if (variableConfig.ShuffleTrialOrder) {
+                baseTrialTable = baseTrialTable.ShuffleRows();
+            }
+        }
+
+        void RepeatTrialsIfNeeded(VariableConfig variableConfig) {
             if (variableConfig.RepeatTrialsInBlock > 1) {
                 DataTable repeatedTable = baseTrialTable.Clone();
                 for (int i = 0; i < variableConfig.RepeatTrialsInBlock; i++) {
@@ -31,31 +58,33 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
                 baseTrialTable = repeatedTable;
             }
-
-            //Shuffle trial order if needed
-            if (variableConfig.ShuffleTrialOrder) {
-                baseTrialTable = baseTrialTable.Shuffle();
-            }
-
-            AddBlockColumnsFrom(baseBlockTable);
-
-            AddTotalTrialIndexColumnTo();
-            AddTrialIndexColumnTo();
-            AddBlockNumberColumnTo();
-            AddSuccessColumnTo();
-            AddAttemptsColumnTo();
-            AddSkippedColumnTo();
-            AddTrialTimeColumnTo();
-
         }
 
         public static implicit operator DataTable(TrialTable table) {
             return table.baseTrialTable;
         }
+        
+        DataTable AddVariablesToTable() {
+            DataTable table = new DataTable();
 
-        public DataRowCollection Rows => baseTrialTable.Rows;
+            //Order matters.
+            foreach (IndependentVariable independentVariable in variables.IndependentVariables.Looped) {
+                table = independentVariable.AddValuesTo(table);
+            }
+            foreach (IndependentVariable independentVariable in variables.IndependentVariables.Balanced) {
+                table = independentVariable.AddValuesTo(table);
+            }
+            foreach (IndependentVariable independentVariable in variables.IndependentVariables.Probability) {
+                table = independentVariable.AddValuesTo(table);
+            }
+            foreach (DependentVariable dependentVariable in variables.DependentVariables) {
+                table = dependentVariable.AddValuesTo(table);
+            }
 
-        void AddSkippedColumnTo() {
+            return table;
+        }
+        
+        void AddSkippedColumn() {
             DataColumn skippedColumn = new DataColumn {
                 DataType = typeof(bool),
                 ColumnName = columnNames.Skipped,
@@ -68,7 +97,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
         }
 
-        void AddAttemptsColumnTo() {
+        void AddAttemptsColumn() {
             DataColumn attemptsColumn = new DataColumn {
                 DataType = typeof(int),
                 ColumnName = columnNames.Attempts,
@@ -81,7 +110,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
         }
 
-        void AddSuccessColumnTo() {
+        void AddSuccessColumn() {
             DataColumn successColumn = new DataColumn {
                 DataType = typeof(bool),
                 ColumnName = columnNames.Completed,
@@ -94,7 +123,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
         }
 
-        void AddTrialIndexColumnTo() {
+        void AddTrialIndexColumn() {
             DataColumn trialIndexColumn = new DataColumn {
                 DataType = typeof(int),
                 ColumnName = columnNames.TrialIndex,
@@ -108,7 +137,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
         }
 
-        void AddTotalTrialIndexColumnTo() {
+        void AddTotalTrialIndexColumn() {
             DataColumn trialIndexColumn = new DataColumn {
                 DataType = typeof(int),
                 ColumnName = columnNames.TotalTrialIndex,
@@ -122,7 +151,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
         }
 
-        void AddBlockNumberColumnTo() {
+        void AddBlockNumberColumn() {
             DataColumn blockIndexColumn = new DataColumn {
                 DataType = typeof(int),
                 ColumnName = columnNames.BlockIndex,
@@ -135,7 +164,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 row[columnNames.BlockIndex] = columnNames.DefaultMissingValue;
             }
         }
-        void AddTrialTimeColumnTo() {
+        void AddTrialTimeColumn() {
             DataColumn trailTimeColumn = new DataColumn {
                                                              DataType = typeof(float),
                                                              ColumnName = columnNames.TrialTime,

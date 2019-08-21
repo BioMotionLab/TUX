@@ -266,16 +266,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             
             
             EditorGUILayout.LabelField("Fill In Participant Variables:", EditorStyles.boldLabel);
-            List<Variable> variables = runner.VariableConfigFile.Factory.AllVariables;
 
 
-            foreach (Variable variable in variables) {
-                
-                
-
-                if (variable.TypeOfVariable != VariableType.Participant) continue;
-
-                ParticipantVariable participantVariable = (ParticipantVariable) variable;
+            foreach (ParticipantVariable participantVariable in runner.VariableConfigFile.Factory.Variables.ParticipantVariables) {
 
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField(participantVariable.Name + ":", LabelWidth);
@@ -311,7 +304,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                         case SupportedDataTypes.Vector3:
                         case SupportedDataTypes.CustomDataType_NotYetImplemented:
                         case SupportedDataTypes.ChooseType:
-                            break;
+                            throw new NotImplementedException();
                         default:
                             throw new ArgumentOutOfRangeException();
                     }

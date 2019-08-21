@@ -76,10 +76,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
 
         void ShowParticipantVariables() {
 
-            List<Variable> variables = runner.VariableConfigFile.Factory.AllVariables;
+            List<ParticipantVariable> participantVariables = runner.VariableConfigFile.Factory.Variables.ParticipantVariables;
 
-            foreach (Variable variable in variables) {
-                if (!(variable is ParticipantVariable participantVariable)) continue;
+            foreach (ParticipantVariable participantVariable in participantVariables) {
                 
                 ParticipantVariableEntry newParticipantVariableEntry = 
                     Instantiate(ParticipantVariableEntryPrefab, ParticipantVariablesPanel);
@@ -91,7 +90,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         void ShowBlockOrderSettings() {
             
             if (!runner.Design.HasBlocks) {
-                session.OrderChosenIndex = 0;
+                session.BlockOrderChosenIndex = 0;
                 BlockOrderSelector.gameObject.SetActive(false);
                 BlockOrderTitle.text = "No block variables configured";
                 return;
@@ -100,7 +99,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             try {
                 List<string> blockPermutations = runner.Design.BlockPermutationsStrings;
                 if (blockPermutations.Count == 1) {
-                    session.OrderChosenIndex = 0;
+                    session.BlockOrderChosenIndex = 0;
                 }
                 else {
                     BlockOrderSelector.options.Clear();
@@ -126,7 +125,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             
             if (!InputsValid()) return;
 
-            session.OrderChosenIndex = BlockOrderSelector.value-1; // subtract 1 because added first one in.
+            session.BlockOrderChosenIndex = BlockOrderSelector.value-1; // subtract 1 because added first one in.
             
             gameObject.SetActive(false);
             ExperimentEvents.StartRunningExperiment(session);

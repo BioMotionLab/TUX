@@ -89,43 +89,44 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         #endregion
 
 
-        public List<Variable> AllVariables {
+        public Variables Variables {
             get {
 
-                List<Variable> variables = new List<Variable>();
+                List<Variable> allVariables = new List<Variable>();
 
                 //IVs
-                variables.AddRange(IntIVs);
-                variables.AddRange(FloatIVs);
-                variables.AddRange(StringIVs);
-                variables.AddRange(BoolIVs);
-                variables.AddRange(GameObjectIVs);
-                variables.AddRange(Vector2IVs);
-                variables.AddRange(Vector3IVs);
-                variables.AddRange(CustomDataTypeIVs);
+                allVariables.AddRange(IntIVs);
+                allVariables.AddRange(FloatIVs);
+                allVariables.AddRange(StringIVs);
+                allVariables.AddRange(BoolIVs);
+                allVariables.AddRange(GameObjectIVs);
+                allVariables.AddRange(Vector2IVs);
+                allVariables.AddRange(Vector3IVs);
+                allVariables.AddRange(CustomDataTypeIVs);
 
                 //DVs
-                variables.AddRange(IntDVs);
-                variables.AddRange(FloatDVs);
-                variables.AddRange(StringDVs);
-                variables.AddRange(BoolDVs);
-                variables.AddRange(GameObjectDVs);
-                variables.AddRange(Vector2DVs);
-                variables.AddRange(Vector3DVs);
-                variables.AddRange(CustomDataTypeDVs);
+                allVariables.AddRange(IntDVs);
+                allVariables.AddRange(FloatDVs);
+                allVariables.AddRange(StringDVs);
+                allVariables.AddRange(BoolDVs);
+                allVariables.AddRange(GameObjectDVs);
+                allVariables.AddRange(Vector2DVs);
+                allVariables.AddRange(Vector3DVs);
+                allVariables.AddRange(CustomDataTypeDVs);
                 
 
                 //PARTICIPANT VARIABLES
-                variables.AddRange(IntParticipantVariables);    
-                variables.AddRange(FloatParticipantVariables);
-                variables.AddRange(StringParticipantVariables);
-                variables.AddRange(BoolParticipantVariables);
-                variables.AddRange(GameObjectParticipantVariables);
-                variables.AddRange(Vector2ParticipantVariables);
-                variables.AddRange(Vector3ParticipantVariables);
-                variables.AddRange(CustomDataParticipantVariables);
+                allVariables.AddRange(IntParticipantVariables);    
+                allVariables.AddRange(FloatParticipantVariables);
+                allVariables.AddRange(StringParticipantVariables);
+                allVariables.AddRange(BoolParticipantVariables);
+                allVariables.AddRange(GameObjectParticipantVariables);
+                allVariables.AddRange(Vector2ParticipantVariables);
+                allVariables.AddRange(Vector3ParticipantVariables);
+                allVariables.AddRange(CustomDataParticipantVariables);
                 
-                return variables;
+                
+                return new Variables(allVariables);
             }
         }
 

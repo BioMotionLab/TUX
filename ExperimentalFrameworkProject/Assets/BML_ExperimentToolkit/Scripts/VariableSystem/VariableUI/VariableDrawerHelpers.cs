@@ -360,7 +360,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                 if (prob.floatValue < 0 || prob.floatValue > 1) {
                     throw new
                         ArgumentOutOfRangeException(
-                            $"Can't have a ProbabilityIndependentVariables outside of range 0-1, prob: {prob.floatValue} ");
+                            $"Can't have a Probability outside of range 0-1, prob: {prob.floatValue} ");
                 }
 
                 runningTotal += prob.floatValue;

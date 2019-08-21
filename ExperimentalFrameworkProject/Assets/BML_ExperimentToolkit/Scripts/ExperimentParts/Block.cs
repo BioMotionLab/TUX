@@ -34,13 +34,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         protected Block(ExperimentRunner runner,
                      DataTable trialTable, 
-                     string identity, 
-                     Type trialType,
+                     string identity,
                      DataRow dataRow) 
                         : base(runner) {
             TrialTable = trialTable;
             Identity = identity;
-            MakeTrials(trialType);
+            MakeTrials();
             data = dataRow;
         }
 
@@ -48,12 +47,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Makes the trials for this block.
         /// </summary>
         /// <param name="trialType">Type of the trial.</param>
-        void MakeTrials(Type trialType) {
+        void MakeTrials() {
 
             Trials = new List<Trial>();
             
             foreach (DataRow row in TrialTable.Rows) {
-                Trial newTrial = (Trial)Activator.CreateInstance(trialType, Runner, row);
+                Trial newTrial = (Trial)Activator.CreateInstance(Runner.TrialType, Runner, row);
                 Trials.Add(newTrial);
                 
             }
