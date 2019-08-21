@@ -25,7 +25,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         [SerializeField]
         // ReSharper disable once InconsistentNaming
-        private string outputFileName = "";
+        string outputFileName = "";
 
         public string OutputFileName {
             get => DebugMode ? DebugFileName : outputFileName;
@@ -34,7 +34,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         [SerializeField]
         // ReSharper disable once InconsistentNaming
-        private string outputFolder = "";
+        string outputFolder = "";
 
         public string OutputFolder {
             get => DebugMode ? Path.Combine(Application.dataPath + DebugFolder) : outputFolder;
@@ -127,7 +127,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 string dataAsJason = File.ReadAllText(filePath);
                 session = JsonUtility.FromJson<Session>(dataAsJason);
                 //Debug.Log($"Session loaded: {filePath}");
-                }
+            }
             else {
                 Debug.Log("Previous Session file not found, creating new");
                 session = new Session();
