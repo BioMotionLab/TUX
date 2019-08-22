@@ -658,3 +658,8 @@ Session Logged: 2019-08-21 01:55
 ---------------------
 Session Logged: 2019-08-21 02:24
 {"TrialTableGenerationMode":0,"outputFileName":"test","outputFolder":"/Users/adam/test","DebugMode":false,"BlockOrderChosenIndex":1}
+
+
+---------------------
+Session Logged: 2019-08-22 10:21
+{"TrialTableGenerationMode":0,"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","DebugMode":false,"BlockOrderChosenIndex":0}

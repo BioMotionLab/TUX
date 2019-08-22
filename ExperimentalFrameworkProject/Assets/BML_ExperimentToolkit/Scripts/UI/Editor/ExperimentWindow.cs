@@ -157,7 +157,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 
                 //Blocks
                 if (runner.Design.HasBlocks) {
-                    ShowBlockTable(runner.Design.OrderedBlockTable);
+                    ShowBlockTable(runner.ExperimentDesign.OrderedBlockTable);
                 }
 
                 //NumberOfTrials
@@ -333,7 +333,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.LabelField("Choose Block Order:", EditorStyles.boldLabel);
 
             try {
-                List<string> blockPermutations = runner.Design.BlockPermutationsStrings;
+                List<string> blockPermutations = runner.ExperimentDesign.BlockPermutationsStrings;
                 if (blockPermutations.Count == 1) {
                 }
                 else {
@@ -346,7 +346,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             }
             
             
-            DataTable selectedOrderTable = runner.Design.GetBlockOrderTable(OrderChosenIndex);
+            DataTable selectedOrderTable = runner.ExperimentDesign.GetBlockOrderTable(OrderChosenIndex);
             
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Chosen block order:");

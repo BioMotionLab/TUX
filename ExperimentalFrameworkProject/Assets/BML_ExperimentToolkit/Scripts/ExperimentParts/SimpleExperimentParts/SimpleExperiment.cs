@@ -9,7 +9,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
     /// This is the simplest Runner possible, and is used when no custom Runner is specified.
     /// </summary>
     public class SimpleExperiment : Experiment {
-        public SimpleExperiment(ExperimentRunner runner, ExperimentDesign design) 
+        public SimpleExperiment(ExperimentRunner runner, RunnableDesign design) 
             : base(runner, design) {
         }
     }

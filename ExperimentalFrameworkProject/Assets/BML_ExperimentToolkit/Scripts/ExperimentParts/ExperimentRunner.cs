@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_ExperimentToolkit.Scripts.UI;
@@ -13,8 +14,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         [Header("Required:")]
         public VariableConfig VariableConfigFile;
 
-        public ExperimentDesign Design;
-
+        public ExperimentDesign ExperimentDesign;
+        public RunnableDesign Design;
+        
         OutputManager outputManager;
 
         Experiment experiment;
@@ -75,9 +77,15 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 throw new NullReferenceException("Session nul and not created properly");
             }
 
-            Design = ExperimentDesign.CreateFrom(VariableConfigFile, this);
-            if (Design == null) {
-                throw new NullReferenceException("Design null");
+            if (VariableConfigFile.TrialTableGenerationMode == TrialTableGenerationMode.OnTheFly) {
+                ExperimentDesign = ExperimentDesign.CreateFrom(VariableConfigFile, this);
+            }
+            else {
+                throw new NotImplementedException();
+            }
+            
+            if (ExperimentDesign == null) {
+                throw new NullReferenceException("ExperimentDesign null");
             }
             
             if (!WindowOpen) {
@@ -118,7 +126,18 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
 
-            Design.FinalizeDesign(currentSession.BlockOrderChosenIndex);
+            if (VariableConfigFile.TrialTableGenerationMode == TrialTableGenerationMode.OnTheFly) {
+                DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
+                Design = new RunnableDesign(this, finalDesignTable, VariableConfigFile);
+            }
+            else {
+                throw new NotImplementedException();
+            }
+            
+            if (Design == null)
+            {
+                throw new NullReferenceException("No Runnable design");
+            }
             
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);

@@ -89,7 +89,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         
         void ShowBlockOrderSettings() {
             
-            if (!runner.Design.HasBlocks) {
+            if (!runner.ExperimentDesign.HasBlocks) {
                 session.BlockOrderChosenIndex = 0;
                 BlockOrderSelector.gameObject.SetActive(false);
                 BlockOrderTitle.text = "No block variables configured";
@@ -97,7 +97,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             }
 
             try {
-                List<string> blockPermutations = runner.Design.BlockPermutationsStrings;
+                List<string> blockPermutations = runner.ExperimentDesign.BlockPermutationsStrings;
                 if (blockPermutations.Count == 1) {
                     session.BlockOrderChosenIndex = 0;
                 }
