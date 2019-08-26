@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 
@@ -26,10 +27,13 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public readonly IndependentVariables BlockVariables = new IndependentVariables();
         public readonly List<DependentVariable>   DependentVariables              = new List<DependentVariable>();
         public readonly List<ParticipantVariable> ParticipantVariables = new List<ParticipantVariable>();
-        
+        public readonly List<Variable> All = new List<Variable>();
         
         //Sort Independent variables into mixing categories so they go in order
         public Variables(List<Variable> allVariables) {
+
+            All = allVariables;
+            
             int numberOfBlockIvs = 0;
             int numberOfNonBlockIvs = 0;
             foreach (Variable variable in allVariables) {
@@ -89,6 +93,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+
+
+        public Variable GetVariableWithName(string name) {
+            return All.FirstOrDefault(variable => variable.Name == name);
+        }
     }
 }

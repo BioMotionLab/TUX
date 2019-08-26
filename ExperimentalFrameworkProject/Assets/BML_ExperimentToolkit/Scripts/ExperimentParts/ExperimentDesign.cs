@@ -1,6 +1,4 @@
-﻿using BML_ExperimentToolkit.Scripts.Managers;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
-using BML_Utilities;
+﻿using BML_ExperimentToolkit.Scripts.VariableSystem;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,95 +7,6 @@ using BML_Utilities.Extensions;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
-
-    public class RunnableDesign {
-        
-        public List<Block> Blocks;
-        readonly ExperimentRunner runner;
-        readonly VariableConfig config;
-        readonly DataTable finalDataTable;
-        DataTable baseBlockTable;
-        public int         BlockCount       => Blocks.Count;
-        public string      TrialTableHeader => Blocks[0].TrialTable.HeaderAsString(Delimiter.Comma, -1);
-        public int TotalTrials => finalDataTable.Rows.Count;
-        public bool HasBlocks => Blocks.Count > 1;
-
-        public RunnableDesign(ExperimentRunner runner, DataTable finalDataTable, VariableConfig config) {
-            this.runner = runner;
-            this.config = config;
-            this.finalDataTable = finalDataTable;
-            CreateAndAddBlocks();
-            WriteParticipantValuesToTables();
-        }
-        
-        
-        Block CreateNewBlock(DataTable trialTable, string blockIdentity, DataRow dataRow) {
-            Block newBlock = (Block) Activator.CreateInstance(runner.BlockType,
-                                                              runner,
-                                                              trialTable,
-                                                              blockIdentity,
-                                                              dataRow
-                                                             );
-            return newBlock;
-        }
-        
-        void CreateAndAddBlocks() {
-            
-            List<IndependentVariable> blockVariables = config.Variables.BlockVariables;
-            
-            baseBlockTable = new DataTable();
-            foreach (IndependentVariable blockVariable in blockVariables) {
-                DataColumn newColumn = new DataColumn(blockVariable.Name, blockVariable.Type);
-                baseBlockTable.Columns.Add(newColumn);
-            }            
-
-            Blocks = new List<Block>();
-
-            int lastBlockIndex = 0;
-
-            DataTable blockTrialTable = finalDataTable.Clone();
-            foreach (DataRow finalTableRow in finalDataTable.Rows) {
-                int currentBlockIndex = (int) finalTableRow[config.ColumnNamesSettings.BlockIndex];
-                if (currentBlockIndex == lastBlockIndex) {
-                    blockTrialTable.ImportRow(finalTableRow);
-                }
-                else {
-                    if (blockTrialTable.Rows.Count > 0) {
-                        CreateBlockFromTable(baseBlockTable, blockVariables, blockTrialTable);
-                    }
-                    blockTrialTable = finalDataTable.Clone();
-                    blockTrialTable.ImportRow(finalTableRow);
-                }
-
-                lastBlockIndex = currentBlockIndex;
-            }
-            CreateBlockFromTable(baseBlockTable, blockVariables, blockTrialTable);
-        }
-
-        void CreateBlockFromTable(DataTable blockTable, List<IndependentVariable> blockVariables, DataTable blockTrialTable) {
-            string blockIdentity = "TODO block identity"; //TODO fix block identity
-            DataRow blockDataRow = blockTable.NewRow();
-            foreach (IndependentVariable blockVariable in blockVariables) {
-                DataRow firstBlockRow = blockTrialTable.Rows[0];
-                blockDataRow[blockVariable.Name] = firstBlockRow[blockVariable.Name];
-            }
-            Block newBlock = CreateNewBlock(blockTrialTable, blockIdentity, blockDataRow);
-            Blocks.Add(newBlock);
-        }
-
-
-        void WriteParticipantValuesToTables() {
-            foreach (ParticipantVariable participantVariable in config.Variables.ParticipantVariables) {
-                participantVariable.AddValuesTo(finalDataTable);
-                foreach (Block block in Blocks) {
-                    participantVariable.AddValuesTo(block.TrialTable);
-                }
-            }
-        }
-      
-    }
-
-
     public class ExperimentDesign {
         
         readonly BaseBlockTable  baseBlockTable;
@@ -112,8 +21,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         readonly ColumnNamesSettings columnNames;
         
         
-        public static ExperimentDesign CreateFrom(VariableConfig configFile, ExperimentRunner experimentRunner) {
-            return new ExperimentDesign(configFile, experimentRunner);
+        public static ExperimentDesign CreateFrom(VariableConfig configFile) {
+            return new ExperimentDesign(configFile);
         }
 
         public List<string> BlockPermutationsStrings => GetBlockPermutationsStrings();
@@ -167,13 +76,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
         
         
-        ExperimentDesign(VariableConfig config,             
-                                ExperimentRunner runner) {
+        ExperimentDesign(VariableConfig config) {
             this.config = config;
             columnNames = config.ColumnNamesSettings;
             baseBlockTable = new BaseBlockTable(config);
             baseTrialTable = new BaseTrialTable(baseBlockTable, config);
         }
+
+      
 
         public DataTable GetFinalExperimentTable(int selectedOrderIndex) {
             OrderedBlockTable = baseBlockTable.GetOrderedBlockTable(selectedOrderIndex);
@@ -239,9 +149,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 startingTotalTrialIndex++;
             }
         }
-
-
-
-
+        
     }
 }

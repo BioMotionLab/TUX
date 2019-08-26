@@ -11,8 +11,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         const string DebugFileName = "debugFile";
 
         string outputFullPath;
-
-        public TrialTableGenerationMode TrialTableGenerationMode = TrialTableGenerationMode.OnTheFly;
         
         /// <summary>
         /// stores the output path
@@ -41,6 +39,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             get => DebugMode ? Path.Combine(Application.dataPath + DebugFolder) : outputFolder;
             set => outputFolder = value;
         }
+
+        public string SelectedDesignFilePath = "";
 
         [SerializeField]
         public bool DebugMode;

@@ -24,12 +24,14 @@
               <e p="BaseBlockTable.cs" t="Include" />
               <e p="BaseTrialTable.cs" t="Include" />
               <e p="Block.cs" t="Include" />
+              <e p="DataTableCSVUtility.cs" t="Include" />
               <e p="Experiment.cs" t="Include" />
               <e p="ExperimentDesign.cs" t="Include" />
               <e p="ExperimentPart.cs" t="Include" />
               <e p="ExperimentRunner.cs" t="Include" />
               <e p="InvalidExperimentDesignException.cs" t="Include" />
               <e p="OrderConfig.cs" t="Include" />
+              <e p="RunnableDesign.cs" t="Include" />
               <e p="Session.cs" t="Include" />
               <e p="SimpleExperimentParts" t="Include">
                 <e p="SimpleBlock.cs" t="Include" />

@@ -30,11 +30,21 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         RectTransform ParticipantVariablesPanel = default;
 
         [SerializeField]
+        RectTransform DesignFileLoadPanel;
+        
+        [SerializeField]
         TextMeshProUGUI ErrorText = default;
 
         [SerializeField]
         RectTransform ErrorPanel = default;
 
+        
+        [SerializeField]
+        RectTransform BlockOrderSettingsPanel;
+
+        [SerializeField]
+        TMP_InputField DesignFilePath = default;
+        
         [SerializeField]
         TMP_Dropdown BlockOrderSelector = default;
 
@@ -62,16 +72,22 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
                 "no session detected";
 
 
-            switch (session.TrialTableGenerationMode) {
+            switch (runner.VariableConfigFile.TrialTableGenerationMode) {
                 case TrialTableGenerationMode.OnTheFly:
-                    ShowBlockOrderSettings();
                     ShowParticipantVariables();
+                    ShowBlockOrderSettings();
                     break;
                 case TrialTableGenerationMode.PreGenerated:
-                    throw new NotImplementedException();
+                    ShowDesignFileLoadSettings();
+                    ShowParticipantVariables();
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        void ShowDesignFileLoadSettings() {
+            DesignFileLoadPanel.gameObject.SetActive(true);
         }
 
         void ShowParticipantVariables() {
@@ -88,6 +104,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         }
         
         void ShowBlockOrderSettings() {
+            BlockOrderSettingsPanel.gameObject.SetActive(true);
             
             if (!runner.ExperimentDesign.HasBlocks) {
                 session.BlockOrderChosenIndex = 0;
@@ -119,13 +136,38 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         [PublicAPI]
         public void StartExperiment() {
 
+           
+            
+            
+            bool isValid = true;
+            string errorLog = string.Empty;
+            
             session.OutputFileName = OutputFileName.text;
             string folder = GetOutputFolderPath();
             session.OutputFolder = folder;
+            session.ValidateFilePath(ref errorLog, ref isValid);
             
-            if (!InputsValid()) return;
-
-            session.BlockOrderChosenIndex = BlockOrderSelector.value-1; // subtract 1 because added first one in.
+            
+            ValidateParticipantVariableValues(ref errorLog, ref isValid);
+            
+            switch (runner.VariableConfigFile.TrialTableGenerationMode) {
+                case TrialTableGenerationMode.OnTheFly:
+                    session.BlockOrderChosenIndex = BlockOrderSelector.value-1; // subtract 1 because added first one in.
+                    ValidateBlockOrderChosen(ref errorLog, ref isValid);
+                    break;
+                case TrialTableGenerationMode.PreGenerated:
+                    session.SelectedDesignFilePath = DesignFilePath.text;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            
+            if (!isValid) {
+                ErrorText.text = errorLog;
+                ErrorPanel.gameObject.SetActive(true);
+            }
+            
             
             gameObject.SetActive(false);
             ExperimentEvents.StartRunningExperiment(session);
@@ -142,24 +184,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             ErrorPanel.gameObject.SetActive(false);
         }
 
-        bool InputsValid() {
-
-            bool isValid = true;
-            string errorLog = string.Empty;
-            
-            
-            session.ValidateFilePath(ref errorLog, ref isValid);
-            ValidateBlockOrderChosen(ref errorLog, ref isValid);
-            ValidateParticipantVariableValues(ref errorLog, ref isValid);
-            
-            if (!isValid) {
-                ErrorText.text = errorLog;
-                ErrorPanel.gameObject.SetActive(true);
-            }
-
-            return isValid;
-        }
-
+        
         
         void ValidateParticipantVariableValues(ref string errorLog, ref bool isValid) {
             foreach (ParticipantVariableEntry participantVariableEntry in participantVariableEntries) {

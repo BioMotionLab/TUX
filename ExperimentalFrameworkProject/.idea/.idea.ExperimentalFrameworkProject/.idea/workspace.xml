@@ -2,22 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22ea5ef4-e322-4ce5-98ba-7ef8faef5429" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/DataTableCSVUtility.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/DataTableCSVUtility.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/RunnableDesign.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/RunnableDesign.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BlockTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BaseBlockTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BlockTable.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BaseBlockTable.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Experiment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Experiment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Prefabs/MainExperimentUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Prefabs/MainExperimentUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment Example.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment Example.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentDesign.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentDesign.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperiment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperiment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/TrialTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BaseTrialTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/TrialTable.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BaseTrialTable.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Settings/ColumnNamesSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Settings/ColumnNamesSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Runtime/ExperimentGui.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Runtime/ExperimentGui.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/Variables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/Variables.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,10 +94,12 @@
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableVector2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_Utilities/Delimiter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableGameObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/DataTableCSVUtility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableBoolDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/BlackScreenFlasher/BlackCamera.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/TrialTableGenerationMode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/RunnableDesign.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_Utilities/SnapToOtherObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -104,10 +110,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/IndependentVariable.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentPart.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Trial.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawerHelpers.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisplay.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_Utilities/PackageBuilder/PackageBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_Utilities/SetRecursiveLayer.cs" />
@@ -127,7 +129,6 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/ExperimentGui.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_Utilities/Editor/ConditionalHideAttribute.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_Utilities/Editor/EventSystem/BmlEvent.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Settings/ColumnNamesSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Settings/ControlSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/OrderConfig.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/BlackScreenFlasher/BlackCamera.cs" />
@@ -136,10 +137,8 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Settings/GuiSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/nbgfbdfg.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_Utilities/BML_EditorUtilities/Editor/EventSystem/BmlEvent.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/InvalidExperimentDesignException.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SortedVariableContainer.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableFactory.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BlockTable.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/TrialTable.cs" />
@@ -147,14 +146,21 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleBlock.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/DataTableExtension.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BaseTrialTable.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/Variables.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Experiment.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperiment.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BaseBlockTable.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Runtime/ExperimentGui.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/DataTableJsonUtility.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentDesign.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Runtime/ExperimentGui.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/Variables.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/RunnableDesign.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Settings/ColumnNamesSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/DataTableCSVUtility.cs" />
       </list>
     </option>
   </component>
@@ -163,6 +169,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
@@ -229,6 +236,7 @@
       <workItem from="1566242390202" duration="9636000" />
       <workItem from="1566483122083" duration="187000" />
       <workItem from="1566483572342" duration="9577000" />
+      <workItem from="1566827929915" duration="20882000" />
     </task>
     <servers />
   </component>
@@ -262,6 +270,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
   </component>
   <component name="XDebuggerManager">

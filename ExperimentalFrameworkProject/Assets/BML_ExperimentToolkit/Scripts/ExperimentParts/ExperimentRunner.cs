@@ -53,6 +53,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public bool WindowOpen = false;
 
         ExperimentGui gui;
+        bool waitingForUserToSelectDesignFile = false;
 
         public Session Session { get; private set; }
 
@@ -72,21 +73,30 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
             VariableConfigFile.Validate();
 
+            
+
             Session = Session.LoadSessionData();
             if (Session == null) {
                 throw new NullReferenceException("Session nul and not created properly");
             }
 
-            if (VariableConfigFile.TrialTableGenerationMode == TrialTableGenerationMode.OnTheFly) {
-                ExperimentDesign = ExperimentDesign.CreateFrom(VariableConfigFile, this);
-            }
-            else {
-                throw new NotImplementedException();
+            switch (VariableConfigFile.TrialTableGenerationMode) {
+                case TrialTableGenerationMode.OnTheFly:
+                    ExperimentDesign = ExperimentDesign.CreateFrom(VariableConfigFile);
+                    if (ExperimentDesign == null) {
+                        throw new NullReferenceException("ExperimentDesign null");
+                    }
+                    break;
+                    
+                case TrialTableGenerationMode.PreGenerated:
+                    //Design created later
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             
-            if (ExperimentDesign == null) {
-                throw new NullReferenceException("ExperimentDesign null");
-            }
+            
+            
             
             if (!WindowOpen) {
                 gui = Instantiate(VariableConfigFile.GuiSettings.GuiPrefab);
@@ -126,12 +136,20 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
 
-            if (VariableConfigFile.TrialTableGenerationMode == TrialTableGenerationMode.OnTheFly) {
-                DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
-                Design = new RunnableDesign(this, finalDesignTable, VariableConfigFile);
-            }
-            else {
-                throw new NotImplementedException();
+            switch (VariableConfigFile.TrialTableGenerationMode) {
+                case TrialTableGenerationMode.OnTheFly: {
+                    DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
+                    Design = new RunnableDesign(this, finalDesignTable, VariableConfigFile);
+                    break;
+                }
+                case TrialTableGenerationMode.PreGenerated:
+                    string selectedDesignFilePath = currentSession.SelectedDesignFilePath;
+                    if (string.IsNullOrEmpty(selectedDesignFilePath)) throw new NullReferenceException("Trying to load custom design file, but none given");
+                    Design = RunnableDesign.CreateFromFile(this, currentSession.SelectedDesignFilePath,
+                                                           VariableConfigFile);
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
             
             if (Design == null)
