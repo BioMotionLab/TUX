@@ -21,7 +21,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                     UnityEditor.EditorApplication.isPlaying = false;
                     #endif
                     Application.Quit();
-                    throw new MissingIndexException($"OrderConfig named: |{this.name}| is missing index {i}\n" +
+                    throw new MissingIndexException($"OrderConfig named: |{name}| is missing index {i}\n" +
                                                     $"The Order Config should be the order of indexes, not values. So it should start at zero\n" +
                                                     $"and end at n, where n is the number of values");
                 }
@@ -32,12 +32,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             
         }
 
-        
         public int Length => OrderedIndices.Count;
-
-        public string AsString() {
-            throw new NotImplementedException();
-        }
 
         class MissingIndexException : Exception {
             public MissingIndexException(

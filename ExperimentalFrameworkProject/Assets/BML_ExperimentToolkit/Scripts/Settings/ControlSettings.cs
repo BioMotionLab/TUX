@@ -20,30 +20,36 @@ namespace BML_ExperimentToolkit.Scripts.Settings {
 
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             while (running) {
-
-                foreach (KeyCode interruptKey in InterruptKeys) {
-                    if (Input.GetKeyDown(interruptKey)) {
-                        ExperimentEvents.InterruptTrial();
-                    }
-                }
-
-                foreach (KeyCode backKey in BackKeys) {
-                    if (Input.GetKeyDown(backKey)) {
-                        ExperimentEvents.GoBackOneTrial();
-                    }
-                }
-
-                foreach (KeyCode nextKey in NextKeys) {
-                    if (Input.GetKeyDown(nextKey)) {
-                        ExperimentEvents.SkipToNextTrial();
-                    }
-                }
-
+                ListenForInterrupt();
+                ListenForGoBackTrial();
+                ListenForGoToNextTrial();
                 yield return null;
-
             }
             // ReSharper disable once IteratorNeverReturns
         }
 
+        void ListenForGoToNextTrial() {
+            foreach (KeyCode nextKey in NextKeys) {
+                if (Input.GetKeyDown(nextKey)) {
+                    ExperimentEvents.SkipToNextTrial();
+                }
+            }
+        }
+
+        void ListenForGoBackTrial() {
+            foreach (KeyCode backKey in BackKeys) {
+                if (Input.GetKeyDown(backKey)) {
+                    ExperimentEvents.GoBackOneTrial();
+                }
+            }
+        }
+
+        void ListenForInterrupt() {
+            foreach (KeyCode interruptKey in InterruptKeys) {
+                if (Input.GetKeyDown(interruptKey)) {
+                    ExperimentEvents.InterruptTrial();
+                }
+            }
+        }
     }
 }

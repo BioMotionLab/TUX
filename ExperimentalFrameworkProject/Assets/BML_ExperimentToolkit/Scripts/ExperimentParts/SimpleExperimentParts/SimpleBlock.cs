@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
     

@@ -13,8 +13,8 @@ namespace BML_ExperimentToolkit.Extras.BlackScreenFlasher {
             thisCamera.enabled = false;
         }
 
-        public void ShowBlankScreen(float BlackScreenShowTime) {
-            StartCoroutine(ShowThisCamera(BlackScreenShowTime));
+        public void ShowBlankScreen(float blackScreenShowTime) {
+            StartCoroutine(ShowThisCamera(blackScreenShowTime));
         }
 
         void ReturnToPreviousCameras(List<Camera> activeCameras) {

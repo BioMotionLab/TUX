@@ -2,10 +2,8 @@
 using System.Data;
 using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
-using BML_ExperimentToolkit.Scripts.UI;
 using BML_ExperimentToolkit.Scripts.UI.Runtime;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
-using BML_Utilities;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -53,7 +51,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public bool WindowOpen = false;
 
         ExperimentGui gui;
-        bool waitingForUserToSelectDesignFile = false;
 
         public Session Session { get; private set; }
 
@@ -94,10 +91,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
-            
-            
-            
+
             if (!WindowOpen) {
                 gui = Instantiate(VariableConfigFile.GuiSettings.GuiPrefab);
                 gui.gameObject.SetActive(true);
@@ -105,7 +99,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
             
             ExperimentEvents.InitExperiment(this);
-            
             
         }
 
@@ -127,7 +120,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             ExperimentEvents.OnEndExperiment -= EndExperiment;
             outputManager?.Disable();
             experiment?.Disable();
-        
         }
 
         /// <summary>

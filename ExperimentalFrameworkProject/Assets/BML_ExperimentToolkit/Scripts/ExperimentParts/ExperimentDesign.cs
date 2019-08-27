@@ -44,7 +44,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         }
         
-        
         List<string> GetBlockOrderConfigStrings() {
             List<string> orderStrings = new List<string>();
             foreach (OrderConfig orderConfig in config.OrderConfigs) {
@@ -74,8 +73,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             return orderStrings;
         }
-        
-        
+
         ExperimentDesign(VariableConfig config) {
             this.config = config;
             columnNames = config.ColumnNamesSettings;
@@ -83,8 +81,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             baseTrialTable = new BaseTrialTable(baseBlockTable, config);
         }
 
-      
-
+        
         public DataTable GetFinalExperimentTable(int selectedOrderIndex) {
             OrderedBlockTable = baseBlockTable.GetOrderedBlockTable(selectedOrderIndex);
             finalTable = BuildFinalTable();

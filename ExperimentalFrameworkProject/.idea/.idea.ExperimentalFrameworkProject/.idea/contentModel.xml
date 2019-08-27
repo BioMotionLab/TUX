@@ -69,7 +69,7 @@
               <e p="DependentVariable.cs" t="Include" />
               <e p="IndependentVariable.cs" t="Include" />
               <e p="ParticipantVariable.cs" t="Include" />
-              <e p="SupportedDataTypes.cs" t="Include" />
+              <e p="SupportedDataType.cs" t="Include" />
               <e p="Variable.cs" t="Include" />
               <e p="VariableConfig.cs" t="Include" />
               <e p="VariableFactory.cs" t="Include" />

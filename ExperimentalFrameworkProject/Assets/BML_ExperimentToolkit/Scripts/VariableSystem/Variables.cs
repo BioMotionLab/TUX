@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
@@ -27,53 +26,56 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public readonly IndependentVariables BlockVariables = new IndependentVariables();
         public readonly List<DependentVariable>   DependentVariables              = new List<DependentVariable>();
         public readonly List<ParticipantVariable> ParticipantVariables = new List<ParticipantVariable>();
-        public readonly List<Variable> All = new List<Variable>();
+        readonly List<Variable> all;
         
         //Sort Independent variables into mixing categories so they go in order
         public Variables(List<Variable> allVariables) {
 
-            All = allVariables;
+            all = allVariables;
             
             int numberOfBlockIvs = 0;
             int numberOfNonBlockIvs = 0;
             foreach (Variable variable in allVariables) {
-                
-                
-                switch (variable) {
-                    case IndependentVariable independentVariable:
+                numberOfNonBlockIvs = SortVariable(variable, numberOfNonBlockIvs, ref numberOfBlockIvs);
+            }
+            CheckIfBlocksButNoNormalVariables(numberOfBlockIvs, numberOfNonBlockIvs);
+            
+        }
 
-                        if (!independentVariable.Block) {
-                            numberOfNonBlockIvs++;
-                            SortIVs(independentVariable, IndependentVariables);
-                        }
-                        else {
-                            numberOfBlockIvs++;
-                            SortIVs(independentVariable, BlockVariables);
-                        }
-                        break;
-                    case DependentVariable dependentVariable:
-                        DependentVariables.Add(dependentVariable);
-                        break;
-                    case ParticipantVariable participantVariable: 
-                        ParticipantVariables.Add(participantVariable);
-                        break; 
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                        
+        int SortVariable(Variable variable, int numberOfNonBlockIvs, ref int numberOfBlockIvs) {
+            switch (variable) {
+                case IndependentVariable independentVariable:
+                    if (!independentVariable.Block) {
+                        numberOfNonBlockIvs++;
+                        SortIVs(independentVariable, IndependentVariables);
+                    }
+                    else {
+                        numberOfBlockIvs++;
+                        SortIVs(independentVariable, BlockVariables);
+                    }
 
-                }
-                
-                bool thereAreBlockIvsButNoNormalIvs = numberOfBlockIvs > 0 && numberOfNonBlockIvs == 0;
-                if (thereAreBlockIvsButNoNormalIvs) {
-                    throw new InvalidExperimentDesignException($"You defined {numberOfBlockIvs} block variable(s), " +
-                                                               $"when there are {numberOfNonBlockIvs} unblocked independent variables." +
-                                                               "You can safely unblock the variable " +
-                                                               "to make it a normal variable");
-                }
-                
+                    break;
+                case DependentVariable dependentVariable:
+                    DependentVariables.Add(dependentVariable);
+                    break;
+                case ParticipantVariable participantVariable:
+                    ParticipantVariables.Add(participantVariable);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
-            
+            return numberOfNonBlockIvs;
+        }
+
+        static void CheckIfBlocksButNoNormalVariables(int numberOfBlockIvs, int numberOfNonBlockIvs) {
+            bool thereAreBlockIvsButNoNormalIvs = numberOfBlockIvs > 0 && numberOfNonBlockIvs == 0;
+            if (thereAreBlockIvsButNoNormalIvs) {
+                throw new InvalidExperimentDesignException($"You defined {numberOfBlockIvs} block variable(s), " +
+                                                           $"when there are {numberOfNonBlockIvs} unblocked independent variables." +
+                                                           "You can safely unblock the variable " +
+                                                           "to make it a normal variable");
+            }
         }
 
         void SortIVs(IndependentVariable independentVariable, IndependentVariables container) {
@@ -96,7 +98,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
 
         public Variable GetVariableWithName(string name) {
-            return All.FirstOrDefault(variable => variable.Name == name);
+            return all.FirstOrDefault(variable => variable.Name == name);
         }
     }
 }

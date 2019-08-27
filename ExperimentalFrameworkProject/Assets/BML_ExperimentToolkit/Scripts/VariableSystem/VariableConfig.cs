@@ -63,18 +63,16 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
     public class DesignSaverWindow : EditorWindow {
         
         [SerializeField]
-        int orderIndex = default;
+        int OrderIndex = default;
 
         string fileName = "experimentDesignSave";
         
-        string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+        string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         VariableConfig configFile;
 
         void OnGUI() {
-            
-            
-            
+
             configFile = Selection.activeObject as VariableConfig;
             if (configFile == null) {
                 EditorGUILayout.HelpBox("Need to have a Variable Config File Selected", MessageType.Warning);
@@ -91,7 +89,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             EditorGUILayout.LabelField("Select A Block Order");
             
             string[] orderStrings = design.BlockPermutationsStrings.ToArray();
-            orderIndex = EditorGUILayout.Popup(orderIndex, orderStrings);
+            OrderIndex = EditorGUILayout.Popup(OrderIndex, orderStrings);
 
             EditorGUILayout.Space();
             EditorGUILayout.Space();
@@ -104,7 +102,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             }
             EditorGUILayout.EndHorizontal();
             
-            DataTable finalTable = design.GetFinalExperimentTable(orderIndex);
+            DataTable finalTable = design.GetFinalExperimentTable(OrderIndex);
             
             if (GUILayout.Button("Save")) {
                 string fileNameWithExtension = fileName + ".csv";

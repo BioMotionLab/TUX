@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Text;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using BML_Utilities.Extensions;
-using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
@@ -54,29 +50,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public static implicit operator DataTable(BaseBlockTable table) {
             return table.baseBlockTable;
         }
-        
-        
-        
-        public List<string> BlockPermutationsStrings {
-            get {
-                List<string> blockPermutations = new List<string>();
-                int blockOrderIndex = 0;
-                if (baseBlockTable.Rows.Count == 0) return null;
-                if (baseBlockTable.Rows.Count >= 4) throw new TooManyPermutationsException();
-                foreach (List<DataRow> dataRows in baseBlockTable.GetPermutations()) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append($"Order #{blockOrderIndex}:   ");
-                    foreach (DataRow dataRow in dataRows) {
-                        sb.Append($"{dataRow.AsString(separator: ", ", truncateLength: -1)} >   ");
-                    }
-
-                    blockPermutations.Add(sb.ToString());
-                    blockOrderIndex++;
-                }
-
-                return blockPermutations;
-            }
-        }
 
         public bool HasBlocks => baseBlockTable.Rows.Count > 0;
         public DataRowCollection Rows => baseBlockTable.Rows;
@@ -96,7 +69,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return blockOrderTable;
         }
 
-        BaseBlockTable GetBlockOrderTableFromOrderConfigs(int orderChosenIndex, List<OrderConfig> orderConfigs) {
+        BaseBlockTable GetBlockOrderTableFromOrderConfigs(int orderChosenIndex) {
  
             if (orderChosenIndex > orderConfigs.Count- 1) throw new IndexOutOfRangeException($"Index chosen is {orderChosenIndex}, but count is {orderConfigs.Count}");
             
@@ -117,31 +90,13 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return blockOrderTable;
         }
 
-        public BaseBlockTable GetOrderedBlockTable(int OrderChosenIndex) {
+        public BaseBlockTable GetOrderedBlockTable(int orderChosenIndex) {
             BaseBlockTable orderedBlockTable = orderConfigs.Count > 0 ? 
-                GetBlockOrderTableFromOrderConfigs(OrderChosenIndex, orderConfigs) : 
-                GetBlockOrderTableFromPermutations(OrderChosenIndex);
+                GetBlockOrderTableFromOrderConfigs(orderChosenIndex) : 
+                GetBlockOrderTableFromPermutations(orderChosenIndex);
             return orderedBlockTable;
         }
 
     }
 
-    
-    
-    public class TooManyPermutationsException : Exception {
-        public TooManyPermutationsException()
-        {
-        }
-
-        public TooManyPermutationsException(string message)
-            : base(message)
-        {
-        }
-
-        public TooManyPermutationsException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
-    }
-    
 }

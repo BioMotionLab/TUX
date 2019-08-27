@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using BML_ExperimentToolkit.Scripts.Settings;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities.Extensions;

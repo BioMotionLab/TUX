@@ -60,8 +60,8 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
         void FinishTrial() {
 
-            Debug.Log($"Finished {currentlyRunningTrial.TrialText} in Sequence, success = {currentlyRunningTrial.CompletedSuccessfully}\n" +
-                      $"trialTable:\n" +
+            Debug.Log($"Finished {currentlyRunningTrial.TrialText}, Success = {currentlyRunningTrial.CompletedSuccessfully}\n" +
+                      $"Output Table for this trial:\n" +
                       $"{currentlyRunningTrial.Data.AsString(header: true)}");
 
             ExperimentEvents.UpdateTrial(trialsInSequence, TrialIndex(currentlyRunningTrial));

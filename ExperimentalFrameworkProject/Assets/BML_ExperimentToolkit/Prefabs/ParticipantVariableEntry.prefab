@@ -1603,7 +1603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d0d9d2683bb9c4a967797702eb4397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: {fileID: 7065766190343152420}
+  Label: {fileID: 7065766190343152420}
   ValueInput: {fileID: 5217499476492125995}
   Dropdown: {fileID: 3201375171157239695}
 --- !u!114 &2023960393948115606

@@ -674,3 +674,12 @@ Confirmed Complete at: 09:57
 Session Logged: 2019-08-26 05:15
 {"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":0}
 Confirmed Complete at: 05:16
+
+---------------------
+Session Logged: 2019-08-27 01:28
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":0}
+
+
+---------------------
+Session Logged: 2019-08-27 01:30
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":1}

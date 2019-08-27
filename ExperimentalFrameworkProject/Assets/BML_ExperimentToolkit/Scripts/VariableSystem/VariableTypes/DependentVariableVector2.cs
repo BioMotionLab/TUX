@@ -5,7 +5,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
     [Serializable]
     public class DependentVariableVector2 : DependentVariable<Vector2> {
         public DependentVariableVector2() {
-            DataType = SupportedDataTypes.Vector2;
+            DataType = SupportedDataType.Vector2;
         }
     }
 }

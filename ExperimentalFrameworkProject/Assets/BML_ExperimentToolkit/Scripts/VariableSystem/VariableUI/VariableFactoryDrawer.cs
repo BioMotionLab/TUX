@@ -26,7 +26,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             GUI.backgroundColor = Color.white;
 
             EditorGUI.LabelField(layoutRect.NextLine, "Variable Creation:", EditorStyles.boldLabel);
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.DataTypesToCreate));
+            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.DataTypeToCreate));
             AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.VariableTypeToCreate));
             
             if (GUI.Button(layoutRect.NextLine, "Create Variable")) {

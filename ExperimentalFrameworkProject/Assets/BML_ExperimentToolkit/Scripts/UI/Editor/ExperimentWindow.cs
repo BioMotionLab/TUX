@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
@@ -83,9 +82,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             Repaint();
         }
 
-        void InitWindow(ExperimentRunner runner) {
-            this.runner = runner;
-            session = runner.Session;
+        void InitWindow(ExperimentRunner runnerToInit) {
+            runner = runnerToInit;
+            session = runnerToInit.Session;
 
             OrderChosenIndex = 0;
             currentBlockIndex = -1;
@@ -282,32 +281,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
                 }
                 else {
-                    
-                    switch (participantVariable.DataType) {
-                        case SupportedDataTypes.Int:
-                            ParticipantVariableInt intVariable = (ParticipantVariableInt) participantVariable;
-                            intVariable.Value = EditorGUILayout.IntField(intVariable.Value);
-                            break;
-                        case SupportedDataTypes.Float:
-                            ParticipantVariableFloat floatVariable = (ParticipantVariableFloat)participantVariable;
-                            floatVariable.Value = EditorGUILayout.FloatField(floatVariable.Value);
-                            break;
-                        case SupportedDataTypes.String:
-                            ParticipantVariableString stringVariable = (ParticipantVariableString)participantVariable;
-                            stringVariable.Value = EditorGUILayout.TextField(stringVariable.Value);
-                            break;
-                        case SupportedDataTypes.Bool:
-                            ParticipantVariableBool boolVariable = (ParticipantVariableBool)participantVariable;
-                            boolVariable.Value = EditorGUILayout.Toggle(boolVariable.Value);
-                            break;
-                        case SupportedDataTypes.GameObject:
-                        case SupportedDataTypes.Vector3:
-                        case SupportedDataTypes.CustomDataType_NotYetImplemented:
-                        case SupportedDataTypes.ChooseType:
-                            throw new NotImplementedException();
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
+                    AddCorrectValueField(participantVariable);
                 }
 
                 EditorGUILayout.EndHorizontal();
@@ -315,6 +289,34 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             
             EditorGUILayout.EndVertical();
+        }
+
+        static void AddCorrectValueField(ParticipantVariable participantVariable) {
+            switch (participantVariable.DataType) {
+                case SupportedDataType.Int:
+                    ParticipantVariableInt intVariable = (ParticipantVariableInt) participantVariable;
+                    intVariable.Value = EditorGUILayout.IntField(intVariable.Value);
+                    break;
+                case SupportedDataType.Float:
+                    ParticipantVariableFloat floatVariable = (ParticipantVariableFloat) participantVariable;
+                    floatVariable.Value = EditorGUILayout.FloatField(floatVariable.Value);
+                    break;
+                case SupportedDataType.String:
+                    ParticipantVariableString stringVariable = (ParticipantVariableString) participantVariable;
+                    stringVariable.Value = EditorGUILayout.TextField(stringVariable.Value);
+                    break;
+                case SupportedDataType.Bool:
+                    ParticipantVariableBool boolVariable = (ParticipantVariableBool) participantVariable;
+                    boolVariable.Value = EditorGUILayout.Toggle(boolVariable.Value);
+                    break;
+                case SupportedDataType.GameObject:
+                case SupportedDataType.Vector3:
+                case SupportedDataType.CustomDataTypeNotYetImplemented:
+                case SupportedDataType.ChooseType:
+                    throw new NotImplementedException();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
 
@@ -332,19 +334,10 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             
             EditorGUILayout.LabelField("Choose Block Order:", EditorStyles.boldLabel);
 
-            try {
-                List<string> blockPermutations = runner.ExperimentDesign.BlockPermutationsStrings;
-                if (blockPermutations.Count == 1) {
-                }
-                else {
-                    OrderChosenIndex = EditorGUILayout.Popup(OrderChosenIndex, blockPermutations.ToArray());
-                }
-            }
-            catch (TooManyPermutationsException e) {
-                Console.WriteLine(e);
-                throw;
-            }
             
+            List<string> blockPermutations = runner.ExperimentDesign.BlockPermutationsStrings;
+            if (blockPermutations.Count != 1) 
+                OrderChosenIndex = EditorGUILayout.Popup(OrderChosenIndex, blockPermutations.ToArray());
             
             DataTable selectedOrderTable = runner.ExperimentDesign.GetBlockOrderTable(OrderChosenIndex);
             
@@ -467,49 +460,51 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 EditorGUILayout.LabelField("", CompleteIndicatorWidth);
                 EditorGUILayout.TextArea(block.TrialTable.HeaderAsString());
                 EditorGUILayout.EndHorizontal();
-
-
+                
                 for (int indexOfRow = 0; indexOfRow < block.TrialTable.Rows.Count; indexOfRow++) {
-                    DataRow trialRow = block.TrialTable.Rows[indexOfRow];
-
-                    EditorGUILayout.BeginHorizontal();
-
-                    EditorGUILayout.LabelField("", IndentWidth);
-
-                    if (currentTrialIndex == indexOfRow && currentBlockIndex == blockIndex) {
-                        EditorGUILayout.LabelField("Running", RunningTrialIndicatorWidth);
-                    }
-                    else {
-                        EditorGUILayout.LabelField("", RunningTrialIndicatorWidth);
-                    }
-                    
-                    if (blockIndex == currentBlockIndex) {
-                        // can't jump between blocks, only allow jumping with block.
-                        if (GUILayout.Button("Go", JumpToButtonWidth)) {
-                            ExperimentEvents.JumpToTrial(indexOfRow);
-                        }
-                    }
-                    else {
-                        EditorGUILayout.LabelField("", JumpToButtonWidth);
-                    }
-
-                    Trial trial = block.Trials[indexOfRow];
-
-                    Color color = trial.CompletedSuccessfully ? Color.green : Color.red;
-                    color = trial.Skipped ? Color.yellow : color;
-                    EditorGUILayout.ColorField(GUIContent.none, color, false, false, false, CompleteIndicatorWidth);
-                    
-                    EditorGUILayout.TextArea(trialRow.AsString());
-
-                    EditorGUILayout.EndHorizontal();
+                    AddTrialRow(block, indexOfRow, blockIndex);
                 }
 
                 EditorGUILayout.EndVertical();
-
             }
 
             EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
+        }
+
+        void AddTrialRow(Block block, int indexOfRow, int blockIndex) {
+            DataRow trialRow = block.TrialTable.Rows[indexOfRow];
+
+            EditorGUILayout.BeginHorizontal();
+
+            EditorGUILayout.LabelField("", IndentWidth);
+
+            if (currentTrialIndex == indexOfRow && currentBlockIndex == blockIndex) {
+                EditorGUILayout.LabelField("Running", RunningTrialIndicatorWidth);
+            }
+            else {
+                EditorGUILayout.LabelField("", RunningTrialIndicatorWidth);
+            }
+
+            if (blockIndex == currentBlockIndex) {
+                // can't jump between blocks, only allow jumping with block.
+                if (GUILayout.Button("Go", JumpToButtonWidth)) {
+                    ExperimentEvents.JumpToTrial(indexOfRow);
+                }
+            }
+            else {
+                EditorGUILayout.LabelField("", JumpToButtonWidth);
+            }
+
+            Trial trial = block.Trials[indexOfRow];
+
+            Color color = trial.CompletedSuccessfully ? Color.green : Color.red;
+            color = trial.Skipped ? Color.yellow : color;
+            EditorGUILayout.ColorField(GUIContent.none, color, false, false, false, CompleteIndicatorWidth);
+
+            EditorGUILayout.TextArea(trialRow.AsString());
+
+            EditorGUILayout.EndHorizontal();
         }
     }
 }

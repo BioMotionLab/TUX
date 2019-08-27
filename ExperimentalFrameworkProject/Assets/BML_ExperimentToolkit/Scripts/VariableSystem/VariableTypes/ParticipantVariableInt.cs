@@ -4,7 +4,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
     [Serializable]
     public class ParticipantVariableInt : ParticipantVariable<int> {
         public ParticipantVariableInt() {
-            DataType = SupportedDataTypes.Int;
+            DataType = SupportedDataType.Int;
         }
 
         public override void SelectValue(string value) {

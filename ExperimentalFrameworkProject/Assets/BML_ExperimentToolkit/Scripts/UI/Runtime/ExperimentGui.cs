@@ -30,17 +30,16 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         RectTransform ParticipantVariablesPanel = default;
 
         [SerializeField]
-        RectTransform DesignFileLoadPanel;
+        RectTransform DesignFileLoadPanel = default;
         
         [SerializeField]
         TextMeshProUGUI ErrorText = default;
 
         [SerializeField]
         RectTransform ErrorPanel = default;
-
         
         [SerializeField]
-        RectTransform BlockOrderSettingsPanel;
+        RectTransform BlockOrderSettingsPanel = default;
 
         [SerializeField]
         TMP_InputField DesignFilePath = default;
@@ -112,33 +111,23 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
                 BlockOrderTitle.text = "No block variables configured";
                 return;
             }
+            List<string> blockPermutations = runner.ExperimentDesign.BlockPermutationsStrings;
+            if (blockPermutations.Count == 1) {
+                session.BlockOrderChosenIndex = 0;
+            }
+            else {
+                BlockOrderSelector.options.Clear();
+                blockPermutations.Insert(0, SelectText);
+                foreach (string order in blockPermutations) {
+                    BlockOrderSelector.options.Add(new TMP_Dropdown.OptionData() {text = order});
+                }
+            }
 
-            try {
-                List<string> blockPermutations = runner.ExperimentDesign.BlockPermutationsStrings;
-                if (blockPermutations.Count == 1) {
-                    session.BlockOrderChosenIndex = 0;
-                }
-                else {
-                    BlockOrderSelector.options.Clear();
-                    blockPermutations.Insert(0, SelectText);
-                    foreach (string order in blockPermutations) {
-                        BlockOrderSelector.options.Add(new TMP_Dropdown.OptionData() {text = order});
-                    }
-                }
-            }
-            catch (TooManyPermutationsException e) {
-                Console.WriteLine(e);
-                throw;
-            }
-            
         }
 
         [PublicAPI]
         public void StartExperiment() {
 
-           
-            
-            
             bool isValid = true;
             string errorLog = string.Empty;
             
@@ -219,7 +208,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             errorLog += errorString + "\n";
             return errorLog;
         }
-
         
         
     }

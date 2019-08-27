@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BML_ExperimentToolkit.Scripts.UI.Runtime;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using TMPro;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.UI {
+namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
     public class ParticipantVariableEntry : MonoBehaviour {
     
-        public TextMeshProUGUI label;
+        public TextMeshProUGUI Label;
 
         public TMP_InputField ValueInput;
         public TMP_Dropdown   Dropdown;
@@ -16,12 +15,12 @@ namespace BML_ExperimentToolkit.Scripts.UI {
 
         public delegate void ConfirmValueStrategy();
         public ConfirmValueStrategy ConfirmValue;
-        public ParticipantVariable  Variable { get; set; }
+        public ParticipantVariable Variable { get; private set; }
 
         public void Display(ParticipantVariable participantVariable) {
             Variable = participantVariable;
         
-            label.text = participantVariable.Name;
+            Label.text = participantVariable.Name;
 
             if (participantVariable.ValuesAreConstrained) {
                 ConfirmValue = ConstrainedGetValueStrategy;
