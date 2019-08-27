@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using BML_ExperimentToolkit.Scripts.Settings;
 using BML_Utilities.Extensions;
-using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public class ExperimentDesign {
@@ -32,8 +31,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         List<string> GetBlockPermutationsStrings() {
             
             if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && config.OrderConfigs.Count == 0) {
-                Debug.Log("returning BlockPermutationStrings");
-                return BlockPermutationsStrings;
+                return baseBlockTable.BlockPermutationsStrings;
             }
 
             if (config.OrderConfigs.Count > 0) return GetBlockOrderConfigStrings();

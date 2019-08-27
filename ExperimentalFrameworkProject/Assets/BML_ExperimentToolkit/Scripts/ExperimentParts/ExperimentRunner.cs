@@ -4,42 +4,59 @@ using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_ExperimentToolkit.Scripts.UI.Runtime;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_Utilities.Extensions;
 using JetBrains.Annotations;
+using UnityEditor;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+    
+    
+    /// <summary>
+    /// The main entry point for a user's experiments. Links the experiment framework to the unity scene.
+    /// You must create a subclass that inherits from this class and drag it into your scene to make an experiment.
+    /// Your custom ExperimentRunner should contain references to objects in your scene that
+    /// need to be controlled by the framework.
+    /// </summary>
     public abstract class ExperimentRunner : MonoBehaviour {
-        [Header("Required:")]
-        public VariableConfig VariableConfigFile;
 
+        // ReSharper disable once InconsistentNaming
+        [Header("Required:")]
+        [Tooltip("Create a VariableConfigFile from asset menu and drag here")]
+        [SerializeField]
+        VariableConfig variableConfigFile = default;
+
+        // ReSharper disable once ConvertToAutoProperty
+        public VariableConfig VariableConfigFile => variableConfigFile;
+        
         public ExperimentDesign ExperimentDesign;
         public RunnableDesign Design;
         
         OutputManager outputManager;
-
         Experiment experiment;
+        ExperimentGui gui;
 
+        [SerializeField]
+        // ReSharper disable once InconsistentNaming
+        ScriptReferences scriptReferences = new ScriptReferences();
+        
         /// <summary>
-        /// Stores the script of the custom Trial used in this Runner.
-        /// Override this to customize trial behaviour
+        /// Type of custom Trial used.
         /// </summary>
         [PublicAPI]
-        public virtual Type TrialType => typeof(SimpleTrial);
+        public Type TrialType;
 
         /// <summary>
-        /// Stores the script of the custom Block used in this Runner.
-        /// Override this to customize block behaviour
-        /// </summary>
+        /// Type of custom Block used.
+        /// /// </summary>
         [PublicAPI]
-        public virtual Type BlockType => typeof(SimpleBlock);
+        public Type BlockType; 
 
         /// <summary>
-        /// Stores the script of the custom Runner used in this Runner.
-        /// Override this to customize Runner behaviour
+        /// Type of custom Experiment used.
         /// </summary>
-        // ReSharper disable once MemberCanBeProtected.Global
         [PublicAPI]
-        public virtual Type ExperimentType => typeof(SimpleExperiment);
+        public Type ExperimentType;
 
         [HideInInspector]
         public bool Ended;
@@ -49,13 +66,22 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         [HideInInspector]
         public bool WindowOpen = false;
-
-        ExperimentGui gui;
-
+        
         public Session Session { get; private set; }
 
+        void OnEnable() {
+            ExperimentEvents.OnStartRunningExperiment += StartRunningRunningExperiment;
+            ExperimentEvents.OnEndExperiment += EndExperiment;
+
+        }
+        
         void Start() {
 
+            TrialType = scriptReferences.TrialType;
+            BlockType = scriptReferences.BlockType;
+            ExperimentType = scriptReferences.ExperimentType;
+
+            
             #if UNITY_EDITOR
             
             ExperimentEvents.CheckMainWindowIsOpen(this);
@@ -69,8 +95,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 return;
             }
             VariableConfigFile.Validate();
-
-            
 
             Session = Session.LoadSessionData();
             if (Session == null) {
@@ -99,21 +123,15 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
             
             ExperimentEvents.InitExperiment(this);
-            
         }
 
         static void ExitProgram() {
             #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+            EditorApplication.isPlaying = false;
             #endif
             Application.Quit();
         }
-
-        void OnEnable() {
-            ExperimentEvents.OnStartRunningExperiment += StartRunningRunningExperiment;
-            ExperimentEvents.OnEndExperiment += EndExperiment;
-
-        }
+        
 
         void OnDisable() {
             ExperimentEvents.OnStartRunningExperiment -= StartRunningRunningExperiment;
@@ -127,7 +145,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
-
             switch (VariableConfigFile.TrialTableGenerationMode) {
                 case TrialTableGenerationMode.OnTheFly: {
                     DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
@@ -161,6 +178,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             ExperimentEvents.ExperimentStarted();
 
             StartCoroutine(VariableConfigFile.ControlSettings.Run());
+            
             ExperimentEvents.StartPart(experiment);
 
 
@@ -173,5 +191,53 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
        
             
+    }
+
+    [Serializable]
+    public class ScriptReferences {
+        
+        [SerializeField]
+        [Tooltip("Script file that inherits from Trial class")]
+        MonoScript DragTrialScriptHere = default;
+        
+        [SerializeField]
+        [Tooltip("Script file that inherits from Block class")]
+        MonoScript DragBlockScriptHere = default;
+        
+        [SerializeField]
+        [Tooltip("Script file that inherits from Experiment class")]
+        MonoScript DragExperimentScriptHere = default;
+
+
+        public Type TrialType => GetScriptTypeFromInspector<Trial>(DragTrialScriptHere, true);
+        public Type BlockType => GetScriptTypeFromInspector<Block>(DragBlockScriptHere, true);
+        public Type ExperimentType => GetScriptTypeFromInspector<Experiment>(DragExperimentScriptHere, true);
+
+        Type GetScriptTypeFromInspector<T>(MonoScript monoScript, bool optional = false) where T : ExperimentPart {
+
+            string typeName = typeof(T).LastPartOfName();
+
+            if (monoScript == null) {
+                if (optional) return GetDefaultExperimentPart<T>();
+                throw new NullReferenceException($"{typeName} Script null. Create custom {typeName} script and drag into inspector");
+            }
+            
+            Type returnType = monoScript.GetClass();
+            if (!returnType.IsSubclassOf(typeof(T)))
+                throw new NullReferenceException($"{typeName} Script that was dragged in is not subclass of {typeName} Class");
+            
+            Debug.Log($"Successfully linked with {returnType.LastPartOfName()} script");
+            return returnType;
+        }
+
+        Type GetDefaultExperimentPart<T>() where T : ExperimentPart {
+            Type type;
+            if (typeof(T).IsEquivalentTo(typeof(Trial))) type = typeof(SimpleTrial);
+            else if (typeof(T).IsEquivalentTo(typeof(Block))) type =  typeof(SimpleBlock);
+            else if (typeof(T).IsEquivalentTo(typeof(Experiment))) type =  typeof(SimpleExperiment);
+            else throw new ArgumentOutOfRangeException($"Type {typeof(T).FullName} not recognized");
+            Debug.LogWarning($"No Custom class defined for {typeof(T).FullName}, reverting to default {type.FullName}");
+            return type;
+        }
     }
 }

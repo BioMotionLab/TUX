@@ -17,49 +17,29 @@ MonoBehaviour:
   RepeatTrialsInBlock: 1
   RepeatAllBlocks: 1
   Factory:
-    DataTypesToCreate: 1
+    DataTypeToCreate: 0
     VariableTypeToCreate: 0
-    IntIVs: []
-    FloatIVs:
-    - Name: float1
+    IntIVs:
+    - Name: Variable1
       TypeOfVariable: 0
-      DataType: 1
+      DataType: 0
       MixingTypeOfVariable: 0
       Block: 0
-      Values:
-      - 1
-      - 2
+      Values: 010000000200000003000000
       Probabilities:
       - 0
       - 0
-    - Name: float2
+      - 0
+    - Name: Variable2
       TypeOfVariable: 0
-      DataType: 1
+      DataType: 0
       MixingTypeOfVariable: 0
       Block: 0
-      Values:
-      - 1
-      - 2
-      - 4
-      - 5
+      Values: 0500000006000000
       Probabilities:
       - 0
       - 0
-      - 0
-      - 0
-    - Name: blockvar
-      TypeOfVariable: 0
-      DataType: 1
-      MixingTypeOfVariable: 0
-      Block: 1
-      Values:
-      - 1
-      - 2
-      - 3
-      Probabilities:
-      - 0
-      - 0
-      - 0
+    FloatIVs: []
     StringIVs: []
     BoolIVs: []
     GameObjectIVs: []
@@ -86,4 +66,5 @@ MonoBehaviour:
     type: 2}
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
+  TrialTableGenerationMode: 0
   OrderConfigs: []

@@ -683,3 +683,49 @@ Session Logged: 2019-08-27 01:28
 ---------------------
 Session Logged: 2019-08-27 01:30
 {"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":1}
+
+
+---------------------
+Session Logged: 2019-08-27 04:21
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":0}
+
+
+---------------------
+Session Logged: 2019-08-27 04:53
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":2}
+
+
+---------------------
+Session Logged: 2019-08-27 04:54
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":3}
+
+
+---------------------
+Session Logged: 2019-08-27 04:54
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":4}
+
+
+---------------------
+Session Logged: 2019-08-27 05:19
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":3}
+
+
+---------------------
+Session Logged: 2019-08-27 05:20
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":3}
+
+
+---------------------
+Session Logged: 2019-08-27 05:21
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":2}
+
+
+---------------------
+Session Logged: 2019-08-27 05:22
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":2}
+
+
+---------------------
+Session Logged: 2019-08-27 05:29
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":0}
+Confirmed Complete at: 05:29

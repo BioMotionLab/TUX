@@ -9,9 +9,8 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
 
     public class BlockSequenceRunner {
-
-        ExperimentRunner runner;
-        List<Block> blocks;
+        readonly ExperimentRunner runner;
+        readonly List<Block> blocks;
 
         Block currentlyRunningBlock;
         public bool Running = false;

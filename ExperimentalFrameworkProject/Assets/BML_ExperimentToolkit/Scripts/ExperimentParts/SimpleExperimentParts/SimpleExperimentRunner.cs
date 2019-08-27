@@ -1,8 +1,9 @@
-﻿namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
+﻿using UnityEngine;
+
+namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
 
 
-    public class SimpleExperimentRunner : ExperimentRunner
-    {
-        
+    public class SimpleExperimentRunner : ExperimentRunner {
+        public GameObject ReferenceToGameObject;
     }
 }

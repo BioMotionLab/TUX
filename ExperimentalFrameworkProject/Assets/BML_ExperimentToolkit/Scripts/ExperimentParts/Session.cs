@@ -67,7 +67,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
 
         public static Session LoadSessionData() {
-            Debug.Log("Loading Session data");
             string filePath = Path.Combine(Application.dataPath, SessionLocation, SessionDataFileName);
             Session session;
             if (File.Exists(filePath)) {

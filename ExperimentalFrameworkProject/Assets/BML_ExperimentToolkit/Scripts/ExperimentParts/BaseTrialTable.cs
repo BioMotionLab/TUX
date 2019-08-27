@@ -10,7 +10,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         readonly Variables           variables;
         readonly ColumnNamesSettings columnNames;
-        public   int                 NumberOfTrials => baseTrialTable.Rows.Count;
 
         public BaseTrialTable(BaseBlockTable baseBlockTable,
                               VariableConfig variableConfig) {

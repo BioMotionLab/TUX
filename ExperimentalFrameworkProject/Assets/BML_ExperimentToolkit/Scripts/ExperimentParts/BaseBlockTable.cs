@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Text;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities.Extensions;
 
@@ -47,6 +48,26 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return table;
         }
         
+        public List<string> BlockPermutationsStrings {
+            get {
+                List<string> blockPermutations = new List<string>();
+                int blockOrderIndex = 0;
+                if (baseBlockTable.Rows.Count == 0) return null;
+                if (baseBlockTable.Rows.Count >= 4) throw new TooManyPermutationsException();
+                foreach (List<DataRow> dataRows in baseBlockTable.GetPermutations()) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append($"Order #{blockOrderIndex}:   ");
+                    foreach (DataRow dataRow in dataRows) {
+                        sb.Append($"{dataRow.AsString(separator: ", ", truncateLength: -1)} >   ");
+                    }
+
+                    blockPermutations.Add(sb.ToString());
+                    blockOrderIndex++;
+                }
+
+                return blockPermutations;
+            }
+        }
         public static implicit operator DataTable(BaseBlockTable table) {
             return table.baseBlockTable;
         }
@@ -99,4 +120,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
     }
 
+    public class TooManyPermutationsException : Exception {
+    }
 }

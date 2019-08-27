@@ -193,7 +193,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 StartInDebugMode();
             }
             
-            ShowOuputFolderInput();
+            ShowOutputFolderInput();
             ShowOutputFileNameInput();
             
             if (!isValidFilePath) {
@@ -248,7 +248,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             fileName = EditorGUILayout.TextField(fileName);
         }
 
-        void ShowOuputFolderInput() {
+        void ShowOutputFolderInput() {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Output Folder:", LabelWidth);
             if (GUILayout.Button("Choose", LabelWidth)) {

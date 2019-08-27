@@ -69,8 +69,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             SessionStatusText.text = session != null ? 
                 "New session successfully created and linked to experiment" : 
                 "no session detected";
-
-
+            
             switch (runner.VariableConfigFile.TrialTableGenerationMode) {
                 case TrialTableGenerationMode.OnTheFly:
                     ShowParticipantVariables();
@@ -83,6 +82,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
         }
 
         void ShowDesignFileLoadSettings() {
@@ -141,6 +141,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             
             switch (runner.VariableConfigFile.TrialTableGenerationMode) {
                 case TrialTableGenerationMode.OnTheFly:
+                    List<IndependentVariable> blockVariables = runner.VariableConfigFile.Variables.BlockVariables;
+                    if (blockVariables.Count == 0) break;
                     session.BlockOrderChosenIndex = BlockOrderSelector.value-1; // subtract 1 because added first one in.
                     ValidateBlockOrderChosen(ref errorLog, ref isValid);
                     break;
