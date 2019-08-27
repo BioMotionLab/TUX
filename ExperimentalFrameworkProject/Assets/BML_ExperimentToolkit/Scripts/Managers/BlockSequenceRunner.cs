@@ -49,7 +49,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         void StartRunningBlock(Block block) {
 
             currentlyRunningBlock = block;
-            Debug.Log($"*****\nStarting to run block: {block.Identity}");
+            Debug.Log($"*****\nStarting Block {BlockIndex(currentlyRunningBlock)} of {blocks.Count}");
             ExperimentEvents.BlockHasStarted(block);
             ExperimentEvents.StartPart(block);
 

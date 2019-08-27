@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Data;
 using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
-using BML_ExperimentToolkit.Scripts.UI;
 using BML_ExperimentToolkit.Scripts.UI.Runtime;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
-using BML_Utilities;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
@@ -12,8 +12,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         [Header("Required:")]
         public VariableConfig VariableConfigFile;
 
-        public ExperimentDesign Design;
-
+        public ExperimentDesign ExperimentDesign;
+        public RunnableDesign Design;
+        
         OutputManager outputManager;
 
         Experiment experiment;
@@ -22,12 +23,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Stores the script of the custom Trial used in this Runner.
         /// Override this to customize trial behaviour
         /// </summary>
+        [PublicAPI]
         public virtual Type TrialType => typeof(SimpleTrial);
 
         /// <summary>
         /// Stores the script of the custom Block used in this Runner.
         /// Override this to customize block behaviour
         /// </summary>
+        [PublicAPI]
         public virtual Type BlockType => typeof(SimpleBlock);
 
         /// <summary>
@@ -35,6 +38,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Override this to customize Runner behaviour
         /// </summary>
         // ReSharper disable once MemberCanBeProtected.Global
+        [PublicAPI]
         public virtual Type ExperimentType => typeof(SimpleExperiment);
 
         [HideInInspector]
@@ -57,7 +61,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             ExperimentEvents.CheckMainWindowIsOpen(this);
 
             #endif
-            
 
             //check if config file is loaded
             if (VariableConfigFile == null) {
@@ -66,38 +69,36 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 return;
             }
             VariableConfigFile.Validate();
-            
+
             
 
-            Design = VariableConfigFile.Factory.ToTable(this, VariableConfigFile.ShuffleTrialOrder, 
-                                                        VariableConfigFile.RepeatTrialsInBlock, 
-                                                        VariableConfigFile.ShuffleDifferentlyForEachBlock, 
-                                                        VariableConfigFile.RepeatAllBlocks, 
-                                                        VariableConfigFile.OrderConfigs);
-            if (Design == null) {
-                throw new NullReferenceException("Design null");
-            }
-
-            experiment = (Experiment)Activator.CreateInstance(ExperimentType, this, Design);
-
-            if (experiment == null) {
-                throw new NullReferenceException("Experiment object instance could not be created");
-            }
-            
             Session = Session.LoadSessionData();
             if (Session == null) {
                 throw new NullReferenceException("Session nul and not created properly");
             }
-            
+
+            switch (VariableConfigFile.TrialTableGenerationMode) {
+                case TrialTableGenerationMode.OnTheFly:
+                    ExperimentDesign = ExperimentDesign.CreateFrom(VariableConfigFile);
+                    if (ExperimentDesign == null) {
+                        throw new NullReferenceException("ExperimentDesign null");
+                    }
+                    break;
+                    
+                case TrialTableGenerationMode.PreGenerated:
+                    //Design created later
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
             if (!WindowOpen) {
                 gui = Instantiate(VariableConfigFile.GuiSettings.GuiPrefab);
                 gui.gameObject.SetActive(true);
                 gui.RegisterExperiment(this);
             }
             
-            
             ExperimentEvents.InitExperiment(this);
-            
             
         }
 
@@ -117,10 +118,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         void OnDisable() {
             ExperimentEvents.OnStartRunningExperiment -= StartRunningRunningExperiment;
             ExperimentEvents.OnEndExperiment -= EndExperiment;
-            Design?.Disable();
             outputManager?.Disable();
             experiment?.Disable();
-        
         }
 
         /// <summary>
@@ -129,11 +128,38 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
 
+            switch (VariableConfigFile.TrialTableGenerationMode) {
+                case TrialTableGenerationMode.OnTheFly: {
+                    DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
+                    Design = new RunnableDesign(this, finalDesignTable, VariableConfigFile);
+                    break;
+                }
+                case TrialTableGenerationMode.PreGenerated:
+                    string selectedDesignFilePath = currentSession.SelectedDesignFilePath;
+                    if (string.IsNullOrEmpty(selectedDesignFilePath)) throw new NullReferenceException("Trying to load custom design file, but none given");
+                    Design = RunnableDesign.CreateFromFile(this, currentSession.SelectedDesignFilePath,
+                                                           VariableConfigFile);
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+            
+            if (Design == null)
+            {
+                throw new NullReferenceException("No Runnable design");
+            }
+            
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);
 
-            ExperimentEvents.ExperimentStarted();
+            experiment = (Experiment)Activator.CreateInstance(ExperimentType, this, Design);
+
+            if (experiment == null) {
+                throw new NullReferenceException("Experiment object instance could not be created");
+            }
             
+            ExperimentEvents.ExperimentStarted();
+
             StartCoroutine(VariableConfigFile.ControlSettings.Run());
             ExperimentEvents.StartPart(experiment);
 

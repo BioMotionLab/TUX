@@ -13,7 +13,12 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
     /// </summary>
     public static class VariableDrawerHelpers {
         const float LineHeight = 20f;
-
+        const float IndentAmt   = 40f;
+        const float MinusWidth  = 20f;
+        const float MinusHeight = 14f;
+        const float YPadding    = (LineHeight - MinusHeight) / 2;
+        const float CustomProbabilityWidth = 180f;
+ 
         /// <summary>
         /// Adds all properties to independent variables
         /// </summary>
@@ -104,37 +109,13 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
             if (constrainProperty.boolValue) {
                 EditorGUI.LabelField(layoutRect.NextLine, "Possible Values");
-
-                const float indentAmt = 40f;
-                const float minusWidth = 20f;
-                const float minusHeight = 14f;
-                float x = indentAmt + layoutRect.CurrentLine.x;
-                const float yPadding = (LineHeight - minusHeight) / 2;
-
-
-                for (int i = 0; i < valuesProperty.arraySize; i++) {
-
-                    Rect valuesBaseRect = layoutRect.NextLine;
-                    
-                    Rect minusRect = new Rect(x, valuesBaseRect.y + yPadding, minusWidth, minusHeight);
-                    Rect valuesRect = new Rect(x + minusWidth, valuesBaseRect.y, 0.5f * valuesBaseRect.width,
-                                               valuesBaseRect.height);
-
-                    //Minus button
-                    if (GUI.Button(minusRect, "-")) {
-                        valuesProperty.DeleteArrayElementAtIndex(i);
-                        break;
-                    }
-
-                    SerializedProperty value = valuesProperty.GetArrayElementAtIndex(i);
-                    EditorGUI.PropertyField(valuesRect, value, GUIContent.none);
-
-                }
-
-
+                float x = IndentAmt + layoutRect.CurrentLine.x;
+                
+                AddValuePropertyField(layoutRect, valuesProperty, x);
+                
                 Rect valuesFooterBaseRect = layoutRect.NextLine;
                 //plus button
-                Rect plusRect = new Rect(x, valuesFooterBaseRect.y + yPadding, minusWidth, minusHeight);
+                Rect plusRect = new Rect(x, valuesFooterBaseRect.y + YPadding, MinusWidth, MinusHeight);
                 if (GUI.Button(plusRect, "+")) {
                     int lastIndex = valuesProperty.arraySize;
                     if (lastIndex < 0) lastIndex = 0;
@@ -145,6 +126,24 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
             property.serializedObject.ApplyModifiedProperties();
 
+        }
+
+        static void AddValuePropertyField(GuiLayoutRect layoutRect, SerializedProperty valuesProperty, float x) {
+            for (int i = 0; i < valuesProperty.arraySize; i++) {
+                Rect valuesBaseRect = layoutRect.NextLine;
+                Rect minusRect = new Rect(x, valuesBaseRect.y + YPadding, MinusWidth, MinusHeight);
+                Rect valuesRect = new Rect(x + MinusWidth, valuesBaseRect.y, 0.5f * valuesBaseRect.width,
+                                           valuesBaseRect.height);
+
+                //Minus button
+                if (GUI.Button(minusRect, "-")) {
+                    valuesProperty.DeleteArrayElementAtIndex(i);
+                    break;
+                }
+
+                SerializedProperty value = valuesProperty.GetArrayElementAtIndex(i);
+                EditorGUI.PropertyField(valuesRect, value, GUIContent.none);
+            }
         }
 
 
@@ -167,7 +166,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             }
             
             SerializedProperty variableDataType = property.FindPropertyRelative(nameof(Variable.DataType));
-            SupportedDataTypes dataType = (SupportedDataTypes) variableDataType.enumValueIndex;
+            SupportedDataType dataType = (SupportedDataType) variableDataType.enumValueIndex;
             EditorGUI.LabelField(layoutRect.NextLine, $"Data Type: {dataType.ToString()}");
 
             EditorGUI.indentLevel++;
@@ -206,93 +205,84 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         static void AddIndependentVariableValueProperties(GuiLayoutRect layoutRect, SerializedProperty property) {
             SerializedProperty valuesProperty = property.FindPropertyRelative("Values");
             SerializedProperty probabilitiesProperty = property.FindPropertyRelative("Probabilities");
-
-
+            
             Rect valueLabelBaseRect = layoutRect.NextLine;
-            
             EditorGUI.LabelField(valueLabelBaseRect, "Values");
-
             
+            float x = IndentAmt + layoutRect.CurrentLine.x;
             
-            const float indentAmt = 40f;
-            const float minusWidth = 20f;
-            const float minusHeight = 14f;
-            const float customProbabilityWidth = 180f;
-            float x = indentAmt + layoutRect.CurrentLine.x;
-            const float yPadding = (LineHeight - minusHeight) / 2;
-
-            //Debug.Log($"enum value : {mixType.enumValueIndex} {(VariableMixingType)mixType.enumValueIndex}");
-
             float probValuesWidth = 0;
             SerializedProperty mixType =
                 property.FindPropertyRelative(nameof(IndependentVariable.MixingTypeOfVariable));
             bool customProb = (VariableMixingType) mixType.enumValueIndex == VariableMixingType.CustomProbability;
             
             
-            
-            
             if (customProb) {
-                //Debug.Log("custom probabilities");
-                probValuesWidth = customProbabilityWidth;
-
-                
-                
+                probValuesWidth = CustomProbabilityWidth;
                 Rect probLabel = new Rect(valueLabelBaseRect.width - probValuesWidth, 
                                           valueLabelBaseRect.y, 
                                           probValuesWidth,
                                           valueLabelBaseRect.height);
                 EditorGUI.LabelField(probLabel, "Probability");
             }
-
-
-            for (int i = 0; i < valuesProperty.arraySize; i++) {
-
-                Rect valueBaseRect = layoutRect.NextLine;
-                
-                Rect minusRect = new Rect(x, valueBaseRect.y + yPadding, minusWidth, minusHeight);
-                Rect valuesRect = new Rect(x + minusWidth, valueBaseRect.y, 0.5f * valueBaseRect.width, valueBaseRect.height);
-                Rect customProbabilityValuesRect = new Rect(valueBaseRect.width - probValuesWidth, valueBaseRect.y,
-                    probValuesWidth,
-                    valueBaseRect.height);
-
-                //Minus button
-                if (GUI.Button(minusRect, "-")) {
-                    valuesProperty.DeleteArrayElementAtIndex(i);
-                    probabilitiesProperty.DeleteArrayElementAtIndex(i);
-                    //Debug.Log($"Deleted element. Size now {valuesProperty.arraySize}");
-                    break;
-                }
-
-                SerializedProperty value = valuesProperty.GetArrayElementAtIndex(i);
-                EditorGUI.PropertyField(valuesRect, value, GUIContent.none);
-
-                SerializedProperty prob = probabilitiesProperty.GetArrayElementAtIndex(i);
-                if (customProb && probabilitiesProperty.arraySize >= 2) {
-                    if (i == valuesProperty.arraySize - 1) {
-                        float runningTotalWithoutLast = GetRunningTotal(probabilitiesProperty, true);
-                        float remainder = 1 - runningTotalWithoutLast;
-                        if (remainder >= 0) {
-                            prob.floatValue = remainder;
-                        }
-                        else {
-                            prob.floatValue = 0;
-                        }
-
-                        EditorGUI.LabelField(customProbabilityValuesRect, prob.floatValue + " (Auto)");
-                    }
-                    else {
-                        EditorGUI.PropertyField(customProbabilityValuesRect, prob, GUIContent.none);
-                    }
-                }
-
-                
+            
+            AddIvValuePropertyFields(layoutRect, valuesProperty, x, probabilitiesProperty, customProb);
+            
+            Rect valuesFooterBaseRect = layoutRect.NextLine;
+            AddPlusButton(x, valuesFooterBaseRect, valuesProperty, probabilitiesProperty);
+            
+            AddCustomProbabilityField(customProb, valuesFooterBaseRect, probValuesWidth, probabilitiesProperty);
+            if (probabilitiesProperty.arraySize == 0) {
+                Rect noValueWarningRect = new Rect(x + 15f + MinusWidth, valuesFooterBaseRect.y,
+                                                   valuesFooterBaseRect.width - x - 15 - MinusWidth - probValuesWidth,
+                                                   valuesFooterBaseRect.height);
+                EditorGUI.HelpBox(noValueWarningRect, "No values", MessageType.Error);
             }
 
+            SerializedProperty block = property.FindPropertyRelative(nameof(IndependentVariable.Block));
+            CheckMaxBlockPermutationsAllowed(layoutRect, block, valuesProperty);
+           
+        }
 
-            Rect valuesFooterBaseRect = layoutRect.NextLine;
+        static void CheckMaxBlockPermutationsAllowed(GuiLayoutRect      layoutRect, SerializedProperty block,
+                                                     SerializedProperty valuesProperty) {
+            if (block.boolValue && valuesProperty.arraySize > ExperimentDesign.MaxBlockPermutationsAllowed) {
+                Rect tooManyBlockValuesWarningRect = layoutRect.NextLines(3);
+                EditorGUI.HelpBox(tooManyBlockValuesWarningRect, "Too many Block Values for automatic permutation.\n" +
+                                                                 "Must define possible Block orders manually using OrderConfig ScriptableObjects.\n" +
+                                                                 "See Docs.",
+                                  MessageType.Warning);
+            }
+        }
+
+        static void AddCustomProbabilityField(bool               customProb, Rect valuesFooterBaseRect, float probValuesWidth,
+                                              SerializedProperty probabilitiesProperty) {
             
-            //plus button
-            Rect plusRect = new Rect(x, valuesFooterBaseRect.y + yPadding, minusWidth, minusHeight);
+            if (!customProb || probabilitiesProperty.arraySize == 0) return;
+            
+            Rect totalProbRect = new Rect(valuesFooterBaseRect.width - probValuesWidth, valuesFooterBaseRect.y,
+                                          probValuesWidth,
+                                          valuesFooterBaseRect.height);
+            
+            float runningTotal = GetRunningTotal(probabilitiesProperty);
+            string direction = "";
+            float remainder = 1 - runningTotal;
+            if (Math.Abs(remainder) > 0.01f && probabilitiesProperty.arraySize > 0) {
+                if (runningTotal > 1) direction = " (too high)";
+                if (runningTotal < 1) direction = " (too low)";
+
+                EditorGUI.HelpBox(totalProbRect, $"Total = {runningTotal}{direction}", MessageType.Error);
+            }
+            else {
+                EditorGUI.LabelField(totalProbRect, $"Total = {runningTotal}{direction}");
+            }
+        }
+
+        static void AddPlusButton(float x, 
+                                  Rect valuesFooterBaseRect,
+                                  SerializedProperty valuesProperty, 
+                                  SerializedProperty probabilitiesProperty) {
+            Rect plusRect = new Rect(x, valuesFooterBaseRect.y + YPadding, MinusWidth, MinusHeight);
             if (GUI.Button(plusRect, "+")) {
                 int lastIndex = valuesProperty.arraySize;
                 if (lastIndex < 0) lastIndex = 0;
@@ -304,43 +294,58 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                     probabilitiesProperty.GetArrayElementAtIndex(probabilitiesProperty.arraySize - 2).floatValue = 0;
                 //Debug.Log($"Added element, size now {valuesProperty.arraySize}");
             }
+        }
 
-            if (customProb) {
-                Rect totalProbRect = new Rect(valuesFooterBaseRect.width - probValuesWidth, valuesFooterBaseRect.y, probValuesWidth,
-                                              valuesFooterBaseRect.height);
-                if (probabilitiesProperty.arraySize != 0) {
-                    float runningTotal = GetRunningTotal(probabilitiesProperty);
-                    string direction = "";
-                    float remainder = 1 - runningTotal;
-                    if (Math.Abs(remainder) > 0.01f && probabilitiesProperty.arraySize > 0) {
-                        if (runningTotal > 1) direction = " (too high)";
-                        if (runningTotal < 1) direction = " (too low)";
+        static void AddIvValuePropertyFields(GuiLayoutRect layoutRect, 
+                                             SerializedProperty valuesProperty,
+                                             float x,
+                                             SerializedProperty probabilitiesProperty, 
+                                             bool customProb) {
+            
+            for (int i = 0; i < valuesProperty.arraySize; i++) {
+                Rect valueBaseRect = layoutRect.NextLine;
 
-                        EditorGUI.HelpBox(totalProbRect, $"Total = {runningTotal}{direction}", MessageType.Error);
+                Rect minusRect = new Rect(x, valueBaseRect.y + YPadding, MinusWidth, MinusHeight);
+                Rect valuesRect = new Rect(x + MinusWidth, valueBaseRect.y, 0.5f * valueBaseRect.width, valueBaseRect.height);
+                Rect customProbabilityValuesRect = new Rect(valueBaseRect.width - CustomProbabilityWidth, valueBaseRect.y,
+                                                            CustomProbabilityWidth,
+                                                            valueBaseRect.height);
+
+                //Minus button
+                if (GUI.Button(minusRect, "-")) {
+                    valuesProperty.DeleteArrayElementAtIndex(i);
+                    probabilitiesProperty.DeleteArrayElementAtIndex(i);
+                    break;
+                }
+
+                SerializedProperty value = valuesProperty.GetArrayElementAtIndex(i);
+                EditorGUI.PropertyField(valuesRect, value, GUIContent.none);
+
+                AddCustomProbabilities(valuesProperty, probabilitiesProperty, customProb, i, customProbabilityValuesRect);
+            }
+        }
+
+        static void AddCustomProbabilities(SerializedProperty valuesProperty, SerializedProperty probabilitiesProperty,
+                                           bool               customProb,     int                i,
+                                           Rect               customProbabilityValuesRect) {
+            SerializedProperty prob = probabilitiesProperty.GetArrayElementAtIndex(i);
+            if (customProb && probabilitiesProperty.arraySize >= 2) {
+                if (i == valuesProperty.arraySize - 1) {
+                    float runningTotalWithoutLast = GetRunningTotal(probabilitiesProperty, true);
+                    float remainder = 1 - runningTotalWithoutLast;
+                    if (remainder >= 0) {
+                        prob.floatValue = remainder;
                     }
                     else {
-                        EditorGUI.LabelField(totalProbRect, $"Total = {runningTotal}{direction}");
+                        prob.floatValue = 0;
                     }
+
+                    EditorGUI.LabelField(customProbabilityValuesRect, prob.floatValue + " (Auto)");
+                }
+                else {
+                    EditorGUI.PropertyField(customProbabilityValuesRect, prob, GUIContent.none);
                 }
             }
-
-            if (probabilitiesProperty.arraySize == 0) {
-                Rect noValueWarningRect = new Rect(x + 15f + minusWidth, valuesFooterBaseRect.y,
-                                                   valuesFooterBaseRect.width - x - 15 - minusWidth - probValuesWidth,
-                                                   valuesFooterBaseRect.height);
-                EditorGUI.HelpBox(noValueWarningRect, "No values", MessageType.Error);
-            }
-            
-            
-            SerializedProperty block = property.FindPropertyRelative(nameof(IndependentVariable.Block));
-            if (block.boolValue && valuesProperty.arraySize > ExperimentDesign.MaxBlockPermutationsAllowed) {
-                Rect tooManyBlockValuesWarningRect = layoutRect.NextLines(3);
-                EditorGUI.HelpBox(tooManyBlockValuesWarningRect, "Too many Block Values for automatic permutation.\n" +
-                                                                 "Must define possible Block orders manually using OrderConfig ScriptableObjects.\n" +
-                                                                 "See Docs.", 
-                                  MessageType.Warning);
-            }
-           
         }
 
         /// <summary>
@@ -360,7 +365,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                 if (prob.floatValue < 0 || prob.floatValue > 1) {
                     throw new
                         ArgumentOutOfRangeException(
-                            $"Can't have a ProbabilityIndependentVariables outside of range 0-1, prob: {prob.floatValue} ");
+                            $"Can't have a Probability outside of range 0-1, prob: {prob.floatValue} ");
                 }
 
                 runningTotal += prob.floatValue;

@@ -104,6 +104,7 @@ MonoBehaviour:
     type: 2}
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
+  TrialTableGenerationMode: 1
   OrderConfigs:
   - {fileID: 11400000, guid: 6a65ac59fc24e1e45b7b3bbd9d1c6eec, type: 2}
   - {fileID: 11400000, guid: 8c80b0f5495ebb44e958cebc88fd138a, type: 2}

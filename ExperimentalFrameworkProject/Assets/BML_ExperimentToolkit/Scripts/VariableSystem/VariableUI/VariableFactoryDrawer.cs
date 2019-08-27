@@ -26,7 +26,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             GUI.backgroundColor = Color.white;
 
             EditorGUI.LabelField(layoutRect.NextLine, "Variable Creation:", EditorStyles.boldLabel);
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.DataTypesToCreate));
+            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.DataTypeToCreate));
             AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.VariableTypeToCreate));
             
             if (GUI.Button(layoutRect.NextLine, "Create Variable")) {
@@ -81,8 +81,17 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataParticipantVariables));
 
             EditorGUI.LabelField(layoutRect.NextLine, "--------");
+            EditorGUI.LabelField(layoutRect.NextLine, "[Advanced] Generate Design File Manually");
+            if (GUI.Button(layoutRect.NextLine, "Generate...")) {
+                DesignSaverWindow.ShowWindow();
+            }
+            
+            EditorGUI.LabelField(layoutRect.NextLine, "--------");
             EditorGUI.LabelField(layoutRect.NextLine, "Settings:", EditorStyles.boldLabel);
         
+            
+            
+            
             EditorGUI.indentLevel = oldIndentLevel;
             height = layoutRect.FinalHeight;
             mainProperty.serializedObject.ApplyModifiedProperties();

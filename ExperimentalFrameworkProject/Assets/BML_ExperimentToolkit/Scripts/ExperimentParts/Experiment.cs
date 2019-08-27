@@ -18,15 +18,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     // ReSharper disable once InheritdocConsiderUsage
     public abstract class Experiment : ExperimentPart, Outputtable {
 
-        readonly ExperimentDesign design;
+        readonly RunnableDesign design;
         readonly ExperimentRunner runner;
 
-        protected Experiment(ExperimentRunner runner, ExperimentDesign design) : base(runner) {
+        protected Experiment(ExperimentRunner runner, RunnableDesign design) : base(runner) {
             this.runner = runner;
-            if (design == null) {
-                throw new NullReferenceException("Experiment created with null design");
-            }
-            this.design = design;
+            this.design = design ?? throw new NullReferenceException("Experiment created with null design");
             Enable();
         }
 

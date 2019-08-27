@@ -1,8 +1,7 @@
 ﻿using System;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
-
-    public partial class ExperimentDesign {
+    
         public class InvalidExperimentDesignException : Exception {
             public InvalidExperimentDesignException() {
             }
@@ -14,7 +13,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 : base(message, inner) {
             }
         }
-    }
 
 
 }

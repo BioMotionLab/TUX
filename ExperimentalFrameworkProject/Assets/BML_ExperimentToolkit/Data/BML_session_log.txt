@@ -651,6 +651,35 @@ Session Logged: 2019-08-07 12:06
 
 
 ---------------------
-Session Logged: 2019-08-21 01:42
-{"outputFileName":"test","outputFolder":"/Users/adam/ExperimentTests","debugMode":false,"OrderChosenIndex":0,"participantId":"Unnamed"}
-Confirmed Complete at: 01:43
+Session Logged: 2019-08-21 01:55
+{"TrialTableGenerationMode":0,"outputFileName":"test","outputFolder":"/Users/adam/test","DebugMode":false,"OrderChosenIndex":2}
+
+
+---------------------
+Session Logged: 2019-08-21 02:24
+{"TrialTableGenerationMode":0,"outputFileName":"test","outputFolder":"/Users/adam/test","DebugMode":false,"BlockOrderChosenIndex":1}
+
+
+---------------------
+Session Logged: 2019-08-22 10:21
+{"TrialTableGenerationMode":0,"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","DebugMode":false,"BlockOrderChosenIndex":0}
+
+
+---------------------
+Session Logged: 2019-08-26 09:57
+{"TrialTableGenerationMode":0,"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","DebugMode":false,"BlockOrderChosenIndex":0}
+Confirmed Complete at: 09:57
+
+---------------------
+Session Logged: 2019-08-26 05:15
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":0}
+Confirmed Complete at: 05:16
+
+---------------------
+Session Logged: 2019-08-27 01:28
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":0}
+
+
+---------------------
+Session Logged: 2019-08-27 01:30
+{"outputFileName":"test","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":1}

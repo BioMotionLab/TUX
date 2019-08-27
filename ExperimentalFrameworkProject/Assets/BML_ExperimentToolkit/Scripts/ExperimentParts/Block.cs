@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_Utilities.Extensions;
+using JetBrains.Annotations;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
@@ -12,7 +13,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     /// </summary>
     public abstract class Block : ExperimentPart {
 
-        public DataTable TrialTable;
+        public readonly DataTable TrialTable;
         public readonly string    Identity;
 
         public bool Complete = false;
@@ -21,6 +22,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         readonly DataRow data;
 
+        [PublicAPI]
         protected DataRow Data {
             get {
                 if (data == null) {
@@ -34,26 +36,24 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         protected Block(ExperimentRunner runner,
                      DataTable trialTable, 
-                     string identity, 
-                     Type trialType,
+                     string identity,
                      DataRow dataRow) 
                         : base(runner) {
             TrialTable = trialTable;
             Identity = identity;
-            MakeTrials(trialType);
+            MakeTrials();
             data = dataRow;
         }
 
         /// <summary>
         /// Makes the trials for this block.
         /// </summary>
-        /// <param name="trialType">Type of the trial.</param>
-        void MakeTrials(Type trialType) {
+        void MakeTrials() {
 
             Trials = new List<Trial>();
             
             foreach (DataRow row in TrialTable.Rows) {
-                Trial newTrial = (Trial)Activator.CreateInstance(trialType, Runner, row);
+                Trial newTrial = (Trial)Activator.CreateInstance(Runner.TrialType, Runner, row);
                 Trials.Add(newTrial);
                 
             }

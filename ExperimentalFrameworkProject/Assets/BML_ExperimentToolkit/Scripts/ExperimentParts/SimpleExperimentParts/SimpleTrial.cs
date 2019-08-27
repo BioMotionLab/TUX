@@ -33,7 +33,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
             Debug.Log("...Waiting for you to press return key! (in SimpleTrial MainCoroutine() method)");
             while (running) {
                 if (Input.GetKeyDown(KeyCode.Return)) {
-                    Debug.Log($"{TrialText} Return key pressed!");
+                    Debug.Log($"Return key pressed!");
                     running = false;
                 }
 
