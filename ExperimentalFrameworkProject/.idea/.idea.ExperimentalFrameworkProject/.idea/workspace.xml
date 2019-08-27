@@ -75,7 +75,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Assets/BML_Utilities" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/InvalidExperimentDesignException.cs" root0="FORCE_HIGHLIGHTING" />
@@ -275,7 +275,7 @@
       <workItem from="1566483122083" duration="187000" />
       <workItem from="1566483572342" duration="9577000" />
       <workItem from="1566827929915" duration="20882000" />
-      <workItem from="1566916478666" duration="6622000" />
+      <workItem from="1566916478666" duration="6872000" />
     </task>
     <servers />
   </component>
