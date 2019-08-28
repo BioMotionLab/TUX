@@ -3,11 +3,14 @@ using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities.Extensions;
 using UnityEditor;
+using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.UI.Editor {
     public class DesignPreviewer {
         readonly VariableConfigurationFile configurationFile;
         public int                                OrderIndex;
+        Vector2 scrollPos;
+
         public DesignPreviewer(VariableConfigurationFile configurationFile) {
             this.configurationFile = configurationFile;
         }
@@ -25,7 +28,11 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             
         }
         public DataTable ShowPreview() {
-
+            
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos, 
+                                                        false, false, 
+                                                        GUILayout.ExpandHeight(true));
+            
             if (!ConfigurationFileLinked()) return null;
             
             EditorGUILayout.BeginVertical();
@@ -48,7 +55,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             EditorGUILayout.Space();
             EditorGUILayout.TextArea(finalTable.AsString());
+            EditorGUILayout.Space();
             EditorGUILayout.EndVertical();
+            EditorGUILayout.EndScrollView();
             return finalTable;
         }
     }

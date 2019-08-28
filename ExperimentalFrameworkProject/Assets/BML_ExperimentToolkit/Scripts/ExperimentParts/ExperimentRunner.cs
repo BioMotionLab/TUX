@@ -20,12 +20,19 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     /// </summary>
     public abstract class ExperimentRunner : MonoBehaviour {
 
-        // ReSharper disable once InconsistentNaming
+        
         [Header("Required:")]
         [Tooltip("Create a VariableConfigurationFile from asset menu and drag here")]
         [SerializeField]
+        // ReSharper disable once InconsistentNaming
         VariableConfigurationFile variableConfigurationFile = default;
 
+        [Header("Optional:")]
+        [SerializeField]
+        [Tooltip("References to your custom scripts")]
+        // ReSharper disable once InconsistentNaming
+        ScriptReferences scriptReferences = new ScriptReferences();
+        
         // ReSharper disable once ConvertToAutoProperty
         public VariableConfigurationFile VariableConfigurationFileFile => variableConfigurationFile;
         
@@ -35,10 +42,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         OutputManager outputManager;
         Experiment experiment;
         ExperimentGui gui;
-
-        [SerializeField]
-        // ReSharper disable once InconsistentNaming
-        ScriptReferences scriptReferences = new ScriptReferences();
+        
         
         /// <summary>
         /// Type of custom Trial used.
@@ -80,12 +84,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             TrialType = scriptReferences.TrialType;
             BlockType = scriptReferences.BlockType;
             ExperimentType = scriptReferences.ExperimentType;
-
             
             #if UNITY_EDITOR
-            
             ExperimentEvents.CheckMainWindowIsOpen(this);
-
             #endif
 
             //check if configurationFile file is loaded
@@ -98,7 +99,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             Session = Session.LoadSessionData();
             if (Session == null) {
-                throw new NullReferenceException("Session nul and not created properly");
+                throw new NullReferenceException("Session null and not created properly");
             }
 
             switch (VariableConfigurationFileFile.GenerateExperimentTable) {
@@ -180,8 +181,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             StartCoroutine(VariableConfigurationFileFile.ControlSettings.Run());
             
             ExperimentEvents.StartPart(experiment);
-
-
+            
         }
 
         void EndExperiment() {
@@ -189,8 +189,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             Ended = true;
         }
 
-       
-            
     }
 
     [Serializable]

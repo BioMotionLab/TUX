@@ -82,7 +82,12 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
+            OutputFileName.text = session.OutputFileName;
+            OutputFolder.text = session.OutputFolder;
+            BlockOrderSelector.value = session.BlockOrderChosenIndex + 1;
+
+
         }
 
         void ShowDesignFileLoadSettings() {

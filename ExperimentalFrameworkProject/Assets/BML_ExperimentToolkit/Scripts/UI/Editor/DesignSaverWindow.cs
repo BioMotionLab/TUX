@@ -8,22 +8,19 @@ using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.UI.Editor {
     public class DesignSaverWindow : EditorWindow {
-        
-        [SerializeField]
-        int OrderIndex = default;
-
+      
         string fileName = "experimentDesignSave";
         
         string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-        public VariableConfigurationFile configurationFile;
+        public VariableConfigurationFile ConfigurationFile;
 
         DesignPreviewer previewer;
         
         void OnGUI() {
 
             if (previewer == null) {
-                previewer = new DesignPreviewer(configurationFile);
+                previewer = new DesignPreviewer(ConfigurationFile);
             }
             var finalTable = previewer.ShowPreview();
 
@@ -54,7 +51,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
         public static void ShowWindow(VariableConfigurationFile target) {
             DesignSaverWindow window = (DesignSaverWindow) GetWindow(typeof(DesignSaverWindow), false, "Design Saver");
-            window.configurationFile = target;
+            window.ConfigurationFile = target;
             window.Show();
         }
     }

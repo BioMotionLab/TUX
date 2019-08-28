@@ -18,7 +18,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         static readonly GUILayoutOption JumpToButtonWidth = GUILayout.Width(40);
         static readonly GUILayoutOption RunningTrialIndicatorWidth = GUILayout.Width(70);
         static readonly GUILayoutOption IndentWidth = GUILayout.Width(40);
-        static readonly GUILayoutOption SmallLabelWidth = GUILayout.Width(100);
         static readonly GUILayoutOption LabelWidth = GUILayout.Width(120);
         static readonly GUILayoutOption BlockIdentityWidth = GUILayout.Width(300);
 
@@ -217,6 +216,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             }
             previewer.ShowPreview();
             OrderChosenIndex = previewer.OrderIndex;
+            Debug.Log(OrderChosenIndex);
 
             ShowStartButton();
             
@@ -235,6 +235,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             
             session.OutputFolder = outputFolder;
             session.OutputFileName = fileName;
+            session.BlockOrderChosenIndex = OrderChosenIndex;
 
             fileErrorLog = string.Empty;
             session.ValidateFilePath(ref fileErrorLog, ref isValidFilePath);
@@ -332,37 +333,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-
-        /// <summary>
-        /// Choose block order
-        /// </summary>
-        /// <returns></returns>
-        void ShowBlockOrderSettings() {
-            if (!runner.Design.HasBlocks) {
-                return;
-            }
-
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-            EditorGUILayout.Space();
-            
-            EditorGUILayout.LabelField("Choose Block Order:", EditorStyles.boldLabel);
-
-            
-            List<string> blockPermutations = runner.ExperimentDesign.BlockPermutationsStrings;
-            if (blockPermutations.Count != 1) 
-                OrderChosenIndex = EditorGUILayout.Popup(OrderChosenIndex, blockPermutations.ToArray());
-            
-            DataTable selectedOrderTable = runner.ExperimentDesign.GetBlockOrderTable(OrderChosenIndex);
-            
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Chosen block order:");
-
-            ShowBlockTable(selectedOrderTable, false);
-            
-            EditorGUILayout.EndVertical();
-            
         }
 
         public int OrderChosenIndex;
