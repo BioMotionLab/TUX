@@ -16,12 +16,12 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         public VariableConfigurationFile ConfigurationFile;
 
         DesignPreviewer previewer;
-        
-        void OnGUI() {
 
-            if (previewer == null) {
-                previewer = new DesignPreviewer(ConfigurationFile);
-            }
+        void OnEnable() {
+            previewer = new DesignPreviewer(ConfigurationFile);
+        }
+
+        void OnGUI() {
             var finalTable = previewer.ShowPreview();
 
             EditorGUILayout.LabelField("Save:", EditorStyles.boldLabel);

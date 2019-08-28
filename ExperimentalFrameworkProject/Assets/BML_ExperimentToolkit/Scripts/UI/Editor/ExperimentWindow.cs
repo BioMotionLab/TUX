@@ -46,8 +46,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         static bool IsOpen => instance != null;
 
         void OnEnable() {
+            
+            previewer = new DesignPreviewer(runner.VariableConfigurationFileFile);
             instance = this;
-            //add listeners for events
             ExperimentEvents.OnInitExperiment += InitWindow;
             ExperimentEvents.OnBlockUpdated += BlockCompleted;
             ExperimentEvents.OnTrialUpdated += TrialCompleted;
@@ -57,7 +58,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         }
         
         void OnDisable() {
-            //remove listeners for events to prevent memory leaks
             ExperimentEvents.OnInitExperiment -= InitWindow;
             ExperimentEvents.OnBlockUpdated -= BlockCompleted;
             ExperimentEvents.OnTrialUpdated -= TrialCompleted;
@@ -124,7 +124,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 GUILayout.ExpandHeight(true));
             EditorGUILayout.BeginVertical();
             
-            if (PlayModeStatusWrong()) return;
+            if (!IsPlayMode()) return;
             if (ConfigFileStatusWrong()) return;
             
             if (!started) {
@@ -164,18 +164,17 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             return false;
         }
 
-        static bool PlayModeStatusWrong() {
-            if (!Application.isPlaying) {
-                EditorGUILayout
-                    .HelpBox("Runner display needs to be in PlayMode, " +
-                             "\n\nPress play in Editor",
-                             MessageType.Warning);
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndScrollView();
-                return true;
-            }
-
+        static bool IsPlayMode() {
+            if (Application.isPlaying) return true;
+            
+            EditorGUILayout
+                .HelpBox("Runner display needs to be in PlayMode, " +
+                         "\n\nPress play in Editor",
+                         MessageType.Warning);
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.EndScrollView();
             return false;
+
         }
 
 
@@ -210,13 +209,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             }
             
             ShowParticipantVariables();
-
-            if (previewer == null) {
-                previewer = new DesignPreviewer(runner.VariableConfigurationFileFile);
-            }
             previewer.ShowPreview();
             OrderChosenIndex = previewer.OrderIndex;
-            Debug.Log(OrderChosenIndex);
 
             ShowStartButton();
             

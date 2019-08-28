@@ -1,3 +1,4 @@
+using System;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using UnityEditor;
 
@@ -7,10 +8,12 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         public VariableConfigurationFile ConfigurationFile;
         DesignPreviewer                  previewer;
 
+        void OnEnable() {
+            previewer = new DesignPreviewer(ConfigurationFile);
+        }
+
         void OnGUI() {
-            if (previewer == null) {
-                previewer = new DesignPreviewer(ConfigurationFile);
-            }
+            
             previewer.ShowPreview();
         }
 
