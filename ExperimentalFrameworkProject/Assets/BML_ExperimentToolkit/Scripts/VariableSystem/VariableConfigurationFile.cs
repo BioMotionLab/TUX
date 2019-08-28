@@ -12,7 +12,7 @@ using UnityEngine;
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
     [CreateAssetMenu]
-    public class VariableConfig : ScriptableObject {
+    public class VariableConfigurationFile : ScriptableObject {
 
         public bool ShuffleTrialOrder = false;
         public bool ShuffleDifferentlyForEachBlock = false;
@@ -69,22 +69,22 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         
         string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-        VariableConfig configFile;
+        VariableConfigurationFile configurationFileFile;
 
         void OnGUI() {
 
-            configFile = Selection.activeObject as VariableConfig;
-            if (configFile == null) {
+            configurationFileFile = Selection.activeObject as VariableConfigurationFile;
+            if (configurationFileFile == null) {
                 EditorGUILayout.HelpBox("Need to have a Variable Config File Selected", MessageType.Warning);
                 return;
             }
 
             EditorGUILayout.BeginVertical();
-            EditorGUILayout.LabelField($"Config File Selected: {configFile.name}");
+            EditorGUILayout.LabelField($"Config File Selected: {configurationFileFile.name}");
             
             EditorGUILayout.Space();
             
-            ExperimentDesign design = ExperimentDesign.CreateFrom(configFile);
+            ExperimentDesign design = ExperimentDesign.CreateFrom(configurationFileFile);
             
             EditorGUILayout.LabelField("Select A Block Order");
             

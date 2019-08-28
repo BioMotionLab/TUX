@@ -33,8 +33,11 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             int oldIndentLevel = EditorGUI.indentLevel;
 
             AddVariableProperties(layoutRect, mainProperty);
-            AddIndependentVariableProperties(layoutRect, mainProperty);
-            AddIndependentVariableValueProperties(layoutRect, mainProperty);
+
+            if (mainProperty.isExpanded) {
+                AddIndependentVariableProperties(layoutRect, mainProperty);
+                AddIndependentVariableValueProperties(layoutRect, mainProperty);
+            }
 
             EditorGUI.indentLevel = oldIndentLevel;
  
@@ -57,8 +60,11 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             int oldIndentLevel = EditorGUI.indentLevel;
 
             AddVariableProperties(layoutRect, mainProperty);
-            AddDependentVariableValueProperties(layoutRect, mainProperty);
 
+            if (mainProperty.isExpanded) {
+                AddDependentVariableValueProperties(layoutRect, mainProperty);
+            }
+            
             EditorGUI.indentLevel = oldIndentLevel;
             
             mainProperty.serializedObject.ApplyModifiedProperties();
@@ -80,8 +86,11 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             int oldIndentLevel = EditorGUI.indentLevel;
 
             AddVariableProperties(layoutRect, mainProperty);
-            AddParticipantVariableValueProperties(layoutRect, mainProperty);
 
+            if (mainProperty.isExpanded) {
+                AddParticipantVariableValueProperties(layoutRect, mainProperty);
+            }
+            
             EditorGUI.indentLevel = oldIndentLevel;
             
             mainProperty.serializedObject.ApplyModifiedProperties();
@@ -154,26 +163,32 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         /// <param name="property"></param>
         /// <returns></returns>
         static void AddVariableProperties(GuiLayoutRect layoutRect, SerializedProperty property) {
-            
-            SerializedProperty name = property.FindPropertyRelative(nameof(Variable.Name));
-            EditorGUI.PropertyField(layoutRect.NextLine, name, GUIContent.none);
 
+            Rect foldoutPos = layoutRect.CurrentLine;
+            foldoutPos.width = 1;
+            property.isExpanded = EditorGUI.Foldout(foldoutPos, property.isExpanded, GUIContent.none);
+
+            Rect NameRect = layoutRect.CurrentLine;
+            NameRect.width = EditorGUIUtility.labelWidth;
+            SerializedProperty name = property.FindPropertyRelative(nameof(Variable.Name));
+            EditorGUI.PropertyField(NameRect, name, GUIContent.none);
+
+            Rect TypeRect = layoutRect.CurrentLine;
+            TypeRect.width = 80;
+            TypeRect.x = TypeRect.x + EditorGUIUtility.labelWidth; 
+            SerializedProperty variableDataType = property.FindPropertyRelative(nameof(Variable.DataType));
+            SupportedDataType dataType = (SupportedDataType) variableDataType.enumValueIndex;
+            EditorGUI.LabelField(TypeRect, $"Type: {dataType.ToString()}");
+            
             VariableNameValidator validator = new VariableNameValidator(name.stringValue);
             if (!validator.Valid) {
                 Rect warningBoxRect = layoutRect.NextLines(3);
                 EditorGUI.HelpBox(warningBoxRect, validator.InvalidReasons, MessageType.Error);
-                
             }
-            
-            SerializedProperty variableDataType = property.FindPropertyRelative(nameof(Variable.DataType));
-            SupportedDataType dataType = (SupportedDataType) variableDataType.enumValueIndex;
-            EditorGUI.LabelField(layoutRect.NextLine, $"Data Type: {dataType.ToString()}");
 
-            EditorGUI.indentLevel++;
-
-            SerializedProperty variableType = property.FindPropertyRelative(nameof(Variable.TypeOfVariable));
-            VariableType varType = (VariableType) variableType.enumValueIndex;
-            EditorGUI.LabelField(layoutRect.NextLine, $"Variable Type: {varType.ToString()}");
+//            SerializedProperty variableType = property.FindPropertyRelative(nameof(Variable.TypeOfVariable));
+//            VariableType varType = (VariableType) variableType.enumValueIndex;
+//            EditorGUI.LabelField(layoutRect.NextLine, $"Variable Type: {varType.ToString()}");
             
         }
 
@@ -246,13 +261,12 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
         static void CheckMaxBlockPermutationsAllowed(GuiLayoutRect      layoutRect, SerializedProperty block,
                                                      SerializedProperty valuesProperty) {
-            if (block.boolValue && valuesProperty.arraySize > ExperimentDesign.MaxBlockPermutationsAllowed) {
-                Rect tooManyBlockValuesWarningRect = layoutRect.NextLines(3);
-                EditorGUI.HelpBox(tooManyBlockValuesWarningRect, "Too many Block Values for automatic permutation.\n" +
-                                                                 "Must define possible Block orders manually using OrderConfig ScriptableObjects.\n" +
-                                                                 "See Docs.",
-                                  MessageType.Warning);
-            }
+            if (!block.boolValue || valuesProperty.arraySize <= ExperimentDesign.MaxBlockPermutationsAllowed) return;
+            Rect tooManyBlockValuesWarningRect = layoutRect.NextLines(3);
+            EditorGUI.HelpBox(tooManyBlockValuesWarningRect, "Too many Block Values for automatic permutation.\n" +
+                                                             "Must define possible Block orders manually using OrderConfig ScriptableObjects.\n" +
+                                                             "See Docs.",
+                              MessageType.Warning);
         }
 
         static void AddCustomProbabilityField(bool               customProb, Rect valuesFooterBaseRect, float probValuesWidth,

@@ -9,10 +9,11 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
     public class VariableDrawer : PropertyDrawer {
         
         protected float CustomPropertyHeight;
+        protected bool ShowVariableFoldout = true;
 
         public override float GetPropertyHeight(SerializedProperty mainProperty, GUIContent label) {
             float propertyBaseHeight = EditorGUI.GetPropertyHeight(mainProperty, GUIContent.none);
-            float totalPropertyHeight = propertyBaseHeight + CustomPropertyHeight;
+            float totalPropertyHeight =  CustomPropertyHeight;
             return totalPropertyHeight;
         }
     }

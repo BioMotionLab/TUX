@@ -71,7 +71,7 @@
               <e p="ParticipantVariable.cs" t="Include" />
               <e p="SupportedDataType.cs" t="Include" />
               <e p="Variable.cs" t="Include" />
-              <e p="VariableConfig.cs" t="Include" />
+              <e p="VariableConfigurationFile.cs" t="Include" />
               <e p="VariableFactory.cs" t="Include" />
               <e p="VariableMixingType.cs" t="Include" />
               <e p="Variables.cs" t="Include" />

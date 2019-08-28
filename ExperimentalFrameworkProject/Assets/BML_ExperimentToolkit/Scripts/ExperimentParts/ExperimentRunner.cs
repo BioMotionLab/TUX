@@ -22,12 +22,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         // ReSharper disable once InconsistentNaming
         [Header("Required:")]
-        [Tooltip("Create a VariableConfigFile from asset menu and drag here")]
+        [Tooltip("Create a VariableConfigurationFile from asset menu and drag here")]
         [SerializeField]
-        VariableConfig variableConfigFile = default;
+        VariableConfigurationFile variableConfigurationFile = default;
 
         // ReSharper disable once ConvertToAutoProperty
-        public VariableConfig VariableConfigFile => variableConfigFile;
+        public VariableConfigurationFile VariableConfigurationFileFile => variableConfigurationFile;
         
         public ExperimentDesign ExperimentDesign;
         public RunnableDesign Design;
@@ -88,22 +88,22 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             #endif
 
-            //check if config file is loaded
-            if (VariableConfigFile == null) {
+            //check if configurationFile file is loaded
+            if (VariableConfigurationFileFile == null) {
                 Debug.LogError("Config file not set up properly, make sure you dragged a configuration file into your Runner GameObject in the inspector");
                 ExitProgram();
                 return;
             }
-            VariableConfigFile.Validate();
+            VariableConfigurationFileFile.Validate();
 
             Session = Session.LoadSessionData();
             if (Session == null) {
                 throw new NullReferenceException("Session nul and not created properly");
             }
 
-            switch (VariableConfigFile.TrialTableGenerationMode) {
+            switch (VariableConfigurationFileFile.TrialTableGenerationMode) {
                 case TrialTableGenerationMode.OnTheFly:
-                    ExperimentDesign = ExperimentDesign.CreateFrom(VariableConfigFile);
+                    ExperimentDesign = ExperimentDesign.CreateFrom(VariableConfigurationFileFile);
                     if (ExperimentDesign == null) {
                         throw new NullReferenceException("ExperimentDesign null");
                     }
@@ -117,7 +117,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
 
             if (!WindowOpen) {
-                gui = Instantiate(VariableConfigFile.GuiSettings.GuiPrefab);
+                gui = Instantiate(VariableConfigurationFileFile.GuiSettings.GuiPrefab);
                 gui.gameObject.SetActive(true);
                 gui.RegisterExperiment(this);
             }
@@ -145,17 +145,17 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
-            switch (VariableConfigFile.TrialTableGenerationMode) {
+            switch (VariableConfigurationFileFile.TrialTableGenerationMode) {
                 case TrialTableGenerationMode.OnTheFly: {
                     DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
-                    Design = new RunnableDesign(this, finalDesignTable, VariableConfigFile);
+                    Design = new RunnableDesign(this, finalDesignTable, VariableConfigurationFileFile);
                     break;
                 }
                 case TrialTableGenerationMode.PreGenerated:
                     string selectedDesignFilePath = currentSession.SelectedDesignFilePath;
                     if (string.IsNullOrEmpty(selectedDesignFilePath)) throw new NullReferenceException("Trying to load custom design file, but none given");
                     Design = RunnableDesign.CreateFromFile(this, currentSession.SelectedDesignFilePath,
-                                                           VariableConfigFile);
+                                                           VariableConfigurationFileFile);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -177,7 +177,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             
             ExperimentEvents.ExperimentStarted();
 
-            StartCoroutine(VariableConfigFile.ControlSettings.Run());
+            StartCoroutine(VariableConfigurationFileFile.ControlSettings.Run());
             
             ExperimentEvents.StartPart(experiment);
 

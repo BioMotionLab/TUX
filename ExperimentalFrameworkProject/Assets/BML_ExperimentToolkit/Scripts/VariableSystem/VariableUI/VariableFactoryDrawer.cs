@@ -115,9 +115,12 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                 SerializedProperty item = valueProperty.GetArrayElementAtIndex(i);
                 
                 EditorGUI.PropertyField(layoutRect.NextLine, item, GUIContent.none);
-                layoutRect.AddHeight(EditorGUI.GetPropertyHeight(item, GUIContent.none));
-
+                
+                layoutRect.AddHeight(EditorGUI.GetPropertyHeight(item, GUIContent.none)-20);
+                
                 if (DeleteButton(layoutRect, valueProperty, i)) break;
+                
+                //layoutRect.AddHeight(5);
             }
 
             valueProperty.serializedObject.ApplyModifiedProperties();

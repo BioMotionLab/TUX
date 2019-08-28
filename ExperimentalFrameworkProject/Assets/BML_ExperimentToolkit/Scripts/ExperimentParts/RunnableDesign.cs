@@ -10,24 +10,24 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         public   List<Block>      Blocks;
         readonly ExperimentRunner runner;
-        readonly VariableConfig   config;
+        readonly VariableConfigurationFile   configurationFile;
         readonly DataTable finalDataTable;
         public   int              BlockCount       => Blocks.Count;
         public   string           TrialTableHeader => Blocks[0].TrialTable.HeaderAsString(Delimiter.Comma, -1);
         public   int              TotalTrials      => finalDataTable.Rows.Count;
         public   bool             HasBlocks        => Blocks.Count > 1;
 
-        public RunnableDesign(ExperimentRunner runner, DataTable finalDataTable, VariableConfig config) {
+        public RunnableDesign(ExperimentRunner runner, DataTable finalDataTable, VariableConfigurationFile configurationFile) {
             this.runner = runner;
-            this.config = config;
+            this.configurationFile = configurationFile;
             this.finalDataTable = finalDataTable;
             CreateAndAddBlocks();
             WriteParticipantValuesToTables();
         }
 
-        public static RunnableDesign CreateFromFile(ExperimentRunner runner, string fullPathToFile, VariableConfig config) {
-            DataTable experimentTable = DataTableCsvUtility.DataTableFromCsv(config, fullPathToFile);
-            return new RunnableDesign(runner, experimentTable, config);
+        public static RunnableDesign CreateFromFile(ExperimentRunner runner, string fullPathToFile, VariableConfigurationFile configurationFile) {
+            DataTable experimentTable = DataTableCsvUtility.DataTableFromCsv(configurationFile, fullPathToFile);
+            return new RunnableDesign(runner, experimentTable, configurationFile);
         }
         
         
@@ -43,7 +43,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         void CreateAndAddBlocks() {
             
-            List<IndependentVariable> blockVariables = config.Variables.BlockVariables;
+            List<IndependentVariable> blockVariables = configurationFile.Variables.BlockVariables;
             
             DataTable baseBlockTable = new DataTable();
             foreach (IndependentVariable blockVariable in blockVariables) {
@@ -57,7 +57,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             DataTable blockTrialTable = finalDataTable.Clone();
             foreach (DataRow finalTableRow in finalDataTable.Rows) {
-                int currentBlockIndex = (int) finalTableRow[config.ColumnNamesSettings.BlockIndex];
+                int currentBlockIndex = (int) finalTableRow[configurationFile.ColumnNamesSettings.BlockIndex];
                 if (currentBlockIndex == lastBlockIndex) {
                     blockTrialTable.ImportRow(finalTableRow);
                 }
@@ -87,7 +87,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
 
         void WriteParticipantValuesToTables() {
-            foreach (ParticipantVariable participantVariable in config.Variables.ParticipantVariables) {
+            foreach (ParticipantVariable participantVariable in configurationFile.Variables.ParticipantVariables) {
                 participantVariable.AddValuesTo(finalDataTable);
                 foreach (Block block in Blocks) {
                     participantVariable.AddValuesTo(block.TrialTable);

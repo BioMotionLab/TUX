@@ -16,9 +16,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         readonly List<OrderConfig> orderConfigs;
         readonly IndependentVariables blockVariables;
 
-        public BaseBlockTable(VariableConfig variableConfig) {
-            orderConfigs = variableConfig.OrderConfigs;
-            blockVariables = variableConfig.Variables.BlockVariables;
+        public BaseBlockTable(VariableConfigurationFile variableConfigurationFile) {
+            orderConfigs = variableConfigurationFile.OrderConfigs;
+            blockVariables = variableConfigurationFile.Variables.BlockVariables;
             baseBlockTable = AddVariablesToTable();
    
         }

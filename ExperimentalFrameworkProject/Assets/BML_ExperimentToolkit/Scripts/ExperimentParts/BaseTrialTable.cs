@@ -12,18 +12,18 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         readonly ColumnNamesSettings columnNames;
 
         public BaseTrialTable(BaseBlockTable baseBlockTable,
-                              VariableConfig variableConfig) {
+                              VariableConfigurationFile variableConfigurationFile) {
 
-            variables = variableConfig.Variables;
-            columnNames = variableConfig.ColumnNamesSettings;
+            variables = variableConfigurationFile.Variables;
+            columnNames = variableConfigurationFile.ColumnNamesSettings;
 
 
             baseTrialTable = AddVariablesToTable();
 
-            RepeatTrialsIfNeeded(variableConfig);
+            RepeatTrialsIfNeeded(variableConfigurationFile);
 
             //ShuffleRows trial order if needed
-            ShuffleTrialsIfNeeded(variableConfig);
+            ShuffleTrialsIfNeeded(variableConfigurationFile);
 
             AddMetaColumns(baseBlockTable);
         }
@@ -39,16 +39,16 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             AddTrialTimeColumn();
         }
 
-        void ShuffleTrialsIfNeeded(VariableConfig variableConfig) {
-            if (variableConfig.ShuffleTrialOrder) {
+        void ShuffleTrialsIfNeeded(VariableConfigurationFile variableConfigurationFile) {
+            if (variableConfigurationFile.ShuffleTrialOrder) {
                 baseTrialTable = baseTrialTable.ShuffleRows();
             }
         }
 
-        void RepeatTrialsIfNeeded(VariableConfig variableConfig) {
-            if (variableConfig.RepeatTrialsInBlock > 1) {
+        void RepeatTrialsIfNeeded(VariableConfigurationFile variableConfigurationFile) {
+            if (variableConfigurationFile.RepeatTrialsInBlock > 1) {
                 DataTable repeatedTable = baseTrialTable.Clone();
-                for (int i = 0; i < variableConfig.RepeatTrialsInBlock; i++) {
+                for (int i = 0; i < variableConfigurationFile.RepeatTrialsInBlock; i++) {
                     foreach (DataRow row in baseTrialTable.Rows) {
                         repeatedTable.ImportRow(row);
                     }

@@ -16,12 +16,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public bool HasBlocks => baseBlockTable.HasBlocks;
         
 
-        readonly VariableConfig config;
+        readonly VariableConfigurationFile configurationFile;
         readonly ColumnNamesSettings columnNames;
         
         
-        public static ExperimentDesign CreateFrom(VariableConfig configFile) {
-            return new ExperimentDesign(configFile);
+        public static ExperimentDesign CreateFrom(VariableConfigurationFile configurationFileFile) {
+            return new ExperimentDesign(configurationFileFile);
         }
 
         public List<string> BlockPermutationsStrings => GetBlockPermutationsStrings();
@@ -30,11 +30,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         List<string> GetBlockPermutationsStrings() {
             
-            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && config.OrderConfigs.Count == 0) {
+            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && configurationFile.OrderConfigs.Count == 0) {
                 return baseBlockTable.BlockPermutationsStrings;
             }
 
-            if (config.OrderConfigs.Count > 0) return GetBlockOrderConfigStrings();
+            if (configurationFile.OrderConfigs.Count > 0) return GetBlockOrderConfigStrings();
             
             throw new NullReferenceException("There are too many block values to create a permutation table. " +
                                              "Block orders must be defined manually using OrderConfig files. " +
@@ -44,7 +44,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         List<string> GetBlockOrderConfigStrings() {
             List<string> orderStrings = new List<string>();
-            foreach (OrderConfig orderConfig in config.OrderConfigs) {
+            foreach (OrderConfig orderConfig in configurationFile.OrderConfigs) {
                 
                 if (orderConfig.Length != baseBlockTable.Rows.Count) {
                     throw new ArgumentException($"OrderConfig file does not match length. See Below:\n" +
@@ -72,11 +72,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return orderStrings;
         }
 
-        ExperimentDesign(VariableConfig config) {
-            this.config = config;
-            columnNames = config.ColumnNamesSettings;
-            baseBlockTable = new BaseBlockTable(config);
-            baseTrialTable = new BaseTrialTable(baseBlockTable, config);
+        ExperimentDesign(VariableConfigurationFile configurationFile) {
+            this.configurationFile = configurationFile;
+            columnNames = configurationFile.ColumnNamesSettings;
+            baseBlockTable = new BaseBlockTable(configurationFile);
+            baseTrialTable = new BaseTrialTable(baseBlockTable, configurationFile);
         }
 
         
@@ -94,10 +94,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
             
             var newFinalTable = baseTrialTable.Clone();
-            for (int blockRepetitionCount = 0; blockRepetitionCount < config.RepeatAllBlocks; blockRepetitionCount++) {
+            for (int blockRepetitionCount = 0; blockRepetitionCount < configurationFile.RepeatAllBlocks; blockRepetitionCount++) {
                 for (int rowIndex = 0; rowIndex < OrderedBlockTable.Rows.Count; rowIndex++) {
                     DataRow orderedBlockRow = OrderedBlockTable.Rows[rowIndex];
-                    if (config.ShuffleDifferentlyForEachBlock) trialTable = trialTable.ShuffleRows();
+                    if (configurationFile.ShuffleDifferentlyForEachBlock) trialTable = trialTable.ShuffleRows();
                     trialTable = AddBlockValuesToTrialTables(trialTable, orderedBlockRow, (blockRepetitionCount*OrderedBlockTable.Rows.Count)+(rowIndex));
                     newFinalTable.Merge(trialTable, true, MissingSchemaAction.Error);
                 }

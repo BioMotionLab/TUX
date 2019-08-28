@@ -9,14 +9,14 @@ using UnityEngine;
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public static class DataTableCsvUtility {
         
-        public static DataTable DataTableFromCsv(VariableConfig config, string fullPath) {
+        public static DataTable DataTableFromCsv(VariableConfigurationFile configurationFile, string fullPath) {
             
             DataTable loadedDataTable = new DataTable();
             
             using (StreamReader streamReader = new StreamReader(fullPath)) {
                 
                 int rowNumber = 0;
-                List<DataColumn> columns = GetColumns(config, streamReader, loadedDataTable);
+                List<DataColumn> columns = GetColumns(configurationFile, streamReader, loadedDataTable);
 
                 rowNumber++;
                 while (!streamReader.EndOfStream) {
@@ -58,7 +58,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             if (rowValues[columnIndex] == "FALSE") row[column.ColumnName] = false;
         }
 
-        static List<DataColumn> GetColumns(VariableConfig config, StreamReader streamReader, DataTable loadedDataTable) {
+        static List<DataColumn> GetColumns(VariableConfigurationFile configurationFile, StreamReader streamReader, DataTable loadedDataTable) {
             string[] headerNames = streamReader.ReadLine()?.Split(',');
             
             List<DataColumn> columns = new List<DataColumn>();
@@ -66,9 +66,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             if (headerNames == null) throw new NullReferenceException("Headers not found");
             
             foreach (string header in headerNames) {
-                Variable variableWithName = config.Variables.GetVariableWithName(header);
+                Variable variableWithName = configurationFile.Variables.GetVariableWithName(header);
                 DataColumn newColumn = variableWithName == null
-                    ? config.ColumnNamesSettings.GetColumnWithName(header)
+                    ? configurationFile.ColumnNamesSettings.GetColumnWithName(header)
                     : new DataColumn(variableWithName.Name, variableWithName.Type);
                 loadedDataTable.Columns.Add(newColumn);
                 columns.Add(newColumn);
