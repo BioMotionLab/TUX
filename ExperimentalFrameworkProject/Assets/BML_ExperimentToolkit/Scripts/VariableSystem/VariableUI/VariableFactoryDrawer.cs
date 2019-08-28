@@ -1,4 +1,5 @@
-﻿using BML_Utilities;
+﻿using BML_ExperimentToolkit.Scripts.UI.Editor;
+using BML_Utilities;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         const float LineHeight = 20f;
         float height;
         
-
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
             return EditorGUI.GetPropertyHeight(property) + height;
         }
@@ -29,11 +29,13 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.DataTypeToCreate));
             AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.VariableTypeToCreate));
             
-            if (GUI.Button(layoutRect.NextLine, "Create Variable")) {
-                VariableFactory factory =
-                    fieldInfo.GetValue(mainProperty.serializedObject.targetObject) as VariableFactory;
+            VariableFactory factory =
+                fieldInfo.GetValue(mainProperty.serializedObject.targetObject) as VariableFactory;
+
+            Rect createVariableRect = layoutRect.NextLine;
+            createVariableRect.width = 230;
+            if (GUI.Button(createVariableRect, "Create Variable")) {
                 factory?.AddNew();
-                
             }
             
             GUI.backgroundColor = oldColor;
@@ -80,21 +82,12 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3ParticipantVariables));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataParticipantVariables));
 
-            EditorGUI.LabelField(layoutRect.NextLine, "--------");
-            EditorGUI.LabelField(layoutRect.NextLine, "[Advanced] Generate Design File Manually");
-            if (GUI.Button(layoutRect.NextLine, "Generate...")) {
-                DesignSaverWindow.ShowWindow();
-            }
-            
-            EditorGUI.LabelField(layoutRect.NextLine, "--------");
-            EditorGUI.LabelField(layoutRect.NextLine, "Settings:", EditorStyles.boldLabel);
-        
-            
-            
-            
             EditorGUI.indentLevel = oldIndentLevel;
             height = layoutRect.FinalHeight;
             mainProperty.serializedObject.ApplyModifiedProperties();
+
+
+            
         }
 
 

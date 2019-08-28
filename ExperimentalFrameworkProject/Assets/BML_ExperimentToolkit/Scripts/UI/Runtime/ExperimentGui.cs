@@ -70,7 +70,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
                 "New session successfully created and linked to experiment" : 
                 "no session detected";
             
-            switch (runner.VariableConfigurationFileFile.TrialTableGenerationMode) {
+            switch (runner.VariableConfigurationFileFile.GenerateExperimentTable) {
                 case TrialTableGenerationMode.OnTheFly:
                     ShowParticipantVariables();
                     ShowBlockOrderSettings();
@@ -139,7 +139,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             
             ValidateParticipantVariableValues(ref errorLog, ref isValid);
             
-            switch (runner.VariableConfigurationFileFile.TrialTableGenerationMode) {
+            switch (runner.VariableConfigurationFileFile.GenerateExperimentTable) {
                 case TrialTableGenerationMode.OnTheFly:
                     List<IndependentVariable> blockVariables = runner.VariableConfigurationFileFile.Variables.BlockVariables;
                     if (blockVariables.Count == 0) break;

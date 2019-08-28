@@ -56,6 +56,9 @@
             </e>
             <e p="UI" t="Include">
               <e p="Editor" t="Include">
+                <e p="DesignPreviewer.cs" t="Include" />
+                <e p="DesignPreviewWindow.cs" t="Include" />
+                <e p="DesignSaverWindow.cs" t="Include" />
                 <e p="EditorUI.asmdef" t="Include" />
                 <e p="ExperimentWindow.cs" t="Include" />
               </e>
@@ -69,6 +72,7 @@
               <e p="DependentVariable.cs" t="Include" />
               <e p="IndependentVariable.cs" t="Include" />
               <e p="ParticipantVariable.cs" t="Include" />
+              <e p="RandomizationMode.cs" t="Include" />
               <e p="SupportedDataType.cs" t="Include" />
               <e p="Variable.cs" t="Include" />
               <e p="VariableConfigurationFile.cs" t="Include" />
@@ -131,6 +135,7 @@
                 <e p="ParticipantVariableStringDrawer.cs" t="Include" />
                 <e p="ParticipantVariableVector2Drawer.cs" t="Include" />
                 <e p="ParticipantVariableVector3Drawer.cs" t="Include" />
+                <e p="VariableConfigurationFileEditor.cs" t="Include" />
                 <e p="VariableDrawer.cs" t="Include" />
                 <e p="VariableDrawerHelpers.cs" t="Include" />
                 <e p="VariableFactoryDrawer.cs" t="Include" />

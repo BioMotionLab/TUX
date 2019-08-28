@@ -79,7 +79,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         }
 
         void SortIVs(IndependentVariable independentVariable, IndependentVariables container) {
-            switch (independentVariable.MixingTypeOfVariable) {
+            switch (independentVariable.MixingType) {
                 case VariableMixingType.Balanced:
                     container.Balanced.Add(independentVariable);
                     break;

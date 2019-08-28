@@ -13,7 +13,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
     //but need to have serialized lists available in unity inspector
     [Serializable]
     public class VariableFactory {
-
+        
         [SerializeField]
         public SupportedDataType DataTypeToCreate;
 

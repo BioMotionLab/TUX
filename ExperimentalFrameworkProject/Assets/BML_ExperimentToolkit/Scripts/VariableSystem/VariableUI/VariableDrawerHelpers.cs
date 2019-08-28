@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using BML_Utilities;
 using UnityEditor;
 using UnityEngine;
@@ -33,7 +32,8 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             int oldIndentLevel = EditorGUI.indentLevel;
 
             AddVariableProperties(layoutRect, mainProperty);
-
+            
+            EditorGUI.indentLevel++;
             if (mainProperty.isExpanded) {
                 AddIndependentVariableProperties(layoutRect, mainProperty);
                 AddIndependentVariableValueProperties(layoutRect, mainProperty);
@@ -60,7 +60,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             int oldIndentLevel = EditorGUI.indentLevel;
 
             AddVariableProperties(layoutRect, mainProperty);
-
+            EditorGUI.indentLevel++;
             if (mainProperty.isExpanded) {
                 AddDependentVariableValueProperties(layoutRect, mainProperty);
             }
@@ -86,7 +86,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             int oldIndentLevel = EditorGUI.indentLevel;
 
             AddVariableProperties(layoutRect, mainProperty);
-
+            EditorGUI.indentLevel++;
             if (mainProperty.isExpanded) {
                 AddParticipantVariableValueProperties(layoutRect, mainProperty);
             }
@@ -168,17 +168,17 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             foldoutPos.width = 1;
             property.isExpanded = EditorGUI.Foldout(foldoutPos, property.isExpanded, GUIContent.none);
 
-            Rect NameRect = layoutRect.CurrentLine;
-            NameRect.width = EditorGUIUtility.labelWidth;
+            Rect nameRect = layoutRect.CurrentLine;
+            nameRect.width = EditorGUIUtility.labelWidth;
             SerializedProperty name = property.FindPropertyRelative(nameof(Variable.Name));
-            EditorGUI.PropertyField(NameRect, name, GUIContent.none);
+            EditorGUI.PropertyField(nameRect, name, GUIContent.none);
 
-            Rect TypeRect = layoutRect.CurrentLine;
-            TypeRect.width = 80;
-            TypeRect.x = TypeRect.x + EditorGUIUtility.labelWidth; 
+            Rect typeRect = layoutRect.CurrentLine;
+            typeRect.width = 80;
+            typeRect.x = typeRect.x + EditorGUIUtility.labelWidth; 
             SerializedProperty variableDataType = property.FindPropertyRelative(nameof(Variable.DataType));
             SupportedDataType dataType = (SupportedDataType) variableDataType.enumValueIndex;
-            EditorGUI.LabelField(TypeRect, $"Type: {dataType.ToString()}");
+            EditorGUI.LabelField(typeRect, $"Type: {dataType.ToString()}");
             
             VariableNameValidator validator = new VariableNameValidator(name.stringValue);
             if (!validator.Valid) {
@@ -199,16 +199,15 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         /// <param name="property"></param>
         /// <returns></returns>
         static void AddIndependentVariableProperties(GuiLayoutRect layoutRect, SerializedProperty property) {
+
             
             SerializedProperty block = property.FindPropertyRelative(nameof(IndependentVariable.Block));
             EditorGUI.PropertyField(layoutRect.NextLine, block);
-            
-            
-            
 
             SerializedProperty mixType =
-                property.FindPropertyRelative(nameof(IndependentVariable.MixingTypeOfVariable));
+                property.FindPropertyRelative(nameof(IndependentVariable.MixingType));
             EditorGUI.PropertyField(layoutRect.NextLine, mixType);
+            
         }
 
         /// <summary>
@@ -228,7 +227,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             
             float probValuesWidth = 0;
             SerializedProperty mixType =
-                property.FindPropertyRelative(nameof(IndependentVariable.MixingTypeOfVariable));
+                property.FindPropertyRelative(nameof(IndependentVariable.MixingType));
             bool customProb = (VariableMixingType) mixType.enumValueIndex == VariableMixingType.CustomProbability;
             
             

@@ -40,7 +40,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         void ShuffleTrialsIfNeeded(VariableConfigurationFile variableConfigurationFile) {
-            if (variableConfigurationFile.ShuffleTrialOrder) {
+            if (variableConfigurationFile.RandomizationMode != RandomizationMode.None) {
                 baseTrialTable = baseTrialTable.ShuffleRows();
             }
         }

@@ -17,7 +17,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         readonly IndependentVariables blockVariables;
 
         public BaseBlockTable(VariableConfigurationFile variableConfigurationFile) {
-            orderConfigs = variableConfigurationFile.OrderConfigs;
+            orderConfigs = variableConfigurationFile.OrderConfigurationFiles;
             blockVariables = variableConfigurationFile.Variables.BlockVariables;
             baseBlockTable = AddVariablesToTable();
    

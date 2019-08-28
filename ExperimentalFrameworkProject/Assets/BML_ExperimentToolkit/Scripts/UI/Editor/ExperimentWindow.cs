@@ -18,7 +18,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         static readonly GUILayoutOption JumpToButtonWidth = GUILayout.Width(40);
         static readonly GUILayoutOption RunningTrialIndicatorWidth = GUILayout.Width(70);
         static readonly GUILayoutOption IndentWidth = GUILayout.Width(40);
-        static readonly GUILayoutOption SmallLabelWidth = GUILayout.Width(60);
+        static readonly GUILayoutOption SmallLabelWidth = GUILayout.Width(100);
         static readonly GUILayoutOption LabelWidth = GUILayout.Width(120);
         static readonly GUILayoutOption BlockIdentityWidth = GUILayout.Width(300);
 
@@ -121,33 +121,13 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         void OnGUI() {
             
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, 
-                false, 
-                false, 
+                false, false, 
                 GUILayout.ExpandHeight(true));
             EditorGUILayout.BeginVertical();
-
-            //Check if in play mode
-            if (!Application.isPlaying) {
-                EditorGUILayout
-                    .HelpBox("Runner display needs to be in PlayMode, " +
-                             "\n\nPress play in Editor",
-                             MessageType.Warning);
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndScrollView();
-                return;
-            }
-
-            //Ensure configurationFile file initialized properly.
-            if (!initialized) {
-                EditorGUILayout.HelpBox("VariableConfigurationFileFile not properly initialized. " +
-                                        "\n\nMake sure you have created a configurationFile file from the menu and populated it with variables" +
-                                        "\n\nAlso make sure the configurationFile file is dragged into the Runner GameObject inspector in your scene.",
-                                        MessageType.Error);
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndScrollView();
-                return;
-            }
-
+            
+            if (PlayModeStatusWrong()) return;
+            if (ConfigFileStatusWrong()) return;
+            
             if (!started) {
                 ShowSessionSettings();
             }
@@ -169,6 +149,34 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.Space();
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndScrollView();
+        }
+
+        bool ConfigFileStatusWrong() {
+            if (!initialized) {
+                EditorGUILayout.HelpBox("VariableConfigurationFileFile not properly initialized. " +
+                                        "\n\nMake sure you have created a configurationFile file from the menu and populated it with variables" +
+                                        "\n\nAlso make sure the configurationFile file is dragged into the Runner GameObject inspector in your scene.",
+                                        MessageType.Error);
+                EditorGUILayout.EndVertical();
+                EditorGUILayout.EndScrollView();
+                return true;
+            }
+
+            return false;
+        }
+
+        static bool PlayModeStatusWrong() {
+            if (!Application.isPlaying) {
+                EditorGUILayout
+                    .HelpBox("Runner display needs to be in PlayMode, " +
+                             "\n\nPress play in Editor",
+                             MessageType.Warning);
+                EditorGUILayout.EndVertical();
+                EditorGUILayout.EndScrollView();
+                return true;
+            }
+
+            return false;
         }
 
 
@@ -193,17 +201,23 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 StartInDebugMode();
             }
             
+            EditorGUILayout.Space();
             ShowOutputFolderInput();
             ShowOutputFileNameInput();
             
+            EditorGUILayout.Space();
             if (!isValidFilePath) {
                 EditorGUILayout.HelpBox(fileErrorLog, MessageType.Error);
             }
             
             ShowParticipantVariables();
-            
-            ShowBlockOrderSettings();
-            
+
+            if (previewer == null) {
+                previewer = new DesignPreviewer(runner.VariableConfigurationFileFile);
+            }
+            previewer.ShowPreview();
+            OrderChosenIndex = previewer.OrderIndex;
+
             ShowStartButton();
             
             EditorGUI.indentLevel--;
@@ -244,18 +258,19 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         
 
         void ShowOutputFileNameInput() {
-            EditorGUILayout.LabelField("File Name: ", SmallLabelWidth);
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("File Name: ", LabelWidth);
             fileName = EditorGUILayout.TextField(fileName);
+            EditorGUILayout.EndHorizontal();
         }
 
         void ShowOutputFolderInput() {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Output Folder:", LabelWidth);
-            if (GUILayout.Button("Choose", LabelWidth)) {
+            EditorGUILayout.LabelField(outputFolder);
+            if (GUILayout.Button("Choose")) {
                 outputFolder = EditorUtility.OpenFolderPanel("Choose Output Folder", "", "");
             }
-
-            GUILayout.Box(outputFolder);
             EditorGUILayout.EndHorizontal();
         }
 
@@ -351,6 +366,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         }
 
         public int OrderChosenIndex;
+        DesignPreviewer previewer;
 
         /// <summary>
         /// Display the Runner controls

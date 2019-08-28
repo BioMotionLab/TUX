@@ -101,7 +101,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 throw new NullReferenceException("Session nul and not created properly");
             }
 
-            switch (VariableConfigurationFileFile.TrialTableGenerationMode) {
+            switch (VariableConfigurationFileFile.GenerateExperimentTable) {
                 case TrialTableGenerationMode.OnTheFly:
                     ExperimentDesign = ExperimentDesign.CreateFrom(VariableConfigurationFileFile);
                     if (ExperimentDesign == null) {
@@ -145,7 +145,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
-            switch (VariableConfigurationFileFile.TrialTableGenerationMode) {
+            switch (VariableConfigurationFileFile.GenerateExperimentTable) {
                 case TrialTableGenerationMode.OnTheFly: {
                     DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
                     Design = new RunnableDesign(this, finalDesignTable, VariableConfigurationFileFile);

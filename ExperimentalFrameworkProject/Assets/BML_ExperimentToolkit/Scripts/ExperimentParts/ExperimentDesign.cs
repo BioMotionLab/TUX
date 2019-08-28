@@ -30,11 +30,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         List<string> GetBlockPermutationsStrings() {
             
-            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && configurationFile.OrderConfigs.Count == 0) {
+            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && configurationFile.OrderConfigurationFiles.Count == 0) {
                 return baseBlockTable.BlockPermutationsStrings;
             }
 
-            if (configurationFile.OrderConfigs.Count > 0) return GetBlockOrderConfigStrings();
+            if (configurationFile.OrderConfigurationFiles.Count > 0) return GetBlockOrderConfigStrings();
             
             throw new NullReferenceException("There are too many block values to create a permutation table. " +
                                              "Block orders must be defined manually using OrderConfig files. " +
@@ -44,7 +44,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         List<string> GetBlockOrderConfigStrings() {
             List<string> orderStrings = new List<string>();
-            foreach (OrderConfig orderConfig in configurationFile.OrderConfigs) {
+            foreach (OrderConfig orderConfig in configurationFile.OrderConfigurationFiles) {
                 
                 if (orderConfig.Length != baseBlockTable.Rows.Count) {
                     throw new ArgumentException($"OrderConfig file does not match length. See Below:\n" +
@@ -97,7 +97,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             for (int blockRepetitionCount = 0; blockRepetitionCount < configurationFile.RepeatAllBlocks; blockRepetitionCount++) {
                 for (int rowIndex = 0; rowIndex < OrderedBlockTable.Rows.Count; rowIndex++) {
                     DataRow orderedBlockRow = OrderedBlockTable.Rows[rowIndex];
-                    if (configurationFile.ShuffleDifferentlyForEachBlock) trialTable = trialTable.ShuffleRows();
+                    if (configurationFile.RandomizationMode == RandomizationMode.RandomizeCompletely) trialTable = trialTable.ShuffleRows();
                     trialTable = AddBlockValuesToTrialTables(trialTable, orderedBlockRow, (blockRepetitionCount*OrderedBlockTable.Rows.Count)+(rowIndex));
                     newFinalTable.Merge(trialTable, true, MissingSchemaAction.Error);
                 }

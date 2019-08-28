@@ -12,18 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
   m_Name: SimpleExperiment Config
   m_EditorClassIdentifier: 
-  ShuffleTrialOrder: 0
-  ShuffleDifferentlyForEachBlock: 0
+  RandomizationMode: 0
   RepeatTrialsInBlock: 1
   RepeatAllBlocks: 1
   Factory:
     DataTypeToCreate: 0
-    VariableTypeToCreate: 0
+    VariableTypeToCreate: 1
     IntIVs:
     - Name: Variable1
       TypeOfVariable: 0
       DataType: 0
-      MixingTypeOfVariable: 0
+      MixingType: 0
       Block: 0
       Values: 010000000200000003000000
       Probabilities:
@@ -33,7 +32,7 @@ MonoBehaviour:
     - Name: Variable2
       TypeOfVariable: 0
       DataType: 0
-      MixingTypeOfVariable: 0
+      MixingType: 0
       Block: 0
       Values: 0500000006000000
       Probabilities:
@@ -46,7 +45,12 @@ MonoBehaviour:
     Vector2IVs: []
     Vector3IVs: []
     CustomDataTypeIVs: []
-    IntDVs: []
+    IntDVs:
+    - Name: test
+      TypeOfVariable: 1
+      DataType: 0
+      Value: 0
+      DefaultValue: 0
     FloatDVs: []
     StringDVs: []
     BoolDVs: []
@@ -66,5 +70,5 @@ MonoBehaviour:
     type: 2}
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
-  TrialTableGenerationMode: 0
-  OrderConfigs: []
+  GenerateExperimentTable: 0
+  OrderConfigurationFiles: []

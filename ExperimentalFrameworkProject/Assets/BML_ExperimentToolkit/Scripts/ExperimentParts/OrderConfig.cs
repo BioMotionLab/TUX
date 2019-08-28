@@ -5,10 +5,12 @@ using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     [CreateAssetMenu]
+    
+    [Serializable]
     public class OrderConfig : ScriptableObject {
         [SerializeField]
         [Header("Add indexes of block table in desired order")]
-        private List<int> Order = new List<int>();
+        List<int> Order = new List<int>();
 
         [Tooltip("Check this to randomize block order. Still type in required indexes.")]
         public bool Randomize;
@@ -17,6 +19,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             get {
                 for (int i = 0; i < Order.Count; i++) {
                     if (Order.Contains(i)) continue;
+                    
 #if UNITY_EDITOR
                     UnityEditor.EditorApplication.isPlaying = false;
                     #endif
