@@ -1,5 +1,6 @@
 ﻿using BML_ExperimentToolkit.Scripts.VariableSystem;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using BML_ExperimentToolkit.Scripts.Settings;
@@ -25,16 +26,17 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         public List<string> BlockPermutationsStrings => GetBlockPermutationsStrings();
+        public DataTable BaseBlockTable => baseBlockTable;
 
         public const int MaxBlockPermutationsAllowed = 3;
         
         List<string> GetBlockPermutationsStrings() {
             
-            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && configurationFile.OrderConfigurationFiles.Count == 0) {
+            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && configurationFile.OrderConfigurations.Count == 0) {
                 return baseBlockTable.BlockPermutationsStrings;
             }
 
-            if (configurationFile.OrderConfigurationFiles.Count > 0) return GetBlockOrderConfigStrings();
+            if (configurationFile.OrderConfigurations.Count > 0) return GetBlockOrderConfigStrings();
             
             throw new NullReferenceException("There are too many block values to create a permutation table. " +
                                              "Block orders must be defined manually using OrderConfig files. " +
@@ -44,23 +46,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         List<string> GetBlockOrderConfigStrings() {
             List<string> orderStrings = new List<string>();
-            foreach (OrderConfig orderConfig in configurationFile.OrderConfigurationFiles) {
-                
-                if (orderConfig.Length != baseBlockTable.Rows.Count) {
-                    throw new ArgumentException($"OrderConfig file does not match length. See Below:\n" +
-                                                $"Need to adjust length of orders.\n" +
-                                                $"{orderConfig.name} should be {baseBlockTable.Rows.Count} long. But is {orderConfig.Length}\n\n" +
-                                                $"Base Table:" +
-                                                $"{baseBlockTable.AsString()}");
-                    
-                }
+            foreach (RowHolder orderConfig in configurationFile.OrderConfigurations) {
 
                 if (orderConfig.Randomize) {
                     orderStrings.Add("Randomize");
                 }
                 else {
                     string orderString = "";
-                    foreach (int orderIndex in orderConfig.OrderedIndices) {
+                    foreach (int orderIndex in orderConfig.Order) {
                         string rowString = baseBlockTable.Rows[orderIndex].AsString(separator: ", ", truncateLength: -1);
                         orderString += rowString + " > ";
                     }

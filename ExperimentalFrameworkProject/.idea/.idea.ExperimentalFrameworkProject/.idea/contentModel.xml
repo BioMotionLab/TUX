@@ -205,6 +205,34 @@
           <e p="PlaneAspectRatioAndResizer.cs" t="Include" />
           <e p="QuaternionSerializable.cs" t="Include" />
           <e p="ReadOnlyInInspectorAttribute.cs" t="Include" />
+          <e p="ReorderableList" t="Include">
+            <e p="Example" t="Include">
+              <e p="Editor" t="Include">
+                <e p="ExampleEditor.cs" t="Include" />
+                <e p="GameObjectEditor.cs" t="Include" />
+                <e p="NameOverrideEditor.cs" t="Include" />
+                <e p="NestedChildDrawer.cs" t="Include" />
+                <e p="SurrogateTestEditor.cs" t="Include" />
+              </e>
+              <e p="Example.cs" t="Include" />
+              <e p="GameObjectExample.cs" t="Include" />
+              <e p="NameOverride.cs" t="Include" />
+              <e p="NestedExample.cs" t="Include" />
+              <e p="RecursionTest.cs" t="Include" />
+              <e p="ScriptableObjectExample.cs" t="Include" />
+              <e p="SurrogateTest.cs" t="Include" />
+            </e>
+            <e p="List" t="Include">
+              <e p="Attributes" t="Include">
+                <e p="ReorderableAttribute.cs" t="Include" />
+              </e>
+              <e p="Editor" t="Include">
+                <e p="ReorderableDrawer.cs" t="Include" />
+                <e p="ReorderableList.cs" t="Include" />
+              </e>
+              <e p="ReorderableArray.cs" t="Include" />
+            </e>
+          </e>
           <e p="Rotator.cs" t="Include" />
           <e p="ScriptableObject Assets" t="Include">
             <e p="BoolValue.cs" t="Include" />

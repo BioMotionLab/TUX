@@ -13,11 +13,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         BaseBlockTable currentOrderedTable;
         int currentOrderedTableIndex = -1;
         
-        readonly List<OrderConfig> orderConfigs;
+        readonly List<RowHolder> orderConfigs;
         readonly IndependentVariables blockVariables;
 
         public BaseBlockTable(VariableConfigurationFile variableConfigurationFile) {
-            orderConfigs = variableConfigurationFile.OrderConfigurationFiles;
+            orderConfigs = variableConfigurationFile.OrderConfigurations;
             blockVariables = variableConfigurationFile.Variables.BlockVariables;
             baseBlockTable = AddVariablesToTable();
    
@@ -94,7 +94,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
  
             if (orderChosenIndex > orderConfigs.Count- 1) throw new IndexOutOfRangeException($"Index chosen is {orderChosenIndex}, but count is {orderConfigs.Count}");
             
-            OrderConfig chosenOrder = orderConfigs[orderChosenIndex];
+            RowHolder chosenOrder = orderConfigs[orderChosenIndex];
 
             if (chosenOrder.Randomize && currentOrderedTableIndex == orderChosenIndex) {
                 return currentOrderedTable;
@@ -102,7 +102,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             
             DataTable orderedTable = baseBlockTable.Clone();
 
-            foreach (int index in chosenOrder.OrderedIndices) {
+            foreach (int index in chosenOrder.Order) {
                 orderedTable.ImportRow(baseBlockTable.Rows[index]);
             }
             BaseBlockTable blockOrderTable = new BaseBlockTable(orderedTable);

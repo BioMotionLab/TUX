@@ -21,7 +21,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         void OnEnable() {
             factory = serializedObject.FindProperty(nameof(VariableConfigurationFile.Factory));
             trialTableGenerationMode = serializedObject.FindProperty(nameof(VariableConfigurationFile.GenerateExperimentTable));
-            orderConfigs = serializedObject.FindProperty(nameof(VariableConfigurationFile.OrderConfigurationFiles));
+            orderConfigs = serializedObject.FindProperty(nameof(VariableConfigurationFile.OrderConfigurations));
             randomizationMode = serializedObject.FindProperty(nameof(VariableConfigurationFile.RandomizationMode));
             repeatTrialsInBlock = serializedObject.FindProperty(nameof(VariableConfigurationFile.RepeatTrialsInBlock));
             repeatAllBlocks = serializedObject.FindProperty(nameof(VariableConfigurationFile.RepeatAllBlocks));
@@ -73,11 +73,18 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                 EditorGUI.indentLevel-=2;
             
                 EditorGUILayout.LabelField("Manual block order configuration");
+             
                 
                 
                 EditorGUI.indentLevel+=2;
                 EditorGUILayout.LabelField("Note: This system works is but due for an overhaul, see wiki", EditorStyles.miniLabel);
+                
                 EditorGUILayout.PropertyField(orderConfigs, true);
+                if (GUILayout.Button("Add")) {
+                    var orderTest = target as VariableConfigurationFile;
+                    orderTest.OrderConfigurations.Add(RowHolder.BlockOrderFrom(orderTest));
+                }
+
                 EditorGUI.indentLevel-=2;
                 
                 
