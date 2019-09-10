@@ -59,7 +59,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         }
 
         void FinishTrial() {
-
+            
             Debug.Log($"Finished {currentlyRunningTrial.TrialText}, Success = {currentlyRunningTrial.CompletedSuccessfully}\n" +
                       $"Output Table for this trial:\n" +
                       $"{currentlyRunningTrial.Data.AsString(header: true)}");

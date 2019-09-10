@@ -12,15 +12,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         string fileName = "experimentDesignSave";
         
         string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-        public VariableConfigurationFile ConfigurationFile;
-
+        
         DesignPreviewer previewer;
-
-        void OnEnable() {
-            previewer = new DesignPreviewer(ConfigurationFile);
-        }
-
+        
         void OnGUI() {
             var finalTable = previewer.ShowPreview();
 
@@ -30,11 +24,11 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             if (GUILayout.Button("Save")) {
                 string fileNameWithExtension = fileName + ".csv";
                 string path = Path.Combine(folder, fileNameWithExtension);
-                File.WriteAllText(path, finalTable.AsString(truncateLength:-1, separator:Delimiter.Comma)); 
+                File.WriteAllText(path, finalTable.AsString(truncateLength:-1, separator:Delimiter.Comma));
+                Close();
             }
             
         }
-
 
         void ShowFileSelections() {
             EditorGUILayout.Space();
@@ -49,9 +43,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.EndHorizontal();
         }
 
-        public static void ShowWindow(VariableConfigurationFile target) {
+        public static void ShowWindow(VariableConfigurationFile configFile) {
             DesignSaverWindow window = (DesignSaverWindow) GetWindow(typeof(DesignSaverWindow), false, "Design Saver");
-            window.ConfigurationFile = target;
+            window.previewer = new DesignPreviewer(configFile);
             window.Show();
         }
     }

@@ -9,11 +9,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
     public class SimpleBlock : Block {
         public SimpleBlock(ExperimentRunner runner,
                            DataTable trialTable, 
-                           string identity, 
                            DataRow dataRow) :
             base(runner, 
                  trialTable, 
-                 identity,
                  dataRow) {
         }
         

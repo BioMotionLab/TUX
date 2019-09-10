@@ -71,4 +71,4 @@ MonoBehaviour:
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
   GenerateExperimentTable: 0
-  OrderConfigurationFiles: []
+  BlockOrderConfigurations: []

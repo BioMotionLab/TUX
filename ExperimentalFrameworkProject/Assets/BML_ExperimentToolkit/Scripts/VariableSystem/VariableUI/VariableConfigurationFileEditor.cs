@@ -49,8 +49,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             
             EditorGUILayout.LabelField("--------");
             
-            if (GUILayout.Button("Preview", GUILayout.Width(250), GUILayout.Height(50))){
-                DesignPreviewWindow.ShowWindow();
+            if (GUILayout.Button("Preview Design", GUILayout.Width(250), GUILayout.Height(50))){
+                DesignPreviewWindow.ShowWindow(target as VariableConfigurationFile);
+                
             }
             
             EditorGUILayout.LabelField("--------");
@@ -86,7 +87,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
 
             if (GUILayout.Button("Generate Design File Manually", GUILayout.Width(250))) {
-                DesignSaverWindow.ShowWindow(target as VariableConfigurationFile);
+                DesignSaverWindow.ShowWindow(Selection.activeObject as VariableConfigurationFile);
             }
 
             EditorGUI.indentLevel -= 2;

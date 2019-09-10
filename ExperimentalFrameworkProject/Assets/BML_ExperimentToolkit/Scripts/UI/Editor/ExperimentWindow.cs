@@ -46,8 +46,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         static bool IsOpen => instance != null;
 
         void OnEnable() {
-            
-            previewer = new DesignPreviewer(runner.VariableConfigurationFileFile);
             instance = this;
             ExperimentEvents.OnInitExperiment += InitWindow;
             ExperimentEvents.OnBlockUpdated += BlockCompleted;
@@ -84,7 +82,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         void InitWindow(ExperimentRunner runnerToInit) {
             runner = runnerToInit;
             session = runnerToInit.Session;
-
+            previewer = new DesignPreviewer(runner.VariableConfigurationFile);
             OrderChosenIndex = 0;
             currentBlockIndex = -1;
             currentTrialIndex = -1;
@@ -134,8 +132,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 ShowExperimentControls();
                 
                 //Blocks
-                if (runner.Design.HasBlocks) {
-                    ShowBlockTable(runner.ExperimentDesign.OrderedBlockTable);
+                if (runner.RunnableDesign.HasBlocks) {
+                    //ShowBlockTable(runner.ExperimentDesign.OrderedBlockTable);
                 }
 
                 //NumberOfTrials
@@ -202,22 +200,33 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.Space();
             ShowOutputFolderInput();
             ShowOutputFileNameInput();
-            
             EditorGUILayout.Space();
             if (!isValidFilePath) {
                 EditorGUILayout.HelpBox(fileErrorLog, MessageType.Error);
             }
             
+            
+            
+            
+            
             ShowParticipantVariables();
-            previewer.ShowPreview();
-            OrderChosenIndex = previewer.OrderIndex;
-
+            
+            if (runner.VariableConfigurationFile.GenerateExperimentTable == TrialTableGenerationMode.PreGenerated) {
+                ShowTrialTableLoadInput();
+            }
+            else {
+                previewer.ShowPreview();
+                OrderChosenIndex = previewer.OrderIndex;
+            }
+            
             ShowStartButton();
             
             EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
 
         }
+
+        
 
         void ShowStartButton() {
             if (GUILayout.Button("Start Runner")) {
@@ -250,7 +259,17 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             ExperimentEvents.StartRunningExperiment(session);
         }
         
-        
+        void ShowTrialTableLoadInput() {
+            EditorGUILayout.Space();
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Pre-Generated Trial Table File:");
+            EditorGUILayout.LabelField(session.SelectedDesignFilePath);
+            if (GUILayout.Button("Choose File")) {
+                session.SelectedDesignFilePath = EditorUtility.OpenFilePanel("Choose Pre Generated Trial Table", "", "csv");
+            }
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space();
+        }
 
         void ShowOutputFileNameInput() {
             EditorGUILayout.BeginHorizontal();
@@ -264,7 +283,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.LabelField("Output Folder:", LabelWidth);
             EditorGUILayout.LabelField(outputFolder);
             if (GUILayout.Button("Choose")) {
-                outputFolder = EditorUtility.OpenFolderPanel("Choose Output Folder", "", "");
+                             outputFolder = EditorUtility.OpenFolderPanel("Choose Output Folder", "", "");
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -277,7 +296,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.LabelField("Fill In Participant Variables:", EditorStyles.boldLabel);
 
 
-            foreach (ParticipantVariable participantVariable in runner.VariableConfigurationFileFile.Factory.Variables.ParticipantVariables) {
+            foreach (ParticipantVariable participantVariable in runner.VariableConfigurationFile.Factory.Variables.ParticipantVariables) {
 
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField(participantVariable.Name + ":", LabelWidth);
@@ -331,6 +350,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
         public int OrderChosenIndex;
         DesignPreviewer previewer;
+        string trialTableFilePath;
 
         /// <summary>
         /// Display the Runner controls
@@ -346,12 +366,12 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 EditorGUILayout.BeginHorizontal();
                 string runningText = runner.Running ? "Running" : "Not Running";
                 EditorGUILayout.LabelField($"Runner {runningText}.");
-                int currentTrial = (runner.Design.TotalTrials/runner.Design.BlockCount) * (currentBlockIndex) + currentTrialIndex + 1;
-                if (currentTrial > runner.Design.TotalTrials) currentTrial = runner.Design.TotalTrials;
+                int currentTrial = (runner.RunnableDesign.TotalTrials/runner.RunnableDesign.BlockCount) * (currentBlockIndex) + currentTrialIndex + 1;
+                if (currentTrial > runner.RunnableDesign.TotalTrials) currentTrial = runner.RunnableDesign.TotalTrials;
                 EditorGUILayout.LabelField("Running Trial: " +
                                            $"{currentTrial}" +
                                            "/" +
-                                           $"{runner.Design.TotalTrials} ");
+                                           $"{runner.RunnableDesign.TotalTrials} ");
                 EditorGUILayout.EndHorizontal();
             }
 
@@ -370,7 +390,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         /// <param name="orderSelected"></param>
         void ShowBlockTable(DataTable blockTable, bool orderSelected = true) {
             
-            if (!runner.Design.HasBlocks) return;
+            if (!runner.RunnableDesign.HasBlocks) return;
 
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.Space();
@@ -397,7 +417,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
                 if (orderSelected) {
 
-                    Block block = runner.Design.Blocks[indexOfBlock];
+                    Block block = runner.RunnableDesign.Blocks[indexOfBlock];
                     Color color = block.Complete ? Color.green : Color.red;
                     EditorGUILayout.ColorField(GUIContent.none, color, false, false, false, CompleteIndicatorWidth);
                 }
@@ -422,15 +442,15 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Trial Tables:", EditorStyles.boldLabel);
 
-            foreach (Block block in runner.Design.Blocks) {
-                int blockIndex = runner.Design.Blocks.IndexOf(block);
+            foreach (Block block in runner.RunnableDesign.Blocks) {
+                int blockIndex = runner.RunnableDesign.Blocks.IndexOf(block);
 
                 EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
 
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("", IndentWidth);
-                EditorGUILayout.TextArea($"Block Values: {block.Identity}", BlockIdentityWidth);
+                EditorGUILayout.TextArea($"Block: {block.Identity}", BlockIdentityWidth);
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.BeginHorizontal();

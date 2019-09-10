@@ -57,15 +57,13 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <param name="runner"></param>
         /// <param name="trialTable"></param>
-        /// <param name="identity"></param>
         /// <param name="dataRow"></param>
         protected Block(ExperimentRunner runner,
-                     DataTable trialTable, 
-                     string identity,
+                     DataTable trialTable,
                      DataRow dataRow) 
                         : base(runner) {
             TrialTable = trialTable;
-            Identity = identity;
+            Identity = dataRow.AsStringWithColumnNames();
             MakeTrials();
             data = dataRow;
         }

@@ -31,11 +31,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
         
         
-        Block CreateNewBlock(DataTable trialTable, string blockIdentity, DataRow dataRow) {
+        Block CreateNewBlock(DataTable trialTable, DataRow dataRow) {
             Block newBlock = (Block) Activator.CreateInstance(runner.BlockType,
                                                               runner,
                                                               trialTable,
-                                                              blockIdentity,
                                                               dataRow
                                                              );
             return newBlock;
@@ -75,13 +74,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         void CreateBlockFromTable(DataTable blockTable, List<IndependentVariable> blockVariables, DataTable blockTrialTable) {
-            string blockIdentity = "TODO block identity"; //TODO fix block identity
             DataRow blockDataRow = blockTable.NewRow();
             foreach (IndependentVariable blockVariable in blockVariables) {
                 DataRow firstBlockRow = blockTrialTable.Rows[0];
                 blockDataRow[blockVariable.Name] = firstBlockRow[blockVariable.Name];
             }
-            Block newBlock = CreateNewBlock(blockTrialTable, blockIdentity, blockDataRow);
+            Block newBlock = CreateNewBlock(blockTrialTable, blockDataRow);
             Blocks.Add(newBlock);
         }
 

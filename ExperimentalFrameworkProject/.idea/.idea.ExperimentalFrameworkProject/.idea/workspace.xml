@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="22ea5ef4-e322-4ce5-98ba-7ef8faef5429" name="Default Changelist" comment="" />
+    <list default="true" id="22ea5ef4-e322-4ce5-98ba-7ef8faef5429" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Documentation/~$cumentation for the BML Experiment Toolkit.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/BackwardBlockOrder.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/BackwardBlockOrder.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Block.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/DataTableCSVUtility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/DataTableCSVUtility.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/RunnableDesign.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/RunnableDesign.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleBlock.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Trial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Trial.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/TrialSequenceRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/TrialSequenceRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignSaverWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignSaverWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Runtime/ExperimentGui.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Runtime/ExperimentGui.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableConfigurationFileEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableConfigurationFileEditor.cs" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,19 +123,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Settings/ControlSettings.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Runtime/NoValueSelectedException.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Runtime/ParticipantVariableEntry.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SupportedDataTypes.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfig.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SupportedDataType.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/Variables.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/TrialSequenceRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/OutputManager.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/DataTableExtension.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/BlockSequenceRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Trial.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Block.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Experiment.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentPart.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_Utilities/Delimiter.cs" />
@@ -134,8 +149,6 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Runtime/ExperimentGui.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignSaverWindow.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" />
         <option value="$PROJECT_DIR$/Assets/ordertest.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperimentRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_Utilities/ReorderableList/List/Editor/ReorderableList.cs" />
@@ -148,12 +161,19 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfigurationFile.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/Order.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/OrderRow.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewWindow.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/TestOrderEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/OrderDefinitionEditor.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewer.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableConfigurationFileEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawerHelpers.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewer.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewWindow.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/TrialSequenceRunner.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableConfigurationFileEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignSaverWindow.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/DataTableCSVUtility.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Block.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleBlock.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/RunnableDesign.cs" />
       </list>
     </option>
   </component>
@@ -234,7 +254,7 @@
       <workItem from="1566938321413" duration="29310000" />
       <workItem from="1567027556422" duration="2949000" />
       <workItem from="1568122362810" duration="113000" />
-      <workItem from="1568122510007" duration="10782000" />
+      <workItem from="1568122510007" duration="15137000" />
     </task>
     <servers />
   </component>

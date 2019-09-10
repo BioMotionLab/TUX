@@ -34,10 +34,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         ScriptReferences scriptReferences = new ScriptReferences();
         
         // ReSharper disable once ConvertToAutoProperty
-        public VariableConfigurationFile VariableConfigurationFileFile => variableConfigurationFile;
+        public VariableConfigurationFile VariableConfigurationFile => variableConfigurationFile;
         
         public ExperimentDesign ExperimentDesign;
-        public RunnableDesign Design;
+        public RunnableDesign RunnableDesign;
         
         OutputManager outputManager;
         Experiment experiment;
@@ -90,35 +90,35 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             #endif
 
             //check if configurationFile file is loaded
-            if (VariableConfigurationFileFile == null) {
+            if (VariableConfigurationFile == null) {
                 Debug.LogError("Config file not set up properly, make sure you dragged a configuration file into your Runner GameObject in the inspector");
                 ExitProgram();
                 return;
             }
-            VariableConfigurationFileFile.Validate();
+            VariableConfigurationFile.Validate();
 
             Session = Session.LoadSessionData();
             if (Session == null) {
                 throw new NullReferenceException("Session null and not created properly");
             }
 
-            switch (VariableConfigurationFileFile.GenerateExperimentTable) {
+            switch (VariableConfigurationFile.GenerateExperimentTable) {
                 case TrialTableGenerationMode.OnTheFly:
-                    ExperimentDesign = ExperimentDesign.CreateFrom(VariableConfigurationFileFile);
+                    ExperimentDesign = ExperimentDesign.CreateFrom(VariableConfigurationFile);
                     if (ExperimentDesign == null) {
                         throw new NullReferenceException("ExperimentDesign null");
                     }
                     break;
                     
                 case TrialTableGenerationMode.PreGenerated:
-                    //Design created later
+                    //RunnableDesign created later
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
             if (!WindowOpen) {
-                gui = Instantiate(VariableConfigurationFileFile.GuiSettings.GuiPrefab);
+                gui = Instantiate(VariableConfigurationFile.GuiSettings.GuiPrefab);
                 gui.gameObject.SetActive(true);
                 gui.RegisterExperiment(this);
             }
@@ -146,23 +146,23 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
-            switch (VariableConfigurationFileFile.GenerateExperimentTable) {
+            switch (VariableConfigurationFile.GenerateExperimentTable) {
                 case TrialTableGenerationMode.OnTheFly: {
                     DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
-                    Design = new RunnableDesign(this, finalDesignTable, VariableConfigurationFileFile);
+                    RunnableDesign = new RunnableDesign(this, finalDesignTable, VariableConfigurationFile);
                     break;
                 }
                 case TrialTableGenerationMode.PreGenerated:
                     string selectedDesignFilePath = currentSession.SelectedDesignFilePath;
                     if (string.IsNullOrEmpty(selectedDesignFilePath)) throw new NullReferenceException("Trying to load custom design file, but none given");
-                    Design = RunnableDesign.CreateFromFile(this, currentSession.SelectedDesignFilePath,
-                                                           VariableConfigurationFileFile);
+                    RunnableDesign = RunnableDesign.CreateFromFile(this, currentSession.SelectedDesignFilePath,
+                                                           VariableConfigurationFile);
                     break;
                 default:
                     throw new NotImplementedException();
             }
             
-            if (Design == null)
+            if (RunnableDesign == null)
             {
                 throw new NullReferenceException("No Runnable design");
             }
@@ -170,7 +170,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             Running = true;
             outputManager = new OutputManager(currentSession.OutputFullPath);
 
-            experiment = (Experiment)Activator.CreateInstance(ExperimentType, this, Design);
+            experiment = (Experiment)Activator.CreateInstance(ExperimentType, this, RunnableDesign);
 
             if (experiment == null) {
                 throw new NullReferenceException("Experiment object instance could not be created");
@@ -178,7 +178,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             
             ExperimentEvents.ExperimentStarted();
 
-            StartCoroutine(VariableConfigurationFileFile.ControlSettings.Run());
+            StartCoroutine(VariableConfigurationFile.ControlSettings.Run());
             
             ExperimentEvents.StartPart(experiment);
             

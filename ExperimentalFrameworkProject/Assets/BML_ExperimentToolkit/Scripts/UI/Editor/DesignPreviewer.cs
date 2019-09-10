@@ -7,16 +7,17 @@ using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.UI.Editor {
     public class DesignPreviewer {
-        VariableConfigurationFile configurationFile;
+        readonly VariableConfigurationFile configurationFile;
         public int                                OrderIndex;
         Vector2 scrollPos;
+        readonly ExperimentDesign design;
 
         public DesignPreviewer(VariableConfigurationFile configurationFile) {
             this.configurationFile = configurationFile;
+            design = ExperimentDesign.CreateFrom(configurationFile);
         }
         
         bool ConfigurationFileLinked() {
-            configurationFile = Selection.activeObject as VariableConfigurationFile;
             bool linked = false;
             if (configurationFile != null) {
                 EditorGUILayout.LabelField($"Config File Selected: {configurationFile.name}");
@@ -36,12 +37,13 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                                                         false, false, 
                                                         GUILayout.ExpandHeight(true));
             
+            
             if (!ConfigurationFileLinked()) return null;
             
             EditorGUILayout.BeginVertical();
             
             EditorGUILayout.LabelField("Preview:", EditorStyles.boldLabel);
-            ExperimentDesign design = ExperimentDesign.CreateFrom(configurationFile);
+            
 
             if (design.HasBlocks) {
                 EditorGUILayout.LabelField("Select A Block Order");
@@ -63,5 +65,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.EndScrollView();
             return finalTable;
         }
+        
     }
 }

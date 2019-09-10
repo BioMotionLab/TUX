@@ -53,7 +53,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
 
         static void ProcessBool(DataColumn column, string[] rowValues, int columnIndex, DataRow row) {
-            Debug.Log($"column {column.ColumnName} value {rowValues[columnIndex]}, col index {columnIndex}");
+            //Debug.Log($"column {column.ColumnName} value {rowValues[columnIndex]}, col index {columnIndex}");
             if (rowValues[columnIndex] == "TRUE") row[column.ColumnName] = true;
             if (rowValues[columnIndex] == "FALSE") row[column.ColumnName] = false;
         }

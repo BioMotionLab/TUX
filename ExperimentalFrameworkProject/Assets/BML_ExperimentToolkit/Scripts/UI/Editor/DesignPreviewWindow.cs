@@ -6,19 +6,17 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         
         public VariableConfigurationFile ConfigurationFile;
         DesignPreviewer                  previewer;
-
-        void OnEnable() {
-            previewer = new DesignPreviewer(ConfigurationFile);
-        }
-
+        
         void OnGUI() {
-            
             previewer.ShowPreview();
         }
 
-        public static void ShowWindow() {
+        public static void ShowWindow(VariableConfigurationFile configFile) {
+            
             DesignPreviewWindow window = (DesignPreviewWindow) GetWindow(typeof(DesignPreviewWindow), false, "Design Previewer");
+            window.previewer = new DesignPreviewer(configFile);
             window.Show();
         }
+        
     }
 }
