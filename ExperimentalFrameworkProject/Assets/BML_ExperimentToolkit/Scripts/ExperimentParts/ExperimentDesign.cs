@@ -1,6 +1,5 @@
 ﻿using BML_ExperimentToolkit.Scripts.VariableSystem;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using BML_ExperimentToolkit.Scripts.Settings;
@@ -32,11 +31,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         List<string> GetBlockPermutationsStrings() {
             
-            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && configurationFile.OrderConfigurations.Count == 0) {
+            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && configurationFile.BlockOrderConfigurations.Count == 0) {
                 return baseBlockTable.BlockPermutationsStrings;
             }
 
-            if (configurationFile.OrderConfigurations.Count > 0) return GetBlockOrderConfigStrings();
+            if (configurationFile.BlockOrderConfigurations.Count > 0) return GetBlockOrderConfigStrings();
             
             throw new NullReferenceException("There are too many block values to create a permutation table. " +
                                              "Block orders must be defined manually using OrderConfig files. " +
@@ -46,14 +45,14 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         List<string> GetBlockOrderConfigStrings() {
             List<string> orderStrings = new List<string>();
-            foreach (RowHolder orderConfig in configurationFile.OrderConfigurations) {
+            foreach (BlockOrderDefinition orderConfig in configurationFile.BlockOrderConfigurations) {
 
                 if (orderConfig.Randomize) {
                     orderStrings.Add("Randomize");
                 }
                 else {
                     string orderString = "";
-                    foreach (int orderIndex in orderConfig.Order) {
+                    foreach (int orderIndex in orderConfig.IndexOrder) {
                         string rowString = baseBlockTable.Rows[orderIndex].AsString(separator: ", ", truncateLength: -1);
                         orderString += rowString + " > ";
                     }

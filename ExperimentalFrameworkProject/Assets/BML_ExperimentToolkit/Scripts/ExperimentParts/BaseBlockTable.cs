@@ -13,11 +13,11 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         BaseBlockTable currentOrderedTable;
         int currentOrderedTableIndex = -1;
         
-        readonly List<RowHolder> orderConfigs;
+        readonly List<BlockOrderDefinition> orderConfigs;
         readonly IndependentVariables blockVariables;
 
         public BaseBlockTable(VariableConfigurationFile variableConfigurationFile) {
-            orderConfigs = variableConfigurationFile.OrderConfigurations;
+            orderConfigs = variableConfigurationFile.BlockOrderConfigurations;
             blockVariables = variableConfigurationFile.Variables.BlockVariables;
             baseBlockTable = AddVariablesToTable();
    
@@ -34,7 +34,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         DataTable AddVariablesToTable() {
             DataTable table = new DataTable();
 
-            //Order matters.
+            //BlockOrderDefinition matters.
             foreach (IndependentVariable independentVariable in blockVariables.Looped) {
                 table = independentVariable.AddValuesTo(table);
             }
@@ -56,7 +56,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 if (baseBlockTable.Rows.Count >= 4) throw new TooManyPermutationsException();
                 foreach (List<DataRow> dataRows in baseBlockTable.GetPermutations()) {
                     StringBuilder sb = new StringBuilder();
-                    sb.Append($"Order #{blockOrderIndex}:   ");
+                    sb.Append($"BlockOrderDefinition #{blockOrderIndex}:   ");
                     foreach (DataRow dataRow in dataRows) {
                         sb.Append($"{dataRow.AsString(separator: ", ", truncateLength: -1)} >   ");
                     }
@@ -94,15 +94,15 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
  
             if (orderChosenIndex > orderConfigs.Count- 1) throw new IndexOutOfRangeException($"Index chosen is {orderChosenIndex}, but count is {orderConfigs.Count}");
             
-            RowHolder chosenOrder = orderConfigs[orderChosenIndex];
+            BlockOrderDefinition chosenBlockOrderDefinition = orderConfigs[orderChosenIndex];
 
-            if (chosenOrder.Randomize && currentOrderedTableIndex == orderChosenIndex) {
+            if (chosenBlockOrderDefinition.Randomize && currentOrderedTableIndex == orderChosenIndex) {
                 return currentOrderedTable;
             } 
             
             DataTable orderedTable = baseBlockTable.Clone();
 
-            foreach (int index in chosenOrder.Order) {
+            foreach (int index in chosenBlockOrderDefinition.IndexOrder) {
                 orderedTable.ImportRow(baseBlockTable.Rows[index]);
             }
             BaseBlockTable blockOrderTable = new BaseBlockTable(orderedTable);

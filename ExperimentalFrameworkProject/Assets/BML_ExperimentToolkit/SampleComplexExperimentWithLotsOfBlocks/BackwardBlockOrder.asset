@@ -9,7 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c778f369fcf2481a977aaae21caa0804, type: 3}
-  m_Name: BackwardOrder
+  m_Script: {fileID: 11500000, guid: 9a2f874bb9a360b4e93c41a8b3594b95, type: 3}
+  m_Name: New Block Order Definition
   m_EditorClassIdentifier: 
-  Order: 03000000020000000100000000000000
+  List:
+  - Index: 0
+    Text: blockvar= 1
+  - Index: 1
+    Text: blockvar= 2
+  - Index: 2
+    Text: blockvar= 3
+  - Index: 3
+    Text: blockvar= 4
+  Randomize: 0

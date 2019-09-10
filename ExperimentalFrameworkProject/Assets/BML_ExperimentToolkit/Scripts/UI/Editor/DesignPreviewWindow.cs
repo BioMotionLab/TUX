@@ -1,4 +1,3 @@
-using System;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using UnityEditor;
 
@@ -17,9 +16,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             previewer.ShowPreview();
         }
 
-        public static void ShowWindow(VariableConfigurationFile target) {
+        public static void ShowWindow() {
             DesignPreviewWindow window = (DesignPreviewWindow) GetWindow(typeof(DesignPreviewWindow), false, "Design Previewer");
-            window.ConfigurationFile = target;
             window.Show();
         }
     }

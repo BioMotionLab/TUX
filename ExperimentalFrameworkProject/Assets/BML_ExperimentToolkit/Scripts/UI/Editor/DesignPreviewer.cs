@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.UI.Editor {
     public class DesignPreviewer {
-        readonly VariableConfigurationFile configurationFile;
+        VariableConfigurationFile configurationFile;
         public int                                OrderIndex;
         Vector2 scrollPos;
 
@@ -16,17 +16,20 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         }
         
         bool ConfigurationFileLinked() {
+            configurationFile = Selection.activeObject as VariableConfigurationFile;
+            bool linked = false;
             if (configurationFile != null) {
                 EditorGUILayout.LabelField($"Config File Selected: {configurationFile.name}");
-                return true;
+                linked = true;
             }
             else {
                 EditorGUILayout.HelpBox("Need to have a Variable Config File Selected", MessageType.Warning);
                 EditorGUILayout.Space();
-                return false; 
             }
-            
+
+            return linked;
         }
+        
         public DataTable ShowPreview() {
             
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, 
