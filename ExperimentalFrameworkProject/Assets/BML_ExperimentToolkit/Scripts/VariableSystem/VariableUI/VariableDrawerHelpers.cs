@@ -263,7 +263,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             if (!block.boolValue || valuesProperty.arraySize <= ExperimentDesign.MaxBlockPermutationsAllowed) return;
             Rect tooManyBlockValuesWarningRect = layoutRect.NextLines(3);
             EditorGUI.HelpBox(tooManyBlockValuesWarningRect, "Too many Block Values for automatic permutation.\n" +
-                                                             "Must define possible Block orders manually using OrderConfig ScriptableObjects.\n" +
+                                                             "Must define possible Block orders manually using BlockOrderDefinition files.\n" +
                                                              "See Docs.",
                               MessageType.Warning);
         }
