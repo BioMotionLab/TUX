@@ -2,7 +2,7 @@
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
     [Serializable]
-    public enum SupportedDataTypes {
+    public enum SupportedDataType {
         Int,
         Float,
         String,
@@ -10,7 +10,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         GameObject,
         Vector2,
         Vector3,
-        CustomDataType_NotYetImplemented,
+        CustomDataTypeNotYetImplemented,
         ChooseType,
         
     }

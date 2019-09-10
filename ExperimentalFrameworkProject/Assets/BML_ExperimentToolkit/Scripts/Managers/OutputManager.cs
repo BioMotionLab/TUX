@@ -48,7 +48,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         /// </summary>
         /// <param name="output"></param>
         void OutputFile(Outputtable output) {
-            Debug.Log($"Writing to file {outputPath}");
+            Debug.Log($"Writing output to file {outputPath}");
             string folder = Path.GetDirectoryName(outputPath);
             if (folder != null) Directory.CreateDirectory(folder);
 

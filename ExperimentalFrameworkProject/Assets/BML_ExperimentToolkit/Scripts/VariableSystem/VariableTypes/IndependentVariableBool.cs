@@ -4,7 +4,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
     [Serializable]
     public class IndependentVariableBool : IndependentVariable<bool> {
         public IndependentVariableBool() {
-            DataType = SupportedDataTypes.Bool;
+            DataType = SupportedDataType.Bool;
             Values.Add(true);
             Values.Add(false);
         }

@@ -5,14 +5,13 @@ using BML_ExperimentToolkit.Scripts.Managers;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
-
     [Serializable]
     public class Session {
         const string DebugFolder = "/BML_Debug/";
         const string DebugFileName = "debugFile";
 
         string outputFullPath;
-
+        
         /// <summary>
         /// stores the output path
         /// </summary>
@@ -25,7 +24,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         [SerializeField]
         // ReSharper disable once InconsistentNaming
-        private string outputFileName = "";
+        string outputFileName = "";
 
         public string OutputFileName {
             get => DebugMode ? DebugFileName : outputFileName;
@@ -34,71 +33,19 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         [SerializeField]
         // ReSharper disable once InconsistentNaming
-        private string outputFolder = "";
+        string outputFolder = "";
 
         public string OutputFolder {
             get => DebugMode ? Path.Combine(Application.dataPath + DebugFolder) : outputFolder;
             set => outputFolder = value;
         }
 
-        [SerializeField]
-        // ReSharper disable once InconsistentNaming
-        bool debugMode;
-
-        public bool DebugMode {
-            get { return debugMode; }
-            set {
-                if (value == debugMode) return;
-                debugMode = value;
-
-                
-                if (!debugMode) {
-                    ParticipantId = "Unnamed";
-                }
-            }
-        }
-
-
-        bool blockChosen;
-
-        public bool BlockChosen {
-            get => blockChosen;
-            set {
-
-                if (value == blockChosen) return;
-
-                blockChosen = value;
-                if (!blockChosen) return;
-                ExperimentEvents.BlockOrderSelected(OrderChosenIndex);
-            }
-        }
-
-
-        public int    OrderChosenIndex = 0;
+        public string SelectedDesignFilePath = "";
 
         [SerializeField]
-        // ReSharper disable once InconsistentNaming
-        string participantId;
-
-
-        public string ParticipantId {
-            get {
-                if (debugMode) {
-                    return "debug";
-                }
-                else {
-                    if (string.IsNullOrEmpty(participantId))
-                    {
-                        participantId = "Unnamed";
-                    }
-                    return participantId;
-                }
-            }
-            set {
-                participantId = debugMode ? "debug" : value;
-            }
-        }
-
+        public bool DebugMode;
+        
+        public int    BlockOrderChosenIndex = 0;
 
         const string SessionDataFileName = "BML_last_experiment_session.json";
         const string SessionLocation = "BML_ExperimentToolkit/Data";
@@ -120,14 +67,13 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
 
         public static Session LoadSessionData() {
-            Debug.Log("Loading Session data");
             string filePath = Path.Combine(Application.dataPath, SessionLocation, SessionDataFileName);
             Session session;
             if (File.Exists(filePath)) {
                 string dataAsJason = File.ReadAllText(filePath);
                 session = JsonUtility.FromJson<Session>(dataAsJason);
                 //Debug.Log($"Session loaded: {filePath}");
-                }
+            }
             else {
                 Debug.Log("Previous Session file not found, creating new");
                 session = new Session();
@@ -136,7 +82,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return session;
         }
 
-        public void SaveSessionData() {
+        void SaveSessionData() {
             //Debug.Log("Saving Session data");
             string fileFolder = Path.Combine(Application.dataPath, SessionLocation);
 
@@ -152,7 +98,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <summary>
         /// Mark Session as completed
         /// </summary>
-        public void Completed() {
+        void Completed() {
 
             SessionLogger.LogComplete(this);
             Disable();

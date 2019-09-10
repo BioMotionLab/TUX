@@ -4,7 +4,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
     [Serializable]
     public class ParticipantVariableFloat : ParticipantVariable<float> {
         public ParticipantVariableFloat() {
-            DataType = SupportedDataTypes.Float;
+            DataType = SupportedDataType.Float;
         }
 
         public override void SelectValue(string value) {

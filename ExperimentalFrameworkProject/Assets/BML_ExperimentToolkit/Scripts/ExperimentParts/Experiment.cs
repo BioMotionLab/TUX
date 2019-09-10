@@ -18,24 +18,21 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     // ReSharper disable once InheritdocConsiderUsage
     public abstract class Experiment : ExperimentPart, Outputtable {
 
-        readonly ExperimentDesign design;
+        readonly RunnableDesign design;
         readonly ExperimentRunner runner;
 
-        protected Experiment(ExperimentRunner runner, ExperimentDesign design) : base(runner) {
-            this.runner = runner;
-            if (design == null) {
-                throw new NullReferenceException("Experiment created with null design");
-            }
-            this.design = design;
-            Enable();
-        }
-
         /// <summary>
-        /// Called when Runner is loaded
+        /// Constructor. Just call auto implementation and everything should work
         /// </summary>
-        void Enable() {
+        /// <param name="runner"></param>
+        /// <param name="design"></param>
+        protected Experiment(ExperimentRunner runner, RunnableDesign design) : base(runner) {
+            this.runner = runner;
+            this.design = design ?? throw new NullReferenceException("Experiment created with null design");
+            
             ExperimentEvents.OnTrialUpdated += TrialUpdated;
         }
+      
 
         /// <summary>
         /// Called when Runner is over
@@ -43,34 +40,23 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public void Disable() {
             ExperimentEvents.OnTrialUpdated -= TrialUpdated;
         }
-
-        /// <summary>
-        /// Called when a trial gets updated
-        /// </summary>
-        /// <param name="trials"></param>
-        /// <param name="index"></param>
+        
         void TrialUpdated(List<Trial> trials, int index) {
-            OutputUpdated();
-        }
-
-        /// <summary>
-        /// Updates the Runner's output
-        /// </summary>
-        void OutputUpdated() {
             ExperimentEvents.OutputUpdated(this);
         }
+        
 
-        protected override IEnumerator RunMainCoroutine() {
+        protected sealed override IEnumerator RunMainCoroutine() {
             BlockSequenceRunner blockRunner = new BlockSequenceRunner(runner, design.Blocks);
             blockRunner.Start();
             while (blockRunner.Running) {
                 yield return null;
             }
-            
         }
 
-        /// <summary>Gets the Runner as string.</summary>
-        /// <value>The Runner as a string.</value>
+        /// <summary>
+        /// Gets the Runner as string.
+        /// </summary>
         public string AsString {
             get {
                 StringBuilder sb = new StringBuilder();

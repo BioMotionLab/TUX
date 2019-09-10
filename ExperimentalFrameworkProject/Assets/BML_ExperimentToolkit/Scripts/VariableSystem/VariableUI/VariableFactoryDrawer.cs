@@ -9,7 +9,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         const float LineHeight = 20f;
         float height;
         
-
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
             return EditorGUI.GetPropertyHeight(property) + height;
         }
@@ -26,14 +25,16 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             GUI.backgroundColor = Color.white;
 
             EditorGUI.LabelField(layoutRect.NextLine, "Variable Creation:", EditorStyles.boldLabel);
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.DataTypesToCreate));
+            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.DataTypeToCreate));
             AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.VariableTypeToCreate));
             
-            if (GUI.Button(layoutRect.NextLine, "Create Variable")) {
-                VariableFactory factory =
-                    fieldInfo.GetValue(mainProperty.serializedObject.targetObject) as VariableFactory;
+            VariableFactory factory =
+                fieldInfo.GetValue(mainProperty.serializedObject.targetObject) as VariableFactory;
+
+            Rect createVariableRect = layoutRect.NextLine;
+            createVariableRect.width = 230;
+            if (GUI.Button(createVariableRect, "Create Variable")) {
                 factory?.AddNew();
-                
             }
             
             GUI.backgroundColor = oldColor;
@@ -80,12 +81,12 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.Vector3ParticipantVariables));
             AddListPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.CustomDataParticipantVariables));
 
-            EditorGUI.LabelField(layoutRect.NextLine, "--------");
-            EditorGUI.LabelField(layoutRect.NextLine, "Settings:", EditorStyles.boldLabel);
-        
             EditorGUI.indentLevel = oldIndentLevel;
             height = layoutRect.FinalHeight;
             mainProperty.serializedObject.ApplyModifiedProperties();
+
+
+            
         }
 
 
@@ -106,9 +107,12 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
                 SerializedProperty item = valueProperty.GetArrayElementAtIndex(i);
                 
                 EditorGUI.PropertyField(layoutRect.NextLine, item, GUIContent.none);
-                layoutRect.AddHeight(EditorGUI.GetPropertyHeight(item, GUIContent.none));
-
+                
+                layoutRect.AddHeight(EditorGUI.GetPropertyHeight(item, GUIContent.none)-20);
+                
                 if (DeleteButton(layoutRect, valueProperty, i)) break;
+                
+                //layoutRect.AddHeight(5);
             }
 
             valueProperty.serializedObject.ApplyModifiedProperties();

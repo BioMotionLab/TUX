@@ -5,17 +5,17 @@ using BML_ExperimentToolkit.Scripts.Settings;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
-
     [CreateAssetMenu]
-    public class VariableConfig : ScriptableObject {
+    public class VariableConfigurationFile : ScriptableObject {
 
-        public bool ShuffleTrialOrder = false;
-        public bool ShuffleDifferentlyForEachBlock = false;
         
-        [Range(1,100)]
+        [Header("Randomization and Repetition settings:")]
+        public RandomizationMode RandomizationMode;
+        
+        [Range(1,50)]
         public int  RepeatTrialsInBlock = 1;
         
-        [Range(1,100)]
+        [Range(1,20)]
         public int RepeatAllBlocks = 1;
         
         [SerializeField]
@@ -25,10 +25,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public ControlSettings ControlSettings;
         public GuiSettings GuiSettings;
         
-        [Header("Manual Block Order Config:")]
-        [SerializeField]
-        public List<OrderConfig> OrderConfigs = new List<OrderConfig>();
-
         public void Validate() {
             
             if (ColumnNamesSettings == null) {
@@ -43,5 +39,18 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                                                  "Please drag control settings into the proper place in the config file");
             }
         }
+
+        public Variables Variables => Factory.Variables;
+        
+        
+        [SerializeField]
+        public TrialTableGenerationMode GenerateExperimentTable = TrialTableGenerationMode.OnTheFly;
+        
+        [SerializeField]
+        public List<BlockOrderDefinition> BlockOrderConfigurations = new List<BlockOrderDefinition>();
+
+
     }
+    
+
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
     [Serializable]
     public abstract class IndependentVariable : Variable {
-        public VariableMixingType MixingTypeOfVariable;
+        public VariableMixingType MixingType;
         public bool               Block;
     }
 
@@ -22,7 +22,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
                 throw new ArgumentNullException($"Can't add values, none defined for variable: {Name}");
             }
 
-            IndependentVariableValuesAdderStrategy<T> independentVariableValuesAdderStrategy = IndependentValuesStrategyFactory.Create<T>(MixingTypeOfVariable);
+            IndependentVariableValuesAdderStrategy<T> independentVariableValuesAdderStrategy = IndependentValuesStrategyFactory.Create<T>(MixingType);
             return independentVariableValuesAdderStrategy.AddVariableValuesToTable(table, this);
         }
 
