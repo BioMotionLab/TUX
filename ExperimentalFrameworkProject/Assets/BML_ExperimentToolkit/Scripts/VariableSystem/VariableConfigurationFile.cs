@@ -44,7 +44,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         
         
         [SerializeField]
-        public TrialTableGenerationMode GenerateExperimentTable = TrialTableGenerationMode.OnTheFly;
+        public TrialTableGenerationMode TrialTableGeneration = TrialTableGenerationMode.OnTheFly;
         
         [SerializeField]
         public List<BlockOrderDefinition> BlockOrderConfigurations = new List<BlockOrderDefinition>();

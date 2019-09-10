@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
     [Serializable]
@@ -9,6 +10,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
 
         public override void SelectValue(string value) {
             Value = value;
+        }
+
+        public override void AddValueFieldInEditor() {
+            Value = EditorGUILayout.TextField(Value);
         }
     }
 }

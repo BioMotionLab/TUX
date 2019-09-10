@@ -21,12 +21,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <summary>
         /// The index of the Trial within a Block
         /// </summary>
-        [PublicAPI] public int Index => (int) Data[Runner.VariableConfigurationFile.ColumnNamesSettings.TrialIndex];
+        [PublicAPI] public int Index => (int) Data[Runner.VariableConfigFile.ColumnNamesSettings.TrialIndex];
         
         /// <summary>
         /// The index of the Block in which this Trial resides
         /// </summary>
-        [PublicAPI] public int BlockIndex => (int) Data[Runner.VariableConfigurationFile.ColumnNamesSettings.BlockIndex];
+        [PublicAPI] public int BlockIndex => (int) Data[Runner.VariableConfigFile.ColumnNamesSettings.BlockIndex];
         
         /// <summary>
         /// Text that describes the index of Trial and Block.
@@ -37,8 +37,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Whether the trial was Completed Successfully
         /// </summary>
         [PublicAPI] public bool CompletedSuccessfully {
-            get => (bool)Data[Runner.VariableConfigurationFile.ColumnNamesSettings.Completed];
-            set => Data[Runner.VariableConfigurationFile.ColumnNamesSettings.Completed] = value;
+            get => (bool)Data[Runner.VariableConfigFile.ColumnNamesSettings.Completed];
+            set => Data[Runner.VariableConfigFile.ColumnNamesSettings.Completed] = value;
         }
 
         /// <summary>
@@ -46,23 +46,23 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Not accurate enough for high-precision reaction times
         /// </summary>
         [PublicAPI] public float TrialTime {
-            set => Data[Runner.VariableConfigurationFile.ColumnNamesSettings.TrialTime] = value;
+            set => Data[Runner.VariableConfigFile.ColumnNamesSettings.TrialTime] = value;
         }
 
         /// <summary>
         /// How many times the trial was attempted
         /// </summary>
         [PublicAPI] public int Attempts {
-            get => (int) Data[Runner.VariableConfigurationFile.ColumnNamesSettings.Attempts];
-            set => Data[Runner.VariableConfigurationFile.ColumnNamesSettings.Attempts] = value;
+            get => (int) Data[Runner.VariableConfigFile.ColumnNamesSettings.Attempts];
+            set => Data[Runner.VariableConfigFile.ColumnNamesSettings.Attempts] = value;
         }
 
         /// <summary>
         /// Whether the trial was skipped over manually
         /// </summary>
         [PublicAPI] public bool Skipped {
-            get => (bool) Data[Runner.VariableConfigurationFile.ColumnNamesSettings.Skipped];
-            set => Data[Runner.VariableConfigurationFile.ColumnNamesSettings.Skipped] = value;
+            get => (bool) Data[Runner.VariableConfigFile.ColumnNamesSettings.Skipped];
+            set => Data[Runner.VariableConfigFile.ColumnNamesSettings.Skipped] = value;
         }
 
         /// <summary>
