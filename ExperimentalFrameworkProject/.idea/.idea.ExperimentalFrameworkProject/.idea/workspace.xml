@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22ea5ef4-e322-4ce5-98ba-7ef8faef5429" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -140,7 +137,6 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/TestOrderEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/OrderDefinitionEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawerHelpers.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewer.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewWindow.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/TrialSequenceRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableConfigurationFileEditor.cs" />
@@ -158,8 +154,9 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableString.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableVector2.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableVector3.cs" />
-        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleTrial.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewer.cs" />
       </list>
     </option>
   </component>
@@ -242,6 +239,7 @@
       <workItem from="1568122362810" duration="113000" />
       <workItem from="1568122510007" duration="19040000" />
       <workItem from="1568228333319" duration="1263000" />
+      <workItem from="1568301954684" duration="365000" />
     </task>
     <servers />
   </component>

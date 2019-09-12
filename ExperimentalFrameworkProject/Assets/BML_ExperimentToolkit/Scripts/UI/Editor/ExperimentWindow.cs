@@ -26,13 +26,15 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         bool autoName;
         Vector2 scrollPos = Vector2.zero;
         Session session;
-
+        public int OrderChosenIndex;
+        DesignPreviewer previewer;
+        string trialTableFilePath;
         
         
         /// <summary>
         /// Add menu item to open this window
         /// </summary>
-        [MenuItem(MenuNames.BmlMainMenu + "Runner Runner Window")]
+        [MenuItem(MenuNames.BmlMainMenu + "Experiment Runner Window")]
         public static void ShowWindow() {
             //Show existing window instance. If one doesn't exist, make one.
             GetWindow(typeof(ExperimentWindow), false, "Experiment Runner Window");
@@ -189,7 +191,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 ShowTrialTableLoadInput();
             else {
                 previewer.ShowPreview();
-                OrderChosenIndex = previewer.OrderIndex;
+                OrderChosenIndex = previewer.SelectedBlockOrderIndex;
             }
             
             ShowStartButton();
@@ -294,9 +296,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.EndVertical();
         }
 
-        public int OrderChosenIndex;
-        DesignPreviewer previewer;
-        string trialTableFilePath;
+       
 
         /// <summary>
         /// Display the Runner controls

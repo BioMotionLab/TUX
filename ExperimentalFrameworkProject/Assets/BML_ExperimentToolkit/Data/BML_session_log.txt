@@ -818,3 +818,8 @@ Session Logged: 2019-09-10 03:09
 ---------------------
 Session Logged: 2019-09-11 03:12
 {"outputFileName":"test","outputFolder":"C:/Users/BioMotion/Documents/test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":false,"BlockOrderChosenIndex":0}
+
+
+---------------------
+Session Logged: 2019-09-12 11:32
+{"outputFileName":"test","outputFolder":"C:/Users/BioMotion/Documents/test","SelectedDesignFilePath":"C:\\\\Users\\\\BioMotion\\\\Documents\\\\test.csv","DebugMode":true,"BlockOrderChosenIndex":0}
