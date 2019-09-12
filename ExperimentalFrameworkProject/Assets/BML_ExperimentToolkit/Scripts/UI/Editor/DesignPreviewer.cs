@@ -8,13 +8,15 @@ using UnityEngine;
 namespace BML_ExperimentToolkit.Scripts.UI.Editor {
     public class DesignPreviewer {
         readonly VariableConfigurationFile configurationFile;
-        public int                                OrderIndex;
+        public int SelectedBlockOrderIndex;
         Vector2 scrollPos;
-        readonly ExperimentDesign design;
-
+        readonly ExperimentDesign experimentDesign;
+        DataTable previewTable;
+        int lastDisplayedOrderIndex = -1 ;
+        
         public DesignPreviewer(VariableConfigurationFile configurationFile) {
             this.configurationFile = configurationFile;
-            design = ExperimentDesign.CreateFrom(configurationFile);
+            experimentDesign = ExperimentDesign.CreateFrom(configurationFile);
         }
         
         bool ConfigurationFileLinked() {
@@ -33,38 +35,40 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         
         public DataTable ShowPreview() {
             
+            if (!ConfigurationFileLinked()) return null;
+            
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, 
                                                         false, false, 
                                                         GUILayout.ExpandHeight(true));
             
             
-            if (!ConfigurationFileLinked()) return null;
-            
             EditorGUILayout.BeginVertical();
-            
             EditorGUILayout.LabelField("Preview:", EditorStyles.boldLabel);
-            
 
-            if (design.HasBlocks) {
+            if (experimentDesign.HasBlocks) {
                 EditorGUILayout.LabelField("Select A Block Order");
-                string[] orderStrings = design.BlockPermutationsStrings.ToArray();
-                OrderIndex = EditorGUILayout.Popup(OrderIndex, orderStrings);
+                string[] orderStrings = experimentDesign.BlockPermutationsStrings.ToArray();
+                SelectedBlockOrderIndex = EditorGUILayout.Popup(SelectedBlockOrderIndex, orderStrings);
             }
             else {
                 EditorGUILayout.LabelField("No block variables");
-                OrderIndex = 0;
+                SelectedBlockOrderIndex = 0;
             }
             EditorGUILayout.Space();
-
-            var finalTable = design.GetFinalExperimentTable(OrderIndex);
+            
+            if (SelectedBlockOrderChanged || previewTable == null) {
+                previewTable = experimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
+                lastDisplayedOrderIndex = SelectedBlockOrderIndex;
+            }
 
             EditorGUILayout.Space();
-            EditorGUILayout.TextArea(finalTable.AsString());
+            EditorGUILayout.TextArea(previewTable.AsString());
             EditorGUILayout.Space();
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndScrollView();
-            return finalTable;
+            return previewTable;
         }
-        
+
+        bool SelectedBlockOrderChanged => SelectedBlockOrderIndex != lastDisplayedOrderIndex;
     }
 }

@@ -22,7 +22,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
         void OnEnable() {
             factory = serializedObject.FindProperty(nameof(VariableConfigurationFile.Factory));
-            trialTableGenerationMode = serializedObject.FindProperty(nameof(VariableConfigurationFile.GenerateExperimentTable));
+            trialTableGenerationMode = serializedObject.FindProperty(nameof(VariableConfigurationFile.TrialTableGeneration));
             orderConfigs = serializedObject.FindProperty(nameof(VariableConfigurationFile.BlockOrderConfigurations));
             
             randomizationMode = serializedObject.FindProperty(nameof(VariableConfigurationFile.RandomizationMode));

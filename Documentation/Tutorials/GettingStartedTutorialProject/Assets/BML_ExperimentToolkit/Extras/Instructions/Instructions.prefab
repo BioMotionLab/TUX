@@ -108,9 +108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1312561905557310643}
-  - component: {fileID: 1312561905557310642}
-  - component: {fileID: 1312561905557310640}
-  - component: {fileID: 1312561905557310641}
+  - component: {fileID: 1509143336747929224}
   m_Layer: 28
   m_Name: Instructions
   m_TagString: Untagged
@@ -133,7 +131,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1312561905557310642
+--- !u!114 &1509143336747929224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,69 +140,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1312561905557310541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 955fc6d63448c1246acdebcb06ae5169, type: 3}
+  m_Script: {fileID: 11500000, guid: 57435245d90179944b150440aa104c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TextBox: {fileID: 1312561906136341216}
-  Container: {fileID: 1312561905825978112}
---- !u!114 &1312561905557310640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312561905557310541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1832868fe9465ca4a8165647de700df8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 4ef8df6f943905d4cb97e37a195997a1, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1312561905557310642}
-        m_MethodName: ShowInstructions
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: BML_MagicAlbertiFrame.Scripts.MyStringEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &1312561905557310641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312561905557310541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb2398f00b09dae489e33e5e0c9528f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: bc18aad3f5957fb4b9e301c59632defa, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1312561905557310642}
-        m_MethodName: HideInstructions
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  DisplayGameObject: {fileID: 1312561905825978112}
 --- !u!1 &1312561905680208261
 GameObject:
   m_ObjectHideFlags: 0

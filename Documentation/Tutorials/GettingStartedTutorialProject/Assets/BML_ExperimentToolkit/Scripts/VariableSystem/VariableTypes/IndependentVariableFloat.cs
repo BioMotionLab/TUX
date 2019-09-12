@@ -4,7 +4,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
     [Serializable]
     public class IndependentVariableFloat : IndependentVariable<float> {
         public IndependentVariableFloat() {
-            DataType = SupportedDataTypes.Float;
+            DataType = SupportedDataType.Float;
         }
     }
 }

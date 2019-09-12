@@ -4,7 +4,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
     [Serializable]
     public class DependentVariableCustomDataType : DependentVariable<CustomSupportedDataType> {
         public DependentVariableCustomDataType() {
-            DataType = SupportedDataTypes.CustomDataType;
+            DataType = SupportedDataType.CustomDataTypeNotYetImplemented;
         }
     }
 }

@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using UnityEngine;
 
 public class TutorialBlock : Block
 {
-    public TutorialBlock(ExperimentRunner runner, DataTable trialTable, string identity, Type trialType, DataRow dataRow) 
-        : base(runner, trialTable, identity, trialType, dataRow) {
+    
+    public TutorialBlock(ExperimentRunner runner, DataTable trialTable, DataRow dataRow) : base(runner, trialTable, dataRow) {
     }
 
     protected override void PreMethod() {
         //Get reference to custom ExperimentRunner
-        TutorialExperimentRunner tutorialRunner = (TutorialExperimentRunner) runner;
+        TutorialExperimentRunner tutorialRunner = (TutorialExperimentRunner) Runner;
 
         //Get value of distance for this block.
         float distance = (float) Data["Distance"];
@@ -28,4 +26,6 @@ public class TutorialBlock : Block
         tutorialRunner.Stimulus.transform.localPosition = position;
 
     }
+
+   
 }

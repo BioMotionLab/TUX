@@ -1,30 +1,27 @@
-﻿using System.Collections;
-using System.Data;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BML_Utilities {
 
 
 
     /// <summary>
-    /// Component to set a camera's aspect ratio
+    /// CameraLocationComponentBase to set a camera's aspect ratio
     /// </summary>
     [RequireComponent(typeof(Camera))]
+    [ExecuteInEditMode]
     public class CameraAspect : MonoBehaviour {
 
-        [Tooltip("square = 1")]
-        public float AspectRatio;
+        public float Aspect = 1;
 
         private Camera thisCamera;
 
         void Start() {
-            thisCamera = this.GetComponent<Camera>();
-            thisCamera.aspect = AspectRatio;
+            thisCamera = GetComponent<Camera>();
+            thisCamera.aspect = Aspect;
         }
 
 
 
 
     }
-
 }

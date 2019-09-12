@@ -11,5 +11,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
         public override void SelectValue(string value) {
             throw new NotImplementedException();
         }
+
+        public override void AddValueFieldInEditor() {
+            throw new NotImplementedException();
+        }
     }
 }

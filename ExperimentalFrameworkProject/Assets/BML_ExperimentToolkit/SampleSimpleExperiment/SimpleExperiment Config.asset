@@ -16,24 +16,24 @@ MonoBehaviour:
   RepeatTrialsInBlock: 1
   RepeatAllBlocks: 1
   Factory:
-    DataTypeToCreate: 0
-    VariableTypeToCreate: 1
+    DataTypeToCreate: 2
+    VariableTypeToCreate: 2
     IntIVs:
-    - Name: Variable1
+    - Name: StimulusDistance
       TypeOfVariable: 0
       DataType: 0
-      MixingType: 0
+      MixingType: 2
       Block: 0
       Values: 010000000200000003000000
       Probabilities:
       - 0
       - 0
       - 0
-    - Name: Variable2
+    - Name: StimulusSize
       TypeOfVariable: 0
       DataType: 0
       MixingType: 0
-      Block: 0
+      Block: 1
       Values: 0500000006000000
       Probabilities:
       - 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     Vector3IVs: []
     CustomDataTypeIVs: []
     IntDVs:
-    - Name: test
+    - Name: SelectedSize
       TypeOfVariable: 1
       DataType: 0
       Value: 0
@@ -60,7 +60,16 @@ MonoBehaviour:
     CustomDataTypeDVs: []
     IntParticipantVariables: []
     FloatParticipantVariables: []
-    StringParticipantVariables: []
+    StringParticipantVariables:
+    - Name: Gender
+      TypeOfVariable: 2
+      DataType: 2
+      Value: 
+      ConstrainValues: 1
+      PossibleValues:
+      - M
+      - F
+      - O
     BoolParticipantVariables: []
     GameObjectParticipantVariables: []
     Vector2ParticipantVariables: []
@@ -70,5 +79,5 @@ MonoBehaviour:
     type: 2}
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
-  GenerateExperimentTable: 0
+  TrialTableGeneration: 0
   BlockOrderConfigurations: []

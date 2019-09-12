@@ -1,10 +1,28 @@
-Block, TrialInBlock, Trial, Distance, Color, Size, SelectedSize, Completed, Attempts, Skipped, RespTime, Age, Gender
-0, 0, 0, 1, Red, 1.5, 1, True, 1, False, 9.759346, 0, 
-0, 1, 1, 1, Blue, 2, 1, True, 1, False, 1.801176, 0, 
-0, 2, 2, 1, Green, 1, 1, True, 1, False, 0.3490582, 0, 
-1, 0, 3, 2, Red, 1.5, 2.58856, True, 1, False, 11.72355, 0, 
-1, 1, 4, 2, Blue, 2, -999, False, 0, False, 0, 0, 
-1, 2, 5, 2, Green, 1, -999, False, 0, False, 0, 0, 
-2, 0, 6, 3, Red, 1.5, -999, False, 0, False, 0, 0, 
-2, 1, 7, 3, Blue, 2, -999, False, 0, False, 0, 0, 
-2, 2, 8, 3, Green, 1, -999, False, 0, False, 0, 0, 
+Block,TrialInBlock,Trial,Distance,Size,Color,SelectedSize,Completed,Attempts,Skipped,RespTime,Age,Gender
+0,0,0,2,1,Green,1,True,1,False,9.882658,0,Male
+0,1,1,2,2,Green,1,True,1,False,0.3970451,0,Male
+0,2,2,2,1.5,Red,1,True,1,False,0.2041903,0,Male
+0,3,3,2,2,Blue,1,True,1,False,0.1865435,0,Male
+0,4,4,2,2,Red,1,True,1,False,0.228056,0,Male
+0,5,5,2,1.5,Green,1,True,1,False,0.1507111,0,Male
+0,6,6,2,1,Blue,1,True,1,False,0.1717091,0,Male
+0,7,7,2,1.5,Blue,1,True,1,False,0.2549133,0,Male
+0,8,8,2,1,Red,1,True,1,False,0.1778145,0,Male
+1,0,9,1,1.5,Red,1,True,1,False,0.1515074,0,Male
+1,1,10,1,1,Blue,1,True,1,False,0.1781588,0,Male
+1,2,11,1,2,Blue,1,True,1,False,0.12889,0,Male
+1,3,12,1,1,Red,1,True,1,False,0.2688684,0,Male
+1,4,13,1,1.5,Blue,1,True,1,False,0.1716757,0,Male
+1,5,14,1,2,Green,1,True,1,False,0.1203413,0,Male
+1,6,15,1,1.5,Green,1,True,1,False,0.198597,0,Male
+1,7,16,1,2,Red,1,True,1,False,0.1262674,0,Male
+1,8,17,1,1,Green,1,True,1,False,0.1784668,0,Male
+2,0,18,3,1.5,Blue,1,True,1,False,0.1701365,0,Male
+2,1,19,3,2,Blue,1,True,1,False,0.1635132,0,Male
+2,2,20,3,1,Blue,1,True,1,False,0.1354685,0,Male
+2,3,21,3,2,Green,1,True,1,False,0.1287441,0,Male
+2,4,22,3,1.5,Green,1,True,1,False,0.2339001,0,Male
+2,5,23,3,1.5,Red,1,True,1,False,0.2111797,0,Male
+2,6,24,3,2,Red,1,True,1,False,0.1087894,0,Male
+2,7,25,3,1,Green,1,True,1,False,0.1767635,0,Male
+2,8,26,3,1,Red,1,True,1,False,0.4514236,0,Male

@@ -14,30 +14,35 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
     public class SimpleTrial : Trial {
         
 
+
         /// <summary>
-        /// Constructor just calls the base class Trail's constructor.
+        /// Constructor just calls the base class Trial's constructor.
         /// </summary>
         /// <param name="runner">The Runner being run</param>
         /// <param name="data">The row of BlockData for this trial from a table</param>
-        public SimpleTrial(ExperimentRunner runner, DataRow data) : base(runner, data) {}
+        public SimpleTrial(ExperimentRunner runner, DataRow data) : base(runner, data) {
+        }
 
-        
 
         /// <inheritdoc />
         /// <summary>
         /// Overwrites the MainCoroutine method to provide the trial's functionality
         /// </summary>
         /// <returns></returns>
-        protected override IEnumerator MainCoroutine() {
+        protected override IEnumerator RunMainCoroutine() {
             bool running = true;
-            Debug.Log("...Waiting for you to press return key! (in SimpleTrial MainCoroutine() method)");
+            Debug.Log("...Waiting for you to press return key! (This is from SimpleTrial MainCoroutine() method)");
+       
+            //Loop over several frames
             while (running) {
+                
+                //End Trial based on user input
                 if (Input.GetKeyDown(KeyCode.Return)) {
-                    Debug.Log($"{TrialText} Return key pressed!");
+                    Debug.Log($"Return key pressed!");
                     running = false;
                 }
-
-                yield return null;
+                
+                yield return null; //IMPORTANT: This lets it wait for next frame, and not hang program.
             }
         }
     }

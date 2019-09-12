@@ -1,71 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using System.Linq;
+using System.Reflection;
 using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
 
+    //TODO Code smell. feel like some kind of strategy pattern needed here...
+    //but need to have serialized lists available in unity inspector
     [Serializable]
     public class VariableFactory {
-
+        
         [SerializeField]
-        public SupportedDataTypes DataTypesToCreate;
+        public SupportedDataType DataTypeToCreate;
 
         [SerializeField]
         public VariableType VariableTypeToCreate;
+        
+        
+        readonly Dictionary<SupportedDataType, Type> supportedIndependentTypes;
+        readonly Dictionary<SupportedDataType, Type> supportedDependentTypes;
+        readonly Dictionary<SupportedDataType, Type> supportedParticipantTypes;
+
+        public VariableFactory() {
+            supportedIndependentTypes = GetSupportedTypes(typeof(IndependentVariable));
+            supportedDependentTypes = GetSupportedTypes(typeof(DependentVariable));
+            supportedParticipantTypes = GetSupportedTypes(typeof(ParticipantVariable));
+        }
+
+        static Dictionary<SupportedDataType, Type> GetSupportedTypes(Type baseType) {
+            
+            IEnumerable<Type> concreteTypes = Assembly.GetAssembly(baseType).GetTypes()
+                .Where(myType => myType.IsClass && !myType.IsAbstract &&
+                                 myType.IsSubclassOf(baseType));
+            
+            
+            Dictionary<SupportedDataType, Type> createdDic = new Dictionary<SupportedDataType, Type>();
+            
+            foreach (Type concreteType in concreteTypes) {
+                dynamic tempVariable = Activator.CreateInstance(concreteType);
+                if (!createdDic.ContainsKey(tempVariable.DataType)) createdDic.Add(tempVariable.DataType, concreteType);
+            }
+
+            return createdDic;
+        }
 
         #region IndependentVariables
-
         
-
-        [SerializeField]
         public List<IndependentVariableInt> IntIVs = new List<IndependentVariableInt>();
-
-        [SerializeField]
         public List<IndependentVariableFloat> FloatIVs = new List<IndependentVariableFloat>();
-
-        [SerializeField]
         public List<IndependentVariableString> StringIVs = new List<IndependentVariableString>();
-
-        [SerializeField]
         public List<IndependentVariableBool> BoolIVs = new List<IndependentVariableBool>();
-
-        [SerializeField]
         public List<IndependentVariableGameObject> GameObjectIVs = new List<IndependentVariableGameObject>();
-
-        [SerializeField]
+        public List<IndependentVariableVector2> Vector2IVs = new List<IndependentVariableVector2>();
         public List<IndependentVariableVector3> Vector3IVs = new List<IndependentVariableVector3>();
-
-        [SerializeField]
-        public List<IndependentVariableCustomDataType>
-            CustomDataTypeIVs = new List<IndependentVariableCustomDataType>();
+        public List<IndependentVariableCustomDataType> CustomDataTypeIVs = new List<IndependentVariableCustomDataType>();
 
         #endregion
 
         #region DependentVariables
 
-        [SerializeField]
         public List<DependentVariableInt> IntDVs = new List<DependentVariableInt>();
-
-        [SerializeField]
         public List<DependentVariableFloat> FloatDVs = new List<DependentVariableFloat>();
-
-        [SerializeField]
         public List<DependentVariableString> StringDVs = new List<DependentVariableString>();
-
-        [SerializeField]
         public List<DependentVariableBool> BoolDVs = new List<DependentVariableBool>();
-
-        [SerializeField]
         public List<DependentVariableGameObject> GameObjectDVs = new List<DependentVariableGameObject>();
-
-        [SerializeField]
+        public List<DependentVariableVector2> Vector2DVs = new List<DependentVariableVector2>();
         public List<DependentVariableVector3> Vector3DVs = new List<DependentVariableVector3>();
-
-        [SerializeField]
         public List<DependentVariableCustomDataType> CustomDataTypeDVs = new List<DependentVariableCustomDataType>();
 
         #endregion
@@ -77,190 +81,169 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public List<ParticipantVariableString> StringParticipantVariables = new List<ParticipantVariableString>();
         public List<ParticipantVariableBool> BoolParticipantVariables = new List<ParticipantVariableBool>();
         public List<ParticipantVariableGameObject> GameObjectParticipantVariables = new List<ParticipantVariableGameObject>();
+        public List<ParticipantVariableVector2> Vector2ParticipantVariables = new List<ParticipantVariableVector2>();
         public List<ParticipantVariableVector3> Vector3ParticipantVariables = new List<ParticipantVariableVector3>();
         public List<ParticipantVariableCustomData> CustomDataParticipantVariables = new List<ParticipantVariableCustomData>();
 
         #endregion
 
 
-        public List<Variable> AllVariables {
+        public Variables Variables {
             get {
 
-                List<Variable> variables = new List<Variable>();
+                List<Variable> allVariables = new List<Variable>();
 
                 //IVs
-                variables.AddRange(IntIVs);
-                variables.AddRange(FloatIVs);
-                variables.AddRange(StringIVs);
-                variables.AddRange(BoolIVs);
-                variables.AddRange(GameObjectIVs);
-                variables.AddRange(Vector3IVs);
-                variables.AddRange(CustomDataTypeIVs);
+                allVariables.AddRange(IntIVs);
+                allVariables.AddRange(FloatIVs);
+                allVariables.AddRange(StringIVs);
+                allVariables.AddRange(BoolIVs);
+                allVariables.AddRange(GameObjectIVs);
+                allVariables.AddRange(Vector2IVs);
+                allVariables.AddRange(Vector3IVs);
+                allVariables.AddRange(CustomDataTypeIVs);
 
                 //DVs
-                variables.AddRange(IntDVs);
-                variables.AddRange(FloatDVs);
-                variables.AddRange(StringDVs);
-                variables.AddRange(BoolDVs);
-                variables.AddRange(GameObjectDVs);
-                variables.AddRange(Vector3DVs);
-                variables.AddRange(CustomDataTypeDVs);
+                allVariables.AddRange(IntDVs);
+                allVariables.AddRange(FloatDVs);
+                allVariables.AddRange(StringDVs);
+                allVariables.AddRange(BoolDVs);
+                allVariables.AddRange(GameObjectDVs);
+                allVariables.AddRange(Vector2DVs);
+                allVariables.AddRange(Vector3DVs);
+                allVariables.AddRange(CustomDataTypeDVs);
                 
 
                 //PARTICIPANT VARIABLES
-                variables.AddRange(IntParticipantVariables);    
-                variables.AddRange(FloatParticipantVariables);
-                variables.AddRange(StringParticipantVariables);
-                variables.AddRange(BoolParticipantVariables);
-                variables.AddRange(GameObjectParticipantVariables);
-                variables.AddRange(Vector3ParticipantVariables);
-                variables.AddRange(CustomDataParticipantVariables);
+                allVariables.AddRange(IntParticipantVariables);    
+                allVariables.AddRange(FloatParticipantVariables);
+                allVariables.AddRange(StringParticipantVariables);
+                allVariables.AddRange(BoolParticipantVariables);
+                allVariables.AddRange(GameObjectParticipantVariables);
+                allVariables.AddRange(Vector2ParticipantVariables);
+                allVariables.AddRange(Vector3ParticipantVariables);
+                allVariables.AddRange(CustomDataParticipantVariables);
                 
-                return variables;
+                
+                return new Variables(allVariables);
             }
         }
 
+        
+        // ReSharper disable once CognitiveComplexity
         public void AddNew() {
+            //TODO Probably a better way to do this
             switch (VariableTypeToCreate) {
-                case VariableType.Independent: {
-
-
-                    switch (DataTypesToCreate) {
-                        case SupportedDataTypes.Int:
-                            IndependentVariableInt ivInt = new IndependentVariableInt();
-                            IntIVs.Add(ivInt);
-                            break;
-                        case SupportedDataTypes.Float:
-                            IndependentVariableFloat ivFloat = new IndependentVariableFloat();
-                            FloatIVs.Add(ivFloat);
-                            break;
-                        case SupportedDataTypes.String:
-                            IndependentVariableString ivString = new IndependentVariableString();
-                            StringIVs.Add(ivString);
-                            break;
-                        case SupportedDataTypes.Bool:
-                            IndependentVariableBool ivBool = new IndependentVariableBool();
-                            BoolIVs.Add(ivBool);
-                            break;
-                            case SupportedDataTypes.GameObject:
-                            IndependentVariableGameObject ivGameObject = new IndependentVariableGameObject();
-                            GameObjectIVs.Add(ivGameObject);
-                            break;
-                        case SupportedDataTypes.Vector3:
-                            IndependentVariableVector3 ivVector3 = new IndependentVariableVector3();
-                            Vector3IVs.Add(ivVector3);
-                            break;
-                        case SupportedDataTypes.CustomDataType:
-                            IndependentVariableCustomDataType
-                                ivCustomDataType = new IndependentVariableCustomDataType();
-                            CustomDataTypeIVs.Add(ivCustomDataType);
-                            break;
-                        case SupportedDataTypes.ChooseType:
-                            throw new
-                                InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
-                        default:
-                            throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
-                                                              "You can customize it yourself in the IndependentVariable.cs class");
+                case VariableType.Independent:
+                    if (supportedIndependentTypes.TryGetValue(DataTypeToCreate, out Type ivType)) {
+                        IndependentVariable newIv = Activator.CreateInstance(ivType) as IndependentVariable;
+                        UpdateSerializedListsWith(newIv);
                     }
-                }
                     break;
-
                 case VariableType.Dependent:
-
-                    switch (DataTypesToCreate) {
-                        case SupportedDataTypes.Int:
-                            DependentVariableInt newDependentVariableInt = new DependentVariableInt();
-                            IntDVs.Add(newDependentVariableInt);
-                            break;
-                        case SupportedDataTypes.Float:
-                            DependentVariableFloat newDependentVariableFloat = new DependentVariableFloat();
-                            FloatDVs.Add(newDependentVariableFloat);
-                            break;
-                        case SupportedDataTypes.String:
-                            DependentVariableString newDependentVariableString = new DependentVariableString();
-                            StringDVs.Add(newDependentVariableString);
-                            break;
-                        case SupportedDataTypes.Bool:
-                            DependentVariableBool newDependentVariableBool = new DependentVariableBool();
-                            BoolDVs.Add(newDependentVariableBool);
-                            break;
-                        case SupportedDataTypes.GameObject:
-                            DependentVariableGameObject newDependentVariableGameObject =
-                                new DependentVariableGameObject();
-                            GameObjectDVs.Add(newDependentVariableGameObject);
-                            break;
-                        case SupportedDataTypes.Vector3:
-                            DependentVariableVector3 newDependentVariableVector3 = new DependentVariableVector3();
-                            Vector3DVs.Add(newDependentVariableVector3);
-                            break;
-                        case SupportedDataTypes.CustomDataType:
-                            DependentVariableCustomDataType newDependentVariableCustomDataType =
-                                new DependentVariableCustomDataType();
-                            CustomDataTypeDVs.Add(newDependentVariableCustomDataType);
-                            break;
-                        case SupportedDataTypes.ChooseType:
-                            throw new
-                                InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
-                        default:
-                            throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
-                                                              "You can customize it yourself in the IndependentVariable.cs class");
+                    if (supportedDependentTypes.TryGetValue(DataTypeToCreate, out Type dvType)) {
+                        DependentVariable newDv = Activator.CreateInstance(dvType) as DependentVariable;
+                        UpdateSerializedListsWith(newDv);
                     }
-
                     break;
                 case VariableType.ChooseType:
                     break;
                 case VariableType.Participant:
-
-                    switch (DataTypesToCreate) {
-                        case SupportedDataTypes.Int:
-                            ParticipantVariableInt newVariableInt = new ParticipantVariableInt();
-                            IntParticipantVariables.Add(newVariableInt);
-                            break;
-                        case SupportedDataTypes.Float:
-                            ParticipantVariableFloat newVariableFloat = new ParticipantVariableFloat();
-                            FloatParticipantVariables.Add(newVariableFloat);
-                            break;
-                        case SupportedDataTypes.String:
-                            ParticipantVariableString newVariableString = new ParticipantVariableString();
-                            StringParticipantVariables.Add(newVariableString);
-                            break;
-                        case SupportedDataTypes.Bool:
-                            ParticipantVariableBool newVariableBool = new ParticipantVariableBool();
-                            BoolParticipantVariables.Add(newVariableBool);
-                            break;
-                        case SupportedDataTypes.GameObject:
-                            ParticipantVariableGameObject newVariableGameObject = new ParticipantVariableGameObject();
-                            GameObjectParticipantVariables.Add(newVariableGameObject);
-                            break;
-                        case SupportedDataTypes.Vector3:
-                            ParticipantVariableVector3 newVariableVector3 = new ParticipantVariableVector3();
-                            Vector3ParticipantVariables.Add(newVariableVector3);
-                            break;
-                        case SupportedDataTypes.CustomDataType:
-                            ParticipantVariableCustomData newVariableCustomData = new ParticipantVariableCustomData();
-                            CustomDataParticipantVariables.Add(newVariableCustomData);
-                            break;
-                        case SupportedDataTypes.ChooseType:
-                            throw new
-                                InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
-                        default:
-                            throw new NotImplementedException("Support for this BlockData types has not yet been defined." +
-                                                              "You can customize it yourself in the IndependentVariable.cs class");
+                    if (supportedParticipantTypes.TryGetValue(DataTypeToCreate, out Type pvType)) {
+                        ParticipantVariable newPv = Activator.CreateInstance(pvType) as ParticipantVariable;
+                        UpdateSerializedListsWith(newPv);
                     }
-
-
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(VariableTypeToCreate), DataTypesToCreate, null);
+                    throw new ArgumentOutOfRangeException(nameof(VariableTypeToCreate), DataTypeToCreate, null);
             }
 
         }
 
-        public ExperimentDesign ToTable(ExperimentRunner experimentRunner, bool shuffleTrialOrder, int numberRepetitions, bool shuffleTrialsBetweenBlocks) {
-            //Debug.Log($"ToTable method in IndependentVariable: Alldata.count {AllVariables.Count}");
-            return new ExperimentDesign(experimentRunner, AllVariables, shuffleTrialOrder, numberRepetitions, shuffleTrialsBetweenBlocks );
+        // ReSharper disable once CognitiveComplexity
+        void UpdateSerializedListsWith(Variable variable) {
+            //TODO Probably a better way to do this.
+            if (variable.DataType == SupportedDataType.ChooseType) 
+                throw new InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
+            
+            switch (variable) {
+                case DependentVariableBool dependentVariableBool:
+                    BoolDVs.Add(dependentVariableBool);
+                    break;
+                case DependentVariableCustomDataType dependentVariableCustomDataType:
+                    CustomDataTypeDVs.Add(dependentVariableCustomDataType);
+                    break;
+                case DependentVariableFloat dependentVariableFloat:
+                    FloatDVs.Add(dependentVariableFloat);
+                    break;
+                case DependentVariableGameObject dependentVariableGameObject:
+                    GameObjectDVs.Add(dependentVariableGameObject);
+                    break;
+                case DependentVariableInt dependentVariableInt:
+                    IntDVs.Add(dependentVariableInt);
+                    break;
+                case DependentVariableString dependentVariableString:
+                    StringDVs.Add(dependentVariableString);
+                    break;
+                case DependentVariableVector2 dependentVariableVector2:
+                    Vector2DVs.Add(dependentVariableVector2);
+                    break;
+                case DependentVariableVector3 dependentVariableVector3:
+                    Vector3DVs.Add(dependentVariableVector3);
+                    break;
+                case IndependentVariableInt independentVariableInt:
+                    IntIVs.Add(independentVariableInt);
+                    break;
+                case IndependentVariableFloat independentVariableFloat:
+                    FloatIVs.Add(independentVariableFloat);
+                    break;
+                case IndependentVariableString independentVariableString:
+                    StringIVs.Add(independentVariableString);
+                    break;
+                case IndependentVariableBool independentVariableBool:
+                    BoolIVs.Add(independentVariableBool);
+                    break;
+                case IndependentVariableGameObject independentVariableGameObject:
+                    GameObjectIVs.Add(independentVariableGameObject);
+                    break;
+                case IndependentVariableVector2 independentVariableVector2:
+                    Vector2IVs.Add(independentVariableVector2);
+                    break;
+                case IndependentVariableVector3 independentVariableVector3:
+                    Vector3IVs.Add(independentVariableVector3);
+                    break;
+                case ParticipantVariableBool participantVariableBool:
+                    BoolParticipantVariables.Add(participantVariableBool);
+                    break;
+                case ParticipantVariableCustomData participantVariableCustomData:
+                    CustomDataParticipantVariables.Add(participantVariableCustomData);
+                    break;
+                case ParticipantVariableFloat participantVariableFloat:
+                    FloatParticipantVariables.Add(participantVariableFloat);
+                    break;
+                case ParticipantVariableGameObject participantVariableGameObject:
+                    GameObjectParticipantVariables.Add(participantVariableGameObject);
+                    break;
+                case ParticipantVariableInt participantVariableInt:
+                    IntParticipantVariables.Add(participantVariableInt);
+                    break;
+                case ParticipantVariableString participantVariableString:
+                    StringParticipantVariables.Add(participantVariableString);
+                    break;
+                case ParticipantVariableVector2 participantVariableVector2:
+                    Vector2ParticipantVariables.Add(participantVariableVector2);
+                    break;
+                case ParticipantVariableVector3 participantVariableVector3:
+                    Vector3ParticipantVariables.Add(participantVariableVector3);
+                    break;
+                case IndependentVariableCustomDataType independentVariableCustomDataType:
+                    CustomDataTypeIVs.Add(independentVariableCustomDataType);
+                    break;
+                default:
+                    throw new InvalidEnumArgumentException("Support for this Type has not yet been defined." +
+                                                           "You can customize it yourself in the in the variable system");
+            }
         }
-
 
     }
 }

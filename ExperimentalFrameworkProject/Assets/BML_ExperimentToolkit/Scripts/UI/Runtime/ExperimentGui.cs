@@ -70,7 +70,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
                 "New session successfully created and linked to experiment" : 
                 "no session detected";
             
-            switch (runner.VariableConfigurationFile.GenerateExperimentTable) {
+            switch (runner.VariableConfigFile.TrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly:
                     ShowParticipantVariables();
                     ShowBlockOrderSettings();
@@ -96,7 +96,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
 
         void ShowParticipantVariables() {
 
-            List<ParticipantVariable> participantVariables = runner.VariableConfigurationFile.Factory.Variables.ParticipantVariables;
+            List<ParticipantVariable> participantVariables = runner.VariableConfigFile.Factory.Variables.ParticipantVariables;
 
             foreach (ParticipantVariable participantVariable in participantVariables) {
                 
@@ -144,9 +144,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             
             ValidateParticipantVariableValues(ref errorLog, ref isValid);
             
-            switch (runner.VariableConfigurationFile.GenerateExperimentTable) {
+            switch (runner.VariableConfigFile.TrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly:
-                    List<IndependentVariable> blockVariables = runner.VariableConfigurationFile.Variables.BlockVariables;
+                    List<IndependentVariable> blockVariables = runner.VariableConfigFile.Variables.BlockVariables;
                     if (blockVariables.Count == 0) break;
                     session.BlockOrderChosenIndex = BlockOrderSelector.value-1; // subtract 1 because added first one in.
                     ValidateBlockOrderChosen(ref errorLog, ref isValid);

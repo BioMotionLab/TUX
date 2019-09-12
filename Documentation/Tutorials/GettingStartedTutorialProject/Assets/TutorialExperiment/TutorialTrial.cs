@@ -6,13 +6,17 @@ using UnityEngine;
 
 public class TutorialTrial : Trial
 {
+    
+    TutorialExperimentRunner tutorialRunner;
+    
+    //constructor. you don't need to worry about this.
     public TutorialTrial(ExperimentRunner runner, DataRow data) : base(runner, data) {
     }
-
-    TutorialExperimentRunner tutorialRunner;
-
+    
     protected override void PreMethod() {
-        tutorialRunner = (TutorialExperimentRunner)runner;
+        
+        // convert the generic ExperimentRunner to your custom type of ExperimentRunner.
+        tutorialRunner = (TutorialExperimentRunner)Runner;
 
         //Get this trial's value for the Color variable
         string colorString = (string) Data["Color"];
@@ -43,7 +47,8 @@ public class TutorialTrial : Trial
 
     }
 
-    protected override IEnumerator MainCoroutine() {
+    protected override IEnumerator RunMainCoroutine() {
+    
         bool trialComplete = false;
         while (!trialComplete) {
             if (Input.GetKeyDown(KeyCode.Space)) {

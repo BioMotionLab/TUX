@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,27 +14,41 @@ namespace BML_Utilities.Extensions {
 
         const int TruncateDefault = 8;
 
-        public static void PrintToConsole(this DataTable dt) {
+        [PublicAPI]
+        public static void PrintToDebugConsole(this DataTable dt) {
             Debug.Log(dt.AsString());
         }
 
-
-
         public static string AsString(this DataTable dt, bool header = true, string separator = Delimiter.Tab,
-                                      int            truncate = TruncateDefault) {
-            string headerString = header ? HeaderAsString(dt, separator, truncate) + "\n" : "";
+                                      int            truncateLength = TruncateDefault) {
+            string headerString = header ? HeaderAsString(dt, separator, truncateLength) + Environment.NewLine : "";
 
-            string tableString = string.Join(Environment.NewLine,
-                                             dt.Rows.OfType<DataRow>()
-                                                 .Select(x => string.Join(separator, x.ItemArray)));
+            string tableString = "";
+            foreach (DataRow row in dt.Rows) {
+                string rowString = GetRowString(row, separator, truncateLength);
+                tableString +=  rowString + Environment.NewLine;
+            }
+            
             return headerString + tableString;
+        }
+
+        static string GetRowString(DataRow row, string separator, int truncateLength) {
+            List<string> rowStrings = new List<string>();
+            foreach (DataColumn dataColumn in row.Table.Columns) {
+                string unFormattedString = row[dataColumn.ColumnName].ToString();
+                string formattedString = new DataFormatter(unFormattedString).Formatted;
+                if (truncateLength >= 0) {
+                    formattedString = formattedString.Truncate(truncateLength);
+                }
+                rowStrings.Add(formattedString);
+            }
+            return string.Join(separator, rowStrings);
         }
 
         public static string HeaderAsString(this DataTable dt, string separator = Delimiter.Tab,
                                             int            truncate = TruncateDefault) {
             string headerString =
-                string.Join(separator,
-                            truncate > 0
+                string.Join(separator, truncate > 0
                                 ? dt.Columns.OfType<DataColumn>()
                                     .Select(x => string.Join(separator, x.ColumnName.Truncate(truncate)))
                                 : dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName))
@@ -42,15 +57,15 @@ namespace BML_Utilities.Extensions {
         }
 
         public static string AsString(this DataRow row, bool header = false, string separator = Delimiter.Tab,
-                                      int          truncate = TruncateDefault) {
+                                      int          truncateLength = TruncateDefault) {
             string headerString =
-                header ? row.Table.HeaderAsString(separator: separator, truncate: truncate) + "\n" : "";
-            string rowString = truncate <= 0
-                ? string.Join(separator, row.ItemArray.Select(c => c.ToString()).ToArray())
-                : string.Join(separator, row.ItemArray.Select(c => c.ToString().Truncate(truncate)).ToArray());
+                header ? row.Table.HeaderAsString(separator: separator, truncate: truncateLength) + "\n" : "";
+            string rowString = GetRowString(row, separator, truncateLength);
+            
             return headerString + rowString;
         }
 
+        [PublicAPI]
         public static string AsStringWithColumnNames(this DataRow row, string separator = Delimiter.Tab,
                                       int          truncate = TruncateDefault) {
             string headerString =
@@ -91,13 +106,13 @@ namespace BML_Utilities.Extensions {
             return allPermutations;
         }
 
-        public static void RotateRight(IList sequence, int count) {
+        static void RotateRight(IList sequence, int count) {
             object tmp = sequence[count - 1];
             sequence.RemoveAt(count - 1);
             sequence.Insert(0, tmp);
         }
 
-        public static IEnumerable<IList> Permutate(IList sequence, int count) {
+        static IEnumerable<IList> Permutate(IList sequence, int count) {
             if (count == 1) yield return sequence;
             else {
                 for (int i = 0; i < count; i++) {
@@ -108,6 +123,13 @@ namespace BML_Utilities.Extensions {
             }
         }
 
+        /// <summary>
+        /// Adds a Column to the DataTable that exists in another DataTable
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="columnToAdd"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public static DataTable AddColumnFromOtherTable(this DataTable table, DataColumn columnToAdd, int index = -1) {
             DataTable newTable = table.Copy();
             DataColumn column = new DataColumn {
@@ -129,7 +151,7 @@ namespace BML_Utilities.Extensions {
         /// Randomly shuffles the row order of this table
         /// </summary>
         /// <param name="table"></param>
-        public static DataTable Shuffle(this DataTable table) {
+        public static DataTable ShuffleRows(this DataTable table) {
             int n = table.Rows.Count;
             List<DataRow> shuffledRows = new List<DataRow>();
             foreach (DataRow row in table.Rows) {

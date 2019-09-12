@@ -9,12 +9,12 @@ namespace BML_Utilities.ScriptableObject_Assets {
         public StringValue Text;
         const  string      MissingWarning = "Missing Text Reference";
         Text               text;
-        // Start is called before the first frame update
+        // Start is called before the first frameInterface update
         void Start() {
             text = GetComponent<Text>();
         }
 
-        // Update is called once per frame
+        // Update is called once per frameInterface
         void Update() {
             text.text = Text == null ? MissingWarning : Text;
         }

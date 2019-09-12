@@ -12,6 +12,8 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public abstract void SelectValue(string value);
         public abstract string[] PossibleValuesStringArray { get; }
         public abstract bool ValuesAreConstrained { get; }
+
+        public abstract void AddValueFieldInEditor();
     }
 
 

@@ -9,19 +9,22 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
     public class TrialSequenceRunner {
 
         Trial currentlyRunningTrial;
+        public bool Running = false;
 
-        List<Trial> trialsInSequence;
+        readonly List<Trial> trialsInSequence;
         List<Trial> currentTrialList;
 
 
-        public TrialSequenceRunner(ExperimentRunner runner, List<Trial> trialList) {
+        public TrialSequenceRunner(List<Trial> trialList) {
             OnEnable();
             trialsInSequence = trialList;
             currentTrialList = trialList;
         }
 
+        
         public void Start() {
             //Debug.Log("Starting to run trial sequence");
+            Running = true;
             StartRunningTrial(currentTrialList[0]);
         }
 
@@ -50,15 +53,15 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         }
 
         void TrialHasCompleted() {
-            Debug.Log("Trial has completed event received)");
+            //Debug.Log("Trial has completed event received)");
             FinishTrial();
             GoToNextTrial();
         }
 
         void FinishTrial() {
-
-            Debug.Log($"Finished {currentlyRunningTrial.TrialText} in Sequence, success = {currentlyRunningTrial.CompletedSuccessfully}\n" +
-                      $"trialTable:\n" +
+            
+            Debug.Log($"Finished {currentlyRunningTrial.TrialText}, Success = {currentlyRunningTrial.CompletedSuccessfully}\n" +
+                      $"Output Table for this trial:\n" +
                       $"{currentlyRunningTrial.Data.AsString(header: true)}");
 
             ExperimentEvents.UpdateTrial(trialsInSequence, TrialIndex(currentlyRunningTrial));
@@ -124,6 +127,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
                 // finish up
                 Debug.Log($"No more trials");
                 ExperimentEvents.TrialSequenceHasCompleted(trialsInSequence);
+                Running = false;
                 OnDisable();
             }
         }
