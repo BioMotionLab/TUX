@@ -2,157 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d794456-f4fe-4efd-ba4d-4595583589ae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Debug.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Debug/debugFile.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Debug/debugFile.csv.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/DefaultControls.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/DefaultControls.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Documentation/Documentation for the BML Experiment Toolkit V0_3.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Documentation/Documentation for the BML Experiment Toolkit V0_3.pdf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/BlackScreenFlasher/BlackCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/BlackScreenFlasher/BlackCamera.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/BlackScreenFlasher/BlackScreenTime.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/BlackScreenFlasher/BlackScreenTime.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/BlackScreenFlasher/FlashBlackScreenEvent.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/BlackScreenFlasher/FlashBlackScreenEvent.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/Instructions.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/Instructions.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisply.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/Instructions/InstructionsDisply.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/BadColor.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/BadColor.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/DefaultStandHereSettings.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/DefaultStandHereSettings.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/DestinationMarker.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/DestinationMarker.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/GoodColor.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/GoodColor.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/Instructions.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/Instructions.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/LookThisWayText.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/LookThisWayText.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/MoveThisWayText.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/MoveThisWayText.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/MoveToOtherText.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/MoveToOtherText.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/OkText.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/OkText.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/PositionMarker.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/PositionMarker.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/StandHereText.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/StandHereText.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/StandingInCorrectSpot.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/Data/StandingInCorrectSpot.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/DestinationMarker.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/DestinationMarker.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/MoveMarker.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/MoveMarker.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/PositionMarker.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/PositionMarker.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/StandHerePrompt.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/StandHerePrompt.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/StandHerePrompt.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/StandHerePrompt.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/StandHerePromptSettings.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Extras/StandHerePrompt/StandHerePromptSettings.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleSimpleExperiment/SimpleExperiment Config.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleSimpleExperiment/SimpleExperiment Config.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleSimpleExperiment/SimpleExperiment Example.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SampleSimpleExperiment/SimpleExperiment Example.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Block.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BlockTable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/BlockTable.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ColumnNames.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ColumnNames.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ConfigDesignFile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ConfigDesignFile.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ControlSettings.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ControlSettings.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Experiment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Experiment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentDesign.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentDesign.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentPart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentPart.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/InvalidExperimentDesignException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/InvalidExperimentDesignException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Session.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleBlock.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperiment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperiment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperimentRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperimentRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleTrial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleTrial.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SortedVariableContainer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SortedVariableContainer.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Trial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/Trial.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/TrialTable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/TrialTable.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/BlockSequenceRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/BlockSequenceRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/ExperimentEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/ExperimentEvents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/OutputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/OutputManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/SessionLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/SessionLogger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/TrialSequenceRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Managers/TrialSequenceRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/IndependentVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/IndependentVariable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/ParticipantVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/ParticipantVariable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SupportedDataTypes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/SupportedDataTypes.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/Variable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/Variable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableBool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableBool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableCustomDataType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableCustomDataType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableFloat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableFloat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableGameObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableGameObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableInt.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableInt.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableString.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableString.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableVector3.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/DependentVariableVector3.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableBool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableBool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableCustomDataType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableCustomDataType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableFloat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableFloat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableGameObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableGameObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableInt.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableInt.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableString.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableString.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableVector3.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/IndependentVariableVector3.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableBool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableBool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableCustomData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableCustomData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableFloat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableFloat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableGameObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableGameObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableInt.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableInt.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableString.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableString.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableVector3.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableTypes/ParticipantVariableVector3.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/DependentVariableDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/DependentVariableDrawer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableBoolDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableBoolDrawer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/IndependentVariableDrawer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawerHelpers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableDrawerHelpers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableFactoryDrawer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/CameraAspect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/CameraAspect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/CameraAspect.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/CameraAspect.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Delimiter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/Delimiter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/EventSystem/BmlEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/EventSystem/BmlEvent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/DataTableExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/DataTableExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/ListExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/ListExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/StringExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/StringExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/Tests/Editor/IntExtensionTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/Tests/Editor/IntExtensionTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/Tests/Editor/ListExtensionTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/Tests/Editor/ListExtensionTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/Tests/Editor/StringExtensionTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/Tests/Editor/StringExtensionTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/Tests/Editor/TransformExtensionTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/Tests/Editor/TransformExtensionTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/TransformExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/Extensions/TransformExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/ScriptableObject Assets/TextAssetToUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/ScriptableObject Assets/TextAssetToUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities/SnapToOtherObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_Utilities/SnapToOtherObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Editor.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialBlock.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialExperimentRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialExperimentRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialTrial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialTrial.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/Packages-Update.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/Packages-Update.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -175,9 +25,9 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentPart.cs" />
         <option value="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialExperimentRunner.cs" />
-        <option value="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialTrial.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" />
         <option value="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialBlock.cs" />
+        <option value="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialTrial.cs" />
       </list>
     </option>
   </component>
@@ -239,7 +89,7 @@
       <workItem from="1559144153264" duration="89000" />
       <workItem from="1559144490324" duration="16000" />
       <workItem from="1559144519430" duration="3000" />
-      <workItem from="1568298904960" duration="738000" />
+      <workItem from="1568298904960" duration="1988000" />
     </task>
     <servers />
   </component>
