@@ -9,7 +9,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public string Name;
 
         public          VariableType       TypeOfVariable;
-        public          SupportedDataTypes DataType;
+        public          SupportedDataType DataType;
         public abstract Type               Type { get; }
         public abstract DataTable AddValuesTo(DataTable table);
     }

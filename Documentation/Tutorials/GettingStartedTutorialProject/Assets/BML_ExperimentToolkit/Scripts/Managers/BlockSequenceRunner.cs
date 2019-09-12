@@ -9,11 +9,11 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
 
     public class BlockSequenceRunner {
-
-        ExperimentRunner runner;
-        List<Block> blocks;
+        readonly ExperimentRunner runner;
+        readonly List<Block> blocks;
 
         Block currentlyRunningBlock;
+        public bool Running = false;
 
         public BlockSequenceRunner(ExperimentRunner runner, List<Block> blocks) {
             OnEnable();
@@ -39,6 +39,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
                 throw new InvalidDataException("Runner blocks not created correctly");
             }
 
+            Running = true;
             //Debug.Log("Starting to run Blocks");
             StartRunningBlock(blocks[0]);
         }
@@ -47,7 +48,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         void StartRunningBlock(Block block) {
 
             currentlyRunningBlock = block;
-            Debug.Log($"*****\nStarting to run block: {block.Identity}");
+            Debug.Log($"*****\nStarting Block {BlockIndex(currentlyRunningBlock)} of {blocks.Count}");
             ExperimentEvents.BlockHasStarted(block);
             ExperimentEvents.StartPart(block);
 
@@ -93,7 +94,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
 
             ExperimentEvents.BlockSequenceHasCompleted(blocks);
             ExperimentEvents.EndExperiment();
-
+            Running = false;
             OnDisable();
         }
 

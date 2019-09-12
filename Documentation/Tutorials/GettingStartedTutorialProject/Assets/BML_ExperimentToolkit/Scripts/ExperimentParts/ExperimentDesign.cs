@@ -1,182 +1,141 @@
-﻿using BML_ExperimentToolkit.Scripts.Managers;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
-using BML_Utilities;
+﻿using BML_ExperimentToolkit.Scripts.VariableSystem;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using BML_ExperimentToolkit.Scripts.Settings;
 using BML_Utilities.Extensions;
-using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
-
-    public partial class ExperimentDesign {
-
-        readonly ExperimentRunner runner;
-
-        public BlockTable OrderedBlockTable;
-
-        public List<Block> Blocks;
-        readonly BlockTable baseBlockTable;
-        TrialTable baseTrialTable;
-        SortedVariableContainer sortedVariables;
-
-        public List<string> BlockPermutationsStrings => baseBlockTable.BlockPermutationsStrings;
-
-        public int TotalTrials => Blocks.Count * baseTrialTable.NumberOfTrials;
-        public int BlockCount => Blocks.Count;
-        public string TrialTableHeader => Blocks[0].TrialTable.HeaderAsString(separator: Delimiter.Comma, truncate: -1);
-
+    public class ExperimentDesign {
+        
+        readonly BaseBlockTable  baseBlockTable;
+        readonly BaseTrialTable  baseTrialTable;
+        public BaseBlockTable OrderedBlockTable;
+        DataTable finalTable;
+        
         public bool HasBlocks => baseBlockTable.HasBlocks;
-
-        readonly bool shuffleTrialsBetweenBlocks;
-
-        public ExperimentDesign(ExperimentRunner runner, List<Variable> allData, bool shuffleTrialOrder,
-                                int numberOfRepetitions, bool shuffleTrialsBetweenBlocks) {
-            this.runner = runner;
-            this.shuffleTrialsBetweenBlocks = shuffleTrialsBetweenBlocks;
-            baseBlockTable = new BlockTable(allData, this);
-            baseTrialTable = new TrialTable(allData, this, baseBlockTable, shuffleTrialOrder, numberOfRepetitions,
-                                            runner.ConfigFile.ColumnNames);
-            Enable();
-        }
-        
-        void Enable() {
-            ExperimentEvents.OnBlockOrderChosen += BlockOrderSelected;
-            ExperimentEvents.OnStartExperiment += ExperimentStarted;
-        }
-
         
 
-        public void Disable() {
-            ExperimentEvents.OnBlockOrderChosen -= BlockOrderSelected;
-            ExperimentEvents.OnStartExperiment -= ExperimentStarted;
+        readonly VariableConfigurationFile configurationFile;
+        readonly ColumnNamesSettings columnNames;
+        
+        
+        public static ExperimentDesign CreateFrom(VariableConfigurationFile configurationFileFile) {
+            return new ExperimentDesign(configurationFileFile);
         }
 
-        void BlockOrderSelected(int selectedOrderIndex) {
-            OrderedBlockTable = baseBlockTable.GetBlockOrderTable(selectedOrderIndex);
-            CreateAndAddBlocks();
+        public List<string> BlockPermutationsStrings => GetBlockPermutationsStrings();
+        public DataTable BaseBlockTable => baseBlockTable;
+
+        public const int MaxBlockPermutationsAllowed = 3;
+        
+        List<string> GetBlockPermutationsStrings() {
+            
+            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && configurationFile.BlockOrderConfigurations.Count == 0) {
+                return baseBlockTable.BlockPermutationsStrings;
+            }
+
+            if (configurationFile.BlockOrderConfigurations.Count > 0) return GetBlockOrderConfigStrings();
+            
+            throw new NullReferenceException("There are too many block values to create a permutation table. " +
+                                             "Block orders must be defined manually using OrderConfig files. " +
+                                             "See documentation for more information");
+
         }
         
+        List<string> GetBlockOrderConfigStrings() {
+            List<string> orderStrings = new List<string>();
+            foreach (BlockOrderDefinition orderConfig in configurationFile.BlockOrderConfigurations) {
+
+                if (orderConfig.Randomize) {
+                    orderStrings.Add("Randomize");
+                }
+                else {
+                    string orderString = "";
+                    foreach (int orderIndex in orderConfig.IndexOrder) {
+                        string rowString = baseBlockTable.Rows[orderIndex].AsString(separator: ", ", truncateLength: -1);
+                        orderString += rowString + " > ";
+                    }
+                    orderStrings.Add(orderString); 
+                }
+                
+            }
+
+            return orderStrings;
+        }
+
+        ExperimentDesign(VariableConfigurationFile configurationFile) {
+            this.configurationFile = configurationFile;
+            columnNames = configurationFile.ColumnNamesSettings;
+            baseBlockTable = new BaseBlockTable(configurationFile);
+            baseTrialTable = new BaseTrialTable(baseBlockTable, configurationFile);
+        }
+
+        
+        public DataTable GetFinalExperimentTable(int selectedOrderIndex) {
+            OrderedBlockTable = baseBlockTable.GetOrderedBlockTable(selectedOrderIndex);
+            finalTable = BuildFinalTable();
+            return finalTable;
+        }
+
+        DataTable BuildFinalTable() {
+            DataTable trialTable = baseTrialTable.Copy();
+            if (OrderedBlockTable == null) {
+                AddTrialAndBlockIndicesWhenNoBlocks(trialTable);
+                return trialTable;
+            }
+            
+            var newFinalTable = baseTrialTable.Clone();
+            for (int blockRepetitionCount = 0; blockRepetitionCount < configurationFile.RepeatAllBlocks; blockRepetitionCount++) {
+                for (int rowIndex = 0; rowIndex < OrderedBlockTable.Rows.Count; rowIndex++) {
+                    DataRow orderedBlockRow = OrderedBlockTable.Rows[rowIndex];
+                    if (configurationFile.RandomizationMode == RandomizationMode.RandomizeCompletely) trialTable = trialTable.ShuffleRows();
+                    trialTable = AddBlockValuesToTrialTables(trialTable, orderedBlockRow, (blockRepetitionCount*OrderedBlockTable.Rows.Count)+(rowIndex));
+                    newFinalTable.Merge(trialTable, true, MissingSchemaAction.Error);
+                }
+            }
+            return newFinalTable;
+        }
+
         public DataTable GetBlockOrderTable(int sessionOrderChosenIndex) {
-            BlockTable orderedBlockTable = baseBlockTable.GetBlockOrderTable(sessionOrderChosenIndex);
+            BaseBlockTable orderedBlockTable = baseBlockTable.GetOrderedBlockTable(sessionOrderChosenIndex);
             return orderedBlockTable;
         }
+        
 
-        void CreateAndAddBlocks() {
-            Blocks = new List<Block>();
-
-            if (OrderedBlockTable == null) {
-                Debug.Log("No Block Variables");
-                DataTable trialTable = baseTrialTable.Copy();
-                for (int i = 0; i < trialTable.Rows.Count; i++) {
-                    DataRow trialRow = trialTable.Rows[i];
-                    trialRow[runner.ConfigFile.ColumnNames.BlockIndex] = 0;
-                    trialRow[runner.ConfigFile.ColumnNames.TrialIndex] = i;
-                    trialRow[runner.ConfigFile.ColumnNames.TotalTrialIndex] = i;
-                }
-
-                const string blockIdentity = "MainCoroutine Block";
-                Block newBlock = CreateNewBlock(trialTable, blockIdentity, null);
-                Blocks.Add(newBlock);
-
-            }
-            else {
-                for (int i = 0; i < OrderedBlockTable.Rows.Count; i++) {
-                    DataRow orderedBlockRow = OrderedBlockTable.Rows[i];
-
-                    DataTable trialTable = baseTrialTable.Copy();
-                    if (shuffleTrialsBetweenBlocks) {
-                        trialTable = trialTable.Shuffle();
-                    }
-
-                    trialTable = UpdateWithBlockValues(trialTable, orderedBlockRow, i);
-
-                    string blockIdentity = orderedBlockRow.AsStringWithColumnNames(separator: ", ");
-                    Block newBlock = CreateNewBlock(trialTable, blockIdentity, orderedBlockRow);
-                    Blocks.Add(newBlock);
-
-                    //Debug.Log($"{newBlock.AsString()}");
-                }
-            }
-
-            //Debug.Log($"Blocks added {Blocks.Count}");
-        }
-
-        void ExperimentStarted(Session session) {
-            UpdateParticipantValues();
-        }
-
-        void UpdateParticipantValues() {
-            
-            foreach (ParticipantVariable participantVariable in sortedVariables.ParticipantVariables) {
-                
-                participantVariable.AddValuesTo(baseTrialTable);
-                foreach (Block block in Blocks) {
-                    participantVariable.AddValuesTo(block.TrialTable);
-
-                }
-
-            }
-
-        }
-
-        Block CreateNewBlock(DataTable trialTable, string blockIdentity, DataRow dataRow) {
-            Block newBlock = (Block)Activator.CreateInstance(runner.BlockType,
-                                                              runner,
-                                                              trialTable,
-                                                              blockIdentity,
-                                                              runner.TrialType,
-                                                              dataRow
-                                                             );
-            return newBlock;
-        }
-
-        DataTable UpdateWithBlockValues(DataTable blockTrialTable, DataRow blockTableRow, int blockIndex) {
+        DataTable AddBlockValuesToTrialTables(DataTable blockTrialTable, DataRow blockTableRow, int blockIndex) {
             DataTable newTable = blockTrialTable.Copy();
 
             foreach (DataColumn blockTableColumn in blockTableRow.Table.Columns) {
                 string columnName = blockTableColumn.ColumnName;
                 int startingTotalTrialIndex = blockIndex * newTable.Rows.Count;
-                for (int trialIndexInBlock = 0; trialIndexInBlock < newTable.Rows.Count; trialIndexInBlock++) {
-                    DataRow trialRow = newTable.Rows[trialIndexInBlock];
-                    trialRow[columnName] = blockTableRow[columnName];
-                    trialRow[runner.ConfigFile.ColumnNames.BlockIndex] = blockIndex;
-                    trialRow[runner.ConfigFile.ColumnNames.TrialIndex] = trialIndexInBlock;
-                    trialRow[runner.ConfigFile.ColumnNames.TotalTrialIndex] = startingTotalTrialIndex;
-                    startingTotalTrialIndex++;
-                }
+
+                AddTrialAndBlockIndicesWhenThereAreBlocks(blockTableRow, blockIndex, newTable, columnName, startingTotalTrialIndex);
             }
 
             return newTable;
         }
 
-
-        public DataTable SortAndAddIVs(List<Variable> allData, bool block = false) {
-            DataTable table = new DataTable();
-
-            
-            sortedVariables = new SortedVariableContainer(allData, block);
-
-            //Order matters.
-            foreach (IndependentVariable independentVariable in sortedVariables.BalancedIndependentVariables) {
-                table = independentVariable.AddValuesTo(table);
+        void AddTrialAndBlockIndicesWhenNoBlocks(DataTable trialTable) {
+            for (int rowIndex = 0; rowIndex < trialTable.Rows.Count; rowIndex++) {
+                DataRow trialRow = trialTable.Rows[rowIndex];
+                trialRow[columnNames.BlockIndex] = 0;
+                trialRow[columnNames.TrialIndex] = rowIndex;
+                trialRow[columnNames.TotalTrialIndex] = rowIndex;
             }
-
-            foreach (IndependentVariable independentVariable in sortedVariables.LoopedIndependentVariables) {
-                table = independentVariable.AddValuesTo(table);
-            }
-
-            foreach (IndependentVariable independentVariable in sortedVariables.ProbabilityIndependentVariables) {
-                table = independentVariable.AddValuesTo(table);
-            }
-
-            foreach (DependentVariable dependentVariable in sortedVariables.DependentVariables) {
-                table = dependentVariable.AddValuesTo(table);
-            }
-
-            
-            return table;
         }
 
+        void AddTrialAndBlockIndicesWhenThereAreBlocks(DataRow blockTableRow, int blockIndex, DataTable newTable,
+                                                       string  columnName,    int startingTotalTrialIndex) {
+            for (int rowIndex = 0; rowIndex < newTable.Rows.Count; rowIndex++) {
+                DataRow trialRow = newTable.Rows[rowIndex];
+                trialRow[columnName] = blockTableRow[columnName];
+                trialRow[columnNames.BlockIndex] = blockIndex;
+                trialRow[columnNames.TrialIndex] = rowIndex;
+                trialRow[columnNames.TotalTrialIndex] = startingTotalTrialIndex;
+                startingTotalTrialIndex++;
+            }
+        }
+        
     }
 }

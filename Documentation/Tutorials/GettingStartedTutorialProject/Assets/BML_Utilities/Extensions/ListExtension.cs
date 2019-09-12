@@ -81,7 +81,7 @@ namespace BML_Utilities.Extensions {
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns></returns>
-        public static List<T> ShuffledList<T>(this IList<T> list) {
+        public static List<T> ShuffledCopy<T>(this IList<T> list) {
             List<T> newList = new List<T>();
             newList.AddRange(list);
             newList.Shuffle();
@@ -107,7 +107,7 @@ namespace BML_Utilities.Extensions {
 
         public T NextElement {
             get {
-                currentIndex = (currentIndex + 1) % this.Count;
+                currentIndex = (currentIndex + 1) % Count;
                 T nextItem = this[currentIndex];
                 return nextItem;
             }

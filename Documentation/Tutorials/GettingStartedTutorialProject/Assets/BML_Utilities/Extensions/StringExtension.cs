@@ -18,5 +18,6 @@ namespace BML_Utilities.Extensions {
             return truncatedString + Ellipses;
 
         }
+        
     }
 }

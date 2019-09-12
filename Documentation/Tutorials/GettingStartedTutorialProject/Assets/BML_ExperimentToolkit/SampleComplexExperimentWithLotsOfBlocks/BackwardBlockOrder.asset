@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2f874bb9a360b4e93c41a8b3594b95, type: 3}
+  m_Name: BackwardBlockOrder
+  m_EditorClassIdentifier: 
+  List:
+  - Index: 3
+    Text: blockvar= 4
+  - Index: 2
+    Text: blockvar= 3
+  - Index: 1
+    Text: blockvar= 2
+  - Index: 0
+    Text: blockvar= 1
+  Randomize: 0

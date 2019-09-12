@@ -11,11 +11,11 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         const string OutputFileName = "BML_session_log.txt";
         
         /// <summary>
-        /// Logs a session to file
+        /// Logs a Session to file
         /// </summary>
         /// <param name="session"></param>
         public static void Log(Session session) {
-            //Debug.Log("Logging session");
+            //Debug.Log("Logging Session");
 
             //Set up file location/reference
             string fileFolder = Path.Combine(Application.dataPath, OutputLocation);
@@ -37,7 +37,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         }
 
         /// <summary>
-        /// Adds a line to log to mark session as complete
+        /// Adds a line to log to mark Session as complete
         /// </summary>
         /// <param name="session"></param>
         public static void LogComplete(Session session) {

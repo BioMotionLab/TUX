@@ -4,7 +4,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
     [Serializable]
     public class DependentVariableBool : DependentVariable<bool> {
         public DependentVariableBool() {
-            DataType = SupportedDataTypes.Bool;
+            DataType = SupportedDataType.Bool;
         }
     }
 }

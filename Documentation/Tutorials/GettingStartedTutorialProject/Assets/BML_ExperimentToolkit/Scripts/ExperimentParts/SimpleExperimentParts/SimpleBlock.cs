@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
     
@@ -10,16 +9,10 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
     public class SimpleBlock : Block {
         public SimpleBlock(ExperimentRunner runner,
                            DataTable trialTable, 
-                           string identity, 
-                           Type customTrialType,
-                           DataRow dataRow
-                           )
-            : base(runner, 
+                           DataRow dataRow) :
+            base(runner, 
                  trialTable, 
-                 identity, 
-                 customTrialType,
-                 dataRow
-                 ) {
+                 dataRow) {
         }
         
     }

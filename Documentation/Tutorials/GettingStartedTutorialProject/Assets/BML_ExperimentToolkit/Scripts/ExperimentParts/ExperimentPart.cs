@@ -1,33 +1,32 @@
 ﻿using BML_ExperimentToolkit.Scripts.Managers;
 using System.Collections;
+using JetBrains.Annotations;
 using UnityEngine;
 
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+    
+    /// <summary>
+    /// Basic boilerplate code for Experiment > Block > Trial structure.
+    /// Manages the basic functionality of these elements.
+    /// </summary>
     public abstract class ExperimentPart {
-        protected readonly ExperimentRunner runner;
+
+        protected readonly ExperimentRunner Runner;
         protected float RunTime;
         protected bool Interrupt { get; private set; }
 
         protected ExperimentPart(ExperimentRunner runner) {
-            this.runner = runner;
+            Runner = runner;
             Interrupt = false;
-            Enable();
-        }
-
-        void Enable() {
+            
             ExperimentEvents.OnStartPart += StartPart;
+            //TODO disable somehow. Disabling after trial completed does not allow it to restart. Perhaps do it using end of experiment event?
         }
-
-        void Disable() {
-            ExperimentEvents.OnStartPart -= StartPart;
-        }
-
+        
         void StartPart(ExperimentPart experimentPart) {
-
             if (experimentPart != this) return;
-
-            runner.StartCoroutine(Run());
+            Runner.StartCoroutine(Run());
             Interrupt = false;
         }
         
@@ -40,10 +39,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             InternalPreMethod();
             PreMethod();
             yield return PreCoroutine();
-            
         }
 
-        protected abstract IEnumerator MainCoroutine();
 
 
         IEnumerator Run() {
@@ -51,16 +48,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             float startTime = Time.time;
 
-            yield return ConditionalCoroutine(MainCoroutine());
-
-            //yield return MainCoroutine();
+            yield return ConditionalCoroutine(RunMainCoroutine());
 
             float endTime = Time.time;
             RunTime = endTime - startTime;
 
             yield return ConditionalCoroutine(RunPostMethods());
-
-            
         }
 
         IEnumerator ConditionalCoroutine(IEnumerator coroutine) {
@@ -79,19 +72,13 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// <returns></returns>
         IEnumerator RunPostMethods() {
             yield return null; // let last frame finish before starting
-
             yield return PostCoroutine();
             PostMethod();
             InternalPostMethod();
-            
         }
 
-
-        protected virtual void InternalPreMethod() {
-        }
-
-        protected virtual void InternalPostMethod() {
-        }
+        [PublicAPI] protected virtual void InternalPreMethod() { }
+        [PublicAPI] protected virtual void InternalPostMethod() { }
 
         /// <summary>
         /// Code that runs before this ExperimentPart.
@@ -99,7 +86,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Useful for simple setup tasks that can be completed in a single frame.
         /// [Note: Called before PreCoroutine()]
         /// </summary>
-        protected virtual void PreMethod() {}
+        [PublicAPI] protected virtual void PreMethod() {}
 
         /// <summary>
         /// Code that runs before this ExperimentPart.
@@ -110,10 +97,16 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// [Note: Called after PreMethod()]
         /// </summary>
         /// <returns></returns>
-        protected virtual IEnumerator PreCoroutine() {
+        [PublicAPI] protected virtual IEnumerator PreCoroutine() {
             yield return null;
         }
 
+        
+        /// <summary>
+        /// The main body of code that runs in the experiment part called for every part.
+        /// </summary>
+        /// <returns></returns>
+        [PublicAPI] protected abstract IEnumerator RunMainCoroutine();
 
         /// <summary>
         /// Code that runs after this ExperimentPart.
@@ -124,7 +117,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// [Note: Called before PostMethod()]
         /// </summary>
         /// <returns></returns>
-        protected virtual IEnumerator PostCoroutine() {
+        [PublicAPI] protected virtual IEnumerator PostCoroutine() {
             yield return null;
         }
 
@@ -134,9 +127,12 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// Useful for simple setup tasks that can occur in a single frame.
         /// [Note: Called after PostCoroutine()]
         /// </summary>
-        protected virtual void PostMethod() {}
+        [PublicAPI] protected virtual void PostMethod() {}
 
-        protected void InterruptThis() {
+        /// <summary>
+        /// Interrupts the ExperimentPart from within
+        /// </summary>
+        [PublicAPI] protected void InterruptThis() {
             Interrupt = true;
         }
     }
