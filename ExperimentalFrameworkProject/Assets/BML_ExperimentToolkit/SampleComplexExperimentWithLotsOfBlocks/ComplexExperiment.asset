@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
   m_Name: ComplexExperiment
   m_EditorClassIdentifier: 
-  RandomizationMode: 0
+  RandomizationMode: 2
   RepeatTrialsInBlock: 1
   RepeatAllBlocks: 1
   Factory:
@@ -81,7 +81,7 @@ MonoBehaviour:
     - Name: ParticipantID
       TypeOfVariable: 2
       DataType: 0
-      Value: 234
+      Value: 43
       ConstrainValues: 0
       PossibleValues: 
     FloatParticipantVariables: []
@@ -89,7 +89,7 @@ MonoBehaviour:
     - Name: Sex
       TypeOfVariable: 2
       DataType: 2
-      Value: Male
+      Value: Female
       ConstrainValues: 1
       PossibleValues:
       - Male
@@ -103,7 +103,7 @@ MonoBehaviour:
     type: 2}
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
-  GenerateExperimentTable: 0
+  TrialTableGeneration: 0
   BlockOrderConfigurations:
   - {fileID: 11400000, guid: 14c9c2b83f95998479a0ecc06b6257ff, type: 2}
   - {fileID: 11400000, guid: a8f20bfdacc858f48ba7cf4ca443e12a, type: 2}
