@@ -145,7 +145,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         }
         
         void ValidateFileDoesNotExist(ref string errorLog, ref bool isValid) {
-            if (!File.Exists(outputFullPath)) return;
+            string outputFullPathWithExtension = Path.Combine(OutputFolder, outputFileName) + ".csv";
+            Debug.Log(outputFullPathWithExtension);
+            if (!File.Exists(outputFullPathWithExtension)) return;
             string errorString = $"Output File Already Exists @ {outputFullPath}";
             errorLog = LogErrorIntoString(errorLog, errorString);
             isValid = false;

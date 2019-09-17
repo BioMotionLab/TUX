@@ -17,7 +17,7 @@ MonoBehaviour:
   RepeatAllBlocks: 1
   Factory:
     DataTypeToCreate: 0
-    VariableTypeToCreate: 2
+    VariableTypeToCreate: 0
     IntIVs: []
     FloatIVs:
     - Name: float1

@@ -26,6 +26,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
         public List<string> BlockPermutationsStrings => GetBlockPermutationsStrings();
         public DataTable BaseBlockTable => baseBlockTable;
+        public int NumberOfBlocks => baseBlockTable.Rows.Count;
 
         public const int MaxBlockPermutationsAllowed = 3;
         

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.Managers {
@@ -50,7 +51,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
         void OutputFile(Outputtable output) {
             Debug.Log($"Writing output to file {outputPath}");
             string folder = Path.GetDirectoryName(outputPath);
-            if (folder != null) Directory.CreateDirectory(folder);
+            if (folder == null) Directory.CreateDirectory(folder ?? throw new NullReferenceException("Folder could not be created"));
 
             using (StreamWriter streamWriter = new StreamWriter(outputPath)) {
                     streamWriter.Write(output.AsString);

@@ -13,10 +13,12 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         readonly ExperimentDesign experimentDesign;
         DataTable previewTable;
         int lastDisplayedOrderIndex = -1 ;
-        
+        readonly BlockOrderData blockOrderData;
+
         public DesignPreviewer(VariableConfigurationFile configurationFile) {
             this.configurationFile = configurationFile;
             experimentDesign = ExperimentDesign.CreateFrom(configurationFile);
+            blockOrderData = new BlockOrderData(experimentDesign);
         }
         
         bool ConfigurationFileLinked() {
@@ -45,15 +47,12 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.BeginVertical();
             EditorGUILayout.LabelField("Preview:", EditorStyles.boldLabel);
 
-            if (experimentDesign.HasBlocks) {
-                EditorGUILayout.LabelField("Select A Block Order");
-                string[] orderStrings = experimentDesign.BlockPermutationsStrings.ToArray();
-                SelectedBlockOrderIndex = EditorGUILayout.Popup(SelectedBlockOrderIndex, orderStrings);
-            }
-            else {
-                EditorGUILayout.LabelField("No block variables");
-                SelectedBlockOrderIndex = 0;
-            }
+            EditorGUILayout.LabelField(blockOrderData.BlockOrderText);
+
+            SelectedBlockOrderIndex = blockOrderData.SelectionRequired
+                ? EditorGUILayout.Popup(SelectedBlockOrderIndex, experimentDesign.BlockPermutationsStrings.ToArray())
+                : SelectedBlockOrderIndex = blockOrderData.DefaultBlockOrderIndex;
+            
             EditorGUILayout.Space();
             
             if (SelectedBlockOrderChanged || previewTable == null) {

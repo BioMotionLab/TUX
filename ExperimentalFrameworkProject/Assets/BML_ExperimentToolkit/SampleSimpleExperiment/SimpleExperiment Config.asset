@@ -34,7 +34,7 @@ MonoBehaviour:
       DataType: 0
       MixingType: 0
       Block: 1
-      Values: 0500000006000000
+      Values: 0600000005000000
       Probabilities:
       - 0
       - 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     - Name: Gender
       TypeOfVariable: 2
       DataType: 2
-      Value: 
+      Value: M
       ConstrainValues: 1
       PossibleValues:
       - M

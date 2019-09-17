@@ -63,6 +63,7 @@
                 <e p="ExperimentWindow.cs" t="Include" />
               </e>
               <e p="Runtime" t="Include">
+                <e p="BlockOrderData.cs" t="Include" />
                 <e p="ExperimentGUI.cs" t="Include" />
                 <e p="NoValueSelectedException.cs" t="Include" />
                 <e p="ParticipantVariableEntry.cs" t="Include" />

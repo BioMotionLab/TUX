@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
+using BML_ExperimentToolkit.Scripts.UI.Editor;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using TMPro;
@@ -53,6 +54,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         const string SelectText = "Choose...";
 
         readonly List<ParticipantVariableEntry> participantVariableEntries = new List<ParticipantVariableEntry>();
+        BlockOrderData blockOrderData;
+
         public void RegisterExperiment(ExperimentRunner experimentRunner) {
             ExperimentEvents.OnInitExperiment += Init;
             runner = experimentRunner;
@@ -86,8 +89,6 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             OutputFileName.text = session.OutputFileName;
             OutputFolder.text = session.OutputFolder;
             BlockOrderSelector.value = session.BlockOrderChosenIndex + 1;
-
-
         }
 
         void ShowDesignFileLoadSettings() {
@@ -106,28 +107,24 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
                 newParticipantVariableEntry.Display(participantVariable);
             }
         }
+
+        void GetBlockOrderFromPopup() {
+            List<string> blockPermutations = runner.ExperimentDesign.BlockPermutationsStrings;
+            BlockOrderSelector.options.Clear();
+            blockPermutations.Insert(0, SelectText);
+            foreach (string order in blockPermutations) {
+                BlockOrderSelector.options.Add(new TMP_Dropdown.OptionData() {text = order});
+            }
+        }
         
         void ShowBlockOrderSettings() {
-            BlockOrderSettingsPanel.gameObject.SetActive(true);
+            blockOrderData = new BlockOrderData(runner.ExperimentDesign);
             
-            if (!runner.ExperimentDesign.HasBlocks) {
-                session.BlockOrderChosenIndex = 0;
-                BlockOrderSelector.gameObject.SetActive(false);
-                BlockOrderTitle.text = "No block variables configured";
-                return;
-            }
-            List<string> blockPermutations = runner.ExperimentDesign.BlockPermutationsStrings;
-            if (blockPermutations.Count == 1) {
-                session.BlockOrderChosenIndex = 0;
-            }
-            else {
-                BlockOrderSelector.options.Clear();
-                blockPermutations.Insert(0, SelectText);
-                foreach (string order in blockPermutations) {
-                    BlockOrderSelector.options.Add(new TMP_Dropdown.OptionData() {text = order});
-                }
-            }
-
+            if (!blockOrderData.SelectionRequired) return;
+            
+            GetBlockOrderFromPopup();
+            BlockOrderTitle.text = blockOrderData.BlockOrderText;
+            BlockOrderSettingsPanel.gameObject.SetActive(true);
         }
 
         [PublicAPI]
@@ -141,14 +138,17 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
             session.OutputFolder = folder;
             session.ValidateFilePath(ref errorLog, ref isValid);
             
-            
             ValidateParticipantVariableValues(ref errorLog, ref isValid);
             
             switch (runner.VariableConfigFile.TrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly:
                     List<IndependentVariable> blockVariables = runner.VariableConfigFile.Variables.BlockVariables;
-                    if (blockVariables.Count == 0) break;
-                    session.BlockOrderChosenIndex = BlockOrderSelector.value-1; // subtract 1 because added first one in.
+                    if (blockOrderData.SelectionRequired) {
+                        session.BlockOrderChosenIndex = BlockOrderSelector.value - 1; // subtract 1 because added first one in.
+                    }
+                    else {
+                        session.BlockOrderChosenIndex = blockOrderData.DefaultBlockOrderIndex;
+                    }
                     ValidateBlockOrderChosen(ref errorLog, ref isValid);
                     break;
                 case TrialTableGenerationMode.PreGenerated:
@@ -163,10 +163,11 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
                 ErrorText.text = errorLog;
                 ErrorPanel.gameObject.SetActive(true);
             }
-            
-            
-            gameObject.SetActive(false);
-            ExperimentEvents.StartRunningExperiment(session);
+            else {
+                gameObject.SetActive(false);
+                ExperimentEvents.StartRunningExperiment(session);
+            }
+
         }
 
         string GetOutputFolderPath() {
@@ -203,6 +204,8 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         }
 
         void ValidateBlockOrderChosen(ref string errorLog, ref bool isValid) {
+            if (!blockOrderData.SelectionRequired) return;
+            
             string selectedText = BlockOrderSelector.options[BlockOrderSelector.value].text;
             if (selectedText != SelectText) return;
             string errorString = $"Need to select block order value";

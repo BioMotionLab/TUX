@@ -56,7 +56,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 if (baseBlockTable.Rows.Count >= 4) throw new TooManyPermutationsException();
                 foreach (List<DataRow> dataRows in baseBlockTable.GetPermutations()) {
                     StringBuilder sb = new StringBuilder();
-                    sb.Append($"BlockOrderDefinition #{blockOrderIndex}:   ");
+                    sb.Append($"Block Order #{blockOrderIndex}: ");
                     foreach (DataRow dataRow in dataRows) {
                         sb.Append($"{dataRow.AsString(separator: ", ", truncateLength: -1)} >   ");
                     }
