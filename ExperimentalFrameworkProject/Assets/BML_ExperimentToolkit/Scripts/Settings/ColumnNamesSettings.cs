@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Data;
+using BML_Utilities;
 using UnityEngine;
 using Debug = System.Diagnostics.Debug;
 
 
 namespace BML_ExperimentToolkit.Scripts.Settings {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = MenuNames.BmlSettingsMenu + "Column Names Settings")]
     public class ColumnNamesSettings : ScriptableObject{
         public string TotalTrialIndex = "Trial";
         public string BlockIndex      = "Block";

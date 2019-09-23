@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d794456-f4fe-4efd-ba4d-4595583589ae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialTrial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialTrial.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/OrderConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/OrderConfig.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/ColumnNamesSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/ColumnNamesSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/ControlSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/ControlSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/GuiSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/GuiSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/BlockOrderDefinition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/BlockOrderDefinition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfigurationFile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfigurationFile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_Utilities" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_Utilities" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,12 +43,6 @@
         <option value="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialTrial.cs" />
       </list>
     </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="77" />
-    <option name="y" value="134" />
-    <option name="width" value="1739" />
-    <option name="height" value="738" />
   </component>
   <component name="ProjectId" id="1Qjzg3Slbi8aOswlNaXLA8y8acS" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -90,6 +97,7 @@
       <workItem from="1559144490324" duration="16000" />
       <workItem from="1559144519430" duration="3000" />
       <workItem from="1568298904960" duration="1988000" />
+      <workItem from="1568755301129" duration="1310000" />
     </task>
     <servers />
   </component>
@@ -100,7 +108,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

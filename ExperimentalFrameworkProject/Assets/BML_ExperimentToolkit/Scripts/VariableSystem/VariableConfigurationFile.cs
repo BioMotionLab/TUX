@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Settings;
+using BML_Utilities;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Variable Configuration")]
     public class VariableConfigurationFile : ScriptableObject {
 
         
