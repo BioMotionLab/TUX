@@ -52,6 +52,7 @@
               <e p="ColumnNamesSettings.cs" t="Include" />
               <e p="ControlSettings.cs" t="Include" />
               <e p="GuiSettings.cs" t="Include" />
+              <e p="MenuNames.cs" t="Include" />
             </e>
             <e p="UI" t="Include">
               <e p="Editor" t="Include">
@@ -200,7 +201,6 @@
           <e p="LayerAttribute.cs" t="Include" />
           <e p="LayerUtil.cs" t="Include" />
           <e p="LowestCommonFunctions.cs" t="Include" />
-          <e p="MenuNames.cs" t="Include" />
           <e p="PackageBuilder" t="Include">
             <e p="PackageBuilder.cs" t="Include" />
             <e p="PackageBuilderCustomEditor.cs" t="Include" />

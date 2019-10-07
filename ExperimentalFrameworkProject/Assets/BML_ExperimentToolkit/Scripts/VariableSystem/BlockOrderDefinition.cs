@@ -2,12 +2,13 @@
 using System.Data;
 using System.Text;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_ExperimentToolkit.Scripts.Settings;
 using BML_Utilities;
 using BML_Utilities.Extensions;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
-    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Block Order Definition")]
+    [CreateAssetMenu()]
     public class BlockOrderDefinition : ScriptableObject {
         [SerializeField]
         public List<OrderRow> List = new List<OrderRow>();

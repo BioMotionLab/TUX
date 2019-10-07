@@ -2,6 +2,7 @@
 using System.Data;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
+using BML_ExperimentToolkit.Scripts.Settings;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities;
 using BML_Utilities.Extensions;
