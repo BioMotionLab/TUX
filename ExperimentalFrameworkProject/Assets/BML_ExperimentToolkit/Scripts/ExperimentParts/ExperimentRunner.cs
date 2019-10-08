@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Data;
-using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_ExperimentToolkit.Scripts.UI.Runtime;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
-using BML_Utilities.Extensions;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     
@@ -21,21 +20,25 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public abstract class ExperimentRunner : MonoBehaviour {
 
         
+        [FormerlySerializedAs("variableConfigurationFile")]
         [Header("Required:")]
-        [Tooltip("Create a VariableConfigFile from asset menu and drag here")]
+        [Tooltip("Create a DesignFile from asset menu and drag here")]
         [SerializeField]
         // ReSharper disable once InconsistentNaming
-        VariableConfigurationFile variableConfigurationFile = default;
+        ExperimentDesignFile ExperimentDesignFile = default;
 
         [Header("Optional:")]
         [SerializeField]
         [Tooltip("References to your custom scripts")]
         // ReSharper disable once InconsistentNaming
-        ScriptReferences scriptReferences = new ScriptReferences();
+        public ScriptReferences scriptReferences = new ScriptReferences();
         
         // ReSharper disable once ConvertToAutoProperty
-        public VariableConfigurationFile VariableConfigFile => variableConfigurationFile;
-        
+        public ExperimentDesignFile DesignFile {
+            get => ExperimentDesignFile;
+            set => ExperimentDesignFile = value;
+        }
+
         public ExperimentDesign ExperimentDesign;
         public RunnableDesign RunnableDesign;
         
@@ -90,21 +93,21 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             #endif
 
             //check if configurationFile file is loaded
-            if (VariableConfigFile == null) {
+            if (DesignFile == null) {
                 Debug.LogError("Config file not set up properly, make sure you dragged a configuration file into your Runner GameObject in the inspector");
                 ExitProgram();
                 return;
             }
-            VariableConfigFile.Validate();
+            DesignFile.Validate();
 
             Session = Session.LoadSessionData();
             if (Session == null) {
                 throw new NullReferenceException("Session null and not created properly");
             }
 
-            switch (VariableConfigFile.TrialTableGeneration) {
+            switch (DesignFile.TrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly:
-                    ExperimentDesign = ExperimentDesign.CreateFrom(VariableConfigFile);
+                    ExperimentDesign = ExperimentDesign.CreateFrom(DesignFile);
                     if (ExperimentDesign == null) {
                         throw new NullReferenceException("ExperimentDesign null");
                     }
@@ -118,7 +121,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             }
 
             if (!WindowOpen) {
-                gui = Instantiate(VariableConfigFile.GuiSettings.GuiPrefab);
+                gui = Instantiate(DesignFile.GuiSettings.GuiPrefab);
                 gui.gameObject.SetActive(true);
                 gui.RegisterExperiment(this);
             }
@@ -146,17 +149,17 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         /// </summary>
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
-            switch (VariableConfigFile.TrialTableGeneration) {
+            switch (DesignFile.TrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly: {
                     DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
-                    RunnableDesign = new RunnableDesign(this, finalDesignTable, VariableConfigFile);
+                    RunnableDesign = new RunnableDesign(this, finalDesignTable, DesignFile);
                     break;
                 }
                 case TrialTableGenerationMode.PreGenerated:
                     string selectedDesignFilePath = currentSession.SelectedDesignFilePath;
                     if (string.IsNullOrEmpty(selectedDesignFilePath)) throw new NullReferenceException("Trying to load custom design file, but none given");
                     RunnableDesign = RunnableDesign.CreateFromFile(this, currentSession.SelectedDesignFilePath,
-                                                           VariableConfigFile);
+                                                           DesignFile);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -178,7 +181,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             
             ExperimentEvents.ExperimentStarted();
 
-            StartCoroutine(VariableConfigFile.ControlSettings.Run());
+            StartCoroutine(DesignFile.ControlSettings.Run());
             
             ExperimentEvents.StartPart(experiment);
             
@@ -189,53 +192,5 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             Ended = true;
         }
 
-    }
-
-    [Serializable]
-    public class ScriptReferences {
-        
-        [SerializeField]
-        [Tooltip("Script file that inherits from Trial class")]
-        MonoScript DragTrialScriptHere = default;
-        
-        [SerializeField]
-        [Tooltip("Script file that inherits from Block class")]
-        MonoScript DragBlockScriptHere = default;
-        
-        [SerializeField]
-        [Tooltip("Script file that inherits from Experiment class")]
-        MonoScript DragExperimentScriptHere = default;
-
-
-        public Type TrialType => GetScriptTypeFromInspector<Trial>(DragTrialScriptHere, true);
-        public Type BlockType => GetScriptTypeFromInspector<Block>(DragBlockScriptHere, true);
-        public Type ExperimentType => GetScriptTypeFromInspector<Experiment>(DragExperimentScriptHere, true);
-
-        Type GetScriptTypeFromInspector<T>(MonoScript monoScript, bool optional = false) where T : ExperimentPart {
-
-            string typeName = typeof(T).LastPartOfName();
-
-            if (monoScript == null) {
-                if (optional) return GetDefaultExperimentPart<T>();
-                throw new NullReferenceException($"{typeName} Script null. Create custom {typeName} script and drag into inspector");
-            }
-            
-            Type returnType = monoScript.GetClass();
-            if (!returnType.IsSubclassOf(typeof(T)))
-                throw new NullReferenceException($"{typeName} Script that was dragged in is not subclass of {typeName} Class");
-            
-            Debug.Log($"Successfully linked with {returnType.LastPartOfName()} script");
-            return returnType;
-        }
-
-        Type GetDefaultExperimentPart<T>() where T : ExperimentPart {
-            Type type;
-            if (typeof(T).IsEquivalentTo(typeof(Trial))) type = typeof(SimpleTrial);
-            else if (typeof(T).IsEquivalentTo(typeof(Block))) type =  typeof(SimpleBlock);
-            else if (typeof(T).IsEquivalentTo(typeof(Experiment))) type =  typeof(SimpleExperiment);
-            else throw new ArgumentOutOfRangeException($"Type {typeof(T).FullName} not recognized");
-            Debug.LogWarning($"No Custom class defined for {typeof(T).FullName}, reverting to default {type.FullName}");
-            return type;
-        }
     }
 }

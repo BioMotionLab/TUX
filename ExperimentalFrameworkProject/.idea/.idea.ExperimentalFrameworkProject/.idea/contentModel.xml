@@ -9,6 +9,14 @@
         <e p="BML_ExperimentToolkit" t="Include">
           <e p="Data" t="Include">
             <e p="BML_session_log.txt" t="Include" />
+            <e p="ScriptingTemplates" t="Include">
+              <e p="AssemblyTemplateReference.cs" t="Include" />
+              <e p="BlockScriptTemplate.cs" t="Include" />
+              <e p="ExperimentRunnerTemplate.cs" t="Include" />
+              <e p="ExperimentScriptTemplate.cs" t="Include" />
+              <e p="Templates.asmdef" t="Include" />
+              <e p="TrialScriptTemplate.cs" t="Include" />
+            </e>
           </e>
           <e p="Extras" t="Include">
             <e p="BlackScreenFlasher" t="Include">
@@ -31,6 +39,7 @@
               <e p="ExperimentRunner.cs" t="Include" />
               <e p="InvalidExperimentDesignException.cs" t="Include" />
               <e p="RunnableDesign.cs" t="Include" />
+              <e p="ScriptReferences.cs" t="Include" />
               <e p="Session.cs" t="Include" />
               <e p="SimpleExperimentParts" t="Include">
                 <e p="SimpleBlock.cs" t="Include" />
@@ -61,6 +70,7 @@
                 <e p="DesignSaverWindow.cs" t="Include" />
                 <e p="EditorUI.asmdef" t="Include" />
                 <e p="ExperimentWindow.cs" t="Include" />
+                <e p="ScriptHelperWindow.cs" t="Include" />
               </e>
               <e p="Runtime" t="Include">
                 <e p="BlockOrderData.cs" t="Include" />
@@ -72,13 +82,13 @@
             <e p="VariableSystem" t="Include">
               <e p="BlockOrderDefinition.cs" t="Include" />
               <e p="DependentVariable.cs" t="Include" />
+              <e p="ExperimentDesignFile.cs" t="Include" />
               <e p="IndependentVariable.cs" t="Include" />
               <e p="OrderRow.cs" t="Include" />
               <e p="ParticipantVariable.cs" t="Include" />
               <e p="RandomizationMode.cs" t="Include" />
               <e p="SupportedDataType.cs" t="Include" />
               <e p="Variable.cs" t="Include" />
-              <e p="VariableConfigurationFile.cs" t="Include" />
               <e p="VariableFactory.cs" t="Include" />
               <e p="VariableMixingType.cs" t="Include" />
               <e p="Variables.cs" t="Include" />
@@ -120,6 +130,7 @@
                 <e p="DependentVariableStringDrawer.cs" t="Include" />
                 <e p="DependentVariableVector2Drawer.cs" t="Include" />
                 <e p="DependentVariableVector3Drawer.cs" t="Include" />
+                <e p="ExperimentDesignFileEditor.cs" t="Include" />
                 <e p="IndependentVariableBoolDrawer.cs" t="Include" />
                 <e p="IndependentVariableCustomDataTypeDrawer.cs" t="Include" />
                 <e p="IndependentVariableDrawer.cs" t="Include" />
@@ -139,7 +150,6 @@
                 <e p="ParticipantVariableStringDrawer.cs" t="Include" />
                 <e p="ParticipantVariableVector2Drawer.cs" t="Include" />
                 <e p="ParticipantVariableVector3Drawer.cs" t="Include" />
-                <e p="VariableConfigurationFileEditor.cs" t="Include" />
                 <e p="VariableDrawer.cs" t="Include" />
                 <e p="VariableDrawerHelpers.cs" t="Include" />
                 <e p="VariableFactoryDrawer.cs" t="Include" />
@@ -259,6 +269,7 @@
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="Templates.csproj" t="IncludeRecursive" />
       <e p="TestingUtilities.csproj" t="IncludeRecursive" />
       <e p="VariableUI.csproj" t="IncludeRecursive" />
     </e>

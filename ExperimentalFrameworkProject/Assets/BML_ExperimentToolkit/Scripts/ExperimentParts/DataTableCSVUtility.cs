@@ -9,7 +9,7 @@ using UnityEngine;
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public static class DataTableCsvUtility {
         
-        public static DataTable DataTableFromCsv(VariableConfigurationFile configurationFile, string fullPath) {
+        public static DataTable DataTableFromCsv(ExperimentDesignFile configurationFile, string fullPath) {
             
             DataTable loadedDataTable = new DataTable();
             
@@ -58,7 +58,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             if (rowValues[columnIndex] == "FALSE") row[column.ColumnName] = false;
         }
 
-        static List<DataColumn> GetColumns(VariableConfigurationFile configurationFile, StreamReader streamReader, DataTable loadedDataTable) {
+        static List<DataColumn> GetColumns(ExperimentDesignFile configurationFile, StreamReader streamReader, DataTable loadedDataTable) {
             string[] headerNames = streamReader.ReadLine()?.Split(',');
             
             List<DataColumn> columns = new List<DataColumn>();

@@ -34,9 +34,9 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             }
         }
 
-        public void InitFromDesign(VariableConfigurationFile variableConfigurationFile) {
+        public void InitFromDesign(ExperimentDesignFile experimentDesignFile) {
         
-            ExperimentDesign experimentDesign = ExperimentDesign.CreateFrom(variableConfigurationFile);
+            ExperimentDesign experimentDesign = ExperimentDesign.CreateFrom(experimentDesignFile);
             for (int rowIndex = 0; rowIndex < experimentDesign.BaseBlockTable.Rows.Count; rowIndex++) {
                 DataRow row = experimentDesign.BaseBlockTable.Rows[rowIndex];
                 StringBuilder sb = new StringBuilder();

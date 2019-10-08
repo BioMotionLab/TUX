@@ -43,7 +43,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.EndHorizontal();
         }
 
-        public static void ShowWindow(VariableConfigurationFile configFile) {
+        public static void ShowWindow(ExperimentDesignFile configFile) {
             DesignSaverWindow window = (DesignSaverWindow) GetWindow(typeof(DesignSaverWindow), false, "Design Saver");
             window.previewer = new DesignPreviewer(configFile);
             window.Show();

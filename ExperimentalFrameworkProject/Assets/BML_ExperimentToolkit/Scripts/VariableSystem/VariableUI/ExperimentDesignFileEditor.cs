@@ -5,8 +5,8 @@ using UnityEditor;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
-    [CustomEditor(typeof(VariableConfigurationFile))]
-    public class VariableConfigurationFileEditor : Editor {
+    [CustomEditor(typeof(ExperimentDesignFile))]
+    public class ExperimentDesignFileEditor : Editor {
 
 
         bool               showAdvanced;
@@ -21,17 +21,16 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         SerializedProperty guiSettings;
 
         void OnEnable() {
-            factory = serializedObject.FindProperty(nameof(VariableConfigurationFile.Factory));
-            trialTableGenerationMode = serializedObject.FindProperty(nameof(VariableConfigurationFile.TrialTableGeneration));
-            orderConfigs = serializedObject.FindProperty(nameof(VariableConfigurationFile.BlockOrderConfigurations));
+            factory = serializedObject.FindProperty(nameof(ExperimentDesignFile.Factory));
+            trialTableGenerationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialTableGeneration));
+            orderConfigs = serializedObject.FindProperty(nameof(ExperimentDesignFile.BlockOrderConfigurations));
             
-            randomizationMode = serializedObject.FindProperty(nameof(VariableConfigurationFile.RandomizationMode));
-            repeatTrialsInBlock = serializedObject.FindProperty(nameof(VariableConfigurationFile.RepeatTrialsInBlock));
-            repeatAllBlocks = serializedObject.FindProperty(nameof(VariableConfigurationFile.RepeatAllBlocks));
-            columnNameSettings = serializedObject.FindProperty(nameof(VariableConfigurationFile.ColumnNamesSettings));
-            controlSettings = serializedObject.FindProperty(nameof(VariableConfigurationFile.ControlSettings));
-            guiSettings = serializedObject.FindProperty(nameof(VariableConfigurationFile.GuiSettings));
-            
+            randomizationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.RandomizationMode));
+            repeatTrialsInBlock = serializedObject.FindProperty(nameof(ExperimentDesignFile.RepeatTrialsInBlock));
+            repeatAllBlocks = serializedObject.FindProperty(nameof(ExperimentDesignFile.RepeatAllBlocks));
+            columnNameSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.ColumnNamesSettings));
+            controlSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.ControlSettings));
+            guiSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.GuiSettings));
             
             
         }
@@ -50,7 +49,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.LabelField("--------");
             
             if (GUILayout.Button("Preview Design", GUILayout.Width(250), GUILayout.Height(50))){
-                DesignPreviewWindow.ShowWindow(target as VariableConfigurationFile);
+                DesignPreviewWindow.ShowWindow(target as ExperimentDesignFile);
                 
             }
             
@@ -87,7 +86,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
 
             if (GUILayout.Button("Generate Design File Manually", GUILayout.Width(250))) {
-                DesignSaverWindow.ShowWindow(Selection.activeObject as VariableConfigurationFile);
+                DesignSaverWindow.ShowWindow(Selection.activeObject as ExperimentDesignFile);
             }
 
             EditorGUI.indentLevel -= 2;
@@ -104,11 +103,11 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
 
             if (GUILayout.Button("Add New BlockOrderDefinition")) {
-                VariableConfigurationFile variableConfigurationFile = target as VariableConfigurationFile;
-                if (variableConfigurationFile != null) {
-                    List<BlockOrderDefinition> orders = variableConfigurationFile.BlockOrderConfigurations;
+                ExperimentDesignFile experimentDesignFile = target as ExperimentDesignFile;
+                if (experimentDesignFile != null) {
+                    List<BlockOrderDefinition> orders = experimentDesignFile.BlockOrderConfigurations;
                     BlockOrderDefinition newBlockOrderDefinition = CreateInstance<BlockOrderDefinition>();
-                    newBlockOrderDefinition.InitFromDesign(variableConfigurationFile);
+                    newBlockOrderDefinition.InitFromDesign(experimentDesignFile);
                     orders.Add(newBlockOrderDefinition);
                     string savePath = Path.GetDirectoryName(path: AssetDatabase.GetAssetPath(Selection.activeObject)) + "/New Block Order Definition.asset";
                     AssetDatabase.CreateAsset(newBlockOrderDefinition, savePath);

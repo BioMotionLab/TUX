@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d94fdbbf4931f8429360b47cbe5d070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variableConfigurationFile: {fileID: 11400000, guid: 717ef8589e8e3164f9eb9ca72c0e10f3,
+  ExperimentDesignFile: {fileID: 11400000, guid: 717ef8589e8e3164f9eb9ca72c0e10f3,
     type: 2}
   scriptReferences:
     DragTrialScriptHere: {fileID: 11500000, guid: 2882cad7c6b849a9af9d29520d4a528b,
@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 1945448388}
   - component: {fileID: 1945448387}
   - component: {fileID: 1945448391}
+  - component: {fileID: 1945448392}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -459,3 +460,16 @@ MonoBehaviour:
   x: 1
   y: 1
   z: 1
+--- !u!114 &1945448392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945448386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af99515f1b6dc7a458a7af6dcd5a9259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExperimentName: 

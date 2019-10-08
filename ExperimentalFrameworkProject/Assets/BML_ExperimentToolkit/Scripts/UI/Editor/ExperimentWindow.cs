@@ -87,7 +87,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         void InitWindow(ExperimentRunner runnerToInit) {
             runner = runnerToInit;
             session = runnerToInit.Session;
-            previewer = new DesignPreviewer(runner.VariableConfigFile);
+            previewer = new DesignPreviewer(runner.DesignFile);
             OrderChosenIndex = 0;
             currentBlockIndex = -1;
             currentTrialIndex = -1;
@@ -129,7 +129,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.BeginVertical();
             
             if (!IsPlayMode()) return;
-            if (!ConfigFileGoodStatus()) return;
+            if (!DesignFileStatusGood()) return;
             
             if (!started) {
                 ShowSessionSettings();
@@ -148,12 +148,12 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.EndScrollView();
         }
 
-        bool ConfigFileGoodStatus() {
+        bool DesignFileStatusGood() {
             if (initialized) return true;
             
-            EditorGUILayout.HelpBox("VariableConfigFile not properly initialized. " +
+            EditorGUILayout.HelpBox("DesignFile not properly initialized. " +
                                     "\n\nMake sure you have created a configuration file from the menu and populated it with variables" +
-                                    "\n\nAlso make sure the configurationFile file is dragged into the Runner GameObject inspector in your scene.",
+                                    "\n\nAlso make sure the DesignFile is dragged into the ExperimentRunner GameObject inspector in your scene.",
                                     MessageType.Error);
             FinalizeUiElements();
             return false;
@@ -188,7 +188,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             ShowOutputFileSettings();
             ShowParticipantVariables();
             
-            if (runner.VariableConfigFile.TrialTableGeneration == TrialTableGenerationMode.PreGenerated) 
+            if (runner.DesignFile.TrialTableGeneration == TrialTableGenerationMode.PreGenerated) 
                 ShowTrialTableLoadInput();
             else {
                 previewer.ShowPreview();
@@ -279,7 +279,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Fill In Participant Variables:", EditorStyles.boldLabel);
             
-            foreach (ParticipantVariable participantVariable in runner.VariableConfigFile.Factory.Variables.ParticipantVariables) {
+            foreach (ParticipantVariable participantVariable in runner.DesignFile.Factory.Variables.ParticipantVariables) {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField(participantVariable.Name + ":", LabelWidth);
                 if (participantVariable.ValuesAreConstrained) {

@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Settings;
-using BML_Utilities;
 using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
-    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "Variable Configuration")]
-    public class VariableConfigurationFile : ScriptableObject {
+    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "New Experiment Design File")]
+    public class ExperimentDesignFile : ScriptableObject {
 
-        
         [Header("Randomization and Repetition settings:")]
         public RandomizationMode RandomizationMode;
         
@@ -30,14 +28,14 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             
             if (ColumnNamesSettings == null) {
                 throw new NullReferenceException(
-                                                 "Configuration file does not have column name settings defined. " + 
-                                                 "Please drag column name settings into the proper place in the config file");
+                                                 "Design file does not have column name settings defined. " + 
+                                                 "Please drag column name settings into the proper place in the design file");
             }
 
             if (ControlSettings == null) {
                 throw new NullReferenceException(
-                                                 "Configuration file does not have Control Settings defined. " +
-                                                 "Please drag control settings into the proper place in the config file");
+                                                 "Design file does not have Control Settings defined. " +
+                                                 "Please drag control settings into the proper place in the design file");
             }
         }
 

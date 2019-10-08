@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.UI.Editor {
     public class DesignPreviewer {
-        readonly VariableConfigurationFile configurationFile;
+        readonly ExperimentDesignFile designFile;
         public int SelectedBlockOrderIndex;
         Vector2 scrollPos;
         readonly ExperimentDesign experimentDesign;
@@ -15,20 +15,20 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         int lastDisplayedOrderIndex = -1 ;
         readonly BlockOrderData blockOrderData;
 
-        public DesignPreviewer(VariableConfigurationFile configurationFile) {
-            this.configurationFile = configurationFile;
-            experimentDesign = ExperimentDesign.CreateFrom(configurationFile);
+        public DesignPreviewer(ExperimentDesignFile designFile) {
+            this.designFile = designFile;
+            experimentDesign = ExperimentDesign.CreateFrom(designFile);
             blockOrderData = new BlockOrderData(experimentDesign);
         }
         
-        bool ConfigurationFileLinked() {
+        bool DesignFileLinked() {
             bool linked = false;
-            if (configurationFile != null) {
-                EditorGUILayout.LabelField($"Config File Selected: {configurationFile.name}");
+            if (designFile != null) {
+                EditorGUILayout.LabelField($"Design File Selected: {designFile.name}");
                 linked = true;
             }
             else {
-                EditorGUILayout.HelpBox("Need to have a Variable Config File Selected", MessageType.Warning);
+                EditorGUILayout.HelpBox("Need to have a Design File Selected", MessageType.Warning);
                 EditorGUILayout.Space();
             }
 
@@ -37,7 +37,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         
         public DataTable ShowPreview() {
             
-            if (!ConfigurationFileLinked()) return null;
+            if (!DesignFileLinked()) return null;
             
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, 
                                                         false, false, 
