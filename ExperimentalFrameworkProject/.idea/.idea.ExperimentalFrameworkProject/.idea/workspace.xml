@@ -5,6 +5,7 @@
       <change afterPath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/BML_TUX_Utilities.asmdef" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/BML_TUX_Utilities.asmdef.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/ExperimentParts/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/ExperimentParts/Session.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/Utilities.asmdef" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/Utilities.asmdef.meta" beforeDir="false" />
@@ -170,7 +171,7 @@
       <workItem from="1570542111334" duration="8012000" />
       <workItem from="1570559053221" duration="12837000" />
       <workItem from="1570631934079" duration="1160000" />
-      <workItem from="1570634258735" duration="997000" />
+      <workItem from="1570634258735" duration="1034000" />
     </task>
     <servers />
   </component>
