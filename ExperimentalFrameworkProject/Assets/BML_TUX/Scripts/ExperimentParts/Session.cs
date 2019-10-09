@@ -48,7 +48,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         public int    BlockOrderChosenIndex = 0;
 
         const string SessionDataFileName = "BML_last_experiment_session.json";
-        const string SessionLocation = "BML_ExperimentToolkit/Data";
+        const string SessionLocation = "BML_TUX/Data";
 
        void Enable() {
             ExperimentEvents.OnEndExperiment += Completed;

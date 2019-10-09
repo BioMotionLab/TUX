@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22ea5ef4-e322-4ce5-98ba-7ef8faef5429" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitmodules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/BML_TUX_Utilities.asmdef" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/BML_TUX_Utilities.asmdef.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/SamplesAndTutorials/SampleSimpleExperiment/SimpleExperimentDesign.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_TUX/SamplesAndTutorials/SampleSimpleExperiment/SimpleExperimentDesign.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/BML_ExperimentToolkit.asmdef" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/BML_ExperimentToolkit.asmdef.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/ExperimentParts/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/ExperimentParts/Session.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Managers/OutputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Managers/OutputManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BML_Utilities.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/Utilities.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/Utilities.asmdef.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -180,7 +170,7 @@
       <workItem from="1570542111334" duration="8012000" />
       <workItem from="1570559053221" duration="12837000" />
       <workItem from="1570631934079" duration="1160000" />
-      <workItem from="1570634258735" duration="241000" />
+      <workItem from="1570634258735" duration="997000" />
     </task>
     <servers />
   </component>

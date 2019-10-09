@@ -91,6 +91,7 @@
               </e>
             </e>
             <e p="Utilities" t="Include">
+              <e p="BML_TUX_Utilities.asmdef" t="Include" />
               <e p="CameraAspect.cs" t="Include" />
               <e p="ConditionalHideAttribute.cs" t="Include" />
               <e p="Delimiter.cs" t="Include" />
@@ -142,7 +143,6 @@
                 <e p="AssertUtilities.cs" t="Include" />
                 <e p="TestingUtilities.asmdef" t="Include" />
               </e>
-              <e p="Utilities.asmdef" t="Include" />
             </e>
             <e p="VariableSystem" t="Include">
               <e p="BlockOrderDefinition.cs" t="Include" />
@@ -268,6 +268,7 @@
         </e>
       </e>
       <e p="BML_T.csproj" t="IncludeRecursive" />
+      <e p="BML_TUX_Utilities.csproj" t="IncludeRecursive" />
       <e p="EditorUI.csproj" t="IncludeRecursive" />
       <e p="ExperimentalFrameworkProject.sln" t="IncludeFlat" />
       <e p="ExtensionTests.csproj" t="IncludeRecursive" />
@@ -276,7 +277,6 @@
       <e p="ScriptingTemplates.csproj" t="IncludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
       <e p="TestingUtilities.csproj" t="IncludeRecursive" />
-      <e p="Utilities.csproj" t="IncludeRecursive" />
       <e p="VariableUI.csproj" t="IncludeRecursive" />
     </e>
   </component>
