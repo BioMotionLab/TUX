@@ -56,10 +56,7 @@ namespace BML_ExperimentToolkit.Scripts.Managers {
             using (StreamWriter streamWriter = new StreamWriter(outputPath)) {
                     streamWriter.Write(output.AsString);
             }
-            
-
         }
-
     }
 
 // ReSharper disable once IdentifierTypo

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     [Serializable]
     public class Session {
-        const string DebugFolder = "/BML_Debug/";
+        const string DebugFolder = "/BML_TUX/Data/Debug";
         const string DebugFileName = "debugFile";
 
         string outputFullPath;

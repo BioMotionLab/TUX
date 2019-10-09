@@ -6,6 +6,11 @@
     <e p="C:\Users\BioMotion\Documents\GitHub\ExperimentalFramework\ExperimentalFrameworkProject" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="BML_ExperimentToolkit" t="Include">
+          <e p="Data" t="Include">
+            <e p="BML_session_log.txt" t="Include" />
+          </e>
+        </e>
         <e p="BML_TUX" t="Include">
           <e p="Data" t="Include">
             <e p="ScriptingTemplates" t="Include">
@@ -33,7 +38,7 @@
             </e>
           </e>
           <e p="Scripts" t="Include">
-            <e p="BML_ExperimentToolkit.asmdef" t="Include" />
+            <e p="BML_TUX.asmdef" t="Include" />
             <e p="ExperimentParts" t="Include">
               <e p="BaseBlockTable.cs" t="Include" />
               <e p="BaseTrialTable.cs" t="Include" />
@@ -84,6 +89,60 @@
                 <e p="NoValueSelectedException.cs" t="Include" />
                 <e p="ParticipantVariableEntry.cs" t="Include" />
               </e>
+            </e>
+            <e p="Utilities" t="Include">
+              <e p="CameraAspect.cs" t="Include" />
+              <e p="ConditionalHideAttribute.cs" t="Include" />
+              <e p="Delimiter.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="LayerAttributeEditor.cs" t="Include" />
+              </e>
+              <e p="Extensions" t="Include">
+                <e p="CameraExtension.cs" t="Include" />
+                <e p="DataFormatter.cs" t="Include" />
+                <e p="DataTableExtension.cs" t="Include" />
+                <e p="GameObjectExtension.cs" t="Include" />
+                <e p="IntExtension.cs" t="Include" />
+                <e p="ListExtension.cs" t="Include" />
+                <e p="ProjectorExtension.cs" t="Include" />
+                <e p="QuaternionExtension.cs" t="Include" />
+                <e p="StringExtension.cs" t="Include" />
+                <e p="Tests" t="Include">
+                  <e p="Editor" t="Include">
+                    <e p="GameObjectExtensionTests.cs" t="Include" />
+                    <e p="IntExtensionTests.cs" t="Include" />
+                    <e p="ListExtensionTests.cs" t="Include" />
+                    <e p="StringExtensionTests.cs" t="Include" />
+                    <e p="TransformExtensionTests.cs" t="Include" />
+                  </e>
+                  <e p="ExtensionTests.asmdef" t="Include" />
+                </e>
+                <e p="TransformExtension.cs" t="Include" />
+                <e p="TypeExtension.cs" t="Include" />
+                <e p="Vector3Extension.cs" t="Include" />
+              </e>
+              <e p="GuiLayoutRect.cs" t="Include" />
+              <e p="LayerAttribute.cs" t="Include" />
+              <e p="LayerUtil.cs" t="Include" />
+              <e p="LowestCommonFunctions.cs" t="Include" />
+              <e p="ReadOnlyInInspectorAttribute.cs" t="Include" />
+              <e p="Rotator.cs" t="Include" />
+              <e p="ScriptableObject Assets" t="Include">
+                <e p="BoolValue.cs" t="Include" />
+                <e p="FloatValue.cs" t="Include" />
+                <e p="StringValue.cs" t="Include" />
+                <e p="TextAssetToUI.cs" t="Include" />
+              </e>
+              <e p="SerializableClasses" t="Include">
+                <e p="QuaternionSerializable.cs" t="Include" />
+                <e p="Vector3Serializable.cs" t="Include" />
+              </e>
+              <e p="SnapToOtherObject.cs" t="Include" />
+              <e p="TestingUtilities" t="Include">
+                <e p="AssertUtilities.cs" t="Include" />
+                <e p="TestingUtilities.asmdef" t="Include" />
+              </e>
+              <e p="Utilities.asmdef" t="Include" />
             </e>
             <e p="VariableSystem" t="Include">
               <e p="BlockOrderDefinition.cs" t="Include" />
@@ -175,68 +234,9 @@
             </e>
           </e>
         </e>
-        <e p="BML_Utilities" t="Include">
-          <e p="BML_Utilities.asmdef" t="Include" />
-          <e p="CameraAspect.cs" t="Include" />
-          <e p="ConditionalHideAttribute.cs" t="Include" />
-          <e p="Delimiter.cs" t="Include" />
-          <e p="Editor" t="Include">
-            <e p="LayerAttributeEditor.cs" t="Include" />
-          </e>
-          <e p="EventSystem" t="Include">
-            <e p="BmlEvent.cs" t="Include" />
-            <e p="BmlEventListener.cs" t="Include" />
-            <e p="BmlStringEvent.cs" t="Include" />
-            <e p="BmlStringEventListener.cs" t="Include" />
-          </e>
-          <e p="Extensions" t="Include">
-            <e p="CameraExtension.cs" t="Include" />
-            <e p="DataFormatter.cs" t="Include" />
-            <e p="DataTableExtension.cs" t="Include" />
-            <e p="GameObjectExtension.cs" t="Include" />
-            <e p="IntExtension.cs" t="Include" />
-            <e p="ListExtension.cs" t="Include" />
-            <e p="ProjectorExtension.cs" t="Include" />
-            <e p="QuaternionExtension.cs" t="Include" />
-            <e p="StringExtension.cs" t="Include" />
-            <e p="Tests" t="Include">
-              <e p="Editor" t="Include">
-                <e p="GameObjectExtensionTests.cs" t="Include" />
-                <e p="IntExtensionTests.cs" t="Include" />
-                <e p="ListExtensionTests.cs" t="Include" />
-                <e p="StringExtensionTests.cs" t="Include" />
-                <e p="TransformExtensionTests.cs" t="Include" />
-              </e>
-              <e p="ExtensionTests.asmdef" t="Include" />
-            </e>
-            <e p="TransformExtension.cs" t="Include" />
-            <e p="TypeExtension.cs" t="Include" />
-            <e p="Vector3Extension.cs" t="Include" />
-          </e>
-          <e p="GuiLayoutRect.cs" t="Include" />
-          <e p="LayerAttribute.cs" t="Include" />
-          <e p="LayerUtil.cs" t="Include" />
-          <e p="LowestCommonFunctions.cs" t="Include" />
-          <e p="PackageBuilder" t="Include">
-            <e p="PackageBuilder.cs" t="Include" />
-            <e p="PackageBuilderCustomEditor.cs" t="Include" />
-          </e>
-          <e p="PlaneAspectRatioAndResizer.cs" t="Include" />
-          <e p="QuaternionSerializable.cs" t="Include" />
-          <e p="ReadOnlyInInspectorAttribute.cs" t="Include" />
-          <e p="Rotator.cs" t="Include" />
-          <e p="ScriptableObject Assets" t="Include">
-            <e p="BoolValue.cs" t="Include" />
-            <e p="FloatValue.cs" t="Include" />
-            <e p="StringValue.cs" t="Include" />
-            <e p="TextAssetToUI.cs" t="Include" />
-          </e>
-          <e p="SnapToOtherObject.cs" t="Include" />
-          <e p="TestingUtilities" t="Include">
-            <e p="AssertUtilities.cs" t="Include" />
-            <e p="TestingUtilities.asmdef" t="Include" />
-          </e>
-          <e p="Vector3Serializable.cs" t="Include" />
+        <e p="PackageBuilder" t="Include">
+          <e p="PackageBuilder.cs" t="Include" />
+          <e p="PackageBuilderCustomEditor.cs" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
@@ -267,8 +267,7 @@
           </e>
         </e>
       </e>
-      <e p="BML_ExperimentToolkit.csproj" t="IncludeRecursive" />
-      <e p="BML_Utilities.csproj" t="IncludeRecursive" />
+      <e p="BML_T.csproj" t="IncludeRecursive" />
       <e p="EditorUI.csproj" t="IncludeRecursive" />
       <e p="ExperimentalFrameworkProject.sln" t="IncludeFlat" />
       <e p="ExtensionTests.csproj" t="IncludeRecursive" />
@@ -277,6 +276,7 @@
       <e p="ScriptingTemplates.csproj" t="IncludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
       <e p="TestingUtilities.csproj" t="IncludeRecursive" />
+      <e p="Utilities.csproj" t="IncludeRecursive" />
       <e p="VariableUI.csproj" t="IncludeRecursive" />
     </e>
   </component>
