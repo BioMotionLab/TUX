@@ -2,20 +2,69 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d794456-f4fe-4efd-ba4d-4595583589ae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/BackwardBlockOrder.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/BackwardBlockOrder.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/ForwardBlockOrder.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/ForwardBlockOrder.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/RandomBlockOrder.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/RandomBlockOrder.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment Example.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment Example.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/ComplexExperimentDesign.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/ComplexExperimentDesign.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleSimpleExperiment.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleSimpleExperiment/SimpleExperiment Example.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleSimpleExperiment/SimpleExperiment Example.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleSimpleExperiment/SimpleExperimentDesign.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/SampleSimpleExperiment/SimpleExperimentDesign.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/BlueMaterial.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/BlueMaterial.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/GreenMaterial.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/GreenMaterial.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/RedMaterial.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/RedMaterial.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialBlock.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialBlock.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialDesignFile.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialDesignFile.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialExperiment.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialExperiment.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialExperimentRunner.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialExperimentRunner.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialTrial.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialTrial.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GettingStartedTutorialProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialTrial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialExperiment/TutorialTrial.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/OrderConfig.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/OrderConfig.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/ColumnNamesSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/ColumnNamesSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/ControlSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/ControlSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/GuiSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/Settings/GuiSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/BlockOrderDefinition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/BlockOrderDefinition.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfigurationFile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableConfigurationFile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_Utilities" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_Utilities" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_Debug.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_Debug/debugFile.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_Debug/debugFile.csv.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Data/BML_last_experiment_session.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/Data/BML_session_log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/BackwardBlockOrder.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/BackwardBlockOrder.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/ForwardBlockOrder.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/ForwardBlockOrder.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/RandomBlockOrder.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/BlockOrderDefinitions/RandomBlockOrder.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment Example.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment Example.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/ComplexExperimentDesign.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleComplexExperimentWithLotsOfBlocks/ComplexExperimentDesign.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleSimpleExperiment.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleSimpleExperiment/SimpleExperiment Example.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleSimpleExperiment/SimpleExperiment Example.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleSimpleExperiment/SimpleExperimentDesign.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/SampleSimpleExperiment/SimpleExperimentDesign.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/version_history.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ExperimentalFrameworkProject/Assets/BML_ExperimentToolkit/version_history.json.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,6 +147,7 @@
       <workItem from="1559144519430" duration="3000" />
       <workItem from="1568298904960" duration="1988000" />
       <workItem from="1568755301129" duration="1310000" />
+      <workItem from="1570565737512" duration="605000" />
     </task>
     <servers />
   </component>

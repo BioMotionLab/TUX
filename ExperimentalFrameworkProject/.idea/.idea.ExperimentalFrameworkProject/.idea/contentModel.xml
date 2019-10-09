@@ -26,6 +26,13 @@
               <e p="InstructionsDisplay.cs" t="Include" />
             </e>
           </e>
+          <e p="SamplesAndTutorials" t="Include">
+            <e p="TutorialExperiment" t="Include">
+              <e p="TutorialBlockScript.cs" t="Include" />
+              <e p="TutorialExperimentRunner.cs" t="Include" />
+              <e p="TutorialTrialScript.cs" t="Include" />
+            </e>
+          </e>
           <e p="Scripts" t="Include">
             <e p="BML_ExperimentToolkit.asmdef" t="Include" />
             <e p="ExperimentParts" t="Include">

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Data;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using UnityEngine;
 
 
 /// <summary>
@@ -39,16 +40,20 @@ public class ___TrialClassName___ : Trial {
     }
 
     
-    // Required Main Trial Code.
+    // Main Trial Execution Code.
     protected override IEnumerator RunMainCoroutine() {
         
-        // // You might want to do a while-loop to wait for participant response:
-        // bool waitingForParticipantResponse = true;
-        // while (waitingForParticipantResponse) {   // keep check each frame until waitingForParticipantResponse set to false.
-        //     yield return null;
-        // }
+        // You might want to do a while-loop to wait for participant response: 
+        bool waitingForParticipantResponse = true;
+        while (waitingForParticipantResponse) {   // keep check each frame until waitingForParticipantResponse set to false.
 
-        yield return null; //required for coroutine
+            if (Input.GetKeyDown(KeyCode.Return)) { // check return key pressed
+                waitingForParticipantResponse = false;  // escape from while loop
+            }
+            
+            yield return null; // wait for next frame while allowing rest of program to run (without this the program will hang in an infinite loop)
+        }
+        
     }
 
     
