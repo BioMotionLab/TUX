@@ -6,15 +6,14 @@
     <e p="C:\Users\BioMotion\Documents\GitHub\ExperimentalFramework\ExperimentalFrameworkProject" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="BML_ExperimentToolkit" t="Include">
+        <e p="BML_TUX" t="Include">
           <e p="Data" t="Include">
-            <e p="BML_session_log.txt" t="Include" />
             <e p="ScriptingTemplates" t="Include">
               <e p="AssemblyTemplateReference.cs" t="Include" />
               <e p="BlockScriptTemplate.cs" t="Include" />
               <e p="ExperimentRunnerTemplate.cs" t="Include" />
               <e p="ExperimentScriptTemplate.cs" t="Include" />
-              <e p="Templates.asmdef" t="Include" />
+              <e p="ScriptingTemplates.asmdef" t="Include" />
               <e p="TrialScriptTemplate.cs" t="Include" />
             </e>
           </e>
@@ -275,8 +274,8 @@
       <e p="ExtensionTests.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
+      <e p="ScriptingTemplates.csproj" t="IncludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
-      <e p="Templates.csproj" t="IncludeRecursive" />
       <e p="TestingUtilities.csproj" t="IncludeRecursive" />
       <e p="VariableUI.csproj" t="IncludeRecursive" />
     </e>
