@@ -385,13 +385,9 @@
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/ScriptingTemplates/ExperimentRunnerTemplate.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ScriptReferences.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ScriptHelperWindow.cs" />
-        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Creating-and-Configuring-your-experiment.md" />
         <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Setting-up-your-Experiment's-Behavior.md" />
         <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Trial-Class.md" />
-        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Block-Class.md" />
         <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Experiment-Class.md" />
-        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Output.md" />
-        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Troubleshooting.md" />
         <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Toolkit-Overview.md" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/ExperimentDesignFile.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableConfigurationFileEditor.cs" />
@@ -406,12 +402,16 @@
         <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Home.md" />
         <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Getting-Started.md" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/ScriptingTemplates/TrialScriptTemplate.cs" />
-        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/TutorialExperiment_Part2.md" />
-        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/TutorialExperiment.md" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialTrialScript.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialBlockScript.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_TUX/Data/ScriptingTemplates/AssemblyTemplateReference.cs" />
         <option value="$PROJECT_DIR$/Assets/BML_TUX/SamplesAndTutorials/TutorialExperiment/README.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Block-Class.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Creating-and-Configuring-your-experiment.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Output.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Troubleshooting.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/TutorialExperiment.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/TutorialExperiment_Part2.md" />
       </list>
     </option>
   </component>
@@ -502,7 +502,7 @@
       <workItem from="1570459527034" duration="21350000" />
       <workItem from="1570542111334" duration="8012000" />
       <workItem from="1570559053221" duration="12837000" />
-      <workItem from="1570631934079" duration="547000" />
+      <workItem from="1570631934079" duration="1160000" />
     </task>
     <servers />
   </component>
