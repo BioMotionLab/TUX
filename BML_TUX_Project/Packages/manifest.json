@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.bml.unityautopackagebuilder": "https://c88a7ccccb20b973e61c7864fc8b6cb3d091216a@github.com/BioMotionLab/UnityPackageAutoBuilder.git#upm",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.ads": "2.3.1",
@@ -45,5 +46,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "com.bml.unityautopackagebuilder": {
+      "hash": "bd8f283d2956525635c66b67f43b6e8e9d0e71a5",
+      "revision": "upm"
+    }
   }
 }
