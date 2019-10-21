@@ -13,21 +13,28 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         SerializedProperty factory;
         SerializedProperty trialTableGenerationMode;
         SerializedProperty orderConfigs;
-        SerializedProperty randomizationMode;
-        SerializedProperty repeatTrialsInBlock;
-        SerializedProperty repeatAllBlocks;
+        
+        SerializedProperty TrialRepetitions;
+        SerializedProperty ExperimentRepetitions;
         SerializedProperty columnNameSettings;
         SerializedProperty controlSettings;
         SerializedProperty guiSettings;
+        SerializedProperty blockRandomizationMode;
+        SerializedProperty trialRandomizationMode;
+        SerializedProperty trialRandomizationSubType;
+        SerializedProperty blockPartialRandomizationSubType;
 
         void OnEnable() {
             factory = serializedObject.FindProperty(nameof(ExperimentDesignFile.Factory));
             trialTableGenerationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialTableGeneration));
             orderConfigs = serializedObject.FindProperty(nameof(ExperimentDesignFile.BlockOrderConfigurations));
             
-            randomizationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.RandomizationMode));
-            repeatTrialsInBlock = serializedObject.FindProperty(nameof(ExperimentDesignFile.RepeatTrialsInBlock));
-            repeatAllBlocks = serializedObject.FindProperty(nameof(ExperimentDesignFile.RepeatAllBlocks));
+            blockRandomizationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.BlockRandomizationMode));
+            trialRandomizationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialRandomizationMode));
+            trialRandomizationSubType = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialRandomizationSubType));
+            blockPartialRandomizationSubType = serializedObject.FindProperty(nameof(ExperimentDesignFile.BlockPartialRandomizationSubType));
+            TrialRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialRepetitions));
+            ExperimentRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile.ExperimentRepetitions));
             columnNameSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.ColumnNamesSettings));
             controlSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.ControlSettings));
             guiSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.GuiSettings));
@@ -40,10 +47,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         {
             serializedObject.Update();
             
-            EditorGUILayout.LabelField("Randomization and Repetition settings:");
-            EditorGUILayout.PropertyField(randomizationMode);
-            EditorGUILayout.PropertyField(repeatTrialsInBlock);
-            EditorGUILayout.PropertyField(repeatAllBlocks);
+            
+            ShowRepetitionAndRandomizationSettings();
+            
+            
             EditorGUILayout.PropertyField(factory);
             
             EditorGUILayout.LabelField("--------");
@@ -71,6 +78,30 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.EndVertical();
             serializedObject.ApplyModifiedProperties();
             EditorUtility.SetDirty(target);
+        }
+
+        void ShowRepetitionAndRandomizationSettings() {
+            EditorGUILayout.LabelField("Randomization and Repetition settings:");
+
+            EditorGUILayout.PropertyField(TrialRepetitions);
+            EditorGUILayout.PropertyField(ExperimentRepetitions);
+
+            EditorGUILayout.PropertyField(blockRandomizationMode);
+
+            if (blockRandomizationMode.enumValueIndex == (int) BlockRandomizationMode.PartialRandomization) {
+                EditorGUI.indentLevel += 2;
+                EditorGUILayout.PropertyField(blockPartialRandomizationSubType);
+                EditorGUI.indentLevel -= 2;
+            }
+            
+            EditorGUILayout.PropertyField(trialRandomizationMode);
+
+            if (trialRandomizationMode.enumValueIndex == (int) TrialRandomizationMode.Randomized) {
+                EditorGUI.indentLevel += 2;
+                EditorGUILayout.PropertyField(trialRandomizationSubType);
+                EditorGUI.indentLevel -= 2;
+            }
+                
         }
 
         void ShowAdvancedOptions() {

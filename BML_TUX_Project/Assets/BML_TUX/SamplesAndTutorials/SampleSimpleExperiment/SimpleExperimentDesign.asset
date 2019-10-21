@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
   m_Name: SimpleExperimentDesign
   m_EditorClassIdentifier: 
-  RandomizationMode: 0
-  RepeatTrialsInBlock: 1
-  RepeatAllBlocks: 1
+  TrialRepetitions: 5
+  ExperimentRepetitions: 1
+  RandomizationMode: 2
   Factory:
     DataTypeToCreate: 2
     VariableTypeToCreate: 2

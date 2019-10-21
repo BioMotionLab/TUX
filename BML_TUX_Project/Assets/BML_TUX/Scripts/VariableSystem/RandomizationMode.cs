@@ -1,7 +1,8 @@
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
-    public enum RandomizationMode {
-        None,
-        RandomizeButSameOrderEachBlock,
-        RandomizeCompletely
+    public enum BlockRandomizationMode {
+        InOrder,
+        CustomOrder,
+        CompleteRandomization,
+        PartialRandomization
     }
 }

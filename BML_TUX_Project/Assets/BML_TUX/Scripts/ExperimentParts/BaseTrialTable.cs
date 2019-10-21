@@ -16,15 +16,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
             variables = experimentDesignFile.Variables;
             columnNames = experimentDesignFile.ColumnNamesSettings;
-
-
+            
             baseTrialTable = AddVariablesToTable();
-
-            RepeatTrialsIfNeeded(experimentDesignFile);
-
-            //ShuffleRows trial order if needed
-            ShuffleTrialsIfNeeded(experimentDesignFile);
-
+            
             AddMetaColumns(baseBlockTable);
         }
 
@@ -37,25 +31,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             AddAttemptsColumn();
             AddSkippedColumn();
             AddTrialTimeColumn();
-        }
-
-        void ShuffleTrialsIfNeeded(ExperimentDesignFile experimentDesignFile) {
-            if (experimentDesignFile.RandomizationMode != RandomizationMode.None) {
-                baseTrialTable = baseTrialTable.ShuffleRows();
-            }
-        }
-
-        void RepeatTrialsIfNeeded(ExperimentDesignFile experimentDesignFile) {
-            if (experimentDesignFile.RepeatTrialsInBlock > 1) {
-                DataTable repeatedTable = baseTrialTable.Clone();
-                for (int i = 0; i < experimentDesignFile.RepeatTrialsInBlock; i++) {
-                    foreach (DataRow row in baseTrialTable.Rows) {
-                        repeatedTable.ImportRow(row);
-                    }
-                }
-
-                baseTrialTable = repeatedTable;
-            }
         }
 
         public static implicit operator DataTable(BaseTrialTable table) {

@@ -20,7 +20,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             orderConfigs = experimentDesignFile.BlockOrderConfigurations;
             blockVariables = experimentDesignFile.Variables.BlockVariables;
             baseBlockTable = AddVariablesToTable();
-   
         }
 
         BaseBlockTable(DataTable blockTable) {

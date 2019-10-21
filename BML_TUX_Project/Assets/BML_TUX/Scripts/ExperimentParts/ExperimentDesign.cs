@@ -15,21 +15,62 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
         
         public bool HasBlocks => baseBlockTable.HasBlocks;
         
-
         readonly ExperimentDesignFile designFile;
         readonly ColumnNamesSettings columnNames;
-        
-        
+
+        public List<string> BlockPermutationsStrings => GetBlockPermutationsStrings();
+
+        public DataTable BaseBlockTable => baseBlockTable;
+
+        public int NumberOfBlocks => baseBlockTable.Rows.Count;
+
+        public const int MaxBlockPermutationsAllowed = 3;
+
         public static ExperimentDesign CreateFrom(ExperimentDesignFile configurationFileFile) {
             return new ExperimentDesign(configurationFileFile);
         }
 
-        public List<string> BlockPermutationsStrings => GetBlockPermutationsStrings();
-        public DataTable BaseBlockTable => baseBlockTable;
-        public int NumberOfBlocks => baseBlockTable.Rows.Count;
+        ExperimentDesign(ExperimentDesignFile designFile) {
+            this.designFile = designFile;
+            columnNames = designFile.ColumnNamesSettings;
+            baseBlockTable = new BaseBlockTable(designFile);
+            baseTrialTable = new BaseTrialTable(baseBlockTable, designFile);
 
-        public const int MaxBlockPermutationsAllowed = 3;
+        }
         
+        void AddRepetitionAndRandomization(ExperimentDesignFile experimentDesignFile) {
+            
+            //ShuffleTrialsIfNeeded
+            if (experimentDesignFile.RandomizationMode != RandomizationMode.None) {
+                baseTrialTable = baseTrialTable.ShuffleRows();
+            }
+            
+            //RepeatTrialsIfNeeded
+            if (experimentDesignFile.TrialRepetitions > 1) {
+                DataTable repeatedTable = baseTrialTable.Clone();
+                for (int i = 0; i < experimentDesignFile.TrialRepetitions; i++) {
+                    foreach (DataRow row in baseTrialTable.Rows) {
+                        repeatedTable.ImportRow(row);
+                    }
+                }
+
+                baseTrialTable = repeatedTable;
+                
+            }
+            
+            
+            // shuffle trials
+            var newFinalTable = baseTrialTable.Clone();
+            for (int blockRepetitionCount = 0; blockRepetitionCount < designFile.ExperimentRepetitions; blockRepetitionCount++) {
+                for (int rowIndex = 0; rowIndex < orderedBlockTable.Rows.Count; rowIndex++) {
+                    DataRow orderedBlockRow = orderedBlockTable.Rows[rowIndex];
+                    if (designFile.RandomizationMode == RandomizationMode.RandomizeCompletely) trialTable = trialTable.ShuffleRows();
+                    trialTable = AddBlockValuesToTrialTables(trialTable, orderedBlockRow, (blockRepetitionCount*orderedBlockTable.Rows.Count)+(rowIndex));
+                    newFinalTable.Merge(trialTable, true, MissingSchemaAction.Error);
+                }
+            }
+        }
+
         List<string> GetBlockPermutationsStrings() {
             
             if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && designFile.BlockOrderConfigurations.Count == 0) {
@@ -43,7 +84,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                                              "See documentation for more information");
 
         }
-        
+
         List<string> GetBlockOrderConfigStrings() {
             List<string> orderStrings = new List<string>();
             foreach (BlockOrderDefinition orderConfig in designFile.BlockOrderConfigurations) {
@@ -65,14 +106,7 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return orderStrings;
         }
 
-        ExperimentDesign(ExperimentDesignFile designFile) {
-            this.designFile = designFile;
-            columnNames = designFile.ColumnNamesSettings;
-            baseBlockTable = new BaseBlockTable(designFile);
-            baseTrialTable = new BaseTrialTable(baseBlockTable, designFile);
-        }
 
-        
         public DataTable GetFinalExperimentTable(int selectedOrderIndex) {
             orderedBlockTable = baseBlockTable.GetOrderedBlockTable(selectedOrderIndex);
             finalTable = BuildFinalTable();
@@ -86,15 +120,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
                 return trialTable;
             }
             
-            var newFinalTable = baseTrialTable.Clone();
-            for (int blockRepetitionCount = 0; blockRepetitionCount < designFile.RepeatAllBlocks; blockRepetitionCount++) {
-                for (int rowIndex = 0; rowIndex < orderedBlockTable.Rows.Count; rowIndex++) {
-                    DataRow orderedBlockRow = orderedBlockTable.Rows[rowIndex];
-                    if (designFile.RandomizationMode == RandomizationMode.RandomizeCompletely) trialTable = trialTable.ShuffleRows();
-                    trialTable = AddBlockValuesToTrialTables(trialTable, orderedBlockRow, (blockRepetitionCount*orderedBlockTable.Rows.Count)+(rowIndex));
-                    newFinalTable.Merge(trialTable, true, MissingSchemaAction.Error);
-                }
-            }
+            AddRepetitionAndRandomization(designFile);
+            
+            
             return newFinalTable;
         }
 

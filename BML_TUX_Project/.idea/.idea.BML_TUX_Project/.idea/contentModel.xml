@@ -141,6 +141,7 @@
             </e>
             <e p="VariableSystem" t="Include">
               <e p="BlockOrderDefinition.cs" t="Include" />
+              <e p="BlockPartialRandomizationSubType.cs" t="Include" />
               <e p="DependentVariable.cs" t="Include" />
               <e p="ExperimentDesignFile.cs" t="Include" />
               <e p="IndependentVariable.cs" t="Include" />
@@ -148,6 +149,8 @@
               <e p="ParticipantVariable.cs" t="Include" />
               <e p="RandomizationMode.cs" t="Include" />
               <e p="SupportedDataType.cs" t="Include" />
+              <e p="TrialRandomizationMode.cs" t="Include" />
+              <e p="TrialRandomizationSubType.cs" t="Include" />
               <e p="Variable.cs" t="Include" />
               <e p="VariableFactory.cs" t="Include" />
               <e p="VariableMixingType.cs" t="Include" />

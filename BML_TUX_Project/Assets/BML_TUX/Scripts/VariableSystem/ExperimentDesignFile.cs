@@ -3,19 +3,31 @@ using System.Collections.Generic;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Settings;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
     [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "New Experiment Design File")]
     public class ExperimentDesignFile : ScriptableObject {
 
         [Header("Randomization and Repetition settings:")]
-        public RandomizationMode RandomizationMode;
+       
         
+        [FormerlySerializedAs("RepeatTrials")]
+        [FormerlySerializedAs("RepeatTrialsInBlock")]
         [Range(1,50)]
-        public int  RepeatTrialsInBlock = 1;
+        public int  TrialRepetitions = 1;
         
+        [FormerlySerializedAs("RepeatExperiment")]
+        [FormerlySerializedAs("RepeatAllBlocks")]
         [Range(1,20)]
-        public int RepeatAllBlocks = 1;
+        public int ExperimentRepetitions = 1;
+        
+        
+        public TrialRandomizationMode TrialRandomizationMode;
+        public TrialRandomizationSubType TrialRandomizationSubType;
+
+        public BlockRandomizationMode BlockRandomizationMode;
+        public BlockPartialRandomizationSubType BlockPartialRandomizationSubType;
         
         [SerializeField]
         public VariableFactory Factory = new VariableFactory();
