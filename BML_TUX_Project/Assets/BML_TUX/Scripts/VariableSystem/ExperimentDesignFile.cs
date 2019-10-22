@@ -23,10 +23,13 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public int ExperimentRepetitions = 1;
         
         
-        public TrialRandomizationMode TrialRandomizationMode = TrialRandomizationMode.InOrder;
-        public TrialRandomizationSubType TrialRandomizationSubType = TrialRandomizationSubType.DifferentPermutations;
+        [FormerlySerializedAs("TrialRandomizationMode")]
+        public TrialRandomizationMode TrialRandomization = TrialRandomizationMode.InOrder;
+        [FormerlySerializedAs("TrialPermutationType")]
+        public TrialPermutationType TrialPermutationType = TrialPermutationType.DifferentPermutations;
 
-        public BlockRandomizationMode BlockRandomizationMode = BlockRandomizationMode.InOrder;
+        [FormerlySerializedAs("BlockRandomizationMode")]
+        public BlockRandomizationMode BlockRandomization = BlockRandomizationMode.InOrder;
         public BlockPartialRandomizationSubType BlockPartialRandomizationSubType = BlockPartialRandomizationSubType.DifferentPermutations;
         
         [SerializeField]
@@ -53,7 +56,13 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
         public Variables Variables => Factory.Variables;
         
-        
+        public bool HasBlocks {
+            get {
+                List<IndependentVariable> blockIVs = Variables.BlockVariables;
+                return blockIVs.Count > 0;
+            }
+        }
+
         [SerializeField]
         public TrialTableGenerationMode TrialTableGeneration = TrialTableGenerationMode.OnTheFly;
         

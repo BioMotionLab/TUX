@@ -1,0 +1,15 @@
+
+
+---------------------
+Session Logged: 2019-10-22 11:31
+{"outputFileName":"","outputFolder":"","SelectedDesignFilePath":"","DebugMode":true,"BlockOrderChosenIndex":0}
+
+
+---------------------
+Session Logged: 2019-10-22 12:44
+{"outputFileName":"tes4","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"","DebugMode":false,"BlockOrderChosenIndex":0}
+Confirmed Complete at: 12:44
+
+---------------------
+Session Logged: 2019-10-22 01:05
+{"outputFileName":"tes7","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"","DebugMode":false,"BlockOrderChosenIndex":0}

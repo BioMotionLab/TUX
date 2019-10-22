@@ -119,8 +119,10 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         
         void ShowBlockOrderSettings() {
             blockOrderData = new BlockOrderData(runner.ExperimentDesign);
-            
+
             if (!blockOrderData.SelectionRequired) return;
+
+            
             
             GetBlockOrderFromPopup();
             BlockOrderTitle.text = blockOrderData.BlockOrderText;

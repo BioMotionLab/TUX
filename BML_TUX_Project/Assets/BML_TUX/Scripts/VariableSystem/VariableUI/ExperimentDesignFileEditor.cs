@@ -24,15 +24,16 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         SerializedProperty trialRandomizationMode;
         SerializedProperty trialRandomizationSubType;
         SerializedProperty blockPartialRandomizationSubType;
+        ExperimentDesignFile designFileTarget;
 
         void OnEnable() {
             factory = serializedObject.FindProperty(nameof(ExperimentDesignFile.Factory));
             trialTableGenerationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialTableGeneration));
             orderConfigs = serializedObject.FindProperty(nameof(ExperimentDesignFile.BlockOrderConfigurations));
             
-            blockRandomizationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.BlockRandomizationMode));
-            trialRandomizationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialRandomizationMode));
-            trialRandomizationSubType = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialRandomizationSubType));
+            blockRandomizationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.BlockRandomization));
+            trialRandomizationMode = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialRandomization));
+            trialRandomizationSubType = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialPermutationType));
             blockPartialRandomizationSubType = serializedObject.FindProperty(nameof(ExperimentDesignFile.BlockPartialRandomizationSubType));
             TrialRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialRepetitions));
             ExperimentRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile.ExperimentRepetitions));
@@ -42,23 +43,25 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             
             
         }
-        
+
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
             
+            designFileTarget = target as ExperimentDesignFile;
             
             ShowRepetitionAndRandomizationSettings();
             
             
             EditorGUILayout.PropertyField(factory);
+            serializedObject.Update();
+            serializedObject.ApplyModifiedProperties();
             
             EditorGUILayout.LabelField("--------");
             
-            if (GUILayout.Button("Preview Design", GUILayout.Width(250), GUILayout.Height(50))){
-                DesignPreviewWindow.ShowWindow(target as ExperimentDesignFile);
-                
+            if (GUILayout.Button("Preview Design", GUILayout.Width(250), GUILayout.Height(50))) {
+                DesignPreviewWindow.ShowWindow(designFileTarget);
             }
             
             EditorGUILayout.LabelField("--------");
@@ -97,13 +100,14 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             
             EditorGUILayout.PropertyField(trialRandomizationMode);
 
-            if (trialRandomizationMode.enumValueIndex == (int) TrialRandomizationMode.Randomized) {
+            if (trialRandomizationMode.enumValueIndex == (int) TrialRandomizationMode.Randomized && designFileTarget.HasBlocks) {
                 EditorGUI.indentLevel += 2;
                 EditorGUILayout.PropertyField(trialRandomizationSubType);
                 EditorGUI.indentLevel -= 2;
             }
                 
         }
+        
 
         void ShowAdvancedOptions() {
             

@@ -1,5 +1,5 @@
 namespace BML_ExperimentToolkit.Scripts.VariableSystem {
-    public enum TrialRandomizationSubType {
+    public enum TrialPermutationType {
         OnePermutation,
         DifferentPermutations
     }

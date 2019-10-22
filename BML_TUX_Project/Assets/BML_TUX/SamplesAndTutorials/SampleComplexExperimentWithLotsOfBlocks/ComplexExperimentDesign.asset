@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
   m_Name: ComplexExperimentDesign
   m_EditorClassIdentifier: 
-  RandomizationMode: 2
-  RepeatTrialsInBlock: 1
-  RepeatAllBlocks: 1
+  TrialRepetitions: 1
+  ExperimentRepetitions: 1
+  TrialRandomization: 0
+  TrialPermutationType: 1
+  BlockRandomization: 1
+  BlockPartialRandomizationSubType: 1
   Factory:
     DataTypeToCreate: 0
     VariableTypeToCreate: 0
@@ -89,7 +92,7 @@ MonoBehaviour:
     - Name: Sex
       TypeOfVariable: 2
       DataType: 2
-      Value: Female
+      Value: Male
       ConstrainValues: 1
       PossibleValues:
       - Male

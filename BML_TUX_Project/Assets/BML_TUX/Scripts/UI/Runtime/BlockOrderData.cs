@@ -10,17 +10,18 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         
         public BlockOrderData(ExperimentDesign experimentDesign) {
             
-            if (experimentDesign.NumberOfBlocks > 1) {
+            if (experimentDesign.RandomizedBlocks) {
+                SelectionRequired = false;
+            }
+            else if (experimentDesign.NumberOfBlocks > 1) {
                 BlockOrderText = "Select a Block order";
                 SelectionRequired = true;
             }
             else if (experimentDesign.NumberOfBlocks == 1) {
                 BlockOrderText = "Only one Block value";
-                DefaultBlockOrderIndex = 0;
             }
             else {
                 BlockOrderText = "No Block variables";
-                DefaultBlockOrderIndex = 0;
             }
         }
 

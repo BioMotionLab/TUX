@@ -6,6 +6,11 @@
     <e p="C:\Users\BioMotion\Documents\GitHub\BML_TUX\BML_TUX_Project" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="BML_ExperimentToolkit" t="Include">
+          <e p="Data" t="Include">
+            <e p="BML_session_log.txt" t="Include" />
+          </e>
+        </e>
         <e p="BML_TUX" t="Include">
           <e p="Data" t="Include">
             <e p="ScriptingTemplates" t="Include">
@@ -149,8 +154,8 @@
               <e p="ParticipantVariable.cs" t="Include" />
               <e p="RandomizationMode.cs" t="Include" />
               <e p="SupportedDataType.cs" t="Include" />
+              <e p="TrialPermutationType.cs" t="Include" />
               <e p="TrialRandomizationMode.cs" t="Include" />
-              <e p="TrialRandomizationSubType.cs" t="Include" />
               <e p="Variable.cs" t="Include" />
               <e p="VariableFactory.cs" t="Include" />
               <e p="VariableMixingType.cs" t="Include" />

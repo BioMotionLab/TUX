@@ -10,12 +10,22 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         float height;
         
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
+            if (height < 1) {
+                RepaintInspector(property.serializedObject);
+            }
             return EditorGUI.GetPropertyHeight(property) + height;
         }
 
+        static void RepaintInspector(SerializedObject BaseObject)
+        {
+            foreach (Editor item in ActiveEditorTracker.sharedTracker.activeEditors)
+                if (item.serializedObject == BaseObject)
+                { item.Repaint(); return; }
+        }
+        
         public override void OnGUI(Rect mainPosition, SerializedProperty mainProperty, GUIContent label) {
             
-            //property.serializedObject.Update();
+            mainProperty.serializedObject.Update();
             int oldIndentLevel = EditorGUI.indentLevel;
             
             GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight, mainPosition);
@@ -84,8 +94,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             EditorGUI.indentLevel = oldIndentLevel;
             height = layoutRect.FinalHeight;
             mainProperty.serializedObject.ApplyModifiedProperties();
-
-
             
         }
 

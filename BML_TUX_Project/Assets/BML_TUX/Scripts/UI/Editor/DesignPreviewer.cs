@@ -50,11 +50,19 @@ namespace BML_TUX.Scripts.UI.Editor {
             EditorGUILayout.BeginVertical();
             EditorGUILayout.LabelField("Preview:", EditorStyles.boldLabel);
 
-            EditorGUILayout.LabelField(blockOrderData.BlockOrderText);
 
-            SelectedBlockOrderIndex = blockOrderData.SelectionRequired
-                ? EditorGUILayout.Popup(SelectedBlockOrderIndex, experimentDesign.BlockPermutationsStrings.ToArray())
-                : SelectedBlockOrderIndex = blockOrderData.DefaultBlockOrderIndex;
+            if (designFile.BlockRandomization != BlockRandomizationMode.CompleteRandomization &&
+                designFile.BlockRandomization != BlockRandomizationMode.PartialRandomization) {
+                EditorGUILayout.LabelField(blockOrderData.BlockOrderText);
+
+                SelectedBlockOrderIndex = blockOrderData.SelectionRequired
+                    ? EditorGUILayout.Popup(SelectedBlockOrderIndex,
+                                            experimentDesign.BlockPermutationsStrings.ToArray())
+                    : SelectedBlockOrderIndex = blockOrderData.DefaultBlockOrderIndex;
+            }
+            else {
+                SelectedBlockOrderIndex = 0;
+            }
             
             EditorGUILayout.Space();
 

@@ -13,17 +13,17 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
     //but need to have serialized lists available in unity inspector
     [Serializable]
     public class VariableFactory {
-        
         [SerializeField]
         public SupportedDataType DataTypeToCreate;
 
         [SerializeField]
         public VariableType VariableTypeToCreate;
-        
-        
+
+
         readonly Dictionary<SupportedDataType, Type> supportedIndependentTypes;
         readonly Dictionary<SupportedDataType, Type> supportedDependentTypes;
         readonly Dictionary<SupportedDataType, Type> supportedParticipantTypes;
+        
 
         public VariableFactory() {
             supportedIndependentTypes = GetSupportedTypes(typeof(IndependentVariable));
@@ -49,7 +49,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         }
 
         #region IndependentVariables
-        
+
         public List<IndependentVariableInt> IntIVs = new List<IndependentVariableInt>();
         public List<IndependentVariableFloat> FloatIVs = new List<IndependentVariableFloat>();
         public List<IndependentVariableString> StringIVs = new List<IndependentVariableString>();
@@ -129,7 +129,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             }
         }
 
-        
+
         // ReSharper disable once CognitiveComplexity
         public void AddNew() {
             //TODO Probably a better way to do this
