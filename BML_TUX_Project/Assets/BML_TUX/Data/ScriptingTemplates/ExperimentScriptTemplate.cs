@@ -3,7 +3,8 @@ using BML_ExperimentToolkit.Scripts.ExperimentParts;
 
 namespace BML_TUX.Data.ScriptingTemplates {
     /// <summary>
-    /// Classes that inherit from Experiment define custom behaviour for your experiment.
+    /// Classes that inherit from Experiment define custom behaviour for the start and end of your experiment.
+    /// This might useful for experiment setup, instructions, and debrief.
     ///
     /// This template shows how to set up a custom experiment script using the toolkit's built-in functions.
     ///

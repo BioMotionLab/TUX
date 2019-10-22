@@ -4,7 +4,8 @@ using BML_ExperimentToolkit.Scripts.ExperimentParts;
 
 namespace BML_TUX.Data.ScriptingTemplates {
     /// <summary>
-    /// Classes that inherit from Block define custom behaviour for your experiment.
+    /// Classes that inherit from Block define custom behaviour for your experiment's blocks.
+    /// This might be useful for instructions that differ between each block, setting up the scene for each block, etc.
     ///
     /// This template shows how to set up a custom Block script using the toolkit's built-in functions.
     ///
@@ -27,7 +28,7 @@ namespace BML_TUX.Data.ScriptingTemplates {
         }
 
 
-        // Optional Pre-Block code. Useful for calibration and setup common to all blocks.
+        // Optional Pre-Block code. Useful for calibration and setup common to all blocks. Executes in a single frame at the start of the block
         protected override void PreMethod() {
         
             // float thisBlocksDistanceValue = (float)Data["MyDistanceFloatVariableName"]; // Read values of independent variables
@@ -36,8 +37,13 @@ namespace BML_TUX.Data.ScriptingTemplates {
 
     
         // Optional Pre-Block code spanning multiple frames. Useful for pre-Block instructions.
+        // Can execute over multiple frames at the start of a block
         protected override IEnumerator PreCoroutine() {
-            yield return null; //required for coroutine
+            yield return null; // yield return required for coroutine. Waits until next frame
+            
+            // Other ideas:
+            // yield return new WaitForSeconds(5);     Waits for 5 seconds worth of frames;
+            // can also wait for user input in a while-loop with a yield return null inside.
         }
     
     
@@ -49,7 +55,7 @@ namespace BML_TUX.Data.ScriptingTemplates {
     
         // Optional Post-Block code.
         protected override void PostMethod() {
-            // cleanup code (happens all in one frame)
+            // cleanup code (happens all in one frame at end of block)
         }
     }
 }

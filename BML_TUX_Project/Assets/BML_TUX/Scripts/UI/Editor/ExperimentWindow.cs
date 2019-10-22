@@ -4,12 +4,11 @@ using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Managers;
 using BML_ExperimentToolkit.Scripts.Settings;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
-using BML_Utilities;
 using BML_Utilities.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.UI.Editor {
+namespace BML_TUX.Scripts.UI.Editor {
 
     public class ExperimentWindow : EditorWindow {
 

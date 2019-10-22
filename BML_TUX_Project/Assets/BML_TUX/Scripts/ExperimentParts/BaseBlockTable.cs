@@ -117,6 +117,9 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             return orderedBlockTable;
         }
 
+        public DataTable Clone() {
+            return baseBlockTable.Clone();
+        }
     }
 
     public class TooManyPermutationsException : Exception {

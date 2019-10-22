@@ -6,7 +6,7 @@ using BML_Utilities.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.UI.Editor {
+namespace BML_TUX.Scripts.UI.Editor {
     public class DesignSaverWindow : EditorWindow {
       
         string fileName = "experimentDesignSave";

@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace BML_TUX.Data.ScriptingTemplates {
     /// <summary>
-    /// Classes that inherit from Trial define custom behaviour for your experiment.
+    /// Classes that inherit from Trial define custom behaviour for your experiment's trials.
+    /// Most experiments will need to edit this file to describe what happens in a trial.
     ///
     /// This template shows how to set up a custom trial script using the toolkit's built-in functions.
     ///
@@ -26,7 +27,7 @@ namespace BML_TUX.Data.ScriptingTemplates {
         }
 
 
-        // Optional Pre-Trial code. Useful for setting up trials (one frame only)
+        // Optional Pre-Trial code. Useful for setting unity scene for trials. Executes in one frame at the start of each trial
         protected override void PreMethod() {
         
             // float thisTrialsDistanceValue = (float)Data["MyDistanceFloatVariableName"]; // Read values of independent variables
@@ -34,7 +35,8 @@ namespace BML_TUX.Data.ScriptingTemplates {
         }
 
     
-        // Optional Pre-Trial code. Useful for waiting for the participant to do something before each trial (multiple frames)
+        // Optional Pre-Trial code. Useful for waiting for the participant to
+        // do something before each trial (multiple frames). Also might be useful for fixation points etc.
         protected override IEnumerator PreCoroutine() {
             yield return null; //required for coroutine
         }
@@ -63,9 +65,10 @@ namespace BML_TUX.Data.ScriptingTemplates {
         }
 
     
-        // Optional Post-Trial code. Useful for resetting everything, and writing data to dependent variables. (One frame only)
+        // Optional Post-Trial code. useful for writing data to dependent variables and for resetting everything.
+        // Executes in a single frame at the end of each trial
         protected override void PostMethod() {
-            // Good place to write results to dependent variables. 
+            // How to write results to dependent variables: 
             // Data["MyDependentFloatVariable"] = someFloatVariable;
         }
     }

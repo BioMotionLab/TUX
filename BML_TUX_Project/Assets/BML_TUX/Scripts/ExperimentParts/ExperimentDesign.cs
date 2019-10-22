@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 using BML_ExperimentToolkit.Scripts.Settings;
 using BML_Utilities.Extensions;
+using JetBrains.Annotations;
+using UnityEngine;
 
 namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
     public class ExperimentDesign {
@@ -36,39 +39,6 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             baseBlockTable = new BaseBlockTable(designFile);
             baseTrialTable = new BaseTrialTable(baseBlockTable, designFile);
 
-        }
-        
-        void AddRepetitionAndRandomization(ExperimentDesignFile experimentDesignFile) {
-            
-            //ShuffleTrialsIfNeeded
-            if (experimentDesignFile.RandomizationMode != RandomizationMode.None) {
-                baseTrialTable = baseTrialTable.ShuffleRows();
-            }
-            
-            //RepeatTrialsIfNeeded
-            if (experimentDesignFile.TrialRepetitions > 1) {
-                DataTable repeatedTable = baseTrialTable.Clone();
-                for (int i = 0; i < experimentDesignFile.TrialRepetitions; i++) {
-                    foreach (DataRow row in baseTrialTable.Rows) {
-                        repeatedTable.ImportRow(row);
-                    }
-                }
-
-                baseTrialTable = repeatedTable;
-                
-            }
-            
-            
-            // shuffle trials
-            var newFinalTable = baseTrialTable.Clone();
-            for (int blockRepetitionCount = 0; blockRepetitionCount < designFile.ExperimentRepetitions; blockRepetitionCount++) {
-                for (int rowIndex = 0; rowIndex < orderedBlockTable.Rows.Count; rowIndex++) {
-                    DataRow orderedBlockRow = orderedBlockTable.Rows[rowIndex];
-                    if (designFile.RandomizationMode == RandomizationMode.RandomizeCompletely) trialTable = trialTable.ShuffleRows();
-                    trialTable = AddBlockValuesToTrialTables(trialTable, orderedBlockRow, (blockRepetitionCount*orderedBlockTable.Rows.Count)+(rowIndex));
-                    newFinalTable.Merge(trialTable, true, MissingSchemaAction.Error);
-                }
-            }
         }
 
         List<string> GetBlockPermutationsStrings() {
@@ -108,22 +78,120 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
 
 
         public DataTable GetFinalExperimentTable(int selectedOrderIndex) {
-            orderedBlockTable = baseBlockTable.GetOrderedBlockTable(selectedOrderIndex);
-            finalTable = BuildFinalTable();
+            finalTable = BuildFinalTable(selectedOrderIndex);
             return finalTable;
         }
 
-        DataTable BuildFinalTable() {
+        DataTable BuildFinalTable(int selectedOrderIndex) {
+
+
+            DataTable newFinalOverallTable = baseTrialTable.Clone();
+            
+            //Copy base trial table
             DataTable trialTable = baseTrialTable.Copy();
-            if (orderedBlockTable == null) {
-                AddTrialAndBlockIndicesWhenNoBlocks(trialTable);
-                return trialTable;
+
+            //Repeat individual trials if needed
+            
+            DataTable repeatedTrialTable = baseTrialTable.Clone();
+            if (designFile.TrialRepetitions < 1) throw new ArgumentOutOfRangeException("Trial Repetitions cannot be less than 1");
+            foreach (DataRow row in baseTrialTable.Rows) {
+                for (int i = 0; i < designFile.TrialRepetitions; i++) {
+                    repeatedTrialTable.ImportRow(row);
+                }
+            }
+
+            trialTable = repeatedTrialTable;
+            
+
+            //Shuffle trial order if needed
+            if (designFile.TrialRandomizationMode == TrialRandomizationMode.Randomized) {
+                trialTable = trialTable.ShuffleRows();
+            }
+
+
+            if (HasBlocks) {
+
+                //Randomize block order once if needed
+                DataTable selectedOrderedBlockTable = baseBlockTable.GetOrderedBlockTable(selectedOrderIndex);
+                if (designFile.BlockRandomizationMode == BlockRandomizationMode.CompleteRandomization
+                    || designFile.BlockRandomizationMode == BlockRandomizationMode.PartialRandomization) {
+                    Debug.Log("Shuffling blockTableRows");
+                    selectedOrderedBlockTable = selectedOrderedBlockTable.ShuffleRows();
+                    
+                }
+
+                //create empty block table for adding repetitions
+                DataTable blockOrderTableWIthRepetitions = selectedOrderedBlockTable.Clone();
+
+                for (int experimentRepetitionIndex = 0;
+                    experimentRepetitionIndex < designFile.ExperimentRepetitions;
+                    experimentRepetitionIndex++) {
+
+                    //Create temporary new block table
+                    DataTable repeatedBlockOrderTable = selectedOrderedBlockTable.Copy();
+
+                    //Randomize block order per repetition if needed
+                    if (designFile.BlockRandomizationMode == BlockRandomizationMode.PartialRandomization
+                        && designFile.BlockPartialRandomizationSubType ==
+                        BlockPartialRandomizationSubType.DifferentPermutations) {
+                        repeatedBlockOrderTable = repeatedBlockOrderTable.ShuffleRows();
+                    }
+
+                    //Add repetition to overall table
+                    for (int blockRowIndex = 0; blockRowIndex < repeatedBlockOrderTable.Rows.Count; blockRowIndex++) {
+                        blockOrderTableWIthRepetitions.ImportRow(repeatedBlockOrderTable.Rows[blockRowIndex]);
+                    }
+                }
+
+                //Randomize across repetitions if needed
+                if (designFile.BlockRandomizationMode == BlockRandomizationMode.CompleteRandomization) {
+                    blockOrderTableWIthRepetitions = blockOrderTableWIthRepetitions.ShuffleRows();
+                    Debug.Log("CompleteRandomization");
+                }
+
+                
+                
+                for (int blockIndex = 0; blockIndex < blockOrderTableWIthRepetitions.Rows.Count; blockIndex++) {
+                    Debug.Log(blockIndex);
+                    DataTable newFinalizedTrialTable = trialTable.Copy();
+                    DataRow orderedBlockRow = blockOrderTableWIthRepetitions.Rows[blockIndex];
+                    if (designFile.TrialRandomizationMode == TrialRandomizationMode.Randomized
+                        && designFile.TrialRandomizationSubType == TrialRandomizationSubType.DifferentPermutations) {
+                        newFinalizedTrialTable = newFinalizedTrialTable.ShuffleRows();
+                    }
+                    newFinalizedTrialTable = AddBlockValuesToTrialTables(newFinalizedTrialTable, orderedBlockRow, blockIndex);
+                    newFinalOverallTable.Merge(newFinalizedTrialTable, true, MissingSchemaAction.Error);
+                }
+
+                finalTable = newFinalOverallTable;
+                Debug.Log(newFinalOverallTable.AsString());
+                return newFinalOverallTable;
             }
             
-            AddRepetitionAndRandomization(designFile);
-            
-            
-            return newFinalTable;
+            //No blocks
+            else {
+
+                AddTrialAndBlockIndicesWhenNoBlocks(trialTable);
+                
+                DataTable repeatedTable = trialTable.Clone();
+
+                for (int i = 0; i < designFile.ExperimentRepetitions; i++) {
+
+                    DataTable singleExperimentRepetition = trialTable.Copy();
+
+                    if (designFile.TrialRandomizationMode == TrialRandomizationMode.Randomized
+                        && designFile.TrialRandomizationSubType ==
+                        TrialRandomizationSubType.DifferentPermutations)
+                        singleExperimentRepetition = singleExperimentRepetition.ShuffleRows();
+
+                    foreach (DataRow row in singleExperimentRepetition.Rows) {
+                        repeatedTable.ImportRow(row);
+                    }
+                }
+
+                return repeatedTable;
+
+            }
         }
 
         public DataTable GetBlockOrderTable(int sessionOrderChosenIndex) {

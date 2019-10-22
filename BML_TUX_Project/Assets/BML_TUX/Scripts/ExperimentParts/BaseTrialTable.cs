@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using BML_ExperimentToolkit.Scripts.Settings;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities.Extensions;
@@ -21,6 +22,8 @@ namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
             
             AddMetaColumns(baseBlockTable);
         }
+
+        public DataRowCollection Rows => baseTrialTable.Rows;
 
         void AddMetaColumns(BaseBlockTable baseBlockTable) {
             AddBlockColumnsFrom(baseBlockTable);

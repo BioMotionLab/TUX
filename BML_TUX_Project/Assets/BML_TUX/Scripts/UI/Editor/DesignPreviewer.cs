@@ -1,11 +1,12 @@
 using System.Data;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_ExperimentToolkit.Scripts.UI.Editor;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
 using BML_Utilities.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.UI.Editor {
+namespace BML_TUX.Scripts.UI.Editor {
     public class DesignPreviewer {
         readonly ExperimentDesignFile designFile;
         public int SelectedBlockOrderIndex;
@@ -15,12 +16,14 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         int lastDisplayedOrderIndex = -1 ;
         readonly BlockOrderData blockOrderData;
 
+        bool SelectedBlockOrderChanged => SelectedBlockOrderIndex != lastDisplayedOrderIndex;
+
         public DesignPreviewer(ExperimentDesignFile designFile) {
             this.designFile = designFile;
             experimentDesign = ExperimentDesign.CreateFrom(designFile);
             blockOrderData = new BlockOrderData(experimentDesign);
         }
-        
+
         bool DesignFileLinked() {
             bool linked = false;
             if (designFile != null) {
@@ -34,7 +37,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
             return linked;
         }
-        
+
         public DataTable ShowPreview() {
             
             if (!DesignFileLinked()) return null;
@@ -54,6 +57,10 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
                 : SelectedBlockOrderIndex = blockOrderData.DefaultBlockOrderIndex;
             
             EditorGUILayout.Space();
+
+            if (GUILayout.Button("Re-randomize")) {
+                previewTable = experimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
+            }
             
             if (SelectedBlockOrderChanged || previewTable == null) {
                 previewTable = experimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
@@ -67,7 +74,9 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
             EditorGUILayout.EndScrollView();
             return previewTable;
         }
-
-        bool SelectedBlockOrderChanged => SelectedBlockOrderIndex != lastDisplayedOrderIndex;
+        
     }
+    
+    
+    
 }

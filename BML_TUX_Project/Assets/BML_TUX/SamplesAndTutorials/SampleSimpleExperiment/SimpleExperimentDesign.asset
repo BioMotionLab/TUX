@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
   m_Name: SimpleExperimentDesign
   m_EditorClassIdentifier: 
-  TrialRepetitions: 5
-  ExperimentRepetitions: 1
-  RandomizationMode: 2
+  TrialRepetitions: 1
+  ExperimentRepetitions: 2
+  TrialRandomizationMode: 1
+  TrialRandomizationSubType: 0
+  BlockRandomizationMode: 3
+  BlockPartialRandomizationSubType: 1
   Factory:
     DataTypeToCreate: 2
     VariableTypeToCreate: 2
     IntIVs:
-    - Name: StimulusDistance
+    - Name: DistanceOfStimulus
       TypeOfVariable: 0
       DataType: 0
       MixingType: 2
@@ -29,13 +32,14 @@ MonoBehaviour:
       - 0
       - 0
       - 0
-    - Name: StimulusSize
+    - Name: SizeOfStimulus
       TypeOfVariable: 0
       DataType: 0
       MixingType: 0
       Block: 1
-      Values: 0600000005000000
+      Values: 060000000500000004000000
       Probabilities:
+      - 0
       - 0
       - 0
     FloatIVs: []
@@ -46,7 +50,7 @@ MonoBehaviour:
     Vector3IVs: []
     CustomDataTypeIVs: []
     IntDVs:
-    - Name: SelectedSize
+    - Name: SizeSelected
       TypeOfVariable: 1
       DataType: 0
       Value: 0

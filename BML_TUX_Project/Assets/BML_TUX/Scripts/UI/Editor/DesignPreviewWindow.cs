@@ -2,7 +2,7 @@ using BML_ExperimentToolkit.Scripts.VariableSystem;
 using UnityEditor;
 using UnityEngine.Serialization;
 
-namespace BML_ExperimentToolkit.Scripts.UI.Editor {
+namespace BML_TUX.Scripts.UI.Editor {
     public class DesignPreviewWindow : EditorWindow {
         
         [FormerlySerializedAs("ConfigurationFile")]
@@ -10,7 +10,13 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
         DesignPreviewer                  previewer;
         
         void OnGUI() {
-            previewer.ShowPreview();
+            if (previewer != null) {
+                previewer.ShowPreview();
+            }
+            else {
+                EditorGUILayout.HelpBox("Nothing to preview. Click on the preview button of a design file", MessageType.Error);
+            }
+
         }
 
         public static void ShowWindow(ExperimentDesignFile configFile) {

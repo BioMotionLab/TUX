@@ -1,16 +1,12 @@
-﻿
-using System;
+﻿using System;
 using System.IO;
-using System.Reflection;
 using BML_ExperimentToolkit.Scripts.ExperimentParts;
 using BML_ExperimentToolkit.Scripts.Settings;
 using BML_ExperimentToolkit.Scripts.VariableSystem;
-using BML_Utilities;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace BML_ExperimentToolkit.Scripts.UI.Editor {
+namespace BML_TUX.Scripts.UI.Editor {
     public class ScriptHelperWindow : EditorWindow {
         const string RunnerKey = "ExperimentRunner";
         const string TrialKey = "Trial";
@@ -20,7 +16,7 @@ namespace BML_ExperimentToolkit.Scripts.UI.Editor {
 
         string experimentName;
 
-        string RelativePathToTemplates => Application.dataPath + "/BML_ExperimentToolkit/Data/ScriptingTemplates/";
+        string RelativePathToTemplates => Application.dataPath + "/BML_TUX/Data/ScriptingTemplates/";
 
         public string ExperimentRunnerTemplatePath => RelativePathToTemplates + "ExperimentRunnerTemplate.cs";
         public string TrialTemplatePath => RelativePathToTemplates + "TrialScriptTemplate.cs";

@@ -14,20 +14,20 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         
         [FormerlySerializedAs("RepeatTrials")]
         [FormerlySerializedAs("RepeatTrialsInBlock")]
-        [Range(1,50)]
+        [Range(1,1000)]
         public int  TrialRepetitions = 1;
         
         [FormerlySerializedAs("RepeatExperiment")]
         [FormerlySerializedAs("RepeatAllBlocks")]
-        [Range(1,20)]
+        [Range(1,100)]
         public int ExperimentRepetitions = 1;
         
         
-        public TrialRandomizationMode TrialRandomizationMode;
-        public TrialRandomizationSubType TrialRandomizationSubType;
+        public TrialRandomizationMode TrialRandomizationMode = TrialRandomizationMode.InOrder;
+        public TrialRandomizationSubType TrialRandomizationSubType = TrialRandomizationSubType.DifferentPermutations;
 
-        public BlockRandomizationMode BlockRandomizationMode;
-        public BlockPartialRandomizationSubType BlockPartialRandomizationSubType;
+        public BlockRandomizationMode BlockRandomizationMode = BlockRandomizationMode.InOrder;
+        public BlockPartialRandomizationSubType BlockPartialRandomizationSubType = BlockPartialRandomizationSubType.DifferentPermutations;
         
         [SerializeField]
         public VariableFactory Factory = new VariableFactory();
