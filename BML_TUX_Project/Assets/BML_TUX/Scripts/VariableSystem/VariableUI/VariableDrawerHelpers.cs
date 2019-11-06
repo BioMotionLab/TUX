@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_TUX.Scripts.ExperimentParts;
+using BML_TUX.Scripts.VariableSystem.VariableValueAddingStrategies;
 using BML_Utilities;
 using UnityEditor;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
+namespace BML_TUX.Scripts.VariableSystem.VariableUI {
     /// <summary>
     /// A collection of functions to help draw variable drawers
     /// </summary>
@@ -375,11 +376,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
             for (int i = 0; i < n; i++) {
                 SerializedProperty prob = probabilitiesProperty.GetArrayElementAtIndex(i);
-                if (prob.floatValue < 0 || prob.floatValue > 1) {
-                    throw new
-                        ArgumentOutOfRangeException(
-                            $"Can't have a Probability outside of range 0-1, prob: {prob.floatValue} ");
-                }
+                
 
                 runningTotal += prob.floatValue;
             }
@@ -413,7 +410,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
             get {
                 string reasons = "";
                 foreach (string reason in reasonsInvalid) {
-                    reasons += reason + ", ";
+                    reasons += reason + "\n";
                 }
 
                 return reasons;
@@ -425,9 +422,15 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         const string InvalidName =
             "Name Contains Illegal Characters. Name must be one word of letters or numbers only";
 
+        const string Unnamed = "Unamed variable.";
+        
         public VariableNameValidator(string nameStringValue) {
             if (!nameStringValue.All(c => Char.IsLetterOrDigit(c) || c == '_')) {
                 reasonsInvalid.Add(InvalidName);
+            }
+
+            if (nameStringValue == UnnamedColumn.Name) {
+                reasonsInvalid.Add(Unnamed);
             }
         }
     }

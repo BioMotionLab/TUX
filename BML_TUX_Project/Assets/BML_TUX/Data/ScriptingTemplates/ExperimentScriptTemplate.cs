@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_TUX.Scripts.ExperimentParts;
 
 namespace BML_TUX.Data.ScriptingTemplates {
     /// <summary>

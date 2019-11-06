@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_TUX.Scripts.ExperimentParts;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_TUX.Scripts.VariableSystem {
 
     public class IndependentVariables {
         public readonly List<IndependentVariable> Balanced    = new List<IndependentVariable>();

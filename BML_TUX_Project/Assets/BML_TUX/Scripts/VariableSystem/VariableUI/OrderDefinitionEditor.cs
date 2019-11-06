@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEditorInternal;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
+namespace BML_TUX.Scripts.VariableSystem.VariableUI {
     [CustomEditor(typeof(BlockOrderDefinition))]
     public class OrderDefinitionEditor : Editor {
 

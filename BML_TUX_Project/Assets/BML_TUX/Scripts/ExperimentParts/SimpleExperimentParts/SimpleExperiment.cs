@@ -1,6 +1,6 @@
 ﻿
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts.SimpleExperimentParts {
 
 
 

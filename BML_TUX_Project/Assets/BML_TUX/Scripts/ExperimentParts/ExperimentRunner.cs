@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Data;
-using BML_ExperimentToolkit.Scripts.Managers;
-using BML_ExperimentToolkit.Scripts.UI.Runtime;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_TUX.Scripts.Managers;
+using BML_TUX.Scripts.UI.Runtime;
+using BML_TUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     
     
     /// <summary>

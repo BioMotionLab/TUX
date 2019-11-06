@@ -1,6 +1,6 @@
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_TUX.Scripts.ExperimentParts;
 
-namespace BML_ExperimentToolkit.Scripts.UI.Editor {
+namespace BML_TUX.Scripts.UI.Runtime {
     public class BlockOrderData {
         
         

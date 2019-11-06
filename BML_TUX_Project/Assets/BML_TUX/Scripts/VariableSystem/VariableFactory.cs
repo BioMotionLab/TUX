@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
+using BML_TUX.Scripts.VariableSystem.VariableTypes;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_TUX.Scripts.VariableSystem {
 
 
     //TODO Code smell. feel like some kind of strategy pattern needed here...
@@ -90,76 +91,92 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
 
         public Variables Variables {
             get {
-
                 List<Variable> allVariables = new List<Variable>();
-
-                //IVs
-                allVariables.AddRange(IntIVs);
-                allVariables.AddRange(FloatIVs);
-                allVariables.AddRange(StringIVs);
-                allVariables.AddRange(BoolIVs);
-                allVariables.AddRange(GameObjectIVs);
-                allVariables.AddRange(Vector2IVs);
-                allVariables.AddRange(Vector3IVs);
-                allVariables.AddRange(CustomDataTypeIVs);
-
-                //DVs
-                allVariables.AddRange(IntDVs);
-                allVariables.AddRange(FloatDVs);
-                allVariables.AddRange(StringDVs);
-                allVariables.AddRange(BoolDVs);
-                allVariables.AddRange(GameObjectDVs);
-                allVariables.AddRange(Vector2DVs);
-                allVariables.AddRange(Vector3DVs);
-                allVariables.AddRange(CustomDataTypeDVs);
-                
-
-                //PARTICIPANT VARIABLES
-                allVariables.AddRange(IntParticipantVariables);    
-                allVariables.AddRange(FloatParticipantVariables);
-                allVariables.AddRange(StringParticipantVariables);
-                allVariables.AddRange(BoolParticipantVariables);
-                allVariables.AddRange(GameObjectParticipantVariables);
-                allVariables.AddRange(Vector2ParticipantVariables);
-                allVariables.AddRange(Vector3ParticipantVariables);
-                allVariables.AddRange(CustomDataParticipantVariables);
-                
-                
+                allVariables.AddRange(IndependentVariables);
+                allVariables.AddRange(DependentVariables);
+                allVariables.AddRange(ParticipantVariables);
                 return new Variables(allVariables);
+            }
+        }
+
+        public List<Variable> ParticipantVariables { 
+            get {
+                List<Variable> participantVariables = new List<Variable>();
+                    participantVariables.AddRange(IntParticipantVariables);
+                    participantVariables.AddRange(FloatParticipantVariables);
+                    participantVariables.AddRange(StringParticipantVariables);
+                    participantVariables.AddRange(BoolParticipantVariables);
+                    participantVariables.AddRange(GameObjectParticipantVariables);
+                    participantVariables.AddRange(Vector2ParticipantVariables);
+                    participantVariables.AddRange(Vector3ParticipantVariables);
+                    participantVariables.AddRange(CustomDataParticipantVariables);
+                    return participantVariables;
+                }
+            }
+
+        public List<Variable> DependentVariables { get {
+            List<Variable> dependentVariables = new List<Variable>();
+            dependentVariables.AddRange(IntDVs);
+            dependentVariables.AddRange(FloatDVs);
+            dependentVariables.AddRange(StringDVs);
+            dependentVariables.AddRange(BoolDVs);
+            dependentVariables.AddRange(GameObjectDVs);
+            dependentVariables.AddRange(Vector2DVs);
+            dependentVariables.AddRange(Vector3DVs);
+            dependentVariables.AddRange(CustomDataTypeDVs);
+            return dependentVariables;
+        }}
+
+        public List<Variable> IndependentVariables {
+            get {
+                List<Variable> independentVariables = new List<Variable>();
+                independentVariables.AddRange(IntIVs);
+                independentVariables.AddRange(FloatIVs);
+                independentVariables.AddRange(StringIVs);
+                independentVariables.AddRange(BoolIVs);
+                independentVariables.AddRange(GameObjectIVs);
+                independentVariables.AddRange(Vector2IVs);
+                independentVariables.AddRange(Vector3IVs);
+                independentVariables.AddRange(CustomDataTypeIVs);
+                return independentVariables;
             }
         }
 
 
         // ReSharper disable once CognitiveComplexity
-        public void AddNew() {
+        public Variable AddNew() {
             //TODO Probably a better way to do this
+            Variable newVar;
             switch (VariableTypeToCreate) {
                 case VariableType.Independent:
-                    if (supportedIndependentTypes.TryGetValue(DataTypeToCreate, out Type ivType)) {
-                        IndependentVariable newIv = Activator.CreateInstance(ivType) as IndependentVariable;
-                        UpdateSerializedListsWith(newIv);
-                    }
+                    Type ivType = supportedIndependentTypes[DataTypeToCreate];
+                    IndependentVariable newIv = Activator.CreateInstance(ivType) as IndependentVariable;
+                    UpdateSerializedListsWith(newIv);
+                    newVar = newIv;
                     break;
                 case VariableType.Dependent:
-                    if (supportedDependentTypes.TryGetValue(DataTypeToCreate, out Type dvType)) {
-                        DependentVariable newDv = Activator.CreateInstance(dvType) as DependentVariable;
-                        UpdateSerializedListsWith(newDv);
-                    }
+                    Type dvType = supportedDependentTypes[DataTypeToCreate];
+                    DependentVariable newDv = Activator.CreateInstance(dvType) as DependentVariable;
+                    UpdateSerializedListsWith(newDv);
+                    newVar = newDv;
                     break;
                 case VariableType.ChooseType:
+                    newVar = null;
                     break;
                 case VariableType.Participant:
-                    if (supportedParticipantTypes.TryGetValue(DataTypeToCreate, out Type pvType)) {
-                        ParticipantVariable newPv = Activator.CreateInstance(pvType) as ParticipantVariable;
-                        UpdateSerializedListsWith(newPv);
-                    }
+                    Type pvType = supportedParticipantTypes[DataTypeToCreate];
+                    ParticipantVariable newPv = Activator.CreateInstance(pvType) as ParticipantVariable;
+                    UpdateSerializedListsWith(newPv);
+                    newVar = newPv;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(VariableTypeToCreate), DataTypeToCreate, null);
             }
 
-        }
+            return newVar;
 
+        }
+     
         // ReSharper disable once CognitiveComplexity
         void UpdateSerializedListsWith(Variable variable) {
             //TODO Probably a better way to do this.
@@ -245,5 +262,88 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             }
         }
 
+        public void RemoveVariable(Variable variable) {
+            //TODO Probably a better way to do this.
+            if (variable.DataType == SupportedDataType.ChooseType) 
+                throw new InvalidEnumArgumentException("Trying to create new variable, but not types not yet chosen");
+            
+            switch (variable) {
+                case DependentVariableBool dependentVariableBool:
+                    BoolDVs.Remove(dependentVariableBool);
+                    break;
+                case DependentVariableCustomDataType dependentVariableCustomDataType:
+                    CustomDataTypeDVs.Remove(dependentVariableCustomDataType);
+                    break;
+                case DependentVariableFloat dependentVariableFloat:
+                    FloatDVs.Remove(dependentVariableFloat);
+                    break;
+                case DependentVariableGameObject dependentVariableGameObject:
+                    GameObjectDVs.Remove(dependentVariableGameObject);
+                    break;
+                case DependentVariableInt dependentVariableInt:
+                    IntDVs.Remove(dependentVariableInt);
+                    break;
+                case DependentVariableString dependentVariableString:
+                    StringDVs.Remove(dependentVariableString);
+                    break;
+                case DependentVariableVector2 dependentVariableVector2:
+                    Vector2DVs.Remove(dependentVariableVector2);
+                    break;
+                case DependentVariableVector3 dependentVariableVector3:
+                    Vector3DVs.Remove(dependentVariableVector3);
+                    break;
+                case IndependentVariableInt independentVariableInt:
+                    IntIVs.Remove(independentVariableInt);
+                    break;
+                case IndependentVariableFloat independentVariableFloat:
+                    FloatIVs.Remove(independentVariableFloat);
+                    break;
+                case IndependentVariableString independentVariableString:
+                    StringIVs.Remove(independentVariableString);
+                    break;
+                case IndependentVariableBool independentVariableBool:
+                    BoolIVs.Remove(independentVariableBool);
+                    break;
+                case IndependentVariableGameObject independentVariableGameObject:
+                    GameObjectIVs.Remove(independentVariableGameObject);
+                    break;
+                case IndependentVariableVector2 independentVariableVector2:
+                    Vector2IVs.Remove(independentVariableVector2);
+                    break;
+                case IndependentVariableVector3 independentVariableVector3:
+                    Vector3IVs.Remove(independentVariableVector3);
+                    break;
+                case ParticipantVariableBool participantVariableBool:
+                    BoolParticipantVariables.Remove(participantVariableBool);
+                    break;
+                case ParticipantVariableCustomData participantVariableCustomData:
+                    CustomDataParticipantVariables.Remove(participantVariableCustomData);
+                    break;
+                case ParticipantVariableFloat participantVariableFloat:
+                    FloatParticipantVariables.Remove(participantVariableFloat);
+                    break;
+                case ParticipantVariableGameObject participantVariableGameObject:
+                    GameObjectParticipantVariables.Remove(participantVariableGameObject);
+                    break;
+                case ParticipantVariableInt participantVariableInt:
+                    IntParticipantVariables.Remove(participantVariableInt);
+                    break;
+                case ParticipantVariableString participantVariableString:
+                    StringParticipantVariables.Remove(participantVariableString);
+                    break;
+                case ParticipantVariableVector2 participantVariableVector2:
+                    Vector2ParticipantVariables.Remove(participantVariableVector2);
+                    break;
+                case ParticipantVariableVector3 participantVariableVector3:
+                    Vector3ParticipantVariables.Remove(participantVariableVector3);
+                    break;
+                case IndependentVariableCustomDataType independentVariableCustomDataType:
+                    CustomDataTypeIVs.Remove(independentVariableCustomDataType);
+                    break;
+                default:
+                    throw new InvalidEnumArgumentException("Support for this Type has not yet been defined." +
+                                                           "You can customize it yourself in the in the variable system");
+            }
+        }
     }
 }

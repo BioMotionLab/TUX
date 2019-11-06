@@ -1,34 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using BML_ExperimentToolkit.Scripts.Settings;
+using BML_TUX.Scripts.ExperimentParts;
+using BML_TUX.Scripts.Settings;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_TUX.Scripts.VariableSystem {
     [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "New Experiment Design File")]
     public class ExperimentDesignFile : ScriptableObject {
 
-        [Header("Randomization and Repetition settings:")]
        
+        [SerializeField]
+        [Min(1)]
+        public int TrialRepetitions = 1;
         
-        [FormerlySerializedAs("RepeatTrials")]
-        [FormerlySerializedAs("RepeatTrialsInBlock")]
-        [Range(1,1000)]
-        public int  TrialRepetitions = 1;
-        
-        [FormerlySerializedAs("RepeatExperiment")]
-        [FormerlySerializedAs("RepeatAllBlocks")]
-        [Range(1,100)]
+        [Min(1)]
         public int ExperimentRepetitions = 1;
         
-        
-        [FormerlySerializedAs("TrialRandomizationMode")]
         public TrialRandomizationMode TrialRandomization = TrialRandomizationMode.InOrder;
-        [FormerlySerializedAs("TrialPermutationType")]
         public TrialPermutationType TrialPermutationType = TrialPermutationType.DifferentPermutations;
 
-        [FormerlySerializedAs("BlockRandomizationMode")]
         public BlockRandomizationMode BlockRandomization = BlockRandomizationMode.InOrder;
         public BlockPartialRandomizationSubType BlockPartialRandomizationSubType = BlockPartialRandomizationSubType.DifferentPermutations;
         

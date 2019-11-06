@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_TUX.Scripts.ExperimentParts;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.Managers {
+namespace BML_TUX.Scripts.Managers {
 
 
 

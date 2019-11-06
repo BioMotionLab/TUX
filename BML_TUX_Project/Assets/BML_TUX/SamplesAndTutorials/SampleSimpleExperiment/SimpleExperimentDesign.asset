@@ -68,7 +68,7 @@ MonoBehaviour:
     - Name: Gender
       TypeOfVariable: 2
       DataType: 2
-      Value: O
+      Value: M
       ConstrainValues: 1
       PossibleValues:
       - M

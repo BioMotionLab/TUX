@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEditor;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
+namespace BML_TUX.Scripts.VariableSystem.VariableTypes {
     [Serializable]
     public class ParticipantVariableFloat : ParticipantVariable<float> {
         public ParticipantVariableFloat() {

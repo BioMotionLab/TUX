@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_TUX.Scripts.VariableSystem;
 using BML_Utilities;
 using BML_Utilities.Extensions;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     public class RunnableDesign {
         
         public   List<Block>      Blocks;

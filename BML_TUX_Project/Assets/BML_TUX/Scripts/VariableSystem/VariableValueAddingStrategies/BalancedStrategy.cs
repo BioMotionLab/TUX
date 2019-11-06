@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies {
+namespace BML_TUX.Scripts.VariableSystem.VariableValueAddingStrategies {
 
 
     /// <summary>

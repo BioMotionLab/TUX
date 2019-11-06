@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts.SimpleExperimentParts {
     
     /// <summary>
     /// This class is the simplest block possible.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies {
+namespace BML_TUX.Scripts.VariableSystem.VariableValueAddingStrategies {
 
     internal class IndependentValuesStrategyFactory {
 

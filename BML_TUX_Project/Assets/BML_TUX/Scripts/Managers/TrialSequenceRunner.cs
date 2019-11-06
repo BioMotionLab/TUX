@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_TUX.Scripts.ExperimentParts;
 using BML_Utilities.Extensions;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.Managers {
+namespace BML_TUX.Scripts.Managers {
 
 
     public class TrialSequenceRunner {

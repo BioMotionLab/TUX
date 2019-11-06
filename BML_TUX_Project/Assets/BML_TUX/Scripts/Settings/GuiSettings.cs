@@ -1,8 +1,7 @@
-﻿using BML_ExperimentToolkit.Scripts.UI.Runtime;
-using BML_Utilities;
+﻿using BML_TUX.Scripts.UI.Runtime;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.Settings {
+namespace BML_TUX.Scripts.Settings {
     [CreateAssetMenu(menuName = MenuNames.BmlSettingsMenu + "GUI Settings")]
     public class GuiSettings : ScriptableObject {
         

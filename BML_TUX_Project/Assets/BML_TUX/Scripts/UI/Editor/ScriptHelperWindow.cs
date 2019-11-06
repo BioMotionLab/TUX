@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using BML_ExperimentToolkit.Scripts.Settings;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_TUX.Scripts.ExperimentParts;
+using BML_TUX.Scripts.Settings;
+using BML_TUX.Scripts.VariableSystem;
 using UnityEditor;
 using UnityEngine;
 

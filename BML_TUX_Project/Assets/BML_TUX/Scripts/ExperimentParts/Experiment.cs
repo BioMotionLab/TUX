@@ -2,19 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using BML_ExperimentToolkit.Scripts.Managers;
+using BML_TUX.Scripts.Managers;
 using BML_Utilities;
 using BML_Utilities.Extensions;
 
 // ReSharper disable VirtualMemberNeverOverridden.Global
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     /// <summary>
     /// The Runner class is the main backbone of the toolkit. This sets up the Runner design, the blocks and trial structure, and manages output
     /// </summary>
     /// <seealso cref="T:UnityEngine.MonoBehaviour" />
-    /// <seealso cref="T:BML_ExperimentToolkit.Scripts.Managers.Outputtable" />
+    /// <seealso cref="T:BML_TUX.Scripts.Managers.Outputtable" />
     // ReSharper disable once InheritdocConsiderUsage
     public abstract class Experiment : ExperimentPart, Outputtable {
 

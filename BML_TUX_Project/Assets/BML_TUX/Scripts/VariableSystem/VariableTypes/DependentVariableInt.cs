@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
+namespace BML_TUX.Scripts.VariableSystem.VariableTypes {
     [Serializable]
     public class DependentVariableInt : DependentVariable<int> {
         public DependentVariableInt() {

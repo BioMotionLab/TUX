@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_TUX.Scripts.ExperimentParts;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.Managers {
+namespace BML_TUX.Scripts.Managers {
     public static class SessionLogger {
 
         const string OutputLocation = "BML_ExperimentToolkit/Data";

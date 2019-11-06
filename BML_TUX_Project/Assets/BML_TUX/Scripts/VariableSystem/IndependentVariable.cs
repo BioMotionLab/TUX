@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies;
+using BML_TUX.Scripts.VariableSystem.VariableTypes;
+using BML_TUX.Scripts.VariableSystem.VariableValueAddingStrategies;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_TUX.Scripts.VariableSystem {
     [Serializable]
     public abstract class IndependentVariable : Variable {
         public VariableMixingType MixingType;
@@ -35,7 +35,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         protected IndependentVariable() {
             Values = new List<T>();
             Probabilities = new List<float>();
-            Name = $"Unnamed Variable (types:{typeof(T)})";
+            Name = UnnamedColumn.Name;
             TypeOfVariable = VariableType.Independent;
         }
 

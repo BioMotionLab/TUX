@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
+using BML_TUX.Scripts.ExperimentParts;
 
-namespace BML_ExperimentToolkit.Scripts.Managers {
+namespace BML_TUX.Scripts.Managers {
     
     public static class ExperimentEvents {
 

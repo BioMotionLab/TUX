@@ -1,10 +1,10 @@
 using System;
-using BML_ExperimentToolkit.Scripts.ExperimentParts.SimpleExperimentParts;
+using BML_TUX.Scripts.ExperimentParts.SimpleExperimentParts;
 using BML_Utilities.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     [Serializable]
     public class ScriptReferences {
         

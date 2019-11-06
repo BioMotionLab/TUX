@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using BML_ExperimentToolkit.Scripts.Managers;
+using BML_TUX.Scripts.Managers;
 using BML_Utilities.Extensions;
 using JetBrains.Annotations;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
 
     /// <summary>
     /// This class stores a block a trials in an Runner.

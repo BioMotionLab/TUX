@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_TUX.Scripts.VariableSystem {
     [Serializable]
     public enum SupportedDataType {
         Int,

@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
+namespace BML_TUX.Scripts.VariableSystem.VariableUI {
     /// <inheritdoc />
     /// <summary>
     /// A custom drawer to edit variables

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using BML_ExperimentToolkit.Scripts.Managers;
-using BML_ExperimentToolkit.Scripts.UI.Editor;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_TUX.Scripts.ExperimentParts;
+using BML_TUX.Scripts.Managers;
+using BML_TUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
+namespace BML_TUX.Scripts.UI.Runtime {
     public class ExperimentGui : MonoBehaviour {
 
         Session session;
@@ -120,10 +119,12 @@ namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
         void ShowBlockOrderSettings() {
             blockOrderData = new BlockOrderData(runner.ExperimentDesign);
 
-            if (!blockOrderData.SelectionRequired) return;
+            if (!blockOrderData.SelectionRequired) {
+                BlockOrderSettingsPanel.gameObject.SetActive(false);
+                return;
+            }
 
-            
-            
+
             GetBlockOrderFromPopup();
             BlockOrderTitle.text = blockOrderData.BlockOrderText;
             BlockOrderSettingsPanel.gameObject.SetActive(true);

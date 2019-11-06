@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
+namespace BML_TUX.Scripts.VariableSystem.VariableUI {
     [CustomPropertyDrawer(typeof(VariableFactory))]
     public class VariableFactoryDrawer : PropertyDrawer {
 
@@ -25,29 +25,12 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
         
         public override void OnGUI(Rect mainPosition, SerializedProperty mainProperty, GUIContent label) {
             
-            mainProperty.serializedObject.Update();
             int oldIndentLevel = EditorGUI.indentLevel;
             
             GuiLayoutRect layoutRect = new GuiLayoutRect(LineHeight, mainPosition);
             
             Color oldColor = GUI.backgroundColor;
             
-            GUI.backgroundColor = Color.white;
-
-            EditorGUI.LabelField(layoutRect.NextLine, "Variable Creation:", EditorStyles.boldLabel);
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.DataTypeToCreate));
-            AddPropertyFromName(layoutRect, mainProperty, nameof(VariableFactory.VariableTypeToCreate));
-            
-            VariableFactory factory =
-                fieldInfo.GetValue(mainProperty.serializedObject.targetObject) as VariableFactory;
-
-            Rect createVariableRect = layoutRect.NextLine;
-            createVariableRect.width = 230;
-            if (GUI.Button(createVariableRect, "Create Variable")) {
-                factory?.AddNew();
-            }
-            
-            GUI.backgroundColor = oldColor;
 
             mainProperty.serializedObject.ApplyModifiedProperties();
 
@@ -93,7 +76,6 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
 
             EditorGUI.indentLevel = oldIndentLevel;
             height = layoutRect.FinalHeight;
-            mainProperty.serializedObject.ApplyModifiedProperties();
             
         }
 

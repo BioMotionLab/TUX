@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using BML_ExperimentToolkit.Scripts.Managers;
+using BML_TUX.Scripts.Managers;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     [Serializable]
     public class Session {
         const string DebugFolder = "/BML_TUX/Data/Debug";

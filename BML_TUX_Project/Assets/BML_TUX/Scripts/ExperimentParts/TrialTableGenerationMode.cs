@@ -1,4 +1,4 @@
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     public enum TrialTableGenerationMode {
         OnTheFly,
         PreGenerated

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_TUX.Scripts.VariableSystem;
 using TMPro;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.UI.Runtime {
+namespace BML_TUX.Scripts.UI.Runtime {
     public class ParticipantVariableEntry : MonoBehaviour {
     
         public TextMeshProUGUI Label;

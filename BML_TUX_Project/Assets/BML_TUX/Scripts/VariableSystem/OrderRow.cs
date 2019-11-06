@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_TUX.Scripts.VariableSystem {
     
     [Serializable]
     public class OrderRow {

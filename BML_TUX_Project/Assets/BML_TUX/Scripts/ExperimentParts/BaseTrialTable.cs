@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using BML_ExperimentToolkit.Scripts.Settings;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
+﻿using System.Data;
+using BML_TUX.Scripts.Settings;
+using BML_TUX.Scripts.VariableSystem;
 using BML_Utilities.Extensions;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     public class BaseTrialTable {
 
         DataTable baseTrialTable;

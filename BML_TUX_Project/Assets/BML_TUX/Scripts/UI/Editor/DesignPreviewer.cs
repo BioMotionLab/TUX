@@ -1,7 +1,7 @@
 using System.Data;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using BML_ExperimentToolkit.Scripts.UI.Editor;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_TUX.Scripts.ExperimentParts;
+using BML_TUX.Scripts.UI.Runtime;
+using BML_TUX.Scripts.VariableSystem;
 using BML_Utilities.Extensions;
 using UnityEditor;
 using UnityEngine;
@@ -41,7 +41,7 @@ namespace BML_TUX.Scripts.UI.Editor {
         public DataTable ShowPreview() {
             
             if (!DesignFileLinked()) return null;
-            
+
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, 
                                                         false, false, 
                                                         GUILayout.ExpandHeight(true));

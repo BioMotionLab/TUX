@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.Managers {
+namespace BML_TUX.Scripts.Managers {
 
     /// <summary>
     /// Outputs files based on events that it listens to.

@@ -1,4 +1,4 @@
-﻿namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes {
+﻿namespace BML_TUX.Scripts.VariableSystem.VariableTypes {
     public interface CustomSupportedDataType {
     }
 }

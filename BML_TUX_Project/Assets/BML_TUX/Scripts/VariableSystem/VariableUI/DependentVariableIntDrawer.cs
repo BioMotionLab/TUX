@@ -1,7 +1,7 @@
-﻿using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
+﻿using BML_TUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableUI {
+namespace BML_TUX.Scripts.VariableSystem.VariableUI {
     [CustomPropertyDrawer(typeof(DependentVariableInt))]
     public class DependentVariableIntDrawer : DependentVariableDrawer {
     }

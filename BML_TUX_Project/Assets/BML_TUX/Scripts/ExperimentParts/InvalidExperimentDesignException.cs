@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     
         public class InvalidExperimentDesignException : Exception {
             public InvalidExperimentDesignException() {

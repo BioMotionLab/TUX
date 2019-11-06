@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using BML_ExperimentToolkit.Scripts.Managers;
-using BML_ExperimentToolkit.Scripts.Settings;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_TUX.Scripts.ExperimentParts;
+using BML_TUX.Scripts.Managers;
+using BML_TUX.Scripts.Settings;
+using BML_TUX.Scripts.VariableSystem;
 using BML_Utilities.Extensions;
 using UnityEditor;
 using UnityEngine;

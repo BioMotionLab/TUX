@@ -222,6 +222,7 @@
                 <e p="VariableDrawerHelpers.cs" t="Include" />
                 <e p="VariableFactoryDrawer.cs" t="Include" />
                 <e p="VariableUI.asmdef" t="Include" />
+                <e p="VariableViewer.cs" t="Include" />
               </e>
               <e p="VariableValueAddingStrategies" t="Include">
                 <e p="AddVariableColumnToDataTable.cs" t="Include" />
@@ -233,6 +234,7 @@
                 <e p="IndependentValuesStrategyFactory.cs" t="Include" />
                 <e p="LoopedStrategy.cs" t="Include" />
                 <e p="ParticipantValuesStrategy.cs" t="Include" />
+                <e p="UnnamedColumn.cs" t="Include" />
               </e>
             </e>
           </e>

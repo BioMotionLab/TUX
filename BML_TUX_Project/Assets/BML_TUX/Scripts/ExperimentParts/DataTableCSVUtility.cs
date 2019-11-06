@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using BML_ExperimentToolkit.Scripts.VariableSystem;
-
+using BML_TUX.Scripts.VariableSystem;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     public static class DataTableCsvUtility {
         
         public static DataTable DataTableFromCsv(ExperimentDesignFile configurationFile, string fullPath) {

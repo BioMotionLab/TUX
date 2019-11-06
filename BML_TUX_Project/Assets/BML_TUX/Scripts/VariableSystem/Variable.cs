@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
+using BML_TUX.Scripts.VariableSystem.VariableTypes;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_TUX.Scripts.VariableSystem {
     
     [Serializable]
     public abstract class Variable {
@@ -12,5 +12,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public          SupportedDataType DataType;
         public abstract Type               Type { get; }
         public abstract DataTable AddValuesTo(DataTable table);
+
+        public bool ExpandSettings = true;
     }
 }

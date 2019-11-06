@@ -1,6 +1,8 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
+using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies {
+namespace BML_TUX.Scripts.VariableSystem.VariableValueAddingStrategies {
 
     public static class CreateColumnForVariableInDataTableExtension
     {
@@ -19,6 +21,10 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrate
                                                    ReadOnly = false,
                                                    Unique = false
                                                };
+            if (column.ColumnName == UnnamedColumn.Name) {
+                Debug.LogError("There remains an unnamed variable. Please fix.");
+                throw new InvalidOperationException("Can't add unnamed variable to table");
+            }
             table.Columns.Add(column);
             if (index >= 0) {
                 column.SetOrdinal(index);

@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using BML_ExperimentToolkit.Scripts.Managers;
-using BML_Utilities;
+using BML_TUX.Scripts.Managers;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.Settings {
+namespace BML_TUX.Scripts.Settings {
 
     [CreateAssetMenu(menuName = MenuNames.BmlSettingsMenu + "Control Settings")]
     public class ControlSettings : ScriptableObject {

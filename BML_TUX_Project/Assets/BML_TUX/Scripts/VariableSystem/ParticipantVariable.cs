@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies;
+using BML_TUX.Scripts.VariableSystem.VariableTypes;
+using BML_TUX.Scripts.VariableSystem.VariableValueAddingStrategies;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_TUX.Scripts.VariableSystem {
     [Serializable]
     public abstract class ParticipantVariable : Variable {
         public abstract int SelectedValue { get; set; }
@@ -49,7 +49,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
             = new ParticipantVariableValuesAdderStrategy<T>();
 
         protected ParticipantVariable() {
-            Name = $"Unnamed ParticipantVariable";
+            Name = UnnamedColumn.Name;
             TypeOfVariable = VariableType.Participant;
         }
 

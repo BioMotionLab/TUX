@@ -1,4 +1,4 @@
-using BML_ExperimentToolkit.Scripts.VariableSystem;
+using BML_TUX.Scripts.VariableSystem;
 using UnityEditor;
 using UnityEngine.Serialization;
 
@@ -14,7 +14,7 @@ namespace BML_TUX.Scripts.UI.Editor {
                 previewer.ShowPreview();
             }
             else {
-                EditorGUILayout.HelpBox("Nothing to preview. Click on the preview button of a design file", MessageType.Error);
+                EditorGUILayout.HelpBox("Nothing to preview. Make sure a design file is selected and it has no errors.", MessageType.Error);
             }
 
         }

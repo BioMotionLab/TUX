@@ -2,7 +2,7 @@
 using System.Data;
 using BML_Utilities.Extensions;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies {
+namespace BML_TUX.Scripts.VariableSystem.VariableValueAddingStrategies {
 
     /// <inheritdoc />
     /// <summary>

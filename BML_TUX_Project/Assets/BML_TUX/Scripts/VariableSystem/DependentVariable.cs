@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableTypes;
-using BML_ExperimentToolkit.Scripts.VariableSystem.VariableValueAddingStrategies;
+using BML_TUX.Scripts.VariableSystem.VariableTypes;
+using BML_TUX.Scripts.VariableSystem.VariableValueAddingStrategies;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_TUX.Scripts.VariableSystem {
     [Serializable]
     public abstract class DependentVariable : Variable {
     }
@@ -16,7 +16,7 @@ namespace BML_ExperimentToolkit.Scripts.VariableSystem {
         public override Type Type => typeof(T);
 
         protected DependentVariable() {
-            Name = $"Unnamed DependentVariable Variable (type:{typeof(T)})";
+            Name = UnnamedColumn.Name;
             TypeOfVariable = VariableType.Dependent;
 
         }

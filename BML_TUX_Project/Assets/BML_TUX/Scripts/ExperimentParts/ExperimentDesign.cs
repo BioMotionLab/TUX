@@ -1,14 +1,11 @@
-﻿using BML_ExperimentToolkit.Scripts.VariableSystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Runtime.CompilerServices;
-using BML_ExperimentToolkit.Scripts.Settings;
+using BML_TUX.Scripts.Settings;
+using BML_TUX.Scripts.VariableSystem;
 using BML_Utilities.Extensions;
-using JetBrains.Annotations;
-using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     public class ExperimentDesign {
         
         readonly BaseBlockTable  baseBlockTable;

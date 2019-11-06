@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using BML_ExperimentToolkit.Scripts.ExperimentParts;
-using BML_ExperimentToolkit.Scripts.Settings;
-using BML_Utilities;
+using BML_TUX.Scripts.ExperimentParts;
 using BML_Utilities.Extensions;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Scripts.VariableSystem {
+namespace BML_TUX.Scripts.VariableSystem {
     [CreateAssetMenu()]
     public class BlockOrderDefinition : ScriptableObject {
         [SerializeField]

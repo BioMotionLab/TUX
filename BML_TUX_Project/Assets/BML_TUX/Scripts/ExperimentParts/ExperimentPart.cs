@@ -1,10 +1,9 @@
-﻿using BML_ExperimentToolkit.Scripts.Managers;
-using System.Collections;
+﻿using System.Collections;
+using BML_TUX.Scripts.Managers;
 using JetBrains.Annotations;
 using UnityEngine;
 
-
-namespace BML_ExperimentToolkit.Scripts.ExperimentParts {
+namespace BML_TUX.Scripts.ExperimentParts {
     
     /// <summary>
     /// Basic boilerplate code for Experiment > Block > Trial structure.
