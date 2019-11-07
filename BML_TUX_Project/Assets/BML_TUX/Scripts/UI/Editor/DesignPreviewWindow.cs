@@ -11,7 +11,7 @@ namespace BML_TUX.Scripts.UI.Editor {
         
         void OnGUI() {
             if (previewer != null) {
-                previewer.ShowPreview();
+                previewer.ShowEditorPreview();
             }
             else {
                 EditorGUILayout.HelpBox("Nothing to preview. Make sure a design file is selected and it has no errors.", MessageType.Error);

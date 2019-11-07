@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using BML_TUX.Scripts.ExperimentParts;
 using BML_TUX.Scripts.Managers;
+using BML_TUX.Scripts.UI.Editor;
 using BML_TUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using TMPro;
@@ -49,6 +50,9 @@ namespace BML_TUX.Scripts.UI.Runtime {
 
         [SerializeField]
         TextMeshProUGUI BlockOrderTitle = default;
+
+        [SerializeField]
+        TextMeshProUGUI PreviewText = default;
         
         const string SelectText = "Choose...";
 
@@ -58,6 +62,7 @@ namespace BML_TUX.Scripts.UI.Runtime {
         public void RegisterExperiment(ExperimentRunner experimentRunner) {
             ExperimentEvents.OnInitExperiment += Init;
             runner = experimentRunner;
+            
         }
 
         public void OnDisable() {
@@ -88,6 +93,9 @@ namespace BML_TUX.Scripts.UI.Runtime {
             OutputFileName.text = session.OutputFileName;
             OutputFolder.text = session.OutputFolder;
             BlockOrderSelector.value = session.BlockOrderChosenIndex + 1;
+            
+            DesignPreviewer previewer = new DesignPreviewer(runner.DesignFile);
+            PreviewText.text = previewer.ShowRuntimePreview();
         }
 
         void ShowDesignFileLoadSettings() {

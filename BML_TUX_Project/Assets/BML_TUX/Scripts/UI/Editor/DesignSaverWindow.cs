@@ -16,7 +16,7 @@ namespace BML_TUX.Scripts.UI.Editor {
         DesignPreviewer previewer;
         
         void OnGUI() {
-            var finalTable = previewer.ShowPreview();
+            var finalTable = previewer.ShowEditorPreview();
 
             EditorGUILayout.LabelField("Save:", EditorStyles.boldLabel);
             ShowFileSelections();

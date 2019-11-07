@@ -37,9 +37,14 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
        
    
         const int IndentWidth  = 10;
-
+        const float VariablePanelBackgroundLightness = .55f;
+        Color VariablePanelBackgroundColor;
+        Color a = Color.gray;
 
         void OnEnable() {
+            VariablePanelBackgroundColor = new Color(VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, 1);
+            
+            
             designFileTarget = target as ExperimentDesignFile;
             if (designFileTarget == null) {
                 throw new NullReferenceException("Null ExperimentDesignFile");
@@ -178,7 +183,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
 
 
             GUIStyle variableStyle = new GUIStyle(GUI.skin.box) {
-                                                                    normal = {background = MakeTex(Color.grey)}
+                                                                    normal = {background = MakeTex(VariablePanelBackgroundColor)}
                                                                 };
             
             EditorGUILayout.LabelField("Independent Variables", EditorStyles.boldLabel);

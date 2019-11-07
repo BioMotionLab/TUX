@@ -19,3 +19,7 @@ Session Logged: 2019-10-22 01:05
 Session Logged: 2019-11-04 11:17
 {"outputFileName":"tes7","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"","DebugMode":true,"BlockOrderChosenIndex":0}
 Confirmed Complete at: 11:17
+
+---------------------
+Session Logged: 2019-11-07 10:03
+{"outputFileName":"tes9","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"","DebugMode":false,"BlockOrderChosenIndex":0}

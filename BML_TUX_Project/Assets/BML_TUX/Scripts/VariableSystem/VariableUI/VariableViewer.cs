@@ -79,7 +79,6 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                 EditorGUI.indentLevel++;
                 
                 SerializedProperty constrainProperty = variableProperty.FindPropertyRelative("ConstrainValues");
-
                 EditorGUILayout.PropertyField(constrainProperty);
 
                 if (constrainProperty.boolValue) {
@@ -88,7 +87,6 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                     DisplayValues();
 
                 }
-
                 EditorGUI.indentLevel--;
 
             }

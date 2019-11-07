@@ -25,23 +25,54 @@ namespace BML_TUX.Scripts.UI.Editor {
         }
 
         bool DesignFileLinked() {
-            bool linked = false;
+            bool linked = designFile != null;
+            return linked;
+        }
+
+        public string ShowRuntimePreview() {
+            if (!DesignFileLinked()) return null;
+            
+            if (designFile.BlockRandomization != BlockRandomizationMode.CompleteRandomization &&
+                designFile.BlockRandomization != BlockRandomizationMode.PartialRandomization) {
+                EditorGUILayout.LabelField(blockOrderData.BlockOrderText);
+
+                SelectedBlockOrderIndex = blockOrderData.SelectionRequired
+                    ? EditorGUILayout.Popup(SelectedBlockOrderIndex,
+                                            experimentDesign.BlockPermutationsStrings.ToArray())
+                    : SelectedBlockOrderIndex = blockOrderData.DefaultBlockOrderIndex;
+            }
+            else {
+                SelectedBlockOrderIndex = 0;
+            }
+            
+            if (SelectedBlockOrderChanged || previewTable == null) {
+                previewTable = experimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
+                lastDisplayedOrderIndex = SelectedBlockOrderIndex;
+            }
+
+            return previewTable.AsString(separator:"\t\t", truncateLength:5);
+        }
+
+        public void ReRandomizeTable() {
+            previewTable = experimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
+        }
+
+        public DataTable ShowEditorPreview() {
+            
             if (designFile != null) {
                 EditorGUILayout.LabelField($"Design File Selected: {designFile.name}");
-                linked = true;
             }
             else {
                 EditorGUILayout.HelpBox("Need to have a Design File Selected", MessageType.Warning);
                 EditorGUILayout.Space();
             }
-
-            return linked;
-        }
-
-        public DataTable ShowPreview() {
+            
             
             if (!DesignFileLinked()) return null;
 
+            
+            
+            
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, 
                                                         false, false, 
                                                         GUILayout.ExpandHeight(true));

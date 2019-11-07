@@ -190,7 +190,7 @@ namespace BML_TUX.Scripts.UI.Editor {
             if (runner.DesignFile.TrialTableGeneration == TrialTableGenerationMode.PreGenerated) 
                 ShowTrialTableLoadInput();
             else {
-                previewer.ShowPreview();
+                previewer.ShowEditorPreview();
                 OrderChosenIndex = previewer.SelectedBlockOrderIndex;
             }
             
