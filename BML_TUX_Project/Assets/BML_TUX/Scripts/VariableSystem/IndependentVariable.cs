@@ -19,7 +19,7 @@ namespace BML_TUX.Scripts.VariableSystem {
         public override DataTable AddValuesTo(DataTable table) {
 
             if (Values.Count == 0) {
-                throw new ArgumentNullException($"Can't add values, none defined for variable: {Name}");
+                throw new NullReferenceException($"No values defined for variable: {Name}");
             }
 
             IndependentVariableValuesAdderStrategy<T> independentVariableValuesAdderStrategy = IndependentValuesStrategyFactory.Create<T>(MixingType);

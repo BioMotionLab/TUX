@@ -19,23 +19,52 @@ MonoBehaviour:
   BlockRandomization: 0
   BlockPartialRandomizationSubType: 1
   Factory:
-    DataTypeToCreate: 5
-    VariableTypeToCreate: 2
+    DataTypeToCreate: 4
+    VariableTypeToCreate: 0
     IntIVs:
-    - Name: 1
+    - Name: int1
       TypeOfVariable: 0
       DataType: 0
       ExpandSettings: 1
       MixingType: 0
+      Block: 1
+      Values: 010000000200000003000000
+      Probabilities:
+      - 0
+      - 0
+      - 0
+    - Name: int2
+      TypeOfVariable: 0
+      DataType: 0
+      ExpandSettings: 0
+      MixingType: 0
       Block: 0
-      Values: 
-      Probabilities: []
+      Values: 0100000002000000
+      Probabilities:
+      - 0
+      - 0
     FloatIVs: []
     StringIVs: []
     BoolIVs: []
-    GameObjectIVs: []
+    GameObjectIVs:
+    - Name: Unamed
+      TypeOfVariable: 0
+      DataType: 4
+      ExpandSettings: 1
+      MixingType: 0
+      Block: 0
+      Values: []
+      Probabilities: []
     Vector2IVs: []
-    Vector3IVs: []
+    Vector3IVs:
+    - Name: Unamed
+      TypeOfVariable: 0
+      DataType: 6
+      ExpandSettings: 1
+      MixingType: 0
+      Block: 0
+      Values: []
+      Probabilities: []
     CustomDataTypeIVs: []
     IntDVs: []
     FloatDVs: []

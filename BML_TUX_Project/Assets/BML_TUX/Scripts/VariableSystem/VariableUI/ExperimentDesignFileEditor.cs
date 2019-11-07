@@ -7,7 +7,6 @@ using BML_TUX.Scripts.UI.Editor;
 using BML_TUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace BML_TUX.Scripts.VariableSystem.VariableUI {
     [CustomEditor(typeof(ExperimentDesignFile))]
@@ -20,8 +19,8 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         SerializedProperty trialTableGenerationMode;
         SerializedProperty orderConfigs;
 
-        SerializedProperty   TrialRepetitions;
-        SerializedProperty   ExperimentRepetitions;
+        SerializedProperty   trialRepetitions;
+        SerializedProperty   experimentRepetitions;
         SerializedProperty   columnNameSettings;
         SerializedProperty   controlSettings;
         SerializedProperty   guiSettings;
@@ -33,7 +32,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         List<VariableViewer> ivViewers;
         List<VariableViewer> dvViewers;
         List<VariableViewer> pvViewers;
-        public List<VariableViewer> listToDelete = new List<VariableViewer>();
+        public List<VariableViewer> ListToDelete = new List<VariableViewer>();
 
        
    
@@ -60,8 +59,8 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                 serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialPermutationType));
             blockPartialRandomizationSubType =
                 serializedObject.FindProperty(nameof(ExperimentDesignFile.BlockPartialRandomizationSubType));
-            TrialRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialRepetitions));
-            ExperimentRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile.ExperimentRepetitions));
+            trialRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile.TrialRepetitions));
+            experimentRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile.ExperimentRepetitions));
             columnNameSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.ColumnNamesSettings));
             controlSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.ControlSettings));
             guiSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.GuiSettings));
@@ -106,8 +105,8 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             CreateViewersFrom(nameof(VariableFactory.CustomDataTypeDVs), dvViewers);
         }
 
-        void CreateViewersFrom(string name, List<VariableViewer> viewerList) {
-            SerializedProperty list = factoryProp.FindPropertyRelative(name);
+        void CreateViewersFrom(string variableRelativeName, List<VariableViewer> viewerList) {
+            SerializedProperty list = factoryProp.FindPropertyRelative(variableRelativeName);
             
             for (int index = 0; index < list.arraySize; index++) {
                 SerializedProperty variableProp = list.GetArrayElementAtIndex(index);
@@ -137,18 +136,18 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         }
 
         void DeleteVariablesFlaggedForDeletion() {
-            foreach (VariableViewer variableViewer in listToDelete) {
+            foreach (VariableViewer variableViewer in ListToDelete) {
                 
-                int variableViewerIndex = variableViewer.index;
-                SerializedProperty containingList = variableViewer.containingList;
+                int variableViewerIndex = variableViewer.Index;
+                SerializedProperty containingList = variableViewer.ContainingList;
                 containingList.DeleteArrayElementAtIndex(variableViewerIndex);
             }
-            listToDelete.Clear();
+            ListToDelete.Clear();
             RebuildEditor();
             
         }
         
-        void CreateNewVariableAndViewer(VariableFactory factory) {
+        void CreateNewVariableAndViewer() {
             factory.AddNew();
             RebuildEditor();
         }
@@ -175,12 +174,12 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Variables", EditorStyles.boldLabel);
 
-            ShowVariableCreationInterface(factory);
+            ShowVariableCreationInterface();
 
 
-            GUIStyle variableStyle = new GUIStyle( GUI.skin.box );
-            variableStyle.normal.background = MakeTex( Color.grey );
-
+            GUIStyle variableStyle = new GUIStyle(GUI.skin.box) {
+                                                                    normal = {background = MakeTex(Color.grey)}
+                                                                };
             
             EditorGUILayout.LabelField("Independent Variables", EditorStyles.boldLabel);
             EditorGUILayout.BeginVertical(variableStyle);
@@ -210,11 +209,11 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             
         }
 
-        void ShowVariableCreationInterface(VariableFactory factory) {
+        void ShowVariableCreationInterface() {
             EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
             //GUILayout.Space((EditorGUI.indentLevel +1) * IndentSize);
             if (GUILayout.Button("Create Variable:")) {
-                CreateNewVariableAndViewer(factory);
+                CreateNewVariableAndViewer();
             }
 
             factory.VariableTypeToCreate = (VariableType) EditorGUILayout.EnumPopup(factory.VariableTypeToCreate);
@@ -251,8 +250,8 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Randomization and Repetition", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(TrialRepetitions);
-            EditorGUILayout.PropertyField(ExperimentRepetitions);
+            EditorGUILayout.PropertyField(trialRepetitions);
+            EditorGUILayout.PropertyField(experimentRepetitions);
 
             EditorGUILayout.PropertyField(blockRandomizationMode);
 
@@ -291,21 +290,22 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                 EditorGUILayout.Space();
                 
                 ShowBlockOrderConfiguration();
-                
-                EditorGUI.indentLevel -= 2;
-
-                EditorGUILayout.LabelField("Settings:");
-                EditorGUI.indentLevel += 2;
-                EditorGUILayout.PropertyField(columnNameSettings);
-                EditorGUILayout.PropertyField(controlSettings);
-                EditorGUILayout.PropertyField(guiSettings);
-                EditorGUI.indentLevel -= 2;
-
+                EditorGUILayout.Space();
+                ShowSettingsFields();
             }
 
             EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
 
+        }
+
+        void ShowSettingsFields() {
+            EditorGUILayout.LabelField("Other Settings", EditorStyles.boldLabel);
+            EditorGUI.indentLevel += 2;
+            EditorGUILayout.PropertyField(columnNameSettings);
+            EditorGUILayout.PropertyField(controlSettings);
+            EditorGUILayout.PropertyField(guiSettings);
+            EditorGUI.indentLevel -= 2;
         }
 
         void ShowBlockOrderConfiguration() {
@@ -329,10 +329,18 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                 CreateNewBlockOrderDefinition();
             }
             EditorGUILayout.EndHorizontal();
+            EditorGUI.indentLevel -= 2;
         }
 
         void CreateNewBlockOrderDefinition() {
+            
             ExperimentDesignFile experimentDesignFile = target as ExperimentDesignFile;
+            if (experimentDesignFile == null) throw new NullReferenceException("Can't read experimental design from file check for errors");
+            if (!experimentDesignFile.HasBlocks) {
+                Debug.LogError("Tried to make block order definition file, but no block variables have been defined!");
+                return;
+            }
+
             if (experimentDesignFile != null) {
                 List<BlockOrderDefinition> orders = experimentDesignFile.BlockOrderConfigurations;
                 BlockOrderDefinition newBlockOrderDefinition = CreateInstance<BlockOrderDefinition>();

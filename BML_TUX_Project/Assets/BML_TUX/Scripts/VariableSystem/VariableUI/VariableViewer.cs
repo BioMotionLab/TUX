@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using BML_TUX.Scripts.ExperimentParts;
 using BML_TUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
@@ -7,8 +6,8 @@ using UnityEngine;
 
 namespace BML_TUX.Scripts.VariableSystem.VariableUI {
     public class VariableViewer {
-        public readonly SerializedProperty variableProp;
-        public readonly SerializedProperty containingList;
+        readonly SerializedProperty variableProperty;
+        public readonly SerializedProperty ContainingList;
         readonly ExperimentDesignFileEditor editor;
         
         const int ValueButtonWidth      = 25;
@@ -20,20 +19,20 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         
         
         bool deleted;
-        VariableType type;
-        public int index;
-        SerializedProperty expandSettingsProp;
+        readonly VariableType type;
+        public readonly int Index;
+        readonly SerializedProperty expandSettingsProp;
         SerializedProperty valuesProperty;
         SerializedProperty probabilitiesProperty;
         SerializedProperty blockProperty;
 
-        public VariableViewer(ExperimentDesignFileEditor editor,  SerializedProperty variableProp, SerializedProperty containingList, int index, bool showSettings = true) {
+        public VariableViewer(ExperimentDesignFileEditor editor,  SerializedProperty variableProperty, SerializedProperty containingList, int index) {
             this.editor = editor;
-            this.variableProp = variableProp;
-            this.containingList = containingList;
-            this.index = index;
-            expandSettingsProp = variableProp.FindPropertyRelative(nameof(Variable.ExpandSettings));
-            type = (VariableType)variableProp.FindPropertyRelative(nameof(Variable.TypeOfVariable)).enumValueIndex;
+            this.variableProperty = variableProperty;
+            ContainingList = containingList;
+            Index = index;
+            expandSettingsProp = variableProperty.FindPropertyRelative(nameof(Variable.ExpandSettings));
+            type = (VariableType)variableProperty.FindPropertyRelative(nameof(Variable.TypeOfVariable)).enumValueIndex;
         }
 
         public void Show() {
@@ -41,7 +40,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
-            AddCommonVariableProperties(variableProp);
+            AddCommonVariableProperties();
             
             EditorGUI.indentLevel++;
             
@@ -49,13 +48,13 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                 
             switch (type) {
                 case VariableType.Independent:
-                    AddIndependentVariableProperties(variableProp);
+                    AddIndependentVariableProperties();
                     break;
                 case VariableType.Dependent:
-                    AddDependentVariableProperties(variableProp);
+                    AddDependentVariableProperties();
                     break;
                 case VariableType.Participant:
-                    AddParticipantVariableProperties(variableProp);
+                    AddParticipantVariableProperties();
                     break;
                 case VariableType.ChooseType:
                     break;
@@ -73,13 +72,12 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         }
         
              
-        void AddParticipantVariableProperties(SerializedProperty variableProperty) {
+        void AddParticipantVariableProperties() {
 
             if (expandSettingsProp.boolValue) {
 
                 EditorGUI.indentLevel++;
-
-                SerializedProperty valuesProperty = variableProperty.FindPropertyRelative("PossibleValues");
+                
                 SerializedProperty constrainProperty = variableProperty.FindPropertyRelative("ConstrainValues");
 
                 EditorGUILayout.PropertyField(constrainProperty);
@@ -87,7 +85,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                 if (constrainProperty.boolValue) {
                     EditorGUILayout.LabelField("Possible Values");
 
-                    DisplayValues(VariableType.Participant, variableProperty, valuesProperty, null);
+                    DisplayValues();
 
                 }
 
@@ -97,7 +95,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         }
      
         
-        void AddDependentVariableProperties(SerializedProperty variableProperty) {
+        void AddDependentVariableProperties() {
             if (expandSettingsProp.boolValue) {
                 SerializedProperty defaultValueProperty = variableProperty.FindPropertyRelative("DefaultValue");
                 EditorGUILayout.PropertyField(defaultValueProperty);
@@ -108,27 +106,28 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("Delete Variable", GUILayout.Width(DeleteButtonWidth))) {
-                editor.listToDelete.Add(this);
+                editor.ListToDelete.Add(this);
                 deleted = true;
             }
             EditorGUILayout.EndHorizontal();
         }
 
-        void AddCommonVariableProperties(SerializedProperty variableProperty) {
+        void AddCommonVariableProperties() {
 
+            int oldIndentLevel = EditorGUI.indentLevel;
+            EditorGUI.indentLevel = 0;
             EditorGUILayout.BeginHorizontal();
             SerializedProperty name = variableProperty.FindPropertyRelative(nameof(Variable.Name));
             EditorGUILayout.PropertyField(name, GUIContent.none );
 
             SerializedProperty variableDataType = variableProperty.FindPropertyRelative(nameof(Variable.DataType));
             SupportedDataType dataType = (SupportedDataType) variableDataType.enumValueIndex;
-            EditorGUILayout.LabelField($"Type: {dataType.ToString()}");
-            
+            EditorGUILayout.LabelField($"{dataType.ToString()}", GUILayout.Width(75));
             AddEditViewButton();
             
             EditorGUILayout.EndHorizontal();
-            
-            
+
+            EditorGUI.indentLevel = oldIndentLevel;
             VariableNameValidator validator = new VariableNameValidator(name.stringValue);
             if (!validator.Valid) {
                 EditorGUI.indentLevel++;
@@ -140,36 +139,34 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
 
         void AddEditViewButton() {
             if (expandSettingsProp.boolValue) {
-                if (GUILayout.Button("Hide settings", GUILayout.Width(DeleteButtonWidth))) {
+                if (GUILayout.Button("Hide Settings", GUILayout.Width(DeleteButtonWidth))) {
                     expandSettingsProp.boolValue = false;
-                    Debug.Log("collapsing view");
                 }
             }
             else {
-                if (GUILayout.Button("Edit settings", GUILayout.Width(DeleteButtonWidth))) {
+                if (GUILayout.Button("Edit Settings", GUILayout.Width(DeleteButtonWidth))) {
                     expandSettingsProp.boolValue = true;
-                    Debug.Log("expanding view");
                 }
             }
         }
 
-        void AddIndependentVariableProperties(SerializedProperty independentVariableProperty) {
+        void AddIndependentVariableProperties() {
 
             if (expandSettingsProp.boolValue) {
-                SerializedProperty block = independentVariableProperty.FindPropertyRelative(nameof(IndependentVariable.Block));
+                SerializedProperty block = variableProperty.FindPropertyRelative(nameof(IndependentVariable.Block));
                 EditorGUILayout.PropertyField(block);
 
-                SerializedProperty mixType = independentVariableProperty.FindPropertyRelative(nameof(IndependentVariable.MixingType));
+                SerializedProperty mixType = variableProperty.FindPropertyRelative(nameof(IndependentVariable.MixingType));
                 EditorGUILayout.PropertyField(mixType);
             }
             
             
-            AddIndependentVariableValueProperties(independentVariableProperty);
+            AddIndependentVariableValueProperties();
             
         }
         
           
-        void AddIndependentVariableValueProperties(SerializedProperty variableProperty) {
+        void AddIndependentVariableValueProperties() {
             valuesProperty = variableProperty.FindPropertyRelative("Values");
             if (valuesProperty.arraySize == 0) {
                 EditorGUILayout.HelpBox("No values", MessageType.Error);
@@ -179,23 +176,22 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                 probabilitiesProperty = variableProperty.FindPropertyRelative("Probabilities");
                 blockProperty = variableProperty.FindPropertyRelative(nameof(IndependentVariable.Block));
                 
-                DisplayValues(VariableType.Independent, variableProperty, valuesProperty, probabilitiesProperty);
+                DisplayValues();
                 
                 EditorGUI.indentLevel--;
-                CheckMaxBlockPermutationsAllowed(blockProperty, valuesProperty);
+                CheckMaxBlockPermutationsAllowed();
             }
         }
 
         
-         void DisplayValues(VariableType type, SerializedProperty variableProperty, SerializedProperty valuesProperty,
-                           SerializedProperty probabilitiesProperty) {
+         void DisplayValues() {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Values");
             bool customProb;
             
             if (type == VariableType.Independent) {
                 SerializedProperty mixType = variableProperty.FindPropertyRelative(nameof(IndependentVariable.MixingType));
-                customProb = (VariableMixingType) mixType.enumValueIndex == VariableMixingType.CustomProbability;
+                customProb = ((VariableMixingType)mixType.enumValueIndex) == VariableMixingType.CustomProbability;
             }
             else {
                 customProb = false;
@@ -213,18 +209,18 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                 EditorGUILayout.BeginHorizontal();
 
                 GUILayout.Space((oldIndentLevel + ValueIndentLevel) * IndentSize);
-                if (AddMinusButton(valuesProperty, probabilitiesProperty, i)) break;
+                if (AddMinusButton(i)) break;
                 SerializedProperty value = valuesProperty.GetArrayElementAtIndex(i);
                 EditorGUILayout.PropertyField(value, GUIContent.none);
-                if (customProb) AddCustomProbabilities(valuesProperty, probabilitiesProperty, customProb, i);
+                if (customProb) AddCustomProbabilities(true, i);
                 EditorGUILayout.EndHorizontal();
             }
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.Space((oldIndentLevel + ValueIndentLevel) * 10);
-            AddPlusButton(valuesProperty, probabilitiesProperty);
+            AddPlusButton();
             EditorGUILayout.LabelField("");
-            if (customProb) AddTotalProbability(customProb, probabilitiesProperty);
+            if (customProb) AddTotalProbability(true);
             EditorGUILayout.EndHorizontal();
 
             EditorGUI.indentLevel = oldIndentLevel;
@@ -233,8 +229,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         }
          
          
-        static void AddPlusButton(SerializedProperty valuesProperty,
-                                  SerializedProperty probabilitiesProperty) {
+        void AddPlusButton() {
             EditorGUILayout.BeginHorizontal();
             GUILayout.Space(EditorGUI.indentLevel * IndentSize);
             if (GUILayout.Button("+",  GUILayout.Width(ValueButtonWidth))) {
@@ -251,7 +246,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         }
         
         
-        bool AddMinusButton(SerializedProperty valuesProperty, SerializedProperty probabilitiesProperty, int i) {
+        bool AddMinusButton(int i) {
             if (GUILayout.Button("-", GUILayout.Width(ValueButtonWidth))) {
                 valuesProperty.DeleteArrayElementAtIndex(i);
                 if (probabilitiesProperty?.arraySize > 0) probabilitiesProperty?.DeleteArrayElementAtIndex(i);
@@ -261,13 +256,12 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         }
 
 
-        static void AddCustomProbabilities(SerializedProperty valuesProperty, SerializedProperty probabilitiesProperty,
-                                           bool               customProb,     int                i) {
+        void AddCustomProbabilities(bool customProb, int i) {
             
             SerializedProperty prob = probabilitiesProperty.GetArrayElementAtIndex(i);
             if (customProb && probabilitiesProperty.arraySize >= 1) {
                 if (i == valuesProperty.arraySize - 1) {
-                    float runningTotalWithoutLast = GetRunningTotal(probabilitiesProperty, true);
+                    float runningTotalWithoutLast = GetRunningTotal(true);
                     float remainder = 1 - runningTotalWithoutLast;
                     if (remainder >= 0) {
                         prob.floatValue = remainder;
@@ -284,7 +278,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             }
         }
 
-        static float GetRunningTotal(SerializedProperty probabilitiesProperty, bool skipLast = false) {
+        float GetRunningTotal(bool skipLast = false) {
             float runningTotal = 0;
 
             int n = probabilitiesProperty.arraySize;
@@ -300,9 +294,8 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         }
         
 
-        static void CheckMaxBlockPermutationsAllowed( SerializedProperty block,
-                                                      SerializedProperty valuesProperty) {
-            if (!block.boolValue || valuesProperty.arraySize <= ExperimentDesign.MaxBlockPermutationsAllowed) return;
+        void CheckMaxBlockPermutationsAllowed() {
+            if (!blockProperty.boolValue || valuesProperty.arraySize <= ExperimentDesign.MaxBlockPermutationsAllowed) return;
             EditorGUILayout.HelpBox("Too many Block Values for automatic permutation.\n" +
                                     "Must define possible Block orders manually using BlockOrderDefinition files.\n" +
                                     "See Docs.",
@@ -310,11 +303,11 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                                     MessageType.Warning);
         }
         
-        static void AddTotalProbability(bool customProb, SerializedProperty probabilitiesProperty) {
+        void AddTotalProbability(bool customProb) {
             
             if (!customProb || probabilitiesProperty.arraySize == 0) return;
 
-            float runningTotal = GetRunningTotal(probabilitiesProperty);
+            float runningTotal = GetRunningTotal();
             string direction = "";
             float remainder = 1 - runningTotal;
             if (Math.Abs(remainder) > 0.01f && probabilitiesProperty.arraySize > 0) {
