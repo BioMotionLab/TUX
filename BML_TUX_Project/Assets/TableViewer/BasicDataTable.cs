@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using System.Data;
-using BML_Utilities.Extensions;
 using UnityEngine;
 
 [ExecuteInEditMode]
 public class BasicDataTable : MonoBehaviour {
 
     public DataTable table;
-    
+
+
+    public DataTableUIDisplay tableDisplay;
     [ContextMenu("Generate")]
     public void Generate()
     {
@@ -47,12 +47,12 @@ public class BasicDataTable : MonoBehaviour {
         longRow["Head3"] = 2147483647;
         table.Rows.Add(longRow);
         
-        Debug.Log(table.AsString());
+        tableDisplay.Display(table);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    [ContextMenu("Clear")]
+    public void Clear() {
+        tableDisplay.Clear();
     }
+
 }

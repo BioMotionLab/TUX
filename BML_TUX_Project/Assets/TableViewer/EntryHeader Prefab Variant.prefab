@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 4182220544098799244, guid: 17372b9eedde4c04a86f7e9ea901d0af,
         type: 3}
       propertyPath: m_Name
-      value: HeaderEntryPrefab Variant
+      value: EntryHeader Prefab Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4827807482048576798, guid: 17372b9eedde4c04a86f7e9ea901d0af,
         type: 3}
@@ -140,12 +140,12 @@ PrefabInstance:
     - target: {fileID: 5712555879807391029, guid: 17372b9eedde4c04a86f7e9ea901d0af,
         type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5712555879807391029, guid: 17372b9eedde4c04a86f7e9ea901d0af,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 18
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17372b9eedde4c04a86f7e9ea901d0af, type: 3}

@@ -29,28 +29,16 @@ namespace BML_TUX.Scripts.UI.Editor {
             return linked;
         }
 
-        public string ShowRuntimePreview() {
-            if (!DesignFileLinked()) return null;
+        public DataTable GetPreview(int blockOrderIndex) {
             
-            if (designFile.BlockRandomization != BlockRandomizationMode.CompleteRandomization &&
-                designFile.BlockRandomization != BlockRandomizationMode.PartialRandomization) {
-                EditorGUILayout.LabelField(blockOrderData.BlockOrderText);
-
-                SelectedBlockOrderIndex = blockOrderData.SelectionRequired
-                    ? EditorGUILayout.Popup(SelectedBlockOrderIndex,
-                                            experimentDesign.BlockPermutationsStrings.ToArray())
-                    : SelectedBlockOrderIndex = blockOrderData.DefaultBlockOrderIndex;
-            }
-            else {
-                SelectedBlockOrderIndex = 0;
-            }
+            if (!DesignFileLinked()) return null;
             
             if (SelectedBlockOrderChanged || previewTable == null) {
                 previewTable = experimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
                 lastDisplayedOrderIndex = SelectedBlockOrderIndex;
             }
-
-            return previewTable.AsString(separator:"\t\t", truncateLength:5);
+            
+            return previewTable;
         }
 
         public void ReRandomizeTable() {
@@ -69,8 +57,6 @@ namespace BML_TUX.Scripts.UI.Editor {
             
             
             if (!DesignFileLinked()) return null;
-
-            
             
             
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, 
@@ -98,7 +84,7 @@ namespace BML_TUX.Scripts.UI.Editor {
             EditorGUILayout.Space();
 
             if (GUILayout.Button("Re-randomize")) {
-                previewTable = experimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
+                ReRandomizeTable();
             }
             
             if (SelectedBlockOrderChanged || previewTable == null) {
@@ -113,6 +99,7 @@ namespace BML_TUX.Scripts.UI.Editor {
             EditorGUILayout.EndScrollView();
             return previewTable;
         }
+
         
     }
     

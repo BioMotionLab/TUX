@@ -5,57 +5,55 @@ using System.Data;
 using System.Runtime.Remoting.Messaging;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
 public class DataTableUIDisplay : MonoBehaviour {
-    public BasicDataTable basicTable;
-    public GameObject content;
-    DataTable table;
     
-    public TextMeshProUGUI entryPrefab;
-    public TextMeshProUGUI headerEntryPrefab;
-    public GameObject rowPrefab;
-
+    public GameObject ContentContainer;
+    public TextMeshProUGUI EntryPrefab;
+    public TextMeshProUGUI HeaderEntryPrefab;
+    public GameObject RowPrefab;
+    public GameObject HeaderRowPrefab;
+    
     List<GameObject> entries;
     Dictionary<int, int> columnIndexToMaxLength;
-    int headerPixelMultiplier = 14;
-    int entryPixelMultiplier = 8;
-
-    void Start() {
-        DoUpdate();
-    }
-
-    [ContextMenu("Do Update")]
-    void DoUpdate() {
-        basicTable.Generate();
-        table = basicTable.table;
-
+    DataTable table;
+    const int HeaderPixelMultiplier = 10;
+    const int EntryPixelMultiplier = 8;
+    
+    
+    public void Display(DataTable tableToDisplay) {
+        table = tableToDisplay;
         columnIndexToMaxLength = new Dictionary<int, int>();
         for (int index = 0; index < table.Columns.Count; index++) {
             columnIndexToMaxLength.Add(index,0);
             DataColumn column = table.Columns[index];
             foreach (DataRow row in table.Rows) {
                 columnIndexToMaxLength[index] =
-                    Math.Max(columnIndexToMaxLength[index], row[column.ColumnName].ToString().Length * entryPixelMultiplier);
+                    Math.Max(columnIndexToMaxLength[index], row[column.ColumnName].ToString().Length * EntryPixelMultiplier);
                 columnIndexToMaxLength[index] =
-                    Math.Max(columnIndexToMaxLength[index], column.ColumnName.Length * headerPixelMultiplier);
+                    Math.Max(columnIndexToMaxLength[index], column.ColumnName.Length * HeaderPixelMultiplier);
             }
         }
 
-        DestroyAllChildren(content.transform);
-        
+        DestroyAllContent();
         
         DisplayHeader();
         DisplayRows();
     }
 
+    public void Clear() {
+        DestroyAllContent();
+    }
+
     void DisplayHeader() {
-        GameObject header = Instantiate(rowPrefab, content.transform);
+        GameObject header = Instantiate(HeaderRowPrefab, ContentContainer.transform);
         header.name = "Header";
         for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
             DataColumn column = table.Columns[columnIndex];
-            var newEntry = Instantiate(headerEntryPrefab, header.transform);
+            var newEntry = Instantiate(HeaderEntryPrefab, header.transform);
 
             LayoutElement entryLayout = newEntry.GetComponent<LayoutElement>();
             entryLayout.minWidth = columnIndexToMaxLength[columnIndex];
@@ -68,11 +66,11 @@ public class DataTableUIDisplay : MonoBehaviour {
     void DisplayRows() {
         for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++) {
             DataRow row = table.Rows[rowIndex];
-            var newRowObject = Instantiate(rowPrefab, content.transform);
+            var newRowObject = Instantiate(RowPrefab, ContentContainer.transform);
             newRowObject.name = $"Row {rowIndex}";
             for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
                 DataColumn column = table.Columns[columnIndex];
-                TextMeshProUGUI newEntry = Instantiate(entryPrefab, newRowObject.transform);
+                TextMeshProUGUI newEntry = Instantiate(EntryPrefab, newRowObject.transform);
                 newEntry.gameObject.name = $"Column {columnIndex}";
                 LayoutElement entryLayout = newEntry.GetComponent<LayoutElement>();
                 entryLayout.minWidth = columnIndexToMaxLength[columnIndex];
@@ -82,8 +80,8 @@ public class DataTableUIDisplay : MonoBehaviour {
         }
     }
 
-    void DestroyAllChildren(Transform parent) {
-        foreach (Transform child in parent.transform) {
+    void DestroyAllContent() {
+        foreach (Transform child in ContentContainer.transform) {
             DestroyImmediate(child.gameObject);
         }
     }

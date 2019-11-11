@@ -6,7 +6,6 @@
     <e p="C:\Users\BioMotion\Documents\GitHub\BML_TUX\BML_TUX_Project" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="BasicDataTable.cs" t="Include" />
         <e p="BML_ExperimentToolkit" t="Include">
           <e p="Data" t="Include">
             <e p="BML_session_log.txt" t="Include" />
@@ -240,7 +239,11 @@
             </e>
           </e>
         </e>
-        <e p="DataTableUIDisplay.cs" t="Include" />
+        <e p="TableViewer" t="Include">
+          <e p="BasicDataTable.cs" t="Include" />
+          <e p="DataTableUIDisplay.cs" t="Include" />
+          <e p="TableViewer.asmdef" t="Include" />
+        </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
             <e p="LiberationSans - OFL.txt" t="Include" />
@@ -278,6 +281,7 @@
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
       <e p="ScriptingTemplates.csproj" t="IncludeRecursive" />
+      <e p="TableViewer.csproj" t="IncludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
       <e p="TestingUtilities.csproj" t="IncludeRecursive" />
       <e p="VariableUI.csproj" t="IncludeRecursive" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using BML_TUX.Scripts.ExperimentParts;
 using BML_TUX.Scripts.Managers;
@@ -51,14 +52,13 @@ namespace BML_TUX.Scripts.UI.Runtime {
         [SerializeField]
         TextMeshProUGUI BlockOrderTitle = default;
 
-        [SerializeField]
-        TextMeshProUGUI PreviewText = default;
-        
         const string SelectText = "Choose...";
 
         readonly List<ParticipantVariableEntry> participantVariableEntries = new List<ParticipantVariableEntry>();
         BlockOrderData blockOrderData;
 
+        public DataTableUIDisplay TableDisplay;
+        
         public void RegisterExperiment(ExperimentRunner experimentRunner) {
             ExperimentEvents.OnInitExperiment += Init;
             runner = experimentRunner;
@@ -92,10 +92,13 @@ namespace BML_TUX.Scripts.UI.Runtime {
 
             OutputFileName.text = session.OutputFileName;
             OutputFolder.text = session.OutputFolder;
-            BlockOrderSelector.value = session.BlockOrderChosenIndex + 1;
             
+            int selectedBlockOrder = session.BlockOrderChosenIndex + 1;
+            BlockOrderSelector.value = selectedBlockOrder;
+
             DesignPreviewer previewer = new DesignPreviewer(runner.DesignFile);
-            PreviewText.text = previewer.ShowRuntimePreview();
+            DataTable preview = previewer.GetPreview(selectedBlockOrder);
+            TableDisplay.Display(preview);
         }
 
         void ShowDesignFileLoadSettings() {
