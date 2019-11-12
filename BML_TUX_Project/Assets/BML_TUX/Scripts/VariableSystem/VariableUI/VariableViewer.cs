@@ -33,6 +33,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             Index = index;
             expandSettingsProp = variableProperty.FindPropertyRelative(nameof(Variable.ExpandSettings));
             type = (VariableType)variableProperty.FindPropertyRelative(nameof(Variable.TypeOfVariable)).enumValueIndex;
+            
         }
 
         public void Show() {
@@ -73,7 +74,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         
              
         void AddParticipantVariableProperties() {
-
+            valuesProperty = variableProperty.FindPropertyRelative("PossibleValues");
             if (expandSettingsProp.boolValue) {
 
                 EditorGUI.indentLevel++;
@@ -149,7 +150,6 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         }
 
         void AddIndependentVariableProperties() {
-
             if (expandSettingsProp.boolValue) {
                 SerializedProperty block = variableProperty.FindPropertyRelative(nameof(IndependentVariable.Block));
                 EditorGUILayout.PropertyField(block);
@@ -181,19 +181,22 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             }
         }
 
-        
-         void DisplayValues() {
+
+        void DisplayValues() {
+            
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Values");
             bool customProb;
-            
+
             if (type == VariableType.Independent) {
-                SerializedProperty mixType = variableProperty.FindPropertyRelative(nameof(IndependentVariable.MixingType));
-                customProb = ((VariableMixingType)mixType.enumValueIndex) == VariableMixingType.CustomProbability;
+                SerializedProperty mixType =
+                    variableProperty.FindPropertyRelative(nameof(IndependentVariable.MixingType));
+                customProb = ((VariableMixingType) mixType.enumValueIndex) == VariableMixingType.CustomProbability;
             }
             else {
                 customProb = false;
             }
+
             if (customProb) EditorGUILayout.LabelField("Probability");
             EditorGUILayout.EndHorizontal();
 

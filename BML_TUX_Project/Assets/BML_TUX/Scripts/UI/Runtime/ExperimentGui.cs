@@ -52,13 +52,16 @@ namespace BML_TUX.Scripts.UI.Runtime {
         [SerializeField]
         TextMeshProUGUI BlockOrderTitle = default;
 
-        const string SelectText = "Choose...";
+        [SerializeField] FileLocationSettings FileLocationSettings = default;
+
+        public const string SelectText = "Choose...";
 
         readonly List<ParticipantVariableEntry> participantVariableEntries = new List<ParticipantVariableEntry>();
         BlockOrderData blockOrderData;
 
-        public DataTableUIDisplay TableDisplay;
-        
+        public TableViewer TableDisplay;
+        DesignPreviewer previewer;
+
         public void RegisterExperiment(ExperimentRunner experimentRunner) {
             ExperimentEvents.OnInitExperiment += Init;
             runner = experimentRunner;
@@ -90,14 +93,20 @@ namespace BML_TUX.Scripts.UI.Runtime {
                     throw new ArgumentOutOfRangeException();
             }
 
-            OutputFileName.text = session.OutputFileName;
-            OutputFolder.text = session.OutputFolder;
+            OutputFileName.text = session.OutputFile.outputFileName;
+            OutputFolder.text = session.OutputFile.outputFolder;
             
             int selectedBlockOrder = session.BlockOrderChosenIndex + 1;
             BlockOrderSelector.value = selectedBlockOrder;
 
-            DesignPreviewer previewer = new DesignPreviewer(runner.DesignFile);
+            previewer = new DesignPreviewer(runner.DesignFile);
             DataTable preview = previewer.GetPreview(selectedBlockOrder);
+            TableDisplay.Display(preview);
+        }
+
+        public void ReRandomizePreview() {
+            previewer.ReRandomizeTable();
+            DataTable preview = previewer.GetPreview(BlockOrderSelector.value);
             TableDisplay.Display(preview);
         }
 
@@ -143,42 +152,60 @@ namespace BML_TUX.Scripts.UI.Runtime {
 
         [PublicAPI]
         public void StartExperiment() {
+            
+            List<InputValidator> validators = new List<InputValidator>();
+            
+            OutputFile outputFile = new OutputFile(GetOutputFolderPath(),
+                OutputFileName.text);
+            
+            
+            validators.Add(new OutputFileValidationResult(outputFile));
+            
+            validators.Add(new ParticipantVariableValuesValidator(participantVariableEntries));
 
-            bool isValid = true;
-            string errorLog = string.Empty;
-            
-            session.OutputFileName = OutputFileName.text;
-            string folder = GetOutputFolderPath();
-            session.OutputFolder = folder;
-            session.ValidateFilePath(ref errorLog, ref isValid);
-            
-            ValidateParticipantVariableValues(ref errorLog, ref isValid);
-            
+            int blockOrderChosen = 0;
+            string designFilePath = "";
             switch (runner.DesignFile.TrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly:
                     List<IndependentVariable> blockVariables = runner.DesignFile.Variables.BlockVariables;
                     if (blockOrderData.SelectionRequired) {
-                        session.BlockOrderChosenIndex = BlockOrderSelector.value - 1; // subtract 1 because added first one in.
+                        blockOrderChosen = BlockOrderSelector.value - 1; // subtract 1 because added first one in.
                     }
                     else {
-                        session.BlockOrderChosenIndex = blockOrderData.DefaultBlockOrderIndex;
+                        blockOrderChosen = blockOrderData.DefaultBlockOrderIndex;
                     }
-                    ValidateBlockOrderChosen(ref errorLog, ref isValid);
+                    validators.Add(new BlockOrderValidationResult(blockOrderData, BlockOrderSelector));
                     break;
                 case TrialTableGenerationMode.PreGenerated:
-                    session.SelectedDesignFilePath = DesignFilePath.text;
+                    designFilePath = DesignFilePath.text;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
-            
+
+            bool isValid = true;
+            string errorString = "";
+            foreach (InputValidator validator in validators) {
+                if (!validator.Valid) {
+                    isValid = false;
+                    foreach (string error in validator.Errors) {
+                        errorString += error + "\n";
+                    }
+                }
+            }
+
             if (!isValid) {
-                ErrorText.text = errorLog;
+                
+                ErrorText.text = errorString;
                 ErrorPanel.gameObject.SetActive(true);
             }
             else {
                 gameObject.SetActive(false);
+
+                session.BlockOrderChosenIndex = blockOrderChosen;
+                session.OutputFile = outputFile;
+                session.SelectedDesignFilePath = designFilePath;
+                
                 ExperimentEvents.StartRunningExperiment(session);
             }
 
@@ -194,38 +221,7 @@ namespace BML_TUX.Scripts.UI.Runtime {
         public void HideErrorPanel() {
             ErrorPanel.gameObject.SetActive(false);
         }
-
         
-        
-        void ValidateParticipantVariableValues(ref string errorLog, ref bool isValid) {
-            foreach (ParticipantVariableEntry participantVariableEntry in participantVariableEntries) {
-                try {
-                    participantVariableEntry.ConfirmValue();
-                }
-                catch (FormatException) {
-                    string errorString =
-                        $"Input for Variable {participantVariableEntry.Variable.Name} is incorrect format or type";
-                    errorLog = LogErrorIntoString(errorLog, errorString);
-                    isValid = false;
-                }
-                catch (NoValueSelectedException) {
-                    string errorString =
-                        $"No value selected for {participantVariableEntry.Variable.Name}";
-                    errorLog = LogErrorIntoString(errorLog, errorString);
-                    isValid = false;
-                }
-            }
-        }
-
-        void ValidateBlockOrderChosen(ref string errorLog, ref bool isValid) {
-            if (!blockOrderData.SelectionRequired) return;
-            
-            string selectedText = BlockOrderSelector.options[BlockOrderSelector.value].text;
-            if (selectedText != SelectText) return;
-            string errorString = $"Need to select block order value";
-            errorLog = LogErrorIntoString(errorLog, errorString);
-            isValid = false;
-        }
 
         static string LogErrorIntoString(string errorLog, string errorString) {
             Debug.LogWarning(errorString);
@@ -234,5 +230,52 @@ namespace BML_TUX.Scripts.UI.Runtime {
         }
         
         
+        
+        
+    }
+
+    public class BlockOrderValidationResult : InputValidator {
+        
+        public BlockOrderValidationResult(BlockOrderData blockOrderData, TMP_Dropdown blockOrderSelector ) {
+            if (!blockOrderData.SelectionRequired) return;
+            Errors = new List<string>();
+            string selectedText = blockOrderSelector.options[blockOrderSelector.value].text;
+            if (selectedText != ExperimentGui.SelectText) return;
+            Errors.Add($"Need to select block order value");
+            Valid = false;
+        }
+
+        public List<string> Errors { get; }
+        public bool Valid { get; }
+    }
+
+    public interface InputValidator {
+        List<string> Errors { get; }
+        bool Valid { get; }
+    }
+
+    public class ParticipantVariableValuesValidator : InputValidator {
+        
+        public List<string> Errors { get; }
+        public bool Valid { get; }
+        public ParticipantVariableValuesValidator( List<ParticipantVariableEntry> participantVariableEntries) {
+            Errors = new List<string>();
+            
+            foreach (ParticipantVariableEntry participantVariableEntry in participantVariableEntries) {
+                try {
+                    participantVariableEntry.ConfirmValue();
+                }
+                catch (FormatException) {
+                    Errors.Add($"Input for Variable {participantVariableEntry.Variable.Name} is incorrect format or type");
+                    Valid = false;
+                }
+                catch (NoValueSelectedException) {
+                    Errors.Add($"No value selected for {participantVariableEntry.Variable.Name}");
+                    Valid = false;
+                }
+            }
+        }
+
+   
     }
 }

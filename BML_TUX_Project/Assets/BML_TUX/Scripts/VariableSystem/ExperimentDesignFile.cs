@@ -28,6 +28,7 @@ namespace BML_TUX.Scripts.VariableSystem {
         public ColumnNamesSettings ColumnNamesSettings;
         public ControlSettings ControlSettings;
         public GuiSettings GuiSettings;
+        public FileLocationSettings FileLocationSettings;
         
         public void Validate() {
             
@@ -52,6 +53,8 @@ namespace BML_TUX.Scripts.VariableSystem {
                 return blockIVs.Count > 0;
             }
         }
+
+       
 
         [SerializeField]
         public TrialTableGenerationMode TrialTableGeneration = TrialTableGenerationMode.OnTheFly;

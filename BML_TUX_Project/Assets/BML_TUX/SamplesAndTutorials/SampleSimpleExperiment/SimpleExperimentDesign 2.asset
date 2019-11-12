@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
-  m_Name: SimpleExperimentDesign 1
+  m_Name: SimpleExperimentDesign 2
   m_EditorClassIdentifier: 
   TrialRepetitions: 1
   ExperimentRepetitions: 2
@@ -25,6 +25,7 @@ MonoBehaviour:
     - Name: DistanceOfStimulus
       TypeOfVariable: 0
       DataType: 0
+      ExpandSettings: 1
       MixingType: 2
       Block: 0
       Values: 010000000200000003000000
@@ -35,6 +36,7 @@ MonoBehaviour:
     - Name: SizeOfStimulus
       TypeOfVariable: 0
       DataType: 0
+      ExpandSettings: 1
       MixingType: 0
       Block: 1
       Values: 060000000500000004000000
@@ -53,6 +55,7 @@ MonoBehaviour:
     - Name: SizeSelected
       TypeOfVariable: 1
       DataType: 0
+      ExpandSettings: 1
       Value: 0
       DefaultValue: 0
     FloatDVs: []
@@ -68,6 +71,7 @@ MonoBehaviour:
     - Name: Gender
       TypeOfVariable: 2
       DataType: 2
+      ExpandSettings: 1
       Value: O
       ConstrainValues: 1
       PossibleValues:

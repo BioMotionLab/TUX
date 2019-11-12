@@ -23,3 +23,23 @@ Confirmed Complete at: 11:17
 ---------------------
 Session Logged: 2019-11-07 10:03
 {"outputFileName":"tes9","outputFolder":"C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"","DebugMode":false,"BlockOrderChosenIndex":0}
+
+
+---------------------
+Session Logged: 2019-11-11 06:42
+{"outputFileName":"tes9","outputFolder":"/Users/adam/C:\\Users\\BioMotion\\Documents\\test","SelectedDesignFilePath":"","DebugMode":false,"BlockOrderChosenIndex":0}
+
+
+---------------------
+Session Logged: 2019-11-11 06:43
+{"outputFileName":"test","outputFolder":"/Users/adam/test","SelectedDesignFilePath":"","DebugMode":false,"BlockOrderChosenIndex":0}
+
+
+---------------------
+Session Logged: 2019-11-11 06:54
+{"outputFileName":"test","outputFolder":"/Users/adam/test","SelectedDesignFilePath":"","DebugMode":false,"BlockOrderChosenIndex":0}
+
+
+---------------------
+Session Logged: 2019-11-11 06:56
+{"outputFileName":"test","outputFolder":"/Users/adam/test","SelectedDesignFilePath":"","DebugMode":false,"BlockOrderChosenIndex":0}

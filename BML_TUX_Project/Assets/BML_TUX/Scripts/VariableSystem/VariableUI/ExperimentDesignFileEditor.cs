@@ -40,6 +40,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         const float VariablePanelBackgroundLightness = .55f;
         Color VariablePanelBackgroundColor;
         Color a = Color.gray;
+        SerializedProperty fileLocationSettings;
 
         void OnEnable() {
             VariablePanelBackgroundColor = new Color(VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, 1);
@@ -69,7 +70,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             columnNameSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.ColumnNamesSettings));
             controlSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.ControlSettings));
             guiSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.GuiSettings));
-
+            fileLocationSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.FileLocationSettings));
             CreateAllViewers();
             
         }
@@ -310,6 +311,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.PropertyField(columnNameSettings);
             EditorGUILayout.PropertyField(controlSettings);
             EditorGUILayout.PropertyField(guiSettings);
+            EditorGUILayout.PropertyField(fileLocationSettings);
             EditorGUI.indentLevel -= 2;
         }
 

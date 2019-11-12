@@ -8,7 +8,7 @@ public class BasicDataTable : MonoBehaviour {
     public DataTable table;
 
 
-    public DataTableUIDisplay tableDisplay;
+    public TableViewer tableDisplay;
     [ContextMenu("Generate")]
     public void Generate()
     {

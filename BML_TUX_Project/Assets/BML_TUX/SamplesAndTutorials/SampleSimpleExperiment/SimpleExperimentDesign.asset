@@ -16,7 +16,7 @@ MonoBehaviour:
   ExperimentRepetitions: 2
   TrialRandomization: 1
   TrialPermutationType: 1
-  BlockRandomization: 2
+  BlockRandomization: 0
   BlockPartialRandomizationSubType: 1
   Factory:
     DataTypeToCreate: 2
@@ -25,6 +25,7 @@ MonoBehaviour:
     - Name: DistanceOfStimulus
       TypeOfVariable: 0
       DataType: 0
+      ExpandSettings: 1
       MixingType: 2
       Block: 0
       Values: 010000000200000003000000
@@ -35,6 +36,7 @@ MonoBehaviour:
     - Name: SizeOfStimulus
       TypeOfVariable: 0
       DataType: 0
+      ExpandSettings: 1
       MixingType: 0
       Block: 1
       Values: 060000000500000004000000
@@ -53,6 +55,7 @@ MonoBehaviour:
     - Name: SizeSelected
       TypeOfVariable: 1
       DataType: 0
+      ExpandSettings: 1
       Value: 0
       DefaultValue: 0
     FloatDVs: []
@@ -68,6 +71,7 @@ MonoBehaviour:
     - Name: Gender
       TypeOfVariable: 2
       DataType: 2
+      ExpandSettings: 1
       Value: M
       ConstrainValues: 1
       PossibleValues:
@@ -83,5 +87,6 @@ MonoBehaviour:
     type: 2}
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
+  FileLocationSettings: {fileID: 0}
   TrialTableGeneration: 0
   BlockOrderConfigurations: []

@@ -221,12 +221,12 @@ namespace BML_TUX.Scripts.UI.Editor {
         }
         
         void StartExperiment() {
-            session.OutputFolder = outputFolder;
-            session.OutputFileName = fileName;
+            //session.OutputFolder = outputFolder;
+            //session.OutputFileName = fileName;
             session.BlockOrderChosenIndex = OrderChosenIndex;
 
             fileErrorLog = string.Empty;
-            session.ValidateFilePath(ref fileErrorLog, ref isValidFilePath);
+            //session.ValidateFilePath(ref fileErrorLog, ref isValidFilePath);
             
             if (!isValidFilePath) return;
             

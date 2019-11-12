@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
-public class DataTableUIDisplay : MonoBehaviour {
+public class TableViewer : MonoBehaviour {
     
     public GameObject ContentContainer;
     public TextMeshProUGUI EntryPrefab;
@@ -25,6 +25,7 @@ public class DataTableUIDisplay : MonoBehaviour {
     
     
     public void Display(DataTable tableToDisplay) {
+        Clear();
         table = tableToDisplay;
         columnIndexToMaxLength = new Dictionary<int, int>();
         for (int index = 0; index < table.Columns.Count; index++) {
@@ -38,8 +39,6 @@ public class DataTableUIDisplay : MonoBehaviour {
             }
         }
 
-        DestroyAllContent();
-        
         DisplayHeader();
         DisplayRows();
     }
@@ -82,7 +81,7 @@ public class DataTableUIDisplay : MonoBehaviour {
 
     void DestroyAllContent() {
         foreach (Transform child in ContentContainer.transform) {
-            DestroyImmediate(child.gameObject);
+            Destroy(child.gameObject);
         }
     }
 }

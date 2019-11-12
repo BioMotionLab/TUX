@@ -100,7 +100,7 @@ namespace BML_TUX.Scripts.ExperimentParts {
             }
             DesignFile.Validate();
 
-            Session = Session.LoadSessionData();
+            Session = Session.LoadSessionData(DesignFile.FileLocationSettings);
             if (Session == null) {
                 throw new NullReferenceException("Session null and not created properly");
             }
@@ -171,7 +171,7 @@ namespace BML_TUX.Scripts.ExperimentParts {
             }
             
             Running = true;
-            outputManager = new OutputManager(currentSession.OutputFullPath);
+            outputManager = new OutputManager(currentSession.OutputFile);
 
             experiment = (Experiment)Activator.CreateInstance(ExperimentType, this, RunnableDesign);
 
