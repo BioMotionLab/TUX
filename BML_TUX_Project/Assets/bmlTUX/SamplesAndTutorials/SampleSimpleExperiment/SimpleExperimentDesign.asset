@@ -19,10 +19,10 @@ MonoBehaviour:
   BlockRandomization: 0
   BlockPartialRandomizationSubType: 1
   Factory:
-    DataTypeToCreate: 2
-    VariableTypeToCreate: 2
+    DataTypeToCreate: 8
+    VariableTypeToCreate: 3
     IntIVs:
-    - Name: DistanceOfStimulus
+    - Name: Distance
       TypeOfVariable: 0
       DataType: 0
       ExpandSettings: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
       - 0
       - 0
       - 0
-    - Name: SizeOfStimulus
+    - Name: Size
       TypeOfVariable: 0
       DataType: 0
       ExpandSettings: 1
@@ -57,7 +57,7 @@ MonoBehaviour:
       DataType: 0
       ExpandSettings: 1
       Value: 0
-      DefaultValue: 0
+      DefaultValue: -999
     FloatDVs: []
     StringDVs: []
     BoolDVs: []

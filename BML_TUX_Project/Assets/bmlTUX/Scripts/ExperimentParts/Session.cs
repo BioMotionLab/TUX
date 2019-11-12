@@ -8,7 +8,6 @@ namespace bmlTUX.Scripts.ExperimentParts {
     [Serializable]
     public class Session {
         
-        [SerializeField]
         public FileLocationSettings FileLocations;
 
         [SerializeField]

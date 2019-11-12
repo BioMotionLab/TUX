@@ -24,6 +24,11 @@
             <e p="Instructions" t="Include">
               <e p="InstructionsDisplay.cs" t="Include" />
             </e>
+            <e p="TableViewer" t="Include">
+              <e p="BasicDataTable.cs" t="Include" />
+              <e p="TableViewer.asmdef" t="Include" />
+              <e p="TableViewer.cs" t="Include" />
+            </e>
           </e>
           <e p="SamplesAndTutorials" t="Include">
             <e p="TutorialExperiment" t="Include">
@@ -248,11 +253,6 @@
               </e>
             </e>
           </e>
-        </e>
-        <e p="TableViewer" t="Include">
-          <e p="BasicDataTable.cs" t="Include" />
-          <e p="TableViewer.asmdef" t="Include" />
-          <e p="TableViewer.cs" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
