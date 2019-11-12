@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
 using BML_TUX.Scripts.UI.Editor;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.VariableSystem;
@@ -153,13 +154,8 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             RebuildEditor();
             
         }
-        
-        void CreateNewVariableAndViewer() {
-            factory.AddNew();
-            RebuildEditor();
-        }
-        
-        
+
+
         void RebuildEditor() {
             serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
@@ -228,7 +224,15 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.EndHorizontal();
         }
 
-      
+        void CreateNewVariableAndViewer() {
+            if (factory.VariableTypeToCreate == VariableType.ChooseType || factory.DataTypeToCreate == SupportedDataType.ChooseType) {
+                Debug.LogWarning("Need to select variable type and data type before creating a variable");
+                return;
+            }
+            factory.AddNew();
+            RebuildEditor();
+        }
+
 
         void ShowViewers(List<VariableViewer> dict) {
             if (CheckEmptyDict(dict)) return;

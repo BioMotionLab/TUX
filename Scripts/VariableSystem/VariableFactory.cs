@@ -172,6 +172,9 @@ namespace bmlTUX.Scripts.VariableSystem {
                     throw new ArgumentOutOfRangeException(nameof(VariableTypeToCreate), DataTypeToCreate, null);
             }
 
+            DataTypeToCreate = SupportedDataType.ChooseType;
+            VariableTypeToCreate = VariableType.ChooseType;
+            
             return newVar;
 
         }
