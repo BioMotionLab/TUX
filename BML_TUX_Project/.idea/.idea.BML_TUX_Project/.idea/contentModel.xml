@@ -110,9 +110,6 @@
               <e p="BML_TUX_Utilities.asmdef" t="Include" />
               <e p="CameraAspect.cs" t="Include" />
               <e p="Delimiter.cs" t="Include" />
-              <e p="Editor" t="Include">
-                <e p="LayerAttributeEditor.cs" t="Include" />
-              </e>
               <e p="Extensions" t="Include">
                 <e p="CameraExtension.cs" t="Include" />
                 <e p="DataFormatter.cs" t="Include" />
@@ -137,11 +134,7 @@
                 <e p="TypeExtension.cs" t="Include" />
                 <e p="Vector3Extension.cs" t="Include" />
               </e>
-              <e p="GuiLayoutRect.cs" t="Include" />
-              <e p="LayerAttribute.cs" t="Include" />
-              <e p="LayerUtil.cs" t="Include" />
               <e p="LowestCommonFunctions.cs" t="Include" />
-              <e p="ReadOnlyInInspectorAttribute.cs" t="Include" />
               <e p="Rotator.cs" t="Include" />
               <e p="ScriptableObject Assets" t="Include">
                 <e p="BoolValue.cs" t="Include" />
@@ -233,9 +226,9 @@
                 <e p="ParticipantVariableStringDrawer.cs" t="Include" />
                 <e p="ParticipantVariableVector2Drawer.cs" t="Include" />
                 <e p="ParticipantVariableVector3Drawer.cs" t="Include" />
-                <e p="VariableDrawer.cs" t="Include" />
                 <e p="VariableDrawerHelpers.cs" t="Include" />
                 <e p="VariableFactoryDrawer.cs" t="Include" />
+                <e p="VariableNameValidator.cs" t="Include" />
                 <e p="VariableUI.asmdef" t="Include" />
                 <e p="VariableViewer.cs" t="Include" />
               </e>

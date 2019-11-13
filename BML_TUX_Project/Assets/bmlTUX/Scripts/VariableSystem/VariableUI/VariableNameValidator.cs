@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies;
 
-namespace BML_TUX.Scripts.VariableSystem.VariableUI {
+namespace bmlTUX.Scripts.VariableSystem.VariableUI {
     internal class VariableNameValidator {
 
         public bool Valid => reasonsInvalid.Count == 0;
