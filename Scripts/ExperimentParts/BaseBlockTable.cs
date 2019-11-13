@@ -91,7 +91,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
         BaseBlockTable GetBlockOrderTableFromOrderConfigs(int orderChosenIndex) {
  
-            if (orderChosenIndex > orderConfigs.Count- 1) throw new IndexOutOfRangeException($"Index chosen is {orderChosenIndex}, but count is {orderConfigs.Count}");
+            if (orderChosenIndex > orderConfigs.Count- 1) throw new IndexOutOfRangeException($"IndexInBlock chosen is {orderChosenIndex}, but count is {orderConfigs.Count}");
             
             BlockOrderDefinition chosenBlockOrderDefinition = orderConfigs[orderChosenIndex];
 
