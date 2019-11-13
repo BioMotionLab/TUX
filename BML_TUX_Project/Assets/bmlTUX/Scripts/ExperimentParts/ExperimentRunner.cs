@@ -88,10 +88,6 @@ namespace bmlTUX.Scripts.ExperimentParts {
             BlockType = scriptReferences.BlockType;
             ExperimentType = scriptReferences.ExperimentType;
             
-            #if UNITY_EDITOR
-            ExperimentEvents.CheckMainWindowIsOpen(this);
-            #endif
-
             //check if configurationFile file is loaded
             if (DesignFile == null) {
                 Debug.LogError("Config file not set up properly, make sure you dragged a configuration file into your Runner GameObject in the inspector");
@@ -124,6 +120,8 @@ namespace bmlTUX.Scripts.ExperimentParts {
                 gui = Instantiate(DesignFile.GuiSettings.GuiPrefab);
                 gui.gameObject.SetActive(true);
                 gui.RegisterExperiment(this);
+                Canvas guiCanvas = gui.GetComponent<Canvas>();
+                guiCanvas.targetDisplay = DesignFile.GuiSettings.TargetDisplay;
             }
             
             ExperimentEvents.InitExperiment(this);

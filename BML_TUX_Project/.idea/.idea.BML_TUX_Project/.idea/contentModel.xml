@@ -77,6 +77,7 @@
             <e p="Settings" t="Include">
               <e p="ColumnNamesSettings.cs" t="Include" />
               <e p="ControlSettings.cs" t="Include" />
+              <e p="DisplaySelection.cs" t="Include" />
               <e p="GuiSettings.cs" t="Include" />
               <e p="MenuNames.cs" t="Include" />
             </e>
@@ -85,7 +86,6 @@
                 <e p="DesignPreviewWindow.cs" t="Include" />
                 <e p="DesignSaverWindow.cs" t="Include" />
                 <e p="EditorUI.asmdef" t="Include" />
-                <e p="ExperimentWindow.cs" t="Include" />
                 <e p="ScriptHelperWindow.cs" t="Include" />
               </e>
               <e p="Runtime" t="Include">
@@ -109,7 +109,6 @@
             <e p="Utilities" t="Include">
               <e p="BML_TUX_Utilities.asmdef" t="Include" />
               <e p="CameraAspect.cs" t="Include" />
-              <e p="ConditionalHideAttribute.cs" t="Include" />
               <e p="Delimiter.cs" t="Include" />
               <e p="Editor" t="Include">
                 <e p="LayerAttributeEditor.cs" t="Include" />

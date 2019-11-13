@@ -316,6 +316,9 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.PropertyField(columnNameSettings);
             EditorGUILayout.PropertyField(controlSettings);
             EditorGUILayout.PropertyField(guiSettings);
+            EditorGUI.indentLevel+= 2;
+            EditorGUILayout.HelpBox("Change the monitor to which the UI is rendered", MessageType.Info);
+            EditorGUI.indentLevel-= 2;
             EditorGUILayout.PropertyField(fileLocationSettings);
             EditorGUI.indentLevel -= 2;
         }

@@ -23,12 +23,12 @@ namespace bmlTUX.Scripts.Managers {
 
 
         void OnEnable() {
-            ExperimentEvents.OnTrialSequenceHasCompleted += BlockDoneRunning;
+            ExperimentEvents.OnBlockCompleted += BlockDoneRunning;
             ExperimentEvents.OnJumpToBlock += JumpToBlock;
         }
 
         void OnDisable() {
-            ExperimentEvents.OnTrialSequenceHasCompleted -= BlockDoneRunning;
+            ExperimentEvents.OnBlockCompleted -= BlockDoneRunning;
             ExperimentEvents.OnJumpToBlock -= JumpToBlock;
         }
 
@@ -48,6 +48,7 @@ namespace bmlTUX.Scripts.Managers {
         void StartRunningBlock(Block block) {
 
             currentlyRunningBlock = block;
+            Debug.Log("");
             Debug.Log($"*****\nStarting Block {BlockIndex(currentlyRunningBlock)} of {blocks.Count}");
             ExperimentEvents.BlockHasStarted(block);
             ExperimentEvents.StartPart(block);
@@ -82,11 +83,8 @@ namespace bmlTUX.Scripts.Managers {
             ExperimentEvents.UpdateBlock(blocks, BlockIndex(currentlyRunningBlock));
         }
 
-        void BlockDoneRunning(List<Trial> trials) {
-
-
+        void BlockDoneRunning(Block unused) {
             runner.StartCoroutine(RunPostBlock());
-
         }
 
         void DoneBlockSequence() {

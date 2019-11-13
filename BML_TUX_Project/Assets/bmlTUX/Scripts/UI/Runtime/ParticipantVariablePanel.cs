@@ -8,6 +8,8 @@ namespace bmlTUX.Scripts.UI.Runtime {
         [SerializeField]
         ParticipantVariableEntry ParticipantVariableEntryPrefab = default;
 
+        [SerializeField]
+        GameObject ContentPanel = default;
         
         readonly List<ParticipantVariableEntry> participantVariableEntries = new List<ParticipantVariableEntry>();
         public List<ParticipantVariableEntry> Entries => participantVariableEntries;
@@ -17,7 +19,7 @@ namespace bmlTUX.Scripts.UI.Runtime {
             foreach (ParticipantVariable participantVariable in participantVariables) {
                 
                 ParticipantVariableEntry newParticipantVariableEntry = 
-                    Instantiate(ParticipantVariableEntryPrefab, transform);
+                    Instantiate(ParticipantVariableEntryPrefab, ContentPanel.transform);
                 participantVariableEntries.Add(newParticipantVariableEntry);
                 newParticipantVariableEntry.Display(participantVariable);
             }
