@@ -39,7 +39,6 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
         public static Session LoadSessionData(FileLocationSettings fileLocations) {
             string filePath = fileLocations.LastSessionSaveFilePath;
-            Debug.Log(fileLocations.LastSessionSaveFilePath);
             Session session;
             if (File.Exists(filePath)) {
                 string dataAsJason = File.ReadAllText(filePath);
@@ -58,10 +57,9 @@ namespace bmlTUX.Scripts.ExperimentParts {
             Directory.CreateDirectory(FileLocations.SessionFolderWithDocuments);
             string filePath = FileLocations.LastSessionSaveFilePath;
             string dataAsJson = JsonUtility.ToJson(this);
-            Debug.Log($"before save {FileLocations.LastSessionSaveFilePath}, {filePath}");
             File.WriteAllText(filePath, dataAsJson);
             
-            Debug.Log(File.Exists(filePath) ? $"Session data Saved" : $"Session not saved properly: {filePath}");
+            Debug.Log(File.Exists(filePath) ? $"Session data Saved to {filePath}" : $"Session not saved properly: {filePath}");
         }
         
         void Completed() {

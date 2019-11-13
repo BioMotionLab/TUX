@@ -6,5 +6,13 @@ namespace bmlTUX.Scripts.Settings {
     public class GuiSettings : ScriptableObject {
         
         public ExperimentGui GuiPrefab;
+
+        [SerializeField]
+        // ReSharper disable once InconsistentNaming
+        DisplaySelection targetDisplay = default;
+
+        // ReSharper disable once ConvertToAutoProperty
+        public int TargetDisplay => (int)targetDisplay;
+
     }
 }

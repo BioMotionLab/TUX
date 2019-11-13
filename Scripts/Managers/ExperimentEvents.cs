@@ -8,7 +8,7 @@ namespace bmlTUX.Scripts.Managers {
         public delegate void TrialHasStartedEvent(Trial trial, int index);
 
         public static event TrialHasStartedEvent OnTrialHasStarted;
-
+       
 
 
         public static void TrialHasStarted(Trial trial, int indexInBlock) {
@@ -64,6 +64,14 @@ namespace bmlTUX.Scripts.Managers {
             OnBlockHasStarted?.Invoke(block);
         }
 
+
+        public delegate void BlockHasCompletedEvent(Block block);
+
+        public static event BlockHasCompletedEvent OnBlockCompleted;
+
+        public static void BlockCompleted(Block block) {
+            OnBlockCompleted?.Invoke(block);
+        }
 
         public delegate void JumpToBlockEvent(int indexToJumpTo);
 
@@ -164,13 +172,6 @@ namespace bmlTUX.Scripts.Managers {
         public static void StartPart(ExperimentPart experimentPart) {
             OnStartPart?.Invoke(experimentPart);
         }
-
-        public delegate void CheckMainWindowIsOpenEvent(ExperimentRunner experimentRunner);
-
-        public static event CheckMainWindowIsOpenEvent OnCheckMainWindowIsOpen;
-
-        public static void CheckMainWindowIsOpen(ExperimentRunner experimentRunner) {
-            OnCheckMainWindowIsOpen?.Invoke(experimentRunner);
-        }
+        
     }
 }

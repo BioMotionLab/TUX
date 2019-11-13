@@ -24,6 +24,7 @@ namespace bmlTUX.Scripts.Managers {
 
 		public void OutputToFile(Outputtable output) {
 			Debug.Log($"Writing output file: {FullPath}");
+			Debug.Log("");
 			Directory.CreateDirectory(OutputFolder ?? throw new NullReferenceException("Folder could not be created"));
 
 			using (StreamWriter streamWriter = new StreamWriter(FullPath)) {

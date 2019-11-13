@@ -86,7 +86,10 @@ namespace bmlTUX.Scripts.ExperimentParts {
             while (trialSequenceRunner.Running) {
                 yield return null;
             }
-            
+        }
+
+        protected override void InternalPostMethod() {
+            ExperimentEvents.BlockCompleted(this);
         }
 
         /// <summary>

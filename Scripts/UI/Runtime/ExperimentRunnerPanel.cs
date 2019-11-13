@@ -22,6 +22,9 @@ namespace bmlTUX.Scripts.UI.Runtime {
 
         [SerializeField]
         RectTransform CurrentTrialContainer = default;
+
+        [SerializeField]
+        RectTransform ProgressPanel = default;
         
         bool             started           = false;
         int              currentBlockIndex = -1;
@@ -146,28 +149,13 @@ namespace bmlTUX.Scripts.UI.Runtime {
             string blockText = "";
             if (design.HasBlocks) blockText = $" (Block {currentBlockIndex} / {design.BlockCount})";
             CurrentTrialText.text = ($"Running Trial: {currentTrial} of {design.TotalTrials} total{blockText}.");
+
+            if (runner.Ended) {
+                Image progressPanelImage = ProgressPanel.GetComponent<Image>();
+                progressPanelImage.color = Color.red;
+            }
         }
-
-/*        void UpdateTrialTable() {
-
-            if (blockIndex == currentBlockIndex) {
-                // can't jump between blocks, only allow jumping with block.
-                if (GUILayout.Button("Go", JumpToButtonWidth)) {
-                    ExperimentEvents.JumpToTrial(trialIndexInBlock);
-                }
-            }
-            else {
-                EditorGUILayout.LabelField("", JumpToButtonWidth);
-            }
-
-            Trial trial = block.Trials[trialIndexInBlock];
-            Color color = trial.CompletedSuccessfully ? Color.green : Color.red;
-            color = trial.Skipped ? Color.yellow : color;
-            EditorGUILayout.ColorField(GUIContent.none, color, false, false, false, CompleteIndicatorWidth);
-            EditorGUILayout.TextArea(trialRow.AsString());
-
-        }*/
-
+        
 
         void Clear() {
             DestroyAllContent();

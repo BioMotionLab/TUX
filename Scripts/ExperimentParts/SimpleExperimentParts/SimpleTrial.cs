@@ -38,7 +38,6 @@ namespace bmlTUX.Scripts.ExperimentParts.SimpleExperimentParts {
                 
                 //End Trial based on user input
                 if (Input.GetKeyDown(KeyCode.Return)) {
-                    Debug.Log($"Return key pressed!");
                     running = false;
                 }
                 
