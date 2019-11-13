@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SimpleExperimentDesign
   m_EditorClassIdentifier: 
   TrialRepetitions: 1
-  ExperimentRepetitions: 2
-  TrialRandomization: 1
+  ExperimentRepetitions: 1
+  TrialRandomization: 0
   TrialPermutationType: 1
   BlockRandomization: 0
   BlockPartialRandomizationSubType: 1
@@ -22,30 +22,43 @@ MonoBehaviour:
     DataTypeToCreate: 8
     VariableTypeToCreate: 3
     IntIVs:
-    - Name: Distance
+    - Name: IndependentVar1
       TypeOfVariable: 0
       DataType: 0
       ExpandSettings: 1
-      MixingType: 2
+      MixingType: 0
       Block: 0
       Values: 010000000200000003000000
       Probabilities:
       - 0
       - 0
       - 0
-    - Name: Size
+    FloatIVs:
+    - Name: IndependentVar2
       TypeOfVariable: 0
-      DataType: 0
+      DataType: 1
       ExpandSettings: 1
       MixingType: 0
-      Block: 1
-      Values: 060000000500000004000000
+      Block: 0
+      Values:
+      - 4
+      - 5
       Probabilities:
       - 0
       - 0
+    StringIVs:
+    - Name: BlockVar1
+      TypeOfVariable: 0
+      DataType: 2
+      ExpandSettings: 1
+      MixingType: 0
+      Block: 1
+      Values:
+      - BlockValue1
+      - BlockValue2
+      Probabilities:
       - 0
-    FloatIVs: []
-    StringIVs: []
+      - 0
     BoolIVs: []
     GameObjectIVs: []
     Vector2IVs: []

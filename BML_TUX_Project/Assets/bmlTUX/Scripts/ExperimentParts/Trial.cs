@@ -20,7 +20,10 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// <summary>
         /// The index of the Trial within a Block
         /// </summary>
-        [PublicAPI] public int Index => (int) Data[Runner.DesignFile.ColumnNamesSettings.TrialIndex];
+        [PublicAPI] public int IndexInBlock => (int) Data[Runner.DesignFile.ColumnNamesSettings.TrialIndex];
+
+        [PublicAPI]
+        public int Index => (int) Data[Runner.DesignFile.ColumnNamesSettings.TotalTrialIndex];
         
         /// <summary>
         /// The index of the Block in which this Trial resides
@@ -30,7 +33,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// <summary>
         /// Text that describes the index of Trial and Block.
         /// </summary>
-        [PublicAPI] public string  TrialText => $"Trial {Index} of Block {BlockIndex}";
+        [PublicAPI] public string  TrialText => $"Trial {IndexInBlock} of Block {BlockIndex}";
 
         /// <summary>
         /// Whether the trial was Completed Successfully
@@ -63,6 +66,8 @@ namespace bmlTUX.Scripts.ExperimentParts {
             get => (bool) Data[Runner.DesignFile.ColumnNamesSettings.Skipped];
             set => Data[Runner.DesignFile.ColumnNamesSettings.Skipped] = value;
         }
+
+      
 
         /// <summary>
         /// Constructor

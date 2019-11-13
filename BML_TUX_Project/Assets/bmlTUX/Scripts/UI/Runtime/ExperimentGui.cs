@@ -15,6 +15,12 @@ namespace bmlTUX.Scripts.UI.Runtime {
         
         [SerializeField]
         TableViewer TableDisplay = default;
+
+        [SerializeField]
+        ExperimentRunnerPanel ExperimentRunnerPanel = default;
+
+        [SerializeField]
+        RectTransform ExperimentStartPanel = default;
         
         DesignPreviewer previewer;
         FileLocationSettings fileLocationSettings;
@@ -58,11 +64,13 @@ namespace bmlTUX.Scripts.UI.Runtime {
 
         void StartRunningExperiment(Session session) {
             ExperimentEvents.StartRunningExperiment(session);
-            gameObject.SetActive(false);
+            ExperimentStartPanel.gameObject.SetActive(false);
+            ExperimentRunnerPanel.ShowPanel();
         }
 
         [PublicAPI]
         public void StartDebugExperiment() {
+            if (fileLocationSettings == null) Debug.LogError($"fileLocationSettings null when debug started");
             Session session = new DebugSession(fileLocationSettings);
 
             foreach (ParticipantVariable variable in runner.DesignFile.Variables.ParticipantVariables) {

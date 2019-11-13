@@ -96,6 +96,7 @@
                 <e p="DesignPreviewer.cs" t="Include" />
                 <e p="ErrorDisplayPanel.cs" t="Include" />
                 <e p="ExperimentGui.cs" t="Include" />
+                <e p="ExperimentRunnerPanel.cs" t="Include" />
                 <e p="InputValidator.cs" t="Include" />
                 <e p="NoValueSelectedException.cs" t="Include" />
                 <e p="OutputFilePanel.cs" t="Include" />

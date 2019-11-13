@@ -11,8 +11,8 @@ namespace bmlTUX.Scripts.Managers {
 
 
 
-        public static void TrialHasStarted(Trial trial, int index) {
-            OnTrialHasStarted?.Invoke(trial, index);
+        public static void TrialHasStarted(Trial trial, int indexInBlock) {
+            OnTrialHasStarted?.Invoke(trial, indexInBlock);
         }
 
         public delegate void InterruptTrialEvent();

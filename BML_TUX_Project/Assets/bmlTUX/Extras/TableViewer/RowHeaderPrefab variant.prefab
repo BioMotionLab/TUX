@@ -7,11 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -5331577082917160598, guid: 8a8ddbce541a4e84c95eabfc51b53d94,
-        type: 3}
-      propertyPath: m_MinHeight
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 3671844299121869332, guid: 8a8ddbce541a4e84c95eabfc51b53d94,
         type: 3}
       propertyPath: m_Name
@@ -141,6 +136,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5331577082917160598, guid: 8a8ddbce541a4e84c95eabfc51b53d94,
+        type: 3}
+      propertyPath: m_MinHeight
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a8ddbce541a4e84c95eabfc51b53d94, type: 3}

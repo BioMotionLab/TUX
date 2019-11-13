@@ -18,6 +18,7 @@ namespace bmlTUX.Scripts.Managers {
 		}
 
 		public static OutputFile DebugFile(FileLocationSettings fileLocationSettings) {
+			if (fileLocationSettings == null) Debug.Log($"File location settings null");
 			return new OutputFile(fileLocationSettings.DebugFolder, fileLocationSettings.DebugFileName);
 		}
 
