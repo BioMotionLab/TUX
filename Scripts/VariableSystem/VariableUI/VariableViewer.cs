@@ -2,6 +2,7 @@ using System;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.VariableSystem;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
+using bmlTUX.Scripts.VariableSystem.VariableUI;
 using UnityEditor;
 using UnityEngine;
 
