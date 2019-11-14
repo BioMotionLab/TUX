@@ -1,9 +1,7 @@
 ﻿using JetBrains.Annotations;
 
-namespace BML_Utilities {
-
-
-
+namespace bmlTUX.Scripts.Utilities {
+    
     public static class Delimiter {
         [PublicAPI]
         public const string Comma = ",";

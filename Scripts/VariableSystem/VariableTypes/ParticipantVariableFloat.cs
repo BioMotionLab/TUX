@@ -11,10 +11,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableTypes {
         public override void SelectValue(string value) {
             Value = Convert.ToSingle(value);
         }
-
-        public override void AddValueFieldInEditor() {
-            Value = EditorGUILayout.FloatField(Value);
-        }
+        
 
         protected override float DefaultValue => default;
     }

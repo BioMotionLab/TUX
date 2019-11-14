@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Random = UnityEngine.Random;
 
-namespace BML_Utilities.Extensions {
+namespace bmlTUX.Scripts.Utilities.Extensions {
 
     /// <summary>
     /// A collection of extensions that extend the System List class to add new functionality

@@ -15,3 +15,4 @@ MonoBehaviour:
   InterruptKeys: 2f000000
   BackKeys: 2c000000
   NextKeys: 2e000000
+  QuitKeys: 1b000000

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace BML_Utilities.Extensions {
+namespace bmlTUX.Scripts.Utilities.Extensions {
     public static class GameObjectExtensions
     {
 

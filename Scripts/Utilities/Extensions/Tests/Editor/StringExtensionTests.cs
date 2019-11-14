@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace BML_Utilities.Extensions.Tests.Editor {
+namespace bmlTUX.Scripts.Utilities.Extensions.Tests.Editor {
     public class StringExtensionTests {
         const string TestString = "12345678AndManyMoreCharacters";
 

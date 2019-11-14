@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using BML_Utilities.Extensions;
 using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX.Scripts.Utilities.Extensions;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {

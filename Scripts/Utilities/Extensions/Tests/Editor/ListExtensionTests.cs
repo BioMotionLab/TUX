@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace BML_Utilities.Extensions.Tests.Editor {
+namespace bmlTUX.Scripts.Utilities.Extensions.Tests.Editor {
     public class ListExtensionTests {
         readonly List<int> testTooShortList = new List<int>() {1};
         readonly List<int> testListTwo      = new List<int>() {1, 2};

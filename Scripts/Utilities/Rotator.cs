@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BML_Utilities {
+namespace bmlTUX.Scripts.Utilities {
     public class Rotator : MonoBehaviour {
 
         [SerializeField]

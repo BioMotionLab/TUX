@@ -13,7 +13,7 @@ namespace bmlTUX.Scripts.Managers {
         /// <param name="session"></param>
         public static void Log(Session session) {
 
-            Directory.CreateDirectory(session.FileLocations.SessionFolderWithDocuments);
+            Directory.CreateDirectory(session.FileLocations.SessionFolder);
             string logString = CreateLogString(session);
 
             using (StreamWriter streamWriter = new StreamWriter(session.FileLocations.SessionLogFilePath, true)) {

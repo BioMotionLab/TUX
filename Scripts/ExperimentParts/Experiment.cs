@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using BML_Utilities;
-using BML_Utilities.Extensions;
 using bmlTUX.Scripts.Managers;
+using bmlTUX.Scripts.Utilities;
+using bmlTUX.Scripts.Utilities.Extensions;
 
 // ReSharper disable VirtualMemberNeverOverridden.Global
 // ReSharper disable MemberCanBePrivate.Global

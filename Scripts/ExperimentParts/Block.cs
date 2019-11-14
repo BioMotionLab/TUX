@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using BML_Utilities.Extensions;
 using bmlTUX.Scripts.Managers;
+using bmlTUX.Scripts.Utilities.Extensions;
 using JetBrains.Annotations;
 
 namespace bmlTUX.Scripts.ExperimentParts {

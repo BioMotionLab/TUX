@@ -79,7 +79,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         void OnEnable() {
             ExperimentEvents.OnStartRunningExperiment += StartRunningRunningExperiment;
             ExperimentEvents.OnEndExperiment += EndExperiment;
-
+            StartCoroutine(DesignFile.ControlSettings.ListenForQuit());
         }
         
         void Start() {
@@ -121,7 +121,15 @@ namespace bmlTUX.Scripts.ExperimentParts {
                 gui.gameObject.SetActive(true);
                 gui.RegisterExperiment(this);
                 Canvas guiCanvas = gui.GetComponent<Canvas>();
-                guiCanvas.targetDisplay = DesignFile.GuiSettings.TargetDisplay;
+                
+                int targetDisplay = DesignFile.GuiSettings.TargetDisplay;
+                if (Display.displays.Length > targetDisplay) {
+                    Display.displays[targetDisplay].Activate();
+                    guiCanvas.targetDisplay = targetDisplay;
+                }
+                else {
+                    guiCanvas.targetDisplay = Display.displays.Length - 1;
+                }
             }
             
             ExperimentEvents.InitExperiment(this);

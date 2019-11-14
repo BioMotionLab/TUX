@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GuiPrefab: {fileID: 5503625799166534412, guid: 54133c8be039f904d859d2f63523b15b,
     type: 3}
-  targetDisplay: 0
+  targetDisplay: 1

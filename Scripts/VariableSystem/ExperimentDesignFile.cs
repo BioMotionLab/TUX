@@ -5,7 +5,7 @@ using bmlTUX.Scripts.Settings;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
-    [CreateAssetMenu(menuName = MenuNames.BmlAssetMenu + "New Experiment Design File")]
+    [CreateAssetMenu(menuName = TUXMenuNames.AssetCreationMenu + "Experiment Design File")]
     public class ExperimentDesignFile : ScriptableObject {
 
        
@@ -25,9 +25,13 @@ namespace bmlTUX.Scripts.VariableSystem {
         [SerializeField]
         public VariableFactory Factory = new VariableFactory();
 
+        [SerializeField]
         public ColumnNamesSettings ColumnNamesSettings;
+        [SerializeField]
         public ControlSettings ControlSettings;
+        [SerializeField]
         public GuiSettings GuiSettings;
+        [SerializeField]
         public FileLocationSettings FileLocationSettings;
         
         public void Validate() {
