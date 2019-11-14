@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using UnityEngine;
 
-namespace BML_Utilities.Extensions.Tests.Editor {
+namespace bmlTUX.Scripts.Utilities.Extensions.Tests.Editor {
     public class TransformExtensionTests {
         
         GameObject fakeGameObject;

@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.bml.unityautopackagebuilder": "https://c88a7ccccb20b973e61c7864fc8b6cb3d091216a@github.com/BioMotionLab/UnityPackageAutoBuilder.git#0.1.1b2",
+    "com.bml.unityautopackagebuilder": "https://c88a7ccccb20b973e61c7864fc8b6cb3d091216a@github.com/BioMotionLab/UnityPackageAutoBuilder.git#0.2.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.ads": "2.3.1",
@@ -49,8 +49,8 @@
   },
   "lock": {
     "com.bml.unityautopackagebuilder": {
-      "hash": "cd5cf4276aa8b5a9b3f4f4397971c9a13e9fdcc9",
-      "revision": "0.1.1b2"
+      "hash": "33ee31b09c7af4940f14f2d937507a1394bd8004",
+      "revision": "0.2.0"
     }
   }
 }

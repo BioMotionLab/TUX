@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using BML_Utilities.Extensions;
 using bmlTUX.Scripts.Settings;
+using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
 
 namespace bmlTUX.Scripts.ExperimentParts {

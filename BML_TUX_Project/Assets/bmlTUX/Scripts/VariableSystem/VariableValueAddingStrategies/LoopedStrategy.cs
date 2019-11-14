@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using BML_Utilities;
-using BML_Utilities.Extensions;
+using bmlTUX.Scripts.Utilities;
+using bmlTUX.Scripts.Utilities.Extensions;
 
 namespace bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies {
 

@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace BML_Utilities.Extensions.Tests.Editor {
+namespace bmlTUX.Scripts.Utilities.Extensions.Tests.Editor {
     public class IntExtensionTests {
         [Test]
         public void FourIsWithin3And7() {

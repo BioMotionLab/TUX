@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace bmlTUX.Scripts.Settings {
-    [CreateAssetMenu(menuName = MenuNames.BmlSettingsMenu + "GUI Settings")]
+    [CreateAssetMenu(menuName = TUXMenuNames.AssetCreationMenu + "GUI Settings File")]
     public class GuiSettings : ScriptableObject {
         
         public ExperimentGui GuiPrefab;

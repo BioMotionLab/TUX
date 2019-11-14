@@ -11,10 +11,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableTypes {
         public override void SelectValue(string value) {
             throw new NotImplementedException();
         }
-
-        public override void AddValueFieldInEditor() {
-            throw new NotImplementedException();
-        }
+        
 
         protected override Vector2 DefaultValue => new Vector2(-999, -999);
     }

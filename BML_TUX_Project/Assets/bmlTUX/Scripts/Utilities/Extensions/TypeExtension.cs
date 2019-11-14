@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace BML_Utilities.Extensions {
+namespace bmlTUX.Scripts.Utilities.Extensions {
     public static class TypeExtension
     {
         /// <summary>
@@ -10,7 +10,7 @@ namespace BML_Utilities.Extensions {
         /// <param name="type"></param>
         /// <returns></returns>
         [PublicAPI]
-        public static string LastPartOfName(this Type type) {
+        public static string LastPartOfTypeName(this Type type) {
             string[] typeNameFull = type.FullName?.Split('.');
             string typeNameLast = typeNameFull?[typeNameFull.Length - 1];
             return typeNameLast;

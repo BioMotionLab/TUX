@@ -24,11 +24,6 @@
             <e p="Instructions" t="Include">
               <e p="InstructionsDisplay.cs" t="Include" />
             </e>
-            <e p="TableViewer" t="Include">
-              <e p="BasicDataTable.cs" t="Include" />
-              <e p="TableViewer.asmdef" t="Include" />
-              <e p="TableViewer.cs" t="Include" />
-            </e>
           </e>
           <e p="SamplesAndTutorials" t="Include">
             <e p="TutorialExperiment" t="Include">
@@ -38,12 +33,11 @@
             </e>
           </e>
           <e p="Scripts" t="Include">
-            <e p="BML_TUX.asmdef" t="Include" />
+            <e p="bmlTUX.asmdef" t="Include" />
             <e p="ExperimentParts" t="Include">
               <e p="BaseBlockTable.cs" t="Include" />
               <e p="BaseTrialTable.cs" t="Include" />
               <e p="Block.cs" t="Include" />
-              <e p="DataTableCSVUtility.cs" t="Include" />
               <e p="DebugSession.cs" t="Include" />
               <e p="Experiment.cs" t="Include" />
               <e p="ExperimentDesign.cs" t="Include" />
@@ -79,36 +73,47 @@
               <e p="ControlSettings.cs" t="Include" />
               <e p="DisplaySelection.cs" t="Include" />
               <e p="GuiSettings.cs" t="Include" />
-              <e p="MenuNames.cs" t="Include" />
+              <e p="TUXMenuNames.cs" t="Include" />
             </e>
             <e p="UI" t="Include">
-              <e p="Editor" t="Include">
-                <e p="DesignPreviewWindow.cs" t="Include" />
-                <e p="DesignSaverWindow.cs" t="Include" />
+              <e p="EditorUI" t="Include">
+                <e p="DesignPreviewEditorDisplay.cs" t="Include" />
+                <e p="DesignPreviewEditorWindow.cs" t="Include" />
+                <e p="DesignSaverEditorWindow.cs" t="Include" />
                 <e p="EditorUI.asmdef" t="Include" />
-                <e p="ScriptHelperWindow.cs" t="Include" />
+                <e p="ScriptHelperEditorWindow.cs" t="Include" />
               </e>
-              <e p="Runtime" t="Include">
-                <e p="BlockOrderData.cs" t="Include" />
-                <e p="BlockOrderPanel.cs" t="Include" />
-                <e p="BlockOrderValidationResult.cs" t="Include" />
-                <e p="DesignFilePanel.cs" t="Include" />
-                <e p="DesignPreviewer.cs" t="Include" />
-                <e p="ErrorDisplayPanel.cs" t="Include" />
+              <e p="RuntimeUI" t="Include">
                 <e p="ExperimentGui.cs" t="Include" />
-                <e p="ExperimentRunnerPanel.cs" t="Include" />
-                <e p="InputValidator.cs" t="Include" />
-                <e p="NoValueSelectedException.cs" t="Include" />
-                <e p="OutputFilePanel.cs" t="Include" />
-                <e p="ParticipantVariableEntry.cs" t="Include" />
-                <e p="ParticipantVariablePanel.cs" t="Include" />
-                <e p="ParticipantVariableValuesValidator.cs" t="Include" />
-                <e p="SessionSetupPanel.cs" t="Include" />
+                <e p="RunnerWindowUI" t="Include">
+                  <e p="BlockOrderPanel.cs" t="Include" />
+                  <e p="DesignFilePanel.cs" t="Include" />
+                  <e p="ExperimentRunnerPanel.cs" t="Include" />
+                  <e p="ParticipantVariablePanel.cs" t="Include" />
+                </e>
+                <e p="SessionSetupWindowUI" t="Include">
+                  <e p="ErrorDisplayPanel.cs" t="Include" />
+                  <e p="OutputFilePanel.cs" t="Include" />
+                  <e p="ParticipantVariableEntry.cs" t="Include" />
+                  <e p="SessionSetupPanel.cs" t="Include" />
+                </e>
+                <e p="TableViewer" t="Include">
+                  <e p="BasicDataTableForTesting.cs" t="Include" />
+                  <e p="TableViewer.asmdef" t="Include" />
+                  <e p="TableViewer.cs" t="Include" />
+                </e>
+                <e p="UIUtilities" t="Include">
+                  <e p="BlockOrderData.cs" t="Include" />
+                  <e p="BlockOrderValidationResult.cs" t="Include" />
+                  <e p="DesignPreviewer.cs" t="Include" />
+                  <e p="InputValidator.cs" t="Include" />
+                  <e p="NoValueSelectedException.cs" t="Include" />
+                  <e p="ParticipantVariableValuesValidator.cs" t="Include" />
+                </e>
               </e>
             </e>
             <e p="Utilities" t="Include">
-              <e p="BML_TUX_Utilities.asmdef" t="Include" />
-              <e p="CameraAspect.cs" t="Include" />
+              <e p="DataTableCSVUtility.cs" t="Include" />
               <e p="Delimiter.cs" t="Include" />
               <e p="Extensions" t="Include">
                 <e p="CameraExtension.cs" t="Include" />
@@ -136,16 +141,6 @@
               </e>
               <e p="LowestCommonFunctions.cs" t="Include" />
               <e p="Rotator.cs" t="Include" />
-              <e p="ScriptableObject Assets" t="Include">
-                <e p="BoolValue.cs" t="Include" />
-                <e p="FloatValue.cs" t="Include" />
-                <e p="StringValue.cs" t="Include" />
-                <e p="TextAssetToUI.cs" t="Include" />
-              </e>
-              <e p="SerializableClasses" t="Include">
-                <e p="QuaternionSerializable.cs" t="Include" />
-                <e p="Vector3Serializable.cs" t="Include" />
-              </e>
               <e p="SnapToOtherObject.cs" t="Include" />
               <e p="TestingUtilities" t="Include">
                 <e p="AssertUtilities.cs" t="Include" />
@@ -197,37 +192,8 @@
                 <e p="VariableType.cs" t="Include" />
               </e>
               <e p="VariableUI" t="Include">
-                <e p="DependentVariableBoolDrawer.cs" t="Include" />
-                <e p="DependentVariableCustomDataTypeDrawer.cs" t="Include" />
-                <e p="DependentVariableDrawer.cs" t="Include" />
-                <e p="DependentVariableFloatDrawer.cs" t="Include" />
-                <e p="DependentVariableGameObjectDrawer.cs" t="Include" />
-                <e p="DependentVariableIntDrawer.cs" t="Include" />
-                <e p="DependentVariableStringDrawer.cs" t="Include" />
-                <e p="DependentVariableVector2Drawer.cs" t="Include" />
-                <e p="DependentVariableVector3Drawer.cs" t="Include" />
                 <e p="ExperimentDesignFileEditor.cs" t="Include" />
-                <e p="IndependentVariableBoolDrawer.cs" t="Include" />
-                <e p="IndependentVariableCustomDataTypeDrawer.cs" t="Include" />
-                <e p="IndependentVariableDrawer.cs" t="Include" />
-                <e p="IndependentVariableFloatDrawer.cs" t="Include" />
-                <e p="IndependentVariableGameObjectDrawer.cs" t="Include" />
-                <e p="IndependentVariableIntDrawer.cs" t="Include" />
-                <e p="IndependentVariableStringDrawer.cs" t="Include" />
-                <e p="IndependentVariableVector2Drawer.cs" t="Include" />
-                <e p="IndependentVariableVector3Drawer.cs" t="Include" />
                 <e p="OrderDefinitionEditor.cs" t="Include" />
-                <e p="ParticipantVariableBoolDrawer.cs" t="Include" />
-                <e p="ParticipantVariableCustomDataDrawer.cs" t="Include" />
-                <e p="ParticipantVariableDrawer.cs" t="Include" />
-                <e p="ParticipantVariableFloatDrawer.cs" t="Include" />
-                <e p="ParticipantVariableGameObjectDrawer.cs" t="Include" />
-                <e p="ParticipantVariableIntDrawer.cs" t="Include" />
-                <e p="ParticipantVariableStringDrawer.cs" t="Include" />
-                <e p="ParticipantVariableVector2Drawer.cs" t="Include" />
-                <e p="ParticipantVariableVector3Drawer.cs" t="Include" />
-                <e p="VariableDrawerHelpers.cs" t="Include" />
-                <e p="VariableFactoryDrawer.cs" t="Include" />
                 <e p="VariableNameValidator.cs" t="Include" />
                 <e p="VariableUI.asmdef" t="Include" />
                 <e p="VariableViewer.cs" t="Include" />
@@ -276,9 +242,8 @@
           </e>
         </e>
       </e>
-      <e p="BML_T.csproj" t="IncludeRecursive" />
       <e p="BML_TUX_Project.sln" t="IncludeFlat" />
-      <e p="BML_TUX_Utilities.csproj" t="IncludeRecursive" />
+      <e p="bmlTUX.csproj" t="IncludeRecursive" />
       <e p="EditorUI.csproj" t="IncludeRecursive" />
       <e p="ExtensionTests.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />

@@ -8,16 +8,21 @@ namespace bmlTUX.Scripts.ExperimentParts {
     [Serializable]
     public class Session {
         
+        [SerializeField]
         public FileLocationSettings FileLocations;
 
         [SerializeField]
         public OutputFile OutputFile;
         
+        [SerializeField]
         public string SelectedDesignFilePath = "";
+        
+        [SerializeField]
         public int BlockOrderChosenIndex = 0;
 
         
         public Session(FileLocationSettings fileLocations) {
+            if (fileLocations == null) throw new NullReferenceException("File Locations Null when creating session");
             FileLocations = fileLocations;
         }
         
@@ -43,18 +48,35 @@ namespace bmlTUX.Scripts.ExperimentParts {
             if (File.Exists(filePath)) {
                 string dataAsJason = File.ReadAllText(filePath);
                 session = JsonUtility.FromJson<Session>(dataAsJason);
+                session.FileLocations = fileLocations;
+                if (!session.ValidSelf()) {
+                    Debug.LogWarning("Loaded Session Not valid, creating new");
+                    CreateNewSession(fileLocations);
+                }
             }
-            else {
-                Debug.Log("Previous Session file not found, creating new");
-                session = new Session(fileLocations);
+            else {        
+                session = CreateNewSession(fileLocations);
             }
             session.Enable();
             return session;
         }
 
+        static Session CreateNewSession(FileLocationSettings fileLocations) {
+            Session session;
+            Debug.Log("Previous Session file not found, creating new");
+            session = new Session(fileLocations);
+            return session;
+        }
+
+        bool ValidSelf() {
+            bool valid = FileLocations != null;
+            return valid;
+        }
+
         void SaveSessionData() {
             
-            Directory.CreateDirectory(FileLocations.SessionFolderWithDocuments);
+            if (FileLocations == null) throw new NullReferenceException("FileLocations null in saveSessionData");
+            Directory.CreateDirectory(FileLocations.SessionFolder);
             string filePath = FileLocations.LastSessionSaveFilePath;
             string dataAsJson = JsonUtility.ToJson(this);
             File.WriteAllText(filePath, dataAsJson);

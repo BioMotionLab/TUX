@@ -8,8 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/bmlTUX/SamplesAndTutorials/SampleComplexExperimentWithLotsOfBlocks/ComplexExperiment
       Example.unity
     guid: 1dca7229bf3222a438aed39115faaeef
+  - enabled: 1
+    path: Assets/bmlTUX/SamplesAndTutorials/SampleSimpleExperiment/SimpleExperiment
+      Example.unity
+    guid: fda06e0587e04a249937776d8e6c9646
   m_configObjects: {}

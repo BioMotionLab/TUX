@@ -1,7 +1,8 @@
 using System;
-using BML_Utilities.Extensions;
+using System.IO;
+using System.Reflection;
 using bmlTUX.Scripts.ExperimentParts.SimpleExperimentParts;
-using UnityEditor;
+using bmlTUX.Scripts.Utilities.Extensions;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.ExperimentParts {
@@ -10,34 +11,35 @@ namespace bmlTUX.Scripts.ExperimentParts {
         
         [SerializeField]
         [Tooltip("Script file that inherits from Trial class")]
-        public MonoScript DragTrialScriptHere = default;
+        public TextAsset DragTrialScriptHere = default;
         
         [SerializeField]
         [Tooltip("Script file that inherits from Block class")]
-        public MonoScript DragBlockScriptHere = default;
+        public TextAsset DragBlockScriptHere = default;
         
         [SerializeField]
         [Tooltip("Script file that inherits from Experiment class")]
-        public MonoScript DragExperimentScriptHere = default;
+        public TextAsset DragExperimentScriptHere = default;
         
         public Type TrialType      => GetScriptTypeFromInspector<Trial>(DragTrialScriptHere, true);
         public Type BlockType      => GetScriptTypeFromInspector<Block>(DragBlockScriptHere, true);
         public Type ExperimentType => GetScriptTypeFromInspector<Experiment>(DragExperimentScriptHere, true);
 
-        Type GetScriptTypeFromInspector<T>(MonoScript monoScript, bool optional = false) where T : ExperimentPart {
+        Type GetScriptTypeFromInspector<T>(TextAsset textAsset, bool optional = false) where T : ExperimentPart {
 
-            string typeName = typeof(T).LastPartOfName();
+            string typeName = typeof(T).LastPartOfTypeName();
 
-            if (monoScript == null) {
+            if (textAsset == null) {
                 if (optional) return GetDefaultExperimentPart<T>();
                 throw new NullReferenceException($"{typeName} Script null. Create custom {typeName} script and drag into inspector");
             }
             
-            Type returnType = monoScript.GetClass();
+            Type returnType = GetType(textAsset.name);
+            
             if (!returnType.IsSubclassOf(typeof(T)))
                 throw new NullReferenceException($"{typeName} Script that was dragged in is not subclass of {typeName} Class");
             
-            Debug.Log($"Successfully linked with {returnType.LastPartOfName()} script");
+            Debug.Log($"Successfully linked with {returnType.LastPartOfTypeName()} script");
             return returnType;
         }
 
@@ -51,7 +53,18 @@ namespace bmlTUX.Scripts.ExperimentParts {
             return type;
         }
 
-        
+
+       
+Type GetType(string typeName) {
+    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) {
+        foreach (Type type in assembly.GetTypes()) {
+            if (type.LastPartOfTypeName() == typeName) {
+                return type;
+            }
+        }
+    }
+    return null;
+}
 
     }
 }

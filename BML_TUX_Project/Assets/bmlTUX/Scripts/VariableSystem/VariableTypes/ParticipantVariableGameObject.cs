@@ -12,10 +12,6 @@ namespace bmlTUX.Scripts.VariableSystem.VariableTypes {
             throw new NotImplementedException();
         }
 
-        public override void AddValueFieldInEditor() {
-            throw new NotImplementedException();
-        }
-
         protected override GameObject DefaultValue => new GameObject("Empty default GameObject");
     }
 }

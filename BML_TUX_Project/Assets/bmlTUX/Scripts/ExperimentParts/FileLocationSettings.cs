@@ -4,41 +4,35 @@ using UnityEngine;
 
 namespace bmlTUX.Scripts.ExperimentParts {
 	
-	[CreateAssetMenu(menuName = "BmlTUX/File Location Settings")]
+	[CreateAssetMenu(menuName = "bmlTUX/File Location Settings")]
 	public class FileLocationSettings : ScriptableObject {
+
+		const string TuxProjectFolderPath = "/bmlTux/Data/ScriptingTemplates/";
+		
+		public static string TemplatePath => Application.dataPath + TuxProjectFolderPath;
+		
+		
+		
+		[SerializeField]
 		public string LastSessionSaveFileName = default;
 		
 		[SerializeField]
 		string SessionLogFileName = default;
 		
 		[SerializeField]
-		[Header("this is relative to your documents folder:")]
-		// ReSharper disable once InconsistentNaming
-		string sessionFolder = default;
-		
+		public string DebugFileName = default;
 		
 		[SerializeField]
-		[Header("this is relative to your documents folder:")]
+		[Header("This folder will show up in your documents folder:")]
 		// ReSharper disable once InconsistentNaming
-		string debugFolder = default;
-		
-		public string DebugFileName = default;
+		string tuxFolderName = "bmlTUX_Data";
 
-		public string DebugFolder {
-			get {
-				string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\\", "/");
-				return Path.Combine(path, debugFolder);
-			}
-		} 
 		
-		public string SessionFolderWithDocuments {
-			get {
-				string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\\", "/");
-				return Path.Combine(path, sessionFolder);
-			}
-		}
-
-		public string LastSessionSaveFilePath => Path.Combine(SessionFolderWithDocuments, LastSessionSaveFileName);
-		public string SessionLogFilePath => Path.Combine(SessionFolderWithDocuments, SessionLogFileName);
+		string BaseTuxFolderPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), tuxFolderName);
+		public string SessionFolder => BaseTuxFolderPath;
+		public string DebugFolder => BaseTuxFolderPath;
+		
+		public string LastSessionSaveFilePath => Path.Combine(SessionFolder, LastSessionSaveFileName);
+		public string SessionLogFilePath => Path.Combine(SessionFolder, SessionLogFileName);
 	}
 }

@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
-using BML_TUX.Scripts.UI.Editor;
 using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX.Scripts.UI.EditorUI;
 using bmlTUX.Scripts.VariableSystem;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
@@ -252,7 +252,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
         void ShowPreviewButton() {
             designFileTarget = target as ExperimentDesignFile;
             if (GUILayout.Button("Preview Design", GUILayout.Height(50))) {
-                DesignPreviewWindow.ShowWindow(designFileTarget);
+                DesignPreviewEditorWindow.ShowWindow(designFileTarget);
             }
         }
 
@@ -391,7 +391,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Space(EditorGUI.indentLevel * IndentWidth);
                 if (GUILayout.Button("Generate a Trial Table", GUILayout.Width(250))) {
-                    DesignSaverWindow.ShowWindow(Selection.activeObject as ExperimentDesignFile);
+                    DesignSaverEditorWindow.ShowWindow(Selection.activeObject as ExperimentDesignFile);
                 }
                 EditorGUILayout.EndHorizontal();
             }

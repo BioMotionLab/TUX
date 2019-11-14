@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using UnityEngine;
 
-namespace BML_Utilities.Extensions.Tests.Editor {
+namespace bmlTUX.Scripts.Utilities.Extensions.Tests.Editor {
     public class GameObjectExtensionTests
     {
         GameObject baseObject;
@@ -23,23 +23,7 @@ namespace BML_Utilities.Extensions.Tests.Editor {
         
         }
 
-        [Test]
-        public void SetLayerRecursivelySetsOwnLayer() {
-            baseObject.SetLayerRecursively(5);
-            Assert.AreEqual(5, baseObject.layer);
-        }
-
-        [Test]
-        public void SetLayerRecursivelySetsChildLayer() {
-            baseObject.SetLayerRecursively(6);
-            Assert.AreEqual(6, aSubObject.layer);
-        }
-    
-        [Test]
-        public void SetLayerRecursivelySetsChildOfChildLayer() {
-            baseObject.SetLayerRecursively(7);
-            Assert.AreEqual(7, aSubSubObject.layer);
-        }
+   
     
     
     }

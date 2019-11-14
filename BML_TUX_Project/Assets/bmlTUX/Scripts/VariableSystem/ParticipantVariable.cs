@@ -13,8 +13,6 @@ namespace bmlTUX.Scripts.VariableSystem {
         public abstract string[] PossibleValuesStringArray { get; }
         public abstract bool ValuesAreConstrained { get; }
 
-        public abstract void AddValueFieldInEditor();
-
         public abstract void SetValueDefaultValue();
     
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BML_Utilities.Extensions {
+namespace bmlTUX.Scripts.Utilities.Extensions {
 
     public static class IntExtension {
         public static bool IsWithin(this int value, int firstInt, int secondInt) {

@@ -5,7 +5,7 @@ using Debug = System.Diagnostics.Debug;
 
 
 namespace bmlTUX.Scripts.Settings {
-    [CreateAssetMenu(menuName = MenuNames.BmlSettingsMenu + "Column Names Settings")]
+    [CreateAssetMenu(menuName = TUXMenuNames.AssetCreationMenu + "Column Names Settings File")]
     public class ColumnNamesSettings : ScriptableObject{
         public string TotalTrialIndex = "Trial";
         public string BlockIndex      = "Block";

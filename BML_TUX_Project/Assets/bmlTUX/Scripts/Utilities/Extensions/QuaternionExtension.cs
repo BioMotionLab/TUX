@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BML_Utilities.Extensions {
+namespace bmlTUX.Scripts.Utilities.Extensions {
     
     public static class QuaternionExtension {
         public static string ToPreciseString(this Quaternion v3) {

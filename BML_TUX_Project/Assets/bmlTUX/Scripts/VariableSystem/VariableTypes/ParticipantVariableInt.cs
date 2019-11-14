@@ -12,9 +12,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableTypes {
             Value = Convert.ToInt32(value);
         }
 
-        public override void AddValueFieldInEditor() {
-            Value = EditorGUILayout.IntField(Value);
-        }
+
 
         protected override int DefaultValue => default;
     }
