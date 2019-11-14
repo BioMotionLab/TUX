@@ -1,12 +1,10 @@
 using System;
 using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.VariableSystem;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
-using bmlTUX.Scripts.VariableSystem.VariableUI;
 using UnityEditor;
 using UnityEngine;
 
-namespace BML_TUX.Scripts.VariableSystem.VariableUI {
+namespace bmlTUX.Scripts.VariableSystem.VariableUI {
     public class VariableViewer {
         readonly SerializedProperty variableProperty;
         public readonly SerializedProperty ContainingList;

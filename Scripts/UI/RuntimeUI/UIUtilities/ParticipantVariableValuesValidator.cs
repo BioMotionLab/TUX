@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI;
+using bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI;
 
-namespace bmlTUX.Scripts.UI.Runtime {
+namespace bmlTUX.Scripts.UI.RuntimeUI.UIUtilities {
     public class ParticipantVariableValuesValidator : InputValidator {
         
         public List<string> Errors { get; }

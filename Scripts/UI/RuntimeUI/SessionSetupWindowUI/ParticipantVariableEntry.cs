@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 using bmlTUX.Scripts.VariableSystem;
 using TMPro;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.Runtime {
+namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
     public class ParticipantVariableEntry : MonoBehaviour {
     
         public TextMeshProUGUI Label;

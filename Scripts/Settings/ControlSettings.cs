@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using bmlTUX.Scripts.Managers;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.Settings {
 
-    [CreateAssetMenu(menuName = TUXMenuNames.AssetCreationMenu + "Control Settings File")]
+    [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "Control Settings File")]
     public class ControlSettings : ScriptableObject {
         public List<KeyCode> InterruptKeys;
         public List<KeyCode> BackKeys;
         public List<KeyCode> NextKeys;
         public List<KeyCode> QuitKeys;
-        public bool listening { get; private set; }
+        bool Listening { get; set; }
 
         /// <summary>
         /// Allows experimenter to control the experiments and jump between trials.
@@ -56,13 +55,13 @@ namespace bmlTUX.Scripts.Settings {
         }
 
         public IEnumerator ListenForQuit() {
-            listening = true;
-            while (listening) {
+            Listening = true;
+            while (Listening) {
                 
                 foreach (KeyCode quitKey in QuitKeys) {
                     if (Input.GetKeyDown(quitKey)) {
                         Debug.LogWarning($"Quit Key Pressed ({quitKey}), quitting program.");
-                        listening = true;
+                        Listening = true;
                         #if UNITY_EDITOR
                             UnityEditor.EditorApplication.isPlaying = false;
                         #else

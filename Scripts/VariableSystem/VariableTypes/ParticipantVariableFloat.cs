@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor;
 
 namespace bmlTUX.Scripts.VariableSystem.VariableTypes {
     [Serializable]

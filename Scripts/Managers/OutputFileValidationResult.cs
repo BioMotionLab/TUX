@@ -1,29 +1,24 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using bmlTUX.Scripts.UI.Runtime;
+using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 
 namespace bmlTUX.Scripts.Managers {
 	public class OutputFileValidationResult : InputValidator {
 		readonly string outputFolder;
 		readonly string outputFileName;
-		
-		bool valid;
-		List<String> errors;
-		
-		public List<string> Errors => errors;
-		public bool Valid => valid;
-		
-		OutputFile file;
-		string fullPath;
+
+		public List<string> Errors { get; }
+
+		public bool Valid { get; private set; }
+
+		readonly string fullPath;
 
 		public OutputFileValidationResult(OutputFile file) {
-			errors = new List<string>();
-			valid = true;
-			this.file = file;
-			this.outputFolder = file.OutputFolder;
-			this.outputFileName = file.OutputFileName;
+			Errors = new List<string>();
+			Valid = true;
+			outputFolder = file.OutputFolder;
+			outputFileName = file.OutputFileName;
 
 			string outputFullPath = Path.Combine(outputFolder, outputFileName);
 			
@@ -32,7 +27,7 @@ namespace bmlTUX.Scripts.Managers {
 				outputFullPath += extension;
 			}
 
-			this.fullPath = outputFullPath;
+			fullPath = outputFullPath;
 			
 			ValidateFolder();
 			ValidateFileName ();
@@ -42,21 +37,21 @@ namespace bmlTUX.Scripts.Managers {
 
 		void ValidateFolder() {
 			if (string.IsNullOrEmpty(outputFolder)) {
-				errors.Add($"Output Folder name not set or too short. {outputFolder}");
-				valid = false;
+				Errors.Add($"Output Folder name not set or too short. {outputFolder}");
+				Valid = false;
 			}
 		}
         
 		void ValidateFileName() {
 			if (string.IsNullOrEmpty(outputFileName)) {
-				errors.Add($"Output File name not set or too short. {outputFileName}");
-				valid = false;
+				Errors.Add($"Output File name not set or too short. {outputFileName}");
+				Valid = false;
 				return;
 			}
             
 			if (!IsAllNumbersAndLetters(outputFileName)) {
-				errors.Add($"Output File name contains invalid characters. {outputFileName}");
-				valid = false;
+				Errors.Add($"Output File name contains invalid characters. {outputFileName}");
+				Valid = false;
 			}
 		}
 
@@ -66,19 +61,8 @@ namespace bmlTUX.Scripts.Managers {
         
 		void ValidateFileDoesNotExist() {
 			if (!File.Exists(fullPath)) return;
-			errors.Add($"Output File Already Exists @ {fullPath}");
-			valid = false;
+			Errors.Add($"Output File Already Exists @ {fullPath}");
+			Valid = false;
 		}
-		
-		
-		public OutputFile GetValidFile {
-			get {
-				if (!valid)
-					throw new CallingInvalidFileException("File not valid. Always check that file is valid first");
-				return file;
-			}
-		}
-
-	
 	}
 }

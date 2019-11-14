@@ -1,8 +1,8 @@
-﻿using bmlTUX.Scripts.UI.Runtime;
+﻿using bmlTUX.Scripts.UI.RuntimeUI;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.Settings {
-    [CreateAssetMenu(menuName = TUXMenuNames.AssetCreationMenu + "GUI Settings File")]
+    [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "GUI Settings File")]
     public class GuiSettings : ScriptableObject {
         
         public ExperimentGui GuiPrefab;

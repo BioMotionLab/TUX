@@ -1,4 +1,4 @@
-using bmlTUX.Scripts.UI.Runtime;
+using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEditor;
 using UnityEngine.Serialization;

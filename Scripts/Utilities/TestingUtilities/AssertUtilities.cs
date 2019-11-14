@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using UnityEngine;
 
-namespace BML_Utilities.TestingUtilities {
+namespace bmlTUX.Scripts.Utilities.TestingUtilities {
     public static class AssertUtilities
     {
     

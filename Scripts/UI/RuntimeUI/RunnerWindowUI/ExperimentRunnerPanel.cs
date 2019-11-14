@@ -6,9 +6,8 @@ using bmlTUX.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Object = System.Object;
 
-namespace bmlTUX.Scripts.UI.Runtime {
+namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
     public class ExperimentRunnerPanel : MonoBehaviour {
         [SerializeField]
         TextMeshProUGUI RunningStatusText = default;
@@ -40,7 +39,6 @@ namespace bmlTUX.Scripts.UI.Runtime {
         List<GameObject>     entries;
         Dictionary<int, int> columnIndexToMaxLength;
         DataTable            table;
-        Trial currentTrial;
         GameObject currentTrialRowObject;
         const int            RunningIndicatorWidth = 60;
         const int            HeaderPixelMultiplier = 10;
@@ -107,20 +105,19 @@ namespace bmlTUX.Scripts.UI.Runtime {
         }
 
         DataTable GetExperimentTable() {
-            DataTable table = runner.RunnableDesign.Blocks[0].TrialTable.Clone();
+            DataTable newTable = runner.RunnableDesign.Blocks[0].TrialTable.Clone();
             foreach (var block in runner.RunnableDesign.Blocks) {
                 DataTable trialTable = block.TrialTable;
                 foreach (DataRow row in trialTable.Rows) {
-                    table.ImportRow(row);
+                    newTable.ImportRow(row);
                 }
             }
 
-            return table;
+            return newTable;
         }
 
         void TrialStarted(Trial trial, int indexInBlock) {
             currentTrialIndex = trial.Index;
-            currentTrial = trial;
         }
 
         void BlockCompleted(List<Block> blocks, int index) {

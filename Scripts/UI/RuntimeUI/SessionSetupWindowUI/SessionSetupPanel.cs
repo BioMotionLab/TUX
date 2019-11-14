@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Managers;
+using bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI;
+using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 using bmlTUX.Scripts.VariableSystem;
 using TMPro;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.Runtime {
+namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
     public class SessionSetupPanel : MonoBehaviour
     {
         [SerializeField]
@@ -110,15 +112,7 @@ namespace bmlTUX.Scripts.UI.Runtime {
             }
 
             ValidSession = true;
-            string errorString = "";
-            foreach (InputValidator validator in validators) {
-                if (!validator.Valid) {
-                    ValidSession = false;
-                    foreach (string error in validator.Errors) {
-                        errorString += error + "\n";
-                    }
-                }
-            }
+            string errorString = MakeErrorString(validators);
 
             if (!ValidSession) {
 
@@ -134,5 +128,18 @@ namespace bmlTUX.Scripts.UI.Runtime {
             return session;
         }
 
+        string MakeErrorString(List<InputValidator> validators) {
+            string errorString = "";
+            foreach (InputValidator validator in validators) {
+                if (!validator.Valid) {
+                    ValidSession = false;
+                    foreach (string error in validator.Errors) {
+                        errorString += error + "\n";
+                    }
+                }
+            }
+
+            return errorString;
+        }
     }
 }

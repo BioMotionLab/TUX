@@ -1,6 +1,6 @@
 using System;
 
-namespace bmlTUX.Scripts.UI.Runtime {
+namespace bmlTUX.Scripts.UI.RuntimeUI.UIUtilities {
     public class NoValueSelectedException : Exception {
 
         public NoValueSelectedException() {
