@@ -2,7 +2,7 @@
 using System.Data;
 using bmlTUX.Scripts.ExperimentParts;
 
-namespace BML_TUX.Data.ScriptingTemplates {
+namespace bmlTUX.Data.ScriptingTemplates {
     /// <summary>
     /// Classes that inherit from Block define custom behaviour for your experiment's blocks.
     /// This might be useful for instructions that differ between each block, setting up the scene for each block, etc.

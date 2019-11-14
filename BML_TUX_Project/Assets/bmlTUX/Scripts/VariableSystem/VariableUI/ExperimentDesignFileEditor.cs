@@ -2,15 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.UI.EditorUI;
-using bmlTUX.Scripts.VariableSystem;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
 using UnityEngine;
 
-namespace BML_TUX.Scripts.VariableSystem.VariableUI {
+namespace bmlTUX.Scripts.VariableSystem.VariableUI {
     [CustomEditor(typeof(ExperimentDesignFile))]
     public class ExperimentDesignFileEditor : Editor {
 
@@ -40,12 +38,11 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
    
         const int IndentWidth  = 10;
         const float VariablePanelBackgroundLightness = .55f;
-        Color VariablePanelBackgroundColor;
-        Color a = Color.gray;
+        Color variablePanelBackgroundColor;
         SerializedProperty fileLocationSettings;
 
         void OnEnable() {
-            VariablePanelBackgroundColor = new Color(VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, 1);
+            variablePanelBackgroundColor = new Color(VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, 1);
             
             
             designFileTarget = target as ExperimentDesignFile;
@@ -181,7 +178,7 @@ namespace BML_TUX.Scripts.VariableSystem.VariableUI {
 
 
             GUIStyle variableStyle = new GUIStyle(GUI.skin.box) {
-                                                                    normal = {background = MakeTex(VariablePanelBackgroundColor)}
+                                                                    normal = {background = MakeTex(variablePanelBackgroundColor)}
                                                                 };
             
             EditorGUILayout.LabelField("Independent Variables", EditorStyles.boldLabel);

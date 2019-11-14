@@ -264,6 +264,7 @@ namespace bmlTUX.Scripts.VariableSystem {
             }
         }
 
+        // ReSharper disable once CognitiveComplexity
         public void RemoveVariable(Variable variable) {
             //TODO Probably a better way to do this.
             if (variable.DataType == SupportedDataType.ChooseType) 

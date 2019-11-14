@@ -1,12 +1,14 @@
 ﻿using System.Data;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Managers;
-using bmlTUX.Scripts.UI.RuntimeUI.TableViewer;
+using bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI;
+using bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI;
+using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 using bmlTUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.Runtime {
+namespace bmlTUX.Scripts.UI.RuntimeUI {
     public class ExperimentGui : MonoBehaviour {
         
         ExperimentRunner runner;
@@ -15,7 +17,7 @@ namespace bmlTUX.Scripts.UI.Runtime {
         SessionSetupPanel SessionSetupPanel = default;
         
         [SerializeField]
-        TableViewer TableDisplay = default;
+        TableViewer.TableViewer TableDisplay = default;
 
         [SerializeField]
         ExperimentRunnerPanel ExperimentRunnerPanel = default;

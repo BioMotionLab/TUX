@@ -3,7 +3,7 @@ using System.Data;
 using bmlTUX.Scripts.ExperimentParts;
 using UnityEngine;
 
-namespace BML_TUX.Data.ScriptingTemplates {
+namespace bmlTUX.Data.ScriptingTemplates {
     /// <summary>
     /// Classes that inherit from Trial define custom behaviour for your experiment's trials.
     /// Most experiments will need to edit this file to describe what happens in a trial.

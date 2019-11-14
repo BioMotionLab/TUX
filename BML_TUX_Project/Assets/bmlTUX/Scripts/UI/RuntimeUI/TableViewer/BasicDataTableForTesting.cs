@@ -5,54 +5,54 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.TableViewer {
     [ExecuteInEditMode]
     public class BasicDataTableForTesting : MonoBehaviour {
 
-        public DataTable table;
+        public DataTable Table;
 
 
-        public TableViewer tableDisplay;
+        public TableViewer TableDisplay;
         [ContextMenu("Generate")]
         public void Generate()
         {
-            table = new DataTable();
+            Table = new DataTable();
             DataColumn column1 = new DataColumn(columnName:"Head1", typeof(int));
-            table.Columns.Add(column1);
+            Table.Columns.Add(column1);
         
             DataColumn column2 = new DataColumn(columnName:"Head2", typeof(int));
-            table.Columns.Add(column2);
+            Table.Columns.Add(column2);
         
             DataColumn column3 = new DataColumn(columnName:"Head3", typeof(int));
-            table.Columns.Add(column3);
+            Table.Columns.Add(column3);
 
 
             DataColumn column4 = new DataColumn(columnName:"Head4", typeof(string));
-            table.Columns.Add(column4);
+            Table.Columns.Add(column4);
             DataColumn column5 = new DataColumn(columnName:"Head5", typeof(int));
-            table.Columns.Add(column5);
+            Table.Columns.Add(column5);
             DataColumn column6 = new DataColumn(columnName:"Head6", typeof(int));
-            table.Columns.Add(column6);
+            Table.Columns.Add(column6);
         
             for (int i = 0; i < 30; i++) {
-                DataRow newRow = table.NewRow();
+                DataRow newRow = Table.NewRow();
                 newRow["Head1"] = i;
                 newRow["Head2"] = i*i;
                 newRow["Head3"] = i*i*i;
                 newRow["head4"] = "SomeLONGGGGGGtext ThatIsReallyLong";
                 newRow["Head5"] = i;
                 newRow["Head6"] = i;
-                table.Rows.Add(newRow);
+                Table.Rows.Add(newRow);
             }
         
-            DataRow longRow = table.NewRow();
+            DataRow longRow = Table.NewRow();
             longRow["Head1"] = 2147483647;
             longRow["Head2"] = 2147483647;
             longRow["Head3"] = 2147483647;
-            table.Rows.Add(longRow);
+            Table.Rows.Add(longRow);
         
-            tableDisplay.Display(table);
+            TableDisplay.Display(Table);
         }
 
         [ContextMenu("Clear")]
         public void Clear() {
-            tableDisplay.Clear();
+            TableDisplay.Clear();
         }
 
     }

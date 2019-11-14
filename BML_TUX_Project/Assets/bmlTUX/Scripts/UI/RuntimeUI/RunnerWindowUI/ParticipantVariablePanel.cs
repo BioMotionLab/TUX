@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.Runtime {
+namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
     public class ParticipantVariablePanel : MonoBehaviour
     {
         [SerializeField]

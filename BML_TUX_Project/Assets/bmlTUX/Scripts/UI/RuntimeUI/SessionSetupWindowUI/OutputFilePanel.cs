@@ -4,7 +4,7 @@ using bmlTUX.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.Runtime {
+namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
     public class OutputFilePanel : MonoBehaviour
     {
   

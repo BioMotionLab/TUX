@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.Runtime {
+namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
     public class BlockOrderPanel : MonoBehaviour
     {
         const string PleaseSelectText = "Choose...";

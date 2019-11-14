@@ -2,26 +2,26 @@ using System.Data;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.VariableSystem;
 
-namespace bmlTUX.Scripts.UI.Runtime {
+namespace bmlTUX.Scripts.UI.RuntimeUI.UIUtilities {
     public class DesignPreviewer {
-        public readonly ExperimentDesignFile designFile;
+        public readonly ExperimentDesignFile DesignFile;
         public int SelectedBlockOrderIndex;
 
-        public readonly ExperimentDesign experimentDesign;
-        public DataTable previewTable;
-        public int lastDisplayedOrderIndex = -1 ;
-        public readonly BlockOrderData blockOrderData;
+        public readonly ExperimentDesign ExperimentDesign;
+        public DataTable PreviewTable;
+        public int LastDisplayedOrderIndex = -1 ;
+        public readonly BlockOrderData BlockOrderData;
 
-        public bool SelectedBlockOrderChanged => SelectedBlockOrderIndex != lastDisplayedOrderIndex;
+        public bool SelectedBlockOrderChanged => SelectedBlockOrderIndex != LastDisplayedOrderIndex;
 
         public DesignPreviewer(ExperimentDesignFile designFile) {
-            this.designFile = designFile;
-            experimentDesign = ExperimentDesign.CreateFrom(designFile);
-            blockOrderData = new BlockOrderData(experimentDesign);
+            DesignFile = designFile;
+            ExperimentDesign = ExperimentDesign.CreateFrom(designFile);
+            BlockOrderData = new BlockOrderData(ExperimentDesign);
         }
 
         public bool DesignFileLinked() {
-            bool linked = designFile != null;
+            bool linked = DesignFile != null;
             return linked;
         }
 
@@ -29,16 +29,16 @@ namespace bmlTUX.Scripts.UI.Runtime {
             
             if (!DesignFileLinked()) return null;
             
-            if (SelectedBlockOrderChanged || previewTable == null) {
-                previewTable = experimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
-                lastDisplayedOrderIndex = SelectedBlockOrderIndex;
+            if (SelectedBlockOrderChanged || PreviewTable == null) {
+                PreviewTable = ExperimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
+                LastDisplayedOrderIndex = SelectedBlockOrderIndex;
             }
             
-            return previewTable;
+            return PreviewTable;
         }
 
         public void ReRandomizeTable() {
-            previewTable = experimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
+            PreviewTable = ExperimentDesign.GetFinalExperimentTable(SelectedBlockOrderIndex);
         }
 
 

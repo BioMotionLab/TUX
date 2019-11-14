@@ -137,7 +137,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
             DataTable repeatedTrialTable = baseTrialTable.Clone();
             if (designFile.TrialRepetitions < 1)
-                throw new ArgumentOutOfRangeException("Trial Repetitions cannot be less than 1");
+                throw new ArgumentOutOfRangeException(designFile.TrialRepetitions.ToString(), "Trial Repetitions cannot be less than 1");
             foreach (DataRow row in baseTrialTable.Rows) {
                 for (int i = 0; i < designFile.TrialRepetitions; i++) {
                     repeatedTrialTable.ImportRow(row);
@@ -216,12 +216,6 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
             return selectedOrderedBlockTable;
         }
-
-        public DataTable GetBlockOrderTable(int sessionOrderChosenIndex) {
-            BaseBlockTable orderedBlockTable = baseBlockTable.GetOrderedBlockTable(sessionOrderChosenIndex);
-            return orderedBlockTable;
-        }
-        
 
         DataTable AddBlockValuesToTrialTables(DataTable blockTrialTable, DataRow blockTableRow, int blockIndex) {
             DataTable newTable = blockTrialTable.Copy();

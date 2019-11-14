@@ -73,7 +73,7 @@
               <e p="ControlSettings.cs" t="Include" />
               <e p="DisplaySelection.cs" t="Include" />
               <e p="GuiSettings.cs" t="Include" />
-              <e p="TUXMenuNames.cs" t="Include" />
+              <e p="MenuNames.cs" t="Include" />
             </e>
             <e p="UI" t="Include">
               <e p="EditorUI" t="Include">
@@ -119,7 +119,6 @@
                 <e p="CameraExtension.cs" t="Include" />
                 <e p="DataFormatter.cs" t="Include" />
                 <e p="DataTableExtension.cs" t="Include" />
-                <e p="GameObjectExtension.cs" t="Include" />
                 <e p="IntExtension.cs" t="Include" />
                 <e p="ListExtension.cs" t="Include" />
                 <e p="ProjectorExtension.cs" t="Include" />
@@ -127,7 +126,6 @@
                 <e p="StringExtension.cs" t="Include" />
                 <e p="Tests" t="Include">
                   <e p="Editor" t="Include">
-                    <e p="GameObjectExtensionTests.cs" t="Include" />
                     <e p="IntExtensionTests.cs" t="Include" />
                     <e p="ListExtensionTests.cs" t="Include" />
                     <e p="StringExtensionTests.cs" t="Include" />

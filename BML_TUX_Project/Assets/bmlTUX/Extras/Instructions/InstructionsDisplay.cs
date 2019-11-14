@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BML_ExperimentToolkit.Extras.Instructions {
+namespace bmlTUX.Extras.Instructions {
     public class InstructionsDisplay : MonoBehaviour {
 
         public Text       TextBox;

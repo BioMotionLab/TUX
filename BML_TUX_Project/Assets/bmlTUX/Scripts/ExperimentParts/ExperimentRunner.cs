@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using bmlTUX.Scripts.Managers;
-using bmlTUX.Scripts.UI.Runtime;
+using bmlTUX.Scripts.UI.RuntimeUI;
 using bmlTUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using UnityEditor;
@@ -70,9 +70,6 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
         [HideInInspector]
         public bool Running;
-
-        [HideInInspector]
-        public bool WindowOpen = false;
         
         public Session Session { get; private set; }
 
@@ -115,24 +112,25 @@ namespace bmlTUX.Scripts.ExperimentParts {
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            if (!WindowOpen) {
-                gui = Instantiate(DesignFile.GuiSettings.GuiPrefab);
-                gui.gameObject.SetActive(true);
-                gui.RegisterExperiment(this);
-                Canvas guiCanvas = gui.GetComponent<Canvas>();
-                
-                int targetDisplay = DesignFile.GuiSettings.TargetDisplay;
-                if (Display.displays.Length > targetDisplay) {
-                    Display.displays[targetDisplay].Activate();
-                    guiCanvas.targetDisplay = targetDisplay;
-                }
-                else {
-                    guiCanvas.targetDisplay = Display.displays.Length - 1;
-                }
-            }
             
+            InitGui();
             ExperimentEvents.InitExperiment(this);
+        }
+
+        void InitGui() {
+            gui = Instantiate(DesignFile.GuiSettings.GuiPrefab);
+            gui.gameObject.SetActive(true);
+            gui.RegisterExperiment(this);
+            Canvas guiCanvas = gui.GetComponent<Canvas>();
+
+            int targetDisplay = DesignFile.GuiSettings.TargetDisplay;
+            if (Display.displays.Length > targetDisplay) {
+                Display.displays[targetDisplay].Activate();
+                guiCanvas.targetDisplay = targetDisplay;
+            }
+            else {
+                guiCanvas.targetDisplay = Display.displays.Length - 1;
+            }
         }
 
         static void ExitProgram() {

@@ -5,7 +5,7 @@ using bmlTUX.Scripts.Settings;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
-    [CreateAssetMenu(menuName = TUXMenuNames.AssetCreationMenu + "Experiment Design File")]
+    [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "Experiment Design File")]
     public class ExperimentDesignFile : ScriptableObject {
 
        

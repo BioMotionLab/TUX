@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BML_ExperimentToolkit.Extras.BlackScreenFlasher {
+namespace bmlTUX.Extras.BlackScreenFlasher {
     public class BlackCamera : MonoBehaviour {
         Camera              thisCamera;
         public List<Camera> OtherCameras = new List<Camera>();

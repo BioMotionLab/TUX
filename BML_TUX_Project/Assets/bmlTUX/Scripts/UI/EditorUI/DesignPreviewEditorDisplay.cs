@@ -1,5 +1,5 @@
 using System.Data;
-using bmlTUX.Scripts.UI.Runtime;
+using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEditor;
@@ -18,8 +18,8 @@ namespace bmlTUX.Scripts.UI.EditorUI {
 
         public  DataTable ShowEditorPreview() {
             
-            if (previewer.designFile != null) {
-                EditorGUILayout.LabelField($"Design File Selected: {previewer.designFile.name}");
+            if (previewer.DesignFile != null) {
+                EditorGUILayout.LabelField($"Design File Selected: {previewer.DesignFile.name}");
             }
             else {
                 EditorGUILayout.HelpBox("Need to have a Design File Selected", MessageType.Warning);
@@ -39,14 +39,14 @@ namespace bmlTUX.Scripts.UI.EditorUI {
             EditorGUILayout.LabelField("Preview:", EditorStyles.boldLabel);
 
 
-            if (previewer.designFile.BlockRandomization != BlockRandomizationMode.CompleteRandomization &&
-                previewer.designFile.BlockRandomization != BlockRandomizationMode.PartialRandomization) {
-                EditorGUILayout.LabelField(previewer.blockOrderData.BlockOrderText);
+            if (previewer.DesignFile.BlockRandomization != BlockRandomizationMode.CompleteRandomization &&
+                previewer.DesignFile.BlockRandomization != BlockRandomizationMode.PartialRandomization) {
+                EditorGUILayout.LabelField(previewer.BlockOrderData.BlockOrderText);
 
-                previewer.SelectedBlockOrderIndex = previewer.blockOrderData.SelectionRequired
+                previewer.SelectedBlockOrderIndex = previewer.BlockOrderData.SelectionRequired
                     ? EditorGUILayout.Popup(previewer.SelectedBlockOrderIndex,
-                                            previewer.experimentDesign.BlockPermutationsStrings.ToArray())
-                    : previewer.SelectedBlockOrderIndex = previewer.blockOrderData.DefaultBlockOrderIndex;
+                                            previewer.ExperimentDesign.BlockPermutationsStrings.ToArray())
+                    : previewer.SelectedBlockOrderIndex = previewer.BlockOrderData.DefaultBlockOrderIndex;
             }
             else {
                 previewer.SelectedBlockOrderIndex = 0;
@@ -58,17 +58,17 @@ namespace bmlTUX.Scripts.UI.EditorUI {
                 previewer.ReRandomizeTable();
             }
             
-            if (previewer.SelectedBlockOrderChanged || previewer.previewTable == null) {
-                previewer.previewTable = previewer.experimentDesign.GetFinalExperimentTable(previewer.SelectedBlockOrderIndex);
-                previewer.lastDisplayedOrderIndex = previewer.SelectedBlockOrderIndex;
+            if (previewer.SelectedBlockOrderChanged || previewer.PreviewTable == null) {
+                previewer.PreviewTable = previewer.ExperimentDesign.GetFinalExperimentTable(previewer.SelectedBlockOrderIndex);
+                previewer.LastDisplayedOrderIndex = previewer.SelectedBlockOrderIndex;
             }
 
             EditorGUILayout.Space();
-            EditorGUILayout.TextArea(previewer.previewTable.AsString());
+            EditorGUILayout.TextArea(previewer.PreviewTable.AsString());
             EditorGUILayout.Space();
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndScrollView();
-            return previewer.previewTable;
+            return previewer.PreviewTable;
         }
     }
 }

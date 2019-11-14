@@ -1,6 +1,6 @@
 ﻿using bmlTUX.Scripts.ExperimentParts;
 
-namespace BML_TUX.Data.ScriptingTemplates {
+namespace bmlTUX.Data.ScriptingTemplates {
     /// <summary>
     /// This class is the main communication between the toolkit and the Unity scene. Drag this script onto an empty gameObject in your Unity scene.
     /// In the gameObject's inspector you need to drag in your design file and any custom scripts.

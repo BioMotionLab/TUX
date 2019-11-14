@@ -15,16 +15,16 @@ namespace bmlTUX.Scripts.UI.EditorUI {
         const string DesignFileKey = "DesignFile";
 
         string experimentName;
-        
-        public string ExperimentRunnerTemplatePath => FileLocationSettings.TemplatePath + "ExperimentRunnerTemplate.cs";
-        public string TrialTemplatePath => FileLocationSettings.TemplatePath + "TrialScriptTemplate.cs";
-        public string BlockTemplatePath => FileLocationSettings.TemplatePath + "BlockScriptTemplate.cs";
-        public string ExperimentTemplatePath => FileLocationSettings.TemplatePath + "ExperimentScriptTemplate.cs";
+
+        static string ExperimentRunnerTemplatePath => FileLocationSettings.TemplatePath + "ExperimentRunnerTemplate.cs";
+        static string TrialTemplatePath => FileLocationSettings.TemplatePath + "TrialScriptTemplate.cs";
+        static string BlockTemplatePath => FileLocationSettings.TemplatePath + "BlockScriptTemplate.cs";
+        static string ExperimentTemplatePath => FileLocationSettings.TemplatePath + "ExperimentScriptTemplate.cs";
         
         /// <summary>
         /// Add menu item to open this window
         /// </summary>
-        [MenuItem(TUXMenuNames.BmlMainMenu + "Script Helper Tool")]
+        [MenuItem(MenuNames.BmlMainMenu + "Script Helper Tool")]
         public static void ShowWindow() {
             //Show existing window instance. If one doesn't exist, make one.
             GetWindow(typeof(ScriptHelperEditorWindow), false, "Script Helper Window");
@@ -40,8 +40,6 @@ namespace bmlTUX.Scripts.UI.EditorUI {
             EditorGUILayout.Space();
             
             
-
-            
             EditorGUILayout.LabelField("Experiment Name (only letters, no spaces):");
             experimentName = EditorGUILayout.TextField(experimentName);
             
@@ -55,7 +53,6 @@ namespace bmlTUX.Scripts.UI.EditorUI {
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
-
                 EditorGUILayout.Space();
 
                 EditorGUILayout.LabelField("Automatic set up of all experiment components:", EditorStyles.boldLabel);
@@ -77,8 +74,6 @@ namespace bmlTUX.Scripts.UI.EditorUI {
                     CreateExperimentScriptFromTemplate();
                     CreateDesignFile();
                 }
-                
-                
 
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
@@ -91,31 +86,17 @@ namespace bmlTUX.Scripts.UI.EditorUI {
 
                 EditorGUILayout.HelpBox("If you make scripts individually, remember to drag them into the fields in the ExperimentRunner Script in your unity scene", MessageType.Warning);
 
-                if (GUILayout.Button("Create Experiment Design File")) {
-                    CreateDesignFile();
-                }
-            
-
-                if (GUILayout.Button("Create ExperimentRunner Script")) {
-                    CreateExperimentRunnerScriptFromTemplate();
-                }
-                
-                
-                if (GUILayout.Button("Create Custom Trial Script")) {
-                    CreateTrialScriptFromTemplate();
-                }
-                
-                if (GUILayout.Button("Create Custom Block Script")) {
-                    CreateBlockScriptFromTemplate();
-                }
-                
-                if (GUILayout.Button("Create Custom Experiment Script")) {
-                    CreateExperimentScriptFromTemplate();
-                }
-                
+                AddCreationButtons();
             }
 
+        }
 
+        void AddCreationButtons() {
+            if (GUILayout.Button("Create Experiment Design File")) CreateDesignFile();
+            if (GUILayout.Button("Create ExperimentRunner Script")) CreateExperimentRunnerScriptFromTemplate();
+            if (GUILayout.Button("Create Custom Trial Script")) CreateTrialScriptFromTemplate();
+            if (GUILayout.Button("Create Custom Block Script")) CreateBlockScriptFromTemplate();
+            if (GUILayout.Button("Create Custom Experiment Script")) CreateExperimentScriptFromTemplate();
         }
 
         void CreateDesignFile() {

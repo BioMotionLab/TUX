@@ -6,7 +6,6 @@ using bmlTUX.Scripts.Utilities.Extensions;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
-    [CreateAssetMenu()]
     public class BlockOrderDefinition : ScriptableObject {
         [SerializeField]
         public List<OrderRow> List = new List<OrderRow>();
