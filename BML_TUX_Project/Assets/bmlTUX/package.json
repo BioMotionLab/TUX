@@ -1,0 +1,16 @@
+{
+  "name": "com.bml.bml_tux",
+  "version": "0.12.0",
+  "displayName": "BML_TUX",
+  "description": "A toolkit for quickly and easily creating experiments in Unity",
+  "unity": "2019.2",
+  "keywords": [
+    "experiments, biomotionlab, toolkit"
+  ],
+  "author": {
+    "name": "Adam Bebko and BiomotionLab",
+    "email": "adambebko@gmail.com",
+    "url": "https://www.biomotionlab.ca/"
+  },
+  "type": "library"
+}

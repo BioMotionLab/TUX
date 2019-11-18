@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="22ea5ef4-e322-4ce5-98ba-7ef8faef5429" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/BML_TUX_Utilities.asmdef" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/BML_TUX_Utilities.asmdef.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExperimentalFrameworkProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/ExperimentParts/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/ExperimentParts/Session.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/Utilities.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Utilities/Utilities.asmdef.meta" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/BML_TUX/Scripts/ExperimentParts/Session.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/AutoBuilder.asset" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_TUX/Data/ScriptingTemplates/AssemblyTemplateReference.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_TUX/Scripts/Managers/OutputManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BML_TUX/Scripts/UI/Editor/ExperimentWindow.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/BlockOrderDefinition.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_Utilities/EventSystem/BmlStringEvent.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_Utilities/ScriptableObject Assets/StringValue.cs" />
+        <option value="$PROJECT_DIR$/Assets/ScriptGeneration.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/Template.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/TrialTemplate.txt" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/TrialTemplate.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/TrialTemplate.cs" />
+        <option value="$PROJECT_DIR$/Assets/SimpleTrial.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/TrialScriptTemplate.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/Settings/ScriptTemplates.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/TrialScriptTemplate1.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/BlockScriptTemplate.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/BlockScriptTemplate.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ScriptingTemplates/ExperimentScriptTemplate.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ScriptingTemplates/BlockScriptTemplate.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ScriptingTemplates/TrialScriptTemplate.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ScriptingTemplates/ScriptTemplates.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/SimpleExperimentParts/SimpleExperimentRunner.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/ScriptingTemplates/ExperimentRunnerTemplate.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ScriptReferences.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ScriptHelperWindow.cs" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Setting-up-your-Experiment's-Behavior.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Trial-Class.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Experiment-Class.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Toolkit-Overview.md" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/ExperimentDesignFile.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/VariableConfigurationFileEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/VariableSystem/VariableUI/ExperimentDesignFileEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentDesign.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/RunnableDesign.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/ExperimentParts/ExperimentRunner.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/ExperimentWindow.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewWindow.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Scripts/UI/Editor/DesignPreviewer.cs" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/_Sidebar.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Home.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Getting-Started.md" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/Data/ScriptingTemplates/TrialScriptTemplate.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialTrialScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_ExperimentToolkit/SamplesAndTutorials/TutorialExperiment/TutorialBlockScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_TUX/Data/ScriptingTemplates/AssemblyTemplateReference.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_TUX/SamplesAndTutorials/TutorialExperiment/README.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Block-Class.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Creating-and-Configuring-your-experiment.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Output.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/Troubleshooting.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/TutorialExperiment.md" />
+        <option value="$PROJECT_DIR$/../../ExperimentalFrameworkWiki/TutorialExperiment_Part2.md" />
+        <option value="$PROJECT_DIR$/Assets/BML_TUX/Scripts/Managers/OutputManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/BML_TUX/Scripts/ExperimentParts/Session.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1PelLJWpzrnZe9Jz4wIh0mSYGDt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="userSelectedPid" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="248">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" value="248" />
+      <option name="userSelectedPid" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="22ea5ef4-e322-4ce5-98ba-7ef8faef5429" name="Default Changelist" comment="" />
+      <created>1556125386059</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1556125386059</updated>
+      <workItem from="1556125389296" duration="67000" />
+      <workItem from="1556125661161" duration="7455000" />
+      <workItem from="1556202826504" duration="2407000" />
+      <workItem from="1556828712533" duration="603000" />
+      <workItem from="1558630296555" duration="20000" />
+      <workItem from="1558630465812" duration="6214000" />
+      <workItem from="1558641830589" duration="1198000" />
+      <workItem from="1558963366457" duration="19200000" />
+      <workItem from="1559140310920" duration="12092000" />
+      <workItem from="1559568640236" duration="174000" />
+      <workItem from="1559569003219" duration="280000" />
+      <workItem from="1559754528797" duration="2987000" />
+      <workItem from="1564421424384" duration="63000" />
+      <workItem from="1564421521965" duration="1362000" />
+      <workItem from="1564523240677" duration="31326000" />
+      <workItem from="1565113532032" duration="760000" />
+      <workItem from="1565127080501" duration="226000" />
+      <workItem from="1565186908407" duration="11863000" />
+      <workItem from="1566242390202" duration="9636000" />
+      <workItem from="1566483122083" duration="187000" />
+      <workItem from="1566483572342" duration="9577000" />
+      <workItem from="1566827929915" duration="20882000" />
+      <workItem from="1566916478666" duration="16750000" />
+      <workItem from="1566938321413" duration="29310000" />
+      <workItem from="1567027556422" duration="2949000" />
+      <workItem from="1568122362810" duration="113000" />
+      <workItem from="1568122510007" duration="19040000" />
+      <workItem from="1568228333319" duration="1263000" />
+      <workItem from="1568301954684" duration="1471000" />
+      <workItem from="1568312874354" duration="2197000" />
+      <workItem from="1568318535253" duration="4495000" />
+      <workItem from="1568754454380" duration="1816000" />
+      <workItem from="1570123922053" duration="2030000" />
+      <workItem from="1570459527034" duration="21350000" />
+      <workItem from="1570542111334" duration="8012000" />
+      <workItem from="1570559053221" duration="12837000" />
+      <workItem from="1570631934079" duration="1160000" />
+      <workItem from="1570634258735" duration="1034000" />
+    </task>
+    <servers />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/Assets/BML_Utilities" />
+    </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1877" height="347" key="GridCell.Tab.0.bottom" />
+    <state width="1877" height="347" key="GridCell.Tab.0.bottom/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.0.center" />
+    <state width="1877" height="347" key="GridCell.Tab.0.center/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.0.left" />
+    <state width="1877" height="347" key="GridCell.Tab.0.left/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.0.right" />
+    <state width="1877" height="347" key="GridCell.Tab.0.right/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.1.bottom" />
+    <state width="1877" height="347" key="GridCell.Tab.1.bottom/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.1.center" />
+    <state width="1877" height="347" key="GridCell.Tab.1.center/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.1.left" />
+    <state width="1877" height="347" key="GridCell.Tab.1.left/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.1.right" />
+    <state width="1877" height="347" key="GridCell.Tab.1.right/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.2.bottom" />
+    <state width="1877" height="347" key="GridCell.Tab.2.bottom/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.2.center" />
+    <state width="1877" height="347" key="GridCell.Tab.2.center/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.2.left" />
+    <state width="1877" height="347" key="GridCell.Tab.2.left/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.2.right" />
+    <state width="1877" height="347" key="GridCell.Tab.2.right/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.3.bottom" />
+    <state width="1877" height="347" key="GridCell.Tab.3.bottom/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.3.center" />
+    <state width="1877" height="347" key="GridCell.Tab.3.center/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.3.left" />
+    <state width="1877" height="347" key="GridCell.Tab.3.left/1920.1080/1920.1080" />
+    <state width="1877" height="347" key="GridCell.Tab.3.right" />
+    <state width="1877" height="347" key="GridCell.Tab.3.right/1920.1080/1920.1080" />
+    <state x="772" y="235" key="RiderGenerateDialog" />
+    <state x="772" y="235" key="RiderGenerateDialog/1920.1080/1920.1080" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.1080/1920.1080" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" suspend="NONE" type="DotNet Exception Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
