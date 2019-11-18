@@ -29,6 +29,7 @@
             <e p="TutorialExperiment" t="Include">
               <e p="TutorialBlockScript.cs" t="Include" />
               <e p="TutorialExperimentRunner.cs" t="Include" />
+              <e p="TutorialExperimentScript.cs" t="Include" />
               <e p="TutorialTrialScript.cs" t="Include" />
             </e>
           </e>

@@ -14,7 +14,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.UIUtilities {
             Errors = new List<string>();
             foreach (ParticipantVariableEntry participantVariableEntry in participantVariablePanel.Entries) {
                 try {
-                    participantVariableEntry.ConfirmValue();
+                    participantVariableEntry.ConfirmValueMethod();
                 }
                 catch (FormatException) {
                     Errors.Add($"Input for Variable {participantVariableEntry.Variable.Name} is incorrect format or type");

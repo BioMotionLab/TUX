@@ -15,7 +15,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
 
 
         public delegate void ConfirmValueStrategy();
-        public ConfirmValueStrategy ConfirmValue;
+        public ConfirmValueStrategy ConfirmValueMethod;
         public ParticipantVariable Variable { get; private set; }
 
         public void Display(ParticipantVariable participantVariable) {
@@ -24,14 +24,14 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
             Label.text = participantVariable.Name;
 
             if (participantVariable.ValuesAreConstrained) {
-                ConfirmValue = ConstrainedGetValueStrategy;
+                ConfirmValueMethod = ConstrainedGetValueStrategy;
             
                 Dropdown.gameObject.SetActive(true);
                 SetupConstrainedValues(participantVariable);
             }
             else {
                 ValueInput.gameObject.SetActive(true);
-                ConfirmValue = DefaultGetValueStrategy;
+                ConfirmValueMethod = DefaultGetValueStrategy;
             }
         }
 

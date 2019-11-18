@@ -242,16 +242,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb095a1a51e08049b74c8d2fcbaac19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variableConfigurationFile: {fileID: 11400000, guid: d4f09839341d3ed4f9c9ba7026564eb4,
+  ExperimentDesignFile: {fileID: 11400000, guid: d4f09839341d3ed4f9c9ba7026564eb4,
     type: 2}
   scriptReferences:
     DragTrialScriptHere: {fileID: 11500000, guid: c4bd215649cbd41439636f258031ee1a,
       type: 3}
-    DragBlockScriptHere: {fileID: 0}
-    DragExperimentScriptHere: {fileID: 0}
+    DragBlockScriptHere: {fileID: 11500000, guid: 84f0dd4f8ec6d2741b80cd937fb8a687,
+      type: 3}
+    DragExperimentScriptHere: {fileID: 11500000, guid: ac1a6771daefce047a1844c4f3f19fe9,
+      type: 3}
   Ended: 0
   Running: 0
-  WindowOpen: 0
   Stimulus: {fileID: 781437900}
   Model: {fileID: 1162773028}
   Red: {fileID: 2100000, guid: ad044030d290aaf4bb5858c49156b4b0, type: 2}

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TrialRepetitions: 1
   ExperimentRepetitions: 1
-  TrialRandomization: 0
+  TrialRandomization: 1
   TrialPermutationType: 1
-  BlockRandomization: 0
+  BlockRandomization: 2
   BlockPartialRandomizationSubType: 1
   Factory:
     DataTypeToCreate: 0
@@ -26,6 +26,7 @@ MonoBehaviour:
     - Name: Distance
       TypeOfVariable: 0
       DataType: 1
+      ExpandSettings: 1
       MixingType: 0
       Block: 1
       Values:
@@ -39,6 +40,7 @@ MonoBehaviour:
     - Name: Size
       TypeOfVariable: 0
       DataType: 1
+      ExpandSettings: 1
       MixingType: 0
       Block: 0
       Values:
@@ -53,6 +55,7 @@ MonoBehaviour:
     - Name: Color
       TypeOfVariable: 0
       DataType: 2
+      ExpandSettings: 1
       MixingType: 0
       Block: 0
       Values:
@@ -73,6 +76,7 @@ MonoBehaviour:
     - Name: SelectedSize
       TypeOfVariable: 1
       DataType: 1
+      ExpandSettings: 1
       Value: 0
       DefaultValue: -999
     StringDVs: []
@@ -85,6 +89,7 @@ MonoBehaviour:
     - Name: Age
       TypeOfVariable: 2
       DataType: 0
+      ExpandSettings: 1
       Value: 0
       ConstrainValues: 0
       PossibleValues: 
@@ -93,6 +98,7 @@ MonoBehaviour:
     - Name: Gender
       TypeOfVariable: 2
       DataType: 2
+      ExpandSettings: 1
       Value: Male
       ConstrainValues: 1
       PossibleValues:
@@ -108,5 +114,7 @@ MonoBehaviour:
     type: 2}
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
+  FileLocationSettings: {fileID: 11400000, guid: 07f42cef79754c74583d0209412fa987,
+    type: 2}
   TrialTableGeneration: 0
   BlockOrderConfigurations: []
