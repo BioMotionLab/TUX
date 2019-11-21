@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
+using System.Text;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Settings;
 using bmlTUX.Scripts.VariableSystem;
@@ -154,8 +156,9 @@ namespace bmlTUX.Scripts.UI.EditorUI {
 
         [UnityEditor.Callbacks.DidReloadScripts]
         static void ScriptReloaded() {
-            ExperimentRunner runner = CheckRunnerCreated();
+            AssetDatabase.Refresh();
             
+            ExperimentRunner runner = CheckRunnerCreated();
             if (runner == null) return;
             
             CheckTrialCreated(runner);
@@ -216,14 +219,33 @@ namespace bmlTUX.Scripts.UI.EditorUI {
 
             Type type = null;
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (var assembly in assemblies) {
+            foreach (Assembly assembly in assemblies) {
                 type = assembly.GetType(typeName);
                 if (type != null)
                     break;
             }
 
+            if (type == null) {
+
+                Debug.LogError($"Cannot find runner script to create. Name: {typeName} Key: {RunnerKey}, String: {EditorPrefs.GetString(RunnerKey)}");
+                Debug.LogError("Printing Verbose error report:");
+                Debug.LogError("");
+                foreach (Assembly assembly in assemblies) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine(assembly.ToString());
+                    foreach (Type listedType in assembly.GetTypes()) {
+                        sb.AppendLine(listedType.ToString());
+                    }
+
+                    Debug.Log(sb);
+                }
+
+                
+            }
             GameObject newGameObject = new GameObject();
             newGameObject.name = typeName;
+            Debug.Log($"Creating GameObject type {type} in currently open scene");
+            
             ExperimentRunner runner = newGameObject.AddComponent(type) as ExperimentRunner;
 
             return runner;
