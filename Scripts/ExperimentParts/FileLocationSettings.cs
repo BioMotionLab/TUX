@@ -7,7 +7,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
 	[CreateAssetMenu(menuName = "bmlTUX/File Location Settings")]
 	public class FileLocationSettings : ScriptableObject {
 
-		const string TuxProjectFolderPath = "/bmlTux/Data/ScriptingTemplates/";
+		const string TuxProjectFolderPath = "/bmlTux/ScriptingTemplates/";
 		
 		public static string TemplatePath => Application.dataPath + TuxProjectFolderPath;
 		

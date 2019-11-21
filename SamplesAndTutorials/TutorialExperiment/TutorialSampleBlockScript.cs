@@ -3,15 +3,15 @@ using bmlTUX.Scripts.ExperimentParts;
 using UnityEngine;
 
 namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
-    public class TutorialBlockScript : Block
+    public class TutorialSampleBlockScript : Block
     {
     
-        public TutorialBlockScript(ExperimentRunner runner, DataTable trialTable, DataRow dataRow) : base(runner, trialTable, dataRow) {
+        public TutorialSampleBlockScript(ExperimentRunner runner, DataTable trialTable, DataRow dataRow) : base(runner, trialTable, dataRow) {
         }
 
         protected override void PreMethod() {
             //Get reference to custom ExperimentRunner
-            TutorialExperimentRunner tutorialRunner = (TutorialExperimentRunner) Runner;
+            TutorialSampleExperimentRunner tutorialRunner = (TutorialSampleExperimentRunner) Runner;
 
             //Get value of distance for this block.
             float distance = (float) Data["Distance"];

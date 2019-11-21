@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
-  m_Name: TutorialDesignFile
+  m_Name: TutorialSampleDesignFile
   m_EditorClassIdentifier: 
   TrialRepetitions: 1
   ExperimentRepetitions: 1

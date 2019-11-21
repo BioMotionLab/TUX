@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
-    public class TutorialExperimentRunner : ExperimentRunner
+    public class TutorialSampleExperimentRunner : ExperimentRunner
     {
     
         public GameObject Stimulus;
