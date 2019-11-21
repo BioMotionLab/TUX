@@ -237,10 +237,6 @@
             <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
-        <e p="TutorialBlockScript.cs" t="Include" />
-        <e p="TutorialExperimentRunner.cs" t="Include" />
-        <e p="TutorialExperimentScript.cs" t="Include" />
-        <e p="TutorialTrialScript.cs" t="Include" />
       </e>
       <e p="BML_TUX_Project.sln" t="IncludeFlat" />
       <e p="bmlTUX.csproj" t="IncludeRecursive" />
