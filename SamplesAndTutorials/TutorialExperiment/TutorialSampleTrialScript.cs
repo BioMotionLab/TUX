@@ -5,19 +5,19 @@ using bmlTUX.Scripts.ExperimentParts;
 using UnityEngine;
 
 namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
-    public class TutorialTrialScript : Trial
+    public class TutorialSampleTrialScript : Trial
     {
     
-        TutorialExperimentRunner tutorialRunner;
+        TutorialSampleExperimentRunner tutorialRunner;
     
         //constructor. you don't need to worry about this.
-        public TutorialTrialScript(ExperimentRunner runner, DataRow data) : base(runner, data) {
+        public TutorialSampleTrialScript(ExperimentRunner runner, DataRow data) : base(runner, data) {
         }
     
         protected override void PreMethod() {
         
             // convert the generic ExperimentRunner to your custom type of ExperimentRunner.
-            tutorialRunner = (TutorialExperimentRunner)Runner;
+            tutorialRunner = (TutorialSampleExperimentRunner)Runner;
 
             //Get this trial's value for the Color variable
             string colorString = (string) Data["Color"];

@@ -1,7 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using bmlTUX.Scripts.ExperimentParts;
 
-namespace bmlTUX.Data.ScriptingTemplates {
+namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
     /// <summary>
     /// Classes that inherit from Experiment define custom behaviour for the start and end of your experiment.
     /// This might useful for experiment setup, instructions, and debrief.
@@ -12,7 +12,7 @@ namespace bmlTUX.Data.ScriptingTemplates {
     ///
     /// You cannot edit the main execution part of experiments since their main execution is to run the trials and blocks.
     /// </summary>
-    public class ___ExperimentClassName___ : Experiment {
+    public class TutorialSampleExperimentScript : Experiment {
     
     
         // // You usually want to store a reference to your experiment runner
@@ -20,7 +20,7 @@ namespace bmlTUX.Data.ScriptingTemplates {
     
     
         // Required Constructor. Good place to set up references to objects in the unity scene
-        public ___ExperimentClassName___(ExperimentRunner runner, RunnableDesign runnableDesign) : base(runner, runnableDesign) {
+        public TutorialSampleExperimentScript(ExperimentRunner runner, RunnableDesign runnableDesign) : base(runner, runnableDesign) {
             // myRunner = (YourCustomExperimentRunner)runner;  //cast the generic runner to your custom type.
             // GameObject myGameObject = myRunner.MyGameObject;  // get reference to gameObject stored in your custom runner
         
