@@ -124,11 +124,16 @@ namespace bmlTUX.Scripts.ExperimentParts {
             Canvas guiCanvas = gui.GetComponent<Canvas>();
 
             int targetDisplay = DesignFile.GuiSettings.TargetDisplay;
-            if (Display.displays.Length > targetDisplay) {
-                Display.displays[targetDisplay].Activate();
+            
+            if (Display.displays.Length > targetDisplay || Application.isEditor) {
+                if (!Application.isEditor) {
+                    Display.displays[targetDisplay].Activate();
+                }
+                Debug.Log($"Setting UI to show on Display {targetDisplay + 1}");
                 guiCanvas.targetDisplay = targetDisplay;
             }
             else {
+                Debug.LogWarning($"Not enough displays plugged in to accommodate your UI settings. Reverting UI to display on {Display.displays.Length}");
                 guiCanvas.targetDisplay = Display.displays.Length - 1;
             }
         }
