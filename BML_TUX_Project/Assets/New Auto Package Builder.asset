@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d0aeb1a05ed1584491986769aef08a4, type: 3}
+  m_Name: New Auto Package Builder
+  m_EditorClassIdentifier: 
+  Folders:
+  - {fileID: 102900000, guid: 8a38113dee9962f4ba4c34c9bb0b1f5b, type: 3}
+  FolderPaths:
+  - Assets/bmlTUX
+  ExportPath: C:/Users/BioMotion/Documents/GitHub/BML_TUX/Releases
+  PackageName: unamed_package
+  Version: 0.12.2

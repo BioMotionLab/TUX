@@ -7,16 +7,6 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="bmlTUX" t="Include">
-          <e p="Data" t="Include">
-            <e p="ScriptingTemplates" t="Include">
-              <e p="AssemblyTemplateReference.cs" t="Include" />
-              <e p="BlockScriptTemplate.cs" t="Include" />
-              <e p="ExperimentRunnerTemplate.cs" t="Include" />
-              <e p="ExperimentScriptTemplate.cs" t="Include" />
-              <e p="ScriptingTemplates.asmdef" t="Include" />
-              <e p="TrialScriptTemplate.cs" t="Include" />
-            </e>
-          </e>
           <e p="Extras" t="Include">
             <e p="BlackScreenFlasher" t="Include">
               <e p="BlackCamera.cs" t="Include" />
@@ -27,11 +17,18 @@
           </e>
           <e p="SamplesAndTutorials" t="Include">
             <e p="TutorialExperiment" t="Include">
-              <e p="TutorialBlockScript.cs" t="Include" />
-              <e p="TutorialExperimentRunner.cs" t="Include" />
-              <e p="TutorialExperimentScript.cs" t="Include" />
-              <e p="TutorialTrialScript.cs" t="Include" />
+              <e p="TutorialSampleBlockScript.cs" t="Include" />
+              <e p="TutorialSampleExperimentRunner.cs" t="Include" />
+              <e p="TutorialSampleExperimentScript.cs" t="Include" />
+              <e p="TutorialSampleTrialScript.cs" t="Include" />
             </e>
+          </e>
+          <e p="ScriptingTemplates" t="Include">
+            <e p="BlockScriptTemplate.cs" t="Include" />
+            <e p="ExperimentRunnerTemplate.cs" t="Include" />
+            <e p="ExperimentScriptTemplate.cs" t="Include" />
+            <e p="ScriptingTemplates.asmdef" t="Include" />
+            <e p="TrialScriptTemplate.cs" t="Include" />
           </e>
           <e p="Scripts" t="Include">
             <e p="bmlTUX.asmdef" t="Include" />
@@ -240,6 +237,10 @@
             <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
+        <e p="TutorialBlockScript.cs" t="Include" />
+        <e p="TutorialExperimentRunner.cs" t="Include" />
+        <e p="TutorialExperimentScript.cs" t="Include" />
+        <e p="TutorialTrialScript.cs" t="Include" />
       </e>
       <e p="BML_TUX_Project.sln" t="IncludeFlat" />
       <e p="bmlTUX.csproj" t="IncludeRecursive" />
