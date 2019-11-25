@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+// ReSharper disable once RedundantUsingDirective
+using UnityEngine;
 using bmlTUX.Scripts.ExperimentParts;
 
 /// <summary>
