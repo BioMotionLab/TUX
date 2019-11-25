@@ -1,5 +1,5 @@
 {
-    "name": "EditorUI",
+    "name": "TUXEditorUI",
     "references": [
         "GUID:e2e42d675e1f3084a981f233d35a3fb5",
         "GUID:f80f72cbd59090348950e93bd8242fd5",

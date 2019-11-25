@@ -1,4 +1,6 @@
 ﻿using bmlTUX.Scripts.ExperimentParts;
+// ReSharper disable once RedundantUsingDirective
+using UnityEngine;
 
 /// <summary>
 /// This class is the main communication between the toolkit and the Unity scene. Drag this script onto an empty gameObject in your Unity scene.
