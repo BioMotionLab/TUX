@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Random = UnityEngine.Random;
@@ -76,19 +75,6 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
         }
 
         /// <summary>
-        /// Returns a copy of the list that has its items' order shuffled.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <returns></returns>
-        public static List<T> ShuffledCopy<T>(this IList<T> list) {
-            List<T> newList = new List<T>();
-            newList.AddRange(list);
-            newList.Shuffle();
-            return newList;
-        }
-
-        /// <summary>
         /// Returns a random index from the list
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -97,42 +83,6 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
         public static int RandomIndex<T>(this IList<T> list) {
             int randomIndex = Random.Range(0, list.Count);
             return randomIndex;
-        }
-    }
-
-
-
-    public class LoopingList<T> : List<T> {
-        int currentIndex = 0;
-
-        public T NextElement {
-            get {
-                currentIndex = (currentIndex + 1) % Count;
-                T nextItem = this[currentIndex];
-                return nextItem;
-            }
-        }
-
-        public T FirstElement => this[0];
-    }
-
-    public class Permutations {
-
-        public static void RotateRight(IList sequence, int count) {
-            object tmp = sequence[count - 1];
-            sequence.RemoveAt(count - 1);
-            sequence.Insert(0, tmp);
-        }
-
-        public static IEnumerable<IList> Permutate(IList sequence, int count) {
-            if (count == 1) yield return sequence;
-            else {
-                for (int i = 0; i < count; i++) {
-                    foreach (IList perm in Permutate(sequence, count - 1))
-                        yield return perm;
-                    RotateRight(sequence, count);
-                }
-            }
         }
     }
 }

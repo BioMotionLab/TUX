@@ -27,8 +27,8 @@
             <e p="BlockScriptTemplate.cs" t="Include" />
             <e p="ExperimentRunnerTemplate.cs" t="Include" />
             <e p="ExperimentScriptTemplate.cs" t="Include" />
-            <e p="ScriptingTemplates.asmdef" t="Include" />
             <e p="TrialScriptTemplate.cs" t="Include" />
+            <e p="TUXScriptingTemplates.asmdef" t="Include" />
           </e>
           <e p="Scripts" t="Include">
             <e p="bmlTUX.asmdef" t="Include" />
@@ -78,8 +78,8 @@
                 <e p="DesignPreviewEditorDisplay.cs" t="Include" />
                 <e p="DesignPreviewEditorWindow.cs" t="Include" />
                 <e p="DesignSaverEditorWindow.cs" t="Include" />
-                <e p="EditorUI.asmdef" t="Include" />
                 <e p="ScriptHelperEditorWindow.cs" t="Include" />
+                <e p="TUXEditorUI.asmdef" t="Include" />
               </e>
               <e p="RuntimeUI" t="Include">
                 <e p="ExperimentGui.cs" t="Include" />
@@ -114,26 +114,19 @@
               <e p="DataTableCSVUtility.cs" t="Include" />
               <e p="Delimiter.cs" t="Include" />
               <e p="Extensions" t="Include">
-                <e p="CameraExtension.cs" t="Include" />
                 <e p="DataFormatter.cs" t="Include" />
                 <e p="DataTableExtension.cs" t="Include" />
-                <e p="IntExtension.cs" t="Include" />
                 <e p="ListExtension.cs" t="Include" />
-                <e p="ProjectorExtension.cs" t="Include" />
-                <e p="QuaternionExtension.cs" t="Include" />
+                <e p="LoopingList.cs" t="Include" />
                 <e p="StringExtension.cs" t="Include" />
                 <e p="Tests" t="Include">
                   <e p="Editor" t="Include">
-                    <e p="IntExtensionTests.cs" t="Include" />
                     <e p="ListExtensionTests.cs" t="Include" />
                     <e p="StringExtensionTests.cs" t="Include" />
-                    <e p="TransformExtensionTests.cs" t="Include" />
                   </e>
-                  <e p="ExtensionTests.asmdef" t="Include" />
+                  <e p="TUXExtensionTests.asmdef" t="Include" />
                 </e>
-                <e p="TransformExtension.cs" t="Include" />
                 <e p="TypeExtension.cs" t="Include" />
-                <e p="Vector3Extension.cs" t="Include" />
               </e>
               <e p="LowestCommonFunctions.cs" t="Include" />
               <e p="Rotator.cs" t="Include" />
@@ -240,14 +233,14 @@
       </e>
       <e p="BML_TUX_Project.sln" t="IncludeFlat" />
       <e p="bmlTUX.csproj" t="IncludeRecursive" />
-      <e p="EditorUI.csproj" t="IncludeRecursive" />
-      <e p="ExtensionTests.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
-      <e p="ScriptingTemplates.csproj" t="IncludeRecursive" />
       <e p="TableViewer.csproj" t="IncludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
       <e p="TestingUtilities.csproj" t="IncludeRecursive" />
+      <e p="TUXEditorUI.csproj" t="IncludeRecursive" />
+      <e p="TUXExtensionTests.csproj" t="IncludeRecursive" />
+      <e p="TUXScriptingTemplates.csproj" t="IncludeRecursive" />
       <e p="VariableUI.csproj" t="IncludeRecursive" />
     </e>
   </component>
