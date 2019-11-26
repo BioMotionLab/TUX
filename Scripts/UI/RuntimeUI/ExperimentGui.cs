@@ -24,17 +24,28 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
 
         [SerializeField]
         RectTransform ExperimentStartPanel = default;
+
+        [SerializeField]
+        public Camera UICamera;
         
         DesignPreviewer previewer;
         FileLocationSettings fileLocationSettings;
         public void RegisterExperiment(ExperimentRunner experimentRunner) {
             ExperimentEvents.OnInitExperiment += Init;
+            ExperimentEvents.OnExperimentStarted += ExperimentHasStarted;
             runner = experimentRunner;
             fileLocationSettings = runner.DesignFile.FileLocationSettings;
         }
 
+        void ExperimentHasStarted() {
+            if (!runner.DesignFile.GuiSettings.ShowRunnerInterfaceAfterStart) {
+                this.gameObject.SetActive(false);
+            }
+        }
+
         public void OnDisable() {
             ExperimentEvents.OnInitExperiment -= Init;
+            ExperimentEvents.OnExperimentStarted -= ExperimentHasStarted;
         }
 
         void Init(ExperimentRunner unused) {
@@ -58,7 +69,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
         
 
         [PublicAPI]
-        public void StartExperiment() {
+        public void StartExperimentFromButton() {
             Session session = SessionSetupPanel.GetSession();
             if (SessionSetupPanel.ValidSession) {
                 StartRunningExperiment(session);
@@ -72,7 +83,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
         }
 
         [PublicAPI]
-        public void StartDebugExperiment() {
+        public void StartDebugExperimentFromButton() {
             if (fileLocationSettings == null) Debug.LogError($"fileLocationSettings null when debug started");
             Session session = new DebugSession(fileLocationSettings);
 

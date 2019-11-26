@@ -121,8 +121,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             gui = Instantiate(DesignFile.GuiSettings.GuiPrefab);
             gui.gameObject.SetActive(true);
             gui.RegisterExperiment(this);
-            Canvas guiCanvas = gui.GetComponent<Canvas>();
-
+            
             int targetDisplay = DesignFile.GuiSettings.TargetDisplay;
             
             if (Display.displays.Length > targetDisplay || Application.isEditor) {
@@ -130,11 +129,11 @@ namespace bmlTUX.Scripts.ExperimentParts {
                     Display.displays[targetDisplay].Activate();
                 }
                 Debug.Log($"Setting UI to show on Display {targetDisplay + 1}");
-                guiCanvas.targetDisplay = targetDisplay;
+                gui.UICamera.targetDisplay = targetDisplay;
             }
             else {
                 Debug.LogWarning($"Not enough displays plugged in to accommodate your UI settings. Reverting UI to display on {Display.displays.Length}");
-                guiCanvas.targetDisplay = Display.displays.Length - 1;
+                gui.UICamera.targetDisplay = Display.displays.Length - 1;
             }
         }
 

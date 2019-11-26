@@ -1,5 +1,6 @@
 ﻿using bmlTUX.Scripts.UI.RuntimeUI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace bmlTUX.Scripts.Settings {
     [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "GUI Settings File")]
@@ -14,5 +15,8 @@ namespace bmlTUX.Scripts.Settings {
         // ReSharper disable once ConvertToAutoProperty
         public int TargetDisplay => (int)targetDisplay;
 
+        [FormerlySerializedAs("ShowRunnerInterface")]
+        [SerializeField]
+        public bool ShowRunnerInterfaceAfterStart = true;
     }
 }
