@@ -53,8 +53,6 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             ExperimentEvents.OnTrialHasStarted += TrialStarted;
         }
 
-
-
         void OnDisable() {
             ExperimentEvents.OnInitExperiment -= Init;
             ExperimentEvents.OnBlockUpdated -= BlockCompleted;
@@ -70,9 +68,14 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             currentBlockIndex = 0;
             currentTrialIndex = 0;
             started = true;
-        }
 
-        void Update() {
+            
+        }
+        
+        
+        void UpdatePanel() {
+            //TODO this can probably be optimized so that instantiation happens at start of experiment once only. Since components don't change, just text content and width.
+            
             if (!started) return;
             UpdateProgressPanel();
 
@@ -80,8 +83,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             table = GetExperimentTable();
             columnIndexToMaxLength = new Dictionary<int, int>();
 
-
-
+            
             for (int index = 0; index < table.Columns.Count; index++) {
                 columnIndexToMaxLength.Add(index, 0);
                 DataColumn column = table.Columns[index];
@@ -117,6 +119,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
         }
 
         void TrialStarted(Trial trial, int indexInBlock) {
+            UpdatePanel();
             currentTrialIndex = trial.Index;
         }
 
