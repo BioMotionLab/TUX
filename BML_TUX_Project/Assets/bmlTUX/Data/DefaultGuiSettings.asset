@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GuiPrefab: {fileID: 2510293699582157743, guid: b4d5317835f671642bc923479a632b1a,
     type: 3}
-  targetDisplay: 0
+  targetDisplay: 1
   ShowRunnerInterfaceAfterStart: 1

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Managers;
 using TMPro;
@@ -40,10 +42,16 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
         Dictionary<int, int> columnIndexToMaxLength;
         DataTable            table;
         GameObject currentTrialRowObject;
-        const int            RunningIndicatorWidth = 60;
-        const int            HeaderPixelMultiplier = 10;
-        const int            EntryPixelMultiplier  = 8;
+        const int            EntryPixelMultiplier  = 12;
         
+        
+        int[]            ColumnLengths; 
+    
+        int              rowLength;
+        bool ended = false;
+
+        const int        paddingChars          = 4;
+        const string     ASpace                = " ";
         
         void OnEnable() {
             MainPanel.gameObject.SetActive(false);
@@ -51,6 +59,13 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             ExperimentEvents.OnBlockUpdated += BlockCompleted;
             ExperimentEvents.OnExperimentStarted += ExperimentStarted;
             ExperimentEvents.OnTrialHasStarted += TrialStarted;
+            ExperimentEvents.OnTrialHasCompleted += TrialCompleted;
+            ExperimentEvents.OnEndExperiment += ExperimentCompleted;
+        }
+
+        void ExperimentCompleted() {
+            ended = true;
+            UpdatePanel();
         }
 
         void OnDisable() {
@@ -58,6 +73,12 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             ExperimentEvents.OnBlockUpdated -= BlockCompleted;
             ExperimentEvents.OnExperimentStarted -= ExperimentStarted;
             ExperimentEvents.OnTrialHasStarted -= TrialStarted;
+            ExperimentEvents.OnTrialHasCompleted -= TrialCompleted;
+            ExperimentEvents.OnEndExperiment -= ExperimentCompleted;
+        }
+
+        void TrialCompleted() {
+            UpdatePanel();
         }
 
         public void ShowPanel() {
@@ -78,34 +99,133 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             
             if (!started) return;
             UpdateProgressPanel();
-
+            
             Clear();
             table = GetExperimentTable();
-            columnIndexToMaxLength = new Dictionary<int, int>();
-
             
-            for (int index = 0; index < table.Columns.Count; index++) {
-                columnIndexToMaxLength.Add(index, 0);
-                DataColumn column = table.Columns[index];
-                foreach (DataRow row in table.Rows) {
-                    columnIndexToMaxLength[index] =
-                        Math.Max(columnIndexToMaxLength[index],
-                                 row[column.ColumnName].ToString().Length * EntryPixelMultiplier);
-                    columnIndexToMaxLength[index] =
-                        Math.Max(columnIndexToMaxLength[index], column.ColumnName.Length * HeaderPixelMultiplier);
-                }
-            }
-
-            DisplayHeader(CurrentTrialContainer.transform, false);
-            currentTrialRowObject = Instantiate(RowPrefab, CurrentTrialContainer.transform);
-            
-            
-            DisplayHeader(ContentContainer.transform);
-            DisplayRows();
-            
-            
+            Display();
         }
 
+        
+        
+        void Display() {
+            Clear();
+            ColumnLengths = new int[table.Columns.Count];
+            for (int index = 0; index < table.Columns.Count; index++) {
+                DataColumn column = table.Columns[index];
+                ColumnLengths[index] = Math.Max(ColumnLengths[index], column.ColumnName.Length);
+                foreach (DataRow row in table.Rows) {
+                    ColumnLengths[index] = Math.Max(ColumnLengths[index], row[column.ColumnName].ToString().Length);
+                }
+
+                ColumnLengths[index] += paddingChars;
+            }
+
+            rowLength = ColumnLengths.Sum();
+
+            DisplayHeader(CurrentTrialContainer.transform);
+            DisplayCurrentRow(CurrentTrialContainer.transform);
+            
+            DisplayHeader(ContentContainer.transform);
+            DisplayRows(ContentContainer.transform);
+        }
+        
+
+        void DisplayHeader(Transform contentContainer) {
+            GameObject header = Instantiate(HeaderRowPrefab, contentContainer);
+            header.name = "Header";
+            
+            var newEntry = Instantiate(EntryPrefab, header.transform);
+            LayoutElement entryLayout = newEntry.GetComponent<LayoutElement>();
+            entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+            
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
+                DataColumn column = table.Columns[columnIndex];
+                string columnName = column.ColumnName;
+                string paddedName = AddPadding(columnName, ColumnLengths[columnIndex]);
+                stringBuilder.Append(paddedName);
+            }
+            
+            TextMeshProUGUI entryTextObject = newEntry.GetComponent<TextMeshProUGUI>();
+            entryTextObject.text = stringBuilder.ToString();
+        }
+
+        string AddPadding(string s, int columnLength) {
+            StringBuilder paddedString = new StringBuilder(s);
+            int diff = columnLength - s.Length;
+            for (int i = 0; i < diff; i++) {
+                paddedString.Append(ASpace);
+            }
+            return paddedString.ToString();
+        }
+
+        void DisplayRows(Transform contentContainerTransform) {
+            
+            for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++) {
+                DataRow row = table.Rows[rowIndex];
+                
+                GameObject newRow = Instantiate(RowPrefab, contentContainerTransform);
+                newRow.name = "Row {rowIndex}";
+        
+                var newRowEntry = Instantiate(EntryPrefab, newRow.transform);
+                LayoutElement entryLayout = newRowEntry.GetComponent<LayoutElement>();
+                entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+        
+                
+                bool isCurrentlyRunningTrial = currentTrialIndex == rowIndex;
+                bool trialIsComplete = (bool)row[runner.DesignFile.ColumnNamesSettings.Completed];
+                
+                if (isCurrentlyRunningTrial && !trialIsComplete) SetColor(newRow, Color.yellow);
+                else if (trialIsComplete) SetColor(newRow, Color.green);
+                else SetColor(newRow, Color.red);
+                
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
+                    DataColumn column = table.Columns[columnIndex];
+                    string rowValue = row[column.ColumnName].ToString();
+                    string paddedValue = AddPadding(rowValue, ColumnLengths[columnIndex]);
+                    stringBuilder.Append(paddedValue);
+                }
+        
+                TextMeshProUGUI entryTextObject = newRowEntry.GetComponent<TextMeshProUGUI>();
+                entryTextObject.text = stringBuilder.ToString();
+                
+            }
+        }
+
+        void DisplayCurrentRow(Transform currentTrialContainer) {
+            for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++) {
+                
+                bool isCurrentlyRunningTrial = currentTrialIndex == rowIndex;
+
+                if (!isCurrentlyRunningTrial) continue;
+                
+                DataRow row = table.Rows[rowIndex];
+                
+                GameObject newRow = Instantiate(RowPrefab, currentTrialContainer);
+                newRow.name = "Row {rowIndex}";
+        
+                var newRowEntry = Instantiate(EntryPrefab, newRow.transform);
+                LayoutElement entryLayout = newRowEntry.GetComponent<LayoutElement>();
+                entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+                
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
+                    DataColumn column = table.Columns[columnIndex];
+                    string rowValue = row[column.ColumnName].ToString();
+                    string paddedValue = AddPadding(rowValue, ColumnLengths[columnIndex]);
+                    stringBuilder.Append(paddedValue);
+                }
+        
+                TextMeshProUGUI entryTextObject = newRowEntry.GetComponent<TextMeshProUGUI>();
+                entryTextObject.text = stringBuilder.ToString();
+                
+            }
+        }
+
+        
+        
         DataTable GetExperimentTable() {
             DataTable newTable = runner.RunnableDesign.Blocks[0].TrialTable.Clone();
             foreach (var block in runner.RunnableDesign.Blocks) {
@@ -119,8 +239,8 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
         }
 
         void TrialStarted(Trial trial, int indexInBlock) {
-            UpdatePanel();
             currentTrialIndex = trial.Index;
+            UpdatePanel();
         }
 
         void BlockCompleted(List<Block> blocks, int index) {
@@ -149,9 +269,12 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             if (design.HasBlocks) blockText = $" (Block {currentBlockIndex} / {design.BlockCount})";
             CurrentTrialText.text = ($"Running Trial: {currentTrial} of {design.TotalTrials} total{blockText}.");
 
-            if (runner.Ended) {
-                Image progressPanelImage = ProgressPanel.GetComponent<Image>();
+            Image progressPanelImage = ProgressPanel.GetComponent<Image>();
+            if (ended) {
                 progressPanelImage.color = Color.red;
+            }
+            else {
+                progressPanelImage.color = Color.green;
             }
         }
         
@@ -159,59 +282,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
         void Clear() {
             DestroyAllContent();
         }
-
-        void DisplayHeader(Transform container, bool displayRunningIndicator = true) {
-            GameObject headerRow = Instantiate(HeaderRowPrefab, container);
-            headerRow.name = "Header";
-
-            if (displayRunningIndicator) {
-                TextMeshProUGUI runningIndicatorHeader =
-                    NewEntryInRow(headerRow, RunningIndicatorWidth, "RunningIndicator", true);
-                runningIndicatorHeader.text = "";
-            }
-
-            for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
-                DataColumn column = table.Columns[columnIndex];
-                TextMeshProUGUI entryTextObject = NewEntryInRow(headerRow, columnIndexToMaxLength[columnIndex],
-                                                                   $"HeaderColumn {columnIndex}", true);
-                entryTextObject.text = column.ColumnName;
-            }
-        }
-
-        void DisplayRows() {
-            for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++) {
-                DataRow row = table.Rows[rowIndex];
-                
-                bool isCurrentlyRunningTrial = currentTrialIndex == rowIndex;
-
-                GameObject newRowObject = Instantiate(RowPrefab, ContentContainer.transform);
-                newRowObject.name = $"Row {rowIndex}";
-
-                TextMeshProUGUI runningIndicator =
-                    NewEntryInRow(newRowObject, RunningIndicatorWidth, "RunningIndicator");
-                
-                
-                runningIndicator.text = isCurrentlyRunningTrial ? "Running" : "";
-                if (isCurrentlyRunningTrial) SetColor(newRowObject, Color.yellow);
-                else if ((bool)row[runner.DesignFile.ColumnNamesSettings.Completed]) SetColor(newRowObject, Color.green);
-                else SetColor(newRowObject, Color.red);
-
-                for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
-                    DataColumn column = table.Columns[columnIndex];
-
-                    if (isCurrentlyRunningTrial) {
-                        TextMeshProUGUI currentTrialEntryTextObject =
-                                NewEntryInRow(currentTrialRowObject, columnIndexToMaxLength[columnIndex], $"Column{columnIndex}");
-                            currentTrialEntryTextObject.text = row[column.ColumnName].ToString();
-                        
-                    }
-                    
-                    TextMeshProUGUI entryTextObject =
-                        NewEntryInRow(newRowObject, columnIndexToMaxLength[columnIndex], $"Column{columnIndex}");
-                    entryTextObject.text = row[column.ColumnName].ToString();
-                }
-            }
-        }
+        
 
         void SetColor(GameObject newRowObject, Color rowColor) {
             Image rowImage = newRowObject.GetComponent<Image>();
