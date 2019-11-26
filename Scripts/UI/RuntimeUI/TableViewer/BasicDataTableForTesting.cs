@@ -30,7 +30,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.TableViewer {
             DataColumn column6 = new DataColumn(columnName:"Head6", typeof(int));
             Table.Columns.Add(column6);
         
-            for (int i = 0; i < 30; i++) {
+            for (int i = 0; i < 300; i++) {
                 DataRow newRow = Table.NewRow();
                 newRow["Head1"] = i;
                 newRow["Head2"] = i*i;

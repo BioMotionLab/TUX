@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,26 +17,31 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.TableViewer {
         public GameObject      HeaderRowPrefab;
     
         List<GameObject>     entries;
-        Dictionary<int, int> columnIndexToMaxLength;
+        int[] ColumnLengths;
         DataTable            table;
+        int rowLength;
         const int            HeaderPixelMultiplier = 10;
         const int            EntryPixelMultiplier  = 8;
-    
-    
+        const int paddingChars = 4;
+        const string ASpace = " ";
+        
+        
         public void Display(DataTable tableToDisplay) {
             Clear();
             table = tableToDisplay;
-            columnIndexToMaxLength = new Dictionary<int, int>();
+            ColumnLengths = new int[table.Columns.Count];
             for (int index = 0; index < table.Columns.Count; index++) {
-                columnIndexToMaxLength.Add(index,0);
                 DataColumn column = table.Columns[index];
+                ColumnLengths[index] = Math.Max(ColumnLengths[index], column.ColumnName.Length);
                 foreach (DataRow row in table.Rows) {
-                    columnIndexToMaxLength[index] =
-                        Math.Max(columnIndexToMaxLength[index], row[column.ColumnName].ToString().Length * EntryPixelMultiplier);
-                    columnIndexToMaxLength[index] =
-                        Math.Max(columnIndexToMaxLength[index], column.ColumnName.Length * HeaderPixelMultiplier);
+                    ColumnLengths[index] = Math.Max(ColumnLengths[index], row[column.ColumnName].ToString().Length);
                 }
+
+                
+                ColumnLengths[index] += paddingChars;
             }
+
+            rowLength = ColumnLengths.Sum();
 
             DisplayHeader();
             DisplayRows();
@@ -47,32 +54,54 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.TableViewer {
         void DisplayHeader() {
             GameObject header = Instantiate(HeaderRowPrefab, ContentContainer.transform);
             header.name = "Header";
+            
+            var newEntry = Instantiate(EntryPrefab, header.transform);
+            LayoutElement entryLayout = newEntry.GetComponent<LayoutElement>();
+            entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+            
+            StringBuilder stringBuilder = new StringBuilder();
             for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
                 DataColumn column = table.Columns[columnIndex];
-                var newEntry = Instantiate(HeaderEntryPrefab, header.transform);
-
-                LayoutElement entryLayout = newEntry.GetComponent<LayoutElement>();
-                entryLayout.minWidth = columnIndexToMaxLength[columnIndex];
-
-                TextMeshProUGUI entryTextObject = newEntry.GetComponent<TextMeshProUGUI>();
-                entryTextObject.text = column.ColumnName;
+                string columnName = column.ColumnName;
+                string paddedName = AddPadding(columnName, ColumnLengths[columnIndex]);
+                stringBuilder.Append(paddedName);
             }
+            
+            TextMeshProUGUI entryTextObject = newEntry.GetComponent<TextMeshProUGUI>();
+            entryTextObject.text = stringBuilder.ToString();
+        }
+
+        string AddPadding(string s, int columnLength) {
+            StringBuilder paddedString = new StringBuilder(s);
+            int diff = columnLength - s.Length;
+            for (int i = 0; i < diff; i++) {
+                paddedString.Append(ASpace);
+            }
+            return paddedString.ToString();
         }
 
         void DisplayRows() {
             for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++) {
                 DataRow row = table.Rows[rowIndex];
-                var newRowObject = Instantiate(RowPrefab, ContentContainer.transform);
-                newRowObject.name = $"Row {rowIndex}";
+                
+                GameObject newRow = Instantiate(RowPrefab, ContentContainer.transform);
+                newRow.name = "Row {rowIndex}";
+        
+                var newRowEntry = Instantiate(EntryPrefab, newRow.transform);
+                LayoutElement entryLayout = newRowEntry.GetComponent<LayoutElement>();
+                entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+        
+                StringBuilder stringBuilder = new StringBuilder();
                 for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
                     DataColumn column = table.Columns[columnIndex];
-                    TextMeshProUGUI newEntry = Instantiate(EntryPrefab, newRowObject.transform);
-                    newEntry.gameObject.name = $"Column {columnIndex}";
-                    LayoutElement entryLayout = newEntry.GetComponent<LayoutElement>();
-                    entryLayout.minWidth = columnIndexToMaxLength[columnIndex];
-                    TextMeshProUGUI entryTextObject = newEntry.GetComponent<TextMeshProUGUI>();
-                    entryTextObject.text = row[column.ColumnName].ToString();
+                    string rowValue = row[column.ColumnName].ToString();
+                    string paddedValue = AddPadding(rowValue, ColumnLengths[columnIndex]);
+                    stringBuilder.Append(paddedValue);
                 }
+        
+                TextMeshProUGUI entryTextObject = newRowEntry.GetComponent<TextMeshProUGUI>();
+                entryTextObject.text = stringBuilder.ToString();
+                
             }
         }
 
