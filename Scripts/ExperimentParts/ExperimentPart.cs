@@ -34,7 +34,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// </summary>
         /// <returns></returns>
         IEnumerator RunPreMethods() {
-            yield return null; // let last frame finish before starting
+            //yield return null; // let last frame finish before starting
             InternalPreMethod();
             PreMethod();
             yield return PreCoroutine();
@@ -70,7 +70,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// </summary>
         /// <returns></returns>
         IEnumerator RunPostMethods() {
-            yield return null; // let last frame finish before starting
+            //yield return null; // let last frame finish before starting
             yield return PostCoroutine();
             PostMethod();
             InternalPostMethod();
