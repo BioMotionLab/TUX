@@ -30,9 +30,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
             if (!previewer.DesignFileLinked()) return null;
             
             
-            scrollPos = EditorGUILayout.BeginScrollView(scrollPos, 
-                                                        false, false, 
-                                                        GUILayout.ExpandHeight(true));
+            
             
             
             EditorGUILayout.BeginVertical();
@@ -67,7 +65,6 @@ namespace bmlTUX.Scripts.UI.EditorUI {
             EditorGUILayout.TextArea(previewer.PreviewTable.AsString());
             EditorGUILayout.Space();
             EditorGUILayout.EndVertical();
-            EditorGUILayout.EndScrollView();
             return previewer.PreviewTable;
         }
     }

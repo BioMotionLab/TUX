@@ -5,14 +5,14 @@ namespace bmlTUX.Scripts.Managers {
     
     public static class ExperimentEvents {
 
-        public delegate void TrialHasStartedEvent(Trial trial, int index);
+        public delegate void TrialHasStartedEvent(Trial trial);
 
         public static event TrialHasStartedEvent OnTrialHasStarted;
        
 
 
-        public static void TrialHasStarted(Trial trial, int indexInBlock) {
-            OnTrialHasStarted?.Invoke(trial, indexInBlock);
+        public static void TrialHasStarted(Trial trial) {
+            OnTrialHasStarted?.Invoke(trial);
         }
 
         public delegate void InterruptTrialEvent();

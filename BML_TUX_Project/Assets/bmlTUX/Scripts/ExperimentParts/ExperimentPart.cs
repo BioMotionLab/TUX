@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using bmlTUX.Scripts.Managers;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -19,64 +20,67 @@ namespace bmlTUX.Scripts.ExperimentParts {
             Runner = runner;
             Interrupt = false;
             
-            ExperimentEvents.OnStartPart += StartPart;
+            ExperimentEvents.OnStartPart += StartRunningPart;
             //TODO disable somehow. Disabling after trial completed does not allow it to restart. Perhaps do it using end of experiment event?
-        }
-        
-        void StartPart(ExperimentPart experimentPart) {
-            if (experimentPart != this) return;
-            Runner.StartCoroutine(Run());
-            Interrupt = false;
         }
         
         /// <summary>
         /// Start running the code that occurs before the main part of the Runner
         /// </summary>
         /// <returns></returns>
-        IEnumerator RunPreMethods() {
-            //yield return null; // let last frame finish before starting
+        void StartRunningPart(ExperimentPart experimentPart) {
+            if (experimentPart != this) return;
+            Interrupt = false;
             InternalPreMethod();
             PreMethod();
+            Runner.StartCoroutine(PreCoroutineRunner(OnDonePreCoroutine));
+        }
+        
+        IEnumerator PreCoroutineRunner(Action actionWhenDone) {
             yield return PreCoroutine();
+            actionWhenDone.Invoke();
+        }
+
+        void OnDonePreCoroutine() {
+            RunMainMethods();
         }
 
 
+        void RunMainMethods() {
+            Runner.StartCoroutine(MainCoroutineRunner(OnDoneMainCoroutine));
+        }
 
-        IEnumerator Run() {
-            yield return ConditionalCoroutine(RunPreMethods());
-
+        IEnumerator MainCoroutineRunner(Action onDoneMainCoroutine) {
             float startTime = Time.time;
-
-            yield return ConditionalCoroutine(RunMainCoroutine());
-
+            
+            yield return RunMainCoroutine();
+            
             float endTime = Time.time;
             RunTime = endTime - startTime;
-
-            yield return ConditionalCoroutine(RunPostMethods());
+            onDoneMainCoroutine.Invoke();
+        }
+        
+        void OnDoneMainCoroutine() {
+            Runner.StartCoroutine(PostCoroutineRunner(OnDonePostCoroutine));
         }
 
-        IEnumerator ConditionalCoroutine(IEnumerator coroutine) {
-            while (coroutine.MoveNext()) {
-                if (Interrupt) {
-                    Debug.LogWarning($"Interrupted {nameof(coroutine)}");
-                    break;
-                }
-                yield return coroutine.Current;
-            }
+        IEnumerator PostCoroutineRunner(Action actionWhenDone) {
+            yield return PostCoroutine();
+            actionWhenDone.Invoke();
         }
-
+        
+        
         /// <summary>
         /// Start running the code that occurs after the main part of the Runner
         /// </summary>
         /// <returns></returns>
-        IEnumerator RunPostMethods() {
-            //yield return null; // let last frame finish before starting
-            yield return PostCoroutine();
+        void OnDonePostCoroutine() {
             PostMethod();
             InternalPostMethod();
         }
 
         [PublicAPI] protected virtual void InternalPreMethod() { }
+
         [PublicAPI] protected virtual void InternalPostMethod() { }
 
         /// <summary>
@@ -87,6 +91,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// </summary>
         [PublicAPI] protected virtual void PreMethod() {}
 
+        
         /// <summary>
         /// Code that runs before this ExperimentPart.
         /// Overwrite this for custom behaviour.

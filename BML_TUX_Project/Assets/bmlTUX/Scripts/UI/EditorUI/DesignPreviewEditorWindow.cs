@@ -1,6 +1,7 @@
 using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace bmlTUX.Scripts.UI.EditorUI {
@@ -9,11 +10,19 @@ namespace bmlTUX.Scripts.UI.EditorUI {
         [FormerlySerializedAs("ConfigurationFile")]
         public ExperimentDesignFile DesignFile;
         DesignPreviewer                  previewer;
-        
+        Vector2 scrollPos;
+
         void OnGUI() {
             if (previewer != null) {
                 DesignPreviewEditorDisplay previewDisplay = new DesignPreviewEditorDisplay(previewer);
+                
+                scrollPos = EditorGUILayout.BeginScrollView(scrollPos, 
+                                                            false, false, 
+                                                            GUILayout.ExpandHeight(true));
+                
                 previewDisplay.ShowEditorPreview();
+                
+                EditorGUILayout.EndScrollView();
             }
             else {
                 EditorGUILayout.HelpBox("Nothing to preview. Make sure a design file is selected and it has no errors.", MessageType.Error);

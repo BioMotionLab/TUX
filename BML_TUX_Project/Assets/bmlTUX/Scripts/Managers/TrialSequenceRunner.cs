@@ -49,7 +49,7 @@ namespace bmlTUX.Scripts.Managers {
             currentlyRunningTrial = trial;
 
             ExperimentEvents.StartPart(trial);
-            ExperimentEvents.TrialHasStarted(trial, TrialIndex(trial));
+            ExperimentEvents.TrialHasStarted(trial);
         }
 
         void TrialHasCompleted() {
