@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 6726290626653219702}
   - component: {fileID: 6726290626653219701}
   - component: {fileID: 6726290626653219700}
-  - component: {fileID: 6726290626653219703}
+  - component: {fileID: 8826126391329950905}
   m_Layer: 5
   m_Name: Viewport
   m_TagString: Untagged
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6726290626653219703
+--- !u!114 &8826126391329950905
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,10 +207,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6726290626653219697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 0
 --- !u!1 &6726290626860059161
 GameObject:
   m_ObjectHideFlags: 0

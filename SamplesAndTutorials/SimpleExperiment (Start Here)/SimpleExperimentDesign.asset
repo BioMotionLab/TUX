@@ -25,11 +25,31 @@ MonoBehaviour:
     - Name: IndependentVar1
       TypeOfVariable: 0
       DataType: 0
-      ExpandSettings: 0
+      ExpandSettings: 1
       MixingType: 0
       Block: 0
-      Values: 010000000200000003000000
+      Values: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
       Probabilities:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - Name: var3
+      TypeOfVariable: 0
+      DataType: 0
+      ExpandSettings: 1
+      MixingType: 0
+      Block: 0
+      Values: 0100000002000000030000000400000005000000
+      Probabilities:
+      - 0
+      - 0
       - 0
       - 0
       - 0
@@ -37,13 +57,29 @@ MonoBehaviour:
     - Name: IndependentVar2
       TypeOfVariable: 0
       DataType: 1
-      ExpandSettings: 0
+      ExpandSettings: 1
       MixingType: 0
       Block: 0
       Values:
+      - 1
+      - 2
+      - 3
       - 4
       - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
       Probabilities:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
       - 0
       - 0
     StringIVs:

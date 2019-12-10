@@ -25,6 +25,10 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
 
         [SerializeField]
         RectTransform ProgressPanel = default;
+
+        [SerializeField]
+        VerticalLayoutGroup panelLayout = default;
+        
         
         bool             started           = false;
         int              currentBlockIndex = -1;
@@ -49,6 +53,12 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
     
         int              rowLength;
         bool ended = false;
+        TextMeshProUGUI textMeshProUgui;
+        TextMeshProUGUI currentTrialHeaderEntry;
+        TextMeshProUGUI currentTrialRow;
+        TextMeshProUGUI runnerHeader;
+        TextMeshProUGUI[] rowEntries;
+        GameObject[] rowObjects;
 
         const int        paddingChars          = 4;
         const string     ASpace                = " ";
@@ -79,37 +89,54 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
 
         void TrialCompleted() {
             UpdatePanel();
+            var rowObject = rowObjects[currentTrialIndex];
+            SetColor(rowObject, Color.green);
+            
         }
 
         public void ShowPanel() {
+            
+            table = GetExperimentTable();
+            
+            CalculateColumnWidths();
+            DisplayHeader();
+            CreateRows(ContentContainer.transform);
+
+            for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++) {
+                UpdateRow(rowIndex);
+            }
+            
             MainPanel.gameObject.SetActive(true);
+            
         }
 
         void ExperimentStarted() {
             currentBlockIndex = 0;
             currentTrialIndex = 0;
             started = true;
-
-            
         }
         
         
         void UpdatePanel() {
-            //TODO this can probably be optimized so that instantiation happens at start of experiment once only. Since components don't change, just text content and width.
-            
+            panelLayout.enabled = false;
             if (!started) return;
             UpdateProgressPanel();
             
-            Clear();
-            table = GetExperimentTable();
-            
             Display();
         }
-
         
         
         void Display() {
-            Clear();
+            CalculateColumnWidths();
+
+            DisplayCurrentTrialHeader();
+            DisplayCurrentTrialRow();
+            
+            UpdateRow(currentTrialIndex);
+            
+        }
+
+        void CalculateColumnWidths() {
             ColumnLengths = new int[table.Columns.Count];
             for (int index = 0; index < table.Columns.Count; index++) {
                 DataColumn column = table.Columns[index];
@@ -122,22 +149,66 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             }
 
             rowLength = ColumnLengths.Sum();
+        }
 
-            DisplayHeader(CurrentTrialContainer.transform);
-            DisplayCurrentRow(CurrentTrialContainer.transform);
+        void DisplayCurrentTrialHeader() {
+
+            if (currentTrialHeaderEntry == null) {
+                var currentTrialHeader = Instantiate(HeaderRowPrefab, CurrentTrialContainer.transform);
+                LayoutElement entryLayout = currentTrialHeader.GetComponent<LayoutElement>();
+                entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+                currentTrialHeader.name = "CurrentTrialHeader";
+                currentTrialHeaderEntry = Instantiate(EntryPrefab, currentTrialHeader.transform);
+            }
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
+                DataColumn column = table.Columns[columnIndex];
+                string columnName = column.ColumnName;
+                string paddedName = AddPadding(columnName, ColumnLengths[columnIndex]);
+                stringBuilder.Append(paddedName);
+            }
             
-            DisplayHeader(ContentContainer.transform);
-            DisplayRows(ContentContainer.transform);
+            TextMeshProUGUI entryTextObject = currentTrialHeaderEntry.GetComponent<TextMeshProUGUI>();
+            entryTextObject.text = stringBuilder.ToString();
         }
         
+        void DisplayCurrentTrialRow() {
 
-        void DisplayHeader(Transform contentContainer) {
-            GameObject header = Instantiate(HeaderRowPrefab, contentContainer);
-            header.name = "Header";
+            if (currentTrialRow == null) {
+                GameObject newRow = Instantiate(RowPrefab, CurrentTrialContainer.transform);
+                LayoutElement entryLayout = newRow.GetComponent<LayoutElement>();
+                entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+                newRow.name = "Row {rowIndex}";
+        
+                currentTrialRow = Instantiate(EntryPrefab, newRow.transform);
+            }
             
-            var newEntry = Instantiate(EntryPrefab, header.transform);
-            LayoutElement entryLayout = newEntry.GetComponent<LayoutElement>();
-            entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+            DataRow row = table.Rows[currentTrialIndex];
+            
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
+                DataColumn column = table.Columns[columnIndex];
+                string rowValue = row[column.ColumnName].ToString();
+                string paddedValue = AddPadding(rowValue, ColumnLengths[columnIndex]);
+                stringBuilder.Append(paddedValue);
+            }
+    
+            TextMeshProUGUI entryTextObject = currentTrialRow.GetComponent<TextMeshProUGUI>();
+            entryTextObject.text = stringBuilder.ToString();
+                
+            
+        }
+
+        void DisplayHeader() {
+
+            if (runnerHeader == null) {
+                GameObject header = Instantiate(HeaderRowPrefab, ContentContainer.transform);
+                LayoutElement entryLayout = header.GetComponent<LayoutElement>();
+                entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+                header.name = "Header";
+                runnerHeader = Instantiate(EntryPrefab, header.transform);
+            }
             
             StringBuilder stringBuilder = new StringBuilder();
             for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
@@ -147,7 +218,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
                 stringBuilder.Append(paddedName);
             }
             
-            TextMeshProUGUI entryTextObject = newEntry.GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI entryTextObject = runnerHeader.GetComponent<TextMeshProUGUI>();
             entryTextObject.text = stringBuilder.ToString();
         }
 
@@ -160,72 +231,52 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             return paddedString.ToString();
         }
 
-        void DisplayRows(Transform contentContainerTransform) {
+        void UpdateRow(int rowIndex) {
+            
+            DataRow rowData = table.Rows[rowIndex];
+            
+            var rowEntry = rowEntries[rowIndex];
+            var rowObject = rowObjects[rowIndex];
+            
+            
+            bool isCurrentlyRunningTrial = currentTrialIndex == rowIndex;
+            bool trialIsComplete = (bool)rowData[runner.DesignFile.ColumnNamesSettings.Completed];
+                
+            
+            if (isCurrentlyRunningTrial && !trialIsComplete) SetColor(rowObject, Color.yellow);
+            else SetColor(rowObject, Color.red);
+                
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
+                DataColumn column = table.Columns[columnIndex];
+                string rowValue = rowData[column.ColumnName].ToString();
+                string paddedValue = AddPadding(rowValue, ColumnLengths[columnIndex]);
+                stringBuilder.Append(paddedValue);
+            }
+        
+            TextMeshProUGUI entryTextObject = rowEntry.GetComponent<TextMeshProUGUI>();
+            entryTextObject.text = stringBuilder.ToString();
+        }
+
+        void CreateRows(Transform contentContainerTransform) {
+            
+            if (rowEntries == null) rowEntries = new TextMeshProUGUI[table.Rows.Count];
+            if (rowObjects == null) rowObjects = new GameObject[table.Rows.Count];
             
             for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++) {
-                DataRow row = table.Rows[rowIndex];
                 
-                GameObject newRow = Instantiate(RowPrefab, contentContainerTransform);
-                newRow.name = "Row {rowIndex}";
-        
-                var newRowEntry = Instantiate(EntryPrefab, newRow.transform);
-                LayoutElement entryLayout = newRowEntry.GetComponent<LayoutElement>();
-                entryLayout.minWidth = rowLength * EntryPixelMultiplier;
-        
-                
-                bool isCurrentlyRunningTrial = currentTrialIndex == rowIndex;
-                bool trialIsComplete = (bool)row[runner.DesignFile.ColumnNamesSettings.Completed];
-                
-                if (isCurrentlyRunningTrial && !trialIsComplete) SetColor(newRow, Color.yellow);
-                else if (trialIsComplete) SetColor(newRow, Color.green);
-                else SetColor(newRow, Color.red);
-                
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
-                    DataColumn column = table.Columns[columnIndex];
-                    string rowValue = row[column.ColumnName].ToString();
-                    string paddedValue = AddPadding(rowValue, ColumnLengths[columnIndex]);
-                    stringBuilder.Append(paddedValue);
+                if (rowEntries[rowIndex] == null) {
+                    GameObject newestRow = Instantiate(RowPrefab, contentContainerTransform);
+                    rowObjects[rowIndex] = newestRow;
+                    newestRow.name = "Row {rowIndex}";
+                    TextMeshProUGUI newestRowEntry = Instantiate(EntryPrefab, newestRow.transform);
+                    rowEntries[rowIndex] = newestRowEntry;
                 }
-        
-                TextMeshProUGUI entryTextObject = newRowEntry.GetComponent<TextMeshProUGUI>();
-                entryTextObject.text = stringBuilder.ToString();
-                
+
             }
         }
 
-        void DisplayCurrentRow(Transform currentTrialContainer) {
-            for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++) {
-                
-                bool isCurrentlyRunningTrial = currentTrialIndex == rowIndex;
 
-                if (!isCurrentlyRunningTrial) continue;
-                
-                DataRow row = table.Rows[rowIndex];
-                
-                GameObject newRow = Instantiate(RowPrefab, currentTrialContainer);
-                newRow.name = "Row {rowIndex}";
-        
-                var newRowEntry = Instantiate(EntryPrefab, newRow.transform);
-                LayoutElement entryLayout = newRowEntry.GetComponent<LayoutElement>();
-                entryLayout.minWidth = rowLength * EntryPixelMultiplier;
-                
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
-                    DataColumn column = table.Columns[columnIndex];
-                    string rowValue = row[column.ColumnName].ToString();
-                    string paddedValue = AddPadding(rowValue, ColumnLengths[columnIndex]);
-                    stringBuilder.Append(paddedValue);
-                }
-        
-                TextMeshProUGUI entryTextObject = newRowEntry.GetComponent<TextMeshProUGUI>();
-                entryTextObject.text = stringBuilder.ToString();
-                
-            }
-        }
-
-        
-        
         DataTable GetExperimentTable() {
             DataTable newTable = runner.RunnableDesign.Blocks[0].TrialTable.Clone();
             foreach (var block in runner.RunnableDesign.Blocks) {
@@ -238,7 +289,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             return newTable;
         }
 
-        void TrialStarted(Trial trial, int indexInBlock) {
+        void TrialStarted(Trial trial) {
             currentTrialIndex = trial.Index;
             UpdatePanel();
         }
@@ -277,12 +328,6 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
                 progressPanelImage.color = Color.green;
             }
         }
-        
-
-        void Clear() {
-            DestroyAllContent();
-        }
-        
 
         void SetColor(GameObject newRowObject, Color rowColor) {
             Image rowImage = newRowObject.GetComponent<Image>();

@@ -29,6 +29,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.TableViewer {
         public void Display(DataTable tableToDisplay) {
             Clear();
             table = tableToDisplay;
+            
             ColumnLengths = new int[table.Columns.Count];
             for (int index = 0; index < table.Columns.Count; index++) {
                 DataColumn column = table.Columns[index];
@@ -54,10 +55,12 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.TableViewer {
         void DisplayHeader() {
             GameObject header = Instantiate(HeaderRowPrefab, ContentContainer.transform);
             header.name = "Header";
+            LayoutElement entryLayout = header.GetComponent<LayoutElement>();
+            entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+            
             
             var newEntry = Instantiate(EntryPrefab, header.transform);
-            LayoutElement entryLayout = newEntry.GetComponent<LayoutElement>();
-            entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+            
             
             StringBuilder stringBuilder = new StringBuilder();
             for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
@@ -86,10 +89,11 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.TableViewer {
                 
                 GameObject newRow = Instantiate(RowPrefab, ContentContainer.transform);
                 newRow.name = "Row {rowIndex}";
-        
-                var newRowEntry = Instantiate(EntryPrefab, newRow.transform);
-                LayoutElement entryLayout = newRowEntry.GetComponent<LayoutElement>();
+                LayoutElement entryLayout = newRow.GetComponent<LayoutElement>();
                 entryLayout.minWidth = rowLength * EntryPixelMultiplier;
+                
+                var newRowEntry = Instantiate(EntryPrefab, newRow.transform);
+                
         
                 StringBuilder stringBuilder = new StringBuilder();
                 for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
