@@ -119,20 +119,10 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
         void InitGui() {
             gui = Instantiate(DesignFile.GuiSettings.GuiPrefab);
-            gui.gameObject.SetActive(true);
+            
             gui.RegisterExperiment(this);
             
-            int targetDisplay = DesignFile.GuiSettings.TargetDisplay;
             
-            if (Display.displays.Length > targetDisplay || Application.isEditor) {
-                if (!Application.isEditor) {
-                    Display.displays[targetDisplay].Activate();
-                }
-                Debug.Log($"Setting UI to show on Display {targetDisplay + 1}");
-            }
-            else {
-                Debug.LogWarning($"Not enough displays plugged in to accommodate your UI settings. Reverting UI to display on {Display.displays.Length}");
-            }
         }
 
         static void ExitProgram() {
@@ -171,8 +161,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
                     throw new NotImplementedException();
             }
             
-            if (RunnableDesign == null)
-            {
+            if (RunnableDesign == null) {
                 throw new NullReferenceException("No Runnable design");
             }
             

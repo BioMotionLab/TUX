@@ -44,7 +44,8 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
         DataTable            table;
         GameObject currentTrialRowObject;
         const int            EntryPixelMultiplier  = 12;
-        
+        public VerticalLayoutGroup tableLayoutGroup;
+        public ContentSizeFitter SizeFitter;
         
         int[]            ColumnLengths; 
     
@@ -56,6 +57,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
         TextMeshProUGUI runnerHeader;
         TextMeshProUGUI[] rowEntries;
         GameObject[] rowObjects;
+        Trial currentTrial;
 
         const int        paddingChars          = 4;
         const string     ASpace                = " ";
@@ -100,7 +102,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             CreateRows(ContentContainer.transform);
 
             for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++) {
-                UpdateRow(rowIndex);
+                InitRow(rowIndex);
             }
             
             MainPanel.gameObject.SetActive(true);
@@ -115,20 +117,26 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
         
         
         void UpdatePanel() {
+            
+            tableLayoutGroup.enabled = false;
+            SizeFitter.enabled = false;
+          
+            tableLayoutGroup.GetComponent<VerticalLayoutGroup>().enabled = false;
+
             if (!started) return;
             UpdateProgressPanel();
             
-            Display();
+            UpdateDisplay();
         }
         
         
-        void Display() {
+        void UpdateDisplay() {
             CalculateColumnWidths();
 
             DisplayCurrentTrialHeader();
             DisplayCurrentTrialRow();
             
-            UpdateRow(currentTrialIndex);
+            UpdateRowNow(currentTrialIndex);
             
         }
 
@@ -226,17 +234,15 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             return paddedString.ToString();
         }
 
-        void UpdateRow(int rowIndex) {
-            
+        
+        void InitRow(int rowIndex) {
             DataRow rowData = table.Rows[rowIndex];
             
             var rowEntry = rowEntries[rowIndex];
             var rowObject = rowObjects[rowIndex];
             
-            
             bool isCurrentlyRunningTrial = currentTrialIndex == rowIndex;
             bool trialIsComplete = (bool)rowData[runner.DesignFile.ColumnNamesSettings.Completed];
-                
             
             if (isCurrentlyRunningTrial && !trialIsComplete) SetColor(rowObject, Color.yellow);
             else SetColor(rowObject, Color.red);
@@ -245,6 +251,31 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
                 DataColumn column = table.Columns[columnIndex];
                 string rowValue = rowData[column.ColumnName].ToString();
+                string paddedValue = AddPadding(rowValue, ColumnLengths[columnIndex]);
+                stringBuilder.Append(paddedValue);
+            }
+        
+            TextMeshProUGUI entryTextObject = rowEntry.GetComponent<TextMeshProUGUI>();
+            entryTextObject.text = stringBuilder.ToString();
+        }
+        
+        void UpdateRowNow(int rowIndex) {
+            if (currentTrial == null) return;
+            DataRow rowData = table.Rows[rowIndex];
+            
+            var rowEntry = rowEntries[rowIndex];
+            var rowObject = rowObjects[rowIndex];
+            
+            bool isCurrentlyRunningTrial = currentTrialIndex == rowIndex;
+            bool trialIsComplete = (bool)rowData[runner.DesignFile.ColumnNamesSettings.Completed];
+            
+            if (isCurrentlyRunningTrial && !trialIsComplete) SetColor(rowObject, Color.yellow);
+            else SetColor(rowObject, Color.red);
+                
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
+                DataColumn column = table.Columns[columnIndex];
+                string rowValue = currentTrial.Data[column.ColumnName].ToString();
                 string paddedValue = AddPadding(rowValue, ColumnLengths[columnIndex]);
                 stringBuilder.Append(paddedValue);
             }
@@ -284,6 +315,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
 
         void TrialStarted(Trial trial) {
             currentTrialIndex = trial.Index;
+            currentTrial = trial;
             UpdatePanel();
         }
 

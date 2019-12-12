@@ -44,5 +44,15 @@ namespace bmlTUX.Scripts.ExperimentParts.SimpleExperimentParts {
                 yield return null; //IMPORTANT: This lets it wait for next frame, and not hang program.
             }
         }
+
+        protected override void PostMethod() {
+            try {
+                Data["Dependent"] = "Successful Output";
+            }
+            catch {
+                Debug.Log("No dependent variable called Dependent defined");
+            }
+            
+        }
     }
 }
