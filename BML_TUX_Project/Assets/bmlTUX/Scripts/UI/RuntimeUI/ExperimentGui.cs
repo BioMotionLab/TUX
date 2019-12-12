@@ -25,16 +25,39 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
         [SerializeField]
         RectTransform ExperimentStartPanel = default;
 
-        [SerializeField]
-        public Camera UICamera;
-        
         DesignPreviewer previewer;
         FileLocationSettings fileLocationSettings;
+        public Canvas Canvas;
+        public Camera placeholderCamera;
         public void RegisterExperiment(ExperimentRunner experimentRunner) {
             ExperimentEvents.OnInitExperiment += Init;
             ExperimentEvents.OnExperimentStarted += ExperimentHasStarted;
             runner = experimentRunner;
             fileLocationSettings = runner.DesignFile.FileLocationSettings;
+            
+            InitGui(experimentRunner);
+        }
+
+        void InitGui(ExperimentRunner experimentRunner) {
+            gameObject.SetActive(true);
+            int targetDisplay = experimentRunner.DesignFile.GuiSettings.TargetDisplay;
+
+            if (Display.displays.Length > targetDisplay || Application.isEditor) {
+                if (!Application.isEditor) {
+                    Display.displays[targetDisplay].Activate();
+                }
+
+                Debug.Log($"Setting UI to show on Display {targetDisplay + 1}");
+            }
+            else {
+                Debug.LogWarning($"Not enough displays plugged in to accommodate your UI settings. Reverting UI to display on {Display.displays.Length}");
+                targetDisplay = Display.displays.Length;
+            }
+
+            Canvas.targetDisplay = targetDisplay;
+            if (targetDisplay != 0) {
+                placeholderCamera.targetDisplay = targetDisplay;
+            }
         }
 
         void ExperimentHasStarted() {

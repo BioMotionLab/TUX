@@ -102,7 +102,13 @@ MonoBehaviour:
     CustomDataTypeIVs: []
     IntDVs: []
     FloatDVs: []
-    StringDVs: []
+    StringDVs:
+    - Name: Dependent
+      TypeOfVariable: 1
+      DataType: 2
+      ExpandSettings: 1
+      Value: 
+      DefaultValue: Nothing Written Yet
     BoolDVs: []
     GameObjectDVs: []
     Vector2DVs: []

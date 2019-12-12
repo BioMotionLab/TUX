@@ -20,7 +20,7 @@
         }
 
         void OutputToFile(Outputtable output) {
-            //file.OutputToFile(output);
+            file.OutputToFile(output);
         }
     }
 
