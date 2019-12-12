@@ -26,10 +26,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
         [SerializeField]
         RectTransform ProgressPanel = default;
 
-        [SerializeField]
-        VerticalLayoutGroup panelLayout = default;
-        
-        
+
         bool             started           = false;
         int              currentBlockIndex = -1;
         int              currentTrialIndex = -1;
@@ -118,7 +115,6 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
         
         
         void UpdatePanel() {
-            panelLayout.enabled = false;
             if (!started) return;
             UpdateProgressPanel();
             
@@ -196,7 +192,6 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
     
             TextMeshProUGUI entryTextObject = currentTrialRow.GetComponent<TextMeshProUGUI>();
             entryTextObject.text = stringBuilder.ToString();
-                
             
         }
 
@@ -272,7 +267,6 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
                     TextMeshProUGUI newestRowEntry = Instantiate(EntryPrefab, newestRow.transform);
                     rowEntries[rowIndex] = newestRowEntry;
                 }
-
             }
         }
 
@@ -285,7 +279,6 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
                     newTable.ImportRow(row);
                 }
             }
-
             return newTable;
         }
 
@@ -303,7 +296,6 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             currentBlockIndex = -1;
             currentTrialIndex = -1;
             started = false;
-
         }
 
         void UpdateProgressPanel() {

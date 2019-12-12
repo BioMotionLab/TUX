@@ -129,11 +129,9 @@ namespace bmlTUX.Scripts.ExperimentParts {
                     Display.displays[targetDisplay].Activate();
                 }
                 Debug.Log($"Setting UI to show on Display {targetDisplay + 1}");
-                gui.UICamera.targetDisplay = targetDisplay;
             }
             else {
                 Debug.LogWarning($"Not enough displays plugged in to accommodate your UI settings. Reverting UI to display on {Display.displays.Length}");
-                gui.UICamera.targetDisplay = Display.displays.Length - 1;
             }
         }
 
