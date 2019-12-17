@@ -1,5 +1,6 @@
 using System;
 using bmlTUX.Scripts.ExperimentParts.SimpleExperimentParts;
+using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.Utilities.Extensions;
 using UnityEngine;
 
@@ -37,7 +38,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             if (!returnType.IsSubclassOf(typeof(T)))
                 throw new NullReferenceException($"{typeName} Script that was dragged in is not subclass of {typeName} Class");
             
-            Debug.Log($"Successfully linked with {returnType.LastPartOfTypeName()} script");
+            Debug.Log($"{TuxLog.Prefix} Successfully linked with {returnType.LastPartOfTypeName()} script");
             return returnType;
         }
 
@@ -47,7 +48,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             else if (typeof(T).IsEquivalentTo(typeof(Block))) type =  typeof(SimpleBlock);
             else if (typeof(T).IsEquivalentTo(typeof(Experiment))) type =  typeof(SimpleExperiment);
             else throw new ArgumentOutOfRangeException($"Type {typeof(T).FullName} not recognized");
-            Debug.LogWarning($"No Custom class defined for {typeof(T).FullName}, reverting to default {type.FullName}");
+            Debug.LogWarning($"{TuxLog.Prefix} No Custom class defined for {typeof(T).FullName}, reverting to default {type.FullName}");
             return type;
         }
 

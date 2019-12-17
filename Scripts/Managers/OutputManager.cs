@@ -12,11 +12,11 @@
         }
         
         void Enable() {
-            ExperimentEvents.OnOutputUpdated += OutputToFile;
+            ExperimentEvents.OnTimeToUpdateOutput += OutputToFile;
         }
         
         public void Disable() {
-            ExperimentEvents.OnOutputUpdated -= OutputToFile;
+            ExperimentEvents.OnTimeToUpdateOutput -= OutputToFile;
         }
 
         void OutputToFile(Outputtable output) {

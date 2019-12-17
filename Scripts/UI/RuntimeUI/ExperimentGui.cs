@@ -4,6 +4,7 @@ using bmlTUX.Scripts.Managers;
 using bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI;
 using bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI;
 using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
+using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -47,10 +48,10 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
                     Display.displays[targetDisplay].Activate();
                 }
 
-                Debug.Log($"Setting UI to show on Display {targetDisplay + 1}");
+                Debug.Log($"{TuxLog.Prefix} Setting UI to show on Display {targetDisplay + 1}");
             }
             else {
-                Debug.LogWarning($"Not enough displays plugged in to accommodate your UI settings. Reverting UI to display on {Display.displays.Length}");
+                Debug.LogWarning($"{TuxLog.Prefix} Not enough displays plugged in to accommodate your UI settings. Reverting UI to display on {Display.displays.Length}");
                 targetDisplay = Display.displays.Length;
             }
 
@@ -107,7 +108,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
 
         [PublicAPI]
         public void StartDebugExperimentFromButton() {
-            if (fileLocationSettings == null) Debug.LogError($"fileLocationSettings null when debug started");
+            if (fileLocationSettings == null) Debug.LogError($"{TuxLog.Prefix} fileLocationSettings null when debug started");
             Session session = new DebugSession(fileLocationSettings);
 
             foreach (ParticipantVariable variable in runner.DesignFile.Variables.ParticipantVariables) {

@@ -9,7 +9,6 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
         public string Formatted {
             get {
                 string formattedString = unFormattedString.Replace(",", "_");
-                //Debug.Log($"formatted {formattedString}");
                 return formattedString;
             }
         }

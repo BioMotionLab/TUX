@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.Managers {
@@ -40,7 +41,6 @@ namespace bmlTUX.Scripts.Managers {
             }
 
             Running = true;
-            //Debug.Log("Starting to run Blocks");
             StartRunningBlock(blocks[0]);
         }
 
@@ -49,7 +49,7 @@ namespace bmlTUX.Scripts.Managers {
 
             currentlyRunningBlock = block;
             Debug.Log("");
-            Debug.Log($"*****\nStarting Block {BlockIndex(currentlyRunningBlock)} of {blocks.Count}");
+            Debug.Log($"{TuxLog.Prefix} <color=orange><b>Starting</b></color> Block index:{BlockIndex(currentlyRunningBlock)}. Total blocks:{blocks.Count}");
             ExperimentEvents.BlockHasStarted(block);
             ExperimentEvents.StartPart(block);
 
@@ -78,7 +78,7 @@ namespace bmlTUX.Scripts.Managers {
 
         void FinishBlock() {
             int blockNum = BlockIndex(currentlyRunningBlock);
-            Debug.Log($"Done block {blockNum + 1}\n {currentlyRunningBlock.AsString()}");
+            Debug.Log($"{TuxLog.Prefix} <color=green><b>Finished</b></color> Block {blockNum}\n {currentlyRunningBlock.AsString()}");
             currentlyRunningBlock.Complete = true;
             ExperimentEvents.UpdateBlock(blocks, BlockIndex(currentlyRunningBlock));
         }
@@ -88,8 +88,7 @@ namespace bmlTUX.Scripts.Managers {
         }
 
         void DoneBlockSequence() {
-            Debug.Log("---------------\nDone all blocks");
-
+            Debug.Log($"{TuxLog.Prefix} <color=purple><b>Experiment Complete!</b></color>");
             ExperimentEvents.BlockSequenceHasCompleted(blocks);
             ExperimentEvents.EndExperiment();
             Running = false;
@@ -97,7 +96,7 @@ namespace bmlTUX.Scripts.Managers {
         }
 
         void JumpToBlock(int jumpToIndex) {
-            Debug.Log("Got jump event");
+            Debug.Log($"{TuxLog.Prefix} Got jump event");
             FinishBlock();
             StartRunningBlock(blocks[jumpToIndex]);
         }

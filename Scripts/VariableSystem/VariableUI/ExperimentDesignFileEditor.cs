@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.UI.EditorUI;
+using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
 using UnityEngine;
@@ -223,7 +224,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
         void CreateNewVariableAndViewer() {
             if (factory.VariableTypeToCreate == VariableType.ChooseType || factory.DataTypeToCreate == SupportedDataType.ChooseType) {
-                Debug.LogWarning("Need to select variable type and data type before creating a variable");
+                Debug.LogWarning($"{TuxLog.Prefix} Need to select variable type and data type before creating a variable");
                 return;
             }
             factory.AddNew();
@@ -349,7 +350,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             ExperimentDesignFile experimentDesignFile = target as ExperimentDesignFile;
             if (experimentDesignFile == null) throw new NullReferenceException("Can't read experimental design from file check for errors");
             if (!experimentDesignFile.HasBlocks) {
-                Debug.LogError("Tried to make block order definition file, but no block variables have been defined!");
+                Debug.LogError($"{TuxLog.Prefix} Tried to make block order definition file, but no block variables have been defined!");
                 return;
             }
 
@@ -370,7 +371,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                     Selection.activeObject = newBlockOrderDefinition;
                 }
                 catch (ArgumentNullException) {
-                    Debug.LogError("Could not create BlockOrderDefinition. There is probably an error in variable definitions.");
+                    Debug.LogError($"{TuxLog.Prefix} Could not create BlockOrderDefinition. There is probably an error in variable definitions.");
                 }
             }
         }

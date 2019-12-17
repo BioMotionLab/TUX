@@ -16,7 +16,7 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
 
         [PublicAPI]
         public static void PrintToDebugConsole(this DataTable dt) {
-            Debug.Log(dt.AsString());
+            Debug.Log($"{TuxLog.Prefix} {dt.AsString()}");
         }
 
         public static string AsString(this DataTable dt, bool header = true, string separator = Delimiter.Tab,

@@ -5,6 +5,7 @@ using System.Data;
 using bmlTUX.Scripts.Managers;
 using bmlTUX.Scripts.Utilities.Extensions;
 using JetBrains.Annotations;
+using UnityEngine;
 
 namespace bmlTUX.Scripts.ExperimentParts {
 
@@ -24,6 +25,8 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// </summary>
         public readonly string    Identity;
 
+        public readonly int index;
+        
         /// <summary>
         /// Whether the block is complete
         /// </summary>
@@ -60,13 +63,35 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// <param name="dataRow"></param>
         protected Block(ExperimentRunner runner,
                      DataTable trialTable,
-                     DataRow dataRow) 
+                     DataRow dataRow,
+                     int index) 
                         : base(runner) {
             TrialTable = trialTable;
             Identity = dataRow.AsStringWithColumnNames();
             MakeTrials();
             data = dataRow;
+            this.index = index;
         }
+        
+        /// <summary>
+        /// This is obsolete. Please use the constructor with an index
+        /// </summary>
+        /// <param name="runner"></param>
+        /// <param name="trialTable"></param>
+        /// <param name="dataRow"></param>
+        [Obsolete]
+        protected Block(ExperimentRunner runner,
+                        DataTable        trialTable,
+                        DataRow          dataRow) 
+            : base(runner) {
+            TrialTable = trialTable;
+            Identity = dataRow.AsStringWithColumnNames();
+            MakeTrials();
+            data = dataRow;
+            this.index = -99;
+        }
+        
+        
 
         /// <summary>
         /// Makes the trials for this block.

@@ -141,12 +141,20 @@ namespace bmlTUX.Scripts.Managers {
             OnInitExperiment?.Invoke(experimentRunner);
         }
 
-        public delegate void OutputUpdatedEvent(Outputtable output);
+        public delegate void TimeToUpdateOutputEvent(Outputtable output);
 
-        public static event OutputUpdatedEvent OnOutputUpdated;
+        public static event TimeToUpdateOutputEvent OnTimeToUpdateOutput;
 
-        public static void OutputUpdated(Outputtable output) {
-            OnOutputUpdated?.Invoke(output);
+        public static void UpdateOutput(Outputtable output) {
+            OnTimeToUpdateOutput?.Invoke(output);
+        }
+
+        public delegate void OutputSuccessfullyUpdatedEvent(string filePath);
+
+        public static event OutputSuccessfullyUpdatedEvent OnOutputSuccessfullyUpdated;
+
+        public static void OutputSuccessfullyUpdated(string filePath) {
+            OnOutputSuccessfullyUpdated?.Invoke(filePath);
         }
 
 

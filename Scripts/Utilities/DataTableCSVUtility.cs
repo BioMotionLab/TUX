@@ -27,7 +27,7 @@ namespace bmlTUX.Scripts.Utilities {
                             LoadAndSetValue(column, rowValues, columnIndex, row);
                         }
                         catch (FormatException) {
-                            Debug.Log($"row: {rowNumber} trying to convert column {column.ColumnName} value {row[column.ColumnName]} to type {column.DataType}");
+                            Debug.Log($"{TuxLog.Prefix} row: {rowNumber} trying to convert column {column.ColumnName} value {row[column.ColumnName]} to type {column.DataType}");
                             throw;
                         }
                     }
@@ -52,7 +52,6 @@ namespace bmlTUX.Scripts.Utilities {
         }
 
         static void ProcessBool(DataColumn column, string[] rowValues, int columnIndex, DataRow row) {
-            //Debug.Log($"column {column.ColumnName} value {rowValues[columnIndex]}, col index {columnIndex}");
             if (rowValues[columnIndex] == "TRUE") row[column.ColumnName] = true;
             if (rowValues[columnIndex] == "FALSE") row[column.ColumnName] = false;
         }

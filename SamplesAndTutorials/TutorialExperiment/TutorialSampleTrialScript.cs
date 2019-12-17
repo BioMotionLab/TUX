@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Data;
 using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
 namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
@@ -50,7 +51,7 @@ namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
 
         protected override IEnumerator RunMainCoroutine() {
     
-            Debug.Log("Trial Running!");
+            Debug.Log($"{TuxLog.Prefix} Trial Running!");
             bool trialComplete = false;
             while (!trialComplete) {
                 if (Input.GetKeyDown(KeyCode.Space)) {
