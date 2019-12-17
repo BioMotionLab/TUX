@@ -2,6 +2,7 @@
 using System.Data;
 using bmlTUX.Scripts.Managers;
 using bmlTUX.Scripts.UI.RuntimeUI;
+using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using UnityEditor;
@@ -87,7 +88,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             
             //check if configurationFile file is loaded
             if (DesignFile == null) {
-                Debug.LogError("Config file not set up properly, make sure you dragged a configuration file into your Runner GameObject in the inspector");
+                Debug.LogError($"{TuxLog.Prefix} Config file not set up properly, make sure you dragged a configuration file into your Runner GameObject in the inspector");
                 ExitProgram();
                 return;
             }

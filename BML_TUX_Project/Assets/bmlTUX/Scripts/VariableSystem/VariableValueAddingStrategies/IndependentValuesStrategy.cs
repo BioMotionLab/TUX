@@ -26,7 +26,6 @@ namespace bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies {
 
             DataTable newTable = table.Clone();
             
-            //Debug.Log("Adding rows to empty trialTable in variable creation");
             foreach (T value in independentVariable.Values) {
                 DataRow newRow = newTable.NewRow();
                 newRow[independentVariable.Name] = value;

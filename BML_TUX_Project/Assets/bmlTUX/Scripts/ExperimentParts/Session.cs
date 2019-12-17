@@ -3,6 +3,7 @@ using System.Collections;
 using System.Data;
 using System.IO;
 using bmlTUX.Scripts.Managers;
+using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.ExperimentParts {
@@ -52,7 +53,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
                 session = JsonUtility.FromJson<Session>(dataAsJason);
                 session.FileLocations = fileLocations;
                 if (!session.ValidSelf()) {
-                    Debug.LogWarning("Loaded Session Not valid, creating new");
+                    Debug.LogWarning($"{TuxLog.Prefix} Loaded Session Not valid, creating new");
                     CreateNewSession(fileLocations);
                 }
             }
@@ -65,7 +66,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
         static Session CreateNewSession(FileLocationSettings fileLocations) {
             Session session;
-            Debug.Log("Previous Session file not found, creating new");
+            Debug.Log($"{TuxLog.Prefix} Previous Session file not found, creating new");
             session = new Session(fileLocations);
             return session;
         }
@@ -82,8 +83,9 @@ namespace bmlTUX.Scripts.ExperimentParts {
             string filePath = FileLocations.LastSessionSaveFilePath;
             string dataAsJson = JsonUtility.ToJson(this);
             File.WriteAllText(filePath, dataAsJson);
-            
-            Debug.Log(File.Exists(filePath) ? $"Session data Saved to {filePath}" : $"Session not saved properly: {filePath}");
+
+            string message = File.Exists(filePath) ? $"Session logged to {filePath}" : $"Error logging session to: {filePath}";
+            Debug.Log($"{TuxLog.Prefix} {message}");
         }
         
         void Completed() {

@@ -31,11 +31,12 @@ namespace bmlTUX.Scripts.ExperimentParts {
         }
         
         
-        Block CreateNewBlock(DataTable trialTable, DataRow dataRow) {
+        Block CreateNewBlock(DataTable trialTable, DataRow dataRow, int index) {
             Block newBlock = (Block) Activator.CreateInstance(runner.BlockType,
                                                               runner,
                                                               trialTable,
-                                                              dataRow
+                                                              dataRow,
+                                                              index
                                                              );
             return newBlock;
         }
@@ -53,16 +54,17 @@ namespace bmlTUX.Scripts.ExperimentParts {
             Blocks = new List<Block>();
 
             int lastBlockIndex = 0;
-
+            int currentBlockIndex = -998;
             DataTable blockTrialTable = finalDataTable.Clone();
             foreach (DataRow finalTableRow in finalDataTable.Rows) {
-                int currentBlockIndex = (int) finalTableRow[designFile.ColumnNamesSettings.BlockIndex];
+                currentBlockIndex = (int) finalTableRow[designFile.ColumnNamesSettings.BlockIndex];
                 if (currentBlockIndex == lastBlockIndex) {
                     blockTrialTable.ImportRow(finalTableRow);
                 }
                 else {
                     if (blockTrialTable.Rows.Count > 0) {
-                        CreateBlockFromTable(baseBlockTable, blockVariables, blockTrialTable);
+                        Block newBlock = CreateBlockFromTable(baseBlockTable, blockVariables, blockTrialTable, currentBlockIndex);
+                        Blocks.Add(newBlock);
                     }
                     blockTrialTable = finalDataTable.Clone();
                     blockTrialTable.ImportRow(finalTableRow);
@@ -70,17 +72,21 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
                 lastBlockIndex = currentBlockIndex;
             }
-            CreateBlockFromTable(baseBlockTable, blockVariables, blockTrialTable);
+
+            currentBlockIndex++;
+            Block lastBlock = CreateBlockFromTable(baseBlockTable, blockVariables, blockTrialTable, currentBlockIndex);
+            Blocks.Add(lastBlock);
         }
 
-        void CreateBlockFromTable(DataTable blockTable, List<IndependentVariable> blockVariables, DataTable blockTrialTable) {
+        Block CreateBlockFromTable(DataTable blockTable,      List<IndependentVariable> blockVariables,
+                                  DataTable blockTrialTable, int                       currentBlockIndex) {
             DataRow blockDataRow = blockTable.NewRow();
             foreach (IndependentVariable blockVariable in blockVariables) {
                 DataRow firstBlockRow = blockTrialTable.Rows[0];
                 blockDataRow[blockVariable.Name] = firstBlockRow[blockVariable.Name];
             }
-            Block newBlock = CreateNewBlock(blockTrialTable, blockDataRow);
-            Blocks.Add(newBlock);
+            Block newBlock = CreateNewBlock(blockTrialTable, blockDataRow, currentBlockIndex-1);
+            return newBlock;
         }
 
 

@@ -31,7 +31,7 @@ namespace bmlTUX.Scripts.ExperimentParts.SimpleExperimentParts {
         /// <returns></returns>
         protected override IEnumerator RunMainCoroutine() {
             bool running = true;
-            Debug.Log("...Waiting for you to press return key! (This is from SimpleTrial MainCoroutine() method)");
+            Debug.Log("...Waiting for you to press return key! (This is from SimpleTrial)");
        
             //Loop over several frames
             while (running) {

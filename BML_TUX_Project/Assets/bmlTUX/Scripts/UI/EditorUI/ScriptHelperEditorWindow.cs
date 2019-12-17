@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Settings;
+using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEditor;
 using UnityEngine;
@@ -227,9 +228,9 @@ namespace bmlTUX.Scripts.UI.EditorUI {
 
             if (type == null) {
 
-                Debug.LogError($"Cannot find runner script to create. Name: {typeName} Key: {RunnerKey}, String: {EditorPrefs.GetString(RunnerKey)}");
-                Debug.LogError("Printing Verbose error report:");
-                Debug.LogError("");
+                Debug.LogError($"{TuxLog.Prefix} Cannot find runner script to create. Name: {typeName} Key: {RunnerKey}, String: {EditorPrefs.GetString(RunnerKey)}");
+                Debug.LogError($"{TuxLog.Prefix} Printing Verbose error report:");
+                Debug.LogError($"{TuxLog.Prefix}");
                 foreach (Assembly assembly in assemblies) {
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine(assembly.ToString());
@@ -237,14 +238,14 @@ namespace bmlTUX.Scripts.UI.EditorUI {
                         sb.AppendLine(listedType.ToString());
                     }
 
-                    Debug.Log(sb);
+                    Debug.Log($"{TuxLog.Prefix} {sb}");
                 }
 
                 
             }
             GameObject newGameObject = new GameObject();
             newGameObject.name = typeName;
-            Debug.Log($"Creating GameObject type {type} in currently open scene");
+            Debug.Log($"{TuxLog.Prefix} Creating GameObject type {type} in currently open scene");
             
             ExperimentRunner runner = newGameObject.AddComponent(type) as ExperimentRunner;
 

@@ -165,9 +165,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         }
 
         void AddBlockColumnsFrom(DataTable blockTable) {
-            //Debug.Log("Adding Block Columns to Trial Table");
             foreach (DataColumn blockTableColumn in blockTable.Columns) {
-                //Debug.Log($"Adding Column: {blockTableColumn.ColumnName}");
                 baseTrialTable = baseTrialTable.AddColumnFromOtherTable(blockTableColumn, 0);
             }
         }

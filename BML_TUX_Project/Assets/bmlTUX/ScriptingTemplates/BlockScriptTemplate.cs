@@ -23,7 +23,7 @@ public class ___BlockClassName___ : Block {
 
 
     // Required Constructor. Good place to set up references to objects in the unity scene
-    public ___BlockClassName___(ExperimentRunner runner, DataTable trialTable, DataRow data) : base(runner, trialTable, data) {
+    public ___BlockClassName___(ExperimentRunner runner, DataTable trialTable, DataRow data, int index) : base(runner, trialTable, data, index) {
         // myRunner = (YourCustomExperimentRunner)runner;  //cast the generic runner to your custom type.
         // GameObject myGameObject = myRunner.MyGameObject;  // get reference to gameObject stored in your custom runner
     

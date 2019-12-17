@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.Managers {
@@ -18,18 +19,20 @@ namespace bmlTUX.Scripts.Managers {
 		}
 
 		public static OutputFile DebugFile(FileLocationSettings fileLocationSettings) {
-			if (fileLocationSettings == null) Debug.Log($"File location settings null");
+			if (fileLocationSettings == null) Debug.Log($"{TuxLog.Prefix} File location settings null");
 			return new OutputFile(fileLocationSettings.DebugFolder, fileLocationSettings.DebugFileName);
 		}
 
 		public void OutputToFile(Outputtable output) {
-			Debug.Log($"Writing output file: {FullPath}");
-			Debug.Log("");
+			
 			Directory.CreateDirectory(OutputFolder ?? throw new NullReferenceException("Folder could not be created"));
 
 			using (StreamWriter streamWriter = new StreamWriter(FullPath)) {
 				streamWriter.Write(output.AsString);
 			}
+
+			ExperimentEvents.OutputSuccessfullyUpdated(FullPath);
+
 		}
 		
 		

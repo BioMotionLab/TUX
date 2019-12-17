@@ -135,6 +135,7 @@
                 <e p="AssertUtilities.cs" t="Include" />
                 <e p="TestingUtilities.asmdef" t="Include" />
               </e>
+              <e p="tuxLog.cs" t="Include" />
             </e>
             <e p="VariableSystem" t="Include">
               <e p="BlockOrderDefinition.cs" t="Include" />

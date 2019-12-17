@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using bmlTUX.Scripts.Managers;
+using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.Settings {
@@ -60,7 +61,7 @@ namespace bmlTUX.Scripts.Settings {
                 
                 foreach (KeyCode quitKey in QuitKeys) {
                     if (Input.GetKeyDown(quitKey)) {
-                        Debug.LogWarning($"Quit Key Pressed ({quitKey}), quitting program.");
+                        Debug.LogWarning($"{TuxLog.Prefix} Quit Key Pressed ({quitKey}), quitting program.");
                         Listening = true;
                         #if UNITY_EDITOR
                             UnityEditor.EditorApplication.isPlaying = false;

@@ -9,10 +9,12 @@ namespace bmlTUX.Scripts.ExperimentParts.SimpleExperimentParts {
     public class SimpleBlock : Block {
         public SimpleBlock(ExperimentRunner runner,
                            DataTable trialTable, 
-                           DataRow dataRow) :
+                           DataRow dataRow,
+                           int index) :
             base(runner, 
                  trialTable, 
-                 dataRow) {
+                 dataRow,
+                 index) {
         }
         
     }

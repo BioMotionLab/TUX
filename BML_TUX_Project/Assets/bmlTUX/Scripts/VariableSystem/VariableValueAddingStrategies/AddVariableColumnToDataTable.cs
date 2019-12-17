@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies {
@@ -22,7 +23,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies {
                                                    Unique = false
                                                };
             if (column.ColumnName == UnnamedColumn.Name) {
-                Debug.LogError("There remains an unnamed variable. Please fix.");
+                Debug.LogError($"{TuxLog.Prefix} There remains an unnamed variable. Please fix.");
                 throw new InvalidOperationException("Can't add unnamed variable to table");
             }
             table.Columns.Add(column);

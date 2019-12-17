@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.Utilities.Extensions;
 using UnityEngine;
 
@@ -23,7 +24,6 @@ namespace bmlTUX.Scripts.Managers {
 
         
         public void Start() {
-            //Debug.Log("Starting to run trial sequence");
             Running = true;
             StartRunningTrial(currentTrialList[0]);
         }
@@ -34,6 +34,7 @@ namespace bmlTUX.Scripts.Managers {
             ExperimentEvents.OnSkipToNextTrial += SkipToNextTrial;
             ExperimentEvents.OnGoBackOneTrial += BackOneTrial;
             ExperimentEvents.OnJumpToTrial += JumpToTrial;
+            ExperimentEvents.OnOutputSuccessfullyUpdated += LogTrial;
         }
 
         void OnDisable() {
@@ -42,6 +43,7 @@ namespace bmlTUX.Scripts.Managers {
             ExperimentEvents.OnSkipToNextTrial -= SkipToNextTrial;
             ExperimentEvents.OnGoBackOneTrial -= BackOneTrial;
             ExperimentEvents.OnJumpToTrial -= JumpToTrial;
+            ExperimentEvents.OnOutputSuccessfullyUpdated -= LogTrial;
         }
 
 
@@ -53,18 +55,19 @@ namespace bmlTUX.Scripts.Managers {
         }
 
         void TrialHasCompleted() {
-            //Debug.Log("Trial has completed event received)");
             FinishTrial();
             GoToNextTrial();
         }
 
         void FinishTrial() {
-            
-            Debug.Log($"Finished {currentlyRunningTrial.TrialText}, Success = {currentlyRunningTrial.CompletedSuccessfully}\n" +
+            ExperimentEvents.UpdateTrial(trialsInSequence, TrialIndex(currentlyRunningTrial));
+        }
+
+        void LogTrial(string filePath) {
+            string successText = currentlyRunningTrial.CompletedSuccessfully ? "successfully" : "<color=red><b>unsuccessfully</b></color>";
+            Debug.Log($"{TuxLog.Prefix} <color=green><b>Finished</b></color> {currentlyRunningTrial.TrialText} {successText}, Output Updated: {filePath} \n" +
                       $"Output Table for this trial:\n" +
                       $"{currentlyRunningTrial.Data.AsString(header: true)}");
-
-            ExperimentEvents.UpdateTrial(trialsInSequence, TrialIndex(currentlyRunningTrial));
         }
 
         void GoToNextTrial() {
@@ -88,17 +91,16 @@ namespace bmlTUX.Scripts.Managers {
         }
 
         void SkipToNextTrial() {
-            Debug.LogWarning("Got Next Trial event");
             currentlyRunningTrial.InterruptTrial();
             FinishTrial();
 
             int newIndex = TrialCurrentIndex(currentlyRunningTrial) + 1;
             if (newIndex > currentTrialList.Count - 1) {
-                Debug.LogWarning("Already at final trial, restarting current Trial");
+                Debug.LogWarning($"{TuxLog.Prefix} Already at final trial, restarting current Trial");
                 StartRunningTrial(currentlyRunningTrial);
             }
             else {
-                Debug.Log("Going to next trial");
+                Debug.Log($"{TuxLog.Prefix} Going to next trial");
                 Trial next = currentTrialList[newIndex];
                 StartRunningTrial(next);
             }
@@ -106,9 +108,6 @@ namespace bmlTUX.Scripts.Managers {
         }
 
         void DoneTrialSequence() {
-            Debug.Log("---------------");
-            Debug.Log("Done all trials in sequence");
-
             List<Trial> unsuccessfulTrials = new List<Trial>();
             foreach (Trial trial in currentTrialList) {
                 if (!trial.CompletedSuccessfully && !trial.Skipped) {
@@ -119,13 +118,12 @@ namespace bmlTUX.Scripts.Managers {
 
             if (unsuccessfulTrials.Count > 0) {
                 //if any trials not complete, run them
-                Debug.Log($"Running {unsuccessfulTrials.Count} unsuccessful trials");
+                Debug.Log($"{TuxLog.Prefix} Running {unsuccessfulTrials.Count} unsuccessful trials");
                 currentTrialList = unsuccessfulTrials;
                 StartRunningTrial(unsuccessfulTrials[0]);
             }
             else {
                 // finish up
-                Debug.Log($"No more trials");
                 ExperimentEvents.TrialSequenceHasCompleted(trialsInSequence);
                 Running = false;
                 OnDisable();
@@ -134,30 +132,30 @@ namespace bmlTUX.Scripts.Managers {
 
 
         void InterruptTrial() {
-            Debug.LogWarning("Got SkipCompletely event from currentTrial");
+            Debug.LogWarning($"{TuxLog.Prefix} Got SkipCompletely event from currentTrial");
             currentlyRunningTrial.SkipCompletely();
             FinishTrial();
             GoToNextTrial();
         }
 
         void BackOneTrial() {
-            Debug.LogWarning("Got Back event");
+            Debug.LogWarning($"{TuxLog.Prefix} Got Back event");
             currentlyRunningTrial.InterruptTrial();
             FinishTrial();
             int newIndex = TrialCurrentIndex(currentlyRunningTrial) - 1;
             if (newIndex < 0) {
-                Debug.LogWarning("Was already at first currentTrial, restarting currentTrial");
+                Debug.LogWarning($"{TuxLog.Prefix} Was already at first Trial, restarting current Trial");
                 StartRunningTrial(currentlyRunningTrial);
             }
             else {
-                Debug.Log("Going back one currentTrial");
+                Debug.Log($"{TuxLog.Prefix} Going back one Trial");
                 Trial prevTrial = currentTrialList[newIndex];
                 StartRunningTrial(prevTrial);
             }
         }
 
         void JumpToTrial(int jumpToIndex) {
-            Debug.Log("Got jump event");
+            Debug.Log($"{TuxLog.Prefix} Got jump event");
             FinishTrial();
             currentlyRunningTrial.InterruptTrial();
             currentTrialList = trialsInSequence;

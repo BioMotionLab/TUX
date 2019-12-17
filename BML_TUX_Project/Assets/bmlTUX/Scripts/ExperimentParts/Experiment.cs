@@ -5,6 +5,7 @@ using System.Text;
 using bmlTUX.Scripts.Managers;
 using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.Utilities.Extensions;
+using UnityEngine;
 
 // ReSharper disable VirtualMemberNeverOverridden.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -42,11 +43,13 @@ namespace bmlTUX.Scripts.ExperimentParts {
         }
         
         void TrialUpdated(List<Trial> trials, int index) {
-            ExperimentEvents.OutputUpdated(this);
+            ExperimentEvents.UpdateOutput(this);
         }
         
 
         protected sealed override IEnumerator RunMainCoroutine() {
+            Debug.Log("");
+            Debug.Log($"{TuxLog.Prefix} <color=purple><b>Starting Experiment!</b></color>");
             BlockSequenceRunner blockRunner = new BlockSequenceRunner(runner, design.Blocks);
             blockRunner.Start();
             while (blockRunner.Running) {

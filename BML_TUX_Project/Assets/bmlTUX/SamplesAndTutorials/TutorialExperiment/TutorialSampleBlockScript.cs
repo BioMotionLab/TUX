@@ -6,7 +6,7 @@ namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
     public class TutorialSampleBlockScript : Block
     {
     
-        public TutorialSampleBlockScript(ExperimentRunner runner, DataTable trialTable, DataRow dataRow) : base(runner, trialTable, dataRow) {
+        public TutorialSampleBlockScript(ExperimentRunner runner, DataTable trialTable, DataRow dataRow, int index) : base(runner, trialTable, dataRow, index) {
         }
 
         protected override void PreMethod() {
