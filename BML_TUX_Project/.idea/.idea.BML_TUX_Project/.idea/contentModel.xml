@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\BioMotion\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\BioMotion\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_BML_TUX_Project.-1874185539.00" t="ExcludeRecursive" />
-    <e p="C:\Users\BioMotion\Documents\GitHub\BML_TUX\BML_TUX_Project" t="IncludeRecursive">
+    <e p="C:\Users\adamb\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\adamb\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_BML_TUX_Project.-2014430681.00" t="ExcludeRecursive" />
+    <e p="E:\GitHub\TUX\BML_TUX_Project" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="bmlTUX" t="Include">
@@ -113,6 +113,7 @@
             <e p="Utilities" t="Include">
               <e p="DataTableCSVUtility.cs" t="Include" />
               <e p="Delimiter.cs" t="Include" />
+              <e p="EnumFromStringUtility.cs" t="Include" />
               <e p="Extensions" t="Include">
                 <e p="DataFormatter.cs" t="Include" />
                 <e p="DataTableExtension.cs" t="Include" />
