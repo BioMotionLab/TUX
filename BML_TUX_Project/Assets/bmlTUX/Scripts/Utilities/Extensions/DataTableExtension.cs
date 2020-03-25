@@ -46,20 +46,20 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
         }
 
         public static string HeaderAsString(this DataTable dt, string separator = Delimiter.Tab,
-                                            int            truncate = TruncateDefault) {
-            string headerString =
-                string.Join(separator, truncate > 0
-                                ? dt.Columns.OfType<DataColumn>()
-                                    .Select(x => string.Join(separator, x.ColumnName.Truncate(truncate)))
-                                : dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName))
-                           );
+                                            int            truncateTo = TruncateDefault) {
+            Debug.Log(truncateTo);
+            IEnumerable<string> truncatedStrings = truncateTo > 0
+                ? dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName.Truncate(truncateTo)))
+                : dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName));
+            
+            string headerString = string.Join(separator, truncatedStrings);
             return headerString;
         }
 
         public static string AsString(this DataRow row, bool header = false, string separator = Delimiter.Tab,
                                       int          truncateLength = TruncateDefault) {
             string headerString =
-                header ? row.Table.HeaderAsString(separator: separator, truncate: truncateLength) + "\n" : "";
+                header ? row.Table.HeaderAsString(separator: separator, truncateTo: truncateLength) + "\n" : "";
             string rowString = GetRowString(row, separator, truncateLength);
             
             return headerString + rowString;
@@ -69,7 +69,7 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
         public static string AsStringWithColumnNames(this DataRow row, string separator = Delimiter.Tab,
                                       int          truncate = TruncateDefault) {
             string headerString =
-                row.Table.HeaderAsString(separator: separator, truncate: truncate);
+                row.Table.HeaderAsString(separator: separator, truncateTo: truncate);
             string rowString = truncate <= 0
                 ? string.Join(separator, row.ItemArray.Select(c => c.ToString()).ToArray())
                 : string.Join(separator, row.ItemArray.Select(c => c.ToString().Truncate(truncate)).ToArray());

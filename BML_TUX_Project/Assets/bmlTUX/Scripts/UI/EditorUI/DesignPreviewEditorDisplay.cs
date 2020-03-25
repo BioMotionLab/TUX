@@ -62,7 +62,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
             }
 
             EditorGUILayout.Space();
-            EditorGUILayout.TextArea(previewer.PreviewTable.AsString());
+            EditorGUILayout.TextArea(previewer.PreviewTable.AsString(truncateLength:6));
             EditorGUILayout.Space();
             EditorGUILayout.EndVertical();
             return previewer.PreviewTable;
