@@ -48,7 +48,9 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
                     Display.displays[targetDisplay].Activate();
                 }
 
-                Debug.Log($"{TuxLog.Prefix} Setting UI to show on Display {targetDisplay + 1}");
+                Debug.Log($"{TuxLog.Prefix} Setting UI to show on Display {targetDisplay + 1}. Click here to highlight settings file in project.", experimentRunner.DesignFile.GuiSettings);
+                if (targetDisplay > 0 && experimentRunner.DesignFile.GuiSettings.WarnUserIfNotDisplayOne) 
+                    Debug.LogWarning(TuxLog.Warn("UI is on secondary display. If you can't see UI, adjust settings. You can turn this warning off."),  experimentRunner.DesignFile.GuiSettings);
             }
             else {
                 Debug.LogWarning($"{TuxLog.Prefix} Not enough displays plugged in to accommodate your UI settings. Reverting UI to display on {Display.displays.Length}");

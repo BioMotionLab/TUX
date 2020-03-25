@@ -105,8 +105,11 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("Delete Variable", GUILayout.Width(DeleteButtonWidth))) {
-                editor.ListToDelete.Add(this);
-                deleted = true;
+                if (EditorUtility.DisplayDialog("Delete Variable", "Are you sure you want to delete variable?",
+                    "Delete Variable", "Cancel")) {
+                    editor.ListToDelete.Add(this);
+                    deleted = true;
+                }
             }
             EditorGUILayout.EndHorizontal();
         }

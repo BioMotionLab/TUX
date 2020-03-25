@@ -47,7 +47,6 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
 
         public static string HeaderAsString(this DataTable dt, string separator = Delimiter.Tab,
                                             int            truncateTo = TruncateDefault) {
-            Debug.Log(truncateTo);
             IEnumerable<string> truncatedStrings = truncateTo > 0
                 ? dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName.Truncate(truncateTo)))
                 : dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName));
