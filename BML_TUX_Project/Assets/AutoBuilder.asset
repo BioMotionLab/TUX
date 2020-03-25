@@ -16,6 +16,6 @@ MonoBehaviour:
   - {fileID: 102900000, guid: 8a38113dee9962f4ba4c34c9bb0b1f5b, type: 3}
   FolderPaths:
   - Assets/bmlTUX
-  ExportPath: C:/Users/BioMotion/Documents/GitHub/BML_TUX/Releases
+  ExportPath: C:/Users/adamb/OneDrive/Desktop
   PackageName: bmlTUX
-  Version: 0.13.6b
+  Version: 0.13.7b
