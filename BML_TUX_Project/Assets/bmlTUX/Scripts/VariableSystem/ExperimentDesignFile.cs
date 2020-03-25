@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Settings;
+using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
@@ -33,20 +34,27 @@ namespace bmlTUX.Scripts.VariableSystem {
         public GuiSettings GuiSettings;
         [SerializeField]
         public FileLocationSettings FileLocationSettings;
-        
-        public void Validate() {
-            
-            if (ColumnNamesSettings == null) {
-                throw new NullReferenceException(
-                                                 "Design file does not have column name settings defined. " + 
-                                                 "Please drag column name settings into the proper place in the design file");
-            }
 
-            if (ControlSettings == null) {
-                throw new NullReferenceException(
-                                                 "Design file does not have Control Settings defined. " +
-                                                 "Please drag control settings into the proper place in the design file");
-            }
+        bool valid = true;
+        
+        void OnValidate() {
+            Validate();
+        }
+
+        public void Validate() {
+            bool wasValid = valid;
+            valid = true;
+            if (ColumnNamesSettings == null) MissingReference(nameof(ColumnNamesSettings));
+            if (ControlSettings == null) MissingReference(nameof(ControlSettings));
+            if (FileLocationSettings == null) MissingReference(nameof(FileLocationSettings));
+            if (GuiSettings == null) MissingReference(nameof(GuiSettings));
+            if (!wasValid && valid) Debug.Log(TuxLog.Good($"{nameof(ExperimentDesignFile)} Fixed."), this);
+        }
+
+        void MissingReference(string missingReference) {
+            Debug.LogError(TuxLog.Error($"{nameof(ExperimentDesignFile)} does not have {missingReference} defined. " + 
+                         $"Please drag {missingReference} into the proper place in the design file"), this);
+            valid = false;
         }
 
         public Variables Variables => Factory.Variables;

@@ -38,7 +38,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             if (!returnType.IsSubclassOf(typeof(T)))
                 throw new NullReferenceException($"{typeName} Script that was dragged in is not subclass of {typeName} Class");
             
-            Debug.Log($"{TuxLog.Prefix} Successfully linked with {returnType.LastPartOfTypeName()} script");
+            Debug.Log(TuxLog.Good($"Successfully linked with {returnType.LastPartOfTypeName()} script"), textAsset);
             return returnType;
         }
 

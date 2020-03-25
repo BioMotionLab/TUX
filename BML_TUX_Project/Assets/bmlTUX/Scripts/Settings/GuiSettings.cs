@@ -14,6 +14,8 @@ namespace bmlTUX.Scripts.Settings {
 
         // ReSharper disable once ConvertToAutoProperty
         public int TargetDisplay => (int)targetDisplay;
+        
+        public bool WarnUserIfNotDisplayOne = true;
 
         [FormerlySerializedAs("ShowRunnerInterface")]
         [SerializeField]
