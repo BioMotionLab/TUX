@@ -1,10 +1,9 @@
 {
   "Documentation": {
     "Getting Started": [
-      "Home", 
+      "GettingStarted",
       "Requirements", 
-      "Overview", 
-      "GettingStarted", 
+      "Overview"
       ],
     "Using TUX": [
       "CreatingExperiment", 

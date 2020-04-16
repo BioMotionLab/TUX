@@ -21,8 +21,8 @@ const users = [
 ];
 
 const siteConfig = {
-  title: 'Test Site', // Title for your website.
-  tagline: 'A website for testing',
+  title: 'bmlTUX', // Title for your website.
+  tagline: 'A framework for experiments in Unity and VR',
   url: 'https://your-docusaurus-test-site.com', // Your website URL
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
@@ -38,8 +38,8 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {doc: 'Home', label: 'Docs'},
-    {page: 'help', label: 'Help'},
+    {doc: 'GettingStarted', label: 'Documentation'},
+    {doc: 'Troubleshooting', label: 'Help'},
     {blog: true, label: 'Blog'},
   ],
 
@@ -53,7 +53,7 @@ const siteConfig = {
 
   /* Colors for website */
   colors: {
-    primaryColor: '#8f0916',
+    primaryColor: '#195675',
     secondaryColor: '#64060f',
   },
 
@@ -72,7 +72,7 @@ const siteConfig = {
   */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} Your Name or Your Company Name`,
+  copyright: `Copyright © ${new Date().getFullYear()} Adam Bebko and BiomotionLab`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
