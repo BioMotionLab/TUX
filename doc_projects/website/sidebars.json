@@ -1,0 +1,33 @@
+{
+  "Documentation": {
+    "Getting Started": [
+      "Home", 
+      "Requirements", 
+      "Overview", 
+      "GettingStarted", 
+      ],
+    "Using TUX": [
+      "CreatingExperiment", 
+      "Accessing Scene",
+      "Output",
+      "Experiment Behavior",
+      "TrialClass",
+      "BlockClass",
+      "ExperimentClass"
+    ],
+    "Help": [
+      "Troubleshooting",
+      "Coroutines"
+    ],
+    "Advanced": [
+      "AdvancedOptions",
+      "Logging",
+      "Building",
+      "Customizing",
+      "Extras"
+    ]
+  },
+  "docs-other": {
+    "Advanced": []
+  }
+}
