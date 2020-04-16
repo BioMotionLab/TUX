@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Managers;
 using bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI;
@@ -7,7 +9,9 @@ using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
+using UnityEditor;
 using UnityEngine;
+using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace bmlTUX.Scripts.UI.RuntimeUI {
     public class ExperimentGui : MonoBehaviour {
@@ -40,6 +44,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
         }
 
         void InitGui(ExperimentRunner experimentRunner) {
+
             gameObject.SetActive(true);
             int targetDisplay = experimentRunner.DesignFile.GuiSettings.TargetDisplay;
 
