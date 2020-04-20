@@ -40,7 +40,7 @@ MonoBehaviour:
     - Name: Size
       TypeOfVariable: 0
       DataType: 1
-      ExpandSettings: 1
+      ExpandSettings: 0
       MixingType: 0
       Block: 0
       Values:
@@ -55,7 +55,7 @@ MonoBehaviour:
     - Name: Color
       TypeOfVariable: 0
       DataType: 2
-      ExpandSettings: 1
+      ExpandSettings: 0
       MixingType: 0
       Block: 0
       Values:
@@ -76,7 +76,7 @@ MonoBehaviour:
     - Name: SelectedSize
       TypeOfVariable: 1
       DataType: 1
-      ExpandSettings: 1
+      ExpandSettings: 0
       Value: 0
       DefaultValue: -999
     StringDVs: []
@@ -89,7 +89,7 @@ MonoBehaviour:
     - Name: Age
       TypeOfVariable: 2
       DataType: 0
-      ExpandSettings: 1
+      ExpandSettings: 0
       Value: 0
       ConstrainValues: 0
       PossibleValues: 
@@ -98,7 +98,7 @@ MonoBehaviour:
     - Name: Gender
       TypeOfVariable: 2
       DataType: 2
-      ExpandSettings: 1
+      ExpandSettings: 0
       Value: Male
       ConstrainValues: 1
       PossibleValues:
