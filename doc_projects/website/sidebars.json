@@ -4,8 +4,21 @@
       "GettingStarted",
       "Requirements", 
       "Overview"
-      ],
-    "Using TUX": [
+    ],
+    "Tutorials": [
+      {
+        "type": "subcategory",
+        "label": "Making your first experiment",
+        "ids": [
+          "firstoverview",
+          "firstcreating",
+          "firstdesign",
+          "firstrunning",
+          "firstblocks"
+        ]
+      }
+    ],
+    "Documentation": [
       "CreatingExperiment", 
       "Accessing Scene",
       "Output",

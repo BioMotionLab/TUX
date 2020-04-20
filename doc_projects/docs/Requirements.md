@@ -14,17 +14,20 @@ Basic coding experience with C# and Unity. At the bare minimum you should know a
 * Overriding methods.
 * Overloading methods and properties.
 * Casting objects to other types.
+
 ## Unity 
-* Creating a project, scene, GameObjects.
-* Working with Transforms.
-* Dragging object references in the inspector.
-* Difference between scripts, assets, and objects in the scene.
-* Basic MonoBehaviour scripting.
-    * Exposing public variables of MonoBehaviours in the inspector.
+* Know about:
+    * Creating a project, scene, GameObjects.
+    * Working with Transforms.
+    * Creating script object references and link them up in the inspector.
+    * Difference between scripts, assets, and objects in the scene.
+    * Basic MonoBehaviour scripting.
+        * Exposing public variables of MonoBehaviours in the inspector.
     * Unity Coroutines (see [page on Coroutines](Coroutines-and-IEnumerators) for brief overview).
-* Latest version of bmlTUX. Download from the [Releases page](https://github.com/BioMotionLab/bmlTUX/releases),
-* Compatible with Unity 2019.2 or later.
-* Compatible with SteamVR (although works fine without VR).
+* Unity 2019.2 or later.
+    * TextMeshPro 2.1.0 or later.
+    * Compatible with SteamVR (although works fine without VR).
+
 ## Suggested tools:
 * **Highly Recommended:** [JetBrains Rider IDE](https://www.jetbrains.com/rider/?fromMenu)
     * Free for academic use.

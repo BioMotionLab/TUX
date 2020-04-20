@@ -11,16 +11,14 @@ The toolkit includes tools to aid in both the design and the execution of experi
 
 The toolkit was also designed to facilitate creating experiments incrementally. Variables and manipulations can be added or removed without requiring any changes to an experiment’s code, allowing for fast changes to test out new functionality. 
 
-# Getting Started
+## First steps
 
 Make sure you meet the [Requirements](Requirements.md).
 
 Download the latest [Release](https://github.com/BioMotionLab/ExperimentalFramework/releases).
 
-Complete the tutorials:
-* [TutorialExperiment](TutorialExperiment):
-* Advanced tutorials coming soon.
+Complete the [First Experiment](FirstOverview.md) tutorial.
 
-Once you've got the package inside unity, there is a demo scene with a very basic experiment set up.
+There is also a demo scene inside the unitypackage, with a very basic experiment set up.
 
 

@@ -60,13 +60,12 @@ class HomeSplash extends React.Component {
 
     return (
       <SplashContainer>
-        <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
+        <Logo img_src={`${baseUrl}img/favicon.ico`} />
         <div className="inner">
           <ProjectTitle tagline={siteConfig.tagline} title={siteConfig.title} />
           <PromoSection>
-            <Button href="#try">Try It Out</Button>
-            <Button href={docUrl('doc1.html')}>Example Link</Button>
-            <Button href={docUrl('doc2.html')}>Example Link 2</Button>
+            <Button href={docUrl('GettingStarted.html')}>Learn</Button>
+            <Button href={'https://github.com/BioMotionLab/TUX/releases'}>Download</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -92,73 +91,70 @@ class Index extends React.Component {
       </Container>
     );
 
-    const FeatureCallout = () => (
-      <div
-        className="productShowcaseSection paddingBottom"
-        style={{textAlign: 'center'}}>
-        <h2>Feature Callout</h2>
-        <MarkdownBlock>These are features of this project</MarkdownBlock>
-      </div>
-    );
 
-    const TryOut = () => (
-      <Block id="try">
-        {[
-          {
-            content:
-              'To make your landing page more attractive, use illustrations! Check out ' +
-              '[**unDraw**](https://undraw.co/) which provides you with customizable illustrations which are free to use. ' +
-              'The illustrations you see on this page are from unDraw.',
-            image: `${baseUrl}img/undraw_code_review.svg`,
-            imageAlign: 'left',
-            title: 'Wonderful SVG Illustrations',
-          },
-        ]}
-      </Block>
-    );
-
-    const Description = () => (
-      <Block background="dark">
-        {[
-          {
-            content:
-              'This is another description of how this project is useful',
-            image: `${baseUrl}img/undraw_note_list.svg`,
-            imageAlign: 'right',
-            title: 'Description',
-          },
-        ]}
-      </Block>
-    );
-
-    const LearnHow = () => (
+      const Design = () => (
+          <Block background="dark">
+              {[
+                  {
+                      content:
+                          'The experimental design is configured using a simple interface in the unity editor. Add variables, set up counterbalancing, repetitions, randomization and more with no code required. The toolkit handles the rest',
+                      image: `${baseUrl}img/designinterface.png`,
+                      imageAlign: 'right',
+                      title: 'Design your experiment with no code',
+                  },
+              ]}
+          </Block>
+      );
+    
+    const Runner = () => (
       <Block background="light">
         {[
           {
             content:
-              'Each new Docusaurus project has **randomly-generated** theme colors.',
-            image: `${baseUrl}img/undraw_youtube_tutorial.svg`,
-            imageAlign: 'right',
-            title: 'Randomly Generated Theme Colors',
+              'Write short scripts to define how your Unity scene should be manipulated, record your measurements, and bmlTUX will take care of the rest.',
+            image: `${baseUrl}img/scriptexample.png`,
+            imageAlign: 'left',
+            title: 'Run experiments with minimal code',
           },
         ]}
       </Block>
     );
+
+    const Iterate = () => (
+      <Block background="dark">
+        {[
+          {
+            content:
+              'Modifications and additions to experiments are simple and easy. You can swap between experimental design configurations with a drag-and-drop interface. This is particularly useful for pilot testing and training.',
+            image: `${baseUrl}img/iterative.png`,
+            imageAlign: 'right',
+            title: 'Work iteratively',
+          },
+        ]}
+      </Block>
+    );
+
 
     const Features = () => (
       <Block layout="fourColumn">
         {[
           {
-            content: 'This is the content of my feature',
-            image: `${baseUrl}img/undraw_react.svg`,
+            content: 'Prototype 3D experiments quickly and iteratively',
+            image: `${baseUrl}img/undraw_3d.svg`,
             imageAlign: 'top',
-            title: 'Feature One',
+            title: 'Experiments in minutes',
           },
           {
-            content: 'The content of my second feature',
-            image: `${baseUrl}img/undraw_operating_system.svg`,
+            content: 'Easy integration with SteamVR',
+            image: `${baseUrl}img/undraw_augmented_reality_heuy.svg`,
             imageAlign: 'top',
-            title: 'Feature Two',
+            title: 'VR Ready',
+          },
+          {
+            content: 'Not a pro programmer? No Problem.',
+            image: `${baseUrl}img/undraw_dev_focus.svg`,
+            imageAlign: 'top',
+            title: 'Minimal Coding',
           },
         ]}
       </Block>
@@ -198,11 +194,9 @@ class Index extends React.Component {
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
           <Features />
-          <FeatureCallout />
-          <LearnHow />
-          <TryOut />
-          <Description />
-          <Showcase />
+          <Design />
+          <Runner />
+          <Iterate />
         </div>
       </div>
     );

@@ -3,6 +3,7 @@
   <component name="ContentModelUserStore">
     <attachedFolders />
     <explicitIncludes>
+      <Path>Library/PackageCache/com.bml.unityautopackagebuilder@33ee31b09c</Path>
       <Path>Library/PackageCache/com.bml.unityautopackagebuilder@33ee31b09c7af4940f14f2d937507a1394bd8004</Path>
       <Path>Library/PackageCache/com.bml.unityautopackagebuilder@bd8f283d2956525635c66b67f43b6e8e9d0e71a5</Path>
       <Path>Library/PackageCache/com.unity.analytics@3.3.2</Path>
