@@ -5,7 +5,7 @@
   "description": "A toolkit for creating experiments in Unity",
   "unity": "2019.2",
   "dependencies": {
-    "com.unity.textmeshpro": "2.1.0-preview.2"
+    "com.unity.textmeshpro": "2.1.0"
   },
   "license": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0",
   "keywords": [
