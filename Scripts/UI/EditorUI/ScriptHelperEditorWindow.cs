@@ -19,11 +19,6 @@ namespace bmlTUX.Scripts.UI.EditorUI {
 
         string experimentName;
 
-        static string ExperimentRunnerTemplatePath => FileLocationSettings.TemplatePath + "ExperimentRunnerTemplate.cs";
-        static string TrialTemplatePath => FileLocationSettings.TemplatePath + "TrialScriptTemplate.cs";
-        static string BlockTemplatePath => FileLocationSettings.TemplatePath + "BlockScriptTemplate.cs";
-        static string ExperimentTemplatePath => FileLocationSettings.TemplatePath + "ExperimentScriptTemplate.cs";
-        
         /// <summary>
         /// Add menu item to open this window
         /// </summary>
@@ -111,7 +106,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
         }
 
         void CreateExperimentRunnerScriptFromTemplate() {
-            string fileText = File.ReadAllText(ExperimentRunnerTemplatePath);
+            string fileText = File.ReadAllText(FileLocationSettings.ExperimentRunnerTemplatePath);
             string updatedText = fileText.Replace("___ExperimentRunnerClassName___", experimentName + RunnerKey);
             string outPath = Application.dataPath + "/" + experimentName + RunnerKey + ".cs";
             string typeName = Path.GetFileNameWithoutExtension(outPath);
@@ -123,7 +118,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
         }
         
         void CreateTrialScriptFromTemplate() {
-            string fileText = File.ReadAllText(TrialTemplatePath);
+            string fileText = File.ReadAllText(FileLocationSettings.TrialTemplatePath);
             string updatedText = fileText.Replace("___TrialClassName___", experimentName + "TrialScript");
             string outPath = Application.dataPath + "/" + experimentName + "TrialScript" + ".cs";
             string typeName = Path.GetFileNameWithoutExtension(outPath);
@@ -132,7 +127,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
         }
         
         void CreateBlockScriptFromTemplate() {
-            string fileText = File.ReadAllText(BlockTemplatePath);
+            string fileText = File.ReadAllText(FileLocationSettings.BlockTemplatePath);
             string updatedText = fileText.Replace("___BlockClassName___", experimentName + "BlockScript");
             string outPath = Application.dataPath + "/" + experimentName + "BlockScript" + ".cs";
             string typeName = Path.GetFileNameWithoutExtension(outPath);
@@ -141,7 +136,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
         }
         
         void CreateExperimentScriptFromTemplate() {
-            string fileText = File.ReadAllText(ExperimentTemplatePath);
+            string fileText = File.ReadAllText(FileLocationSettings.ExperimentTemplatePath);
             string updatedText = fileText.Replace("___ExperimentClassName___", experimentName + "ExperimentScript");
             string outPath = Application.dataPath + "/" + experimentName + "ExperimentScript" + ".cs";
             string typeName = Path.GetFileNameWithoutExtension(outPath);
