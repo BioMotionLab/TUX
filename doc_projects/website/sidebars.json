@@ -1,0 +1,45 @@
+{
+  "Documentation": {
+    "Getting Started": [
+      "GettingStarted",
+      "Requirements", 
+      "Overview"
+    ],
+    "Tutorials": [
+      {
+        "type": "subcategory",
+        "label": "Making your first experiment",
+        "ids": [
+          "firstoverview",
+          "firstcreating",
+          "firstdesign",
+          "firstrunning",
+          "firstblocks"
+        ]
+      }
+    ],
+    "Documentation": [
+      "CreatingExperiment", 
+      "Accessing Scene",
+      "Output",
+      "Experiment Behavior",
+      "TrialClass",
+      "BlockClass",
+      "ExperimentClass"
+    ],
+    "Help": [
+      "Troubleshooting",
+      "Coroutines"
+    ],
+    "Advanced": [
+      "AdvancedOptions",
+      "Logging",
+      "Building",
+      "Customizing",
+      "Extras"
+    ]
+  },
+  "docs-other": {
+    "Advanced": []
+  }
+}
