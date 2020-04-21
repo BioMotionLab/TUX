@@ -1,9 +1,13 @@
 {
-  "name": "com.bml.bml_tux",
+  "name": "com.biomotionlab.tux",
   "version": "0.12.0",
-  "displayName": "BML_TUX",
-  "description": "A toolkit for quickly and easily creating experiments in Unity",
+  "displayName": "bmlTUX",
+  "description": "A toolkit for creating experiments in Unity",
   "unity": "2019.2",
+  "dependencies": {
+    "com.unity.textmeshpro": "2.1.0-preview.2"
+  },
+  "license": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0",
   "keywords": [
     "experiments, biomotionlab, toolkit"
   ],
