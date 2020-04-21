@@ -15,14 +15,21 @@ title: Part 2: Creating a new Experiment
     4. A popup will appear after import asking to import essentials. Do this.
 
 
-## Download bmlTUX
+## Install bmlTUX
+1. Go to the releases page https://github.com/BioMotionLab/TUX/releases. Don't download anything, just note the number of the most recent release. It Should be in the format X.Y.Z, for example 1.0.1.
+2. In a new unity project (Unity 2019.3 or later), open the Package Manager from the Window menu.
+3. Back in unity, click the plus button at the top of the window, selecting "Add package from git URL"
+4. Type in the following url, replacing X.Y.Z with the correct number noted above. and press "Add". 
 
-1. Download the latest release of bmlTUX from [the Releases Page](https://github.com/BioMotionLab/bmlTux/releases)
-    1. **You do not need the source code, only the unity package.** 
-2. Import the downloaded .unitypackage into your project:
-    1. In Unity, go to Assets > Import Package > Custom Package and browse to the .unitypackage
-    2. Click Import all.
-    
+```text
+https://github.com/BioMotionLab/TUX.git#X.Y.Z
+```
+
+At first you may notice nothing happens. The Unity Package Manager provides little feedback, but behind the scenes, it should be downloading and importing. Eventually, you should see a loading bar appear.
+
+When finished, in the Project window, expand the Packages folder, and you should see a folder called bmlTUX. You should also notice a new menu at the top of the screen.
+
+You're all set.
 
 ## Set up the Unity Scene
 1. Create a new Unity Scene and name it TutorialExperiment

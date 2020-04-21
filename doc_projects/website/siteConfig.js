@@ -41,7 +41,7 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     {doc: 'GettingStarted', label: 'Documentation'},
-    {href: 'https://github.com/BioMotionLab/TUX/releases', label: 'Download'},
+    {href: 'Installation', label: 'Install'},
     {doc: 'Troubleshooting', label: 'Help'}
   ],
 

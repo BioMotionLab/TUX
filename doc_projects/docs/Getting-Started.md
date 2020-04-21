@@ -15,7 +15,7 @@ The toolkit was also designed to facilitate creating experiments incrementally. 
 
 Make sure you meet the [Requirements](Requirements.md).
 
-Download the latest [Release](https://github.com/BioMotionLab/ExperimentalFramework/releases).
+Install the package following these [Instructions](Installation.md)
 
 Complete the [First Experiment](FirstOverview.md) tutorial.
 
