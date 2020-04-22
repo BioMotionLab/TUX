@@ -41,8 +41,9 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     {doc: 'GettingStarted', label: 'Documentation'},
-    {href: 'Installation', label: 'Install'},
-    {doc: 'Troubleshooting', label: 'Help'}
+    {doc: 'Installation', label: 'Install'},
+    {doc: 'Troubleshooting', label: 'Help'},
+    {href: 'https://github.com/BioMotionLab/TUX', label: 'GitHub'}
   ],
 
   // If you have users set above, you add it here:
