@@ -20,7 +20,7 @@ Advances in virtual reality (VR) technology have made it a valuable new tool for
 
 ## Download Paper
 
-In Press, submitted to [i-Perception](https://journals.sagepub.com/home/pec), available as pre-print on PsyArXiv: https://psyarxiv.com/arvkf/
+In Press, submitted to [i-Perception](https://journals.sagepub.com/home/ipe), available as pre-print on PsyArXiv: https://psyarxiv.com/arvkf/
 
 ## Citing
 

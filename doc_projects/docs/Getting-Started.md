@@ -11,6 +11,9 @@ The toolkit includes tools to aid in both the design and the execution of experi
 
 The toolkit was also designed to facilitate creating experiments incrementally. Variables and manipulations can be added or removed without requiring any changes to an experiment’s code, allowing for fast changes to test out new functionality. 
 
+
+If you use the toolkit please [cite](Publication.md) our work
+
 ## First steps
 
 Read the [publication](Publication.md) for a good overview.
