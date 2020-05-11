@@ -6,6 +6,6 @@ The BML Experiment Toolkit helps you design and run experiments in Unity quickly
 
 For documentation see https://biomotionlab.github.io/TUX/
 
-Download the latest [Release](https://github.com/BioMotionLab/ExperimentalFramework/releases).
+Downloa/Install [Here](https://biomotionlab.github.io/TUX/).
 
 
