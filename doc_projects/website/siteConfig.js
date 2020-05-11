@@ -42,7 +42,9 @@ const siteConfig = {
   headerLinks: [
     {doc: 'GettingStarted', label: 'Documentation'},
     {doc: 'Installation', label: 'Install'},
+    {doc: 'Publication', label: 'Publication'},
     {doc: 'Troubleshooting', label: 'Help'},
+    {href: 'https://www.biomotionlab.ca', label: 'BioMotionLab'},
     {href: 'https://github.com/BioMotionLab/TUX', label: 'GitHub'}
   ],
 
@@ -75,7 +77,7 @@ const siteConfig = {
   */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} Adam Bebko and BiomotionLab`,
+  copyright: `Copyright © ${new Date().getFullYear()} BioMotionLab (A.O. Bebko & N.F. Troje)`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
@@ -96,7 +98,7 @@ const siteConfig = {
 
   // For sites with a sizable amount of content, set collapsible to true.
   // Expand/collapse the links and subcategories under categories.
-  // docsSideNavCollapsible: true,
+  docsSideNavCollapsible: true,
 
   // Show documentation's last contributor's name.
   // enableUpdateBy: true,

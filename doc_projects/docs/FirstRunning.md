@@ -46,7 +46,7 @@ public class TutorialTrialScript : Trial {
 }
 ```
 
-The `RunMainCoroutine()` part is the important part. This is the main execution code of our trial where we will define what happens in our trials. This method is a Coroutine, which means it needs to have at minimum one yield return statement. If you don’t know about coroutines, there is a [section in the documentation](Coroutines-and-IEnumerators) explaining them. 
+The `RunMainCoroutine()` part is the important part. This is the main execution code of our trial where we will define what happens in our trials. This method is a Coroutine, which means it needs to have at minimum one yield return statement. If you don’t know about coroutines, there is a [section in the documentation](Coroutines-and-IEnumerators.md) explaining them. 
  
 Let’s start simple and just have it print something to the console. inside the `MainCoroutine()` method type the following code. Remember to `yield return null` at the end.
 

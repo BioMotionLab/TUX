@@ -3,7 +3,7 @@ id: firstoverview
 title: Part 1: Tutorial Overview
 ---
 
-![overview image](assets/Misc/BMLTUX%20header.PNG)
+![overview image](assets/Misc/tutorialHeader%20.PNG)
 
 This tutorial will guide you through the basic steps to make a simple experiment using bmlTUX. For this tutorial our experiment will present the participant with a simple stimulus, and then have the participant match the size of another object to the stimulus. We will vary the stimulus’ size, and distance, and the color of the stimulus. We will also collect participants' age and gender. We want to record how close the participant matched the size, and the time it took them.
 
@@ -11,7 +11,7 @@ The finished project from this tutorial can be found in the toolkit's Samples fo
 
 There is a video walkthrough of this tutorial [here](https://www.youtube.com/watch?v=lqji2T1hmHc&list=PL-dGBattdHXQAJwYUISwciVQ7gfyS-z3y&index=2&t=463s) (Note that there may be some minor differences with this version).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lqji2T1hmHc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x30KNfyz6L4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 _Note: This tutorial, for simplicity, does not teach best coding practices. It is designed to show the basic functionality of the experiment framework, and in some instances purposely uses poor coding practices to increase clarity._
