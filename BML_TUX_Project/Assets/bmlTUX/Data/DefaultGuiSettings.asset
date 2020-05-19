@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de2d29b33db59e4186a89a5ef9549c5, type: 3}
   m_Name: DefaultGuiSettings
   m_EditorClassIdentifier: 
-  GuiPrefab: {fileID: 2510293699582157743, guid: b4d5317835f671642bc923479a632b1a,
+  GuiPrefab: {fileID: 3678802056161241045, guid: b4d5317835f671642bc923479a632b1a,
     type: 3}
   targetDisplay: 0
+  WarnUserIfNotDisplayOne: 1
   ShowRunnerInterfaceAfterStart: 1

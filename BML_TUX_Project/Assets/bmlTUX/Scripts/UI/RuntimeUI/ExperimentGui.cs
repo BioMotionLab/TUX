@@ -7,8 +7,10 @@ using bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI;
 using bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI;
 using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 using bmlTUX.Scripts.Utilities;
+using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
@@ -30,6 +32,8 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
         [SerializeField]
         RectTransform ExperimentStartPanel = default;
 
+        [SerializeField] TextMeshProUGUI previewText = default;
+        
         DesignPreviewer previewer;
         FileLocationSettings fileLocationSettings;
         public Canvas Canvas;
@@ -89,6 +93,9 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
 
         void DisplayPreview() {
             DataTable preview = previewer.GetPreview(SessionSetupPanel.SelectedBlockOrder);
+            string tableString = preview.AsString(truncateLength:10, paddingLength:10, separator:" ");
+            Debug.Log(tableString);
+            previewText.text = tableString;
             TableDisplay.Display(preview);
         }
 
