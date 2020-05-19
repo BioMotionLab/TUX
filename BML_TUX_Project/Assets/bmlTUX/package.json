@@ -15,5 +15,17 @@
     "email": "adambebko@gmail.com",
     "url": "https://www.biomotionlab.ca/"
   },
-  "type": "library"
+  "type": "library",
+  "samples": [
+    {
+      "displayName": "Tutorial Sample Project",
+      "description": "The completed first tutorial project",
+      "path": "Samples~/TutorialExperiment"
+    },
+    {
+      "displayName": "Sample Simple Experiment",
+      "description": "A sample of an extremely simple experiment",
+      "path": "Samples~/SimpleExperiment"
+    }
+  ]
 }

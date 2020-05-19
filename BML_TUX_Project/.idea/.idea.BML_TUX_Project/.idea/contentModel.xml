@@ -15,7 +15,7 @@
               <e p="InstructionsDisplay.cs" t="Include" />
             </e>
           </e>
-          <e p="SamplesAndTutorials" t="Include">
+          <e p="Samples" t="Include">
             <e p="TutorialExperiment" t="Include">
               <e p="TutorialSampleBlockScript.cs" t="Include" />
               <e p="TutorialSampleExperimentRunner.cs" t="Include" />
@@ -205,6 +205,8 @@
           </e>
         </e>
         <e p="How to push to github upm.txt" t="Include" />
+        <e p="SampleBuilder.cs" t="Include" />
+        <e p="SampleBuilderCustomEditor.cs" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
             <e p="LiberationSans - OFL.txt" t="Include" />
