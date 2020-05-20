@@ -16,6 +16,11 @@ There is a video walkthrough of this tutorial [here](https://www.youtube.com/wat
 
 _Note: This tutorial, for simplicity, does not teach best coding practices. It is designed to show the basic functionality of the experiment framework, and in some instances purposely uses poor coding practices to increase clarity._
 
+
+To load the completed project, there is a button in the package manager window under the description for bmlTUX once the package is installed
+
+![Tutorial Project Location](assets/Misc/samples.png)
+
 ## Requirements
 * **Important:** Unity 2019.3 or later required.
 * See [Requirements section](Requirements) in main documentation for a more exhaustive list and tips on setting up Unity.
