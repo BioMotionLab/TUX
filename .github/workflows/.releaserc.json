@@ -1,5 +1,5 @@
 {
-  "tagFormat": "v${version}",
+  "tagFormat": "${version}",
   "plugins": [
     ["@semantic-release/npm", { "npmPublish": false, "pkgRoot": "BML_TUX_Project/Assets/bmlTUX" }],
     ["@semantic-release/git", {
