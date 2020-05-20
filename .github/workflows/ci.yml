@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-    - Release
+    - master
 jobs:
   release:
     name: release
@@ -16,8 +16,9 @@ jobs:
       uses: cycjimmy/semantic-release-action@v2
       with:
         extra_plugins: |
+          @semantic-release/changelog
           @semantic-release/git
-        branch: Release
+        branch: master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Create upm branch
@@ -41,4 +42,4 @@ jobs:
         git tag $TAG upm
         git push origin --tags
       env:
-        TAG: upm/${{ steps.semantic.outputs.new_release_version }}
+        TAG: upm/v${{ steps.semantic.outputs.new_release_version }}ew_release_version }}
