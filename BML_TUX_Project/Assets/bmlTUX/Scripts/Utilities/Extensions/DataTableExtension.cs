@@ -20,19 +20,19 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
         }
 
         public static string AsString(this DataTable dt, bool header = true, string separator = Delimiter.Tab,
-                                      int            truncateLength = TruncateDefault) {
-            string headerString = header ? HeaderAsString(dt, separator, truncateLength) + Environment.NewLine : "";
+                                      int            truncateLength = TruncateDefault, int paddingLength=-1) {
+            string headerString = header ? HeaderAsString(dt, separator, truncateLength, paddingLength) + Environment.NewLine : "";
 
             string tableString = "";
             foreach (DataRow row in dt.Rows) {
-                string rowString = GetRowString(row, separator, truncateLength);
+                string rowString = GetRowString(row, separator, truncateLength, paddingLength);
                 tableString +=  rowString + Environment.NewLine;
             }
             
             return headerString + tableString;
         }
 
-        static string GetRowString(DataRow row, string separator, int truncateLength) {
+        static string GetRowString(DataRow row, string separator, int truncateLength, int paddingLength=-1) {
             List<string> rowStrings = new List<string>();
             foreach (DataColumn dataColumn in row.Table.Columns) {
                 string unFormattedString = row[dataColumn.ColumnName].ToString();
@@ -40,17 +40,21 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
                 if (truncateLength >= 0) {
                     formattedString = formattedString.Truncate(truncateLength);
                 }
+
+                if (paddingLength >= truncateLength) {
+                    formattedString = formattedString.PadRight(paddingLength);
+                }
                 rowStrings.Add(formattedString);
             }
             return string.Join(separator, rowStrings);
         }
 
         public static string HeaderAsString(this DataTable dt, string separator = Delimiter.Tab,
-                                            int            truncateTo = TruncateDefault) {
+                                            int            truncateTo = TruncateDefault, int paddingLength=0) {
             IEnumerable<string> truncatedStrings = truncateTo > 0
-                ? dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName.Truncate(truncateTo)))
+                ? dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName.Truncate(truncateTo).PadRight(paddingLength)))
                 : dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName));
-            
+
             string headerString = string.Join(separator, truncatedStrings);
             return headerString;
         }

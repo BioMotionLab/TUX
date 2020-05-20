@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d5d7a88-93e2-479e-91a7-c28128dfadb2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Installation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../BML_TUX_Project/.idea/.idea.BML_TUX_Project/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../BML_TUX_Project/.idea/.idea.BML_TUX_Project/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FirstCreating.md" beforeDir="false" afterPath="$PROJECT_DIR$/FirstCreating.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FirstOverview.md" beforeDir="false" afterPath="$PROJECT_DIR$/FirstOverview.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Getting-Started.md" beforeDir="false" afterPath="$PROJECT_DIR$/Getting-Started.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../website/pages/en/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../website/pages/en/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../website/sidebars.json" beforeDir="false" afterPath="$PROJECT_DIR$/../website/sidebars.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../website/siteConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/../website/siteConfig.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +47,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1587490072905</updated>
-      <workItem from="1587490074050" duration="3795000" />
+      <workItem from="1587490074050" duration="5194000" />
     </task>
     <servers />
   </component>

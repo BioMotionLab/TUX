@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7de2d29b33db59e4186a89a5ef9549c5, type: 3}
-  m_Name: DefaultGuiSettings
+  m_Script: {fileID: 11500000, guid: a39f59220469ef74cbf4161f2e199319, type: 3}
+  m_Name: SampleBuilder
   m_EditorClassIdentifier: 
-  GuiPrefab: {fileID: 3678802056161241045, guid: b4d5317835f671642bc923479a632b1a,
-    type: 3}
-  targetDisplay: 0
-  WarnUserIfNotDisplayOne: 1
-  ShowRunnerInterfaceAfterStart: 1
+  baseFolderName: bmlTUX

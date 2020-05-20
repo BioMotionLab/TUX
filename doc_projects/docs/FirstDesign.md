@@ -34,24 +34,12 @@ We want to vary the color of our stimulus in each trial. So let’s define an in
 3. Click Create Variable.
 4. You should see a new variable appear in the Independent Variables section.
 5. Name it "Color"
-6. We want to vary color every trial, so keep Block unchecked.
-7. We want an the trials to be created for every possible color, so choose Balanced for the mixing type.
-8. Define values for our variable. Click the plus button to add values.
+6. We want an the trials to be created for every possible color, so choose Balanced for the mixing type.
+7. Define values for our variable. Click the plus button to add values.
     1. Add values: Red, Blue, Green.
-9. You should see something like this:
+8. You should see something like this:
  
 ![Image of color variable](assets/Tutorials/ColorVariable.png)
-
-
-#### Distance
-
-Next, Let’s create our Distance variable. In this case we want all the trials at a given distance to be grouped together, so we want to flag it as a "block" variable.
-
-1. Create a float independent variable.
-2. Name it "Distance".
-3. Make sure "block" is checked.
-4. Choose "balanced" mixing mode.
-5. Add values: 1, 2, 3.
 
 #### Size
 
@@ -59,9 +47,8 @@ Next, Let’s create our size variable.
 
 1. Create a float independent variable
 2. Name it "Size".
-3. Make sure "block" is unchecked.
-4. Choose "balanced" mixing mode.
-5. Add values 1, 1.5, 2.
+3. Choose "balanced" mixing mode.
+4. Add values 1, 2, 3.
 
 ### Participant Variables
 
@@ -76,17 +63,7 @@ Create an int Participant variable named Age.
 
 ### Dependent Variables
 
-We want to record how closely the participants match the size of the stimulus. We’ll record that in a float dependent variable called SelectedSize. The default value will be assigned to any missing values in case of problems or stopping the experiment early.
-
-
-## Other Settings
-
-Finally, we want to randomize the trial order completely.
-
-1. In the top of the config file inspector, select the following settings:
-    1. Block Randomization: Complete Randomization
-    2. Trial Randomization: Randomize (and choose Different Permutations).
-2. We don’t want to repeat anything so leave both repetition settings at 1.
+We want to record how closely the participants match the size of the stimulus. We’ll record that in a float dependent variable called MatchedSize. The default value will be assigned to any missing values in case of problems or stopping the experiment early.
  
 ## Test out our experiment design using basic components
 
@@ -98,7 +75,8 @@ Press play in the editor. You’ll see a window to start an experimental session
 
 ![Display Selection](assets/Tutorials/DisplaySelection.png)
 
-**_Important Note for VR Users: SteamVR automatically sets all cameras in the scene to track the HMD. I haven't found a way to disable this. You need to disable it manually. In the TUX folder, there's a prefab for the UI called "ExperimentGUI". Open the prefab and there should be a camera object inside called "ExperimentUICamera". Adjust the "Target Eye" to "Display(None)". This will render the UI to the display rather than floating in front of the HMD. I'm looking for solutions to avoid this step._**
+**_Important Note for VR Users: SteamVR can sometimes take over the display of Display 1. You may need to display the Runner UI on display 2, even with only one monitor.
+
 
 1. Take a look at the previewed trial table and ensure everything is set up properly. Note that the toolkit adds some useful columns to track progress and other metrics.
 2. Debug mode is useful to check functionality during development without having to type in complicated options. Click Debug.

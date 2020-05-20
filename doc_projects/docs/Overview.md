@@ -6,6 +6,8 @@ title: Overview
 
 In our approach, we keep the configuration of the structure of the experiment (**Design module**) entirely separate from the execution of the experiment itself (**Runner module**). 
 
+![Structure](assets/Misc/structure.PNG)
+
 ## Design Module
 
 The **Design module** is set of tools aids with setting up the experiment’s variables and their behavior. Using a graphical user interface in a Unity inspector window, experimenters can declare all factors that affect the design of the experiment. At this stage, the user specifies independent, dependent, and participant variables, their levels, and the rules by which they are combined into trials. Independent variables are factors that affect how stimuli are displayed and manipulated. Experimenters can adjust settings for each independent variable to define the rules by which they are combined into trials, the order in which these trials are being presented to the participants, and a few other parameters that control experimental flow. Dependent variables include expected measurements and responses that will be collected from participants during runtime. Participant variables are those that are consistent for each participant in the experiment and do not change over an experimental session (e.g. participant gender).

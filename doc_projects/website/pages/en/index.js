@@ -97,7 +97,7 @@ class Index extends React.Component {
               {[
                   {
                       content:
-                          'The experimental design is configured using a simple interface in the unity editor. Add variables, set up counterbalancing, repetitions, randomization and more with no code required. The toolkit handles the rest',
+                          'The experimental design is configured using a simple interface in the unity editor. Add variables, set up counterbalancing, repetitions, randomization, and more, with no code required.',
                       image: `${baseUrl}img/designinterface.png`,
                       imageAlign: 'right',
                       title: 'Design your experiment with no code',

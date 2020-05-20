@@ -2,12 +2,13 @@
 using bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
     public class ParticipantVariablePanel : MonoBehaviour
     {
         [SerializeField]
-        ParticipantVariableEntry ParticipantVariableEntryPrefab = default;
+        ParticipantVariableEntry ParticipantVariableEntryPrototype = default;
 
         [SerializeField]
         GameObject ContentPanel = default;
@@ -20,13 +21,12 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             foreach (ParticipantVariable participantVariable in participantVariables) {
                 
                 ParticipantVariableEntry newParticipantVariableEntry = 
-                    Instantiate(ParticipantVariableEntryPrefab, ContentPanel.transform);
+                    Instantiate(ParticipantVariableEntryPrototype, ContentPanel.transform);
+                newParticipantVariableEntry.gameObject.SetActive(true);
                 participantVariableEntries.Add(newParticipantVariableEntry);
                 newParticipantVariableEntry.Display(participantVariable);
             }
         }
-        
-        
-        
+
     }
 }

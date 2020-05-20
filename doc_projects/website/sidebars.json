@@ -2,6 +2,7 @@
   "Documentation": {
     "Getting Started": [
       "GettingStarted",
+      "Publication",
       "Requirements", 
       "Overview",
       "Installation"
@@ -21,9 +22,9 @@
     ],
     "Documentation": [
       "CreatingExperiment", 
-      "Accessing Scene",
+      "AccessingScene",
       "Output",
-      "Experiment Behavior",
+      "ExperimentBehavior",
       "TrialClass",
       "BlockClass",
       "ExperimentClass"
