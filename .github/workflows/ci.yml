@@ -1,8 +1,8 @@
-name: RELEASE_CI
+name: CI
 on:
   push:
     branches:
-    - release
+    - Release
 jobs:
   release:
     name: release
@@ -17,7 +17,7 @@ jobs:
       with:
         extra_plugins: |
           @semantic-release/git
-        branch: release
+        branch: Release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Create upm branch
