@@ -24,6 +24,10 @@ Install the package following these [Instructions](Installation.md).
 
 Complete the [First Experiment](FirstOverview.md) tutorial.
 
+View the sample experiments (after installation):
+
+![Sample Project Location](assets/Misc/samples.png)
+
 There is also a demo scene inside the unitypackage, with a very basic experiment set up.
 
 
