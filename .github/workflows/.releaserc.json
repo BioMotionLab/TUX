@@ -3,7 +3,7 @@
   "plugins": [
     ["@semantic-release/npm", { "npmPublish": false, "pkgRoot": "BML_TUX_Project/Assets/bmlTUX" }],
     ["@semantic-release/git", {
-      "assets": ["BML_TUX_Project/Assets/bmlTUX.json"],
+      "assets": ["BML_TUX_Project/Assets/bmlTUX/package.json"],
       "message": "chore(release): ${nextRelease.version} [skip ci]"
     }],
     "@semantic-release/github"
