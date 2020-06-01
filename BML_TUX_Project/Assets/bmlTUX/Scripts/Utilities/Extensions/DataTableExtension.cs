@@ -33,6 +33,7 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
         }
 
         static string GetRowString(DataRow row, string separator, int truncateLength, int paddingLength=-1) {
+            if (paddingLength <= truncateLength) paddingLength = truncateLength;
             List<string> rowStrings = new List<string>();
             foreach (DataColumn dataColumn in row.Table.Columns) {
                 string unFormattedString = row[dataColumn.ColumnName].ToString();
@@ -51,6 +52,7 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
 
         public static string HeaderAsString(this DataTable dt, string separator = Delimiter.Tab,
                                             int            truncateTo = TruncateDefault, int paddingLength=0) {
+            if (paddingLength <= truncateTo) paddingLength = truncateTo;
             IEnumerable<string> truncatedStrings = truncateTo > 0
                 ? dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName.Truncate(truncateTo).PadRight(paddingLength)))
                 : dt.Columns.OfType<DataColumn>().Select(x => string.Join(separator, x.ColumnName));

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\adamb\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\adamb\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_BML_TUX_Project.-2014430681.00" t="ExcludeRecursive" />
-    <e p="E:\GitHub\TUX\BML_TUX_Project" t="IncludeRecursive">
+    <e p="C:\Users\Adam\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Adam\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_BML_TUX_Project.-2006671322.00" t="ExcludeRecursive" />
+    <e p="D:\GitHub\TUX\BML_TUX_Project" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="bmlTUX" t="Include">
