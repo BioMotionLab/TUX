@@ -21,6 +21,7 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
 
         public static string AsString(this DataTable dt, bool header = true, string separator = Delimiter.Tab,
                                       int            truncateLength = TruncateDefault, int paddingLength=-1) {
+            if (paddingLength < truncateLength) paddingLength = truncateLength;
             string headerString = header ? HeaderAsString(dt, separator, truncateLength, paddingLength) + Environment.NewLine : "";
 
             string tableString = "";
@@ -42,9 +43,10 @@ namespace bmlTUX.Scripts.Utilities.Extensions {
                     formattedString = formattedString.Truncate(truncateLength);
                 }
 
-                if (paddingLength >= truncateLength) {
+                if (paddingLength >= truncateLength && truncateLength > 0) {
                     formattedString = formattedString.PadRight(paddingLength);
                 }
+                
                 rowStrings.Add(formattedString);
             }
             return string.Join(separator, rowStrings);
