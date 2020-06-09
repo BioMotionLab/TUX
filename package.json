@@ -1,0 +1,31 @@
+{
+  "name": "com.biomotionlab.tux",
+  "version": "0.17.3",
+  "displayName": "bmlTUX",
+  "description": "A toolkit for creating experiments in Unity. For more information see our documentation page: https://biomotionlab.github.io/TUX/, our github page: https://github.com/BioMotionLab/TUX, or check out BioMotionLab: http://www.biomotionlab.ca/tux/ ",
+  "unity": "2019.2",
+  "dependencies": {
+  },
+  "license": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0",
+  "keywords": [
+    "experiments, biomotionlab, toolkit, vr, virtual reality"
+  ],
+  "author": {
+    "name": "Adam Bebko and BiomotionLab",
+    "email": "adambebko@gmail.com",
+    "url": "https://www.biomotionlab.ca/"
+  },
+  "type": "library",
+  "samples": [
+    {
+      "displayName": "Tutorial Experiment",
+      "description": "The completed project for the first tutorial",
+      "path": "Samples~/TutorialExperiment"
+    },
+    {
+      "displayName": "Simple Sample Experiment",
+      "description": "A sample of an extremely simple experiment",
+      "path": "Samples~/SimpleExperiment"
+    }
+  ]
+}

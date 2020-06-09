@@ -1,0 +1,16 @@
+{
+    "name": "TUXScriptingTemplates",
+    "references": [
+        "GUID:e2e42d675e1f3084a981f233d35a3fb5"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
