@@ -51,7 +51,7 @@ namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
 
         protected override IEnumerator RunMainCoroutine() {
     
-            Debug.Log($"{TuxLog.Prefix} Trial Running!");
+            Debug.Log($"Trial Running... Press space to continue.");
             bool trialComplete = false;
             while (!trialComplete) {
                 if (Input.GetKeyDown(KeyCode.Space)) {

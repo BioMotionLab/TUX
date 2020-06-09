@@ -68,8 +68,8 @@ namespace bmlTUX.Scripts.Managers {
         }
 
         void LogTrial(string filePath) {
-            string successText = currentlyRunningTrial.CompletedSuccessfully ? "successfully" : "<color=red><b>unsuccessfully</b></color>";
-            Debug.Log($"{TuxLog.Prefix} <color=green><b>Finished</b></color> {currentlyRunningTrial.TrialText} {successText}, Output Updated: {filePath} \n" +
+            string successText = currentlyRunningTrial.CompletedSuccessfully ? "successfully" : "<color=red><b>unsuccessful</b></color>";
+            Debug.Log($"{TuxLog.Prefix} <color=green><b>Finished</b></color> {currentlyRunningTrial.TrialText} {successText}. Output Updated: {filePath} \n" +
                       $"Output Table for this trial:\n" +
                       $"{currentlyRunningTrial.Data.AsString(header: true)}");
         }

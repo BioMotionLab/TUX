@@ -90,7 +90,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
         void DisplayPreview() {
             DataTable preview = previewer.GetPreview(SessionSetupPanel.SelectedBlockOrder);
             string tableString = preview.AsString(truncateLength:10, paddingLength:10, separator:" ");
-            Debug.Log(tableString);
+            Debug.Log($"{TuxLog.Prefix} Click here to see trial table. \n{tableString}");
             previewText.text = tableString;
             TableDisplay.Display(preview);
         }
