@@ -49,7 +49,7 @@ namespace bmlTUX.Scripts.Managers {
 
             currentlyRunningBlock = block;
             Debug.Log("");
-            Debug.Log($"{TuxLog.Prefix} <color=orange><b>Starting</b></color> Block index {BlockIndex(currentlyRunningBlock)}. Total blocks:{blocks.Count}");
+            Debug.Log($"{TuxLog.Prefix} <color=orange><b>Starting</b></color> Block {BlockIndex(currentlyRunningBlock)+1} / {blocks.Count}");
             ExperimentEvents.BlockHasStarted(block);
             ExperimentEvents.StartPart(block);
 
@@ -78,7 +78,8 @@ namespace bmlTUX.Scripts.Managers {
 
         void FinishBlock() {
             int blockNum = BlockIndex(currentlyRunningBlock);
-            Debug.Log($"{TuxLog.Prefix} <color=green><b>Finished</b></color> Block {blockNum}\n {currentlyRunningBlock.AsString()}");
+            Debug.Log("");
+            Debug.Log($"{TuxLog.Prefix} <color=green><b>Finished</b></color> Block {blockNum + 1}\n {currentlyRunningBlock.AsString()}");
             currentlyRunningBlock.Complete = true;
             ExperimentEvents.UpdateBlock(blocks, BlockIndex(currentlyRunningBlock));
         }

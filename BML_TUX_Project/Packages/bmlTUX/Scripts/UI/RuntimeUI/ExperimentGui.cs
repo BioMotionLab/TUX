@@ -53,9 +53,9 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
                     Display.displays[targetDisplay].Activate();
                 }
 
-                Debug.Log($"{TuxLog.Prefix} Setting UI to show on Display {targetDisplay + 1}. Click here to highlight settings file in project.", experimentRunner.DesignFile.GuiSettings);
+                Debug.Log($"{TuxLog.Prefix} Setting UI to show on Display {targetDisplay + 1}. Click here to highlight current settings file in project.", experimentRunner.DesignFile.GuiSettings);
                 if (targetDisplay > 0 && experimentRunner.DesignFile.GuiSettings.WarnUserIfNotDisplayOne) 
-                    Debug.LogWarning(TuxLog.Warn("UI is on secondary display. If you can't see UI, adjust settings. You can turn this warning off."),  experimentRunner.DesignFile.GuiSettings);
+                    Debug.LogWarning(TuxLog.Warn("UI is on secondary display. If you can't see UI, adjust settings. You can turn this warning off (click on this message)."),  experimentRunner.DesignFile.GuiSettings);
             }
             else {
                 Debug.LogWarning($"{TuxLog.Prefix} Not enough displays plugged in to accommodate your UI settings. Reverting UI to display on {Display.displays.Length}");
@@ -90,7 +90,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
         void DisplayPreview() {
             DataTable preview = previewer.GetPreview(SessionSetupPanel.SelectedBlockOrder);
             string tableString = preview.AsString(truncateLength:10, paddingLength:10, separator:" ");
-            Debug.Log($"{TuxLog.Prefix} Click here to see trial table. \n{tableString}");
+            //Debug.Log($"{TuxLog.Prefix} Click here to see trial table. \n{tableString}");
             previewText.text = tableString;
             TableDisplay.Display(preview);
         }
