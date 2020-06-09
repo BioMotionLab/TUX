@@ -4,9 +4,11 @@ Test
 2) Build tutorial scene, run, check for errors.
 
 Build
-3) increment package version in package.json
-4) commit to master
-5) merge master into release
+1) increment package version in package.json
+2) commit to master
+3) merge master into release (Create new commit)
+4) Push
+5) go back to master
 
 
 
