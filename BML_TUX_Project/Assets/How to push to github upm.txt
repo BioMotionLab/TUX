@@ -10,6 +10,14 @@ Build
 4) Push
 5) go back to master
 
+Test build
+
+1)tag upm with x.y.zb for test download
+2) create new project
+3) install textmeshpro
+4) install bmltux
+5) play
+
 
 
 git subtree split --prefix=BML_TUX_Project/Assets/bmlTUX --branch upm
