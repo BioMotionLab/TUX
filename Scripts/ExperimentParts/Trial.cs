@@ -33,7 +33,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// <summary>
         /// Text that describes the index of Trial and Block.
         /// </summary>
-        [PublicAPI] public string  TrialText => $"Trial index {IndexInBlock} of Block index {BlockIndex}";
+        [PublicAPI] public string  TrialText => $"Trial {IndexInBlock + 1} of Block {BlockIndex + 1}";
 
         /// <summary>
         /// Whether the trial was Completed Successfully
