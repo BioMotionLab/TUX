@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Data;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Managers;
 using bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI;
@@ -11,9 +9,7 @@ using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace bmlTUX.Scripts.UI.RuntimeUI {
     public class ExperimentGui : MonoBehaviour {

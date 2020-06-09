@@ -5,7 +5,6 @@ using System.Data;
 using bmlTUX.Scripts.Managers;
 using bmlTUX.Scripts.Utilities.Extensions;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace bmlTUX.Scripts.ExperimentParts {
 

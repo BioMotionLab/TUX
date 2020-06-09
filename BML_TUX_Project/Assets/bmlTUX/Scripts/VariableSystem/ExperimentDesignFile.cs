@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Settings;
 using bmlTUX.Scripts.Utilities;

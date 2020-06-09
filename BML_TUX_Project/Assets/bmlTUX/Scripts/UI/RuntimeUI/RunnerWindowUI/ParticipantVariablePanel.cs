@@ -2,7 +2,6 @@
 using bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
     public class ParticipantVariablePanel : MonoBehaviour
