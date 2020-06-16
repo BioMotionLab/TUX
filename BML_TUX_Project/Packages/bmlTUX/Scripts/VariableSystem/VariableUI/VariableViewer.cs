@@ -239,8 +239,11 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             if (GUILayout.Button("+",  GUILayout.Width(ValueButtonWidth))) {
                 int lastIndex = valuesProperty.arraySize;
                 if (lastIndex < 0) lastIndex = 0;
-                probabilitiesProperty?.InsertArrayElementAtIndex(lastIndex);
+
                 valuesProperty.InsertArrayElementAtIndex(lastIndex);
+                probabilitiesProperty.arraySize++;
+                CheckForProbabilityArrayErrors();
+                
 
                 //make last one input equal to zero;
                 if (probabilitiesProperty?.arraySize > 1)
@@ -248,8 +251,14 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             }
             EditorGUILayout.EndHorizontal();
         }
-        
-        
+
+        void CheckForProbabilityArrayErrors() {
+            while (probabilitiesProperty.arraySize < valuesProperty.arraySize) {
+                probabilitiesProperty.arraySize++;
+            }
+        }
+
+
         bool AddMinusButton(int i) {
             if (GUILayout.Button("-", GUILayout.Width(ValueButtonWidth))) {
                 valuesProperty.DeleteArrayElementAtIndex(i);
