@@ -241,8 +241,11 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                 if (lastIndex < 0) lastIndex = 0;
 
                 valuesProperty.InsertArrayElementAtIndex(lastIndex);
-                probabilitiesProperty.arraySize++;
-                CheckForProbabilityArrayErrors();
+                if (probabilitiesProperty != null) {
+                    probabilitiesProperty.arraySize++;
+                    CheckForProbabilityArrayErrors();
+                }
+                
                 
 
                 //make last one input equal to zero;

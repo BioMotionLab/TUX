@@ -20,6 +20,13 @@
               <e p="Instructions.asmdef" t="Include" />
               <e p="InstructionsDisplay.cs" t="Include" />
             </e>
+            <e p="Tracker" t="Include">
+              <e p="TrackedObject.cs" t="Include" />
+              <e p="Tracker.asmdef" t="Include" />
+              <e p="TrackerManager.cs" t="Include" />
+              <e p="TrackerState.cs" t="Include" />
+              <e p="TransformSnapshot.cs" t="Include" />
+            </e>
           </e>
           <e p="Samples" t="Include">
             <e p="TutorialExperiment" t="Include">
@@ -215,6 +222,7 @@
       <e p="TableViewer.csproj" t="IncludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
       <e p="TestingUtilities.csproj" t="IncludeRecursive" />
+      <e p="Tracker.csproj" t="IncludeRecursive" />
       <e p="TutorialExperiment.csproj" t="IncludeRecursive" />
       <e p="TUXEditorUI.csproj" t="IncludeRecursive" />
       <e p="TUXExtensionTests.csproj" t="IncludeRecursive" />

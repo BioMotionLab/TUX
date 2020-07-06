@@ -12,7 +12,7 @@ Build
 
 Test build
 
-1)tag upm with 0.17.4a for test download
+1)tag upm with x.x.x for test download
 2) create new project
 3) install textmeshpro
 4) install bmltux
@@ -20,11 +20,15 @@ Test build
 
 
 
+
+To install:
+
+In Unity Package Manager, Add from git:
+https://github.com/BioMotionLab/TUX.git#0.17.5
+
+
+
+OLD
 git subtree split --prefix=BML_TUX_Project/Assets/bmlTUX --branch upm
 git tag 1.0.0 upm
 git push origin upm --tags
-
-
-to install 
-
-https://github.com/BioMotionLab/TUX.git#1.0.0
