@@ -1,9 +1,9 @@
-Shader "TextMeshPro/Bitmap Custom Atlas" {
+Shader "TextMeshPro/Bitmap" {
 
 Properties {
 	_MainTex		("Font Atlas", 2D) = "white" {}
 	_FaceTex		("Font Texture", 2D) = "white" {}
-	_FaceColor		("Text Color", Color) = (1,1,1,1)
+	[HDR]_FaceColor	("Text Color", Color) = (1,1,1,1)
 
 	_VertexOffsetX	("Vertex OffsetX", float) = 0
 	_VertexOffsetY	("Vertex OffsetY", float) = 0
@@ -11,7 +11,6 @@ Properties {
 	_MaskSoftnessY	("Mask SoftnessY", float) = 0
 
 	_ClipRect("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
-	_Padding		("Padding", float) = 0
 
 	_StencilComp("Stencil Comparison", Float) = 8
 	_Stencil("Stencil ID", Float) = 0
@@ -19,13 +18,14 @@ Properties {
 	_StencilWriteMask("Stencil Write Mask", Float) = 255
 	_StencilReadMask("Stencil Read Mask", Float) = 255
 
+	_CullMode("Cull Mode", Float) = 0
 	_ColorMask("Color Mask", Float) = 15
 }
 
 SubShader{
 
 	Tags { "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
-	
+
 	Stencil
 	{
 		Ref[_Stencil]
@@ -34,8 +34,8 @@ SubShader{
 		ReadMask[_StencilReadMask]
 		WriteMask[_StencilWriteMask]
 	}
-	
-	
+
+
 	Lighting Off
 	Cull [_CullMode]
 	ZTest [unity_GUIZTestMode]
@@ -114,13 +114,14 @@ SubShader{
 			// Clamp _ClipRect to 16bit.
 			float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
 			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
-			
+
 			return OUT;
 		}
 
 		fixed4 frag (v2f IN) : SV_Target
 		{
-			fixed4 color = tex2D(_MainTex, IN.texcoord0) * tex2D(_FaceTex, IN.texcoord1) * IN.color;
+			fixed4 color = tex2D(_MainTex, IN.texcoord0);
+			color = fixed4 (tex2D(_FaceTex, IN.texcoord1).rgb * IN.color.rgb, IN.color.a * color.a);
 
 			// Alternative implementation to UnityGet2DClipping with support for softness.
 			#if UNITY_UI_CLIP_RECT
