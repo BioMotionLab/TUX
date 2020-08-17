@@ -12,7 +12,7 @@ Build
 
 Test build
 
-1)tag upm with x.x.x for test download
+1) tag upm with x.x.x for test download
 2) create new project
 3) install textmeshpro
 4) install bmltux
