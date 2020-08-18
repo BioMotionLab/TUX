@@ -9,14 +9,16 @@ There are two ways to install bmlTUX.
 For both methods, you should be in a new unity project that meets the [Requirements](Requirements.md)
 
 * Make sure you are targetting .NET 4.x in the Project Settings > Player > Other
-* Make sure you have TextMeshPro version 2.1 or later installed. Earlier versions contain a bug that causes interface mis-alignments. At the time of writing, this requires a pre-release package.
+* Make sure you have TextMeshPro version 2.1 or later installed. Go to Window > Package Manager, and look for TextMeshPro in the list.
+* _IMPORTANT:_ Make sure TextMeshPro Essentials are already imported. Go to Window > TextMeshPro > Import Essentials. Doing this after installing bmlTUX can cause display issues.
 
 ## Through Unity Package Manager
 
 1. Go to the releases page https://github.com/BioMotionLab/TUX/releases. Don't download anything, just note the number of the most recent release. It Should be in the format X.Y.Z, for example 1.0.1.
 2. In a new unity project (Unity 2019.3 or later), open the Package Manager from the Window menu.
 3. Back in unity, click the plus button at the top of the window, selecting "Add package from git URL"
-4. Type in the following url, replacing X.Y.Z with the correct number noted above. and press "Add". 
+4. IMPORTANT: Make sure TextMeshPro Essentials are imported (see above).
+5. Type in the following url, replacing X.Y.Z with the correct number noted above. and press "Add". 
 
 ```text
 https://github.com/BioMotionLab/TUX.git#X.Y.Z
