@@ -1,4 +1,6 @@
 ﻿using System;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace bmlTUX.Scripts.Utilities {
     public static class TuxLog {
@@ -9,8 +11,12 @@ namespace bmlTUX.Scripts.Utilities {
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static string Error(string message) {
-            return Prefix + $" <color=red>{message}</color>";
+        public static void LogError(string message) {
+            Debug.LogError(Prefix + $" <color=red>{message}</color>");
+        }
+
+        public static void LogError(string message, Object context) {
+            Debug.LogError(Prefix + $" <color=red>{message}</color>", context);
         }
         
         /// <summary>
