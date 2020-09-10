@@ -51,8 +51,8 @@ namespace bmlTUX.Scripts.VariableSystem {
         }
 
         void MissingReference(string missingReference) {
-            Debug.LogError(TuxLog.Error($"{nameof(ExperimentDesignFile)} does not have {missingReference} defined. " + 
-                         $"Please drag {missingReference} into the proper place in the design file"), this);
+            TuxLog.LogError($"{nameof(ExperimentDesignFile)} does not have {missingReference} defined. " + 
+                         $"Please drag {missingReference} into the proper place in the design file", this);
             valid = false;
         }
 

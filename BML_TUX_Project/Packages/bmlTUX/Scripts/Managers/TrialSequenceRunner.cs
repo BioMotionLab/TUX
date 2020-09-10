@@ -26,7 +26,7 @@ namespace bmlTUX.Scripts.Managers {
         public void Start() {
             Running = true;
             if (currentTrialList.Count == 0) {
-                Debug.LogError(TuxLog.Error("No Trials Defined! You probably didn't set up a design file."));
+                TuxLog.LogError("No Trials Defined! You probably didn't set up a design file.");
                 return;
             }
             StartRunningTrial(currentTrialList[0]);

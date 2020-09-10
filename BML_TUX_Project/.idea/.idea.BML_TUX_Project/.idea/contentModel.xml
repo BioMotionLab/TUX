@@ -5,6 +5,7 @@
       <e p="BlackCamera.csproj" t="IncludeRecursive" />
       <e p="BML_TUX_Project.sln" t="IncludeFlat" />
       <e p="bmlTUX.csproj" t="IncludeRecursive" />
+      <e p="ComplexExperiment.csproj" t="IncludeRecursive" />
       <e p="Instructions.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive">
@@ -27,6 +28,13 @@
             </e>
           </e>
           <e p="Samples" t="Include">
+            <e p="ComplexExperiment" t="Include">
+              <e p="ComplexBlockScript.cs" t="Include" />
+              <e p="ComplexExperiment.asmdef" t="Include" />
+              <e p="ComplexExperimentRunner.cs" t="Include" />
+              <e p="ComplexExperimentScript.cs" t="Include" />
+              <e p="ComplexTrialScript.cs" t="Include" />
+            </e>
             <e p="TutorialExperiment" t="Include">
               <e p="TutorialExperiment.asmdef" t="Include" />
               <e p="TutorialSampleBlockScript.cs" t="Include" />
@@ -48,6 +56,7 @@
               <e p="BaseBlockTable.cs" t="Include" />
               <e p="BaseTrialTable.cs" t="Include" />
               <e p="Block.cs" t="Include" />
+              <e p="BlockPermutationError.cs" t="Include" />
               <e p="DebugSession.cs" t="Include" />
               <e p="Experiment.cs" t="Include" />
               <e p="ExperimentDesign.cs" t="Include" />

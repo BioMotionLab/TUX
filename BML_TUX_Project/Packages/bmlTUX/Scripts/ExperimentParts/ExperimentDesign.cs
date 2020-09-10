@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using bmlTUX.Scripts.Settings;
+using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
 
@@ -49,10 +50,10 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
             if (designFile.BlockOrderConfigurations.Count > 0) return GetBlockOrderConfigStrings();
             
-            throw new NullReferenceException("There are too many block values to create a permutation table. " +
-                                             "Block orders must be defined manually using OrderConfig files. " +
-                                             "See documentation for more information");
-
+            TuxLog.LogError("There are too many block values to create a permutation table. " +
+                         "Block orders must be defined manually using OrderConfig files. " +
+                         "See documentation for more information");
+            throw new BlockPermutationError("Too many block values for auto permutation");
         }
 
         List<string> GetBlockOrderConfigStrings() {
