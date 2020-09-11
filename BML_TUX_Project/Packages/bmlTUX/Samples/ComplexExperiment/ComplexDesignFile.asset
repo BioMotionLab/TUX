@@ -31,8 +31,7 @@ MonoBehaviour:
       Block: 0
       Values:
       - 1
-      - 0.39
-      - -1.84
+      - 2
       Probabilities:
       - 0
       - 0
@@ -43,10 +42,11 @@ MonoBehaviour:
       MixingType: 0
       Block: 0
       Values:
-      - 1
-      - 2
+      - 1.5
+      - 2.5
+      - 2.5
       Probabilities:
-      - 1
+      - 0.25
       - 0
       - 0
     StringIVs:
@@ -59,10 +59,13 @@ MonoBehaviour:
       Values:
       - Green
       - Red
-      - Blue
       - Purple
       - Orange
+      - Yellow
+      - Maroon
       Probabilities:
+      - 0
+      - 0
       - 0
       - 0
       - 0
@@ -95,6 +98,9 @@ MonoBehaviour:
   FileLocationSettings: {fileID: 11400000, guid: 07f42cef79754c74583d0209412fa987,
     type: 2}
   ShowAdvancedEditor: 1
+  BlockOrderIsValid: 1
   TrialTableGeneration: 0
   BlockOrderConfigurations:
-  - {fileID: 11400000, guid: 6dd38f36839f847a7852bcce42609d66, type: 2}
+  - {fileID: 11400000, guid: 32a5917d0a82048d2ae722766eaea785, type: 2}
+  - {fileID: 11400000, guid: adf496d7cb06d4934a3906ddabcefe1a, type: 2}
+  - {fileID: 11400000, guid: 36f347688f8cb4e3cb27f2623a3a2b18, type: 2}

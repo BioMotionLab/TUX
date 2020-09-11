@@ -69,7 +69,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
                         string rowString = baseBlockTable.Rows[orderIndex].AsString(separator: ", ", truncateLength: -1);
                         orderString += rowString + " > ";
                     }
-                    orderStrings.Add(orderString); 
+                    orderStrings.Add(orderConfig.name + "; " + orderString); 
                 }
                 
             }

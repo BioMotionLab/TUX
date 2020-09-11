@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Utilities.Extensions;
@@ -14,7 +15,26 @@ namespace bmlTUX.Scripts.VariableSystem {
     
         public bool Randomize = false;
         ExperimentDesignFile linkedDesignFile;
-        public bool IsStillValid = true;
+        public bool IsStillValid {
+            get {
+                if (linkedDesignFile == null) return true;
+                List<OrderRow> currentList = new List<OrderRow>();
+                ExperimentDesign experimentDesign = ExperimentDesign.CreateFrom(linkedDesignFile);
+                for (int rowIndex = 0; rowIndex < experimentDesign.BaseBlockTable.Rows.Count; rowIndex++) {
+                    DataRow row = experimentDesign.BaseBlockTable.Rows[rowIndex];
+                    StringBuilder sb = new StringBuilder();
+                    foreach (DataColumn column in experimentDesign.BaseBlockTable.Columns) {
+                        sb.Append(column.ColumnName + "= " + row[column.ColumnName]);
+                    }
+
+            
+                    currentList.Add(new OrderRow(rowIndex, sb.ToString()));
+                }
+                
+                bool valid = currentList.SequenceEqual(List);
+                return valid;
+            }
+        }
         
         public int[] IndexOrder {
             get {
