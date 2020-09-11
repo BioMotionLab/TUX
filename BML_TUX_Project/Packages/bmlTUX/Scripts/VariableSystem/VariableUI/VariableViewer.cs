@@ -202,13 +202,9 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             
             bool isCustomProbability = CheckIfCustomProbability();
             
-            
-            
             valuesList.DoLayoutList();
             
-            EditorGUILayout.LabelField("test");
             if (isCustomProbability) {
-                CheckForProbabilityArrayErrors();
                 CalculateFinalProbability();
                 CheckProbabilityErrors(true);
             }
@@ -243,12 +239,25 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                 }
             };
 
+            valuesList.onRemoveCallback = list => { RemoveValue(list.index); };
+            valuesList.onAddCallback = list => { AddValue(); };
+
+        }
+
+        void AddValue() {
+            valuesProperty.arraySize++;
+            probabilitiesProperty.arraySize++;
+        }
+
+        void RemoveValue(int index) {
+            valuesProperty.DeleteArrayElementAtIndex(index);
+            probabilitiesProperty.DeleteArrayElementAtIndex(index);
+         
         }
 
         void DrawProbabilityElement(int index, Rect leftRect) {
             if (index > probabilitiesProperty.arraySize-1) {
                 Debug.Log("index too big");
-                CheckForProbabilityArrayErrors();
             }
 
             var probabilityElement = probabilitiesProperty.GetArrayElementAtIndex(index);
@@ -318,18 +327,8 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
             return customProb;
         }
-        
-        void CheckForProbabilityArrayErrors() {
-            while (probabilitiesProperty.arraySize < valuesProperty.arraySize) {
-                probabilitiesProperty.arraySize++;
-            }
-            while (probabilitiesProperty.arraySize > valuesProperty.arraySize) {
-                probabilitiesProperty.DeleteArrayElementAtIndex(probabilitiesProperty.arraySize-1);
-                probabilitiesProperty.arraySize--;
-            }
-        }
 
-        
+
         float GetRunningTotal(bool skipLast = false) {
             float runningTotal = 0;
 
