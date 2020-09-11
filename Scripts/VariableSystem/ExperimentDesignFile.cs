@@ -37,7 +37,8 @@ namespace bmlTUX.Scripts.VariableSystem {
         bool valid = true;
 
         [SerializeField] [HideInInspector] public bool ShowAdvancedEditor = false;
-
+        [SerializeField][HideInInspector] public bool BlockOrderIsValid;
+        
         void OnValidate() {
             Validate();
             CheckBlockOrderValidity();
@@ -83,13 +84,13 @@ namespace bmlTUX.Scripts.VariableSystem {
                 if (blockOrderDefinition == null) continue;
                 if (!blockOrderDefinition.IsStillValid) {
                     AllValid = false;
+                    Debug.Log($"{this.name} is invalid because of {blockOrderDefinition.name}");
                 }
             }
 
-            if (!AllValid) TuxLog.LogError("Block Order No longer Valid!");
-            else Debug.Log(TuxLog.Good("block Order valid"));
+            BlockOrderIsValid = AllValid;
         }
-
+        
     }
     
 

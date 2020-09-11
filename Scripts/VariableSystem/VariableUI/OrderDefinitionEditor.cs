@@ -13,7 +13,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         
             list = new ReorderableList(serializedObject, serializedObject.FindProperty(nameof(BlockOrderDefinition.List)));
 
-            list.drawHeaderCallback = rect => { EditorGUI.LabelField(rect, "Define BlockOrderDefinition:"); };
+            list.drawHeaderCallback = rect => { EditorGUI.LabelField(rect, "Drag to define order (Top to Bottom)"); };
         
             list.drawElementCallback = (rect, index, isActive, isFocused) => {
                 var element = list.serializedProperty.GetArrayElementAtIndex(index);

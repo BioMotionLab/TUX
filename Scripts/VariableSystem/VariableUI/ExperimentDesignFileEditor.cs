@@ -138,7 +138,10 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         
 
         public override void OnInspectorGUI() {
+            ExperimentDesignFile file = serializedObject.targetObject as ExperimentDesignFile;
+
             serializedObject.Update();
+            
 
             ShowRepetitionAndRandomizationSettings();
             EditorGUILayout.Space();
@@ -151,10 +154,11 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             ShowAdvancedOptions();
             EditorGUILayout.Space();
             DeleteVariablesFlaggedForDeletion();
-            
-           
-            serializedObject.ApplyModifiedProperties();
 
+            
+            serializedObject.ApplyModifiedProperties();
+            
+            
         }
 
         void DeleteVariablesFlaggedForDeletion() {
@@ -337,6 +341,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         }
 
         void ShowBlockOrderConfiguration() {
+            
             EditorGUILayout.LabelField("Manual Block Order",  EditorStyles.boldLabel);
             EditorGUI.indentLevel += 2;
             
@@ -349,9 +354,24 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.EndHorizontal();
             
             blockOrderFileList.DoLayoutList();
-
+            
+            CheckValidBlockOrder();
             
             EditorGUI.indentLevel -= 2;
+        }
+        
+        void CheckValidBlockOrder() {
+
+            ExperimentDesignFile experimentDesignFile = serializedObject.targetObject as ExperimentDesignFile;
+            if (experimentDesignFile == null) return;
+                
+            if (!experimentDesignFile.HasBlocks) return;
+                
+            if (!experimentDesignFile.BlockOrderIsValid) {
+                EditorGUILayout.HelpBox("A recent change has invalidated your manual block order configurations. Please update them before running your experiment",
+              
+                    MessageType.Error); 
+            }
         }
 
         void CreateNewBlockOrderDefinition() {

@@ -193,8 +193,10 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                 
                 DisplayValues();
                 
-                CheckMaxBlockPermutationsAllowed();
+                
             }
+            
+            CheckMaxBlockPermutationsAllowed();
         }
 
 
@@ -346,12 +348,26 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         
 
         void CheckMaxBlockPermutationsAllowed() {
-            if (!blockProperty.boolValue || valuesProperty.arraySize <= ExperimentDesign.MaxBlockPermutationsAllowed) return;
-            EditorGUILayout.HelpBox("Too many Block Values for automatic permutation.\n" +
-                                    "Must define possible Block orders manually using BlockOrderDefinition files.\n" +
-                                    "See Docs.",
+            
+
+            if (!blockProperty.boolValue ||
+                valuesProperty.arraySize <= ExperimentDesign.MaxBlockPermutationsAllowed) return;
+            
+            ExperimentDesignFile experimentDesignFile = serializedObject.targetObject as ExperimentDesignFile;
+            if (experimentDesignFile == null) return;
+            
+            if (experimentDesignFile.BlockOrderConfigurations.Count == 0) {
+                EditorGUILayout.HelpBox("Too many Block Values for automatic permutation.\n" +
+                                        "Must define possible Block orders manually using BlockOrderDefinition files.\n" +
+                                        "See Docs.",
+                    MessageType.Warning);
+            }
+
+            if (!experimentDesignFile.BlockOrderIsValid) {
+                EditorGUILayout.HelpBox("A recent change has invalidated your manual block order configurations. Please update them before running your experiment",
               
-                                    MessageType.Warning);
+                    MessageType.Error); 
+            }
         }
         
         void CheckProbabilityErrors(bool customProb) {
