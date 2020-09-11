@@ -7,14 +7,13 @@ using bmlTUX.Scripts.UI.EditorUI;
 using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem.VariableUI {
     [CustomEditor(typeof(ExperimentDesignFile))]
     public class ExperimentDesignFileEditor : Editor {
-
-
-        bool               showAdvanced;
+        
         VariableFactory factory;
         SerializedProperty factoryProp;
         SerializedProperty trialTableGenerationMode;
@@ -29,11 +28,14 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         SerializedProperty   trialRandomizationMode;
         SerializedProperty   trialRandomizationSubType;
         SerializedProperty   blockPartialRandomizationSubType;
+        SerializedProperty showAdvanced;
         ExperimentDesignFile designFileTarget;
         List<VariableViewer> ivViewers;
         List<VariableViewer> dvViewers;
         List<VariableViewer> pvViewers;
         public List<VariableViewer> ListToDelete = new List<VariableViewer>();
+
+        ReorderableList blockOrderFileList;
 
        
    
@@ -71,10 +73,24 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             controlSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.ControlSettings));
             guiSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.GuiSettings));
             fileLocationSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile.FileLocationSettings));
+            showAdvanced = serializedObject.FindProperty(nameof(ExperimentDesignFile.ShowAdvancedEditor));
+            
+            InitializeBlockOrderList();
+
             CreateAllViewers();
             
         }
-        
+
+        void InitializeBlockOrderList() {
+            blockOrderFileList = new ReorderableList(serializedObject,
+                serializedObject.FindProperty(nameof(ExperimentDesignFile.BlockOrderConfigurations)), true, false, true, true);
+            blockOrderFileList.drawHeaderCallback = rect => { EditorGUI.LabelField(rect, "Selected Configurations:"); };
+            blockOrderFileList.drawElementCallback = (rect, index, isActive, isFocused) => {
+                var element = blockOrderFileList.serializedProperty.GetArrayElementAtIndex(index);
+                EditorGUI.PropertyField(rect, element, GUIContent.none);
+            };
+        }
+
         void CreateIndependentVariableViewers() {
             ivViewers =  new List<VariableViewer>();
             CreateViewersFrom(nameof(VariableFactory.IntIVs), ivViewers);
@@ -158,7 +174,6 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
             
-            CreateAllViewers();
             EditorUtility.SetDirty(this);
         }
 
@@ -235,7 +250,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         void ShowViewers(List<VariableViewer> dict) {
             if (CheckEmptyDict(dict)) return;
             foreach (VariableViewer item in dict) {
-                item.Show();
+                item.UpdateView();
             }
         }
         bool CheckEmptyDict(IList dict) {
@@ -291,9 +306,9 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             
             EditorGUI.indentLevel++;
 
-            EditorGUILayout.HelpBox("See wiki for information.", MessageType.Info);
+            EditorGUILayout.HelpBox("See documentation for information.", MessageType.Info);
             
-            if (showAdvanced) {
+            if (showAdvanced.boolValue) {
                 
                 ShowTrialTableOptions();
                 EditorGUILayout.Space();
@@ -322,26 +337,20 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         }
 
         void ShowBlockOrderConfiguration() {
-            EditorGUILayout.LabelField("Manual block order configuration",  EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Manual Block Order",  EditorStyles.boldLabel);
             EditorGUI.indentLevel += 2;
-
-
-            if (orderConfigs.arraySize > 0) {
-                for (int i = 0; i < orderConfigs.arraySize; i++) {
-                    SerializedProperty order = orderConfigs.GetArrayElementAtIndex(i);
-                    EditorGUILayout.PropertyField(order, true);
-                }
-            }
-            else {
-                EditorGUILayout.LabelField("None defined");
-            }
-
+            
             EditorGUILayout.BeginHorizontal();
             GUILayout.Space((EditorGUI.indentLevel + 1) * IndentWidth);
-            if (GUILayout.Button("Add New", GUILayout.Width(150))) {
+            if (GUILayout.Button("Create and Add New Block Order File", GUILayout.Width(240))) {
                 CreateNewBlockOrderDefinition();
             }
+            
             EditorGUILayout.EndHorizontal();
+            
+            blockOrderFileList.DoLayoutList();
+
+            
             EditorGUI.indentLevel -= 2;
         }
 
@@ -402,14 +411,14 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Advanced Settings", EditorStyles.boldLabel);
             GUILayout.FlexibleSpace();
-            if (showAdvanced) {
+            if (showAdvanced.boolValue) {
                 if (GUILayout.Button("Hide", GUILayout.Width(150))) {
-                    showAdvanced = false;
+                    showAdvanced.boolValue = false;
                 }
             }
             else {
                 if (GUILayout.Button("Show", GUILayout.Width(150))) {
-                    showAdvanced = true;
+                    showAdvanced.boolValue = true;
                 }
             }
 

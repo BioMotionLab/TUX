@@ -244,6 +244,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aae9bcadd0af49f190f4b1a49e1c365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExperimentDesignFile: {fileID: 11400000, guid: 91b12d594af954bf3bcc25dd58d94449,
+    type: 2}
+  scriptReferences:
+    DragTrialScriptHere: {fileID: 11500000, guid: 713adbc2483d34d60b29a91ee05ca9a0,
+      type: 3}
+    DragBlockScriptHere: {fileID: 11500000, guid: c2b67cb98e7cc489ab61ac8d570d0354,
+      type: 3}
+    DragExperimentScriptHere: {fileID: 11500000, guid: a30fefebe06134795b0a77ed46709be8,
+      type: 3}
+  Ended: 0
+  Running: 0
 --- !u!4 &603200053
 Transform:
   m_ObjectHideFlags: 0

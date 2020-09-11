@@ -31,7 +31,8 @@ MonoBehaviour:
       Block: 0
       Values:
       - 1
-      - 2
+      - 0.39
+      - -1.84
       Probabilities:
       - 0
       - 0
@@ -42,9 +43,10 @@ MonoBehaviour:
       MixingType: 0
       Block: 0
       Values:
-      - 2.5
-      - 1.5
+      - 1
+      - 2
       Probabilities:
+      - 1
       - 0
       - 0
     StringIVs:
@@ -65,16 +67,7 @@ MonoBehaviour:
       - 0
       - 0
       - 0
-      - 0
-    BoolIVs:
-    - Name: BlockBool
-      TypeOfVariable: 0
-      DataType: 3
-      ExpandSettings: 1
-      MixingType: 0
-      Block: 1
-      Values: 0100
-      Probabilities: []
+    BoolIVs: []
     GameObjectIVs: []
     Vector2IVs: []
     Vector3IVs: []
@@ -101,6 +94,7 @@ MonoBehaviour:
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
   FileLocationSettings: {fileID: 11400000, guid: 07f42cef79754c74583d0209412fa987,
     type: 2}
+  ShowAdvancedEditor: 1
   TrialTableGeneration: 0
   BlockOrderConfigurations:
-  - {fileID: 11400000, guid: ecfe1e1dc77614e41987a1004f44c8d8, type: 2}
+  - {fileID: 11400000, guid: 6dd38f36839f847a7852bcce42609d66, type: 2}

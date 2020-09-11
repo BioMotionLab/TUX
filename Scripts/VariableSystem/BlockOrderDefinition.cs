@@ -7,11 +7,15 @@ using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
     public class BlockOrderDefinition : ScriptableObject {
+        
+        
         [SerializeField]
         public List<OrderRow> List = new List<OrderRow>();
     
         public bool Randomize = false;
-
+        ExperimentDesignFile linkedDesignFile;
+        public bool IsStillValid = true;
+        
         public int[] IndexOrder {
             get {
                 List<int> order = new List<int>();
@@ -31,8 +35,12 @@ namespace bmlTUX.Scripts.VariableSystem {
             }
         }
 
-        public void InitFromDesign(ExperimentDesignFile experimentDesignFile) {
         
+           
+        
+
+        public void InitFromDesign(ExperimentDesignFile experimentDesignFile) {
+            linkedDesignFile = experimentDesignFile;
             ExperimentDesign experimentDesign = ExperimentDesign.CreateFrom(experimentDesignFile);
             for (int rowIndex = 0; rowIndex < experimentDesign.BaseBlockTable.Rows.Count; rowIndex++) {
                 DataRow row = experimentDesign.BaseBlockTable.Rows[rowIndex];
