@@ -35,9 +35,12 @@ namespace bmlTUX.Scripts.VariableSystem {
         public FileLocationSettings FileLocationSettings;
 
         bool valid = true;
-        
+
+        [SerializeField] [HideInInspector] public bool ShowAdvancedEditor = false;
+
         void OnValidate() {
             Validate();
+            CheckBlockOrderValidity();
         }
 
         public void Validate() {
@@ -73,6 +76,19 @@ namespace bmlTUX.Scripts.VariableSystem {
         [SerializeField]
         public List<BlockOrderDefinition> BlockOrderConfigurations = new List<BlockOrderDefinition>();
 
+        public void CheckBlockOrderValidity() {
+            if (BlockOrderConfigurations.Count == 0) return;
+            bool AllValid = true;
+            foreach (BlockOrderDefinition blockOrderDefinition in BlockOrderConfigurations) {
+                if (blockOrderDefinition == null) continue;
+                if (!blockOrderDefinition.IsStillValid) {
+                    AllValid = false;
+                }
+            }
+
+            if (!AllValid) TuxLog.LogError("Block Order No longer Valid!");
+            else Debug.Log(TuxLog.Good("block Order valid"));
+        }
 
     }
     
