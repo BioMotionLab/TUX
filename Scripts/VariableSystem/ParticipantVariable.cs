@@ -14,7 +14,13 @@ namespace bmlTUX.Scripts.VariableSystem {
         public abstract bool ValuesAreConstrained { get; }
 
         public abstract void SetValueDefaultValue();
-    
+
+        public abstract void AddValue();
+
+
+        public abstract void RemoveValue(int index);
+
+
     }
 
 
@@ -42,6 +48,14 @@ namespace bmlTUX.Scripts.VariableSystem {
             }
         }
 
+        public override void AddValue() {
+            PossibleValues.Add(PossibleValues[PossibleValues.Count-1]);
+        }
+
+        public override void RemoveValue(int index) {
+            PossibleValues.RemoveAt(index);
+        }
+
         int selectedValue;
         public override int SelectedValue {
             get => selectedValue;
@@ -57,7 +71,6 @@ namespace bmlTUX.Scripts.VariableSystem {
             = new ParticipantVariableValuesAdderStrategy<T>();
 
         protected ParticipantVariable() {
-            Name = UnnamedColumn.Name;
             TypeOfVariable = VariableType.Participant;
         }
 

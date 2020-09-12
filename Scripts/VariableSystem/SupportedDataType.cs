@@ -3,6 +3,7 @@
 namespace bmlTUX.Scripts.VariableSystem {
     [Serializable]
     public enum SupportedDataType {
+        ChooseType,
         Int,
         Float,
         String,
@@ -11,7 +12,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         Vector2,
         Vector3,
         CustomDataTypeNotYetImplemented,
-        ChooseType,
+        
         
     }
 }
