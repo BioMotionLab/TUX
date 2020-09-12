@@ -6,6 +6,7 @@ using bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies;
 namespace bmlTUX.Scripts.VariableSystem {
     [Serializable]
     public abstract class DependentVariable : Variable {
+       
     }
 
 
@@ -16,7 +17,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         public override Type Type => typeof(T);
 
         protected DependentVariable() {
-            Name = UnnamedColumn.Name;
+            
             TypeOfVariable = VariableType.Dependent;
 
         }

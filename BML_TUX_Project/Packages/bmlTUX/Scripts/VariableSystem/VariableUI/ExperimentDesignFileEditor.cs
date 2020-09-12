@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Management.Instrumentation;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.UI.EditorUI;
 using bmlTUX.Scripts.Utilities;
@@ -11,6 +12,7 @@ using UnityEditorInternal;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem.VariableUI {
+
     [CustomEditor(typeof(ExperimentDesignFile))]
     public class ExperimentDesignFileEditor : Editor {
         
@@ -37,6 +39,8 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
         ReorderableList blockOrderFileList;
 
+        public VariableType selectedVariableType;
+        public SupportedDataType selectedDataType;
        
    
         const int IndentWidth  = 10;
@@ -78,7 +82,10 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             InitializeBlockOrderList();
 
             CreateAllViewers();
-            
+
+            selectedDataType = factory.DataTypeToCreate;
+            selectedVariableType = factory.VariableTypeToCreate;
+
         }
 
         void InitializeBlockOrderList() {
@@ -91,55 +98,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             };
         }
 
-        void CreateIndependentVariableViewers() {
-            ivViewers =  new List<VariableViewer>();
-            CreateViewersFrom(nameof(VariableFactory.IntIVs), ivViewers);
-            CreateViewersFrom(nameof(VariableFactory.FloatIVs), ivViewers);
-            CreateViewersFrom(nameof(VariableFactory.StringIVs), ivViewers);
-            CreateViewersFrom(nameof(VariableFactory.BoolIVs), ivViewers);
-            CreateViewersFrom(nameof(VariableFactory.GameObjectIVs), ivViewers);
-            CreateViewersFrom(nameof(VariableFactory.Vector2IVs), ivViewers);
-            CreateViewersFrom(nameof(VariableFactory.Vector3IVs), ivViewers);
-            CreateViewersFrom(nameof(VariableFactory.CustomDataTypeIVs), ivViewers);
-        }
-        
-        void CreateParticipantVariableViewers() {
-            pvViewers =  new List<VariableViewer>();
-            CreateViewersFrom(nameof(VariableFactory.IntParticipantVariables), pvViewers);
-            CreateViewersFrom(nameof(VariableFactory.FloatParticipantVariables), pvViewers);
-            CreateViewersFrom(nameof(VariableFactory.StringParticipantVariables), pvViewers);
-            CreateViewersFrom(nameof(VariableFactory.BoolParticipantVariables), pvViewers);
-            CreateViewersFrom(nameof(VariableFactory.GameObjectParticipantVariables), pvViewers);
-            CreateViewersFrom(nameof(VariableFactory.Vector2ParticipantVariables), pvViewers);
-            CreateViewersFrom(nameof(VariableFactory.Vector3ParticipantVariables), pvViewers);
-            CreateViewersFrom(nameof(VariableFactory.CustomDataParticipantVariables), pvViewers);
-        }
-        
-        void CreateDependentVariableViewers() {
-            dvViewers = new List<VariableViewer>();
-            CreateViewersFrom(nameof(VariableFactory.IntDVs), dvViewers);
-            CreateViewersFrom(nameof(VariableFactory.FloatDVs), dvViewers);
-            CreateViewersFrom(nameof(VariableFactory.StringDVs), dvViewers);
-            CreateViewersFrom(nameof(VariableFactory.BoolDVs), dvViewers);
-            CreateViewersFrom(nameof(VariableFactory.GameObjectDVs), dvViewers);
-            CreateViewersFrom(nameof(VariableFactory.Vector2DVs), dvViewers);
-            CreateViewersFrom(nameof(VariableFactory.Vector3DVs), dvViewers);
-            CreateViewersFrom(nameof(VariableFactory.CustomDataTypeDVs), dvViewers);
-        }
-
-        void CreateViewersFrom(string variableRelativeName, List<VariableViewer> viewerList) {
-            SerializedProperty list = factoryProp.FindPropertyRelative(variableRelativeName);
-            
-            for (int index = 0; index < list.arraySize; index++) {
-                SerializedProperty variableProp = list.GetArrayElementAtIndex(index);
-                viewerList.Add(new VariableViewer(this, variableProp, list, index));
-            }
-        }
-        
-
         public override void OnInspectorGUI() {
-            ExperimentDesignFile file = serializedObject.targetObject as ExperimentDesignFile;
-
             serializedObject.Update();
             
 
@@ -158,33 +117,70 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             
             serializedObject.ApplyModifiedProperties();
             
-            
-        }
-
-        void DeleteVariablesFlaggedForDeletion() {
-            foreach (VariableViewer variableViewer in ListToDelete) {
-                
-                int variableViewerIndex = variableViewer.Index;
-                SerializedProperty containingList = variableViewer.ContainingList;
-                containingList.DeleteArrayElementAtIndex(variableViewerIndex);
-            }
-            ListToDelete.Clear();
-            RebuildEditor();
-            
-        }
-
-
-        void RebuildEditor() {
-            serializedObject.ApplyModifiedProperties();
-            serializedObject.Update();
-            
-            EditorUtility.SetDirty(this);
         }
 
         void CreateAllViewers() {
-            CreateIndependentVariableViewers();
-            CreateDependentVariableViewers();
-            CreateParticipantVariableViewers();
+            ivViewers =  new List<VariableViewer>();
+            dvViewers = new List<VariableViewer>();
+            pvViewers =  new List<VariableViewer>();
+            
+            CreateViewersFrom(nameof(VariableFactory.IndependentVariables), ivViewers);
+            CreateViewersFrom( nameof(VariableFactory.DependentVariables), dvViewers);
+            CreateViewersFrom(nameof(VariableFactory.ParticipantVariables), pvViewers);
+        }
+
+        void CreateViewersFrom(string variableListName, List<VariableViewer> viewerList) {
+            SerializedProperty list = factoryProp.FindPropertyRelative(variableListName);
+            
+            for (int index = 0; index < list.arraySize; index++) {
+                SerializedProperty variableProp = list.GetArrayElementAtIndex(index);
+                viewerList.Add(new VariableViewer(this, variableProp, viewerList));
+            }
+        }
+
+
+        void DeleteVariablesFlaggedForDeletion() {
+           
+            
+            foreach (VariableViewer variableViewer in ListToDelete) {
+                
+                RemoveVariableFromFactory(variableViewer);
+                variableViewer.inViewerList.Remove(variableViewer);
+                
+            }
+            ListToDelete.Clear();
+
+        }
+
+        void RemoveVariableFromFactory(VariableViewer variableViewer) {
+            
+            
+            
+            SerializedProperty containingList;
+            switch ((VariableType)variableViewer.VariableProperty.FindPropertyRelative(nameof(Variable.TypeOfVariable)).enumValueIndex) {
+                case VariableType.Independent:
+                    containingList = factoryProp.FindPropertyRelative(nameof(VariableFactory.IndependentVariables));
+                    break;
+                case VariableType.Dependent:
+                    containingList = factoryProp.FindPropertyRelative(nameof(VariableFactory.DependentVariables));
+                    break;
+                case VariableType.Participant:
+                    containingList = factoryProp.FindPropertyRelative(nameof(VariableFactory.ParticipantVariables));
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            for (int i = 0; i < containingList.arraySize; i++) {
+                var element = containingList.GetArrayElementAtIndex(i);
+                string elementName = element.FindPropertyRelative(nameof(Variable.Name)).stringValue;
+                string variableName = variableViewer.VariableProperty.FindPropertyRelative(nameof(Variable.Name))
+                    .stringValue;
+                if (elementName == variableName) {
+                    containingList.DeleteArrayElementAtIndex(i);
+                    Debug.Log($"Match found: elem {elementName}, variable to delete {variableName}"); 
+                }
+            }
         }
 
 
@@ -193,7 +189,6 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             if (factory == null) return;
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Variables", EditorStyles.boldLabel);
-
             ShowVariableCreationInterface();
 
 
@@ -201,7 +196,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                                                                     normal = {background = MakeTex(variablePanelBackgroundColor)}
                                                                 };
             
-            EditorGUILayout.LabelField("Independent Variables", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField($"Independent Variables: {factory.IndependentVariables.Count}", EditorStyles.boldLabel);
             EditorGUILayout.BeginVertical(variableStyle);
             EditorGUI.indentLevel++;
             ShowViewers(ivViewers);
@@ -209,7 +204,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             EditorGUI.indentLevel--;
             EditorGUILayout.Space();
             
-            EditorGUILayout.LabelField("Dependent Variables", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField($"Dependent Variables: {factory.DependentVariables.Count}", EditorStyles.boldLabel);
             EditorGUILayout.BeginVertical(variableStyle);
             EditorGUI.indentLevel++;
             ShowViewers(dvViewers);
@@ -217,7 +212,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             EditorGUI.indentLevel--;
             EditorGUILayout.Space();
             
-            EditorGUILayout.LabelField("Participant Variables", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField($"Participant Variables: {factory.ParticipantVariables.Count}", EditorStyles.boldLabel);
             EditorGUILayout.BeginVertical(variableStyle);
             EditorGUI.indentLevel++;
             ShowViewers(pvViewers);
@@ -236,18 +231,57 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                 CreateNewVariableAndViewer();
             }
 
-            factory.VariableTypeToCreate = (VariableType) EditorGUILayout.EnumPopup(factory.VariableTypeToCreate);
-            factory.DataTypeToCreate = (SupportedDataType) EditorGUILayout.EnumPopup(factory.DataTypeToCreate);
+            selectedVariableType = (VariableType) EditorGUILayout.EnumPopup(selectedVariableType);
+            selectedDataType = (SupportedDataType) EditorGUILayout.EnumPopup(selectedDataType);
+
+            factoryProp.serializedObject.Update();
+            factoryProp.FindPropertyRelative(nameof(VariableFactory.DataTypeToCreate)).enumValueIndex = (int) selectedDataType;
+            factoryProp.FindPropertyRelative(nameof(VariableFactory.VariableTypeToCreate)).enumValueIndex = (int) selectedVariableType;
+            factoryProp.serializedObject.ApplyModifiedProperties();            
             EditorGUILayout.EndHorizontal();
         }
 
         void CreateNewVariableAndViewer() {
+
             if (factory.VariableTypeToCreate == VariableType.ChooseType || factory.DataTypeToCreate == SupportedDataType.ChooseType) {
                 Debug.LogWarning($"{TuxLog.Prefix} Need to select variable type and data type before creating a variable");
                 return;
             }
-            factory.AddNew();
-            RebuildEditor();
+
+            VariableType typeToCreate = factory.VariableTypeToCreate;
+            Variable variable = factory.AddNew();
+            Debug.Log($"VariableCreated with type {variable.TypeOfVariable}");
+            
+            switch (typeToCreate) {
+                case VariableType.Independent:
+                    CreateViewerFrom(nameof(VariableFactory.IndependentVariables), ivViewers);
+                    break;
+                case VariableType.Dependent:
+                    CreateViewerFrom(nameof(VariableFactory.DependentVariables), dvViewers);
+                    break;
+                case VariableType.Participant:
+                    CreateViewerFrom(nameof(VariableFactory.ParticipantVariables), pvViewers);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            selectedDataType = SupportedDataType.ChooseType;
+            selectedVariableType = VariableType.ChooseType;
+            
+            serializedObject.Update();
+        }
+        
+        void CreateViewerFrom(string variableRelativeName, List<VariableViewer> viewerList) {
+            serializedObject.Update();
+            SerializedProperty list = factoryProp.FindPropertyRelative(variableRelativeName);
+          
+            int index = list.arraySize-1;
+            Debug.Log($"New Index {index} num vars = {list.arraySize}");
+            SerializedProperty variableProp = list.GetArrayElementAtIndex(index);
+            var name = variableProp.FindPropertyRelative(nameof(Variable.Name));
+         
+            VariableViewer variableViewer = new VariableViewer(this, variableProp, viewerList);
+            viewerList.Add(variableViewer);
         }
 
 
@@ -458,5 +492,10 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             result.Apply();
             return result;
         }
+    }
+
+    public class VariableViewerRegistry {
+        List<VariableViewer> viewerList;
+        SerializedProperty containingFactoryList;
     }
 }
