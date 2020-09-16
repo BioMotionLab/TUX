@@ -10,6 +10,7 @@ namespace bmlTUX.Scripts.VariableSystem {
     
     [Serializable]
     public abstract class IndependentVariable : Variable {
+        [SerializeField]
         public VariableMixingType MixingType;
         public bool               Block;
 
@@ -20,6 +21,8 @@ namespace bmlTUX.Scripts.VariableSystem {
         public abstract void AddValue();
 
         public abstract void RemoveValue(int index);
+
+        public abstract List<string> ValuesAsString();
     }
 
     [Serializable]
@@ -39,6 +42,14 @@ namespace bmlTUX.Scripts.VariableSystem {
 
         [SerializeField]
         public List<T> Values;
+
+        public override List<string> ValuesAsString() {
+            List<string> valueStrings = new List<string>();
+            foreach (T value in Values) {
+                valueStrings.Add(value.ToString());
+            }
+            return valueStrings;
+        }
 
         [SerializeField]
         public List<float> Probabilities;

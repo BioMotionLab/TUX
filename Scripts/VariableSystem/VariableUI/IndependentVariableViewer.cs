@@ -2,6 +2,7 @@ using System;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Analytics;
@@ -11,7 +12,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         
         SerializedProperty probabilitiesProperty;
         bool waitingToClearAllValues;
-
+        
         public IndependentVariableViewer(SerializedProperty variableProperty) 
             : base(variableProperty, VariableType.Independent) {
             probabilitiesProperty = variableProperty.FindPropertyRelative("Probabilities");
@@ -22,7 +23,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         }
         
         void RemoveProbability(int index) {
-            probabilitiesProperty.DeleteArrayElementAtIndex(index);
+            if (index < probabilitiesProperty.arraySize) probabilitiesProperty.DeleteArrayElementAtIndex(index);
         }
         
         protected override void DrawVariableSpecificInspector() {
@@ -33,9 +34,12 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             if (ExpandSettingsProp.boolValue) {
                 
                 EditorGUILayout.PropertyField(blockProperty);
-
+                
                 SerializedProperty mixType = variableProperty.FindPropertyRelative(nameof(IndependentVariable.MixingType));
-                EditorGUILayout.PropertyField(mixType);
+                VariableMixingType op = (VariableMixingType) mixType.intValue;
+                op = (VariableMixingType)EditorGUILayout.EnumPopup("Mixing Type", op);
+                mixType.intValue = (int) op;
+
             }
             
             if (valuesProperty.arraySize == 0) {

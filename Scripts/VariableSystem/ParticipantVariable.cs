@@ -22,6 +22,8 @@ namespace bmlTUX.Scripts.VariableSystem {
 
 
         protected ParticipantVariable() : base(VariableType.Participant) { }
+
+        public abstract void ConvertOldValues();
     }
 
 
@@ -31,7 +33,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         public bool ConstrainValues;
         public override bool ValuesAreConstrained => ConstrainValues;
         public List<T> Values = new List<T>();
-
+        public List<T> PossibleValues = new List<T>();
 
         public override void SetValueDefaultValue() {
             Value = Values.Count > 0 ? Values[0] : DefaultValue;
@@ -77,6 +79,8 @@ namespace bmlTUX.Scripts.VariableSystem {
             return variableValuesAdderStrategy.AddValuesToCopyOf(table, this);
         }
 
-
+        public override void ConvertOldValues() {
+            Values = PossibleValues;
+        }
     }
 }

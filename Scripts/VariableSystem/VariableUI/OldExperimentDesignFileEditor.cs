@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using bmlTUX.Scripts.VariableSystem;
+using bmlTUX.Scripts.VariableSystem.VariableUI;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,37 +35,63 @@ public class OldExperimentDesignFileEditor : Editor
             
             newFile.ExperimentRepetitions = old.ExperimentRepetitions;
 
+            foreach (Variable variable in newFile.Factory.ParticipantVariables) {
+                ParticipantVariable participantVariable = variable as ParticipantVariable;
+                participantVariable.DataType = ConvertOldDataType(participantVariable.DataType);
+                participantVariable.ConvertOldValues();
+            }
+
         }
+
+        
 
         EditorGUILayout.LabelField("IVs:");
         EditorGUI.indentLevel++;
         foreach (Variable variable in old.Factory.IndependentVariables) {
-            EditorGUILayout.LabelField(variable.Name);
+            EditorGUILayout.LabelField($"{variable.Name}, type {variable.DataType}");
+            IndependentVariable iv = variable as IndependentVariable;
+            List<string> values = iv.ValuesAsString();
+            EditorGUI.indentLevel++;
+            foreach (string value in values) {
+                EditorGUILayout.LabelField(value);
+            }
+            EditorGUI.indentLevel--;
         }
         EditorGUI.indentLevel--;
         
         EditorGUILayout.LabelField("DVs:");
         EditorGUI.indentLevel++;
         foreach (Variable variable in old.Factory.DependentVariables) {
-            EditorGUILayout.LabelField(variable.Name);
+            EditorGUILayout.LabelField($"{variable.Name}, type {variable.DataType}");
         }
         EditorGUI.indentLevel--;
         
         EditorGUILayout.LabelField("PVs:");
         EditorGUI.indentLevel++;
         foreach (Variable variable in old.Factory.ParticipantVariables) {
-            EditorGUILayout.LabelField(variable.Name);
+            EditorGUILayout.LabelField($"{variable.Name}, type {ConvertOldDataType(variable.DataType)}");
         }
         EditorGUI.indentLevel--;
 
         serializedObject.ApplyModifiedProperties();
     }
-    
-    
+
+    static SupportedDataType ConvertOldDataType(SupportedDataType supportedDataType) {
+        int oldTypeIndex = (int)supportedDataType;
+        SupportedDataType dataType = (SupportedDataType)(oldTypeIndex + 1);
+        return dataType;
+    }
+
+
     ExperimentDesignFile2 CreateDesignFile() {
+        string oldPath = AssetDatabase.GetAssetPath(target);
         ExperimentDesignFile2 file = CreateInstance<ExperimentDesignFile2>();
-        file.name = target.name + "_updated";
-        AssetDatabase.CreateAsset(file, "Assets/" + file.name + ".asset");
+        string fileName = Path.GetFileNameWithoutExtension(oldPath) + "_updated" + ".asset";
+        string path = Path.GetDirectoryName(oldPath);
+        string fullPath = Path.Combine(path, fileName);
+        string uniquePath = EditorGuiHelper.GetUniqueName(fullPath);
+        Debug.Log(uniquePath);
+        AssetDatabase.CreateAsset(file, uniquePath);
         AssetDatabase.SaveAssets();
         return file;
     }

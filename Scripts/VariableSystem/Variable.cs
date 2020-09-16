@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
+using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
     
@@ -8,7 +9,7 @@ namespace bmlTUX.Scripts.VariableSystem {
     public abstract class Variable {
         public const string UnnamedName = "Unamed_Variable";
         public static int UnamedCounter = 0;
-
+        
         public static string GetUniqueName() {
             string newName = UnnamedName + "_" + UnamedCounter.ToString("D4");
             UnamedCounter++;
@@ -24,11 +25,15 @@ namespace bmlTUX.Scripts.VariableSystem {
         string name;
         public string Name;
 
+        [SerializeField]
         public          VariableType       VariableType;
+        
+        [SerializeField]
         public          SupportedDataType DataType;
         public abstract Type               Type { get; }
         public abstract DataTable AddValuesTo(DataTable table);
 
         public bool ExpandSettings = true;
+        
     }
 }
