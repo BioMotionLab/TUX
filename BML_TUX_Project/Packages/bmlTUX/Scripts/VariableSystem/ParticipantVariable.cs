@@ -21,6 +21,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         public abstract void RemoveValue(int index);
 
 
+        protected ParticipantVariable() : base(VariableType.Participant) { }
     }
 
 
@@ -29,11 +30,11 @@ namespace bmlTUX.Scripts.VariableSystem {
         public T Value;
         public bool ConstrainValues;
         public override bool ValuesAreConstrained => ConstrainValues;
-        public List<T> PossibleValues = new List<T>();
+        public List<T> Values = new List<T>();
 
 
         public override void SetValueDefaultValue() {
-            Value = PossibleValues.Count > 0 ? PossibleValues[0] : DefaultValue;
+            Value = Values.Count > 0 ? Values[0] : DefaultValue;
         }
 
         protected abstract T DefaultValue { get; }
@@ -41,7 +42,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         public override string[] PossibleValuesStringArray {
             get {
                 List<string> strings = new List<string>();
-                foreach (T possibleValue in PossibleValues) {
+                foreach (T possibleValue in Values) {
                     strings.Add(possibleValue.ToString());
                 }
                 return strings.ToArray();
@@ -49,11 +50,11 @@ namespace bmlTUX.Scripts.VariableSystem {
         }
 
         public override void AddValue() {
-            PossibleValues.Add(PossibleValues[PossibleValues.Count-1]);
+            Values.Add(Values[Values.Count-1]);
         }
 
         public override void RemoveValue(int index) {
-            PossibleValues.RemoveAt(index);
+            Values.RemoveAt(index);
         }
 
         int selectedValue;
@@ -61,20 +62,18 @@ namespace bmlTUX.Scripts.VariableSystem {
             get => selectedValue;
             set {
                 selectedValue = value;
-                Value = PossibleValues[value];
+                Value = Values[value];
             }
         }
         
 
         public override Type Type => typeof(T);
-        readonly ParticipantVariableValuesAdderStrategy<T> variableValuesAdderStrategy 
-            = new ParticipantVariableValuesAdderStrategy<T>();
-
-        protected ParticipantVariable() {
-            TypeOfVariable = VariableType.Participant;
-        }
+        ParticipantVariableValuesAdderStrategy<T> variableValuesAdderStrategy;
+            
+        
 
         public override DataTable AddValuesTo(DataTable table) {
+            if (variableValuesAdderStrategy == null) variableValuesAdderStrategy = new ParticipantVariableValuesAdderStrategy<T>();
             return variableValuesAdderStrategy.AddValuesToCopyOf(table, this);
         }
 

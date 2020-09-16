@@ -33,64 +33,15 @@ namespace bmlTUX.Scripts.VariableSystem {
         public GuiSettings GuiSettings;
         [SerializeField]
         public FileLocationSettings FileLocationSettings;
-
-        bool valid = true;
-
-        [SerializeField] [HideInInspector] public bool ShowAdvancedEditor = false;
-        [SerializeField][HideInInspector] public bool BlockOrderIsValid;
+        
         
         void OnValidate() {
-            Validate();
-            CheckBlockOrderValidity();
-        }
-
-        public void Validate() {
-            bool wasValid = valid;
-            valid = true;
-            if (ColumnNamesSettings == null) MissingReference(nameof(ColumnNamesSettings));
-            if (ControlSettings == null) MissingReference(nameof(ControlSettings));
-            if (FileLocationSettings == null) MissingReference(nameof(FileLocationSettings));
-            if (GuiSettings == null) MissingReference(nameof(GuiSettings));
-            if (!wasValid && valid) Debug.Log(TuxLog.Good($"{nameof(ExperimentDesignFile)} Fixed."), this);
-        }
-
-        void MissingReference(string missingReference) {
-            TuxLog.LogError($"{nameof(ExperimentDesignFile)} does not have {missingReference} defined. " + 
-                         $"Please drag {missingReference} into the proper place in the design file", this);
-            valid = false;
-        }
-
-        public Variables Variables => Factory.Variables;
-        
-        public bool HasBlocks {
-            get {
-                List<IndependentVariable> blockIVs = Variables.BlockVariables;
-                return blockIVs.Count > 0;
-            }
-        }
-
-       
-
-        [SerializeField]
-        public TrialTableGenerationMode TrialTableGeneration = TrialTableGenerationMode.OnTheFly;
-        
-        [SerializeField]
-        public List<BlockOrderDefinition> BlockOrderConfigurations = new List<BlockOrderDefinition>();
-
-        public void CheckBlockOrderValidity() {
-            if (BlockOrderConfigurations.Count == 0) return;
-            bool AllValid = true;
-            foreach (BlockOrderDefinition blockOrderDefinition in BlockOrderConfigurations) {
-                if (blockOrderDefinition == null) continue;
-                if (!blockOrderDefinition.IsStillValid) {
-                    AllValid = false;
-                    Debug.Log($"{this.name} is invalid because of {blockOrderDefinition.name}");
-                }
-            }
-
-            BlockOrderIsValid = AllValid;
+            Debug.LogWarning($"{name} is obsolete. Please Update. (You can click on this warning to select it)", this);
         }
         
+        
+
+
     }
     
 

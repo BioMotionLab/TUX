@@ -7,10 +7,11 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
         ReorderableList    list;
         SerializedProperty randomize;
+        SerializedProperty isValid;
         void OnEnable() {
 
             randomize = serializedObject.FindProperty(nameof(BlockOrderDefinition.Randomize));
-        
+            isValid = serializedObject.FindProperty(nameof(BlockOrderDefinition.isValid));
             list = new ReorderableList(serializedObject, serializedObject.FindProperty(nameof(BlockOrderDefinition.List)));
 
             list.drawHeaderCallback = rect => { EditorGUI.LabelField(rect, "Drag to define order (Top to Bottom)"); };
@@ -26,15 +27,24 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         public override void OnInspectorGUI() {
         
             serializedObject.Update();
-
+            
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+            if (!isValid.boolValue) { 
+                EditorGUILayout.HelpBox("This file is currently invalid because the block variables of its associated designFile have been modified", MessageType.Warning); 
+            }
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(randomize);
+            EditorGUILayout.Space();
             if (!randomize.boolValue) {
                 list.DoLayoutList();
             }
-        
-            EditorGUILayout.PropertyField(randomize);
-        
+            EditorGUILayout.Space();
+            
+            
             serializedObject.ApplyModifiedProperties();
-            EditorUtility.SetDirty(target);
+            
+            
         }
 
     

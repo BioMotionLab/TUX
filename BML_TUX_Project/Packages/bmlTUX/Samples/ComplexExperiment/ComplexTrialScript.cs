@@ -46,9 +46,10 @@ public class ComplexTrialScript : Trial {
     
         // You might want to do a while-loop to wait for participant response: 
         bool waitingForParticipantResponse = true;
+        Debug.Log("Press the spacebar to end this trial.");
+        
         while (waitingForParticipantResponse) {   // keep check each frame until waitingForParticipantResponse set to false.
-
-            if (Input.GetKeyDown(KeyCode.Return)) { // check return key pressed
+            if (Input.GetKeyDown(KeyCode.Space)) { // check return key pressed
                 waitingForParticipantResponse = false;  // escape from while loop
             }
         

@@ -98,7 +98,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
         }
 
         void CreateDesignFile() {
-            ExperimentDesignFile file = CreateInstance<ExperimentDesignFile>();
+            ExperimentDesignFile2 file = CreateInstance<ExperimentDesignFile2>();
             file.name = experimentName + DesignFileKey;
             AssetDatabase.CreateAsset(file, "Assets/" + file.name + ".asset");
             AssetDatabase.SaveAssets();
@@ -181,7 +181,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
             EditorPrefs.DeleteKey(DesignFileKey);
 
             string pathToTrialScript = "Assets/" + typeName + ".asset";
-            runner.DesignFile = AssetDatabase.LoadAssetAtPath(pathToTrialScript, typeof(ScriptableObject)) as ExperimentDesignFile;
+            runner.SetExperimentDesignFile(AssetDatabase.LoadAssetAtPath(pathToTrialScript, typeof(ScriptableObject)) as ExperimentDesignFile2);
         }
         
         static void CheckBlockCreated(ExperimentRunner runner) {

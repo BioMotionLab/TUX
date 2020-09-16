@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7f52b7cbc1de94f2fbdaad822b4e3ef4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ColumnNamesSettings: {fileID: 11400000, guid: b004757e12fd66b43828570a0f83b1db,
+      type: 2}
+  - ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
+  - GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
+  - FileLocationSettings: {fileID: 11400000, guid: 07f42cef79754c74583d0209412fa987,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

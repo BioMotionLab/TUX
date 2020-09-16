@@ -35,13 +35,6 @@
               <e p="ComplexExperimentScript.cs" t="Include" />
               <e p="ComplexTrialScript.cs" t="Include" />
             </e>
-            <e p="TutorialExperiment" t="Include">
-              <e p="TutorialExperiment.asmdef" t="Include" />
-              <e p="TutorialSampleBlockScript.cs" t="Include" />
-              <e p="TutorialSampleExperimentRunner.cs" t="Include" />
-              <e p="TutorialSampleExperimentScript.cs" t="Include" />
-              <e p="TutorialSampleTrialScript.cs" t="Include" />
-            </e>
           </e>
           <e p="ScriptingTemplates" t="Include">
             <e p="BlockScriptTemplate.cs" t="Include" />
@@ -164,7 +157,10 @@
               <e p="BlockPartialRandomizationSubType.cs" t="Include" />
               <e p="DependentVariable.cs" t="Include" />
               <e p="ExperimentDesignFile.cs" t="Include" />
+              <e p="ExperimentDesignFile2.cs" t="Include" />
+              <e p="IExperimentDesignFile.cs" t="Include" />
               <e p="IndependentVariable.cs" t="Include" />
+              <e p="IVariableFactory.cs" t="Include" />
               <e p="OrderRow.cs" t="Include" />
               <e p="ParticipantVariable.cs" t="Include" />
               <e p="RandomizationMode.cs" t="Include" />
@@ -173,6 +169,7 @@
               <e p="TrialRandomizationMode.cs" t="Include" />
               <e p="Variable.cs" t="Include" />
               <e p="VariableFactory.cs" t="Include" />
+              <e p="VariableFactory2.cs" t="Include" />
               <e p="VariableMixingType.cs" t="Include" />
               <e p="Variables.cs" t="Include" />
               <e p="VariableTypes" t="Include">
@@ -204,11 +201,18 @@
                 <e p="VariableType.cs" t="Include" />
               </e>
               <e p="VariableUI" t="Include">
-                <e p="ExperimentDesignFileEditor.cs" t="Include" />
+                <e p="DependentVariableViewer.cs" t="Include" />
+                <e p="EditorGuiHelper.cs" t="Include" />
+                <e p="ExperimentDesignFile2Editor.cs" t="Include" />
+                <e p="IndependentVariableViewer.cs" t="Include" />
+                <e p="OldExperimentDesignFileEditor.cs" t="Include" />
                 <e p="OrderDefinitionEditor.cs" t="Include" />
+                <e p="ParticipantVariableViewer.cs" t="Include" />
                 <e p="VariableNameValidator.cs" t="Include" />
                 <e p="VariableUI.asmdef" t="Include" />
+                <e p="VariableValidationResults.cs" t="Include" />
                 <e p="VariableViewer.cs" t="Include" />
+                <e p="VariableViewerWithValues.cs" t="Include" />
               </e>
               <e p="VariableValueAddingStrategies" t="Include">
                 <e p="AddVariableColumnToDataTable.cs" t="Include" />
@@ -230,7 +234,6 @@
       <e p="Temp/bin" t="ExcludeRecursive" />
       <e p="TestingUtilities.csproj" t="IncludeRecursive" />
       <e p="Tracker.csproj" t="IncludeRecursive" />
-      <e p="TutorialExperiment.csproj" t="IncludeRecursive" />
       <e p="TUXEditorUI.csproj" t="IncludeRecursive" />
       <e p="TUXExtensionTests.csproj" t="IncludeRecursive" />
       <e p="TUXScriptingTemplates.csproj" t="IncludeRecursive" />
