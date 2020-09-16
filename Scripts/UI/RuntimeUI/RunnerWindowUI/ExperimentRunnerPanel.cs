@@ -242,7 +242,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             var rowObject = rowObjects[rowIndex];
             
             bool isCurrentlyRunningTrial = currentTrialIndex == rowIndex;
-            bool trialIsComplete = (bool)rowData[runner.DesignFile.ColumnNamesSettings.Completed];
+            bool trialIsComplete = (bool)rowData[runner.DesignFile.GetColumnNamesSettings.Completed];
             
             if (isCurrentlyRunningTrial && !trialIsComplete) SetColor(rowObject, Color.yellow);
             else SetColor(rowObject, Color.red);
@@ -267,7 +267,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             var rowObject = rowObjects[rowIndex];
             
             bool isCurrentlyRunningTrial = currentTrialIndex == rowIndex;
-            bool trialIsComplete = (bool)rowData[runner.DesignFile.ColumnNamesSettings.Completed];
+            bool trialIsComplete = (bool)rowData[runner.DesignFile.GetColumnNamesSettings.Completed];
             
             if (isCurrentlyRunningTrial && !trialIsComplete) SetColor(rowObject, Color.yellow);
             else SetColor(rowObject, Color.red);

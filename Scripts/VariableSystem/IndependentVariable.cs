@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Runtime.CompilerServices;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
+    
+    
     [Serializable]
     public abstract class IndependentVariable : Variable {
         public VariableMixingType MixingType;
         public bool               Block;
+
+        protected IndependentVariable() : base(VariableType.Independent) { }
+
         public abstract int NumValues { get; }
 
         public abstract void AddValue();
@@ -19,17 +23,18 @@ namespace bmlTUX.Scripts.VariableSystem {
     }
 
     [Serializable]
-    public abstract class IndependentVariable<T> : IndependentVariable{
+    public abstract class IndependentVariable<T> : IndependentVariable {
 
         public override Type Type => typeof(T);
         public override DataTable AddValuesTo(DataTable table) {
 
             if (Values.Count == 0) {
-                throw new NullReferenceException($"No values defined for variable: {Name}");
+                return table;
             }
 
             IndependentVariableValuesAdderStrategy<T> independentVariableValuesAdderStrategy = IndependentValuesStrategyFactory.Create<T>(MixingType);
-            return independentVariableValuesAdderStrategy.AddVariableValuesToTable(table, this);
+            DataTable addVariableValuesToTable = independentVariableValuesAdderStrategy.AddVariableValuesToTable(table, this);
+            return addVariableValuesToTable;
         }
 
         [SerializeField]
@@ -41,7 +46,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         protected IndependentVariable() {
             Values = new List<T>();
             Probabilities = new List<float>();
-            TypeOfVariable = VariableType.Independent;
+            VariableType = VariableType.Independent;
         }
 
         public override int NumValues {

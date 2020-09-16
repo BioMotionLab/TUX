@@ -8,7 +8,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
     public class DesignPreviewEditorWindow : EditorWindow {
         
         [FormerlySerializedAs("ConfigurationFile")]
-        public ExperimentDesignFile DesignFile;
+        public IExperimentDesignFile DesignFile;
         DesignPreviewer                  previewer;
         Vector2 scrollPos;
 
@@ -30,7 +30,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
 
         }
 
-        public static void ShowWindow(ExperimentDesignFile configFile) {
+        public static void ShowWindow(IExperimentDesignFile configFile) {
             
             DesignPreviewEditorWindow editorWindow = (DesignPreviewEditorWindow) GetWindow(typeof(DesignPreviewEditorWindow), false, "Design Previewer");
             editorWindow.previewer = new DesignPreviewer(configFile);

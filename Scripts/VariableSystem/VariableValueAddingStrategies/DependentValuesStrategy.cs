@@ -16,7 +16,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies {
             DataTable newTable = table.Copy();
 
             if (table.Rows.Count == 0) {
-                throw new ArgumentException("Can't add dependent variable values to empty trialTable");
+                return table;
             }
 
             foreach (DataRow newTableRow in newTable.Rows) {

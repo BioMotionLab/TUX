@@ -15,7 +15,8 @@ namespace bmlTUX.Scripts.VariableSystem {
             return newName;
         }
 
-        protected Variable() {
+        protected Variable(VariableType variableType) {
+            VariableType = variableType;
             name = GetUniqueName();
             Name = name;
         }
@@ -23,7 +24,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         string name;
         public string Name;
 
-        public          VariableType       TypeOfVariable;
+        public          VariableType       VariableType;
         public          SupportedDataType DataType;
         public abstract Type               Type { get; }
         public abstract DataTable AddValuesTo(DataTable table);

@@ -8,7 +8,7 @@ using UnityEngine;
 namespace bmlTUX.Scripts.Utilities {
     public static class DataTableCsvUtility {
         
-        public static DataTable DataTableFromCsv(ExperimentDesignFile configurationFile, string fullPath) {
+        public static DataTable DataTableFromCsv(IExperimentDesignFile configurationFile, string fullPath) {
             
             DataTable loadedDataTable = new DataTable();
             
@@ -56,7 +56,7 @@ namespace bmlTUX.Scripts.Utilities {
             if (rowValues[columnIndex] == "FALSE") row[column.ColumnName] = false;
         }
 
-        static List<DataColumn> GetColumns(ExperimentDesignFile configurationFile, StreamReader streamReader, DataTable loadedDataTable) {
+        static List<DataColumn> GetColumns(IExperimentDesignFile configurationFile, StreamReader streamReader, DataTable loadedDataTable) {
             string[] headerNames = streamReader.ReadLine()?.Split(',');
             
             List<DataColumn> columns = new List<DataColumn>();
@@ -64,9 +64,9 @@ namespace bmlTUX.Scripts.Utilities {
             if (headerNames == null) throw new NullReferenceException("Headers not found");
             
             foreach (string header in headerNames) {
-                Variable variableWithName = configurationFile.Variables.GetVariableWithName(header);
+                Variable variableWithName = configurationFile.GetVariables.GetVariableWithName(header);
                 DataColumn newColumn = variableWithName == null
-                    ? configurationFile.ColumnNamesSettings.GetColumnWithName(header)
+                    ? configurationFile.GetColumnNamesSettings.GetColumnWithName(header)
                     : new DataColumn(variableWithName.Name, variableWithName.Type);
                 loadedDataTable.Columns.Add(newColumn);
                 columns.Add(newColumn);

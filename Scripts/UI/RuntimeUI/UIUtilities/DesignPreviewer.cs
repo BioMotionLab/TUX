@@ -4,7 +4,7 @@ using bmlTUX.Scripts.VariableSystem;
 
 namespace bmlTUX.Scripts.UI.RuntimeUI.UIUtilities {
     public class DesignPreviewer {
-        public readonly ExperimentDesignFile DesignFile;
+        public readonly IExperimentDesignFile DesignFile;
         public int SelectedBlockOrderIndex;
 
         public readonly ExperimentDesign ExperimentDesign;
@@ -14,7 +14,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.UIUtilities {
 
         public bool SelectedBlockOrderChanged => SelectedBlockOrderIndex != LastDisplayedOrderIndex;
 
-        public DesignPreviewer(ExperimentDesignFile designFile) {
+        public DesignPreviewer(IExperimentDesignFile designFile) {
             DesignFile = designFile;
             ExperimentDesign = ExperimentDesign.CreateFrom(designFile);
             BlockOrderData = new BlockOrderData(ExperimentDesign);

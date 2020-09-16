@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Packages.bmlTUX.Extras.Tracker {
     [CreateAssetMenu]

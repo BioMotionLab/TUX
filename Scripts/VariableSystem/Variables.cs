@@ -9,7 +9,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         public readonly List<IndependentVariable> Balanced    = new List<IndependentVariable>();
         public readonly List<IndependentVariable> Looped      = new List<IndependentVariable>();
         public readonly List<IndependentVariable> Probability = new List<IndependentVariable>();
-
+        
         public static implicit operator List<IndependentVariable>(IndependentVariables variables) {
             List<IndependentVariable> combined = new List<IndependentVariable>();
             combined.AddRange(variables.Balanced);

@@ -19,7 +19,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
         public  DataTable ShowEditorPreview() {
             
             if (previewer.DesignFile != null) {
-                EditorGUILayout.LabelField($"Design File Selected: {previewer.DesignFile.name}");
+                EditorGUILayout.LabelField($"Design File Selected: {previewer.DesignFile.GetName}");
             }
             else {
                 EditorGUILayout.HelpBox("Need to have a Design File Selected", MessageType.Warning);
@@ -37,8 +37,8 @@ namespace bmlTUX.Scripts.UI.EditorUI {
             EditorGUILayout.LabelField("Preview:", EditorStyles.boldLabel);
 
 
-            if (previewer.DesignFile.BlockRandomization != BlockRandomizationMode.CompleteRandomization &&
-                previewer.DesignFile.BlockRandomization != BlockRandomizationMode.PartialRandomization) {
+            if (previewer.DesignFile.GetBlockRandomization != BlockRandomizationMode.CompleteRandomization &&
+                previewer.DesignFile.GetBlockRandomization != BlockRandomizationMode.PartialRandomization) {
                 EditorGUILayout.LabelField(previewer.BlockOrderData.BlockOrderText);
 
                 previewer.SelectedBlockOrderIndex = previewer.BlockOrderData.SelectionRequired
