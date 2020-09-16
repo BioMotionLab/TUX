@@ -5,6 +5,7 @@
       <e p="BlackCamera.csproj" t="IncludeRecursive" />
       <e p="BML_TUX_Project.sln" t="IncludeFlat" />
       <e p="bmlTUX.csproj" t="IncludeRecursive" />
+      <e p="ComplexExperiment.csproj" t="IncludeRecursive" />
       <e p="Instructions.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive">
@@ -27,6 +28,13 @@
             </e>
           </e>
           <e p="Samples" t="Include">
+            <e p="ComplexExperiment" t="Include">
+              <e p="ComplexBlockScript.cs" t="Include" />
+              <e p="ComplexExperiment.asmdef" t="Include" />
+              <e p="ComplexExperimentRunner.cs" t="Include" />
+              <e p="ComplexExperimentScript.cs" t="Include" />
+              <e p="ComplexTrialScript.cs" t="Include" />
+            </e>
             <e p="TutorialExperiment" t="Include">
               <e p="TutorialExperiment.asmdef" t="Include" />
               <e p="TutorialSampleBlockScript.cs" t="Include" />
@@ -48,6 +56,7 @@
               <e p="BaseBlockTable.cs" t="Include" />
               <e p="BaseTrialTable.cs" t="Include" />
               <e p="Block.cs" t="Include" />
+              <e p="BlockPermutationError.cs" t="Include" />
               <e p="DebugSession.cs" t="Include" />
               <e p="Experiment.cs" t="Include" />
               <e p="ExperimentDesign.cs" t="Include" />
@@ -155,7 +164,10 @@
               <e p="BlockPartialRandomizationSubType.cs" t="Include" />
               <e p="DependentVariable.cs" t="Include" />
               <e p="ExperimentDesignFile.cs" t="Include" />
+              <e p="ExperimentDesignFile2.cs" t="Include" />
+              <e p="IExperimentDesignFile.cs" t="Include" />
               <e p="IndependentVariable.cs" t="Include" />
+              <e p="IVariableFactory.cs" t="Include" />
               <e p="OrderRow.cs" t="Include" />
               <e p="ParticipantVariable.cs" t="Include" />
               <e p="RandomizationMode.cs" t="Include" />
@@ -164,6 +176,7 @@
               <e p="TrialRandomizationMode.cs" t="Include" />
               <e p="Variable.cs" t="Include" />
               <e p="VariableFactory.cs" t="Include" />
+              <e p="VariableFactory2.cs" t="Include" />
               <e p="VariableMixingType.cs" t="Include" />
               <e p="Variables.cs" t="Include" />
               <e p="VariableTypes" t="Include">
@@ -195,11 +208,18 @@
                 <e p="VariableType.cs" t="Include" />
               </e>
               <e p="VariableUI" t="Include">
-                <e p="ExperimentDesignFileEditor.cs" t="Include" />
+                <e p="DependentVariableViewer.cs" t="Include" />
+                <e p="EditorGuiHelper.cs" t="Include" />
+                <e p="ExperimentDesignFile2Editor.cs" t="Include" />
+                <e p="IndependentVariableViewer.cs" t="Include" />
+                <e p="OldExperimentDesignFileEditor.cs" t="Include" />
                 <e p="OrderDefinitionEditor.cs" t="Include" />
+                <e p="ParticipantVariableViewer.cs" t="Include" />
                 <e p="VariableNameValidator.cs" t="Include" />
                 <e p="VariableUI.asmdef" t="Include" />
+                <e p="VariableValidationResults.cs" t="Include" />
                 <e p="VariableViewer.cs" t="Include" />
+                <e p="VariableViewerWithValues.cs" t="Include" />
               </e>
               <e p="VariableValueAddingStrategies" t="Include">
                 <e p="AddVariableColumnToDataTable.cs" t="Include" />

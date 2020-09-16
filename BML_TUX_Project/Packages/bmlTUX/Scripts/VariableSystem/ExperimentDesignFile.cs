@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using bmlTUX.Scripts.ExperimentParts;
+﻿using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Settings;
-using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
@@ -33,45 +31,13 @@ namespace bmlTUX.Scripts.VariableSystem {
         public GuiSettings GuiSettings;
         [SerializeField]
         public FileLocationSettings FileLocationSettings;
-
-        bool valid = true;
+        
         
         void OnValidate() {
-            Validate();
+            Debug.LogWarning($"{name} is obsolete. Please Update by selecting the file and examining its inspector.", this);
         }
-
-        public void Validate() {
-            bool wasValid = valid;
-            valid = true;
-            if (ColumnNamesSettings == null) MissingReference(nameof(ColumnNamesSettings));
-            if (ControlSettings == null) MissingReference(nameof(ControlSettings));
-            if (FileLocationSettings == null) MissingReference(nameof(FileLocationSettings));
-            if (GuiSettings == null) MissingReference(nameof(GuiSettings));
-            if (!wasValid && valid) Debug.Log(TuxLog.Good($"{nameof(ExperimentDesignFile)} Fixed."), this);
-        }
-
-        void MissingReference(string missingReference) {
-            Debug.LogError(TuxLog.Error($"{nameof(ExperimentDesignFile)} does not have {missingReference} defined. " + 
-                         $"Please drag {missingReference} into the proper place in the design file"), this);
-            valid = false;
-        }
-
-        public Variables Variables => Factory.Variables;
         
-        public bool HasBlocks {
-            get {
-                List<IndependentVariable> blockIVs = Variables.BlockVariables;
-                return blockIVs.Count > 0;
-            }
-        }
-
-       
-
-        [SerializeField]
-        public TrialTableGenerationMode TrialTableGeneration = TrialTableGenerationMode.OnTheFly;
         
-        [SerializeField]
-        public List<BlockOrderDefinition> BlockOrderConfigurations = new List<BlockOrderDefinition>();
 
 
     }

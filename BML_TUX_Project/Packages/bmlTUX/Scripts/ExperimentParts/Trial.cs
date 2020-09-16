@@ -20,15 +20,15 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// <summary>
         /// The index of the Trial within a Block
         /// </summary>
-        [PublicAPI] public int IndexInBlock => (int) Data[Runner.DesignFile.ColumnNamesSettings.TrialIndex];
+        [PublicAPI] public int IndexInBlock => (int) Data[Runner.DesignFile.GetColumnNamesSettings.TrialIndex];
 
         [PublicAPI]
-        public int Index => (int) Data[Runner.DesignFile.ColumnNamesSettings.TotalTrialIndex];
+        public int Index => (int) Data[Runner.DesignFile.GetColumnNamesSettings.TotalTrialIndex];
         
         /// <summary>
         /// The index of the Block in which this Trial resides
         /// </summary>
-        [PublicAPI] public int BlockIndex => (int) Data[Runner.DesignFile.ColumnNamesSettings.BlockIndex];
+        [PublicAPI] public int BlockIndex => (int) Data[Runner.DesignFile.GetColumnNamesSettings.BlockIndex];
         
         /// <summary>
         /// Text that describes the index of Trial and Block.
@@ -39,8 +39,8 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// Whether the trial was Completed Successfully
         /// </summary>
         [PublicAPI] public bool CompletedSuccessfully {
-            get => (bool)Data[Runner.DesignFile.ColumnNamesSettings.Completed];
-            set => Data[Runner.DesignFile.ColumnNamesSettings.Completed] = value;
+            get => (bool)Data[Runner.DesignFile.GetColumnNamesSettings.Completed];
+            set => Data[Runner.DesignFile.GetColumnNamesSettings.Completed] = value;
         }
 
         /// <summary>
@@ -48,23 +48,23 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// Not accurate enough for high-precision reaction times
         /// </summary>
         [PublicAPI] public float TrialTime {
-            set => Data[Runner.DesignFile.ColumnNamesSettings.TrialTime] = value;
+            set => Data[Runner.DesignFile.GetColumnNamesSettings.TrialTime] = value;
         }
 
         /// <summary>
         /// How many times the trial was attempted
         /// </summary>
         [PublicAPI] public int Attempts {
-            get => (int) Data[Runner.DesignFile.ColumnNamesSettings.Attempts];
-            set => Data[Runner.DesignFile.ColumnNamesSettings.Attempts] = value;
+            get => (int) Data[Runner.DesignFile.GetColumnNamesSettings.Attempts];
+            set => Data[Runner.DesignFile.GetColumnNamesSettings.Attempts] = value;
         }
 
         /// <summary>
         /// Whether the trial was skipped over manually
         /// </summary>
         [PublicAPI] public bool Skipped {
-            get => (bool) Data[Runner.DesignFile.ColumnNamesSettings.Skipped];
-            set => Data[Runner.DesignFile.ColumnNamesSettings.Skipped] = value;
+            get => (bool) Data[Runner.DesignFile.GetColumnNamesSettings.Skipped];
+            set => Data[Runner.DesignFile.GetColumnNamesSettings.Skipped] = value;
         }
 
       

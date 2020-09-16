@@ -45,11 +45,11 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
             
             SessionStatusText.text = "New session successfully created";
             
-            List<ParticipantVariable> participantVariables = runner.DesignFile.Factory.Variables.ParticipantVariables;
+            List<ParticipantVariable> participantVariables = runner.DesignFile.GetFactory.GetVariables.ParticipantVariables;
             ParticipantVariablePanel.ShowParticipantVariables(participantVariables);
             
             
-            switch (runner.DesignFile.TrialTableGeneration) {
+            switch (runner.DesignFile.GetTrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly:
                     ShowBlockOrderSettings();
                     break;
@@ -94,7 +94,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
 
             int blockOrderChosen = 0;
             string designFilePath = "";
-            switch (runner.DesignFile.TrialTableGeneration) {
+            switch (runner.DesignFile.GetTrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly:
                     if (blockOrderData.SelectionRequired) {
                         blockOrderChosen = BlockOrderPanel.SelectedBlockOrder - 1; // subtract 1 because added first one in.

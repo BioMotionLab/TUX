@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f52b7cbc1de94f2fbdaad822b4e3ef4, type: 3}
+  m_Name: ComplexDesignFile
+  m_EditorClassIdentifier: 
+  TrialRepetitions: 1
+  ExperimentRepetitions: 1
+  TrialRandomization: 0
+  TrialPermutationType: 1
+  BlockRandomization: 0
+  BlockPartialRandomizationSubType: 1
+  Factory:
+    IndependentVariables:
+    - id: 0
+    - id: 1
+    - id: 2
+    DependentVariables:
+    - id: 3
+    ParticipantVariables:
+    - id: 4
+  ColumnNamesSettings: {fileID: 11400000, guid: b004757e12fd66b43828570a0f83b1db,
+    type: 2}
+  ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
+  GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
+  FileLocationSettings: {fileID: 11400000, guid: 07f42cef79754c74583d0209412fa987,
+    type: 2}
+  ShowAdvancedEditor: 1
+  BlockOrderIsValid: 1
+  TrialTableGeneration: 0
+  BlockOrderConfigurations:
+  - {fileID: 11400000, guid: bd46b3092a42f483f8ccc2bff4d12595, type: 2}
+  - {fileID: 11400000, guid: 129c6306e5d11431a83d21ffde94bc31, type: 2}
+  - {fileID: 11400000, guid: 51b62ab37c2e840ddba7740941ed734e, type: 2}
+  references:
+    version: 1
+    00000000:
+      type: {class: IndependentVariableInt, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: Size
+        VariableType: 1
+        DataType: 1
+        ExpandSettings: 1
+        MixingType: 0
+        Block: 0
+        Values: 
+        Probabilities: []
+    00000001:
+      type: {class: IndependentVariableString, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: StimulusColor
+        VariableType: 1
+        DataType: 3
+        ExpandSettings: 0
+        MixingType: 0
+        Block: 1
+        Values:
+        - Red
+        - Blue
+        - Green
+        - Orange
+        Probabilities:
+        - 0
+        - 0
+        - 0
+        - 0
+    00000002:
+      type: {class: IndependentVariableString, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: StimulusType
+        VariableType: 1
+        DataType: 3
+        ExpandSettings: 1
+        MixingType: 0
+        Block: 1
+        Values:
+        - Person
+        - Animal
+        Probabilities:
+        - 0
+        - 1
+    00000003:
+      type: {class: DependentVariableFloat, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: MeasuredOutcome
+        VariableType: 2
+        DataType: 2
+        ExpandSettings: 0
+        Value: 0
+        DefaultValue: -999
+    00000004:
+      type: {class: ParticipantVariableString, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: ParticipantGender
+        VariableType: 3
+        DataType: 3
+        ExpandSettings: 0
+        Value: Male
+        ConstrainValues: 1
+        Values:
+        - Male
+        - Female
+        - Other

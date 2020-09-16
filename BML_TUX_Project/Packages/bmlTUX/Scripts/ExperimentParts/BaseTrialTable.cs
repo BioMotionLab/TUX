@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using bmlTUX.Scripts.Settings;
 using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
@@ -12,10 +13,10 @@ namespace bmlTUX.Scripts.ExperimentParts {
         readonly ColumnNamesSettings columnNames;
 
         public BaseTrialTable(BaseBlockTable baseBlockTable,
-                              ExperimentDesignFile experimentDesignFile) {
+                              IExperimentDesignFile iExperimentDesignFile) {
 
-            variables = experimentDesignFile.Variables;
-            columnNames = experimentDesignFile.ColumnNamesSettings;
+            variables = iExperimentDesignFile.GetVariables;
+            columnNames = iExperimentDesignFile.GetColumnNamesSettings;
             
             baseTrialTable = AddVariablesToTable();
             

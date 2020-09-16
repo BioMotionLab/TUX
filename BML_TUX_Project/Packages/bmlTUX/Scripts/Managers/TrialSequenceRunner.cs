@@ -26,7 +26,7 @@ namespace bmlTUX.Scripts.Managers {
         public void Start() {
             Running = true;
             if (currentTrialList.Count == 0) {
-                Debug.LogError(TuxLog.Error("No Trials Defined! You probably didn't set up a design file."));
+                TuxLog.LogError("No Trials Defined! You probably didn't set up a design file.");
                 return;
             }
             StartRunningTrial(currentTrialList[0]);
@@ -53,7 +53,8 @@ namespace bmlTUX.Scripts.Managers {
 
         void StartRunningTrial(Trial trial) {
             currentlyRunningTrial = trial;
-
+            TuxLog.Log($"{TuxLog.FormatOrange("Starting")} {currentlyRunningTrial.TrialText}");
+                
             ExperimentEvents.StartPart(trial);
             ExperimentEvents.TrialHasStarted(trial);
         }
@@ -69,7 +70,7 @@ namespace bmlTUX.Scripts.Managers {
 
         void LogTrial(string filePath) {
             string successText = currentlyRunningTrial.CompletedSuccessfully ? "successfully" : "<color=red><b>unsuccessful</b></color>";
-            Debug.Log($"{TuxLog.Prefix} <color=green><b>Finished</b></color> {currentlyRunningTrial.TrialText} {successText}. \tOutput Updated: {filePath} \n" +
+            TuxLog.Log($"{TuxLog.FormatGreen("Finished")} {currentlyRunningTrial.TrialText} {successText}. \tOutput Updated: {filePath} \n" +
                       $"Output Table for this trial:\n" +
                       $"{currentlyRunningTrial.Data.AsString(header: true)}");
         }

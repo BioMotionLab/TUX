@@ -16,9 +16,9 @@ namespace bmlTUX.Scripts.ExperimentParts {
         readonly List<BlockOrderDefinition> orderConfigs;
         readonly IndependentVariables blockVariables;
 
-        public BaseBlockTable(ExperimentDesignFile experimentDesignFile) {
-            orderConfigs = experimentDesignFile.BlockOrderConfigurations;
-            blockVariables = experimentDesignFile.Variables.BlockVariables;
+        public BaseBlockTable(IExperimentDesignFile iExperimentDesignFile) {
+            orderConfigs = iExperimentDesignFile.GetBlockOrderConfigurations;
+            blockVariables = iExperimentDesignFile.GetVariables.BlockVariables;
             baseBlockTable = AddVariablesToTable();
         }
 
@@ -55,9 +55,9 @@ namespace bmlTUX.Scripts.ExperimentParts {
                 if (baseBlockTable.Rows.Count >= 4) throw new TooManyPermutationsException();
                 foreach (List<DataRow> dataRows in baseBlockTable.GetPermutations()) {
                     StringBuilder sb = new StringBuilder();
-                    sb.Append($"Block Order #{blockOrderIndex}: ");
+                    sb.Append($"#{blockOrderIndex}: ");
                     foreach (DataRow dataRow in dataRows) {
-                        sb.Append($"{dataRow.AsString(separator: ", ", truncateLength: -1)} >   ");
+                        sb.Append($"{dataRow.AsString(separator: "_", truncateLength: -1)}> ");
                     }
 
                     blockPermutations.Add(sb.ToString());
