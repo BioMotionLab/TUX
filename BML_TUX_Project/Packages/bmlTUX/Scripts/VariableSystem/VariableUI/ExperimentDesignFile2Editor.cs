@@ -164,6 +164,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                         allViewers.Remove(variablePropertyPath);
                         RemoveFromSubList(variablePropertyPath);
                         existingViewer.Deleted = true;
+                        EditorUtility.SetDirty(this);
                     }
                 }
                 else {
@@ -261,8 +262,8 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             
             selectedDataType = SupportedDataType.ChooseType;
             selectedVariableType = VariableType.ChooseType;
-            
             serializedObject.Update();
+            EditorUtility.SetDirty(this);
         }
 
 

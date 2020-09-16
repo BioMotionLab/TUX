@@ -35,6 +35,13 @@
               <e p="ComplexExperimentScript.cs" t="Include" />
               <e p="ComplexTrialScript.cs" t="Include" />
             </e>
+            <e p="TutorialExperiment" t="Include">
+              <e p="TutorialExperiment.asmdef" t="Include" />
+              <e p="TutorialSampleBlockScript.cs" t="Include" />
+              <e p="TutorialSampleExperimentRunner.cs" t="Include" />
+              <e p="TutorialSampleExperimentScript.cs" t="Include" />
+              <e p="TutorialSampleTrialScript.cs" t="Include" />
+            </e>
           </e>
           <e p="ScriptingTemplates" t="Include">
             <e p="BlockScriptTemplate.cs" t="Include" />
@@ -234,6 +241,7 @@
       <e p="Temp/bin" t="ExcludeRecursive" />
       <e p="TestingUtilities.csproj" t="IncludeRecursive" />
       <e p="Tracker.csproj" t="IncludeRecursive" />
+      <e p="TutorialExperiment.csproj" t="IncludeRecursive" />
       <e p="TUXEditorUI.csproj" t="IncludeRecursive" />
       <e p="TUXExtensionTests.csproj" t="IncludeRecursive" />
       <e p="TUXScriptingTemplates.csproj" t="IncludeRecursive" />

@@ -52,10 +52,8 @@ MonoBehaviour:
         ExpandSettings: 1
         MixingType: 0
         Block: 0
-        Values: 0100000002000000
-        Probabilities:
-        - 0
-        - 0
+        Values: 
+        Probabilities: []
     00000001:
       type: {class: IndependentVariableString, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
         asm: bmlTUX}
