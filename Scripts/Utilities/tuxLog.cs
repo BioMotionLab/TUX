@@ -35,6 +35,21 @@ namespace bmlTUX.Scripts.Utilities {
         public static string Warn(string message) {
             return Prefix + $" <color=purple>{message}</color>";
         }
+
+        public static void Log(string message, Object context) {
+            Debug.Log( $"{Prefix} {message}", context);
+        }
         
+        public static void Log(string message) {
+            Debug.Log($"{Prefix} {message}");
+        }
+
+        public static string FormatGreen(string message) {
+            return $"<color=green>{message}</color>";
+        }
+
+        public static string FormatOrange(string message) {
+            return $"<color=orange>{message}</color>";
+        }
     }
 }

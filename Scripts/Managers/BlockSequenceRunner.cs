@@ -49,7 +49,7 @@ namespace bmlTUX.Scripts.Managers {
 
             currentlyRunningBlock = block;
             Debug.Log("");
-            Debug.Log($"{TuxLog.Prefix} <color=orange><b>Starting</b></color> Block {BlockIndex(currentlyRunningBlock)+1} / {blocks.Count}");
+            TuxLog.Log($"{TuxLog.FormatOrange("Starting")} Block {BlockIndex(currentlyRunningBlock)+1} / {blocks.Count}");
             ExperimentEvents.BlockHasStarted(block);
             ExperimentEvents.StartPart(block);
 

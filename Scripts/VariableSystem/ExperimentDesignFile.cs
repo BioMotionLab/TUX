@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using bmlTUX.Scripts.ExperimentParts;
+﻿using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Settings;
-using bmlTUX.Scripts.Utilities;
-using UnityEditor;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
@@ -37,7 +34,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         
         
         void OnValidate() {
-            Debug.LogWarning($"{name} is obsolete. Please Update. {AssetDatabase.GetAssetPath(this)}", this);
+            Debug.LogWarning($"{name} is obsolete. Please Update by selecting the file and examining its inspector.", this);
         }
         
         
