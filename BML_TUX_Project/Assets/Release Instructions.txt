@@ -5,10 +5,11 @@ Test
 
 Build
 1) increment package version in package.json
-2) commit to master
-3) merge master into release (Create new commit)
-4) Push
-5) go back to master
+2) Save Scene, then Quit and reopen Unity
+3) commit to master
+4) merge master into release (Create new commit)
+5) Push
+6) go back to master
 
 Test build
 
