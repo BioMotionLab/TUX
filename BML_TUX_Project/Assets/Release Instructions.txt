@@ -5,6 +5,7 @@ Test
 
 Build
 1) increment package version in package.json
+    - If samples changed, double check paths in package.json
 2) Save Scene, then Quit and reopen Unity
 3) commit to master
 4) merge master into release (Create new commit)
