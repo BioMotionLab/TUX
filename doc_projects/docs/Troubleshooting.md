@@ -25,6 +25,12 @@ title: Troubleshooting
         * Solution: Create a block variable such that each block contains the 8 trials, and show instructions at the start of every block.
     * If you really need to, trials and blocks have an Index property that will tell you its index (at runtime only)
 
+* The UI text is too big or misaligned:
+    * This is caused by a bug in TextMeshPro.
+    * To Fix, in the unity editor in your project, navigate to Packages/bmlTUX/Prefabs. Right click on ExperimentUI and click "Reimport". 
+    * This can be avoided in the future by importing TextMeshPro essentions BEFORE importing bmlTUX package.
+    * If this does not fix the problem please report the issue on github issues page stating your current versions of Unity, TextmeshPro, and bmlTUX.
+
 * The Experiment Runner UI Looks strange or is Tiny when I have a VR headset hooked up.
     * SteamVR automatically sets all cameras in the scene to track the HMD. I haven't found a way to disable this. You need to disable it manually. In the TUX folder, there's a prefab for the UI called "ExperimentGUI". Open the prefab and there should be a camera object inside called "ExperimentUICamera". Adjust the "Target Eye" to "Display(None)". This will render the UI to the display rather than floating in front of the HMD. I'm looking for solutions to avoid this step.
 

@@ -26,7 +26,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         [Tooltip("Create a DesignFile from asset menu and drag here")]
         [SerializeField]
         // ReSharper disable once InconsistentNaming
-        ExperimentDesignFile ExperimentDesignFile = default;
+        ExperimentDesignFile2 experimentDesignFile = default;
 
         [Header("Optional:")]
         [SerializeField]
@@ -35,9 +35,12 @@ namespace bmlTUX.Scripts.ExperimentParts {
         public ScriptReferences scriptReferences = new ScriptReferences();
         
         // ReSharper disable once ConvertToAutoProperty
-        public ExperimentDesignFile DesignFile {
-            get => ExperimentDesignFile;
-            set => ExperimentDesignFile = value;
+        public IExperimentDesignFile DesignFile {
+            get => experimentDesignFile;
+        }
+
+        public void SetExperimentDesignFile(ExperimentDesignFile2 designFile2) {
+            experimentDesignFile = designFile2;
         }
 
         public ExperimentDesign ExperimentDesign;
@@ -77,7 +80,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         void OnEnable() {
             ExperimentEvents.OnStartRunningExperiment += StartRunningRunningExperiment;
             ExperimentEvents.OnEndExperiment += EndExperiment;
-            StartCoroutine(DesignFile.ControlSettings.ListenForQuit());
+            StartCoroutine(DesignFile.GetControlSettings.ListenForQuit());
         }
         
         void Start() {
@@ -92,19 +95,21 @@ namespace bmlTUX.Scripts.ExperimentParts {
                 ExitProgram();
                 return;
             }
-            DesignFile.Validate();
+            DesignFile.GetValidate();
 
-            Session = Session.LoadSessionData(DesignFile.FileLocationSettings);
+            Session = Session.LoadSessionData(DesignFile.GetFileLocationSettings);
             if (Session == null) {
                 throw new NullReferenceException("Session null and not created properly");
             }
 
-            switch (DesignFile.TrialTableGeneration) {
+            switch (DesignFile.GetTrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly:
                     ExperimentDesign = ExperimentDesign.CreateFrom(DesignFile);
                     if (ExperimentDesign == null) {
                         throw new NullReferenceException("ExperimentDesign null");
                     }
+
+                    if (!ExperimentDesign.HasTrials) throw new NoTrialsException($"{DesignFile.GetName} has no trials. You likely lack any values defined in non-block variables");
                     break;
                     
                 case TrialTableGenerationMode.PreGenerated:
@@ -119,7 +124,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         }
 
         void InitGui() {
-            gui = Instantiate(DesignFile.GuiSettings.GuiPrefab);
+            gui = Instantiate(DesignFile.GetGuiSettings.GuiPrefab);
             
             gui.RegisterExperiment(this);
             
@@ -146,7 +151,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         /// </summary>
         /// <param name="currentSession"></param>
         void StartRunningRunningExperiment(Session currentSession) {
-            switch (DesignFile.TrialTableGeneration) {
+            switch (DesignFile.GetTrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly: {
                     DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
                     RunnableDesign = new RunnableDesign(this, finalDesignTable, DesignFile);
@@ -177,7 +182,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             
             ExperimentEvents.ExperimentStarted();
 
-            StartCoroutine(DesignFile.ControlSettings.Run());
+            StartCoroutine(DesignFile.GetControlSettings.Run());
             
             ExperimentEvents.StartPart(experiment);
             
@@ -186,6 +191,11 @@ namespace bmlTUX.Scripts.ExperimentParts {
         void EndExperiment() {
             Running = false;
             Ended = true;
+        }
+
+        public class NoTrialsException : Exception {
+            public NoTrialsException(string message):  base(message){ }
+
         }
 
     }

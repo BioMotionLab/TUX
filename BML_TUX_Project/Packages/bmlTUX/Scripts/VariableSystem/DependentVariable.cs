@@ -6,6 +6,7 @@ using bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies;
 namespace bmlTUX.Scripts.VariableSystem {
     [Serializable]
     public abstract class DependentVariable : Variable {
+        protected DependentVariable() : base(VariableType.Dependent) { }
     }
 
 
@@ -14,18 +15,15 @@ namespace bmlTUX.Scripts.VariableSystem {
         public          T    Value;
         public          T    DefaultValue;
         public override Type Type => typeof(T);
-
-        protected DependentVariable() {
-            Name = UnnamedColumn.Name;
-            TypeOfVariable = VariableType.Dependent;
-
-        }
-
+        DependentVariableValuesAdderStrategy<T> variableValuesAdderStrategy;
+        
         public override DataTable AddValuesTo(DataTable table) {
-            return variableValuesAdderStrategy.AddValuesToCopyOf(table, this);
+            if (variableValuesAdderStrategy == null) variableValuesAdderStrategy = new DependentVariableValuesAdderStrategy<T>();
+            DataTable tableWithValues = variableValuesAdderStrategy.AddValuesToCopyOf(table, this);
+            return tableWithValues;
         }
 
-        readonly DependentVariableValuesAdderStrategy<T> variableValuesAdderStrategy = new DependentVariableValuesAdderStrategy<T>();
+        
 
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using bmlTUX.Scripts.Settings;
+using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
 
@@ -15,7 +16,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         
         public bool HasBlocks => baseBlockTable.HasBlocks;
         
-        readonly ExperimentDesignFile designFile;
+        readonly IExperimentDesignFile designFile;
         readonly ColumnNamesSettings columnNames;
 
         public List<string> BlockPermutationsStrings => GetBlockPermutationsStrings();
@@ -25,52 +26,43 @@ namespace bmlTUX.Scripts.ExperimentParts {
         public int NumberOfBlocks => baseBlockTable.Rows.Count;
 
         public bool RandomizedBlocks =>
-            designFile.BlockRandomization == BlockRandomizationMode.CompleteRandomization 
-            || designFile.BlockRandomization == BlockRandomizationMode.PartialRandomization;
+            designFile.GetBlockRandomization == BlockRandomizationMode.CompleteRandomization 
+            || designFile.GetBlockRandomization == BlockRandomizationMode.PartialRandomization;
+
+        public bool HasTrials => baseTrialTable.Rows.Count > 0;
 
         public const int MaxBlockPermutationsAllowed = 3;
 
-        public static ExperimentDesign CreateFrom(ExperimentDesignFile configurationFileFile) {
-            return new ExperimentDesign(configurationFileFile);
+        public static ExperimentDesign CreateFrom(IExperimentDesignFile designFile) {
+            if (designFile == null) throw new NullReferenceException("Trying to create Design from null file");
+            return new ExperimentDesign(designFile);
         }
 
-        ExperimentDesign(ExperimentDesignFile designFile) {
+        ExperimentDesign(IExperimentDesignFile designFile) {
             this.designFile = designFile;
-            columnNames = designFile.ColumnNamesSettings;
+            columnNames = designFile.GetColumnNamesSettings;
             baseBlockTable = new BaseBlockTable(designFile);
             baseTrialTable = new BaseTrialTable(baseBlockTable, designFile);
         }
 
         List<string> GetBlockPermutationsStrings() {
             
-            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && designFile.BlockOrderConfigurations.Count == 0) {
+            if (baseBlockTable.Rows.Count <= MaxBlockPermutationsAllowed && designFile.GetBlockOrderConfigurations.Count == 0) {
                 return baseBlockTable.BlockPermutationsStrings;
             }
 
-            if (designFile.BlockOrderConfigurations.Count > 0) return GetBlockOrderConfigStrings();
+            if (designFile.GetBlockOrderConfigurations.Count > 0) return GetBlockOrderConfigStrings();
             
-            throw new NullReferenceException("There are too many block values to create a permutation table. " +
-                                             "Block orders must be defined manually using OrderConfig files. " +
-                                             "See documentation for more information");
-
+            TuxLog.LogError("There are too many block values to create a permutation table. " +
+                         "Block orders must be defined manually using OrderConfig files. " +
+                         "See documentation for more information");
+            throw new BlockPermutationError("Too many block values for auto permutation");
         }
 
         List<string> GetBlockOrderConfigStrings() {
             List<string> orderStrings = new List<string>();
-            foreach (BlockOrderDefinition orderConfig in designFile.BlockOrderConfigurations) {
-
-                if (orderConfig.Randomize) {
-                    orderStrings.Add("Randomize");
-                }
-                else {
-                    string orderString = "";
-                    foreach (int orderIndex in orderConfig.IndexOrder) {
-                        string rowString = baseBlockTable.Rows[orderIndex].AsString(separator: ", ", truncateLength: -1);
-                        orderString += rowString + " > ";
-                    }
-                    orderStrings.Add(orderString); 
-                }
-                
+            foreach (BlockOrderDefinition orderConfig in designFile.GetBlockOrderConfigurations) {
+                orderStrings.Add(orderConfig.name);
             }
 
             return orderStrings;
@@ -97,11 +89,11 @@ namespace bmlTUX.Scripts.ExperimentParts {
         }
 
         DataTable RepeatAndShuffleAllTrialsIfNeeded(DataTable trialTable, DataTable newFinalOverallTable) {
-            for (int i = 0; i < designFile.ExperimentRepetitions; i++) {
+            for (int i = 0; i < designFile.GetExperimentRepetitions; i++) {
                 
                 DataTable singleExperimentRepetition = trialTable.Copy();
-                if (designFile.TrialRandomization == TrialRandomizationMode.Randomized
-                    && designFile.TrialPermutationType ==
+                if (designFile.GetTrialRandomization == TrialRandomizationMode.Randomized
+                    && designFile.GetTrialPermutationType ==
                     TrialPermutationType.DifferentPermutations)
                     singleExperimentRepetition = singleExperimentRepetition.ShuffleRows();
 
@@ -110,7 +102,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
                 }
             }
 
-            if (designFile.TrialRandomization == TrialRandomizationMode.Randomized) {
+            if (designFile.GetTrialRandomization == TrialRandomizationMode.Randomized) {
                 newFinalOverallTable = newFinalOverallTable.ShuffleRows();
             }
 
@@ -123,9 +115,9 @@ namespace bmlTUX.Scripts.ExperimentParts {
 //Add trial indices
             for (int rowIndex = 0; rowIndex < newFinalOverallTable.Rows.Count; rowIndex++) {
                 DataRow row = newFinalOverallTable.Rows[rowIndex];
-                row[designFile.ColumnNamesSettings.BlockIndex] = 0;
-                row[designFile.ColumnNamesSettings.TotalTrialIndex] = rowIndex;
-                row[designFile.ColumnNamesSettings.TrialIndex] = rowIndex;
+                row[designFile.GetColumnNamesSettings.BlockIndex] = 0;
+                row[designFile.GetColumnNamesSettings.TotalTrialIndex] = rowIndex;
+                row[designFile.GetColumnNamesSettings.TrialIndex] = rowIndex;
             }
         }
 
@@ -136,10 +128,10 @@ namespace bmlTUX.Scripts.ExperimentParts {
             //Repeat individual trials if needed
 
             DataTable repeatedTrialTable = baseTrialTable.Clone();
-            if (designFile.TrialRepetitions < 1)
-                throw new ArgumentOutOfRangeException(designFile.TrialRepetitions.ToString(), "Trial Repetitions cannot be less than 1");
+            if (designFile.GetTrialRepetitions < 1)
+                throw new ArgumentOutOfRangeException(designFile.GetTrialRepetitions.ToString(), "Trial Repetitions cannot be less than 1");
             foreach (DataRow row in baseTrialTable.Rows) {
-                for (int i = 0; i < designFile.TrialRepetitions; i++) {
+                for (int i = 0; i < designFile.GetTrialRepetitions; i++) {
                     repeatedTrialTable.ImportRow(row);
                 }
             }
@@ -147,7 +139,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             trialTable = repeatedTrialTable;
 
             //Shuffle trial order if needed
-            if (designFile.TrialRandomization == TrialRandomizationMode.Randomized) {
+            if (designFile.GetTrialRandomization == TrialRandomizationMode.Randomized) {
                 trialTable = trialTable.ShuffleRows();
             }
 
@@ -163,8 +155,8 @@ namespace bmlTUX.Scripts.ExperimentParts {
             for (int blockIndex = 0; blockIndex < blockOrderTableWIthRepetitions.Rows.Count; blockIndex++) {
                 DataTable newFinalizedTrialTable = trialTable.Copy();
                 DataRow orderedBlockRow = blockOrderTableWIthRepetitions.Rows[blockIndex];
-                if (designFile.TrialRandomization == TrialRandomizationMode.Randomized
-                    && designFile.TrialPermutationType == TrialPermutationType.DifferentPermutations) {
+                if (designFile.GetTrialRandomization == TrialRandomizationMode.Randomized
+                    && designFile.GetTrialPermutationType == TrialPermutationType.DifferentPermutations) {
                     newFinalizedTrialTable = newFinalizedTrialTable.ShuffleRows();
                 }
 
@@ -182,14 +174,14 @@ namespace bmlTUX.Scripts.ExperimentParts {
             DataTable blockOrderTableWIthRepetitions = selectedOrderedBlockTable.Clone();
 
             for (int experimentRepetitionIndex = 0;
-                experimentRepetitionIndex < designFile.ExperimentRepetitions;
+                experimentRepetitionIndex < designFile.GetExperimentRepetitions;
                 experimentRepetitionIndex++) {
                 //Create temporary new block table
                 DataTable repeatedBlockOrderTable = selectedOrderedBlockTable.Copy();
 
                 //Randomize block order per repetition if needed
-                if (designFile.BlockRandomization == BlockRandomizationMode.PartialRandomization
-                    && designFile.BlockPartialRandomizationSubType ==
+                if (designFile.GetBlockRandomization == BlockRandomizationMode.PartialRandomization
+                    && designFile.GetBlockPartialRandomizationSubType ==
                     BlockPartialRandomizationSubType.DifferentPermutations) {
                     repeatedBlockOrderTable = repeatedBlockOrderTable.ShuffleRows();
                 }
@@ -201,7 +193,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             }
 
             //Randomize across repetitions if needed
-            if (designFile.BlockRandomization == BlockRandomizationMode.CompleteRandomization) {
+            if (designFile.GetBlockRandomization == BlockRandomizationMode.CompleteRandomization) {
                 blockOrderTableWIthRepetitions = blockOrderTableWIthRepetitions.ShuffleRows();
             }
 

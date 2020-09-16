@@ -5,14 +5,16 @@ Test
 
 Build
 1) increment package version in package.json
-2) commit to master
-3) merge master into release (Create new commit)
-4) Push
-5) go back to master
+    - If samples changed, double check paths in package.json
+2) Save Scene, then Quit and reopen Unity
+3) commit to master
+4) merge master into release (Create new commit)
+5) Push
+6) go back to master
 
 Test build
 
-1)tag upm with x.x.x for test download
+1) tag upm with x.x.x for test download
 2) create new project
 3) install textmeshpro
 4) install bmltux

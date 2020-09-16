@@ -6,10 +6,23 @@ using bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
+    
+    
     [Serializable]
     public abstract class IndependentVariable : Variable {
+        [SerializeField]
         public VariableMixingType MixingType;
         public bool               Block;
+
+        protected IndependentVariable() : base(VariableType.Independent) { }
+
+        public abstract int NumValues { get; }
+
+        public abstract void AddValue();
+
+        public abstract void RemoveValue(int index);
+
+        public abstract List<string> ValuesAsString();
     }
 
     [Serializable]
@@ -19,15 +32,24 @@ namespace bmlTUX.Scripts.VariableSystem {
         public override DataTable AddValuesTo(DataTable table) {
 
             if (Values.Count == 0) {
-                throw new NullReferenceException($"No values defined for variable: {Name}");
+                return table;
             }
 
             IndependentVariableValuesAdderStrategy<T> independentVariableValuesAdderStrategy = IndependentValuesStrategyFactory.Create<T>(MixingType);
-            return independentVariableValuesAdderStrategy.AddVariableValuesToTable(table, this);
+            DataTable addVariableValuesToTable = independentVariableValuesAdderStrategy.AddVariableValuesToTable(table, this);
+            return addVariableValuesToTable;
         }
 
         [SerializeField]
         public List<T> Values;
+
+        public override List<string> ValuesAsString() {
+            List<string> valueStrings = new List<string>();
+            foreach (T value in Values) {
+                valueStrings.Add(value.ToString());
+            }
+            return valueStrings;
+        }
 
         [SerializeField]
         public List<float> Probabilities;
@@ -35,8 +57,31 @@ namespace bmlTUX.Scripts.VariableSystem {
         protected IndependentVariable() {
             Values = new List<T>();
             Probabilities = new List<float>();
-            Name = UnnamedColumn.Name;
-            TypeOfVariable = VariableType.Independent;
+            VariableType = VariableType.Independent;
+        }
+
+        public override int NumValues {
+            get {
+                foreach (T value in Values) {
+                    Debug.Log($"\t{value.ToString()}");
+                }
+                return Values.Count;
+            }
+        }
+
+        public override void AddValue() {
+            T newValue = Values.Count>0 ? Values[Values.Count-1] : Activator.CreateInstance<T>();
+            
+            Values.Add(newValue);
+            Probabilities.Add(0);
+            Debug.Log($"Added value {newValue.ToString()}, values:{Values.Count}, probs:{Probabilities.Count}");
+        }
+
+        public override void RemoveValue(int index) {
+            T t = Values[index];
+            Values.RemoveAt(index);
+            Probabilities.RemoveAt(index);
+            Debug.Log($"Removed value {t}, values:{Values.Count}, probs:{Probabilities.Count}");
         }
 
     }

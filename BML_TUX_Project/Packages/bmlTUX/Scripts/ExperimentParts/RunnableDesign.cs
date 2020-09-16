@@ -10,14 +10,14 @@ namespace bmlTUX.Scripts.ExperimentParts {
         
         public   List<Block>      Blocks;
         readonly ExperimentRunner runner;
-        readonly ExperimentDesignFile   designFile;
+        readonly IExperimentDesignFile   designFile;
         readonly DataTable finalDataTable;
         public   int              BlockCount       => Blocks.Count;
         public   string           TrialTableHeader => Blocks[0].TrialTable.HeaderAsString(Delimiter.Comma, -1);
         public   int              TotalTrials      => finalDataTable.Rows.Count;
         public   bool             HasBlocks        => Blocks.Count > 1;
 
-        public RunnableDesign(ExperimentRunner runner, DataTable finalDataTable, ExperimentDesignFile designFile) {
+        public RunnableDesign(ExperimentRunner runner, DataTable finalDataTable, IExperimentDesignFile designFile) {
             this.runner = runner;
             this.designFile = designFile;
             this.finalDataTable = finalDataTable;
@@ -25,7 +25,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             WriteParticipantValuesToTables();
         }
 
-        public static RunnableDesign CreateFromFile(ExperimentRunner runner, string fullPathToFile, ExperimentDesignFile configurationFile) {
+        public static RunnableDesign CreateFromFile(ExperimentRunner runner, string fullPathToFile, IExperimentDesignFile configurationFile) {
             DataTable experimentTable = DataTableCsvUtility.DataTableFromCsv(configurationFile, fullPathToFile);
             return new RunnableDesign(runner, experimentTable, configurationFile);
         }
@@ -43,7 +43,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         
         void CreateAndAddBlocks() {
             
-            List<IndependentVariable> blockVariables = designFile.Variables.BlockVariables;
+            List<IndependentVariable> blockVariables = designFile.GetVariables.BlockVariables;
             
             DataTable baseBlockTable = new DataTable();
             foreach (IndependentVariable blockVariable in blockVariables) {
@@ -57,7 +57,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             int currentBlockIndex = -998;
             DataTable blockTrialTable = finalDataTable.Clone();
             foreach (DataRow finalTableRow in finalDataTable.Rows) {
-                currentBlockIndex = (int) finalTableRow[designFile.ColumnNamesSettings.BlockIndex];
+                currentBlockIndex = (int) finalTableRow[designFile.GetColumnNamesSettings.BlockIndex];
                 if (currentBlockIndex == lastBlockIndex) {
                     blockTrialTable.ImportRow(finalTableRow);
                 }
@@ -91,7 +91,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
 
         void WriteParticipantValuesToTables() {
-            foreach (ParticipantVariable participantVariable in designFile.Variables.ParticipantVariables) {
+            foreach (ParticipantVariable participantVariable in designFile.GetVariables.ParticipantVariables) {
                 participantVariable.AddValuesTo(finalDataTable);
                 foreach (Block block in Blocks) {
                     participantVariable.AddValuesTo(block.TrialTable);

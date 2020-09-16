@@ -45,7 +45,7 @@ namespace bmlTUX.Scripts.UI.EditorUI {
             EditorGUILayout.EndHorizontal();
         }
 
-        public static void ShowWindow(ExperimentDesignFile configFile) {
+        public static void ShowWindow(IExperimentDesignFile configFile) {
             DesignSaverEditorWindow editorWindow = (DesignSaverEditorWindow) GetWindow(typeof(DesignSaverEditorWindow), false, "Design Saver");
             editorWindow.previewer = new DesignPreviewer(configFile);
             editorWindow.Show();

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed9a93a89f76ed84ca7b5a8bea36e934, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f52b7cbc1de94f2fbdaad822b4e3ef4, type: 3}
   m_Name: TutorialSampleDesignFile
   m_EditorClassIdentifier: 
   TrialRepetitions: 1
@@ -19,103 +19,118 @@ MonoBehaviour:
   BlockRandomization: 2
   BlockPartialRandomizationSubType: 1
   Factory:
-    DataTypeToCreate: 0
-    VariableTypeToCreate: 1
-    IntIVs: []
-    FloatIVs:
-    - Name: Distance
-      TypeOfVariable: 0
-      DataType: 1
-      ExpandSettings: 1
-      MixingType: 0
-      Block: 1
-      Values:
-      - 1
-      - 2
-      - 3
-      - 4
-      Probabilities:
-      - 0
-      - 0
-      - 0
-    - Name: Size
-      TypeOfVariable: 0
-      DataType: 1
-      ExpandSettings: 0
-      MixingType: 0
-      Block: 0
-      Values:
-      - 1
-      - 1.5
-      - 2
-      Probabilities:
-      - 0.25
-      - 0.25
-      - 0.5
-    StringIVs:
-    - Name: Color
-      TypeOfVariable: 0
-      DataType: 2
-      ExpandSettings: 0
-      MixingType: 0
-      Block: 0
-      Values:
-      - Red
-      - Blue
-      - Green
-      Probabilities:
-      - 0
-      - 0
-      - 0
-    BoolIVs: []
-    GameObjectIVs: []
-    Vector2IVs: []
-    Vector3IVs: []
-    CustomDataTypeIVs: []
-    IntDVs: []
-    FloatDVs:
-    - Name: SelectedSize
-      TypeOfVariable: 1
-      DataType: 1
-      ExpandSettings: 0
-      Value: 0
-      DefaultValue: -999
-    StringDVs: []
-    BoolDVs: []
-    GameObjectDVs: []
-    Vector2DVs: []
-    Vector3DVs: []
-    CustomDataTypeDVs: []
-    IntParticipantVariables:
-    - Name: Age
-      TypeOfVariable: 2
-      DataType: 0
-      ExpandSettings: 0
-      Value: 0
-      ConstrainValues: 0
-      PossibleValues: 
-    FloatParticipantVariables: []
-    StringParticipantVariables:
-    - Name: Gender
-      TypeOfVariable: 2
-      DataType: 2
-      ExpandSettings: 1
-      Value: Male
-      ConstrainValues: 1
-      PossibleValues:
-      - Male
-      - Female
-      - Other
-    BoolParticipantVariables: []
-    GameObjectParticipantVariables: []
-    Vector2ParticipantVariables: []
-    Vector3ParticipantVariables: []
-    CustomDataParticipantVariables: []
+    IndependentVariables:
+    - id: 0
+    - id: 1
+    - id: 2
+    DependentVariables:
+    - id: 3
+    ParticipantVariables:
+    - id: 4
+    - id: 5
   ColumnNamesSettings: {fileID: 11400000, guid: b004757e12fd66b43828570a0f83b1db,
     type: 2}
   ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
   FileLocationSettings: {fileID: 11400000, guid: 07f42cef79754c74583d0209412fa987,
     type: 2}
+  ShowAdvancedEditor: 0
+  BlockOrderIsValid: 0
   TrialTableGeneration: 0
   BlockOrderConfigurations: []
+  references:
+    version: 1
+    00000000:
+      type: {class: IndependentVariableFloat, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: Distance
+        VariableType: 1
+        DataType: 1
+        ExpandSettings: 0
+        MixingType: 0
+        Block: 1
+        Values:
+        - 1
+        - 2
+        - 3
+        Probabilities:
+        - 0
+        - 0
+        - 0
+    00000001:
+      type: {class: IndependentVariableFloat, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: Size
+        VariableType: 1
+        DataType: 1
+        ExpandSettings: 0
+        MixingType: 0
+        Block: 0
+        Values:
+        - 1
+        - 1.5
+        - 2
+        Probabilities:
+        - 0.25
+        - 0.25
+        - 0.5
+    00000002:
+      type: {class: IndependentVariableString, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: Color
+        VariableType: 1
+        DataType: 2
+        ExpandSettings: 0
+        MixingType: 0
+        Block: 0
+        Values:
+        - Red
+        - Blue
+        - Green
+        Probabilities:
+        - 0
+        - 0
+        - 0
+    00000003:
+      type: {class: DependentVariableFloat, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: SelectedSize
+        VariableType: 2
+        DataType: 1
+        ExpandSettings: 0
+        Value: 0
+        DefaultValue: -999
+    00000004:
+      type: {class: ParticipantVariableInt, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: Age
+        VariableType: 3
+        DataType: 1
+        ExpandSettings: 0
+        Value: 0
+        ConstrainValues: 0
+        Values: 
+        PossibleValues: 
+    00000005:
+      type: {class: ParticipantVariableString, ns: bmlTUX.Scripts.VariableSystem.VariableTypes,
+        asm: bmlTUX}
+      data:
+        Name: Gender
+        VariableType: 3
+        DataType: 3
+        ExpandSettings: 0
+        Value: Male
+        ConstrainValues: 1
+        Values:
+        - Male
+        - Female
+        - Other
+        PossibleValues:
+        - Male
+        - Female
+        - Other
