@@ -21,9 +21,9 @@
       "path": "Samples~/TutorialExperiment"
     },
     {
-      "displayName": "Simple Sample Experiment",
-      "description": "A sample of an extremely simple experiment",
-      "path": "Samples~/SimpleExperiment"
+      "displayName": "Complex Block Order Experiment",
+      "description": "A sample using custom block orders",
+      "path": "Samples~/ComplexExperiment"
     }
   ]
 }
