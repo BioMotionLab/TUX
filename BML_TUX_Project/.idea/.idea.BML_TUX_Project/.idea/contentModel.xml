@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+    <e p="C:\Users\Adam\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Adam\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_BML_TUX_Project.-2006671322.00" t="ExcludeRecursive" />
+    <e p="D:\GitHub\TUX\BML_TUX_Project" t="IncludeRecursive">
       <e p="BlackCamera.csproj" t="IncludeRecursive" />
       <e p="BML_TUX_Project.sln" t="IncludeFlat" />
       <e p="bmlTUX.csproj" t="IncludeRecursive" />
@@ -238,7 +240,7 @@
         </e>
       </e>
       <e p="TableViewer.csproj" t="IncludeRecursive" />
-      <e p="Temp/bin" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
       <e p="TestingUtilities.csproj" t="IncludeRecursive" />
       <e p="Tracker.csproj" t="IncludeRecursive" />
       <e p="TutorialExperiment.csproj" t="IncludeRecursive" />
@@ -247,7 +249,5 @@
       <e p="TUXScriptingTemplates.csproj" t="IncludeRecursive" />
       <e p="VariableUI.csproj" t="IncludeRecursive" />
     </e>
-    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.1/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.1/resharper-host/local/Transient/ReSharperHost/v201/SolutionCaches/_BML_TUX_Project.-1644617225.00" t="ExcludeRecursive" />
   </component>
 </project>
