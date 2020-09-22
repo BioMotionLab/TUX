@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Part 3: Designing an Experiment · bmlTUX</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="When we used the Script Helper Tool, it also created a Design File called `TutorialDesignFile.asset`. This is the file used to set up our experimental design."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Part 3: Designing an Experiment · bmlTUX"/><meta property="og:type" content="website"/><meta property="og:url" content="https://BioMotionLab.github.io/TUX/"/><meta property="og:description" content="When we used the Script Helper Tool, it also created a Design File called `TutorialDesignFile.asset`. This is the file used to set up our experimental design."/><meta property="og:image" content="https://BioMotionLab.github.io/TUX/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://BioMotionLab.github.io/TUX/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/TUX/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/TUX/js/scrollSpy.js"></script><link rel="stylesheet" href="/TUX/css/main.css"/><script src="/TUX/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/TUX/"><img class="logo" src="/TUX/img/favicon.ico" alt="bmlTUX"/><h2 class="headerTitleWithLogo">bmlTUX</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/TUX/docs/GettingStarted" target="_self">Documentation</a></li><li class="siteNavGroupActive"><a href="/TUX/docs/Installation" target="_self">Install</a></li><li class="siteNavGroupActive"><a href="/TUX/docs/Publication" target="_self">Publication</a></li><li class="siteNavGroupActive"><a href="/TUX/docs/Troubleshooting" target="_self">Help</a></li><li class=""><a href="https://www.biomotionlab.ca" target="_self">BioMotionLab</a></li><li class=""><a href="https://github.com/BioMotionLab/TUX" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Making your first experiment</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting Started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/GettingStarted">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Publication">Publication</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Requirements">Requirements</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Installation">Installation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Making your first experiment</h4><ul><li class="navListItem"><a class="navItem" href="/TUX/docs/firstoverview">Part 1: Tutorial Overview</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/firstcreating">Part 2: Creating a new Experiment</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/TUX/docs/firstdesign">Part 3: Designing an Experiment</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/firstrunning">Part 4: Writing Runner Scripts</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/firstblocks">Part 5: Defining Blocks</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Documentation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/CreatingExperiment">Creating an Experiment</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/AccessingScene">Accessing GameObjects and Scripts in your Scene</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Output">Output</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/ExperimentBehavior">Setting Up Your Experiment&#x27;s Behavior</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/TrialClass">Trial Class</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/BlockClass">Block Class</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/ExperimentClass">Experiment Class</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Help<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/Troubleshooting">Troubleshooting</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Coroutines">About Coroutines and IEnumerators</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Advanced<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/AdvancedOptions">Advanced Options</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Logging">Logging</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Building">Building to an Application</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Customizing">Customizing Further</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Extras">Extras</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Part 3: Designing an Experiment</h1></header><article><div><span><p>When we used the Script Helper Tool, it also created a Design File called <code>TutorialDesignFile.asset</code>. This is the file used to set up our experimental design.</p>
+<p>The design file provides a simple interface that access a powerful behind-the-scenes system for setting up your experimental design without having to write any code.</p>
+<ol>
+<li>Click once on the created design file in the Assets folder to look at its inspector.</li>
+<li>You'll see several options. For more detail on what these settings do please see the main <a href="Home">documentation</a>.</li>
+</ol>
+<p><img src="/TUX/docs/assets/Tutorials/DesignFile.png" alt="Design File Inspector"></p>
+<h2><a class="anchor" aria-hidden="true" id="variables"></a><a href="#variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variables</h2>
+<ol>
+<li>Notice that there are sections for different types of variables. Briefly:
+<ol>
+<li><strong>Independent variables:</strong> any manipulated variables that change between trials or blocks in your experiment (e.g. which stimuli, presentation time, distance from participant etc.)</li>
+<li><strong>Dependent variables:</strong> outputs or measurements from your experiment (i.e. response time, selection etc.)</li>
+<li><strong>Participant variables:</strong> Collected at the start of the session from each participant (e.g. gender, ID, etc.)</li>
+</ol></li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="independent-variables"></a><a href="#independent-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Independent Variables</h3>
+<p>Let’s set up our experiment’s variables.</p>
+<h4><a class="anchor" aria-hidden="true" id="color"></a><a href="#color" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Color</h4>
+<p>We want to vary the color of our stimulus in each trial. So let’s define an independent variable named Color.</p>
+<ol>
+<li>In the Design file’s inspector, in the Variable Creation section, under type to create, choose “String” to make a text-based variable.</li>
+<li>Select Independent.</li>
+<li>Click Create Variable.</li>
+<li>You should see a new variable appear in the Independent Variables section.</li>
+<li>Name it &quot;Color&quot;</li>
+<li>We want an the trials to be created for every possible color, so choose Balanced for the mixing type.</li>
+<li>Define values for our variable. Click the plus button to add values.
+<ol>
+<li>Add values: Red, Blue, Green.</li>
+</ol></li>
+<li>You should see something like this:</li>
+</ol>
+<p><img src="/TUX/docs/assets/Tutorials/ColorVariable.png" alt="Image of color variable"></p>
+<h4><a class="anchor" aria-hidden="true" id="size"></a><a href="#size" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Size</h4>
+<p>Next, Let’s create our size variable.</p>
+<ol>
+<li>Create a float independent variable</li>
+<li>Name it &quot;Size&quot;.</li>
+<li>Choose &quot;balanced&quot; mixing mode.</li>
+<li>Add values 1, 2, 3.</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="participant-variables"></a><a href="#participant-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Participant Variables</h3>
+<p>We also want to record each participant's gender and age at the start of each experimental session.</p>
+<p>Create a string participant variable named Gender</p>
+<ol>
+<li>Check Constrain values. This ensures that the value is restricted to a set of values that we define.</li>
+<li>Type in Male, Female, Other</li>
+</ol>
+<p>Create an int Participant variable named Age.</p>
+<ol>
+<li>Keep Constrain values unchecked so we can type in their age.</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="dependent-variables"></a><a href="#dependent-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dependent Variables</h3>
+<p>We want to record how closely the participants match the size of the stimulus. We’ll record that in a float dependent variable called MatchedSize. The default value will be assigned to any missing values in case of problems or stopping the experiment early.</p>
+<h2><a class="anchor" aria-hidden="true" id="test-out-our-experiment-design-using-basic-components"></a><a href="#test-out-our-experiment-design-using-basic-components" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Test out our experiment design using basic components</h2>
+<p>The Script Helper tool defined enough of the experiment to let you get up and started quickly. Lets test out if everything is working as expected before moving forward.</p>
+<p>Press play in the editor. You’ll see a window to start an experimental session. Unity may prompt you to install TextMeshPro assets. You should accept this since the Runner Interface depends on them.</p>
+<p><strong><em>Important Note: The Runner interface is meant to be displayed on a secondary monitor so that the experimenter can monitor and setup the experiment without the participant seeing it. To view both at the same time, make sure you have a second &quot;Game&quot; tab open set to &quot;Display 2&quot;. The main experiment will be shown on Display 1, with the interface showing on Display 2. This can be adjusted in the settings.</em></strong></p>
+<p><img src="/TUX/docs/assets/Tutorials/DisplaySelection.png" alt="Display Selection"></p>
+<p>**_Important Note for VR Users: SteamVR can sometimes take over the display of Display 1. You may need to display the Runner UI on display 2, even with only one monitor.</p>
+<ol>
+<li>Take a look at the previewed trial table and ensure everything is set up properly. Note that the toolkit adds some useful columns to track progress and other metrics.</li>
+<li>Debug mode is useful to check functionality during development without having to type in complicated options. Click Debug.</li>
+<li>Because it’s debug mode it automatically chooses values for our participant variables and other things. A normal run through the program will force you to select a value.</li>
+<li>Once started, the toolkit automatically constructs your blocks and trials based on code that you provide the ExperimentRunner class. At the moment, we haven't provided any, so it reverts to the built-in defaults.</li>
+<li>A new window will appear showing the progress through the experiment.</li>
+<li>In the default scripts, a trial is simply defined as pressing the return key. Press it a few times to see how the trials advance, and the values of the independent variables change.</li>
+</ol>
+<p><em>Note: Make sure you have one of the &quot;Game&quot; windows focused for the key presses to register</em></p>
+<p>It looks like everything is working properly. Although the auto-generated scripts have enough functionality to allow the experiment to run, but they don't <em>do</em> anything to our Unity scene.</p>
+<p>In the next part of the tutorial we'll learn how to extend our auto-generated scripts by defining some custom behaviour in our experiment.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/TUX/docs/firstcreating"><span class="arrow-prev">← </span><span>Part 2: Creating a new Experiment</span></a><a class="docs-next button" href="/TUX/docs/firstrunning"><span>Part 4: Writing Runner Scripts</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#variables">Variables</a><ul class="toc-headings"><li><a href="#independent-variables">Independent Variables</a></li><li><a href="#participant-variables">Participant Variables</a></li><li><a href="#dependent-variables">Dependent Variables</a></li></ul></li><li><a href="#test-out-our-experiment-design-using-basic-components">Test out our experiment design using basic components</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/TUX/" class="nav-home"><img src="/TUX/img/favicon.ico" alt="bmlTUX" width="66" height="58"/></a><div><h5>bmlTUX</h5><a href="/TUX/docs/en/GettingStarted.html">Documentation</a><a href="https://github.com/BioMotionLab/TUX/releases">Download</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/TUX/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 BioMotionLab (A.O. Bebko &amp; N.F. Troje)</section></footer></div></body></html>

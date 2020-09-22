@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Creating an Experiment · bmlTUX</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Creating a new experiment is best done in a new project."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Creating an Experiment · bmlTUX"/><meta property="og:type" content="website"/><meta property="og:url" content="https://BioMotionLab.github.io/TUX/"/><meta property="og:description" content="Creating a new experiment is best done in a new project."/><meta property="og:image" content="https://BioMotionLab.github.io/TUX/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://BioMotionLab.github.io/TUX/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/TUX/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/TUX/js/scrollSpy.js"></script><link rel="stylesheet" href="/TUX/css/main.css"/><script src="/TUX/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/TUX/"><img class="logo" src="/TUX/img/favicon.ico" alt="bmlTUX"/><h2 class="headerTitleWithLogo">bmlTUX</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/TUX/docs/GettingStarted" target="_self">Documentation</a></li><li class="siteNavGroupActive"><a href="/TUX/docs/Installation" target="_self">Install</a></li><li class="siteNavGroupActive"><a href="/TUX/docs/Publication" target="_self">Publication</a></li><li class="siteNavGroupActive"><a href="/TUX/docs/Troubleshooting" target="_self">Help</a></li><li class=""><a href="https://www.biomotionlab.ca" target="_self">BioMotionLab</a></li><li class=""><a href="https://github.com/BioMotionLab/TUX" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Documentation</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting Started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/GettingStarted">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Publication">Publication</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Requirements">Requirements</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Installation">Installation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Making your first experiment</h4><ul><li class="navListItem"><a class="navItem" href="/TUX/docs/firstoverview">Part 1: Tutorial Overview</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/firstcreating">Part 2: Creating a new Experiment</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/firstdesign">Part 3: Designing an Experiment</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/firstrunning">Part 4: Writing Runner Scripts</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/firstblocks">Part 5: Defining Blocks</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Documentation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem navListItemActive"><a class="navItem" href="/TUX/docs/CreatingExperiment">Creating an Experiment</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/AccessingScene">Accessing GameObjects and Scripts in your Scene</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Output">Output</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/ExperimentBehavior">Setting Up Your Experiment&#x27;s Behavior</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/TrialClass">Trial Class</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/BlockClass">Block Class</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/ExperimentClass">Experiment Class</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Help<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/Troubleshooting">Troubleshooting</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Coroutines">About Coroutines and IEnumerators</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Advanced<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/AdvancedOptions">Advanced Options</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Logging">Logging</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Building">Building to an Application</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Customizing">Customizing Further</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Extras">Extras</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Creating an Experiment</h1></header><article><div><span><p>Creating a new experiment is best done in a new project.</p>
+<p>Some project settings are required:</p>
+<ol>
+<li>API compatibility level to .NET 4.0</li>
+<li>Scripting Runtime Version .Net 4.x Equivalent</li>
+<li>Import the latest release of the toolkit .unitypackage file.</li>
+</ol>
+<h1><a class="anchor" aria-hidden="true" id="setting-up-an-experiment"></a><a href="#setting-up-an-experiment" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setting up an experiment</h1>
+<p>From toolkit version 0.11.x onwards, there is a new helper tool that is accessible from the main &quot;BML&quot; menu that will automatically create all required files and set up a basic experiment for you. Open the Script Helper Window, and click &quot;Automatically set everything up for me!&quot;. The toolkit will then add a new GameObject to your unity scene, generate the skeletons of all required scripts, and set up all the needed references. The created files will be in the root &quot;Assets&quot; folder of your unity project.</p>
+<h1><a class="anchor" aria-hidden="true" id="configuring-your-experimental-design"></a><a href="#configuring-your-experimental-design" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuring your experimental design</h1>
+<p>If you used the helper tool to automatically create all files, the Design File should be created for you. Or, you can create your own using the tool or by right-clicking on a folder in your project and navigate to &quot;Create &gt; bmlTUX &gt; New Design File&quot;.</p>
+<p>Select the Design file to open its inspector window. It should look something like (Figure 2).</p>
+<p><img src="Images/DesignFile.png" alt="VariableConfigurationFile Screenshot"></p>
+<p>Figure 2: A screenshot of the variable creation inspector.</p>
+<h1><a class="anchor" aria-hidden="true" id="randomization-and-repetition"></a><a href="#randomization-and-repetition" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Randomization and Repetition</h1>
+<p>At the top of this inspector you can adjust randomization and repetition settings.</p>
+<h3><a class="anchor" aria-hidden="true" id="randomization-mode"></a><a href="#randomization-mode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Randomization Mode</h3>
+<ul>
+<li><strong>None:</strong> No Randomization</li>
+<li><strong>Randomize but same order in each block:</strong> Trial order is randomized but is consistent across blocks.</li>
+<li><strong>Randomize all:</strong> Trial order is completely randomized across blocks</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="repeat-trials-in-block"></a><a href="#repeat-trials-in-block" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Repeat Trials in block</h3>
+<p>Each trial is repeated multiple times within each block.</p>
+<h3><a class="anchor" aria-hidden="true" id="repeat-all-blocks"></a><a href="#repeat-all-blocks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Repeat All Blocks</h3>
+<p>Runs through all blocks multiple times.</p>
+<h1><a class="anchor" aria-hidden="true" id="configuring-variables"></a><a href="#configuring-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuring Variables</h1>
+<p>To add a variable, select your desired data type (int, string, etc.), type of variable (independent, dependent, participant), and then click on Create Variable. You should see your variable added to the list below. Configure your variable by naming it, adding values, selecting whether the variable will be used to create blocks of trials, etc.
+To delete a variable from the list click the Delete Variable button
+Your changes will be saved automatically.</p>
+<h3><a class="anchor" aria-hidden="true" id="name"></a><a href="#name" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Name</h3>
+<p>You must name your variables. This will be how you access their values within your trials. I recommend using one-word names, or joining words using underscores. Do not use any special characters or punctuation.</p>
+<h3><a class="anchor" aria-hidden="true" id="datatype"></a><a href="#datatype" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Datatype</h3>
+<p>Once created, you cannot modify this variable’s datatype. This lets Unity know what kind of data to expect. Currently, supported datatypes include:</p>
+<ul>
+<li>Int</li>
+<li>Float</li>
+<li>String</li>
+<li>GameObject prefabs</li>
+<li>Vector3
+Although a bit difficult, you can add support for your own types if desired.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="variable-type"></a><a href="#variable-type" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variable Type</h3>
+<p>Independent and dependent variables are treated differently. Independent variables define your experimental structure, and dependent variables are values that determined from responses or measurements during each trial</p>
+<h1><a class="anchor" aria-hidden="true" id="independent-variables"></a><a href="#independent-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Independent Variables</h1>
+<p>Variables whose values change over the course of the experiment. Normal independent variables' values vary each trial, whereas blocked independent variables vary only over blocks of trials (several trials in a row have the same value). (e.g. which stimulus, color of stimulus, experimental conditions, etc.)</p>
+<h2><a class="anchor" aria-hidden="true" id="independent-variable-options"></a><a href="#independent-variable-options" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Independent variable options:</h2>
+<h3><a class="anchor" aria-hidden="true" id="block"></a><a href="#block" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Block</h3>
+<p>Enabling this option will create blocks of trials for each value defined. Useful for counterbalancing or variables that require setup in real life (i.e. participants need to move between values)</p>
+<h3><a class="anchor" aria-hidden="true" id="mixing-type-of-variable"></a><a href="#mixing-type-of-variable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mixing Type of Variable</h3>
+<p>This option will define how the variable is mixed with the other variables when creating your experimental design.</p>
+<h4><a class="anchor" aria-hidden="true" id="balanced"></a><a href="#balanced" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Balanced</h4>
+<p>This will create trials for every combination of values of each balanced variable. Example: for two 3-value balanced variables, there will be 3x3=9 trials.</p>
+<table>
+<thead>
+<tr><th>Trial Number</th><th>BalancedVariable1</th><th>BalancedVariable2</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>2</td><td>1</td><td>2</td></tr>
+<tr><td>3</td><td>1</td><td>3</td></tr>
+<tr><td>4</td><td>2</td><td>1</td></tr>
+<tr><td>5</td><td>2</td><td>2</td></tr>
+<tr><td>6</td><td>2</td><td>3</td></tr>
+<tr><td>7</td><td>3</td><td>1</td></tr>
+<tr><td>8</td><td>3</td><td>2</td></tr>
+<tr><td>9</td><td>3</td><td>3</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="looped"></a><a href="#looped" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Looped:</h4>
+<p>This will loop through the values such that there is an equal number of trials with each value. Lowest common multiple.</p>
+<p>Example1: For a variable with 2 values, and another variable with 4 values, the following table will be created. In this case the lowest common multiple is 4 trials.</p>
+<table>
+<thead>
+<tr><th>Trial Number</th><th>LoopedVariable1</th><th>LoopedVariable2</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>3</td><td>1</td><td>3</td></tr>
+<tr><td>4</td><td>2</td><td>4</td></tr>
+</tbody>
+</table>
+<p>Example2: For a variable with 2 values, and another variable with 3 values the following table. In this case the lowest common multiple is 6 trials.</p>
+<table>
+<thead>
+<tr><th>Trial Number</th><th>LoopedVariable1</th><th>LoopedVariable2</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>3</td><td>1</td><td>3</td></tr>
+<tr><td>4</td><td>2</td><td>1</td></tr>
+<tr><td>5</td><td>1</td><td>2</td></tr>
+<tr><td>6</td><td>2</td><td>3</td></tr>
+</tbody>
+</table>
+<p>Note that adding looped variables occurs before adding balanced variables, so all looped variables as a group are essentially treated as one balanced variable.</p>
+<h4><a class="anchor" aria-hidden="true" id="even-probability"></a><a href="#even-probability" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Even Probability:</h4>
+<p>Each trial will have a randomly selected value for this variable, with the same probability for each value.</p>
+<p>Example, A balanced variable with 6 levels, and an even probability variable with 10 values (numbers 1-10).</p>
+<table>
+<thead>
+<tr><th>Trial Number</th><th>BalancedVariable1</th><th>EvenProbabilityVariable1</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>1</td><td>4</td></tr>
+<tr><td>2</td><td>2</td><td>8</td></tr>
+<tr><td>3</td><td>3</td><td>9</td></tr>
+<tr><td>4</td><td>4</td><td>4</td></tr>
+<tr><td>5</td><td>5</td><td>7</td></tr>
+<tr><td>6</td><td>6</td><td>2</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="custom-probability"></a><a href="#custom-probability" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom Probability:</h4>
+<p>Each trial will have a randomly selected value for this variable, with a defined probability of being selected. You define the probability to the right of each value (as a decimal). The final probability is automatically calculated to ensure they add up to 1.</p>
+<p>Example, A balanced variable with 6 levels, and a custom probability variable with 2 values with the first value having 0.2 probability, and the second value having 0.8 probability.</p>
+<table>
+<thead>
+<tr><th>Trial Number</th><th>BalancedVariable1</th><th>CustomProbabilityVariable1</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>1</td><td>2</td></tr>
+<tr><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>3</td><td>3</td><td>2</td></tr>
+<tr><td>4</td><td>4</td><td>1</td></tr>
+<tr><td>5</td><td>5</td><td>2</td></tr>
+<tr><td>6</td><td>6</td><td>2</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="values"></a><a href="#values" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Values</h3>
+<p>Define the levels of each variable. You must define at least one value.</p>
+<h3><a class="anchor" aria-hidden="true" id="probability"></a><a href="#probability" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Probability</h3>
+<p>Only visible when custom probability mixing type is selected. This is where you define your probability of each value being picked.</p>
+<h1><a class="anchor" aria-hidden="true" id="dependent-variables"></a><a href="#dependent-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dependent Variables</h1>
+<p>Variables whose values are calculated or measured during the experiment. (e.g. reaction time, selected value, etc.)</p>
+<h2><a class="anchor" aria-hidden="true" id="dependent-variable-options"></a><a href="#dependent-variable-options" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dependent variable options:</h2>
+<h3><a class="anchor" aria-hidden="true" id="default-value"></a><a href="#default-value" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Default value</h3>
+<p>This is the value given to your dependent variables in case there is no response given, or the variable is not updated in your trial. This can be left blank if desired.</p>
+<p>Tip: Dependent variables can also be used as input constants if you want them to also appear in your output file. Just set default value to constant and don't write to it.</p>
+<h1><a class="anchor" aria-hidden="true" id="participant-variables"></a><a href="#participant-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Participant Variables</h1>
+<p>Variables whose values are measured once per participant (e.g. gender, age, etc.)</p>
+<p>The interface will prompt you to enter values at the start of each session.</p>
+<h2><a class="anchor" aria-hidden="true" id="participant-variable-options"></a><a href="#participant-variable-options" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Participant variable options:</h2>
+<h3><a class="anchor" aria-hidden="true" id="constrain-values"></a><a href="#constrain-values" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Constrain Values</h3>
+<p>When checked, forces values to be among a specified set of values.</p>
+<h3><a class="anchor" aria-hidden="true" id="values-1"></a><a href="#values-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Values</h3>
+<p>These are the set of values that are allowed when Constrain Values is checked.</p>
+<h1><a class="anchor" aria-hidden="true" id="adding-config-file-to-experimentrunner"></a><a href="#adding-config-file-to-experimentrunner" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Adding Config file to ExperimentRunner</h1>
+<p>If you used the helper to tool to automatically set everything up, the design file should already be referenced by the Experiment Runner Module. If you did it manually, you will need to drag your Design File into the inspector of your custom ExperimentRunner GameObject (described below), and it will run.</p>
+<p>The power of the configuration files is that you can run the same experiment with multiple saved configurations. For example, you can select different values for your experiment in different config files and drag your desired configuration into the experiment object prior to running participants. This also allows you to iteratively design your experiments while saving previous configurations.</p>
+<h1><a class="anchor" aria-hidden="true" id="advanced-options"></a><a href="#advanced-options" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advanced Options</h1>
+<p>There are several advanced options available for further customization. Please see the <a href="Advanced-options">Advanced page</a> of this wiki for more information</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/TUX/docs/firstblocks"><span class="arrow-prev">← </span><span>Part 5: Defining Blocks</span></a><a class="docs-next button" href="/TUX/docs/AccessingScene"><span class="function-name-prevnext">Accessing GameObjects and Scripts in your Scene</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#independent-variable-options">Independent variable options:</a><ul class="toc-headings"><li><a href="#block">Block</a></li><li><a href="#mixing-type-of-variable">Mixing Type of Variable</a></li><li><a href="#values">Values</a></li><li><a href="#probability">Probability</a></li></ul></li><li><a href="#dependent-variable-options">Dependent variable options:</a><ul class="toc-headings"><li><a href="#default-value">Default value</a></li></ul></li><li><a href="#participant-variable-options">Participant variable options:</a><ul class="toc-headings"><li><a href="#constrain-values">Constrain Values</a></li><li><a href="#values-1">Values</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/TUX/" class="nav-home"><img src="/TUX/img/favicon.ico" alt="bmlTUX" width="66" height="58"/></a><div><h5>bmlTUX</h5><a href="/TUX/docs/en/GettingStarted.html">Documentation</a><a href="https://github.com/BioMotionLab/TUX/releases">Download</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/TUX/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 BioMotionLab (A.O. Bebko &amp; N.F. Troje)</section></footer></div></body></html>

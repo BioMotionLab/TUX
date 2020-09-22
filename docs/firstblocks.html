@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Part 5: Defining Blocks · bmlTUX</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Participant input"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Part 5: Defining Blocks · bmlTUX"/><meta property="og:type" content="website"/><meta property="og:url" content="https://BioMotionLab.github.io/TUX/"/><meta property="og:description" content="## Participant input"/><meta property="og:image" content="https://BioMotionLab.github.io/TUX/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://BioMotionLab.github.io/TUX/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/TUX/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/TUX/js/scrollSpy.js"></script><link rel="stylesheet" href="/TUX/css/main.css"/><script src="/TUX/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/TUX/"><img class="logo" src="/TUX/img/favicon.ico" alt="bmlTUX"/><h2 class="headerTitleWithLogo">bmlTUX</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/TUX/docs/GettingStarted" target="_self">Documentation</a></li><li class="siteNavGroupActive"><a href="/TUX/docs/Installation" target="_self">Install</a></li><li class="siteNavGroupActive"><a href="/TUX/docs/Publication" target="_self">Publication</a></li><li class="siteNavGroupActive"><a href="/TUX/docs/Troubleshooting" target="_self">Help</a></li><li class=""><a href="https://www.biomotionlab.ca" target="_self">BioMotionLab</a></li><li class=""><a href="https://github.com/BioMotionLab/TUX" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Making your first experiment</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting Started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/GettingStarted">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Publication">Publication</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Requirements">Requirements</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Installation">Installation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Making your first experiment</h4><ul><li class="navListItem"><a class="navItem" href="/TUX/docs/firstoverview">Part 1: Tutorial Overview</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/firstcreating">Part 2: Creating a new Experiment</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/firstdesign">Part 3: Designing an Experiment</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/firstrunning">Part 4: Writing Runner Scripts</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/TUX/docs/firstblocks">Part 5: Defining Blocks</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Documentation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/CreatingExperiment">Creating an Experiment</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/AccessingScene">Accessing GameObjects and Scripts in your Scene</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Output">Output</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/ExperimentBehavior">Setting Up Your Experiment&#x27;s Behavior</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/TrialClass">Trial Class</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/BlockClass">Block Class</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/ExperimentClass">Experiment Class</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Help<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/Troubleshooting">Troubleshooting</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Coroutines">About Coroutines and IEnumerators</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Advanced<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/TUX/docs/AdvancedOptions">Advanced Options</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Logging">Logging</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Building">Building to an Application</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Customizing">Customizing Further</a></li><li class="navListItem"><a class="navItem" href="/TUX/docs/Extras">Extras</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Part 5: Defining Blocks</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="participant-input"></a><a href="#participant-input" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Participant input</h2>
+<p>We need let the participants resize the stimulus to match it to the model. Lets create a new <code>MonoBehaviour</code> script attached to our MatchObject GameObject. We'll call it Matcher.</p>
+<p>Next, we'll set up keys to scale the stimulus up or down. Let’s use <code>up</code>and <code>down</code> arrow keys.</p>
+<ol>
+<li>Add if statements for the keys. In this instance we want <code>GetKey</code> instead of <code>GetKeyDown</code> to check if the participant held the key down.</li>
+<li>Adjust size of stimulus via its <code>transform.localScale</code>.</li>
+<li>We’ll create variable for adjusting the speed that it gets resizing so we can adjust it later.</li>
+<li>We resize it depending on how much time has passed since last frame. This will keep the speed consistent.</li>
+<li>Finally, we want to disable this based on a boolean value.</li>
+</ol>
+<p>Your code should look something like this:</p>
+<pre><code class="hljs css language-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Matcher</span> : <span class="hljs-title">MonoBehaviour</span> {
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> allowAdjustment = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> resizeSpeed = <span class="hljs-number">1</span>;
+    
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (allowAdjustment) {
+
+            <span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.UpArrow)) {
+                IncreaseSize();
+            }
+            <span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.DownArrow)) {
+                DecreaseSize();
+            }
+
+        }
+
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">IncreaseSize</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-keyword">float</span> amount = resizeSpeed * Time.deltaTime;
+        transform.localScale += <span class="hljs-keyword">new</span> Vector3(amount, amount, amount);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DecreaseSize</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-keyword">float</span> amount = resizeSpeed * Time.deltaTime;
+        transform.localScale -= <span class="hljs-keyword">new</span> Vector3(amount, amount, amount);
+    }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="update-tutorialexperimentrunner-with-reference"></a><a href="#update-tutorialexperimentrunner-with-reference" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Update TutorialExperimentRunner with reference</h3>
+<p>We need to get a reference to the Matcher Script in our TutorialExperimentRunner. So add a public field:</p>
+<pre><code class="hljs css language-c#"><span class="hljs-keyword">public</span> Matcher Matcher;
+</code></pre>
+<p>Then drag in the MatchObject to the field in the inspector.</p>
+<h3><a class="anchor" aria-hidden="true" id="update-trial-script-to-enable"></a><a href="#update-trial-script-to-enable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Update Trial Script to enable</h3>
+<p>We want to enable this matcher script during the <code>RunMainCoroutine()</code> method of our trials, as we're waiting for confirmation with the return key. Let's modify our method like so.</p>
+<pre><code class="hljs css language-c#"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> IEnumerator <span class="hljs-title">RunMainCoroutine</span>(<span class="hljs-params"></span>)</span> {
+    <span class="hljs-keyword">bool</span> waitingForParticipantResponse = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">while</span> (waitingForParticipantResponse) {
+
+        tutorialRunner.Matcher.allowAdjustment = <span class="hljs-literal">true</span>;  <span class="hljs-comment">// &lt;----</span>
+
+        <span class="hljs-keyword">if</span> (Input.GetKeyDown(KeyCode.Return)) { 
+            waitingForParticipantResponse = <span class="hljs-literal">false</span>;  
+        }
+
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>; 
+    }
+
+    tutorialRunner.Matcher.allowAdjustment = <span class="hljs-literal">false</span>; <span class="hljs-comment">// &lt;----</span>
+}
+</code></pre>
+<p>Test it out. We now have a pretty functional experiment. We can try to match the size of the colored stimulus to the model using the W and S keys, And when closely matched, we can hit the Return key to move to the next trial.</p>
+<h2><a class="anchor" aria-hidden="true" id="block-variables"></a><a href="#block-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Block Variables</h2>
+<p>Recall that we set up the distance variable as a block variable. We can define block-specific behavior similar to the way we defined our <code>TutorialTrialScript</code>. We can modify our <code>TutorialBlockScript</code> that inherits from the base <code>Block</code> class. We can use a similar procedure to overwrite methods to add functionality.</p>
+<p>Let’s create our Distance variable. In this case we want all the trials at a given distance to be grouped together, so we want to flag it as a &quot;block&quot; variable.</p>
+<ol>
+<li>Create a float independent variable.</li>
+<li>Name it &quot;Distance&quot;.</li>
+<li>Make sure &quot;block&quot; is checked.</li>
+<li>Choose &quot;balanced&quot; mixing mode.</li>
+<li>Add values: 1, 2, 3.</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="update-block-script"></a><a href="#update-block-script" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Update Block Script</h3>
+<ol>
+<li><p>Open <code>TutorialBlockScript.cs</code>.</p></li>
+<li><p>We want to move the stimulus to the different distances at the start of each block.</p></li>
+<li><p>We have to first get access to our TutorialExperimentRunner as before.</p></li>
+<li><p>As before, override the <code>PreMethod()</code> to add code that runs at the start of each block of trials.</p></li>
+<li><p>We want to read the Distance variable from the <code>Data</code> object just like we did in a trial.</p></li>
+<li><p>Let's save its initial position, so we can reset it at the end of the block in <code>PostMethod</code>, and then adjust its position to the value of the distance variable on the Z axis.</p></li>
+</ol>
+<p><em>Note: A <code>Block</code>’s <code>Data</code> object only has access to block variables, not other variables. However, a <code>Trial</code> has access to both block and trial variables.</em></p>
+<pre><code class="hljs css language-csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TutorialBlockScript</span> : <span class="hljs-title">Block</span> {
+
+    TutorialExperimentRunner tutorialRunner;
+    Vector3 initialPosition;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TutorialBlockScript</span>(<span class="hljs-params">ExperimentRunner runner, DataTable trialTable, DataRow data, <span class="hljs-keyword">int</span> index</span>) 
+        : <span class="hljs-title">base</span>(<span class="hljs-params">runner, trialTable, data, index</span>)</span> {
+        tutorialRunner = (TutorialExperimentRunner) runner;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PreMethod</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-keyword">float</span> distance = (<span class="hljs-keyword">float</span>) Data[<span class="hljs-string">"Distance"</span>];
+        initialPosition = tutorialRunner.Stimulus.transform.position;
+        tutorialRunner.Stimulus.transform.position = <span class="hljs-keyword">new</span> Vector3(initialPosition.x, initialPosition.y, distance);
+    }
+
+    
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PostMethod</span>(<span class="hljs-params"></span>)</span> {
+        tutorialRunner.Stimulus.transform.position = initialPosition;
+    }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="randomization"></a><a href="#randomization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Randomization</h2>
+<p>Finally, we want to randomize the trial order completely.</p>
+<ol>
+<li>In the top of the config file inspector, select the following settings:
+<ol>
+<li>Block Randomization: Complete Randomization</li>
+<li>Trial Randomization: Randomize (and choose Different Permutations).</li>
+</ol></li>
+<li>We don’t want to repeat anything so leave both repetition settings at 1.</li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="run-and-test"></a><a href="#run-and-test" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Run and Test</h2>
+<p>Verify that it works! Run the experiment and make sure that the distance changes for each block.</p>
+<h2><a class="anchor" aria-hidden="true" id="moving-forward"></a><a href="#moving-forward" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Moving forward</h2>
+<p>This tutorial got you started making a functional experiment. You learned how to set up a basic experiment, customize trial and block behavior, and output to a file. Check out the <a href="Home">main documentation</a> to learn more about using the more advanced features of the Toolkit.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/TUX/docs/firstrunning"><span class="arrow-prev">← </span><span>Part 4: Writing Runner Scripts</span></a><a class="docs-next button" href="/TUX/docs/CreatingExperiment"><span>Creating an Experiment</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#participant-input">Participant input</a><ul class="toc-headings"><li><a href="#update-tutorialexperimentrunner-with-reference">Update TutorialExperimentRunner with reference</a></li><li><a href="#update-trial-script-to-enable">Update Trial Script to enable</a></li></ul></li><li><a href="#block-variables">Block Variables</a><ul class="toc-headings"><li><a href="#update-block-script">Update Block Script</a></li></ul></li><li><a href="#randomization">Randomization</a></li><li><a href="#run-and-test">Run and Test</a></li><li><a href="#moving-forward">Moving forward</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/TUX/" class="nav-home"><img src="/TUX/img/favicon.ico" alt="bmlTUX" width="66" height="58"/></a><div><h5>bmlTUX</h5><a href="/TUX/docs/en/GettingStarted.html">Documentation</a><a href="https://github.com/BioMotionLab/TUX/releases">Download</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/TUX/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 BioMotionLab (A.O. Bebko &amp; N.F. Troje)</section></footer></div></body></html>
