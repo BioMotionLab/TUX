@@ -51,4 +51,13 @@ jobs:
           git push origin --tags
         env:
           TAG: ${{ steps.semantic.outputs.new_release_version }}
+      - name: Publish to npm
+          if: steps.semantic.outputs.new_release_published == 'true'
+          run: |
+            yarn install
+            git checkout upm
+            npm publish --access public
+          env:
+            NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
 
