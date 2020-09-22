@@ -51,11 +51,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             DrawVariableSpecificInspector();
             EditorGUI.indentLevel--;
             EditorGUILayout.Space();
-            
-            
-         
-            
-            
+
             if (!variableValidationResults.IsValid) {
                 DrawVariableErrors();
             }
@@ -124,11 +120,14 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("Delete Variable", GUILayout.Width(DeleteButtonWidth))) {
+                //Debug.Log("Showing popup");
                 if (EditorUtility.DisplayDialog("Delete Variable", "Are you sure you want to delete variable?",
                     "Delete Variable", "Cancel")) {
                     if (Deleted) Debug.LogError("Trying to delete already deleted variable");
                     ReadyToDelete = true;
+                    //Debug.Log("deleting...");
                 }
+                GUIUtility.ExitGUI(); 
             }
             EditorGUILayout.EndHorizontal();
         }
