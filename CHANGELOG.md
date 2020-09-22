@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/BioMotionLab/TUX/compare/release/1.0.3...release/1.0.4) (2020-09-22)
+
+
+### Bug Fixes
+
+* readme ([70dcc01](https://github.com/BioMotionLab/TUX/commit/70dcc01c3a9be75669cd336039a050a0d90cc720))
+
 ## [1.0.3](https://github.com/BioMotionLab/TUX/compare/release/1.0.2...release/1.0.3) (2020-09-22)
 
 
