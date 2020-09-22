@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/BioMotionLab/TUX/compare/release/1.0.5...release/1.0.6) (2020-09-22)
+
+
+### Bug Fixes
+
+* variable deletion errors, design file creation right click menu ([f2a6577](https://github.com/BioMotionLab/TUX/commit/f2a6577d5153ed4728c3dfe46b8255ae88216f05))
+
 ## [1.0.5](https://github.com/BioMotionLab/TUX/compare/release/1.0.4...release/1.0.5) (2020-09-22)
 
 
