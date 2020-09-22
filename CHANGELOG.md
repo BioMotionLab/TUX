@@ -1,3 +1,11 @@
+## [1.0.5](https://github.com/BioMotionLab/TUX/compare/release/1.0.4...release/1.0.5) (2020-09-22)
+
+
+### Bug Fixes
+
+* updated semver ([9d8def0](https://github.com/BioMotionLab/TUX/commit/9d8def007375837d242152021804ee226fcd9c70))
+* updated workflow ([d0a58c8](https://github.com/BioMotionLab/TUX/commit/d0a58c811abe4321ce9c80af0d745039b915e13d))
+
 ## [1.0.4](https://github.com/BioMotionLab/TUX/compare/release/1.0.3...release/1.0.4) (2020-09-22)
 
 
