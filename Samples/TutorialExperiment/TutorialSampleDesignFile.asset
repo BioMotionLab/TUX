@@ -47,7 +47,7 @@ MonoBehaviour:
         Name: Distance
         VariableType: 1
         DataType: 1
-        ExpandSettings: 0
+        ExpandSettings: 1
         MixingType: 0
         Block: 1
         Values:
@@ -65,7 +65,7 @@ MonoBehaviour:
         Name: Size
         VariableType: 1
         DataType: 1
-        ExpandSettings: 0
+        ExpandSettings: 1
         MixingType: 0
         Block: 0
         Values:
@@ -82,7 +82,7 @@ MonoBehaviour:
       data:
         Name: Color
         VariableType: 1
-        DataType: 2
+        DataType: 3
         ExpandSettings: 0
         MixingType: 0
         Block: 0
