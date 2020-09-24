@@ -13,11 +13,11 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         }
 
         protected override void DrawVariableSpecificInspector() {
-            if (ExpandSettingsProp.boolValue) {
+            
 
                 EditorGUI.indentLevel++;
                 
-                SerializedProperty constrainProperty = variableProperty.FindPropertyRelative("ConstrainValues");
+                SerializedProperty constrainProperty = VariableProperty.FindPropertyRelative("ConstrainValues");
                 EditorGUILayout.PropertyField(constrainProperty);
 
                 if (constrainProperty.boolValue) {
@@ -25,7 +25,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                     valuesList.DoLayoutList();
                 }
                 EditorGUI.indentLevel--;
-            }
+            
         }
 
         protected override void AddValueElement() {

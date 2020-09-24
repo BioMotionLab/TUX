@@ -28,24 +28,24 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         
         protected override void DrawVariableSpecificInspector() {
             
-            SerializedProperty blockProperty = variableProperty.FindPropertyRelative(nameof(IndependentVariable.Block));
+            SerializedProperty blockProperty = VariableProperty.FindPropertyRelative(nameof(IndependentVariable.Block));
             CheckMaxBlockPermutationsAllowed(blockProperty.boolValue);
             
-            if (ExpandSettingsProp.boolValue) {
+            
                 
-                EditorGUILayout.PropertyField(blockProperty);
-                
-                SerializedProperty mixType = variableProperty.FindPropertyRelative(nameof(IndependentVariable.MixingType));
-                VariableMixingType op = (VariableMixingType) mixType.intValue;
-                op = (VariableMixingType)EditorGUILayout.EnumPopup("Mixing Type", op);
-                mixType.intValue = (int) op;
+            EditorGUILayout.PropertyField(blockProperty);
+            
+            SerializedProperty mixType = VariableProperty.FindPropertyRelative(nameof(IndependentVariable.MixingType));
+            VariableMixingType op = (VariableMixingType) mixType.intValue;
+            op = (VariableMixingType)EditorGUILayout.EnumPopup("Mixing Type", op);
+            mixType.intValue = (int) op;
 
-            }
+            
             
             if (valuesProperty.arraySize == 0) {
-                variableValidationResults.AddWarning("No values");
+                VariableValidationResults.AddWarning("No values");
             }
-            if (ExpandSettingsProp.boolValue) {
+            
                 bool isCustomProbability = CheckIfCustomProbability();
             
                 EditorGUILayout.Space();
@@ -57,7 +57,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                     CalculateFinalProbability();
                     CheckProbabilityErrors(true);
                 }
-            }
+            
 
             if (waitingToClearAllValues) {
                 int n = valuesProperty.arraySize;
@@ -76,18 +76,18 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             if (!isBlockVariable || valuesProperty.arraySize <= ExperimentDesign.MaxBlockPermutationsAllowed) return;
 
             
-            IExperimentDesignFile iExperimentDesignFile = variableProperty.serializedObject.targetObject as IExperimentDesignFile;
+            IExperimentDesignFile iExperimentDesignFile = VariableProperty.serializedObject.targetObject as IExperimentDesignFile;
             if (iExperimentDesignFile == null) return;
             
             if (iExperimentDesignFile.GetBlockOrderConfigurations.Count == 0) {
-                variableValidationResults.AddError(
+                VariableValidationResults.AddError(
                                         "Too many Block Values for automatic permutation. " +
                                         "Must define possible Block orders manually using BlockOrderDefinition files. " +
                                         "Please see docs.");
             }
 
             if (!iExperimentDesignFile.GetBlockOrderIsValid) {
-                variableValidationResults.AddWarning("A recent change has invalidated your manual block order configurations. " +
+                VariableValidationResults.AddWarning("A recent change has invalidated your manual block order configurations. " +
                                                    "Please update them before running your experiment"); 
             }
         }
@@ -118,7 +118,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                 if (runningTotal > 1) direction = " (too high)";
                 if (runningTotal < 1) direction = " (too low)";
 
-                variableValidationResults.AddError($"Custom Probabilities Error: Total = {runningTotal}{direction}");
+                VariableValidationResults.AddError($"Custom Probabilities Error: Total = {runningTotal}{direction}");
             }
        
         }
@@ -153,7 +153,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         bool CheckIfCustomProbability() {
             bool customProb = false;
             
-            VariableMixingType mixingType = (VariableMixingType)variableProperty.FindPropertyRelative(nameof(IndependentVariable.MixingType)).intValue;
+            VariableMixingType mixingType = (VariableMixingType)VariableProperty.FindPropertyRelative(nameof(IndependentVariable.MixingType)).intValue;
             customProb = mixingType == VariableMixingType.CustomProbability;
             
             
