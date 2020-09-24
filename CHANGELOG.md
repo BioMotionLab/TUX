@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/BioMotionLab/TUX/compare/release/1.0.6...release/1.0.7) (2020-09-24)
+
+
+### Bug Fixes
+
+* attempted fix for irregular bug when variable deleted ([57a380a](https://github.com/BioMotionLab/TUX/commit/57a380ad43f605f28cad3b04e7b789a849cacc2a))
+
 ## [1.0.6](https://github.com/BioMotionLab/TUX/compare/release/1.0.5...release/1.0.6) (2020-09-22)
 
 
