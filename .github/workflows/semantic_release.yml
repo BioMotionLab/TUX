@@ -52,11 +52,11 @@ jobs:
         env:
           TAG: ${{ steps.semantic.outputs.new_release_version }}
       - name: Setup Node
-          if: steps.semantic.outputs.new_release_published == 'true'
-          uses: actions/setup-node@v1
-          with:
-            node-version: 12
-            registry-url: https://registry.npmjs.org/
+        if: steps.semantic.outputs.new_release_published == 'true'
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
       - name: Publish to npm
         if: steps.semantic.outputs.new_release_published == 'true'
         run: |
