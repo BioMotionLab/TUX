@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/BioMotionLab/TUX/compare/release/1.0.7...release/1.0.8) (2020-10-28)
+
+
+### Bug Fixes
+
+* UI camera now targets display (none) ([d9a4d4b](https://github.com/BioMotionLab/TUX/commit/d9a4d4bd10ec53db5959247afe05b15910f5dfc1))
+
 ## [1.0.7](https://github.com/BioMotionLab/TUX/compare/release/1.0.6...release/1.0.7) (2020-09-24)
 
 
