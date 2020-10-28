@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TrialRepetitions: 1
   ExperimentRepetitions: 1
-  TrialRandomization: 1
+  TrialRandomization: 0
   TrialPermutationType: 1
   BlockRandomization: 2
   BlockPartialRandomizationSubType: 1
@@ -65,7 +65,7 @@ MonoBehaviour:
         Name: Size
         VariableType: 1
         DataType: 1
-        ExpandSettings: 1
+        ExpandSettings: 0
         MixingType: 0
         Block: 0
         Values:

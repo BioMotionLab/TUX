@@ -46,17 +46,17 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                 VariableValidationResults.AddWarning("No values");
             }
             
-                bool isCustomProbability = CheckIfCustomProbability();
+            bool isCustomProbability = CheckIfCustomProbability();
+        
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+            valuesList.DoLayoutList();
+            EditorGUILayout.Space();
             
-                EditorGUILayout.Space();
-                EditorGUILayout.Space();
-                valuesList.DoLayoutList();
-                EditorGUILayout.Space();
-                
-                if (isCustomProbability) {
-                    CalculateFinalProbability();
-                    CheckProbabilityErrors(true);
-                }
+            if (isCustomProbability) {
+                CalculateFinalProbability();
+                CheckProbabilityErrors(true);
+            }
             
 
             if (waitingToClearAllValues) {
