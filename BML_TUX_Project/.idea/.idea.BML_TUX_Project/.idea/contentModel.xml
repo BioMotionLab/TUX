@@ -106,6 +106,7 @@
               </e>
               <e p="RuntimeUI" t="Include">
                 <e p="ExperimentGui.cs" t="Include" />
+                <e p="MakeCameraTargetEyeNone.cs" t="Include" />
                 <e p="RunnerWindowUI" t="Include">
                   <e p="BlockOrderPanel.cs" t="Include" />
                   <e p="DesignFilePanel.cs" t="Include" />
