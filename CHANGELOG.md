@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/BioMotionLab/TUX/compare/release/1.0.8...release/1.0.9) (2020-11-02)
+
+
+### Bug Fixes
+
+* Possible error on variable deletion ([ae5ef25](https://github.com/BioMotionLab/TUX/commit/ae5ef2565ad1faac1e966834cb0dd1c3b12f2424))
+
 ## [1.0.8](https://github.com/BioMotionLab/TUX/compare/release/1.0.7...release/1.0.8) (2020-10-28)
 
 
