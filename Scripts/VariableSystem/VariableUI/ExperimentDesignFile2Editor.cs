@@ -169,7 +169,6 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                         allViewers.Remove(variablePropertyPath);
                         RemoveFromSubList(variablePropertyPath);
                         existingViewer.Deleted = true;
-                        EditorUtility.SetDirty(this);
                     }
                 }
                 else {
@@ -205,8 +204,9 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             foreach (int i in descendingDeletionIndexes) {
                 list.DeleteArrayElementAtIndex(i);
             }
-            
-            
+
+            factoryProp.serializedObject.ApplyModifiedProperties();
+
         }
 
         void AddToSubList(string variablePropertyPath, VariableViewer newViewer) {
