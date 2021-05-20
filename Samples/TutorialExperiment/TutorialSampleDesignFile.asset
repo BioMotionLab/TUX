@@ -34,8 +34,8 @@ MonoBehaviour:
   GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
   FileLocationSettings: {fileID: 11400000, guid: 07f42cef79754c74583d0209412fa987,
     type: 2}
-  ShowAdvancedEditor: 0
-  BlockOrderIsValid: 0
+  ShowAdvancedEditor: 1
+  BlockOrderIsValid: 1
   TrialTableGeneration: 0
   BlockOrderConfigurations: []
   references:
@@ -112,7 +112,7 @@ MonoBehaviour:
         VariableType: 3
         DataType: 1
         ExpandSettings: 0
-        Value: 0
+        Value: 2
         ConstrainValues: 0
         Values: 
         PossibleValues: 

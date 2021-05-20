@@ -4,6 +4,7 @@ using System.Data;
 using System.Text;
 using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
+using VariableSystem;
 
 namespace bmlTUX.Scripts.ExperimentParts {
 

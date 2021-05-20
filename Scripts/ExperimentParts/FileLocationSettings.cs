@@ -52,15 +52,11 @@ namespace bmlTUX.Scripts.ExperimentParts {
 		[SerializeField]
 		public string DebugFileName = default;
 		
-		[SerializeField]
-		[Header("This folder will show up in your documents folder:")]
-		// ReSharper disable once InconsistentNaming
-		string tuxFolderName = "bmlTUX_Data";
-
+		const string tuxFolderName = "bmlTUX_Data";
 		
-		string BaseTuxFolderPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), tuxFolderName);
-		public string SessionFolder => BaseTuxFolderPath;
-		public string DebugFolder => BaseTuxFolderPath;
+		public static string BaseTuxDocumentsFolderPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), tuxFolderName);
+		public string SessionFolder => BaseTuxDocumentsFolderPath;
+		public string DebugFolder => BaseTuxDocumentsFolderPath;
 		
 		public string LastSessionSaveFilePath => Path.Combine(SessionFolder, LastSessionSaveFileName);
 		public string SessionLogFilePath => Path.Combine(SessionFolder, SessionLogFileName);
