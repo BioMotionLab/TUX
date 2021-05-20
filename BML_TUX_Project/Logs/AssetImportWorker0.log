@@ -1,0 +1,121 @@
+Using pre-set license
+
+ COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/2020.3.8f1/Unity.app/Contents/MacOS/Unity
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+/Users/adam/GitHub/TUX/BML_TUX_Project
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+55090
+Successfully changed project path to: /Users/adam/GitHub/TUX/BML_TUX_Project
+/Users/adam/GitHub/TUX/BML_TUX_Project
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 22.37 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.8f1 (507919d4fff5)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/2020.3.8f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/adam/GitHub/TUX/BML_TUX_Project/Assets
+GfxDevice: creating device client; threaded=0
+2021-05-20 12:48:53.081 Unity[21871:988929] DELL U2713HM preferred device: AMD Radeon RX 580 (high power)
+2021-05-20 12:48:53.081 Unity[21871:988929] Metal devices available: 1
+2021-05-20 12:48:53.081 Unity[21871:988929] 0: AMD Radeon RX 580 (high power)
+2021-05-20 12:48:53.082 Unity[21871:988929] Using device AMD Radeon RX 580 (high power)
+Initializing Metal device caps: AMD Radeon RX 580
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/2020.3.8f1/Unity.app/Contents/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/2020.3.8f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = '/Applications/Unity/Hub/Editor/2020.3.8f1/Unity.app/Contents/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56871
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: /Applications/Unity/Hub/Editor/2020.3.8f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Registered in 0.000547 seconds.
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 22.96 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.907 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.000629 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 21.66 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.828 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launching external process: /Applications/Unity/Hub/Editor/2020.3.8f1/Unity.app/Contents/Tools/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.01 seconds
+Refreshing native plugins compatible for Editor in 0.22 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1527 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 127.3 MB.
+System memory in use after: 127.3 MB.
+
+Unloading 17 unused Assets to reduce memory usage. Loaded Objects now: 1973.
+Total: 1.379761 ms (FindLiveObjects: 0.130558 ms CreateObjectMapping: 0.037952 ms MarkObjects: 1.160921 ms  DeleteObjects: 0.049723 ms)
+
+========================================================================
+Received Import Request.
+  path: Packages/com.biomotionlab.tux/Samples/TutorialExperiment
+  artifactKey: Guid(ff6a24fd356406149b9228e04de36194) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.biomotionlab.tux/Samples/TutorialExperiment using Guid(ff6a24fd356406149b9228e04de36194) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e322c712a93b35a2b4a7472dee9b9478') in 0.002408 seconds
+  Import took 0.003949 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000140 seconds.
+  path: Packages/com.biomotionlab.tux/Samples/TutorialExperiment/TutorialSampleExperiment.unity
+  artifactKey: Guid(4abaef53a10623b4daee608e668ad6df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.biomotionlab.tux/Samples/TutorialExperiment/TutorialSampleExperiment.unity using Guid(4abaef53a10623b4daee608e668ad6df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e559f7219f03b81e2fdea12200aaa018') in 0.005314 seconds
+  Import took 0.006817 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000580 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 0.22 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.794 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.21 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1508 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 126.0 MB.
+System memory in use after: 126.1 MB.
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 1976.
+Total: 1.352398 ms (FindLiveObjects: 0.115013 ms CreateObjectMapping: 0.034349 ms MarkObjects: 1.192210 ms  DeleteObjects: 0.010303 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000614 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 0.23 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.753 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.22 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1508 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 126.2 MB.
+System memory in use after: 126.3 MB.
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 1979.
+Total: 1.203901 ms (FindLiveObjects: 0.113672 ms CreateObjectMapping: 0.030757 ms MarkObjects: 1.048439 ms  DeleteObjects: 0.010198 ms)
+
