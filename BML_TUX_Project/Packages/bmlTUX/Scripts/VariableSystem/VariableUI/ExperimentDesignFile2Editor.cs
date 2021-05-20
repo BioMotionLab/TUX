@@ -427,7 +427,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             if (!designFile.GetHasBlocks) return;
                 
             if (!designFile.GetBlockOrderIsValid) {
-                EditorGUILayout.HelpBox("A recent change has invalidated any manual block order configurations. Please update them before running your experiment",
+                EditorGUILayout.HelpBox("A recent change in your design has invalidated any manual block order configurations. Please update them before running your experiment",
                     MessageType.Error); 
                 EditorGUILayout.Space();
             }
@@ -436,7 +436,8 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         void CreateNewBlockOrderDefinition() {
             
            if (!designFileTarget.HasBlocks) {
-                Debug.LogError($"{TuxLog.Prefix} Tried to make block order definition file, but no block variables have been defined!");
+                EditorUtility.DisplayDialog("bmlTUX: Error Creating Block Order File", 
+                    $"No block variables have been defined.\nYou need to define a block variable first.", "Ok");
                 return;
            }
            
