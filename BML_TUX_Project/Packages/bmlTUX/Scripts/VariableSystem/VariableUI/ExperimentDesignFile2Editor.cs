@@ -9,6 +9,7 @@ using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using VariableSystem;
 
 namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
@@ -405,6 +406,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             GUILayout.Space((EditorGUI.indentLevel + 1) * IndentWidth);
             if (GUILayout.Button("Clear List")) {
                 designFileTarget.BlockOrderConfigurations.Clear();
+                EditorUtility.SetDirty(target);
             }
 
             if (GUILayout.Button("Delete All Files")) {
@@ -427,7 +429,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             if (!designFile.GetHasBlocks) return;
                 
             if (!designFile.GetBlockOrderIsValid) {
-                EditorGUILayout.HelpBox("A recent change has invalidated any manual block order configurations. Please update them before running your experiment",
+                EditorGUILayout.HelpBox("A recent change in your design has invalidated any manual block order configurations. Please update them before running your experiment",
                     MessageType.Error); 
                 EditorGUILayout.Space();
             }
@@ -436,12 +438,17 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         void CreateNewBlockOrderDefinition() {
             
            if (!designFileTarget.HasBlocks) {
-                Debug.LogError($"{TuxLog.Prefix} Tried to make block order definition file, but no block variables have been defined!");
+                EditorUtility.DisplayDialog("bmlTUX: Error Creating Block Order File", 
+                    $"No block variables have been defined.\nYou need to define a block variable first.", "Ok");
                 return;
            }
            
            BlockOrderDefinition newBlockOrderDefinition = CreateInstance<BlockOrderDefinition>();
+           newBlockOrderDefinition.Init(designFileTarget);
            
+           List<BlockOrderDefinition> orders = designFileTarget.GetBlockOrderConfigurations;
+           orders.Add(newBlockOrderDefinition);
+           EditorUtility.SetDirty(designFileTarget);
            try {
                string savePath = Path.GetDirectoryName(path: AssetDatabase.GetAssetPath(Selection.activeObject)) +
                                  "/New Block Order Definition.asset";
@@ -451,16 +458,15 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
            }
            catch (ArgumentNullException) {
                Debug.LogError($"{TuxLog.Prefix} Could not create BlockOrderDefinition. There is probably an error in variable definitions.");
+               orders.Remove(newBlockOrderDefinition);
            }
             
            EditorUtility.FocusProjectWindow();
             
            Selection.activeObject = newBlockOrderDefinition;
            if (designFileTarget == null) throw new NullReferenceException("DesignFileNull");
-           newBlockOrderDefinition.Init(designFileTarget);
-            
-           List<BlockOrderDefinition> orders = designFileTarget.GetBlockOrderConfigurations;
-           orders.Add(newBlockOrderDefinition);
+           
+           
             
                 
                 
