@@ -4,7 +4,7 @@ using UnityEngine;
 namespace bmlTUX.Scripts.VariableSystem {
     
     [Serializable]
-    public class OrderRow : IEquatable<OrderRow> {
+    public struct OrderRow : IEquatable<OrderRow> {
 
         [SerializeField]
         public int Index;

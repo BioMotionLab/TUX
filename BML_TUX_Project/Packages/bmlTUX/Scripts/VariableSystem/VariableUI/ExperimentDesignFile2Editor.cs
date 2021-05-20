@@ -9,6 +9,7 @@ using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using VariableSystem;
 
 namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
@@ -405,6 +406,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             GUILayout.Space((EditorGUI.indentLevel + 1) * IndentWidth);
             if (GUILayout.Button("Clear List")) {
                 designFileTarget.BlockOrderConfigurations.Clear();
+                EditorUtility.SetDirty(target);
             }
 
             if (GUILayout.Button("Delete All Files")) {
@@ -442,7 +444,11 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
            }
            
            BlockOrderDefinition newBlockOrderDefinition = CreateInstance<BlockOrderDefinition>();
+           newBlockOrderDefinition.Init(designFileTarget);
            
+           List<BlockOrderDefinition> orders = designFileTarget.GetBlockOrderConfigurations;
+           orders.Add(newBlockOrderDefinition);
+           EditorUtility.SetDirty(designFileTarget);
            try {
                string savePath = Path.GetDirectoryName(path: AssetDatabase.GetAssetPath(Selection.activeObject)) +
                                  "/New Block Order Definition.asset";
@@ -452,16 +458,15 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
            }
            catch (ArgumentNullException) {
                Debug.LogError($"{TuxLog.Prefix} Could not create BlockOrderDefinition. There is probably an error in variable definitions.");
+               orders.Remove(newBlockOrderDefinition);
            }
             
            EditorUtility.FocusProjectWindow();
             
            Selection.activeObject = newBlockOrderDefinition;
            if (designFileTarget == null) throw new NullReferenceException("DesignFileNull");
-           newBlockOrderDefinition.Init(designFileTarget);
-            
-           List<BlockOrderDefinition> orders = designFileTarget.GetBlockOrderConfigurations;
-           orders.Add(newBlockOrderDefinition);
+           
+           
             
                 
                 

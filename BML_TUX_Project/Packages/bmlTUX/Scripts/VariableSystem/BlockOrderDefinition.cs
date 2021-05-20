@@ -2,28 +2,25 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Utilities.Extensions;
+using bmlTUX.Scripts.VariableSystem;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.VariableSystem {
+namespace VariableSystem {
     public class BlockOrderDefinition : ScriptableObject {
 
-        [SerializeField]
-        bool initialized = false;
-        public bool Initialized => initialized;
+        [SerializeField] public bool isValid;
+        
+        [SerializeField] public List<OrderRow> rawList = new List<OrderRow>();
 
-        [SerializeField]
-        public bool isValid;
+        [SerializeField] public List<OrderRow> List = new List<OrderRow>();
 
-        [SerializeField]
-        public List<OrderRow> List = new List<OrderRow>();
-    
+        [SerializeField] public ExperimentDesignFile2 linkedDesignFile = default;
+        
+        
         public bool Randomize = false;
         
-        [SerializeField]
-        ExperimentDesignFile2 linkedDesignFile = null;
         public bool IsValid {
             get {
                 UpdateValidity();
@@ -32,30 +29,50 @@ namespace bmlTUX.Scripts.VariableSystem {
         }
 
         void UpdateValidity() {
-            if (linkedDesignFile == null) throw new NullReferenceException("no linked file");
+            if (linkedDesignFile == null) throw new NullReferenceException("Block Order File has no linked file. Please report a bug");
+            
+            List<OrderRow> designFileCurrentList = GetOrderRows(linkedDesignFile);
+            
+            isValid = designFileCurrentList.SequenceEqual(rawList);
+        }
+
+        public void Init(ExperimentDesignFile2 designFile) {
+            if (designFile == null) throw new NullReferenceException("Design file null on init");
+            linkedDesignFile = designFile;
+
+            rawList = GetOrderRows(designFile);
+            OrderRow[] orderArray = new OrderRow[rawList.Count];
+            rawList.CopyTo(orderArray);
+            List = orderArray.ToList();
+            
+            UpdateValidity();
+        }
+
+        static List<OrderRow> GetOrderRows(ExperimentDesignFile2 designFile) {
             List<OrderRow> currentList = new List<OrderRow>();
-            ExperimentDesign experimentDesign = ExperimentDesign.CreateFrom(linkedDesignFile);
-            List<IndependentVariable> blockVariables = linkedDesignFile.GetVariables.BlockVariables;
+
+            ExperimentDesign experimentDesign = ExperimentDesign.CreateFrom(designFile);
+            List<IndependentVariable> blockVariables = designFile.GetVariables.BlockVariables;
             for (int rowIndex = 0; rowIndex < experimentDesign.BaseBlockTable.Rows.Count; rowIndex++) {
                 DataRow row = experimentDesign.BaseBlockTable.Rows[rowIndex];
-                StringBuilder sb = new StringBuilder();
+                List<string> values = new List<string>();
                 foreach (DataColumn column in experimentDesign.BaseBlockTable.Columns) {
                     if (!ColumnIsBlockVariable(column, blockVariables)) {
                         Debug.Log($"skipping column {column.ColumnName}");
                         continue;
                     }
 
-                    sb.Append(column.ColumnName + "= " + row[column.ColumnName]);
+                    values.Add(column.ColumnName + "= " + row[column.ColumnName]);
                 }
 
-                currentList.Add(new OrderRow(rowIndex, sb.ToString()));
+
+                currentList.Add(new OrderRow(rowIndex, string.Join(", ", values)));
             }
 
-            bool valid = currentList.SequenceEqual(List);
-            isValid = valid;
+            return currentList;
         }
 
-        bool ColumnIsBlockVariable(DataColumn column, List<IndependentVariable> blockVariables) {
+        static bool ColumnIsBlockVariable(DataColumn column, List<IndependentVariable> blockVariables) {
             foreach (IndependentVariable variable in blockVariables) {
                 if (column.ColumnName == variable.Name) return true;
             }
@@ -78,30 +95,6 @@ namespace bmlTUX.Scripts.VariableSystem {
                     }
                 }
                 return order.ToArray();
-            }
-        }
-
-        
-        
-        public void Init(ExperimentDesignFile2 designFile) {
-            if (designFile == null) throw new NullReferenceException("Design file null on init");
-            linkedDesignFile = designFile;
-            initialized = true;
-            ExperimentDesign experimentDesign = ExperimentDesign.CreateFrom(designFile);
-            List<IndependentVariable> blockVariables = designFile.GetVariables.BlockVariables;
-            for (int rowIndex = 0; rowIndex < experimentDesign.BaseBlockTable.Rows.Count; rowIndex++) {
-                DataRow row = experimentDesign.BaseBlockTable.Rows[rowIndex];
-                StringBuilder sb = new StringBuilder();
-                foreach (DataColumn column in experimentDesign.BaseBlockTable.Columns) {
-                    if (!ColumnIsBlockVariable(column, blockVariables)) {
-                        Debug.Log($"skipping column {column.ColumnName}");
-                        continue;
-                    }
-                    sb.Append(column.ColumnName + "= " + row[column.ColumnName]);
-                }
-
-            
-                List.Add(new OrderRow(rowIndex, sb.ToString()));
             }
         }
     }
