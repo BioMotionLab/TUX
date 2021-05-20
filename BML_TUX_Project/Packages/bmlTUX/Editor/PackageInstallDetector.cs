@@ -11,10 +11,10 @@ using UnityEditor.PackageManager;
  
 public class PackageInstallDetector : AssetPostprocessor {
 
-    const string PackageName = "bmlTUX";
+    const string PackageName = "com.biomotionlab.tux";
     const string installDataFileName = "installData.json";
 
-    private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+    static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
         var inPackages = importedAssets.Any(path => path.StartsWith("Packages/")) ||
                          deletedAssets.Any(path => path.StartsWith("Packages/")) ||
@@ -28,7 +28,7 @@ public class PackageInstallDetector : AssetPostprocessor {
     }
    
     [InitializeOnLoadMethod]
-    private static void InitializeOnLoad() {
+    static void InitializeOnLoad() {
 
         var listRequest = Client.List(true);
         while (!listRequest.IsCompleted)
@@ -42,21 +42,17 @@ public class PackageInstallDetector : AssetPostprocessor {
         var packages = listRequest.Result;
         foreach (var package in packages)
         {
-            if (package.source == PackageSource.Registry) {
-                if (package.name == PackageName) {
-                    HandlePackageLoad(new Version(package.version));
-                }
+            if (package.name == PackageName) {
+                ThisPackageLoaded(new Version(package.version));
             }
         }
-        
-        
         
     }
 
     static string ProjectFolder => Path.GetDirectoryName(Path.Combine( Application.dataPath, "../" ));
     static string InstallDataFilePath => Path.Combine(FileLocationSettings.BaseTuxDocumentsFolderPath, ProjectFolder, installDataFileName);
     
-    static void HandlePackageLoad(Version packageVersion) {
+    static void ThisPackageLoaded(Version packageVersion) {
 
         InstallData installData;
         if (File.Exists(InstallDataFilePath)) {
