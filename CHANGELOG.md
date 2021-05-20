@@ -1,3 +1,19 @@
+# [2.0.0](https://github.com/BioMotionLab/TUX/compare/release/1.0.9...release/2.0.0) (2021-05-20)
+
+
+### Bug Fixes
+
+* better error when creating block config file with no block variables defined ([e5d3516](https://github.com/BioMotionLab/TUX/commit/e5d3516c8819580e0da4eea5ca702be2be3e88cc))
+* Improved warning message when no custom scripts defined ([dce89ef](https://github.com/BioMotionLab/TUX/commit/dce89ef10cb8487f9a3c3caf9991109ac08d393c))
+* Manual Block order bugs ([03de3f2](https://github.com/BioMotionLab/TUX/commit/03de3f21a0491f7771f476549c1d664645b0a553))
+
+
+### BREAKING CHANGES
+
+* Unfortunately, this will break any projects currently using custom orders.
+
+You'll need to delete the old Block order files and redo the custom order files to adopt the new version.
+
 ## [1.0.9](https://github.com/BioMotionLab/TUX/compare/release/1.0.8...release/1.0.9) (2020-11-02)
 
 
