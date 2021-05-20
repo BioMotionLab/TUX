@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/BioMotionLab/TUX/compare/release/2.0.0...release/2.0.1) (2021-05-20)
+
+
+### Bug Fixes
+
+* package search now searches all packages, not just unity ones. ([de991bb](https://github.com/BioMotionLab/TUX/commit/de991bbf5f9d0d6a89093df0f84a97c9b7dd0f7a))
+
 # [2.0.0](https://github.com/BioMotionLab/TUX/compare/release/1.0.9...release/2.0.0) (2021-05-20)
 
 
