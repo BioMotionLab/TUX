@@ -49,7 +49,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             else if (typeof(T).IsEquivalentTo(typeof(Experiment))) type =  typeof(SimpleExperiment);
             else throw new ArgumentOutOfRangeException($"Type {typeof(T).FullName} not recognized");
             Debug.LogWarning($"{TuxLog.Prefix} No custom script referenced for {typeof(T).FullName}, reverting to default {type.FullName}. More info:\n" +
-                             $"You probably broke a reference in your {nameof(ExperimentRunner)} GameObject. Check the Script References section in its inspector.");
+                             $"You likely broke a reference in your {nameof(ExperimentRunner)} GameObject. Check the Script References section in its inspector.");
             return type;
         }
 
