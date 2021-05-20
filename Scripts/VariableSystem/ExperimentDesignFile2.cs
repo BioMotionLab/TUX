@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Settings;
 using bmlTUX.Scripts.Utilities;
 using UnityEngine;
+using VariableSystem;
 
 namespace bmlTUX.Scripts.VariableSystem {
     [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "Experiment Design File")]
@@ -76,20 +78,18 @@ namespace bmlTUX.Scripts.VariableSystem {
             }
         }
 
-       
 
-        public void CheckBlockOrderValidity() {
-            if (BlockOrderConfigurations.Count == 0) return;
-            bool AllValid = true;
-            foreach (BlockOrderDefinition blockOrderDefinition in BlockOrderConfigurations) {
-                if (blockOrderDefinition == null) continue;
-                if (blockOrderDefinition == null || !blockOrderDefinition.Initialized) continue;
-                if (!blockOrderDefinition.IsValid) {
-                    AllValid = false;
+        void CheckBlockOrderValidity() {
+            bool allValid = true;
+            if (BlockOrderConfigurations.Count > 0) {
+                foreach (BlockOrderDefinition blockOrderDefinition in BlockOrderConfigurations) {
+                    if (blockOrderDefinition == null) continue;
+                    if (!blockOrderDefinition.IsValid) {
+                        allValid = false;
+                    }
                 }
             }
-
-            BlockOrderIsValid = AllValid;
+            BlockOrderIsValid = allValid;
         }
 
         public BlockRandomizationMode GetBlockRandomization => BlockRandomization;

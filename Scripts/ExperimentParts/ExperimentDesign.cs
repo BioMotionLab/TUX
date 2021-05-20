@@ -5,6 +5,7 @@ using bmlTUX.Scripts.Settings;
 using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
+using VariableSystem;
 
 namespace bmlTUX.Scripts.ExperimentParts {
     public class ExperimentDesign {

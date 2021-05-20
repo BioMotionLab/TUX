@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Settings;
+using VariableSystem;
 
 namespace bmlTUX.Scripts.VariableSystem {
     public interface IExperimentDesignFile {
