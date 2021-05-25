@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/BioMotionLab/TUX/compare/release/2.0.1...release/2.0.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* improved settings workflow, and adjusted helper tool to match ([a26f874](https://github.com/BioMotionLab/TUX/commit/a26f874c9f1f6f0415c3c814a4e705a1c929e774))
+
 ## [2.0.1](https://github.com/BioMotionLab/TUX/compare/release/2.0.0...release/2.0.1) (2021-05-20)
 
 
