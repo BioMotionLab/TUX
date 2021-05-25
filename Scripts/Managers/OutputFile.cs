@@ -18,9 +18,8 @@ namespace bmlTUX.Scripts.Managers {
 			FullPath += ".csv";
 		}
 
-		public static OutputFile DebugFile(FileLocationSettings fileLocationSettings) {
-			if (fileLocationSettings == null) Debug.Log($"{TuxLog.Prefix} File location settings null");
-			return new OutputFile(fileLocationSettings.DebugFolder, fileLocationSettings.DebugFileName);
+		public static OutputFile DebugFile() {
+			return new OutputFile(FileLocationSettings.DebugFolder, FileLocationSettings.DebugFileName);
 		}
 
 		public void OutputToFile(Outputtable output) {
