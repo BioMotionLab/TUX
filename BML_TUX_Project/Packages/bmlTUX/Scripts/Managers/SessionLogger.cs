@@ -13,10 +13,10 @@ namespace bmlTUX.Scripts.Managers {
         /// <param name="session"></param>
         public static void Log(Session session) {
 
-            Directory.CreateDirectory(session.FileLocations.SessionFolder);
+            Directory.CreateDirectory(FileLocationSettings.SessionFolder);
             string logString = CreateLogString(session);
 
-            using (StreamWriter streamWriter = new StreamWriter(session.FileLocations.SessionLogFilePath, true)) {
+            using (StreamWriter streamWriter = new StreamWriter(FileLocationSettings.SessionLogFilePath, true)) {
                 streamWriter.Write(logString);
             }
         }
@@ -38,8 +38,8 @@ namespace bmlTUX.Scripts.Managers {
         public static void LogComplete(Session session) {
 
             //ensure log exists
-            if (File.Exists(session.FileLocations.SessionLogFilePath)) {
-                using (StreamWriter streamWriter = new StreamWriter(session.FileLocations.SessionLogFilePath, true)) {
+            if (File.Exists(FileLocationSettings.SessionLogFilePath)) {
+                using (StreamWriter streamWriter = new StreamWriter(FileLocationSettings.SessionLogFilePath, true)) {
                     streamWriter.Write($"Confirmed Complete at: {DateTime.Now:hh:mm}");
                 }
             }

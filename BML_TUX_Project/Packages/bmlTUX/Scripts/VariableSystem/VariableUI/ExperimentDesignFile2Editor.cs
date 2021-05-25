@@ -23,9 +23,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
         SerializedProperty   trialRepetitions;
         SerializedProperty   experimentRepetitions;
-        SerializedProperty   columnNameSettings;
-        SerializedProperty   controlSettings;
-        SerializedProperty   guiSettings;
+        SerializedProperty experimentSettings;
         SerializedProperty   blockRandomizationMode;
         SerializedProperty   trialRandomizationMode;
         SerializedProperty   trialRandomizationSubType;
@@ -45,8 +43,9 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         const int IndentWidth  = 10;
         const float VariablePanelBackgroundLightness = .55f;
         Color variablePanelBackgroundColor;
-        SerializedProperty fileLocationSettings;
+
         Dictionary<string,VariableViewer> allViewers;
+        
 
         void OnEnable() {
             variablePanelBackgroundColor = new Color(VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, 1);
@@ -73,10 +72,9 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                 serializedObject.FindProperty(nameof(ExperimentDesignFile2.BlockPartialRandomizationSubType));
             trialRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile2.TrialRepetitions));
             experimentRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile2.ExperimentRepetitions));
-            columnNameSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile2.ColumnNamesSettings));
-            controlSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile2.ControlSettings));
-            guiSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile2.GuiSettings));
-            fileLocationSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile2.FileLocationSettings));
+            experimentSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile2.ExperimentSettings));
+          
+           
             showAdvanced = serializedObject.FindProperty(nameof(ExperimentDesignFile2.ShowAdvancedEditor));
             
             InitializeBlockOrderList();
@@ -359,13 +357,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         void ShowSettingsFields() {
             EditorGUILayout.LabelField("Other Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel += 2;
-            EditorGUILayout.PropertyField(columnNameSettings);
-            EditorGUILayout.PropertyField(controlSettings);
-            EditorGUILayout.PropertyField(guiSettings);
-            EditorGUI.indentLevel+= 2;
-            EditorGUILayout.HelpBox("Change the monitor to which the UI is rendered", MessageType.Info);
-            EditorGUI.indentLevel-= 2;
-            EditorGUILayout.PropertyField(fileLocationSettings);
+            EditorGUILayout.PropertyField(experimentSettings);
             EditorGUI.indentLevel -= 2;
         }
 

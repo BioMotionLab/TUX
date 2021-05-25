@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Settings;
+using bmlTUX.Scripts.UI.RuntimeUI;
 using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 using VariableSystem;
@@ -26,15 +27,9 @@ namespace bmlTUX.Scripts.VariableSystem {
         [SerializeField]
         public VariableFactory2 Factory = new VariableFactory2();
 
-        [SerializeField]
-        public ColumnNamesSettings ColumnNamesSettings;
-        [SerializeField]
-        public ControlSettings ControlSettings;
-        [SerializeField]
-        public GuiSettings GuiSettings;
-        [SerializeField]
-        public FileLocationSettings FileLocationSettings;
-
+        [SerializeField] 
+        public ExperimentSettings ExperimentSettings;
+        
         bool valid = true;
 
         [SerializeField] [HideInInspector] public bool ShowAdvancedEditor = false;
@@ -56,10 +51,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         public void Validate() {
             bool wasValid = valid;
             valid = true;
-            if (ColumnNamesSettings == null) MissingReference(nameof(ColumnNamesSettings));
-            if (ControlSettings == null) MissingReference(nameof(ControlSettings));
-            if (FileLocationSettings == null) MissingReference(nameof(FileLocationSettings));
-            if (GuiSettings == null) MissingReference(nameof(GuiSettings));
+            if (ExperimentSettings == null) MissingReference(nameof(ExperimentSettings));
             if (!wasValid && valid) Debug.Log(TuxLog.Good($"{nameof(ExperimentDesignFile2)} Fixed."), this);
         }
 
@@ -93,19 +85,18 @@ namespace bmlTUX.Scripts.VariableSystem {
         }
 
         public BlockRandomizationMode GetBlockRandomization => BlockRandomization;
-        public ColumnNamesSettings GetColumnNamesSettings => ColumnNamesSettings;
+        public ColumnNamesSettings GetColumnNamesSettings => ExperimentSettings.ColumnNames;
         public List<BlockOrderDefinition>  GetBlockOrderConfigurations => BlockOrderConfigurations;
         public int GetExperimentRepetitions => ExperimentRepetitions;
         public TrialRandomizationMode GetTrialRandomization => TrialRandomization;
         public TrialPermutationType GetTrialPermutationType => TrialPermutationType;
         public int GetTrialRepetitions => TrialRepetitions;
         public BlockPartialRandomizationSubType GetBlockPartialRandomizationSubType => BlockPartialRandomizationSubType;
-        public ControlSettings GetControlSettings => ControlSettings;
+        public ControlSettings GetControlSettings => ExperimentSettings.ControlSettings;
         public TrialTableGenerationMode GetTrialTableGeneration => TrialTableGeneration;
         public Variables GetVariables => Variables;
-        public GuiSettings GetGuiSettings => GuiSettings;
+        public GuiSettings GetGuiSettings => ExperimentSettings.GuiSettings;
         public IVariableFactory GetFactory => Factory;
-        public FileLocationSettings GetFileLocationSettings => FileLocationSettings;
         public string GetName => name;
         public bool GetHasBlocks => HasBlocks;
         public bool GetBlockOrderIsValid => BlockOrderIsValid;
@@ -115,6 +106,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         }
 
         public int GetBlockNumber => BlockNumber;
+        public ExperimentGui GetGuiPrefab => ExperimentSettings.GuiPrefab;
     }
     
 
