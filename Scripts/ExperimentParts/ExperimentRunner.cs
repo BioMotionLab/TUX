@@ -97,7 +97,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
             }
             DesignFile.GetValidate();
 
-            Session = Session.LoadSessionData(DesignFile.GetFileLocationSettings);
+            Session = Session.LoadSessionData();
             if (Session == null) {
                 throw new NullReferenceException("Session null and not created properly");
             }
@@ -124,7 +124,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         }
 
         void InitGui() {
-            gui = Instantiate(DesignFile.GetGuiSettings.GuiPrefab);
+            gui = Instantiate(DesignFile.GetGuiPrefab);
             
             gui.RegisterExperiment(this);
             

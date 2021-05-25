@@ -29,9 +29,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         public ControlSettings ControlSettings;
         [SerializeField]
         public GuiSettings GuiSettings;
-        [SerializeField]
-        public FileLocationSettings FileLocationSettings;
-        
+      
         
         void OnValidate() {
             Debug.LogWarning($"{name} is obsolete. Please Update by selecting the file and examining its inspector.", this);
