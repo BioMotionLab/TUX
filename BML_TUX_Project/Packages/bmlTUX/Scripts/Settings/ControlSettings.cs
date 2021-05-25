@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using bmlTUX.Scripts.Managers;
 using bmlTUX.Scripts.Utilities;
@@ -6,12 +7,25 @@ using UnityEngine;
 
 namespace bmlTUX.Scripts.Settings {
 
-    [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "Control Settings File")]
-    public class ControlSettings : ScriptableObject {
-        public List<KeyCode> InterruptKeys;
-        public List<KeyCode> BackKeys;
-        public List<KeyCode> NextKeys;
-        public List<KeyCode> QuitKeys;
+    [Serializable]
+    public class ControlSettings {
+        
+        public List<KeyCode> InterruptKeys = new List<KeyCode> {
+            KeyCode.Slash
+        };
+        
+        public List<KeyCode> BackKeys = new List<KeyCode> {
+            KeyCode.Comma
+        };
+        
+        public List<KeyCode> NextKeys = new List<KeyCode> {
+            KeyCode.Period
+        };
+        
+        public List<KeyCode> QuitKeys = new List<KeyCode> {
+            KeyCode.Q,
+            KeyCode.Escape
+        };
         bool Listening { get; set; }
 
         /// <summary>

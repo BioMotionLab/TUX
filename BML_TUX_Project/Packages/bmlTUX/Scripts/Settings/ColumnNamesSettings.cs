@@ -5,8 +5,8 @@ using Debug = System.Diagnostics.Debug;
 
 
 namespace bmlTUX.Scripts.Settings {
-    [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "Column Names Settings File")]
-    public class ColumnNamesSettings : ScriptableObject{
+    [Serializable]
+    public class ColumnNamesSettings {
         public string TotalTrialIndex = "Trial";
         public string BlockIndex      = "Block";
         public string Skipped         = "Skipped";
@@ -14,11 +14,9 @@ namespace bmlTUX.Scripts.Settings {
         public string TrialIndex      = "TrialInBlock";
         public string Completed       = "Completed";
         public string TrialTime = "TrialTime";
-
-        [Space]
+        
         public int DefaultMissingValue = -999;
         
-
         public DataColumn GetColumnWithName(string columnName) {
             Debug.Assert(TotalTrialIndex != null, nameof(TotalTrialIndex) + " != null");
 

@@ -194,6 +194,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
             for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++) {
                 DataColumn column = table.Columns[columnIndex];
                 string rowValue = row[column.ColumnName].ToString();
+                
                 string paddedValue = AddPadding(rowValue, ColumnLengths[columnIndex]);
                 stringBuilder.Append(paddedValue);
             }

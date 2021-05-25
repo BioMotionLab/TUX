@@ -1,20 +1,20 @@
-﻿using bmlTUX.Scripts.UI.RuntimeUI;
+﻿using System;
+using bmlTUX.Scripts.UI.RuntimeUI;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace bmlTUX.Scripts.Settings {
-    [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "GUI Settings File")]
-    public class GuiSettings : ScriptableObject {
-        
-        public ExperimentGui GuiPrefab;
+    [Serializable]
+    public class GuiSettings  {
 
         [SerializeField]
         // ReSharper disable once InconsistentNaming
-        DisplaySelection targetDisplay = default;
+        DisplaySelection targetDisplay = DisplaySelection.Display1;
 
         // ReSharper disable once ConvertToAutoProperty
         public int TargetDisplay => (int)targetDisplay;
         
+        [SerializeField]
         public bool WarnUserIfNotDisplayOne = true;
 
         [FormerlySerializedAs("ShowRunnerInterface")]
