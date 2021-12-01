@@ -6,6 +6,7 @@ using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.UI.EditorUI;
 using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
+using bmlTUX.UI.EditorUI;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
