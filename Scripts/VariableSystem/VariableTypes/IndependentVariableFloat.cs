@@ -1,6 +1,7 @@
 ﻿using System;
+using bmlTUX.Scripts.VariableSystem;
 
-namespace bmlTUX.Scripts.VariableSystem.VariableTypes {
+namespace bmlTUX.VariableTypes {
     [Serializable]
     public class IndependentVariableFloat : IndependentVariable<float> {
         public IndependentVariableFloat() {

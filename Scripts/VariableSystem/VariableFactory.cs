@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
+using bmlTUX.VariableTypes;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {

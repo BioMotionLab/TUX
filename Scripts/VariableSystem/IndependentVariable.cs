@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using bmlTUX.Scripts.VariableSystem;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using bmlTUX.Scripts.VariableSystem.VariableValueAddingStrategies;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.VariableSystem {
+namespace bmlTUX {
     
     
     [Serializable]
