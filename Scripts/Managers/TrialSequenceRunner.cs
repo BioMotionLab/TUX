@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.Managers {
+namespace bmlTUX {
 
 
     public class TrialSequenceRunner {

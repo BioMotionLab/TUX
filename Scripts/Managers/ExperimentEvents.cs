@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace bmlTUX.Scripts.Managers {
+namespace bmlTUX {
     
     public static class ExperimentEvents {
 
