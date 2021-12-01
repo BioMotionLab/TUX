@@ -1,8 +1,7 @@
 using System;
 using System.IO;
-using UnityEngine;
 
-namespace bmlTUX.Scripts.Managers {
+namespace bmlTUX {
 	[Serializable]
 	public class OutputFile {
 		public string OutputFolder;

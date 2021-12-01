@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using bmlTUX.Scripts.Managers;
 using bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI;
 using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 using bmlTUX.Scripts.VariableSystem;

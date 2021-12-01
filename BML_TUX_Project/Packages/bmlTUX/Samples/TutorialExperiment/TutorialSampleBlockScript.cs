@@ -1,7 +1,8 @@
 ﻿using System.Data;
+using bmlTUX;
 using UnityEngine;
 
-namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
+namespace Samples.TutorialExperiment {
     public class TutorialSampleBlockScript : Block
     {
     

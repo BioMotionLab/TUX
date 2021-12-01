@@ -1,5 +1,3 @@
-using bmlTUX.Scripts.Managers;
-
 namespace bmlTUX {
     public class DebugSession : Session {
         public DebugSession() {

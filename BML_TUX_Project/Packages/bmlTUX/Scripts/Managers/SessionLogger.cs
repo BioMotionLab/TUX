@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.Managers {
+namespace bmlTUX {
     public static class SessionLogger {
 
         /// <summary>
