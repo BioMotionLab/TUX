@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.UI.EditorUI;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using bmlTUX.UI.EditorUI;

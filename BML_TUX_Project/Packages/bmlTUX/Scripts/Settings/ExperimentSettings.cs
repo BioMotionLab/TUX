@@ -1,9 +1,7 @@
-using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.UI.RuntimeUI;
 using bmlTUX.UI.RuntimeUI;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.Settings {
+namespace bmlTUX {
     [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "New Experiment Settings File")]
     public class ExperimentSettings : ScriptableObject {
         

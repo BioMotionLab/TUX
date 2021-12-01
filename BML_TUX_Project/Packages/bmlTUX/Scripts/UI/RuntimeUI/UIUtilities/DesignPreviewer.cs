@@ -1,5 +1,4 @@
 using System.Data;
-using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.VariableSystem;
 
 namespace bmlTUX.Scripts.UI.RuntimeUI.UIUtilities {

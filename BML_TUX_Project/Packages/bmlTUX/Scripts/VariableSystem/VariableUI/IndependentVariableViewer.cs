@@ -1,5 +1,4 @@
 using System;
-using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
 using UnityEditor;
 using UnityEditor.UIElements;

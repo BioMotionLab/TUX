@@ -1,5 +1,4 @@
 using System.Collections;
-using bmlTUX.Scripts.ExperimentParts;
 
 namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
     /// <summary>

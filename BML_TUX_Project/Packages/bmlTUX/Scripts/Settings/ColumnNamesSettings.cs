@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Data;
-using UnityEngine;
 using Debug = System.Diagnostics.Debug;
 
 
-namespace bmlTUX.Scripts.Settings {
+namespace bmlTUX {
     [Serializable]
     public class ColumnNamesSettings {
         public string TotalTrialIndex = "Trial";

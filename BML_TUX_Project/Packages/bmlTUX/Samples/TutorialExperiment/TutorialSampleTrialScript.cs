@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Data;
-using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX;
+using bmlTUX.SamplesAndTutorials.TutorialExperiment;
 using UnityEngine;
 
-namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
+namespace Samples.TutorialExperiment {
     public class TutorialSampleTrialScript : Trial
     {
     

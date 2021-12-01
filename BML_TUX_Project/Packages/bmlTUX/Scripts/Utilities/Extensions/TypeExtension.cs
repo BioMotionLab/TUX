@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace bmlTUX.Extensions {
+namespace bmlTUX {
     public static class TypeExtension
     {
         /// <summary>

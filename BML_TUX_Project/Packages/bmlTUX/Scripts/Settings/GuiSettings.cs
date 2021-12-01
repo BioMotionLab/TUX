@@ -1,9 +1,8 @@
 ﻿using System;
-using bmlTUX.Scripts.UI.RuntimeUI;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace bmlTUX.Scripts.Settings {
+namespace bmlTUX {
     [Serializable]
     public class GuiSettings  {
 
