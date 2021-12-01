@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using bmlTUX.Extensions;
 using bmlTUX.Scripts.Settings;
-using bmlTUX.Scripts.Utilities;
-using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
 using VariableSystem;
 

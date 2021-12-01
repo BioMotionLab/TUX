@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using bmlTUX.Extensions;
 using bmlTUX.Scripts.Managers;
-using bmlTUX.Scripts.Utilities;
-using bmlTUX.Scripts.Utilities.Extensions;
 using UnityEngine;
 
 // ReSharper disable VirtualMemberNeverOverridden.Global

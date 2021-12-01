@@ -1,5 +1,4 @@
 using System;
-using bmlTUX.Scripts.Utilities;
 
 namespace bmlTUX {
     class BlockPermutationError : Exception {
