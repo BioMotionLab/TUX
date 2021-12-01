@@ -8,9 +8,8 @@ using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace bmlTUX.Scripts.UI.EditorUI {
+namespace bmlTUX.UI.EditorUI {
     public class ScriptHelperEditorWindow : EditorWindow {
         
         static readonly RunnerScriptTemplateComponent Runner = new RunnerScriptTemplateComponent();
