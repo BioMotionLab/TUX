@@ -9,7 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     
     
     /// <summary>

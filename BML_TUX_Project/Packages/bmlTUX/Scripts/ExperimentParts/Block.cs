@@ -6,7 +6,7 @@ using bmlTUX.Scripts.Managers;
 using bmlTUX.Scripts.Utilities.Extensions;
 using JetBrains.Annotations;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
 
     /// <summary>
     /// This class stores a block a trials in an Runner.

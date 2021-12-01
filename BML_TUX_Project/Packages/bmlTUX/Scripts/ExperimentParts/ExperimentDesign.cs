@@ -7,7 +7,7 @@ using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
 using VariableSystem;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     public class ExperimentDesign {
         
         readonly BaseBlockTable  baseBlockTable;

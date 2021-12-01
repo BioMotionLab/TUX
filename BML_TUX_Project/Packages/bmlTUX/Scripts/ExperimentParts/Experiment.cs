@@ -10,7 +10,7 @@ using UnityEngine;
 // ReSharper disable VirtualMemberNeverOverridden.Global
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     /// <summary>
     /// The Runner class is the main backbone of the toolkit. This sets up the Runner design, the blocks and trial structure, and manages output
     /// </summary>

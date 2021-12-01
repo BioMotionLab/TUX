@@ -4,7 +4,7 @@ using bmlTUX.Scripts.Managers;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     
     /// <summary>
     /// Basic boilerplate code for Experiment > Block > Trial structure.
