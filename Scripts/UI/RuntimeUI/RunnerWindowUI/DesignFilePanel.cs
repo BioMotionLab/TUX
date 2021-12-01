@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
+namespace bmlTUX.UI.RuntimeUI {
     public class DesignFilePanel : MonoBehaviour
     {
         [SerializeField]
