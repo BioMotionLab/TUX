@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Data;
 using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
 namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {

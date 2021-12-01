@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
+using bmlTUX.Extensions;
 using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Utilities;
-using bmlTUX.Scripts.Utilities.Extensions;
 using UnityEngine;
 
 namespace bmlTUX.Scripts.Managers {

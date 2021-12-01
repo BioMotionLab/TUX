@@ -2,7 +2,6 @@
 using System.IO;
 using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.Managers;
-using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
 namespace bmlTUX {

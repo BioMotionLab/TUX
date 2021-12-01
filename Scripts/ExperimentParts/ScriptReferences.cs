@@ -1,6 +1,5 @@
 using System;
-using bmlTUX.Scripts.Utilities;
-using bmlTUX.Scripts.Utilities.Extensions;
+using bmlTUX.Extensions;
 using bmlTUX.SimpleExperimentParts;
 using UnityEngine;
 
