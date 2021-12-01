@@ -2,8 +2,6 @@
 using System.IO;
 using System.Reflection;
 using System.Text;
-using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Settings;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEditor;
 using UnityEngine;

@@ -1,6 +1,4 @@
-﻿using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Settings;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
     

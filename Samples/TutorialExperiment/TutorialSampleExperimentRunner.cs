@@ -1,5 +1,4 @@
-﻿using bmlTUX.Scripts.ExperimentParts;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
     public class TutorialSampleExperimentRunner : ExperimentRunner

@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace bmlTUX.Extensions {
+namespace bmlTUX {
 
 
     public static class DataTableExtension {

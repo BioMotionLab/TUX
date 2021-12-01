@@ -2,7 +2,6 @@
 using bmlTUX;
 // ReSharper disable once RedundantUsingDirective
 using UnityEngine;
-using bmlTUX.Scripts.ExperimentParts;
 
 /// <summary>
 /// Classes that inherit from Experiment define custom behaviour for the start and end of your experiment.

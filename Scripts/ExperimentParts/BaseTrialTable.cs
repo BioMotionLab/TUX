@@ -1,6 +1,4 @@
 ﻿using System.Data;
-using bmlTUX.Extensions;
-using bmlTUX.Scripts.Settings;
 using bmlTUX.Scripts.VariableSystem;
 
 namespace bmlTUX {

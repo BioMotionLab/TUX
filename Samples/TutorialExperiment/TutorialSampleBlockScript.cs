@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using bmlTUX.Scripts.ExperimentParts;
 using UnityEngine;
 
 namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
