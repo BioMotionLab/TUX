@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-namespace Editor {
+namespace bmlTUX.Editor {
     public class PackageInstallDetector : AssetPostprocessor {
 
         const string PackageName = "com.biomotionlab.tux";

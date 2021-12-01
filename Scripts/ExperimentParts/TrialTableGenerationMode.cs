@@ -1,4 +1,4 @@
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     public enum TrialTableGenerationMode {
         OnTheFly,
         PreGenerated

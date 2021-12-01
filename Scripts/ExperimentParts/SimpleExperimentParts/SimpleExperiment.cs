@@ -1,6 +1,6 @@
 ﻿
 
-namespace bmlTUX.Scripts.ExperimentParts.SimpleExperimentParts {
+namespace bmlTUX.SimpleExperimentParts {
 
 
 

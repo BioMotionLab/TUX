@@ -2,7 +2,7 @@
 using System.Data;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.ExperimentParts.SimpleExperimentParts {
+namespace bmlTUX.SimpleExperimentParts {
 
 
     /// <inheritdoc />
