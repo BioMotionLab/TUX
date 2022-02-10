@@ -8761,7 +8761,7 @@ GameObject:
   - component: {fileID: 1040413194627398025}
   - component: {fileID: 7228594665336462372}
   m_Layer: 5
-  m_Name: DesignFilePathInput
+  m_Name: DesignFileNameInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8785,7 +8785,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 304.54, y: -20}
+  m_AnchoredPosition: {x: 323.8, y: -20}
   m_SizeDelta: {x: 300, y: 29.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6348561041718869283
@@ -9112,7 +9112,7 @@ GameObject:
   - component: {fileID: 3493190505064518651}
   - component: {fileID: 435167617812695918}
   m_Layer: 5
-  m_Name: DesignFilepathLabel
+  m_Name: DesignFileNameLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9135,8 +9135,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 72.270004, y: -20}
-  m_SizeDelta: {x: 124.54, y: 32.9}
+  m_AnchoredPosition: {x: 81.9, y: -20}
+  m_SizeDelta: {x: 143.8, y: 32.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3493190505064518651
 CanvasRenderer:
@@ -9166,7 +9166,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Design file path
+  m_text: Design File Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14417,7 +14417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8129f7bf7313b8f4d8a76d6cb7fb689d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DesignFilePathInput: {fileID: 1040413194627398025}
+  DesignFileName: {fileID: 1040413194627398025}
+  OutputFolder: {fileID: 4113099305214282503}
 --- !u!1 &8569648988358701388
 GameObject:
   m_ObjectHideFlags: 0
