@@ -1,3 +1,21 @@
+# [2.1.0](https://github.com/BioMotionLab/TUX/compare/release/2.0.2...release/2.1.0) (2022-02-13)
+
+
+### Bug Fixes
+
+* adjusting UI namespaces ([ee56933](https://github.com/BioMotionLab/TUX/commit/ee56933d3e8f69a22c55c6ef1504627f4684047f))
+* cleaned up tableviewer namespace ([3fd9f42](https://github.com/BioMotionLab/TUX/commit/3fd9f422f3bf6dd4b357d608141cc43d772bdd0a))
+* pass on editor namespaces ([300d8c3](https://github.com/BioMotionLab/TUX/commit/300d8c3109453288490ea31042c075f2651de36e))
+* pass on managers namespace ([bb99023](https://github.com/BioMotionLab/TUX/commit/bb990238f790324f0d8bcbfa36303fe57aef37c6))
+* pass on settings namespaces ([9adb434](https://github.com/BioMotionLab/TUX/commit/9adb43405cec611168bd6cc6032b14dfb0fd1f50))
+* pass on utilities namespaces ([ff64527](https://github.com/BioMotionLab/TUX/commit/ff64527680bdf86483d72e8f5a2bf8692fd74c81))
+* renamed base bmlTUX namespaces ([b31cda2](https://github.com/BioMotionLab/TUX/commit/b31cda2a1ebf7a36574eb97dd9e9fe58ef259a38))
+
+
+### Features
+
+* added menu item for project compatibility settings and API ([aa690bb](https://github.com/BioMotionLab/TUX/commit/aa690bb9f83b90d50d4a9ff77ac38b9718df2a90))
+
 ## [2.0.2](https://github.com/BioMotionLab/TUX/compare/release/2.0.1...release/2.0.2) (2021-05-25)
 
 
