@@ -1,4 +1,4 @@
-using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX;
 // ReSharper disable once RedundantUsingDirective
 using UnityEngine;
 

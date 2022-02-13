@@ -1,4 +1,4 @@
-﻿namespace bmlTUX.Scripts.Utilities {
+﻿namespace bmlTUX {
     
     public static class LowestCommon {
         public static int GreatestCommonFactor(int a, int b) {

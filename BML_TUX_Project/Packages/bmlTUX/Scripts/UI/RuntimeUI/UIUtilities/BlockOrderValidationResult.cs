@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI;
+using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 
-namespace bmlTUX.Scripts.UI.RuntimeUI.UIUtilities {
+namespace bmlTUX.UI.RuntimeUI {
     public class BlockOrderValidationResult : InputValidator {
         
         public BlockOrderValidationResult(BlockOrderData blockOrderData, BlockOrderPanel blockOrderPanel) {

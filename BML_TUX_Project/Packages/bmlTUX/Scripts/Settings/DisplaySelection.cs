@@ -1,4 +1,4 @@
-namespace bmlTUX.Scripts.Settings {
+namespace bmlTUX {
     public enum DisplaySelection {
         Display1,
         Display2,

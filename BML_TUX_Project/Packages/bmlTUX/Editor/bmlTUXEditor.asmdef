@@ -1,6 +1,6 @@
 {
     "name": "bmlTUXEditor",
-    "rootNamespace": "",
+    "rootNamespace": "bmlTUX",
     "references": [
         "GUID:e2e42d675e1f3084a981f233d35a3fb5"
     ],

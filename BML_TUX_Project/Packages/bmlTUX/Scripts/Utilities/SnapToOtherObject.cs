@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace bmlTUX.Scripts.Utilities {
+namespace bmlTUX {
 
     /// <summary>
     /// CameraLocationComponentBase used to snap position to another GameObject

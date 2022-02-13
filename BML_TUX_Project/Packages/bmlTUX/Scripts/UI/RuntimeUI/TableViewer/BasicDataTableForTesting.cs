@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.RuntimeUI.TableViewer {
+namespace bmlTUX.UI.RuntimeUI {
     [ExecuteInEditMode]
     public class BasicDataTableForTesting : MonoBehaviour {
 

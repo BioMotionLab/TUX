@@ -5,7 +5,7 @@ using System.IO;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.Utilities {
+namespace bmlTUX {
     public static class DataTableCsvUtility {
         
         public static DataTable DataTableFromCsv(IExperimentDesignFile configurationFile, string fullPath) {

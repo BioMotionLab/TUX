@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Data;
+using bmlTUX;
 using UnityEngine;
-using bmlTUX.Scripts.ExperimentParts;
 
 /// <summary>
 /// Classes that inherit from Trial define custom behaviour for your experiment's trials.

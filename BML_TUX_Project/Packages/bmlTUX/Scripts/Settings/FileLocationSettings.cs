@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
 	
 	public static class FileLocationSettings  {
 

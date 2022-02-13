@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Settings;
 using bmlTUX.Scripts.UI.RuntimeUI;
-using bmlTUX.Scripts.Utilities;
+using bmlTUX.UI.RuntimeUI;
 using UnityEngine;
 using VariableSystem;
 

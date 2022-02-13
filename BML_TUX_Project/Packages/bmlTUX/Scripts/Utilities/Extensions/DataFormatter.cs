@@ -1,4 +1,4 @@
-namespace bmlTUX.Scripts.Utilities.Extensions {
+namespace bmlTUX {
     public class DataFormatter {
 
         string unFormattedString;

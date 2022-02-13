@@ -1,4 +1,4 @@
-namespace bmlTUX.Scripts.Managers {
+namespace bmlTUX {
 	/// <summary>
 	/// Defines a class that can be output as a string.
 	/// </summary>

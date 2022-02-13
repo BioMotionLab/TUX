@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using bmlTUX.Scripts.Managers;
-using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.Settings {
+namespace bmlTUX {
 
     [Serializable]
     public class ControlSettings {

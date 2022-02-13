@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using bmlTUX.Scripts.Settings;
-using bmlTUX.Scripts.Utilities;
-using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
 using VariableSystem;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     public class ExperimentDesign {
         
         readonly BaseBlockTable  baseBlockTable;

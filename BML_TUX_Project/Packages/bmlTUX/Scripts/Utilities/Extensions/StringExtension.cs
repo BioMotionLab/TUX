@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace bmlTUX.Scripts.Utilities.Extensions {
+namespace bmlTUX {
 
     public static class StringExtension {
         const string Ellipses = "..";

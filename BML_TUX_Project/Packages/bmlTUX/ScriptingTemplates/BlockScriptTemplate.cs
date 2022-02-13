@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Data;
+using bmlTUX;
 // ReSharper disable once RedundantUsingDirective
 using UnityEngine;
-using bmlTUX.Scripts.ExperimentParts;
 
-    
 
 /// <summary>
 /// Classes that inherit from Block define custom behaviour for your experiment's blocks.

@@ -3,12 +3,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using bmlTUX.Scripts.ExperimentParts;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-namespace Editor {
+namespace bmlTUX.Editor {
     public class PackageInstallDetector : AssetPostprocessor {
 
         const string PackageName = "com.biomotionlab.tux";
