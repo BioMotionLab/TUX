@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace bmlTUX.Scripts.Utilities {
+namespace bmlTUX {
     
     public static class Delimiter {
         [PublicAPI]

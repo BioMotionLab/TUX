@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace bmlTUX.Scripts.Utilities {
+namespace bmlTUX {
     public static class TuxLog {
         public const string Prefix = "<b>[bmlTUX]</b>";
 

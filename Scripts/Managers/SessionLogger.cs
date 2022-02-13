@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using bmlTUX.Scripts.ExperimentParts;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.Managers {
+namespace bmlTUX {
     public static class SessionLogger {
 
         /// <summary>

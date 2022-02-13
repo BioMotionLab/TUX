@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
+namespace bmlTUX.UI.RuntimeUI {
     public class ExperimentRunnerPanel : MonoBehaviour {
         [SerializeField]
         TextMeshProUGUI RunningStatusText = default;

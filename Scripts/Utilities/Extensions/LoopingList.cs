@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace bmlTUX.Scripts.Utilities.Extensions {
+namespace bmlTUX {
     public class LoopingList<T> : List<T> {
         int currentIndex = 0;
 

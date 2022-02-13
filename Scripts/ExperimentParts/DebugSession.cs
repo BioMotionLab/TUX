@@ -1,6 +1,4 @@
-using bmlTUX.Scripts.Managers;
-
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     public class DebugSession : Session {
         public DebugSession() {
             OutputFile = OutputFile.DebugFile();

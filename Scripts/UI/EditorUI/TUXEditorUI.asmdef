@@ -1,5 +1,6 @@
 {
     "name": "TUXEditorUI",
+    "rootNamespace": "bmlTUX",
     "references": [
         "GUID:e2e42d675e1f3084a981f233d35a3fb5",
         "GUID:f80f72cbd59090348950e93bd8242fd5",
@@ -14,5 +15,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }

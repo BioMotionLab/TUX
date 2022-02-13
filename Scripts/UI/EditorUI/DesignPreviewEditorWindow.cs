@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace bmlTUX.Scripts.UI.EditorUI {
+namespace bmlTUX.UI.EditorUI {
     public class DesignPreviewEditorWindow : EditorWindow {
         
         [FormerlySerializedAs("ConfigurationFile")]
