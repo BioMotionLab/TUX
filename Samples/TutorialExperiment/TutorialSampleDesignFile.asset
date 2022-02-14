@@ -28,10 +28,6 @@ MonoBehaviour:
     ParticipantVariables:
     - id: 4
     - id: 5
-  ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
-  GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
-  FileLocationSettings: {fileID: 11400000, guid: 07f42cef79754c74583d0209412fa987,
-    type: 2}
   ExperimentSettings: {fileID: 11400000, guid: 29d02803048e5478993451dbb14966ee, type: 2}
   ShowAdvancedEditor: 1
   BlockOrderIsValid: 1
@@ -46,7 +42,7 @@ MonoBehaviour:
         Name: Distance
         VariableType: 1
         DataType: 1
-        ExpandSettings: 1
+        ExpandSettings: 0
         MixingType: 0
         Block: 1
         Values:
@@ -111,7 +107,7 @@ MonoBehaviour:
         VariableType: 3
         DataType: 1
         ExpandSettings: 0
-        Value: 2
+        Value: 0
         ConstrainValues: 0
         Values: 
         PossibleValues: 
