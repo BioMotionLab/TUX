@@ -7,13 +7,13 @@ The code defined in your custom `Trial` class is general for all trials, but the
 
 ## Automatically generating Trial Scripts
 
-To define the behavior that occurs during a trial, you need to create a script that inherits from the `Trial` type". The toolkit can automatically generate a `Trial` script for you using a template from the "Script Helper Tool" located in the main "BML_TUX" menu.
+To define the behavior that occurs during a trial, you need to create a script that inherits from the `Trial` type". The toolkit can automatically generate a `Trial` script for you using a template from the "Script Helper Tool" located in the main "bmlTUX" menu.
 
 ## Manually creating a Trial Script
 You can also create this script manually:
 
 ```csharp
-using BML_TUX.Scripts.ExperimentParts
+using bmlTUX
 
 public class MyTrial : Trial {   
 }  
@@ -29,7 +29,7 @@ The added constructor forwards its job up to the main `Trial` class (`base`), so
 The `RunMainCoroutine()` method is where you define the majority of your custom code to run during a trial. 
 
 ```csharp
-using BML_TUX.Scripts.ExperimentParts;
+using bmlTUX
 
 public class MyTrial : Trial {
     public MyTrial(ExperimentRunner runner, DataRow data) : base(runner, data) {}

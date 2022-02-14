@@ -9,7 +9,7 @@ title: Setting Up Your Experiment's Behavior
 The `ExperimentRunner` `MonoBehaviour` Script is the main connection point between the experimental system and your unity scene. This script interfaces with the Experiment Runner GUI to control and set up your experiment.
 `ExperimentRunner` is an abstract class, meaning you need to create your own unique version of it for each experiment. The ExperimentRunner script is attached to an empty gameObject in the unity scene. 
 
-There is a helper tool that can create a basic ExperimentRunner script for you and automatically create and attach it to a gameObject in the currently running scene. To access the helper tool, open the BML_TUX menu and select "Script Helper Tool" and follow the instructions. You can also create an `ExperimentRunner` script yourself in a new C# script, and have it inherit from `ExperimentRunner` rather than `MonoBehaviour`. You will need to import the proper namespaces and implement the basic constructor yourself, and attach it to a `GameObject` in the Unity Scene. The `ExperimentRunner` gameObject also needs a reference to a variable configuration file (see above). Drag one into the appropriate field in the inspector.
+There is a helper tool that can create a basic ExperimentRunner script for you and automatically create and attach it to a gameObject in the currently running scene. To access the helper tool, open the "bmlTUX" menu and select "Script Helper Tool" and follow the instructions. You can also create an `ExperimentRunner` script yourself in a new C# script, and have it inherit from `ExperimentRunner` rather than `MonoBehaviour`. You will need to import the proper namespaces and implement the basic constructor yourself, and attach it to a `GameObject` in the Unity Scene. The `ExperimentRunner` gameObject also needs a reference to a variable configuration file (see above). Drag one into the appropriate field in the inspector.
 
 
 Now, within the `ExperimentRunner` script, you can declare public fields for any references to other unity objects in your scene that may be required. 
@@ -52,7 +52,7 @@ In call order:
 
 For example:
 ```csharp
-using BML_TUX.Scripts.ExperimentParts;
+using bmlTUX
 
 public class MyTrial : Trial {  
     protected override IEnumerator PreCoroutine() {  

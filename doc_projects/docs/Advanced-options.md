@@ -2,7 +2,9 @@
 id: AdvancedOptions
 title: Advanced Options
 ---
-There are several advanced options accessible from the the Variable Configuration File's inspector. 
+
+
+In addition to the basic [Settings](Settings.md) There are several advanced options accessible from the the Variable Configuration File's inspector. 
 
 
 # Manual Block Order Configuration
@@ -20,16 +22,6 @@ At the beginning of an experimental session, the UI will prompt you to select on
 Some tips:
 * You should rename the order definition file for clarity. 
 * You can define any number of block orders. 
-
-
-# Customized Settings
-
-You can replace the default settings with your own files. For example, you can change the default names of the automatically added columns in the output file. Simply create a copy of the appropriate settings file in your assets folder, rename it, and drag then drag this copy into the correct field in the Design File's inspector. 
-
-* ColumnNames: The names of the automatically created columns in the output file.
-* ControlSettings: Keyboard controls for skipping and navigating between trials [advanced use].
-* GuiSettings: Can be used to swap out the in-game experiment GUI to a custom GUI.
-* FileLocationSettings: Defines the location of internal data files saved to disk. 
 
 
 # Pre-Generated Experiment Tables

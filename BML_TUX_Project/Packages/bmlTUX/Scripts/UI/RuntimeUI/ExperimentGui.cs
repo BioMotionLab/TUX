@@ -32,6 +32,7 @@ namespace bmlTUX.UI.RuntimeUI {
         public void RegisterExperiment(ExperimentRunner experimentRunner) {
             ExperimentEvents.OnInitExperiment += Init;
             ExperimentEvents.OnExperimentStarted += ExperimentHasStarted;
+            ExperimentEvents.ExperimentTriggeredWithoutButton += ExperimentStartedWithoutButton;
             runner = experimentRunner;
           
             
@@ -95,10 +96,15 @@ namespace bmlTUX.UI.RuntimeUI {
             previewer.ReRandomizeTable();
             DisplayPreview();
         }
-        
+
+        void ExperimentStartedWithoutButton(Session _)
+        {
+            ExperimentStartPanel.gameObject.SetActive(false);
+        }
 
         [PublicAPI]
-        public void StartExperimentFromButton() {
+        public void StartExperimentFromButton()
+        {
             Session session = SessionSetupPanel.GetSession();
             if (SessionSetupPanel.ValidSession) {
                 StartRunningExperiment(session);
