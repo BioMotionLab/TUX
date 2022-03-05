@@ -37,6 +37,7 @@
     "Advanced": [
       "AdvancedOptions",
       "ContinuousData",
+      "StandaloneVr",
       "Logging",
       "Building",
       "Customizing",

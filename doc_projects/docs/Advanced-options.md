@@ -28,3 +28,8 @@ Some tips:
 
 By default, the experimental toolkit creates and randomizes all trials "On the fly", that is, at the start of each experimental session. However, in some circumstances, experimenters may want to determine the exact trial order and structure prior to any experiment taking place. In such circumstances, experimenters can select the option for using Pre-Generated experiment tables. The toolkit can assist in creating such pre-generated tables by clicking the generate button. The UI will prompt the experimenter at the beginning of the session to load the appropriate design file.
 
+# Editor Settings
+
+Some preferences can be adjusted in the bmlTUX tab in your project settings.
+
+Debug Log Coloring: You can customize the color of the console logs for easier readability if desired
