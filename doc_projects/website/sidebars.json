@@ -36,6 +36,7 @@
     ],
     "Advanced": [
       "AdvancedOptions",
+      "ContinuousData",
       "Logging",
       "Building",
       "Customizing",
