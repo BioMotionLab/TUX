@@ -6,14 +6,14 @@ If you flag any of your independent variables as blocking variables, the toolkit
 
 ## Automatically generating Block Scripts
 
-To define the behavior that occurs before or after a block, you need to create a script that inherits from the `Block` type". The toolkit can automatically generate a `Block` script for you using a template from the "Script Helper Tool" located in the main "BML" menu.
+To define the behavior that occurs before or after a block, you need to create a script that inherits from the `Block` type". The toolkit can automatically generate a `Block` script for you using a template from the "Script Helper Tool" located in the main "bmlTUX" menu.
 
 ## Manually creating a Trial Script
 
 You can also create this script manually:
 
 ```csharp
-using BML_ExperimentToolkit.Scripts.ExperimentParts
+using bmlTUX;
 	
 public class MyBlock : Block { }  
 ```

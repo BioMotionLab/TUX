@@ -103,12 +103,7 @@ namespace bmlTUX {
 
             switch (DesignFile.GetTrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly:
-                    ExperimentDesign = ExperimentDesign.CreateFrom(DesignFile);
-                    if (ExperimentDesign == null) {
-                        throw new NullReferenceException("ExperimentDesign null");
-                    }
-
-                    if (!ExperimentDesign.HasTrials) throw new NoTrialsException($"{DesignFile.GetName} has no trials. You likely lack any values defined in non-block variables");
+                    CreateOnTheFlyDesign();
                     break;
                     
                 case TrialTableGenerationMode.PreGenerated:
@@ -120,6 +115,19 @@ namespace bmlTUX {
             
             InitGui();
             ExperimentEvents.InitExperiment(this);
+        }
+
+        void CreateOnTheFlyDesign()
+        {
+            ExperimentDesign = ExperimentDesign.CreateFrom(DesignFile);
+            if (ExperimentDesign == null)
+            {
+                throw new NullReferenceException("ExperimentDesign null");
+            }
+
+            if (!ExperimentDesign.HasTrials)
+                throw new NoTrialsException(
+                    $"{DesignFile.GetName} has no trials. You likely lack any values defined in non-block variables");
         }
 
         void InitGui() {
@@ -152,15 +160,21 @@ namespace bmlTUX {
         void StartRunningRunningExperiment(Session currentSession) {
             switch (DesignFile.GetTrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly: {
-                    DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
-                    RunnableDesign = new RunnableDesign(this, finalDesignTable, DesignFile);
+                    RunnableDesign = SetupOnTheFlyDesignForRunning(currentSession);
                     break;
                 }
                 case TrialTableGenerationMode.PreGenerated:
-                    string selectedDesignFilePath = currentSession.SelectedDesignFilePath;
-                    if (string.IsNullOrEmpty(selectedDesignFilePath)) throw new NullReferenceException("Trying to load custom design file, but none given");
-                    RunnableDesign = RunnableDesign.CreateFromFile(this, currentSession.SelectedDesignFilePath,
-                                                           DesignFile);
+                    if (currentSession is DebugSession)
+                    {
+                        Debug.LogWarning(TuxLog.Warn("WARNING:Pre-Generated design files can't be used in debug mode, reverting to On-The-Fly for this session."));
+                        CreateOnTheFlyDesign();
+                        RunnableDesign = SetupOnTheFlyDesignForRunning(currentSession);
+                    }
+                    else
+                    {
+                        RunnableDesign = SetupPreGeneratedDesignForRunning(currentSession);
+                    }
+                    
                     break;
                 default:
                     throw new NotImplementedException();
@@ -185,6 +199,20 @@ namespace bmlTUX {
             
             ExperimentEvents.StartPart(experiment);
             
+        }
+
+        RunnableDesign SetupPreGeneratedDesignForRunning(Session currentSession)
+        {
+            string selectedDesignFilePath = currentSession.SelectedDesignFilePath; 
+            if (string.IsNullOrEmpty(selectedDesignFilePath))
+                throw new NullReferenceException("Trying to load custom design file, but none given");
+            return RunnableDesign.CreateFromFile(this, currentSession.SelectedDesignFilePath, DesignFile);
+        }
+
+        RunnableDesign SetupOnTheFlyDesignForRunning(Session currentSession)
+        {
+            DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
+            return new RunnableDesign(this, finalDesignTable, DesignFile);
         }
 
         void EndExperiment() {

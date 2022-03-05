@@ -3,7 +3,7 @@ id: Publication
 title: Publication
 ---
 
-# BMLtux: Design and control of experiments in virtual reality and beyond
+# bmlTUX: Design and control of experiments in virtual reality and beyond
 
 ## Authors
 
@@ -28,7 +28,7 @@ Bebko, A. O., & Troje, N. F. (2020 In Press) bmlTUX: Design and control of exper
 
 ```
 @misc{bebko_troje_2020,
- title={BMLtux: Design and control of experiments in virtual reality and beyond},
+ title={bmlTUX: Design and control of experiments in virtual reality and beyond},
  url={psyarxiv.com/arvkf},
  DOI={10.31234/osf.io/arvkf},
  publisher={PsyArXiv},

@@ -27,7 +27,8 @@
       "ExperimentBehavior",
       "TrialClass",
       "BlockClass",
-      "ExperimentClass"
+      "ExperimentClass",
+      "Settings"
     ],
     "Help": [
       "Troubleshooting",
@@ -35,6 +36,8 @@
     ],
     "Advanced": [
       "AdvancedOptions",
+      "ContinuousData",
+      "StandaloneVr",
       "Logging",
       "Building",
       "Customizing",

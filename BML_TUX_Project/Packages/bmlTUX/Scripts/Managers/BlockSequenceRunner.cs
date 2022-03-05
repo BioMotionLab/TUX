@@ -47,7 +47,7 @@ namespace bmlTUX {
 
             currentlyRunningBlock = block;
             Debug.Log("");
-            TuxLog.Log($"{TuxLog.FormatOrange("Starting")} Block {BlockIndex(currentlyRunningBlock)+1} / {blocks.Count}");
+            TuxLog.Log($"{TuxLog.Warn("Starting")} Block {BlockIndex(currentlyRunningBlock)+1} / {blocks.Count}");
             ExperimentEvents.BlockHasStarted(block);
             ExperimentEvents.StartPart(block);
 
@@ -77,7 +77,7 @@ namespace bmlTUX {
         void FinishBlock() {
             int blockNum = BlockIndex(currentlyRunningBlock);
             Debug.Log("");
-            Debug.Log($"{TuxLog.Prefix} <color=green><b>Finished</b></color> Block {blockNum + 1}\n {currentlyRunningBlock.AsString()}");
+            Debug.Log($"{TuxLog.Warn("Finished")} Block {blockNum + 1}\n {currentlyRunningBlock.AsString()}");
             currentlyRunningBlock.Complete = true;
             ExperimentEvents.UpdateBlock(blocks, BlockIndex(currentlyRunningBlock));
         }
@@ -86,8 +86,9 @@ namespace bmlTUX {
             runner.StartCoroutine(RunPostBlock());
         }
 
-        void DoneBlockSequence() {
-            Debug.Log($"{TuxLog.Prefix} <color=purple><b>Experiment Complete!</b></color>");
+        void DoneBlockSequence()
+        {
+            Debug.Log($"{TuxLog.Warn("Experiment Complete!")}");
             ExperimentEvents.BlockSequenceHasCompleted(blocks);
             ExperimentEvents.EndExperiment();
             Running = false;
