@@ -1,3 +1,13 @@
+# [3.0.0](https://github.com/BioMotionLab/TUX/compare/release/2.2.0...release/3.0.0) (2022-03-05)
+
+
+* Merge branch 'dev' ([d05c2d5](https://github.com/BioMotionLab/TUX/commit/d05c2d58e1b603039beaf1038d31fea00f47f13e))
+
+
+### BREAKING CHANGES
+
+* 3.0 release
+
 # [2.2.0](https://github.com/BioMotionLab/TUX/compare/release/2.1.0...release/2.2.0) (2022-03-05)
 
 
