@@ -1,3 +1,18 @@
+# [2.2.0](https://github.com/BioMotionLab/TUX/compare/release/2.1.0...release/2.2.0) (2022-03-05)
+
+
+### Bug Fixes
+
+* pregenerated trial tables conflict with debug mode ([44efa38](https://github.com/BioMotionLab/TUX/commit/44efa38f598b3cd87179e41d9798dd0104668b39))
+
+
+### Features
+
+* added continuous data recorder ([3e13233](https://github.com/BioMotionLab/TUX/commit/3e132337204ea23928aefb6e38900695a715eddb))
+* can change color of debug logs in project settings ([5b4bb0e](https://github.com/BioMotionLab/TUX/commit/5b4bb0e6c31a0997894f43eb61951607ea0e6528))
+* Fixed some docs and added section on continuous data ([f6c25f5](https://github.com/BioMotionLab/TUX/commit/f6c25f5d5696aac36bdca0e1bf3942bc64632d4b))
+* Recorder package major addition ([eb5090b](https://github.com/BioMotionLab/TUX/commit/eb5090bbd8bd26ae0f329023fe7914b0e707654e))
+
 # [2.1.0](https://github.com/BioMotionLab/TUX/compare/release/2.0.2...release/2.1.0) (2022-02-13)
 
 
