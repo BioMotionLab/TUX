@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace bmlTUX {
     
@@ -178,6 +179,18 @@ namespace bmlTUX {
 
         public static void StartPart(ExperimentPart experimentPart) {
             OnStartPart?.Invoke(experimentPart);
+        }
+
+
+        public delegate void TriggerStartExperimentWithoutButtonEvent(Session session);
+
+        public static event TriggerStartExperimentWithoutButtonEvent ExperimentTriggeredWithoutButton;
+
+        [PublicAPI]
+        public static void StartExperimentFromScript(Session session)
+        {
+            ExperimentTriggeredWithoutButton?.Invoke(session);
+            StartRunningExperiment(session);
         }
         
     }

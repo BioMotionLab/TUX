@@ -28,7 +28,11 @@ namespace bmlTUX.Editor {
    
         [InitializeOnLoadMethod]
         static void InitializeOnLoad() {
+            ThisPackageLoaded();
+        }
 
+        static Version GetPackageVersion()
+        {
             var listRequest = Client.List(true);
             while (!listRequest.IsCompleted)
                 Thread.Sleep(100);
@@ -36,23 +40,27 @@ namespace bmlTUX.Editor {
             if (listRequest.Error != null)
             {
                 Debug.Log("Error: " + listRequest.Error.message);
-                return;
+                return null;
             }
             var packages = listRequest.Result;
             foreach (var package in packages)
             {
-                if (package.name == PackageName) {
-                    ThisPackageLoaded(new Version(package.version));
+                if (package.name == PackageName)
+                {
+                    return new Version(package.version);
                 }
             }
-        
+
+            return null;
         }
 
         static string ProjectFolder => Path.GetDirectoryName(Path.Combine( Application.dataPath, "../" ));
         static string InstallDataFilePath => Path.Combine(FileLocationSettings.BaseTuxDocumentsFolderPath, ProjectFolder, InstallDataFileName);
     
-        static void ThisPackageLoaded(Version packageVersion) {
-
+        static void ThisPackageLoaded()
+        {
+            var packageVersion = GetPackageVersion();
+            if (packageVersion == null) return;
             InstallData installData;
             if (File.Exists(InstallDataFilePath)) {
                 installData = LoadInstallData();
@@ -64,7 +72,11 @@ namespace bmlTUX.Editor {
             Version savedVersion = new Version(installData.versionText);
 
             if (packageVersion.CompareTo(savedVersion) > 0) {
-                HandleNewVersionOfPackageLoaded(packageVersion);
+                ShowVersionUpdateDialog();
+                SaveInstallData(
+                    new InstallData {
+                        versionText = packageVersion.ToString()
+                    });
             }
 
         }
@@ -79,13 +91,12 @@ namespace bmlTUX.Editor {
             string textToSave = JsonUtility.ToJson(installData);
             File.WriteAllText(InstallDataFilePath, textToSave);
         }
-
-        static void HandleNewVersionOfPackageLoaded(Version packageVersion) {
-            SaveInstallData(
-                new InstallData {
-                    versionText = packageVersion.ToString()
-                });
-
+        
+        
+        [MenuItem(MenuNames.BmlMainMenu + "About bmlTUX & What's New?")] 
+        public static void ShowVersionUpdateDialog() {
+            
+            var packageVersion = GetPackageVersion();
 
             string header = $"Thank you for installing {PackageName} version {packageVersion}";
             Debug.Log(header);
@@ -101,17 +112,31 @@ namespace bmlTUX.Editor {
         
             body.AppendLine("");
 
-            if (packageVersion.CompareTo(new Version("1.0.9")) > 0) {
-                body.AppendLine("WARNING: Updating from an older version? Read this first:");
+            if (VersionIsLaterThan(packageVersion, "1.0.0"))
+            {
+                body.AppendLine("WARNING: Major version update 3.0.0. Breaking Changes");
                 body.AppendLine();
-                body.AppendLine("Version 1.0.10+");
+                body.AppendLine("Version 3.0.0 Release");
+                body.AppendLine();
+                body.AppendLine("- Major pass on cleaning up primary namespaces. Almost everything is now in bmlTUX namespace");
+                body.AppendLine("- Major feature: Support for continuous data recording and playback, see documentation for more details");
                 body.AppendLine(
-                    "- Improved manual block order workflow. This unfortunately means old configurations must be deleted and recreated.");
-                body.AppendLine(
-                    "- Improved settings customization workflow. Single settings file created with the helper tool alongside your design file. Existing projects must create one from Create menu, and drag into design file");
+                    "- Can now start an experiment from code, bypassing the starting UI. This is especially useful for experiments on standalone VR headsets.");
+                body.AppendLine("- Major pass on documentation fixes/clarifications");
+                body.AppendLine("- Several quality of life improvements and bug fixes, including several contributions from the community. Special thanks to A-Ivan, and DerMilchmann");
+                body.AppendLine("");
+                body.AppendLine("Note on future maintenance: I have recently left BioMotionLab for a new job, and therefore will have less time to devote to this project. " +
+                                "However, I'm happy with its current state and stability. I will still be providing bug fixes, and accepting community contributions on GitHub, " +
+                                "but I will not be providing any major new features moving forward. If you have a new feature request that is important for your work, or any other questions, " +
+                                "please reach out to myself (Adam Bebko) and/or Nikolaus Troje.");
             }
 
             EditorUtility.DisplayDialog(header, body.ToString(), "Ok");
+        }
+
+        static bool VersionIsLaterThan(Version currentVersion, string versionToCompare)
+        {
+            return currentVersion.CompareTo(new Version(versionToCompare)) > 0;
         }
 
         [Serializable]

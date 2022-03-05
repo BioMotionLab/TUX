@@ -1,21 +1,37 @@
-﻿using UnityEngine;
+﻿using UnityEditor.Graphs;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace bmlTUX {
     public static class TuxLog {
         public const string Prefix = "<b>[bmlTUX]</b>";
 
+        public static string HexFromColor(Color color)
+        {
+            string hexColor = $"#{ColorUtility.ToHtmlStringRGB(color)}";
+            return hexColor;
+        }
+
+        static BmlTuxEditorSettings bmlTuxEditorSettings;
+        static BmlTuxEditorSettings BmlTuxEditorSettings {
+            get
+            {
+                bmlTuxEditorSettings ??= BmlTuxEditorSettings.GetOrCreateSettings();
+                return bmlTuxEditorSettings;
+            }
+        }
+        
         /// <summary>
         /// Formats string as a bmlTUX errror
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
         public static void LogError(string message) {
-            Debug.LogError(Prefix + $" <color=red>{message}</color>");
+            Debug.LogError(Prefix + $" <color={HexFromColor(BmlTuxEditorSettings.BadColor)}>{message}</color>");
         }
 
         public static void LogError(string message, Object context) {
-            Debug.LogError(Prefix + $" <color=red>{message}</color>", context);
+            Debug.LogError(Prefix + $" <color={HexFromColor(BmlTuxEditorSettings.BadColor)}>{message}</color>", context);
         }
         
         /// <summary>
@@ -24,7 +40,7 @@ namespace bmlTUX {
         /// <param name="message"></param>
         /// <returns></returns>
         public static string Good(string message) {
-            return Prefix + $" <color=green>{message}</color>";
+            return Prefix + $" <color={HexFromColor(BmlTuxEditorSettings.GoodColor)}>{message}</color>";
         }
 
         /// <summary>
@@ -33,7 +49,7 @@ namespace bmlTUX {
         /// <param name="message"></param>
         /// <returns></returns>
         public static string Warn(string message) {
-            return Prefix + $" <color=purple>{message}</color>";
+            return Prefix + $" <color={HexFromColor(BmlTuxEditorSettings.WarnColor)}>{message}</color>";
         }
 
         public static void Log(string message, Object context) {
@@ -43,13 +59,6 @@ namespace bmlTUX {
         public static void Log(string message) {
             Debug.Log($"{Prefix} {message}");
         }
-
-        public static string FormatGreen(string message) {
-            return $"<color=green>{message}</color>";
-        }
-
-        public static string FormatOrange(string message) {
-            return $"<color=orange>{message}</color>";
-        }
+        
     }
 }

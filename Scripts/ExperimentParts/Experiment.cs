@@ -46,7 +46,7 @@ namespace bmlTUX {
 
         protected sealed override IEnumerator RunMainCoroutine() {
             Debug.Log("");
-            Debug.Log($"{TuxLog.Prefix} <color=purple><b>Starting Experiment!</b></color>");
+            Debug.Log($"{TuxLog.Warn("Starting Experiment!")}");
             BlockSequenceRunner blockRunner = new BlockSequenceRunner(runner, design.Blocks);
             blockRunner.Start();
             while (blockRunner.Running) {

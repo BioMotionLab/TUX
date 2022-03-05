@@ -103,7 +103,9 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
                     validators.Add(new BlockOrderValidationResult(blockOrderData, BlockOrderPanel));
                     break;
                 case TrialTableGenerationMode.PreGenerated:
-                    designFilePath = DesignFilePanel.DesignFilePath;
+                    InputFile inputFile = DesignFilePanel.GetInputFile();
+                    validators.Add(new DesignFileValidationResult(inputFile));
+                    designFilePath = inputFile.FullPath;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

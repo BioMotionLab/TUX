@@ -16,7 +16,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
      
 
         public OutputFile GetOutputFile() {
-            string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string folder = FileLocationSettings.SessionFolder;
             folder = Path.Combine(folder, OutputFolder.text);
 
             OutputFile outputFile = new OutputFile(folder,
