@@ -1,17 +1,12 @@
 ﻿using System.Data;
-using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Managers;
-using bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI;
 using bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI;
 using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
-using bmlTUX.Scripts.Utilities;
-using bmlTUX.Scripts.Utilities.Extensions;
 using bmlTUX.Scripts.VariableSystem;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.RuntimeUI {
+namespace bmlTUX.UI.RuntimeUI {
     public class ExperimentGui : MonoBehaviour {
         
         ExperimentRunner runner;
@@ -20,7 +15,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
         SessionSetupPanel SessionSetupPanel = default;
         
         [SerializeField]
-        TableViewer.TableViewer TableDisplay = default;
+        TableViewer TableDisplay = default;
 
         [SerializeField]
         ExperimentRunnerPanel ExperimentRunnerPanel = default;
@@ -31,14 +26,15 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
         [SerializeField] TextMeshProUGUI previewText = default;
         
         DesignPreviewer previewer;
-        FileLocationSettings fileLocationSettings;
+  
         public Canvas Canvas;
         public Camera placeholderCamera;
         public void RegisterExperiment(ExperimentRunner experimentRunner) {
             ExperimentEvents.OnInitExperiment += Init;
             ExperimentEvents.OnExperimentStarted += ExperimentHasStarted;
+            ExperimentEvents.ExperimentTriggeredWithoutButton += ExperimentStartedWithoutButton;
             runner = experimentRunner;
-            fileLocationSettings = runner.DesignFile.GetFileLocationSettings;
+          
             
             InitGui(experimentRunner);
         }
@@ -53,9 +49,9 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
                     Display.displays[targetDisplay].Activate();
                 }
 
-                Debug.Log($"{TuxLog.Prefix} Setting UI to show on Display {targetDisplay + 1}. Click here to highlight current settings file in project.", experimentRunner.DesignFile.GetGuiSettings);
+                Debug.Log($"{TuxLog.Prefix} Setting UI to show on Display {targetDisplay + 1}. Click here to highlight current settings file in project.");
                 if (targetDisplay > 0 && experimentRunner.DesignFile.GetGuiSettings.WarnUserIfNotDisplayOne) 
-                    Debug.LogWarning(TuxLog.Warn("UI is on secondary display. If you can't see UI, adjust settings. You can turn this warning off (click on this message)."),  experimentRunner.DesignFile.GetGuiSettings);
+                    Debug.LogWarning(TuxLog.Warn("UI is on secondary display. If you can't see UI, adjust settings. You can turn this warning off (click on this message)."));
             }
             else {
                 Debug.LogWarning($"{TuxLog.Prefix} Not enough displays plugged in to accommodate your UI settings. Reverting UI to display on {Display.displays.Length}");
@@ -100,10 +96,15 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
             previewer.ReRandomizeTable();
             DisplayPreview();
         }
-        
+
+        void ExperimentStartedWithoutButton(Session _)
+        {
+            ExperimentStartPanel.gameObject.SetActive(false);
+        }
 
         [PublicAPI]
-        public void StartExperimentFromButton() {
+        public void StartExperimentFromButton()
+        {
             Session session = SessionSetupPanel.GetSession();
             if (SessionSetupPanel.ValidSession) {
                 StartRunningExperiment(session);
@@ -118,8 +119,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI {
 
         [PublicAPI]
         public void StartDebugExperimentFromButton() {
-            if (fileLocationSettings == null) Debug.LogError($"{TuxLog.Prefix} fileLocationSettings null when debug started");
-            Session session = new DebugSession(fileLocationSettings);
+            Session session = new DebugSession();
 
             foreach (ParticipantVariable variable in runner.DesignFile.GetVariables.ParticipantVariables) {
                 variable.SetValueDefaultValue();

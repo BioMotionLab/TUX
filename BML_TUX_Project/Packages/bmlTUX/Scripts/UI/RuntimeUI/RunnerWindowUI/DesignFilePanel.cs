@@ -1,19 +1,29 @@
-﻿using TMPro;
+﻿using System;
+using System.IO;
+using TMPro;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
+namespace bmlTUX.UI.RuntimeUI {
     public class DesignFilePanel : MonoBehaviour
     {
         [SerializeField]
-        public TMP_InputField DesignFilePathInput = default;
+        TMP_InputField DesignFileName = default;
 
-        public string DesignFilePath => DesignFilePathInput.text;
+        [SerializeField]
+        TMP_InputField OutputFolder = default;
+
 
         public void Show() {
             gameObject.SetActive(true);
         }
     
-    
+        public InputFile GetInputFile(){
+            string folder = FileLocationSettings.SessionFolder;
+            folder = Path.Combine(folder, OutputFolder.text);
+            InputFile inputFile = new InputFile(folder, DesignFileName.text);
+
+            return inputFile;
+        }
     
     }
 }

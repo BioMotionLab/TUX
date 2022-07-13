@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace bmlTUX.Scripts.UI.RuntimeUI.TableViewer {
+namespace bmlTUX.UI.RuntimeUI {
     public class TableViewer : MonoBehaviour {
     
         public GameObject      ContentContainer;

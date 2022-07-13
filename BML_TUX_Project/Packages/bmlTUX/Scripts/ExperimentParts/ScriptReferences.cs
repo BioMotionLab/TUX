@@ -1,10 +1,7 @@
 using System;
-using bmlTUX.Scripts.ExperimentParts.SimpleExperimentParts;
-using bmlTUX.Scripts.Utilities;
-using bmlTUX.Scripts.Utilities.Extensions;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     [Serializable]
     public class ScriptReferences {
         
@@ -48,7 +45,9 @@ namespace bmlTUX.Scripts.ExperimentParts {
             else if (typeof(T).IsEquivalentTo(typeof(Block))) type =  typeof(SimpleBlock);
             else if (typeof(T).IsEquivalentTo(typeof(Experiment))) type =  typeof(SimpleExperiment);
             else throw new ArgumentOutOfRangeException($"Type {typeof(T).FullName} not recognized");
-            Debug.LogWarning($"{TuxLog.Prefix} No Custom class defined for {typeof(T).FullName}, reverting to default {type.FullName}");
+            Debug.LogWarning($"{TuxLog.Prefix} No custom script referenced for {typeof(T).FullName}, reverting to default {type.FullName}. More info:\n" +
+                             $"You likely broke a reference in your {nameof(ExperimentRunner)} GameObject. Check the Script References section in its inspector.\n" +
+                             $"Make sure you drag your custom scripts into the correct fields");
             return type;
         }
 

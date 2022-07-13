@@ -20,10 +20,10 @@ An update to Unity has allowed a much more seamless integration with the package
 
 1. Navigate to Edit > Project Settings, and select the Package Manager tab.
 2. In the section called Scoped Repositories, click the + button to add a new entry. Type in the following information:
-    ```
+    ```text
     Name: BioMotionLab
     URL: https://registry.npmjs.org
-    Scope(s): com.biomotionlab
+    Scope(s): com.biomotionlab.tux
     ```
 3. Then open the Package Manager (Window > Package Manager)
 4. IMPORTANT: Make sure TextMeshPro Essentials are already imported (see above).

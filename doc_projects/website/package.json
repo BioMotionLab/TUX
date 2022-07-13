@@ -9,9 +9,10 @@
     "rename-version": "docusaurus-rename-version"
   },
   "devDependencies": {
-    "docusaurus": "^1.14.4"
+    "docusaurus": "^1.14.7"
   },
   "dependencies": {
+    "react": "^17.0.2",
     "websocket-extensions": "^0.1.4"
   }
 }

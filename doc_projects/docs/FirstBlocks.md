@@ -54,9 +54,9 @@ public class Matcher : MonoBehaviour {
 }
 ```
 
-### Update TutorialExperimentRunner with reference
+### Update TutorialRunner with reference
 
-We need to get a reference to the Matcher Script in our TutorialExperimentRunner. So add a public field:
+We need to get a reference to the Matcher Script in our TutorialRunner. So add a public field:
 
 ```c#
 public Matcher Matcher;
@@ -67,7 +67,7 @@ Then drag in the MatchObject to the field in the inspector.
 
 ### Update Trial Script to enable
 
-We want to enable this matcher script during the `RunMainCoroutine()` method of our trials, as we're waiting for confirmation with the return key. Let's modify our method like so. 
+We want to enable this matcher script during the `RunMainCoroutine()` method of our trials, as we're waiting for confirmation with the space key. Let's modify our method like so. 
 
 ```c#
 protected override IEnumerator RunMainCoroutine() {
@@ -76,7 +76,7 @@ protected override IEnumerator RunMainCoroutine() {
 
         tutorialRunner.Matcher.allowAdjustment = true;  // <----
 
-        if (Input.GetKeyDown(KeyCode.Return)) { 
+        if (Input.GetKeyDown(KeyCode.Space)) { 
             waitingForParticipantResponse = false;  
         }
 
@@ -87,14 +87,12 @@ protected override IEnumerator RunMainCoroutine() {
 }
 ```
 
-Test it out. We now have a pretty functional experiment. We can try to match the size of the colored stimulus to the model using the W and S keys, And when closely matched, we can hit the Return key to move to the next trial. 
+Test it out. We now have a pretty functional experiment. We can try to match the size of the colored stimulus to the model using the W and S keys, And when closely matched, we can hit the Space key to move to the next trial. 
 
 
 ## Block Variables
 
-Recall that we set up the distance variable as a block variable. We can define block-specific behavior similar to the way we defined our `TutorialTrialScript`. We can modify our `TutorialBlockScript` that inherits from the base `Block` class. We can use a similar procedure to overwrite methods to add functionality.
-
-Let’s create our Distance variable. In this case we want all the trials at a given distance to be grouped together, so we want to flag it as a "block" variable.
+Let’s create our Distance variable. To move our stimuli to different distances. In this case we want all the trials at a given distance to be grouped together, so we want to flag it as a "block" variable.
 
 1. Create a float independent variable.
 2. Name it "Distance".
@@ -104,12 +102,13 @@ Let’s create our Distance variable. In this case we want all the trials at a g
 
 ### Update Block Script
 
+We can define block-specific behavior similar to the way we defined our `TutorialTrialScript`. We can modify our `TutorialBlock` that inherits from the base `Block` class. We can use a similar procedure to overwrite methods to add functionality.
 
 
-1. Open `TutorialBlockScript.cs`.
+1. Open `TutorialBlock.cs`.
 
 1. We want to move the stimulus to the different distances at the start of each block.
-2. We have to first get access to our TutorialExperimentRunner as before.
+2. We have to first get access to our TutorialRunner as before.
 3. As before, override the `PreMethod()` to add code that runs at the start of each block of trials.
 4. We want to read the Distance variable from the `Data` object just like we did in a trial. 
 5. Let's save its initial position, so we can reset it at the end of the block in `PostMethod`, and then adjust its position to the value of the distance variable on the Z axis.
@@ -118,14 +117,14 @@ Let’s create our Distance variable. In this case we want all the trials at a g
 _Note: A `Block`’s `Data` object only has access to block variables, not other variables. However, a `Trial` has access to both block and trial variables._
 
 ```csharp
-public class TutorialBlockScript : Block {
+public class TutorialBlock : Block {
 
-    TutorialExperimentRunner tutorialRunner;
+    TutorialRunner tutorialRunner;
     Vector3 initialPosition;
 
-    public TutorialBlockScript(ExperimentRunner runner, DataTable trialTable, DataRow data, int index) 
+    public TutorialBlock(ExperimentRunner runner, DataTable trialTable, DataRow data, int index) 
         : base(runner, trialTable, data, index) {
-        tutorialRunner = (TutorialExperimentRunner) runner;
+        tutorialRunner = (TutorialRunner) runner;
     }
 
     protected override void PreMethod() {
@@ -145,7 +144,7 @@ public class TutorialBlockScript : Block {
 
 Finally, we want to randomize the trial order completely.
 
-1. In the top of the config file inspector, select the following settings:
+1. In the top of the Design File Inspector, select the following settings:
     1. Block Randomization: Complete Randomization
     2. Trial Randomization: Randomize (and choose Different Permutations).
 2. We don’t want to repeat anything so leave both repetition settings at 1.

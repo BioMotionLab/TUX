@@ -1,8 +1,7 @@
 ﻿using System.Data;
-using bmlTUX.Scripts.Managers;
 using JetBrains.Annotations;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
 
     /// <summary>
     /// One Trial of an Runner. The Runner calls Run on this trial,

@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace bmlTUX.Scripts.ExperimentParts.SimpleExperimentParts {
+namespace bmlTUX {
 
 
     public class SimpleExperimentRunner : ExperimentRunner {

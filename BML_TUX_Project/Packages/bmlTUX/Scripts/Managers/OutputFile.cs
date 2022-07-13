@@ -1,10 +1,7 @@
 using System;
 using System.IO;
-using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Utilities;
-using UnityEngine;
 
-namespace bmlTUX.Scripts.Managers {
+namespace bmlTUX {
 	[Serializable]
 	public class OutputFile {
 		public string OutputFolder;
@@ -18,9 +15,8 @@ namespace bmlTUX.Scripts.Managers {
 			FullPath += ".csv";
 		}
 
-		public static OutputFile DebugFile(FileLocationSettings fileLocationSettings) {
-			if (fileLocationSettings == null) Debug.Log($"{TuxLog.Prefix} File location settings null");
-			return new OutputFile(fileLocationSettings.DebugFolder, fileLocationSettings.DebugFileName);
+		public static OutputFile DebugFile() {
+			return new OutputFile(FileLocationSettings.DebugFolder, FileLocationSettings.DebugFileName);
 		}
 
 		public void OutputToFile(Outputtable output) {

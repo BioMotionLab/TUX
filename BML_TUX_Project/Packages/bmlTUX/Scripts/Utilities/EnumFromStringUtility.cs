@@ -3,7 +3,7 @@ using System.Data;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.Utilities {
+namespace bmlTUX {
     
     [PublicAPI]
     public static class EnumFromStringUtility {

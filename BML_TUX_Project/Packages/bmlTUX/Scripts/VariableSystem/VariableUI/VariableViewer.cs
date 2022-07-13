@@ -11,24 +11,21 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         const int NameWidth = 125;
         const int NameLabelWidth = 40;
         
-        protected readonly SerializedProperty variableProperty;
-        protected readonly SerializedProperty ExpandSettingsProp;
-
-        public VariableType VariableType => variableType;
-        protected readonly VariableType variableType;
+        protected readonly SerializedProperty VariableProperty;
+        
+        public VariableType VariableType { get; }
 
         public bool ReadyToDelete = false;
         public bool Deleted;
-        protected VariableValidationResults variableValidationResults;
+        protected VariableValidationResults VariableValidationResults;
+        bool deleteDialogIsOpen = false;
 
 
         public VariableViewer(SerializedProperty variableProperty, VariableType variableType) {
             
-            this.variableProperty = variableProperty ?? throw new NullReferenceException("VariableProperty is null");
-            this.variableType = variableType;
-            
-            ExpandSettingsProp = variableProperty.FindPropertyRelative(nameof(Variable.ExpandSettings));
-            
+            this.VariableProperty = variableProperty ?? throw new NullReferenceException("VariableProperty is null");
+            this.VariableType = variableType;
+
         }
         
         protected abstract void DrawVariableSpecificInspector();
@@ -36,8 +33,11 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         public void DrawInspector() {
             
             if (Deleted) throw new NullReferenceException("Trying To Draw deleted variable inspector");
-            variableValidationResults = new VariableValidationResults();
+            if (deleteDialogIsOpen) return;
+            
+            VariableValidationResults = new VariableValidationResults();
 
+            
             int oldIndentLevel = EditorGUI.indentLevel;
             
             EditorGUI.indentLevel = 0;
@@ -45,18 +45,24 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             
             EditorGUILayout.BeginVertical(EditorGuiHelper.AlternateColorBox);
             
-            DrawVariableHeader();
+            SerializedProperty expandSettingsProp = VariableProperty.FindPropertyRelative(nameof(Variable.ExpandSettings));
+            bool expanded;
+            try {
+                expanded = expandSettingsProp.boolValue;
+            }
+            catch (InvalidOperationException) {
+                // this can happen if variable is deleted from the dialog, and viewer still gets called. Should be fixed by deleteDialogIsOpen check above. but keeping just in case. 
+                return;
+            }
+            
+            DrawVariableHeader(expandSettingsProp);
 
             EditorGUI.indentLevel++;
-            DrawVariableSpecificInspector();
+            if (expanded) DrawVariableSpecificInspector();
             EditorGUI.indentLevel--;
             EditorGUILayout.Space();
-            
-            
-         
-            
-            
-            if (!variableValidationResults.IsValid) {
+
+            if (!VariableValidationResults.IsValid) {
                 DrawVariableErrors();
             }
             
@@ -75,43 +81,44 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
         void DrawVariableErrors() {
             EditorGUI.indentLevel++;
-            foreach (string errorText in variableValidationResults.Errors) {
+            foreach (string errorText in VariableValidationResults.Errors) {
                 EditorGUILayout.HelpBox(errorText, MessageType.Error);
             }
 
-            foreach (string warningText in variableValidationResults.Warnings) {
+            foreach (string warningText in VariableValidationResults.Warnings) {
                 EditorGUILayout.HelpBox(warningText, MessageType.Warning);
             }
             EditorGUI.indentLevel--;
         }
 
-        void DrawVariableHeader() {
+        void DrawVariableHeader(SerializedProperty expandViewerProp) {
             
-            SerializedProperty variableName = variableProperty.FindPropertyRelative(nameof(Variable.Name));
-            SupportedDataType dataType = (SupportedDataType) variableProperty.FindPropertyRelative(nameof(Variable.DataType)).intValue;
+            SerializedProperty variableName = VariableProperty.FindPropertyRelative(nameof(Variable.Name));
+            SupportedDataType dataType = (SupportedDataType) VariableProperty.FindPropertyRelative(nameof(Variable.DataType)).intValue;
 
             EditorGUILayout.BeginHorizontal();
             
-            if (ExpandSettingsProp.boolValue) {
+            if (expandViewerProp.boolValue) {
                 EditorGUILayout.PropertyField(variableName, GUIContent.none, GUILayout.Width(NameWidth));
             }
             else {
                 EditorGUILayout.LabelField(variableName.stringValue, GUILayout.Width(NameWidth));
             }
             
-            VariableNameValidator.Validate(variableName.stringValue, variableValidationResults);
+            VariableNameValidator.Validate(variableName.stringValue, VariableValidationResults);
             
             
             EditorGUILayout.LabelField($"{dataType}", GUILayout.Width(DataTypeWidth));
+            GUILayout.FlexibleSpace();
             
-            if (ExpandSettingsProp.boolValue) {
+            if (expandViewerProp.boolValue) {
                 if (GUILayout.Button("Hide Settings", GUILayout.Width(DeleteButtonWidth))) {
-                    ExpandSettingsProp.boolValue = false;
+                    expandViewerProp.boolValue = false;
                 }
             }
             else {
                 if (GUILayout.Button("Edit Settings", GUILayout.Width(DeleteButtonWidth))) {
-                    ExpandSettingsProp.boolValue = true;
+                    expandViewerProp.boolValue = true;
                 }
             }
 
@@ -124,11 +131,17 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("Delete Variable", GUILayout.Width(DeleteButtonWidth))) {
+                deleteDialogIsOpen = true;
+                //Debug.Log("Showing popup");
                 if (EditorUtility.DisplayDialog("Delete Variable", "Are you sure you want to delete variable?",
                     "Delete Variable", "Cancel")) {
                     if (Deleted) Debug.LogError("Trying to delete already deleted variable");
                     ReadyToDelete = true;
+                    //Debug.Log("deleting...");
                 }
+
+                deleteDialogIsOpen = false;
+                GUIUtility.ExitGUI(); 
             }
             EditorGUILayout.EndHorizontal();
         }

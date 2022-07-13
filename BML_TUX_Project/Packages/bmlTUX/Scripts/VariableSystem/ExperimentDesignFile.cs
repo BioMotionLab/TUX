@@ -1,9 +1,7 @@
-﻿using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Settings;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace bmlTUX.Scripts.VariableSystem {
-    [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "Experiment Design File")]
+    
     public class ExperimentDesignFile : ScriptableObject {
 
        
@@ -29,9 +27,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         public ControlSettings ControlSettings;
         [SerializeField]
         public GuiSettings GuiSettings;
-        [SerializeField]
-        public FileLocationSettings FileLocationSettings;
-        
+      
         
         void OnValidate() {
             Debug.LogWarning($"{name} is obsolete. Please Update by selecting the file and examining its inspector.", this);

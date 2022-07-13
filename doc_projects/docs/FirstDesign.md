@@ -69,13 +69,17 @@ We want to record how closely the participants match the size of the stimulus. W
 
 The Script Helper tool defined enough of the experiment to let you get up and started quickly. Lets test out if everything is working as expected before moving forward.
 
-Press play in the editor. You’ll see a window to start an experimental session. Unity may prompt you to install TextMeshPro assets. You should accept this since the Runner Interface depends on them.
+Press play in the editor. You’ll see a window pop up to start an experimental session. This window is called the Runner Interface. It is a helpful tool for configuring an experiment, starting an experiment, and monitoring the progress of a participant through the experiment. Unity may prompt you to install TextMeshPro assets. You should accept this since the Runner Interface depends on them.
 
-**_Important Note: The Runner interface is meant to be displayed on a secondary monitor so that the experimenter can monitor and setup the experiment without the participant seeing it. To view both at the same time, make sure you have a second "Game" tab open set to "Display 2". The main experiment will be shown on Display 1, with the interface showing on Display 2. This can be adjusted in the settings._**
+
+
+Important Notes: 
+* The Runner Interface blocks the view of everything behind it. For this reason, is meant to be displayed on a secondary display. The idea is that the participant views the virtual world (the experiment) on the primary display, whereas the experimenter can monitor the progress of the experiment on a secondary display. 
+* To preview this functionality in the editor, make sure you have a second "Game" tab open set to "Display 2". The main experiment will be shown on Display 1, with the interface showing on Display 2.
 
 ![Display Selection](assets/Tutorials/DisplaySelection.png)
 
-**_Important Note for VR Users: SteamVR can sometimes take over the display of Display 1. You may need to display the Runner UI on display 2, even with only one monitor.
+* You can choose the display on which the UI is rendered in the display settings. See the [Settings Page](Settings.md) for more info
 
 
 1. Take a look at the previewed trial table and ensure everything is set up properly. Note that the toolkit adds some useful columns to track progress and other metrics.
@@ -83,7 +87,7 @@ Press play in the editor. You’ll see a window to start an experimental session
 3. Because it’s debug mode it automatically chooses values for our participant variables and other things. A normal run through the program will force you to select a value. 
 4. Once started, the toolkit automatically constructs your blocks and trials based on code that you provide the ExperimentRunner class. At the moment, we haven't provided any, so it reverts to the built-in defaults.
 5. A new window will appear showing the progress through the experiment.
-6. In the default scripts, a trial is simply defined as pressing the return key. Press it a few times to see how the trials advance, and the values of the independent variables change.  
+6. In the default scripts, a trial is simply defined as pressing the Space key. Press it a few times to see how the trials advance, and the values of the independent variables change.  
 
 _Note: Make sure you have one of the "Game" windows focused for the key presses to register_
  

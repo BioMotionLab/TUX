@@ -2,15 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using bmlTUX.Scripts.Managers;
-using bmlTUX.Scripts.Utilities;
-using bmlTUX.Scripts.Utilities.Extensions;
 using UnityEngine;
 
 // ReSharper disable VirtualMemberNeverOverridden.Global
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     /// <summary>
     /// The Runner class is the main backbone of the toolkit. This sets up the Runner design, the blocks and trial structure, and manages output
     /// </summary>
@@ -49,7 +46,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
 
         protected sealed override IEnumerator RunMainCoroutine() {
             Debug.Log("");
-            Debug.Log($"{TuxLog.Prefix} <color=purple><b>Starting Experiment!</b></color>");
+            Debug.Log($"{TuxLog.Warn("Starting Experiment!")}");
             BlockSequenceRunner blockRunner = new BlockSequenceRunner(runner, design.Blocks);
             blockRunner.Start();
             while (blockRunner.Running) {

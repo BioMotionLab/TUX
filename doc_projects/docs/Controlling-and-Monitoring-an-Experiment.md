@@ -1,5 +1,5 @@
 # Experiment Runner window
-Once the experiment’s variables have been configured, the experiment can be run from the Experiment Runner Window. You can open this window from the BML menu. This window can be docked and moved around just like any other editor window.
+Once the experiment’s variables have been configured, the experiment can be run from the Experiment Runner Window. You can open this window from the bmlTUX menu. This window can be docked and moved around just like any other editor window.
 This is the main display and control for the toolkit. Once play mode is started, you will control and monitor the experiment from here. The window interfaces with a Custom ExperimentRunner class that you define (see below), to notify the unity scene to set up and begin the experiment. 
 
 Press play in the unity editor. The unity scene will begin, but the experiment will not yet run. It will prompt you for relevant settings, including picking which block order to use. 

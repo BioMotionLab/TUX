@@ -8,4 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Packages/com.biomotionlab.tux/Samples/TutorialExperiment/TutorialSampleExperiment.unity
     guid: 4abaef53a10623b4daee608e668ad6df
+  - enabled: 1
+    path: Packages/com.biomotionlab.tux/Extras/Recorder/Sample Scene/Recorder Example
+      Scene.unity
+    guid: d87ecee3e3cbf461e83bb4dd5517230d
   m_configObjects: {}

@@ -1,4 +1,4 @@
-﻿namespace bmlTUX.Scripts.Managers {
+﻿namespace bmlTUX {
     /// <summary>
     /// Outputs files based on events that it listens to.
     /// </summary>
