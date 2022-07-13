@@ -1,3 +1,37 @@
+# [4.0.0](https://github.com/BioMotionLab/TUX/compare/release/3.0.0...release/4.0.0) (2022-07-13)
+
+
+### Bug Fixes
+
+* build errors due to editor namespaces ([90d82ea](https://github.com/BioMotionLab/TUX/commit/90d82eaa007a6c9c7ec69553ba6edefb1696c8bc))
+
+
+* Merge branch 'master' of https://github.com/BioMotionLab/TUX ([7e1672c](https://github.com/BioMotionLab/TUX/commit/7e1672ccb5264578e324713adcf1a7001bee9db0))
+
+
+### BREAKING CHANGES
+
+* 3.0 release
+  chore(release): 2.2.0 [skip ci]
+  docs: added info about bmlTUX project settings, and added standlone vr page to sidebar
+  docs: standalone vr
+  chore: Prep for major release
+  feat: added continuous data recorder
+  feat: Fixed some docs and added section on continuous data
+  fix: pregenerated trial tables conflict with debug mode
+  docs: clarity edits and updates from older versions
+  chore(release): 2.1.0 [skip ci]
+  feat: can change color of debug logs in project settings
+  feat: Recorder package major addition
+  Fixed Custom Design File Location and Validation
+  Modified OutputFolder base path to use FileLocationSettings
+  Fixed Unaligned Design File Panel
+  chore(deps): bump shelljs from 0.8.4 to 0.8.5 in /doc_projects/website
+  chore(deps): bump prismjs from 1.23.0 to 1.25.0 in /doc_projects/website
+  chore(deps): bump path-parse in /doc_projects/website
+  chore(deps): bump url-parse from 1.5.1 to 1.5.3 in /doc_projects/website
+  ...
+
 # [3.0.0](https://github.com/BioMotionLab/TUX/compare/release/2.2.0...release/3.0.0) (2022-03-05)
 
 
