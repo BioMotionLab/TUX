@@ -1,5 +1,4 @@
-﻿using UnityEditor.Graphs;
-using UnityEngine;
+﻿using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace bmlTUX {
@@ -12,6 +11,7 @@ namespace bmlTUX {
             return hexColor;
         }
 
+
         static BmlTuxEditorSettings bmlTuxEditorSettings;
         static BmlTuxEditorSettings BmlTuxEditorSettings {
             get
@@ -20,7 +20,8 @@ namespace bmlTUX {
                 return bmlTuxEditorSettings;
             }
         }
-        
+
+
         /// <summary>
         /// Formats string as a bmlTUX errror
         /// </summary>

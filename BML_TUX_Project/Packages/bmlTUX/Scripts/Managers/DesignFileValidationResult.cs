@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 
 namespace bmlTUX
