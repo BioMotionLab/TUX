@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ffe945768446bca5a29a99a66a9499, type: 3}
+  m_Name: ComplexExperimentSettings
+  m_EditorClassIdentifier: 
+  ColumnNames:
+    TotalTrialIndex: Trial
+    BlockIndex: Block
+    Skipped: Skipped
+    Attempts: Attempts
+    TrialIndex: TrialInBlock
+    Completed: Completed
+    TrialTime: TrialTime
+    DefaultMissingValue: -999
+  ControlSettings:
+    InterruptKeys: 2f000000
+    BackKeys: 2c000000
+    NextKeys: 2e000000
+    QuitKeys: 710000001b000000
+  GuiPrefab: {fileID: 3678802056161241045, guid: ef21a6db4c41d47ae8cf4d02605a52fb,
+    type: 3}
+  GuiSettings:
+    targetDisplay: 0
+    WarnUserIfNotDisplayOne: 1
+    ShowRunnerInterfaceAfterStart: 1
