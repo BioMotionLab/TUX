@@ -27,12 +27,7 @@ MonoBehaviour:
     - id: 3
     ParticipantVariables:
     - id: 4
-  ColumnNamesSettings: {fileID: 11400000, guid: b004757e12fd66b43828570a0f83b1db,
-    type: 2}
-  ControlSettings: {fileID: 11400000, guid: 04359e47c0c847246b3b31397d86ffb9, type: 2}
-  GuiSettings: {fileID: 11400000, guid: 119e3da44c7fa5948bf956a619f1caa8, type: 2}
-  FileLocationSettings: {fileID: 11400000, guid: 07f42cef79754c74583d0209412fa987,
-    type: 2}
+  ExperimentSettings: {fileID: 11400000, guid: 938133fafa8754179ace2b00546198fd, type: 2}
   ShowAdvancedEditor: 1
   BlockOrderIsValid: 1
   TrialTableGeneration: 0
