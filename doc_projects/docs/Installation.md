@@ -14,6 +14,24 @@ For both methods, you should be in a new unity project that meets the [Requireme
 
 ## Through Unity Package Manager
 
+### Unity 2020.1 and later (recommended):
+
+An update to Unity has allowed a much more seamless integration with the package manager, and will make updating bmlTUX much easier in the future.
+
+1. Navigate to Edit > Project Settings, and select the Package Manager tab.
+2. In the section called Scoped Repositories, click the + button to add a new entry. Type in the following information:
+    ```text
+    Name: BioMotionLab
+    URL: https://registry.npmjs.org
+    Scope(s): com.biomotionlab.tux
+    ```
+3. Then open the Package Manager (Window > Package Manager)
+4. IMPORTANT: Make sure TextMeshPro Essentials are already imported (see above).
+5. From the dropdown pick "My Registries". You will see BioMotionLab listed. Install the latest version of bmlTUX! 
+6. Future updates will appear here as a new version number.
+
+### Old way (not recommended):
+
 1. Go to the releases page https://github.com/BioMotionLab/TUX/releases. Don't download anything, just note the number of the most recent release. It Should be in the format X.Y.Z, for example 1.0.1.
 2. In a new unity project (Unity 2019.3 or later), open the Package Manager from the Window menu.
 3. Back in unity, click the plus button at the top of the window, selecting "Add package from git URL"
@@ -30,7 +48,7 @@ When finished, in the Project window, expand the Packages folder, and you should
 
 You're all set.
 
-## As an old-style .unitypackage
+## As an old-style .unitypackage (definitely not recommended).
 
 This is a bit simpler than above, but has several shortcomings. 
 * It is more difficult to update to newer versions.

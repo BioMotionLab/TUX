@@ -6,7 +6,7 @@ The `Experiment`, `Block`, and `Trial `classes reside in the voids of C# and don
 
 To do this, you need to create references to them in your custom `ExperimentRunner` class. For example:
 ```csharp
-public GameObject gameObjectThatMoves  
+public GameObject GameObjectThatMoves;  
 ```
 
 Then, in your custom `Trial `script you can reference your custom `ExperimentRunner` using the following
@@ -18,7 +18,7 @@ This line converts the generic `ExperimentRunner `that is stored in the `Runner`
 
 Then you can access a `GameObject`, or other public unity field referenced within the customized `ExperimentRunner` class with:
 ```csharp
-GameObject gameObjectInScene = myRunner.SomeReferencedGameObject;
+GameObject gameObjectThatMoves = myRunner.GameObjectThatMoves;
 ```
 
 This allows you to use your `ExperimentRunner` object as a container to drag and drop references to `GameObject`s and other things in your unity scene that need to be controlled or accessed during your experiment.

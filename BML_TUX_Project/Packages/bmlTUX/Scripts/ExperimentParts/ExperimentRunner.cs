@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Data;
-using bmlTUX.Scripts.Managers;
-using bmlTUX.Scripts.UI.RuntimeUI;
-using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.VariableSystem;
+using bmlTUX.UI.RuntimeUI;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     
     
     /// <summary>
@@ -97,19 +95,14 @@ namespace bmlTUX.Scripts.ExperimentParts {
             }
             DesignFile.GetValidate();
 
-            Session = Session.LoadSessionData(DesignFile.GetFileLocationSettings);
+            Session = Session.LoadSessionData();
             if (Session == null) {
                 throw new NullReferenceException("Session null and not created properly");
             }
 
             switch (DesignFile.GetTrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly:
-                    ExperimentDesign = ExperimentDesign.CreateFrom(DesignFile);
-                    if (ExperimentDesign == null) {
-                        throw new NullReferenceException("ExperimentDesign null");
-                    }
-
-                    if (!ExperimentDesign.HasTrials) throw new NoTrialsException($"{DesignFile.GetName} has no trials. You likely lack any values defined in non-block variables");
+                    CreateOnTheFlyDesign();
                     break;
                     
                 case TrialTableGenerationMode.PreGenerated:
@@ -123,8 +116,21 @@ namespace bmlTUX.Scripts.ExperimentParts {
             ExperimentEvents.InitExperiment(this);
         }
 
+        void CreateOnTheFlyDesign()
+        {
+            ExperimentDesign = ExperimentDesign.CreateFrom(DesignFile);
+            if (ExperimentDesign == null)
+            {
+                throw new NullReferenceException("ExperimentDesign null");
+            }
+
+            if (!ExperimentDesign.HasTrials)
+                throw new NoTrialsException(
+                    $"{DesignFile.GetName} has no trials. You likely lack any values defined in non-block variables");
+        }
+
         void InitGui() {
-            gui = Instantiate(DesignFile.GetGuiSettings.GuiPrefab);
+            gui = Instantiate(DesignFile.GetGuiPrefab);
             
             gui.RegisterExperiment(this);
             
@@ -153,15 +159,21 @@ namespace bmlTUX.Scripts.ExperimentParts {
         void StartRunningRunningExperiment(Session currentSession) {
             switch (DesignFile.GetTrialTableGeneration) {
                 case TrialTableGenerationMode.OnTheFly: {
-                    DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
-                    RunnableDesign = new RunnableDesign(this, finalDesignTable, DesignFile);
+                    RunnableDesign = SetupOnTheFlyDesignForRunning(currentSession);
                     break;
                 }
                 case TrialTableGenerationMode.PreGenerated:
-                    string selectedDesignFilePath = currentSession.SelectedDesignFilePath;
-                    if (string.IsNullOrEmpty(selectedDesignFilePath)) throw new NullReferenceException("Trying to load custom design file, but none given");
-                    RunnableDesign = RunnableDesign.CreateFromFile(this, currentSession.SelectedDesignFilePath,
-                                                           DesignFile);
+                    if (currentSession is DebugSession)
+                    {
+                        Debug.LogWarning(TuxLog.Warn("WARNING:Pre-Generated design files can't be used in debug mode, reverting to On-The-Fly for this session."));
+                        CreateOnTheFlyDesign();
+                        RunnableDesign = SetupOnTheFlyDesignForRunning(currentSession);
+                    }
+                    else
+                    {
+                        RunnableDesign = SetupPreGeneratedDesignForRunning(currentSession);
+                    }
+                    
                     break;
                 default:
                     throw new NotImplementedException();
@@ -186,6 +198,20 @@ namespace bmlTUX.Scripts.ExperimentParts {
             
             ExperimentEvents.StartPart(experiment);
             
+        }
+
+        RunnableDesign SetupPreGeneratedDesignForRunning(Session currentSession)
+        {
+            string selectedDesignFilePath = currentSession.SelectedDesignFilePath; 
+            if (string.IsNullOrEmpty(selectedDesignFilePath))
+                throw new NullReferenceException("Trying to load custom design file, but none given");
+            return RunnableDesign.CreateFromFile(this, currentSession.SelectedDesignFilePath, DesignFile);
+        }
+
+        RunnableDesign SetupOnTheFlyDesignForRunning(Session currentSession)
+        {
+            DataTable finalDesignTable = ExperimentDesign.GetFinalExperimentTable(currentSession.BlockOrderChosenIndex);
+            return new RunnableDesign(this, finalDesignTable, DesignFile);
         }
 
         void EndExperiment() {

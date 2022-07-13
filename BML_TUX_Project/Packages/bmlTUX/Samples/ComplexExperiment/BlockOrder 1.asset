@@ -12,24 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2f874bb9a360b4e93c41a8b3594b95, type: 3}
   m_Name: BlockOrder 1
   m_EditorClassIdentifier: 
-  initialized: 1
   isValid: 1
+  rawList:
+  - Index: 0
+    Text: StimulusColor= Red, StimulusType= Person
+  - Index: 1
+    Text: StimulusColor= Red, StimulusType= Animal
+  - Index: 2
+    Text: StimulusColor= Blue, StimulusType= Person
+  - Index: 3
+    Text: StimulusColor= Blue, StimulusType= Animal
+  - Index: 4
+    Text: StimulusColor= Green, StimulusType= Person
+  - Index: 5
+    Text: StimulusColor= Green, StimulusType= Animal
+  - Index: 6
+    Text: StimulusColor= Orange, StimulusType= Person
+  - Index: 7
+    Text: StimulusColor= Orange, StimulusType= Animal
   List:
   - Index: 0
-    Text: StimulusColor= RedStimulusType= Person
+    Text: StimulusColor= Red, StimulusType= Person
   - Index: 1
-    Text: StimulusColor= RedStimulusType= Animal
+    Text: StimulusColor= Red, StimulusType= Animal
   - Index: 2
-    Text: StimulusColor= BlueStimulusType= Person
+    Text: StimulusColor= Blue, StimulusType= Person
   - Index: 3
-    Text: StimulusColor= BlueStimulusType= Animal
+    Text: StimulusColor= Blue, StimulusType= Animal
   - Index: 4
-    Text: StimulusColor= GreenStimulusType= Person
+    Text: StimulusColor= Green, StimulusType= Person
   - Index: 5
-    Text: StimulusColor= GreenStimulusType= Animal
+    Text: StimulusColor= Green, StimulusType= Animal
   - Index: 6
-    Text: StimulusColor= OrangeStimulusType= Person
+    Text: StimulusColor= Orange, StimulusType= Person
   - Index: 7
-    Text: StimulusColor= OrangeStimulusType= Animal
-  Randomize: 0
+    Text: StimulusColor= Orange, StimulusType= Animal
   linkedDesignFile: {fileID: 11400000, guid: c6161d42e130348f5959f86c6cb3dd76, type: 2}
+  Randomize: 0

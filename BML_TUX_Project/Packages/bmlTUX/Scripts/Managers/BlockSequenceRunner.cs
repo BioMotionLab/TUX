@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.Managers {
+namespace bmlTUX {
 
 
 
@@ -49,7 +47,7 @@ namespace bmlTUX.Scripts.Managers {
 
             currentlyRunningBlock = block;
             Debug.Log("");
-            TuxLog.Log($"{TuxLog.FormatOrange("Starting")} Block {BlockIndex(currentlyRunningBlock)+1} / {blocks.Count}");
+            TuxLog.Log($"{TuxLog.Warn("Starting")} Block {BlockIndex(currentlyRunningBlock)+1} / {blocks.Count}");
             ExperimentEvents.BlockHasStarted(block);
             ExperimentEvents.StartPart(block);
 
@@ -79,7 +77,7 @@ namespace bmlTUX.Scripts.Managers {
         void FinishBlock() {
             int blockNum = BlockIndex(currentlyRunningBlock);
             Debug.Log("");
-            Debug.Log($"{TuxLog.Prefix} <color=green><b>Finished</b></color> Block {blockNum + 1}\n {currentlyRunningBlock.AsString()}");
+            Debug.Log($"{TuxLog.Warn("Finished")} Block {blockNum + 1}\n {currentlyRunningBlock.AsString()}");
             currentlyRunningBlock.Complete = true;
             ExperimentEvents.UpdateBlock(blocks, BlockIndex(currentlyRunningBlock));
         }
@@ -88,8 +86,9 @@ namespace bmlTUX.Scripts.Managers {
             runner.StartCoroutine(RunPostBlock());
         }
 
-        void DoneBlockSequence() {
-            Debug.Log($"{TuxLog.Prefix} <color=purple><b>Experiment Complete!</b></color>");
+        void DoneBlockSequence()
+        {
+            Debug.Log($"{TuxLog.Warn("Experiment Complete!")}");
             ExperimentEvents.BlockSequenceHasCompleted(blocks);
             ExperimentEvents.EndExperiment();
             Running = false;

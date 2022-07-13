@@ -9,7 +9,7 @@ For example, the following code will hang your program since it never lets the p
 void NormalKindOfMethod() {  
     while (true) {  
         //do something  
-    }  
+    }     
 }  
 ```
 

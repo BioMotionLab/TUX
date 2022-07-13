@@ -1,7 +1,7 @@
 using System.Collections;
-using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX;
 
-namespace bmlTUX.SamplesAndTutorials.TutorialExperiment {
+namespace Samples.TutorialExperiment {
     /// <summary>
     /// Classes that inherit from Experiment define custom behaviour for the start and end of your experiment.
     /// This might useful for experiment setup, instructions, and debrief.

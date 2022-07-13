@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Utilities;
-using bmlTUX.Scripts.Utilities.Extensions;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.Managers {
+namespace bmlTUX {
 
 
     public class TrialSequenceRunner {
@@ -53,7 +50,7 @@ namespace bmlTUX.Scripts.Managers {
 
         void StartRunningTrial(Trial trial) {
             currentlyRunningTrial = trial;
-            TuxLog.Log($"{TuxLog.FormatOrange("Starting")} {currentlyRunningTrial.TrialText}");
+            TuxLog.Log($"{TuxLog.Good("Starting")} {currentlyRunningTrial.TrialText}");
                 
             ExperimentEvents.StartPart(trial);
             ExperimentEvents.TrialHasStarted(trial);
@@ -70,7 +67,7 @@ namespace bmlTUX.Scripts.Managers {
 
         void LogTrial(string filePath) {
             string successText = currentlyRunningTrial.CompletedSuccessfully ? "successfully" : "<color=red><b>unsuccessful</b></color>";
-            TuxLog.Log($"{TuxLog.FormatGreen("Finished")} {currentlyRunningTrial.TrialText} {successText}. \tOutput Updated: {filePath} \n" +
+            TuxLog.Log($"{TuxLog.Good("Finished")} {currentlyRunningTrial.TrialText} {successText}. \tOutput Updated: {filePath} \n" +
                       $"Output Table for this trial:\n" +
                       $"{currentlyRunningTrial.Data.AsString(header: true)}");
         }

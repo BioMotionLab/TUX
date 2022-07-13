@@ -3,7 +3,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using bmlTUX.Scripts.UI.RuntimeUI.UIUtilities;
 
-namespace bmlTUX.Scripts.Managers {
+namespace bmlTUX {
 	public class OutputFileValidationResult : InputValidator {
 		readonly string outputFolder;
 		readonly string outputFileName;

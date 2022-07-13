@@ -28,6 +28,7 @@ title: Troubleshooting
 * The UI text is too big or misaligned:
     * This is caused by a bug in TextMeshPro.
     * To Fix, in the unity editor in your project, navigate to Packages/bmlTUX/Prefabs. Right click on ExperimentUI and click "Reimport". 
+    * This can be avoided in the future by importing TextMeshPro essentions BEFORE importing bmlTUX package.
     * If this does not fix the problem please report the issue on github issues page stating your current versions of Unity, TextmeshPro, and bmlTUX.
 
 * The Experiment Runner UI Looks strange or is Tiny when I have a VR headset hooked up.

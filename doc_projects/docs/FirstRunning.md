@@ -19,7 +19,7 @@ You'll see the following code (I've deleted most the comments here for clarity):
 using System.Collections;
 using System.Data;
 using UnityEngine;
-using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX
 
 public class TutorialTrialScript : Trial {
     
@@ -34,7 +34,7 @@ public class TutorialTrialScript : Trial {
         
         bool waitingForParticipantResponse = true;
         while (waitingForParticipantResponse) {  
-            if (Input.GetKeyDown(KeyCode.Return)) { 
+            if (Input.GetKeyDown(KeyCode.Space)) { 
                 waitingForParticipantResponse = false;  
             }
             yield return null; 
@@ -46,6 +46,7 @@ public class TutorialTrialScript : Trial {
 }
 ```
 
+
 The `RunMainCoroutine()` part is the important part. This is the main execution code of our trial where we will define what happens in our trials. This method is a Coroutine, which means it needs to have at minimum one yield return statement. If you don’t know about coroutines, there is a [section in the documentation](Coroutines-and-IEnumerators.md) explaining them. 
  
 Let’s start simple and just have it print something to the console. inside the `MainCoroutine()` method type the following code. Remember to `yield return null` at the end.
@@ -53,12 +54,12 @@ Let’s start simple and just have it print something to the console. inside the
 ```c#
     protected override IEnumerator RunMainCoroutine() {
 
-        Debug.Log("Press the return key please!");  // <- ADD THIS LINE
+        Debug.Log("Press the space key please!");  // <- ADD THIS LINE
 
         bool waitingForParticipantResponse = true;
         while (waitingForParticipantResponse) {  
             
-            if (Input.GetKeyDown(KeyCode.Return)) { 
+            if (Input.GetKeyDown(KeyCode.Space)) { 
                 waitingForParticipantResponse = false;  
             }
             yield return null; 
@@ -67,7 +68,7 @@ Let’s start simple and just have it print something to the console. inside the
     }
 ```
 
-Now each trial should output that text once before waiting for the return key.
+Now each trial should output that text once before waiting for the space key.
 
 Let’s run our experiment from the runner window again to see if it worked. Check the console window for the output. If you don't see the console window, open it using **"Window" menu > General > Console**. Make sure all the scripts are saved first!
 
@@ -75,7 +76,7 @@ Let’s run our experiment from the runner window again to see if it worked. Che
 
 Now that we have our trial structure set up, we need to create some objects to use as stimuli.
 
-Let’s first position our main Camera to 0,0,0, and have it pointing along the Z axis. 
+Let’s first position our main Camera to 0,0,-10, and have it pointing along the Z axis (Rotation 0,0,0). 
 1. Click the Main Camera in the scene and reset its transform component.
 
 Let’s create the object that will be the model to which participants are trying to match.
@@ -95,7 +96,7 @@ Now we need a materials to change the stimulus color.
 ## Referencing GameObjects in your experiment
 
 Now that we’ve set up the objects and materials for our stimuli, we need to be able to reference them in our scripts. We use our experiment runner as our main window to our scene.
-1. Open the `TutorialExperimentRunner `script.
+1. Open the `TutorialRunner `script.
 2. Create public fields for the two capsules and the 3 materials.
 3. It should look like this:
 
@@ -103,9 +104,9 @@ Now that we’ve set up the objects and materials for our stimuli, we need to be
 using System.Collections;
 using System.Data;
 using UnityEngine;
-using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX
 
-public class TutorialExperimentRunner : ExperimentRunner
+public class TutorialRunner : ExperimentRunner
 {
     public GameObject Stimulus;
     public GameObject MatchObject;
@@ -119,7 +120,7 @@ public class TutorialExperimentRunner : ExperimentRunner
 
 Next, we have to populate these fields in the inspector.
 
-1. In the scene, click on the GameObject in your scene hierarchy with your runner script on it. It should be called something like TutorialExperimentRunner,
+1. In the scene, click on the GameObject in your scene hierarchy with your runner script on it. It should be called something like TutorialRunner,
 2. In the inspector you should see fields now. 
 3. Drag the appropriate gameObjects into the fields
 
@@ -130,25 +131,25 @@ Now we need to reference these objects within our trial script. We could put thi
 
 1. Open the `TutorialTrialScript.cs` script.
 
-Now our trial script needs a reference to our custom `TutorialExperimentRunner` and the objects we defined in it.
+Now our trial script needs a reference to our custom `TutorialRunner` and the objects we defined in it.
 
 1. Let’s create a field in `TutorialTrialScript` to store a reference to it.
-2. The base class `Trial` already contains a built-in reference to it named `Runner`, but it’s not stored as our custom `TutorialExperimentRunner` but rather a generic `ExperimentRunner`. We need to cast it to our custom class `TutorialExperimentRunner`.
+2. The base class `Trial` already contains a built-in reference to it named `Runner`, but it’s not stored as our custom `TutorialRunner` but rather a generic `ExperimentRunner`. We need to cast it to our custom class `TutorialRunner`.
 6. Add this cast into the body of the constructor. See the code below (some previous code not shown). 
  
 ```c#
 using System.Collections;
 using System.Data;
 using UnityEngine;
-using bmlTUX.Scripts.ExperimentParts;
+using bmlTUX
 
 public class TutorialTrialScript : Trial
 {
 
-    TutorialExperimentRunner tutorialRunner;
+    TutorialRunner tutorialRunner;
 
     public TutorialTrialScript(ExperimentRunner runner, DataRow data) : base(runner, data) {
-        tutorialRunner = (TutorialExperimentRunner)runner;
+        tutorialRunner = (TutorialRunner)runner;
     }
 
    
@@ -214,7 +215,7 @@ We need to get and store the size the participant selected.
 
 ```csharp
 protected override void PostMethod() {
-    Data["MatchedSize"] = tutorialRunner.MatchObject.transform.localScale.x
+    Data["MatchedSize"] = tutorialRunner.MatchObject.transform.localScale.x;
 }
 ```
 

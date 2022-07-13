@@ -21,11 +21,10 @@ public class OldExperimentDesignFileEditor : Editor
             newFile.Factory.DependentVariables = old.Factory.DependentVariables;
             newFile.Factory.ParticipantVariables = old.Factory.ParticipantVariables;
             
-            newFile.ControlSettings = old.ControlSettings;
-            newFile.GuiSettings = old.GuiSettings;
-            newFile.ColumnNamesSettings = old.ColumnNamesSettings;
-            newFile.FileLocationSettings = old.FileLocationSettings;
-            
+            newFile.ExperimentSettings.ControlSettings = old.ControlSettings;
+            newFile.ExperimentSettings.GuiSettings = old.GuiSettings;
+            newFile.ExperimentSettings.ColumnNames = old.ColumnNamesSettings;
+
             newFile.TrialRandomization = old.TrialRandomization;
             
             newFile.TrialRepetitions = old.TrialRepetitions;

@@ -1,5 +1,6 @@
 {
     "name": "bmlTUX",
+    "rootNamespace": "bmlTUX",
     "references": [
         "GUID:33137bc24d23a6d47b061e686c29d7f3",
         "GUID:6055be8ebefd69e48b49212b09b47b2f",
@@ -12,5 +13,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using bmlTUX.Scripts.ExperimentParts;
-using bmlTUX.Scripts.Settings;
+using bmlTUX.UI.RuntimeUI;
+using VariableSystem;
 
 namespace bmlTUX.Scripts.VariableSystem {
     public interface IExperimentDesignFile {
@@ -17,11 +17,11 @@ namespace bmlTUX.Scripts.VariableSystem {
         Variables GetVariables { get; }
         GuiSettings GetGuiSettings { get; }
         IVariableFactory GetFactory { get; }
-        FileLocationSettings GetFileLocationSettings { get;}
         string GetName { get; }
         bool GetHasBlocks { get; }
         bool GetBlockOrderIsValid { get; }
         int GetBlockNumber { get; }
+        ExperimentGui GetGuiPrefab { get;  }
         void GetValidate();
     }
 }

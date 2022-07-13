@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f52b7cbc1de94f2fbdaad822b4e3ef4, type: 3}
+  m_Name: FooDesign
+  m_EditorClassIdentifier: 
+  TrialRepetitions: 1
+  ExperimentRepetitions: 1
+  TrialRandomization: 0
+  TrialPermutationType: 1
+  BlockRandomization: 0
+  BlockPartialRandomizationSubType: 1
+  Factory:
+    IndependentVariables: []
+    DependentVariables: []
+    ParticipantVariables: []
+  ExperimentSettings: {fileID: 11400000, guid: c49ac0045d7f84c7581ffa4930914dd6, type: 2}
+  ShowAdvancedEditor: 0
+  BlockOrderIsValid: 0
+  TrialTableGeneration: 0
+  BlockOrderConfigurations: []
+  references:
+    version: 1

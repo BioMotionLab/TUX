@@ -1,16 +1,12 @@
 ﻿using System;
 using System.IO;
-using bmlTUX.Scripts.Managers;
-using bmlTUX.Scripts.Utilities;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     
     [Serializable]
     public class Session {
         
-        [SerializeField]
-        public FileLocationSettings FileLocations;
 
         [SerializeField]
         public OutputFile OutputFile;
@@ -21,13 +17,7 @@ namespace bmlTUX.Scripts.ExperimentParts {
         [SerializeField]
         public int BlockOrderChosenIndex = 0;
 
-        
-        public Session(FileLocationSettings fileLocations) {
-            if (fileLocations == null) throw new NullReferenceException("File Locations Null when creating session");
-            FileLocations = fileLocations;
-        }
-        
-       void Enable() {
+        void Enable() {
             ExperimentEvents.OnEndExperiment += Completed;
             ExperimentEvents.OnExperimentStarted += Started;
         }
@@ -43,42 +33,31 @@ namespace bmlTUX.Scripts.ExperimentParts {
         }
 
 
-        public static Session LoadSessionData(FileLocationSettings fileLocations) {
-            string filePath = fileLocations.LastSessionSaveFilePath;
+        public static Session LoadSessionData() {
+            string filePath = FileLocationSettings.LastSessionSaveFilePath;
             Session session;
             if (File.Exists(filePath)) {
                 string dataAsJason = File.ReadAllText(filePath);
                 session = JsonUtility.FromJson<Session>(dataAsJason);
-                session.FileLocations = fileLocations;
-                if (!session.ValidSelf()) {
-                    Debug.LogWarning($"{TuxLog.Prefix} Loaded Session Not valid, creating new");
-                    CreateNewSession(fileLocations);
-                }
             }
             else {        
-                session = CreateNewSession(fileLocations);
+                session = CreateNewSession();
             }
             session.Enable();
             return session;
         }
 
-        static Session CreateNewSession(FileLocationSettings fileLocations) {
+        static Session CreateNewSession() {
             Session session;
             Debug.Log($"{TuxLog.Prefix} Previous Session file not found, creating new");
-            session = new Session(fileLocations);
+            session = new Session();
             return session;
-        }
-
-        bool ValidSelf() {
-            bool valid = FileLocations != null;
-            return valid;
         }
 
         void SaveSessionData() {
             
-            if (FileLocations == null) throw new NullReferenceException("FileLocations null in saveSessionData");
-            Directory.CreateDirectory(FileLocations.SessionFolder);
-            string filePath = FileLocations.LastSessionSaveFilePath;
+            Directory.CreateDirectory(FileLocationSettings.SessionFolder);
+            string filePath = FileLocationSettings.LastSessionSaveFilePath;
             string dataAsJson = JsonUtility.ToJson(this);
             File.WriteAllText(filePath, dataAsJson);
 

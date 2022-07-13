@@ -3,7 +3,7 @@ using bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI;
 using bmlTUX.Scripts.VariableSystem;
 using UnityEngine;
 
-namespace bmlTUX.Scripts.UI.RuntimeUI.RunnerWindowUI {
+namespace bmlTUX.UI.RuntimeUI {
     public class ParticipantVariablePanel : MonoBehaviour
     {
         [SerializeField]

@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using bmlTUX.Scripts.ExperimentParts;
 using bmlTUX.Scripts.UI.EditorUI;
-using bmlTUX.Scripts.Utilities;
 using bmlTUX.Scripts.VariableSystem.VariableTypes;
+using bmlTUX.UI.EditorUI;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using VariableSystem;
 
 namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
@@ -22,9 +22,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
         SerializedProperty   trialRepetitions;
         SerializedProperty   experimentRepetitions;
-        SerializedProperty   columnNameSettings;
-        SerializedProperty   controlSettings;
-        SerializedProperty   guiSettings;
+        SerializedProperty experimentSettings;
         SerializedProperty   blockRandomizationMode;
         SerializedProperty   trialRandomizationMode;
         SerializedProperty   trialRandomizationSubType;
@@ -44,8 +42,9 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         const int IndentWidth  = 10;
         const float VariablePanelBackgroundLightness = .55f;
         Color variablePanelBackgroundColor;
-        SerializedProperty fileLocationSettings;
+
         Dictionary<string,VariableViewer> allViewers;
+        
 
         void OnEnable() {
             variablePanelBackgroundColor = new Color(VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, VariablePanelBackgroundLightness, 1);
@@ -72,10 +71,9 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                 serializedObject.FindProperty(nameof(ExperimentDesignFile2.BlockPartialRandomizationSubType));
             trialRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile2.TrialRepetitions));
             experimentRepetitions = serializedObject.FindProperty(nameof(ExperimentDesignFile2.ExperimentRepetitions));
-            columnNameSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile2.ColumnNamesSettings));
-            controlSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile2.ControlSettings));
-            guiSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile2.GuiSettings));
-            fileLocationSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile2.FileLocationSettings));
+            experimentSettings = serializedObject.FindProperty(nameof(ExperimentDesignFile2.ExperimentSettings));
+          
+           
             showAdvanced = serializedObject.FindProperty(nameof(ExperimentDesignFile2.ShowAdvancedEditor));
             
             InitializeBlockOrderList();
@@ -96,6 +94,8 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         }
 
         public override void OnInspectorGUI() {
+            DateTime time = DateTime.Now;
+            //Debug.Log($"StartUpdate {time.Millisecond}");
             serializedObject.Update();
             
             
@@ -103,9 +103,6 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             if (dvViewers == null) dvViewers = new Dictionary<string, VariableViewer>();
             if (pvViewers == null) pvViewers =  new Dictionary<string, VariableViewer>();
             if (allViewers == null) allViewers = new Dictionary<string, VariableViewer>();
-            CheckVariablesAddedDeletedFromFactoryList(nameof(VariableFactory2.IndependentVariables));
-            CheckVariablesAddedDeletedFromFactoryList(nameof(VariableFactory2.DependentVariables));
-            CheckVariablesAddedDeletedFromFactoryList(nameof(VariableFactory2.ParticipantVariables));
 
 
             ShowRepetitionAndRandomizationSettings();
@@ -127,21 +124,27 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             
             serializedObject.ApplyModifiedProperties();
             
+            serializedObject.Update();
+            CheckVariablesAddedDeletedFromFactoryList(nameof(VariableFactory2.IndependentVariables));
+            CheckVariablesAddedDeletedFromFactoryList(nameof(VariableFactory2.DependentVariables));
+            CheckVariablesAddedDeletedFromFactoryList(nameof(VariableFactory2.ParticipantVariables));
+            serializedObject.ApplyModifiedProperties();
             
-            
+            //Debug.Log($"End Update {time.Millisecond}");
         }
 
         void ShowVariableFactory() {
             if (factory == null) return;
             
-            
-
             EditorGUILayout.BeginVertical();
             EditorGUILayout.LabelField("Variables", EditorStyles.boldLabel);
             ShowVariableCreationInterface();
 
+            //Debug.Log("show ivs");
             ShowViewers(ivViewers, $"Independent Variables", EditorGuiHelper.IndependentVarColor);
+            //Debug.Log("show dvs");
             ShowViewers(dvViewers, $"Dependent Variables", EditorGuiHelper.DependentVarColor);
+            //Debug.Log("show pvs");
             ShowViewers(pvViewers, $"Participant Variables", EditorGuiHelper.ParticipantVarColor);
 
             EditorGUILayout.EndVertical();
@@ -164,7 +167,6 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
                         allViewers.Remove(variablePropertyPath);
                         RemoveFromSubList(variablePropertyPath);
                         existingViewer.Deleted = true;
-                        EditorUtility.SetDirty(this);
                     }
                 }
                 else {
@@ -199,11 +201,10 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             var descendingDeletionIndexes = IndexesToDelete.OrderByDescending(i => i);
             foreach (int i in descendingDeletionIndexes) {
                 list.DeleteArrayElementAtIndex(i);
-                serializedObject.ApplyModifiedProperties();
-                serializedObject.Update();
             }
-            
-            
+
+            factoryProp.serializedObject.ApplyModifiedProperties();
+
         }
 
         void AddToSubList(string variablePropertyPath, VariableViewer newViewer) {
@@ -263,7 +264,6 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             selectedDataType = SupportedDataType.ChooseType;
             selectedVariableType = VariableType.ChooseType;
             serializedObject.Update();
-            EditorUtility.SetDirty(this);
         }
 
 
@@ -356,13 +356,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         void ShowSettingsFields() {
             EditorGUILayout.LabelField("Other Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel += 2;
-            EditorGUILayout.PropertyField(columnNameSettings);
-            EditorGUILayout.PropertyField(controlSettings);
-            EditorGUILayout.PropertyField(guiSettings);
-            EditorGUI.indentLevel+= 2;
-            EditorGUILayout.HelpBox("Change the monitor to which the UI is rendered", MessageType.Info);
-            EditorGUI.indentLevel-= 2;
-            EditorGUILayout.PropertyField(fileLocationSettings);
+            EditorGUILayout.PropertyField(experimentSettings);
             EditorGUI.indentLevel -= 2;
         }
 
@@ -377,25 +371,8 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
 
             blockOrderFileList.DoLayoutList();
             
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Space((EditorGUI.indentLevel + 1) * IndentWidth);
-            if (GUILayout.Button("Create New Block Order File")) {
-                CreateNewBlockOrderDefinition();
-            }
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Space((EditorGUI.indentLevel + 1) * IndentWidth);
-            if (GUILayout.Button("Clear List")) {
-                designFileTarget.BlockOrderConfigurations.Clear();
-            }
-            if (GUILayout.Button("Delete All Files")) {
-                foreach (var config in designFileTarget.BlockOrderConfigurations) {
-                    string path = AssetDatabase.GetAssetPath(config);
-                    AssetDatabase.DeleteAsset(path);
-                }
-                designFileTarget.BlockOrderConfigurations.Clear();
-            }
-            EditorGUILayout.EndHorizontal();
+            DrawBlockConfigButtons();
+
             EditorGUILayout.Space();
             
             
@@ -406,7 +383,35 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             EditorGUILayout.Space();
             EditorGUILayout.EndVertical();
         }
-        
+
+        void DrawBlockConfigButtons() {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Space((EditorGUI.indentLevel + 1) * IndentWidth);
+            if (GUILayout.Button("Create New Block Order File")) {
+                CreateNewBlockOrderDefinition();
+            }
+
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Space((EditorGUI.indentLevel + 1) * IndentWidth);
+            if (GUILayout.Button("Clear List")) {
+                designFileTarget.BlockOrderConfigurations.Clear();
+                EditorUtility.SetDirty(target);
+            }
+
+            if (GUILayout.Button("Delete All Files")) {
+                foreach (var config in designFileTarget.BlockOrderConfigurations) {
+                    string path = AssetDatabase.GetAssetPath(config);
+                    AssetDatabase.DeleteAsset(path);
+                }
+
+                designFileTarget.BlockOrderConfigurations.Clear();
+            }
+
+            EditorGUILayout.EndHorizontal();
+        }
+
         void CheckValidBlockOrder() {
 
             IExperimentDesignFile designFile = serializedObject.targetObject as IExperimentDesignFile;
@@ -415,7 +420,7 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
             if (!designFile.GetHasBlocks) return;
                 
             if (!designFile.GetBlockOrderIsValid) {
-                EditorGUILayout.HelpBox("A recent change has invalidated any manual block order configurations. Please update them before running your experiment",
+                EditorGUILayout.HelpBox("A recent change in your design has invalidated any manual block order configurations. Please update them before running your experiment",
                     MessageType.Error); 
                 EditorGUILayout.Space();
             }
@@ -424,12 +429,17 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
         void CreateNewBlockOrderDefinition() {
             
            if (!designFileTarget.HasBlocks) {
-                Debug.LogError($"{TuxLog.Prefix} Tried to make block order definition file, but no block variables have been defined!");
+                EditorUtility.DisplayDialog("bmlTUX: Error Creating Block Order File", 
+                    $"No block variables have been defined.\nYou need to define a block variable first.", "Ok");
                 return;
            }
            
            BlockOrderDefinition newBlockOrderDefinition = CreateInstance<BlockOrderDefinition>();
+           newBlockOrderDefinition.Init(designFileTarget);
            
+           List<BlockOrderDefinition> orders = designFileTarget.GetBlockOrderConfigurations;
+           orders.Add(newBlockOrderDefinition);
+           EditorUtility.SetDirty(designFileTarget);
            try {
                string savePath = Path.GetDirectoryName(path: AssetDatabase.GetAssetPath(Selection.activeObject)) +
                                  "/New Block Order Definition.asset";
@@ -439,16 +449,15 @@ namespace bmlTUX.Scripts.VariableSystem.VariableUI {
            }
            catch (ArgumentNullException) {
                Debug.LogError($"{TuxLog.Prefix} Could not create BlockOrderDefinition. There is probably an error in variable definitions.");
+               orders.Remove(newBlockOrderDefinition);
            }
             
            EditorUtility.FocusProjectWindow();
             
            Selection.activeObject = newBlockOrderDefinition;
            if (designFileTarget == null) throw new NullReferenceException("DesignFileNull");
-           newBlockOrderDefinition.Init(designFileTarget);
-            
-           List<BlockOrderDefinition> orders = designFileTarget.GetBlockOrderConfigurations;
-           orders.Add(newBlockOrderDefinition);
+           
+           
             
                 
                 

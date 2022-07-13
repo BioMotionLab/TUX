@@ -1,10 +1,7 @@
-﻿using System;
-using System.Data;
-using bmlTUX.Scripts.Settings;
-using bmlTUX.Scripts.Utilities.Extensions;
+﻿using System.Data;
 using bmlTUX.Scripts.VariableSystem;
 
-namespace bmlTUX.Scripts.ExperimentParts {
+namespace bmlTUX {
     public class BaseTrialTable {
 
         DataTable baseTrialTable;

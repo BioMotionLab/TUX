@@ -12,14 +12,14 @@ Some project settings are required:
 
 # Setting up an experiment
 
-From toolkit version 0.11.x onwards, there is a new helper tool that is accessible from the main "BML" menu that will automatically create all required files and set up a basic experiment for you. Open the Script Helper Window, and click "Automatically set everything up for me!". The toolkit will then add a new GameObject to your unity scene, generate the skeletons of all required scripts, and set up all the needed references. The created files will be in the root "Assets" folder of your unity project.
+From toolkit version 0.11.x onwards, there is a new helper tool that is accessible from the main "bmlTUX" menu that will automatically create all required files and set up a basic experiment for you. Open the Script Helper Window, and click "Automatically set everything up for me!". The toolkit will then add a new GameObject to your unity scene, generate the skeletons of all required scripts, and set up all the needed references. The created files will be in the root "Assets" folder of your unity project.
 
 # Configuring your experimental design
 If you used the helper tool to automatically create all files, the Design File should be created for you. Or, you can create your own using the tool or by right-clicking on a folder in your project and navigate to "Create > bmlTUX > New Design File". 
 
 Select the Design file to open its inspector window. It should look something like (Figure 2).
 
-![VariableConfigurationFile Screenshot](Images/DesignFile.png)
+![VariableConfigurationFile Screenshot](Assets/Misc/designFile.png)
 
 Figure 2: A screenshot of the variable creation inspector.
 
