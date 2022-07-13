@@ -1,8 +1,6 @@
 using System.IO;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace bmlTUX
 {
@@ -31,16 +29,18 @@ namespace bmlTUX
 
 #else 
             //use default outside editor because it does not matter
-            settings = CreateInstance<MyCustomSettings>();
+            settings = CreateInstance<BmlTuxEditorSettings>();
 #endif
             return settings;
         }
 
+#if UNITY_EDITOR
         public static SerializedObject GetSerializedSettings()
         {
             return new SerializedObject(GetOrCreateSettings());
         }
+#endif
     }
-    
+
     // Register a SettingsProvider using IMGUI for the drawing framework:
 }
