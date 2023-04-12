@@ -13,7 +13,7 @@ title: Troubleshooting
     * Make sure that your ExperimentRunner script is attached to a gameObject in the scene, and references the appropriate script files in its inspector
 
 * I'm getting compile errors
-    * Make sure your project settings are set up for API Compatibility Level is set to .Net 4.x. (Edit > Project Settings > Player > Other Settings)
+    * Make sure your project settings are set up for API Compatibility Level is set to .Net 4.x or .NET Framework. (Edit > Project Settings > Player > Other Settings)
 
 * I'm getting argument exceptions about columns missing
     * Make sure you've spelled your variables and your access correctly. These errors are usually due to mismatch between the spelling of a variable in your Variable Config file and your custom Trial script. For example if you spelled your variable "Color" **(no u)** but accessed it using `Data["Colour"]` **(with a u)**, you will get an `ArgumentException` error.

@@ -8,7 +8,7 @@ There are two ways to install bmlTUX.
 
 For both methods, you should be in a new unity project that meets the [Requirements](Requirements.md)
 
-* Make sure you are targetting .NET 4.x in the Project Settings > Player > Other
+* Make sure you are targetting .NET 4.x (.NET Framework if you are using Unity 2021.2 or later) in the Project Settings > Player > Other
 * Make sure you have TextMeshPro version 2.1 or later installed. Go to Window > Package Manager, and look for TextMeshPro in the list.
 * _IMPORTANT:_ Make sure TextMeshPro Essentials are already imported. Go to Window > TextMeshPro > Import Essentials. Doing this after installing bmlTUX can cause display issues.
 
