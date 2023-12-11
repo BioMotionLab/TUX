@@ -38,7 +38,15 @@ namespace bmlTUX {
             Session session;
             if (File.Exists(filePath)) {
                 string dataAsJason = File.ReadAllText(filePath);
-                session = JsonUtility.FromJson<Session>(dataAsJason);
+                try {
+                    session = JsonUtility.FromJson<Session>(dataAsJason);
+                }
+                catch (ArgumentException) {
+                    File.Delete(filePath);
+                    Debug.LogWarning($"{TuxLog.Prefix} Previous session file became corrupt, deleting it.");
+                    session = CreateNewSession();
+                }
+                
             }
             else {        
                 session = CreateNewSession();
