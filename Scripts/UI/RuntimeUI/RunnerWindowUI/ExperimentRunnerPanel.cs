@@ -336,11 +336,17 @@ namespace bmlTUX.UI.RuntimeUI {
             RunningStatusText.text = $"Runner is {runningText}.";
 
             var design = runner.RunnableDesign;
-            int currentTrial = (design.TotalTrials / design.BlockCount) * (currentBlockIndex) + currentTrialIndex + 1;
-            if (currentTrial > design.TotalTrials) currentTrial = design.TotalTrials;
+
+            int currentTrial = currentTrialIndex + 1;
+            if (currentTrial > design.TotalTrials) currentTrial -= 1;
 
             string blockText = "";
-            if (design.HasBlocks) blockText = $" (Block {currentBlockIndex} / {design.BlockCount})";
+            if (design.HasBlocks)
+            {
+                int currentBlock = currentBlockIndex + 1;
+                if (currentBlock > design.BlockCount) currentBlock -= 1;
+                blockText = $" (Block {currentBlock} / {design.BlockCount})";
+            }
             CurrentTrialText.text = ($"Running Trial: {currentTrial} of {design.TotalTrials} total{blockText}.");
 
             Image progressPanelImage = ProgressPanel.GetComponent<Image>();
