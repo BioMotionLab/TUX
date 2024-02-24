@@ -1,3 +1,10 @@
+## [4.0.5](https://github.com/BioMotionLab/TUX/compare/release/4.0.4...release/4.0.5) (2024-02-24)
+
+
+### Bug Fixes
+
+* Update semantic_release.yml with logs and more tokens ([511af23](https://github.com/BioMotionLab/TUX/commit/511af233cfbf99e7b6683c0a2cfb0e98154c27ea))
+
 ## [4.0.4](https://github.com/BioMotionLab/TUX/compare/release/4.0.3...release/4.0.4) (2024-02-24)
 
 
