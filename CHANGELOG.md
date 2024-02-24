@@ -1,3 +1,12 @@
+## [4.0.1](https://github.com/BioMotionLab/TUX/compare/release/4.0.0...release/4.0.1) (2024-02-24)
+
+
+### Bug Fixes
+
+* catch corrupt json ([0c8be33](https://github.com/BioMotionLab/TUX/commit/0c8be334525ec9a94aede7db986e81737ae037cb))
+* corrected the displayed trial and block numbers in the runner panel ([c8848ae](https://github.com/BioMotionLab/TUX/commit/c8848ae8d589988f2037c895d9d49477a8381773))
+* Update semantic_release.yml ([b777906](https://github.com/BioMotionLab/TUX/commit/b777906c433cbdf26b4882154bcc95316e26ea52))
+
 # [4.0.0](https://github.com/BioMotionLab/TUX/compare/release/3.0.0...release/4.0.0) (2022-07-13)
 
 
