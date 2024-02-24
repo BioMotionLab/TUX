@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - master
+
+permissions:
+  contents: write
+  actions: write
+
 jobs:
   release:
     name: release
@@ -11,6 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           persist-credentials: false
       - name: Semantic release
         uses: cycjimmy/semantic-release-action@v4
@@ -42,14 +48,16 @@ jobs:
             rm -f Samples.meta
             git config --global user.name 'github-bot'
             git config --global user.email 'github-bot@users.noreply.github.com'
+            echo Configuring personal access token
+            git config --global url.https://${{ secrets.GH_TOKEN }}@github.com/.insteadOf https://github.com/
+            echo Comitting update to Samples folder
             git commit -am "fix: Samples => Samples~"
           fi
           echo Pushing upm branch...
           git push -f -u origin upm
           echo Finished pushing upm branch
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           PKG_ROOT: BML_TUX_Project/Packages/bmlTUX
       - name: Create upm git tag
         if: steps.semantic.outputs.new_release_published == 'true'
