@@ -1,6 +1,6 @@
 {
   "name": "com.biomotionlab.tux",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "displayName": "bmlTUX",
   "description": "A toolkit for creating experiments in Unity. For more information see our documentation page: https://biomotionlab.github.io/TUX/, our github page: https://github.com/BioMotionLab/TUX, or check out BioMotionLab: http://www.biomotionlab.ca/tux/",
   "unity": "2019.3",

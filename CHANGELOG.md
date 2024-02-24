@@ -1,3 +1,10 @@
+## [4.0.6](https://github.com/BioMotionLab/TUX/compare/release/4.0.5...release/4.0.6) (2024-02-24)
+
+
+### Bug Fixes
+
+* try injecting access token to git global config ([a8c7ee1](https://github.com/BioMotionLab/TUX/commit/a8c7ee1a2896314e51f57064ac8c43969bd65a87))
+
 ## [4.0.5](https://github.com/BioMotionLab/TUX/compare/release/4.0.4...release/4.0.5) (2024-02-24)
 
 
