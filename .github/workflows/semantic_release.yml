@@ -46,6 +46,7 @@ jobs:
           fi
           git push -f -u origin upm
         env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           PKG_ROOT: BML_TUX_Project/Packages/bmlTUX
       - name: Create upm git tag
         if: steps.semantic.outputs.new_release_published == 'true'
@@ -53,6 +54,7 @@ jobs:
           git tag $TAG upm
           git push origin --tags
         env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           TAG: ${{ steps.semantic.outputs.new_release_version }}
       - name: Setup Node
         if: steps.semantic.outputs.new_release_published == 'true'
