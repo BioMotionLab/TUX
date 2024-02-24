@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/BioMotionLab/TUX/compare/release/4.0.1...release/4.0.2) (2024-02-24)
+
+
+### Bug Fixes
+
+* trigger new release manually to test workflow ([7333553](https://github.com/BioMotionLab/TUX/commit/7333553aa714122e0cca23dfe562bdae75efbcde))
+
 ## [4.0.1](https://github.com/BioMotionLab/TUX/compare/release/4.0.0...release/4.0.1) (2024-02-24)
 
 
