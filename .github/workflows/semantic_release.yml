@@ -49,7 +49,10 @@ jobs:
             git config --global user.name 'github-bot'
             git config --global user.email 'github-bot@users.noreply.github.com'
             echo Configuring personal access token
+            
+            # This step is super important to ensure credentials are properly set up.
             git config --global url.https://${{ secrets.GH_TOKEN }}@github.com/.insteadOf https://github.com/
+            
             echo Comitting update to Samples folder
             git commit -am "fix: Samples => Samples~"
           fi
