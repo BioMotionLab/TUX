@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/BioMotionLab/TUX/compare/release/4.0.3...release/4.0.4) (2024-02-24)
+
+
+### Bug Fixes
+
+* another workflow trigger ([a05a953](https://github.com/BioMotionLab/TUX/commit/a05a953810cba77e9340d27d1e7f1ecd96924c55))
+
 ## [4.0.3](https://github.com/BioMotionLab/TUX/compare/release/4.0.2...release/4.0.3) (2024-02-24)
 
 
