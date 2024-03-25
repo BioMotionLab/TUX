@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace bmlTUX {
@@ -17,6 +18,12 @@ namespace bmlTUX {
         [SerializeField]
         public int BlockOrderChosenIndex = 0;
 
+        [SerializeField]
+        public string saveFilePath;
+
+        [SerializeField]
+        public string sessionFolder;
+
         void Enable() {
             ExperimentEvents.OnEndExperiment += Completed;
             ExperimentEvents.OnExperimentStarted += Started;
@@ -33,39 +40,39 @@ namespace bmlTUX {
         }
 
 
-        public static Session LoadSessionData() {
-            string filePath = FileLocationSettings.LastSessionSaveFilePath;
+        public static Session LoadSessionData(FileLocationSettings fileLocationSettings) {
             Session session;
+            string filePath = fileLocationSettings.SessionSaveFilePath;
             if (File.Exists(filePath)) {
                 string dataAsJason = File.ReadAllText(filePath);
-                try {
+                try{
                     session = JsonUtility.FromJson<Session>(dataAsJason);
-                }
-                catch (ArgumentException) {
+                }catch (ArgumentException){
                     File.Delete(filePath);
-                    Debug.LogWarning($"{TuxLog.Prefix} Previous session file became corrupt, deleting it.");
-                    session = CreateNewSession();
+                    Debug.Log($"{TuxLog.Prefix} Previous Session file corrupt, deleting");
+                    session = CreateNewSession(fileLocationSettings);
                 }
                 
             }
             else {        
-                session = CreateNewSession();
+                session = CreateNewSession(fileLocationSettings);
             }
+
             session.Enable();
             return session;
         }
 
-        static Session CreateNewSession() {
-            Session session;
+        static Session CreateNewSession(FileLocationSettings fileLocationSettings) {
+            Session session = new Session();
             Debug.Log($"{TuxLog.Prefix} Previous Session file not found, creating new");
-            session = new Session();
+            session.saveFilePath = fileLocationSettings.SessionSaveFilePath;
+            session.sessionFolder = fileLocationSettings.SessionFolder;
             return session;
         }
 
         void SaveSessionData() {
-            
-            Directory.CreateDirectory(FileLocationSettings.SessionFolder);
-            string filePath = FileLocationSettings.LastSessionSaveFilePath;
+            Directory.CreateDirectory(sessionFolder);
+            string filePath = saveFilePath;
             string dataAsJson = JsonUtility.ToJson(this);
             File.WriteAllText(filePath, dataAsJson);
 

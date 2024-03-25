@@ -95,7 +95,7 @@ namespace bmlTUX {
             }
             DesignFile.GetValidate();
 
-            Session = Session.LoadSessionData();
+            Session = Session.LoadSessionData(DesignFile.GetFileLocationSettings);
             if (Session == null) {
                 throw new NullReferenceException("Session null and not created properly");
             }

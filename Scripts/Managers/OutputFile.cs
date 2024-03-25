@@ -15,8 +15,8 @@ namespace bmlTUX {
 			FullPath += ".csv";
 		}
 
-		public static OutputFile DebugFile() {
-			return new OutputFile(FileLocationSettings.DebugFolder, FileLocationSettings.DebugFileName);
+		public static OutputFile DebugFile(string debugFolder, string debugFileName) {
+			return new OutputFile(debugFolder, debugFileName);
 		}
 
 		public void OutputToFile(Outputtable output) {

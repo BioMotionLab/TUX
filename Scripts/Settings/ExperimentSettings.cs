@@ -15,5 +15,6 @@ namespace bmlTUX {
         public ExperimentGui GuiPrefab;
         public GuiSettings GuiSettings = default;
         
+        public FileLocationSettings FileLocationSettings = default;
     }
 }

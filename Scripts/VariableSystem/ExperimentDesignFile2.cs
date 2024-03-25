@@ -92,6 +92,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         public TrialTableGenerationMode GetTrialTableGeneration => TrialTableGeneration;
         public Variables GetVariables => Variables;
         public GuiSettings GetGuiSettings => ExperimentSettings.GuiSettings;
+        public FileLocationSettings GetFileLocationSettings => ExperimentSettings.FileLocationSettings;
         public IVariableFactory GetFactory => Factory;
         public string GetName => name;
         public bool GetHasBlocks => HasBlocks;
