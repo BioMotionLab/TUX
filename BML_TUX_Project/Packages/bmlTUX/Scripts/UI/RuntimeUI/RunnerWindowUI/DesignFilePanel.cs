@@ -16,9 +16,8 @@ namespace bmlTUX.UI.RuntimeUI {
             gameObject.SetActive(true);
         }
     
-        public InputFile GetInputFile(){
-            string folder = FileLocationSettings.SessionFolder;
-            folder = Path.Combine(folder, OutputFolder.text);
+        public InputFile GetInputFile(string sessionFolder){
+            string folder = Path.Combine(sessionFolder, OutputFolder.text);
             InputFile inputFile = new InputFile(folder, DesignFileName.text);
 
             return inputFile;

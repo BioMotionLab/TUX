@@ -55,8 +55,7 @@ namespace bmlTUX.Editor {
         }
 
         static string ProjectFolder => Path.GetDirectoryName(Path.Combine( Application.dataPath, "../" ));
-        static string InstallDataFilePath => Path.Combine(FileLocationSettings.BaseTuxDocumentsFolderPath, ProjectFolder, InstallDataFileName);
-    
+        static string InstallDataFilePath => Path.Combine(ProjectFolder, InstallDataFileName);
         static void ThisPackageLoaded()
         {
             var packageVersion = GetPackageVersion();

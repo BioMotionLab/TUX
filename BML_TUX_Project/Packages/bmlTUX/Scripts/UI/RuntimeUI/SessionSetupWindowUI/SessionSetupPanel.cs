@@ -84,7 +84,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
 
         public Session GetSession() {
 
-            OutputFile outputFile = OutputFilePanel.GetOutputFile();
+            OutputFile outputFile = OutputFilePanel.GetOutputFile(session.sessionFolder);
             
             List<InputValidator> validators = new List<InputValidator>();
             validators.Add(new OutputFileValidationResult(outputFile));
@@ -103,7 +103,7 @@ namespace bmlTUX.Scripts.UI.RuntimeUI.SessionSetupWindowUI {
                     validators.Add(new BlockOrderValidationResult(blockOrderData, BlockOrderPanel));
                     break;
                 case TrialTableGenerationMode.PreGenerated:
-                    InputFile inputFile = DesignFilePanel.GetInputFile();
+                    InputFile inputFile = DesignFilePanel.GetInputFile(session.sessionFolder);
                     validators.Add(new DesignFileValidationResult(inputFile));
                     designFilePath = inputFile.FullPath;
                     break;
