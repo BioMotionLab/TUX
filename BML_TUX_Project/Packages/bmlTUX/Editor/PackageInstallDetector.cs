@@ -11,7 +11,7 @@ namespace bmlTUX.Editor {
     public class PackageInstallDetector : AssetPostprocessor {
 
         const string PackageName = "com.biomotionlab.tux";
-        const string InstallDataFileName = "installData.json";
+        const string InstallDataFileName = "bmlTux_InstallData.json";
 
         static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
