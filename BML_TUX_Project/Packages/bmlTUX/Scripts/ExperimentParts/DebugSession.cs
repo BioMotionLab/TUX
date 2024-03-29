@@ -1,7 +1,7 @@
 namespace bmlTUX {
     public class DebugSession : Session {
-        public DebugSession(string debugFolder, string debugFileName) {
-            OutputFile = OutputFile.DebugFile(debugFolder, debugFileName);
+        public DebugSession(FileLocationSettings fileLocationSettings) {
+            OutputFile = OutputFile.DebugFile(fileLocationSettings.DebugFolder, fileLocationSettings.DebugFileName);
             SelectedDesignFilePath = "";
             BlockOrderChosenIndex  = 0;
         }
