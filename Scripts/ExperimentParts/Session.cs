@@ -2,6 +2,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using static System.Collections.Specialized.BitVector32;
 
 namespace bmlTUX {
     
@@ -23,6 +24,11 @@ namespace bmlTUX {
 
         [SerializeField]
         public string sessionFolder;
+
+        public Session(FileLocationSettings fileLocationSettings){
+            saveFilePath = fileLocationSettings.SessionSaveFilePath;
+            sessionFolder = fileLocationSettings.SessionFolder;
+        }
 
         void Enable() {
             ExperimentEvents.OnEndExperiment += Completed;
@@ -52,7 +58,7 @@ namespace bmlTUX {
                     Debug.Log($"{TuxLog.Prefix} Previous Session file corrupt, deleting");
                     session = CreateNewSession(fileLocationSettings);
                 }
-                
+
             }
             else {        
                 session = CreateNewSession(fileLocationSettings);
@@ -63,10 +69,8 @@ namespace bmlTUX {
         }
 
         static Session CreateNewSession(FileLocationSettings fileLocationSettings) {
-            Session session = new Session();
+            Session session = new Session(fileLocationSettings);
             Debug.Log($"{TuxLog.Prefix} Previous Session file not found, creating new");
-            session.saveFilePath = fileLocationSettings.SessionSaveFilePath;
-            session.sessionFolder = fileLocationSettings.SessionFolder;
             return session;
         }
 
