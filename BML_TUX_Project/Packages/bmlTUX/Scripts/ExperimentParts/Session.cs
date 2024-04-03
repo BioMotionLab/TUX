@@ -25,9 +25,13 @@ namespace bmlTUX {
         [SerializeField]
         public string sessionFolder;
 
+        [SerializeField]
+        public string logFilePath;
+
         public Session(FileLocationSettings fileLocationSettings){
             saveFilePath = fileLocationSettings.SessionSaveFilePath;
             sessionFolder = fileLocationSettings.SessionFolder;
+            logFilePath = fileLocationSettings.SessionLogFilePath;
         }
 
         void Enable() {
