@@ -6,7 +6,8 @@ MonoImporter:
   defaultReferences:
   - GuiPrefab: {fileID: 3678802056161241045, guid: ef21a6db4c41d47ae8cf4d02605a52fb,
       type: 3}
-  - FileLocations: {instanceID: 0}
+  - FileLocationSettings: {fileID: 11400000, guid: 16bad5fececfcfa4e9001d4ae60f6681,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
