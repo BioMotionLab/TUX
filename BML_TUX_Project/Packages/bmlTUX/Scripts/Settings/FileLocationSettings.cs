@@ -3,8 +3,9 @@ using System.IO;
 using UnityEngine;
 
 namespace bmlTUX {
-  [Serializable]
-	public class FileLocationSettings  {
+    [CreateAssetMenu(menuName = MenuNames.AssetCreationMenu + "New File Location Settings File")]
+    [Serializable]
+	public class FileLocationSettings :ScriptableObject {
         public string dataFolderName = "bmlTUX_Data";                
         public string SessionSaveFileName = "lastSession.json";  
         public string SessionLogFileName = "sessionLog.txt";
