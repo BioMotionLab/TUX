@@ -32,3 +32,5 @@ MonoBehaviour:
     targetDisplay: 0
     WarnUserIfNotDisplayOne: 1
     ShowRunnerInterfaceAfterStart: 1
+  FileLocationSettings: {fileID: 11400000, guid: 16bad5fececfcfa4e9001d4ae60f6681,
+    type: 2}
