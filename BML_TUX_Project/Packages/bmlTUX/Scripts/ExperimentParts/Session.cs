@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PlasticPipe.PlasticProtocol.Messages;
+using System;
+using System.Data;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -57,7 +59,9 @@ namespace bmlTUX {
                 string dataAsJason = File.ReadAllText(filePath);
                 try{
                     session = JsonUtility.FromJson<Session>(dataAsJason);
-                }catch (ArgumentException){
+                    ValidateSessionJsonExport(session);
+                }catch (Exception ex) when (ex is ArgumentException || 
+                                            ex is NoNullAllowedException){
                     File.Delete(filePath);
                     Debug.Log($"{TuxLog.Prefix} Previous Session file corrupt, deleting");
                     session = CreateNewSession(fileLocationSettings);
@@ -93,7 +97,18 @@ namespace bmlTUX {
             Disable();
         }
 
-
+        static void ValidateSessionJsonExport(Session session){
+            if (session.OutputFile == null)
+                throw new NoNullAllowedException();
+            if (session.SelectedDesignFilePath == null)
+                throw new NoNullAllowedException();
+            if (session.saveFilePath == null)
+                throw new NoNullAllowedException();
+            if (session.sessionFolder == null)
+                throw new NoNullAllowedException();
+            if (session.logFilePath == null)
+                throw new NoNullAllowedException();
+        }
 
     }
 
