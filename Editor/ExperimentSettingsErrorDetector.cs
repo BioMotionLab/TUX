@@ -15,18 +15,6 @@ namespace bmlTUX.Editor
         [InitializeOnLoadMethod]
         public static void Initialize()
         {
-            List<FileLocationSettings> allFileLocationSettings = ScriptableObjectUtilities
-                .GetAllInstancesInProject<FileLocationSettings>();
-            FileLocationSettings defaultFileLocationSettings =
-                allFileLocationSettings.FirstOrDefault(file => file.name == DefaultFileLocationSettingsName);
-
-            if (defaultFileLocationSettings == null)
-            {
-                TuxLog.LogError($"No default FileLocationSettings found named {DefaultFileLocationSettingsName}");
-                return;
-            }
-            defaultFileLocationSettingsLoaded = defaultFileLocationSettings;
-
             CheckForEmptyFileSettings();
         }
         
@@ -49,6 +37,18 @@ namespace bmlTUX.Editor
                         "Use default settings",
                         "I will update this myself"))
                 {
+                    
+                    List<FileLocationSettings> allFileLocationSettings = ScriptableObjectUtilities
+                        .GetAllInstancesInProject<FileLocationSettings>();
+                    
+                    defaultFileLocationSettingsLoaded ??= allFileLocationSettings
+                        .FirstOrDefault(file => file.name == DefaultFileLocationSettingsName);
+
+                    if (defaultFileLocationSettingsLoaded == null)
+                    {
+                        TuxLog.LogError($"No default FileLocationSettings found named {DefaultFileLocationSettingsName}");
+                        return;
+                    }
                     experimentSettingsFile.FileLocationSettings = defaultFileLocationSettingsLoaded;
 
                 }
