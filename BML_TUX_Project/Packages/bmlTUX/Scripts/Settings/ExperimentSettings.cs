@@ -14,6 +14,8 @@ namespace bmlTUX {
         [Space]
         public ExperimentGui GuiPrefab;
         public GuiSettings GuiSettings = default;
-        
+
+        [SerializeField]
+        public FileLocationSettings FileLocationSettings = default;
     }
 }
