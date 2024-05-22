@@ -11,7 +11,7 @@ namespace bmlTUX.Editor {
     public class PackageInstallDetector : AssetPostprocessor {
 
         const string PackageName = "com.biomotionlab.tux";
-        const string InstallDataFileName = "installData.json";
+        const string InstallDataFileName = "bmlTux_InstallData.json";
 
         static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
@@ -55,8 +55,7 @@ namespace bmlTUX.Editor {
         }
 
         static string ProjectFolder => Path.GetDirectoryName(Path.Combine( Application.dataPath, "../" ));
-        static string InstallDataFilePath => Path.Combine(FileLocationSettings.BaseTuxDocumentsFolderPath, ProjectFolder, InstallDataFileName);
-    
+        static string InstallDataFilePath => Path.Combine(ProjectFolder, InstallDataFileName);
         static void ThisPackageLoaded()
         {
             var packageVersion = GetPackageVersion();
@@ -112,7 +111,19 @@ namespace bmlTUX.Editor {
         
             body.AppendLine("");
 
-            if (VersionIsLaterThan(packageVersion, "1.0.0"))
+            if (VersionIsLaterThan(packageVersion, "3.0.0"))
+            {
+                body.AppendLine("WARNING: Major version update 5.0.0. Breaking Changes");
+                body.AppendLine();
+                body.AppendLine("Version 5.0.0 Release");
+                body.AppendLine();
+                body.AppendLine("- Huge thanks to @Rhodelfado (https://github.com/RhodeIfado) for major contributions.");
+                body.AppendLine("- FileLocationSettings can now be customized! But unfortunately existing experiments must update " +
+                                "to the new ScriptableObject-based system. We have provided a tool to help with the transition. " +
+                                "A new FileLocationSettings asset must be created and dragged into the appropriate field in the ExperimentSettings object.");
+            }
+            
+            if (VersionIsEarlierThan(packageVersion, "4.0.0") && VersionIsLaterThan(packageVersion, "1.0.0"))
             {
                 body.AppendLine("WARNING: Major version update 3.0.0. Breaking Changes");
                 body.AppendLine();
@@ -137,6 +148,11 @@ namespace bmlTUX.Editor {
         static bool VersionIsLaterThan(Version currentVersion, string versionToCompare)
         {
             return currentVersion.CompareTo(new Version(versionToCompare)) > 0;
+        }
+        
+        static bool VersionIsEarlierThan(Version currentVersion, string versionToCompare)
+        {
+            return new Version(versionToCompare).CompareTo(currentVersion) > 0;
         }
 
         [Serializable]

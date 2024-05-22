@@ -119,7 +119,7 @@ namespace bmlTUX.UI.RuntimeUI {
 
         [PublicAPI]
         public void StartDebugExperimentFromButton() {
-            Session session = new DebugSession();
+            Session session = new DebugSession(runner.DesignFile.GetFileLocationSettings);
 
             foreach (ParticipantVariable variable in runner.DesignFile.GetVariables.ParticipantVariables) {
                 variable.SetValueDefaultValue();

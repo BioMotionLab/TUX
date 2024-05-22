@@ -1,6 +1,10 @@
-﻿using System;
+﻿using PlasticPipe.PlasticProtocol.Messages;
+using System;
+using System.Data;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
+using static System.Collections.Specialized.BitVector32;
 
 namespace bmlTUX {
     
@@ -16,6 +20,21 @@ namespace bmlTUX {
         
         [SerializeField]
         public int BlockOrderChosenIndex = 0;
+
+        [SerializeField]
+        public string saveFilePath;
+
+        [SerializeField]
+        public string sessionFolder;
+
+        [SerializeField]
+        public string logFilePath;
+
+        public Session(FileLocationSettings fileLocationSettings){
+            saveFilePath = fileLocationSettings.SessionSaveFilePath;
+            sessionFolder = fileLocationSettings.SessionFolder;
+            logFilePath = fileLocationSettings.SessionLogFilePath;
+        }
 
         void Enable() {
             ExperimentEvents.OnEndExperiment += Completed;
@@ -33,39 +52,39 @@ namespace bmlTUX {
         }
 
 
-        public static Session LoadSessionData() {
-            string filePath = FileLocationSettings.LastSessionSaveFilePath;
+        public static Session LoadSessionData(FileLocationSettings fileLocationSettings) {
             Session session;
+            string filePath = fileLocationSettings.SessionSaveFilePath;
             if (File.Exists(filePath)) {
                 string dataAsJason = File.ReadAllText(filePath);
-                try {
+                try{
                     session = JsonUtility.FromJson<Session>(dataAsJason);
-                }
-                catch (ArgumentException) {
+                    ValidateSessionJsonExport(session);
+                }catch (Exception ex) when (ex is ArgumentException || 
+                                            ex is NoNullAllowedException){
                     File.Delete(filePath);
-                    Debug.LogWarning($"{TuxLog.Prefix} Previous session file became corrupt, deleting it.");
-                    session = CreateNewSession();
+                    Debug.Log($"{TuxLog.Prefix} Previous Session file corrupt, deleting");
+                    session = CreateNewSession(fileLocationSettings);
                 }
-                
+
             }
             else {        
-                session = CreateNewSession();
+                session = CreateNewSession(fileLocationSettings);
             }
+
             session.Enable();
             return session;
         }
 
-        static Session CreateNewSession() {
-            Session session;
+        static Session CreateNewSession(FileLocationSettings fileLocationSettings) {
+            Session session = new Session(fileLocationSettings);
             Debug.Log($"{TuxLog.Prefix} Previous Session file not found, creating new");
-            session = new Session();
             return session;
         }
 
         void SaveSessionData() {
-            
-            Directory.CreateDirectory(FileLocationSettings.SessionFolder);
-            string filePath = FileLocationSettings.LastSessionSaveFilePath;
+            Directory.CreateDirectory(sessionFolder);
+            string filePath = saveFilePath;
             string dataAsJson = JsonUtility.ToJson(this);
             File.WriteAllText(filePath, dataAsJson);
 
@@ -78,7 +97,18 @@ namespace bmlTUX {
             Disable();
         }
 
-
+        static void ValidateSessionJsonExport(Session session){
+            if (session.OutputFile == null)
+                throw new NoNullAllowedException();
+            if (session.SelectedDesignFilePath == null)
+                throw new NoNullAllowedException();
+            if (session.saveFilePath == null)
+                throw new NoNullAllowedException();
+            if (session.sessionFolder == null)
+                throw new NoNullAllowedException();
+            if (session.logFilePath == null)
+                throw new NoNullAllowedException();
+        }
 
     }
 

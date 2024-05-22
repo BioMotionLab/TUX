@@ -16,6 +16,7 @@ namespace bmlTUX.Scripts.VariableSystem {
         TrialTableGenerationMode GetTrialTableGeneration { get; }
         Variables GetVariables { get; }
         GuiSettings GetGuiSettings { get; }
+        FileLocationSettings GetFileLocationSettings { get; }
         IVariableFactory GetFactory { get; }
         string GetName { get; }
         bool GetHasBlocks { get; }
