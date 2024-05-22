@@ -1,3 +1,25 @@
+# [5.0.0](https://github.com/BioMotionLab/TUX/compare/release/4.0.6...release/5.0.0) (2024-05-22)
+
+
+### Bug Fixes
+
+* added an updater tool to help users with old settings file update it automatically. ([c794894](https://github.com/BioMotionLab/TUX/commit/c794894065bea6a033e120e6dba842a79934799a))
+* deleted old installData.json ([b3a6eac](https://github.com/BioMotionLab/TUX/commit/b3a6eac765c885acc388ee216bf221e56c738af4))
+* filename capitalization ([d0979b6](https://github.com/BioMotionLab/TUX/commit/d0979b6ac13eb627f2765bc5397d6d9596927aa4))
+* moved logic for default file locations settings to only trigger when needed. ([53f32e9](https://github.com/BioMotionLab/TUX/commit/53f32e96a1bbf03d65da361bb2768ba6dc281d9e))
+
+
+### Documentation
+
+* added text popup for new version 5.0.0 ([90b0222](https://github.com/BioMotionLab/TUX/commit/90b02220a30552d31fe5ef8eae9dc88d91b08197))
+
+
+### BREAKING CHANGES
+
+* FileLocationSettings are now scriptable objects
+
+Users must update their ExperimentSettings assets to link to FileLocationSettings asset. A default asset is provided in the package.
+
 ## [4.0.6](https://github.com/BioMotionLab/TUX/compare/release/4.0.5...release/4.0.6) (2024-02-24)
 
 
